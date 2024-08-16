@@ -9,19 +9,20 @@ import {
   ActivityIndicator,
 } from "react-native";
 import { useState, useEffect } from "react";
+import * as Font from 'expo-font'
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "../styles/home";
+import FontLoader from "../styles/fontloader/fontloader";
 
 export default function Home() {
   // COMUNICAÇÂO COM A API
 
-   // const [vaga, setVaga] = useState("");
+  // const [vaga, setVaga] = useState("");
   // const [loading, setLoading] = useState(true);
 
   // const getVagas = async (vagas) => {
-
 
   //   try {
   //     const response = await fetch(`URL DA API`);
@@ -39,6 +40,25 @@ export default function Home() {
   //   </View>;
   // };
 
+  //Carregador de fontes
+  const [fontsLoaded, setFontsLoaded] = useState(false);
+  
+  useEffect(() => {
+    const loadFonts = async () => {
+      await Font.loadAsync({
+        'DMSans-Regular': require('../../assets/fonts/DMSans-Regular.ttf'),
+        'DMSans-Bold': require('../../assets/fonts/DMSans-Bold.ttf'),
+      });
+      setFontsLoaded(true);
+    };
+
+    loadFonts();
+  }, []);
+
+  if (!fontsLoaded) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
   // RETORNO DA PÁGINA HOME
   return (
     <SafeAreaView style={styles.SafeAreaView}>
@@ -49,7 +69,7 @@ export default function Home() {
           </TouchableOpacity>
           <TextInput
             placeholder="Pesquise por vagas"
-            style={styles.searchbar}
+            style={[styles.searchbar, styles.DMSansRegular]}
           />
 
           <View style={styles.iconbox}>
@@ -63,6 +83,52 @@ export default function Home() {
           renderItem={vagas}
           keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
         /> */}
+
+        <View style={styles.titleCont}>
+          <Text style={[styles.title, styles.DMSansBold]}>Vagas para você:</Text>
+        </View>
+        <ScrollView horizontal={true} style={styles.vagasScrollView}>
+          <View style={styles.vagaCont}>
+            <View style={styles.vagaHead}>
+              <Text style={[styles.titleVaga, styles.DMSansBold]}>Analista de Banco de Dados</Text>
+              <Text style={[styles.corpText, styles.DMSansBold]}>oferecido por: Dynamo.inc</Text>
+              <Text style={[styles.dateText, styles.DMSansRegular]}>publicado em: 14/05/2024</Text>
+            </View>
+            <View style={styles.vagaBody}>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>Modalidade: Remoto</Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>Salário: a combinar</Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>Cidade: São Paulo</Text>
+            </View>
+            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
+              <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
+            </TouchableOpacity>
+          </View>
+
+        </ScrollView>
+
+        <View style={styles.titleCont}>
+          <Text style={[styles.title, styles.DMSansBold]}>Outras Vagas:</Text>
+          <Text style={[styles.text, styles.DMSansRegular]}>Veja vagas relacionadas ao que você busca</Text>
+        </View>
+
+        <ScrollView horizontal={true} style={styles.vagasScrollView}>
+          <View style={styles.vagaCont}>
+            <View style={styles.vagaHead}>
+              <Text style={[styles.titleVaga, styles.DMSansBold]}>Analista de Banco de Dados</Text>
+              <Text style={[styles.corpText, styles.DMSansBold]}>oferecido por: Dynamo.inc</Text>
+              <Text style={[styles.dateText, styles.DMSansRegular]}>publicado em: 14/05/2024</Text>
+            </View>
+            <View style={styles.vagaBody}>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>Modalidade: Remoto</Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>Salário: a combinar</Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>Cidade: São Paulo</Text>
+            </View>
+            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
+              <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
+            </TouchableOpacity>
+          </View>
+
+        </ScrollView>
       </ScrollView>
     </SafeAreaView>
   );

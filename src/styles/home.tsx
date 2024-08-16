@@ -8,15 +8,24 @@ const styles = StyleSheet.create({
       marginTop: 50,
     },
 
+    DMSansRegular: {
+      fontFamily: 'DMSans-Regular',
+    },
+
+    DMSansBold: {
+      fontFamily: 'DMSans-Bold',
+    },
+
     ScrollView: {
       flex: 1,
+      marginHorizontal: 20,
     },
 
     navbar: {
       flexDirection: 'row',
       width: '100%',
       alignItems: 'center',
-      justifyContent: 'space-around'
+      justifyContent: 'space-between'
     },
 
     searchbar: {
@@ -42,20 +51,79 @@ const styles = StyleSheet.create({
     },
 
     button: {
+      backgroundColor: '#56c596',
+      alignItems: 'center',
+      justifyContent: 'center'
+    },
 
+    buttonText: {
+      color: '#fff',
+      fontSize: 18,
+    },
+
+    titleCont: {
+      justifyContent: 'center',
+      height: 50,
+      marginVertical: 10,
+    },
+
+    title: {
+      fontSize: 25,
+    },
+
+    text: {
+      fontSize: 15,
+    },
+
+    vagasScrollView: {
+      flex: 1,
+      padding: 5
     },
 
     vagaCont: {
+      backgroundColor: '#f6f6f6',
+      borderWidth: 2,
+      borderRadius: 25,
+      borderColor: '#56C596',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      width: 250,
+      height: 250,
+      padding: 20,
+      marginRight: 15,
+    },
 
+    vagaHead: {
+      width: '100%',
+      alignItems: 'flex-start'
+    },
+
+    vagaBody: {
+      width: '100%',
+      alignItems: 'flex-start'
     },
 
     titleVaga: {
 
+      fontSize: 22,
+    },
+
+    corpText: {
+
+    },
+
+    dateText: {
+
     },
 
     descVaga: {
-
     },
+
+    buttonVaga: {
+      width: '100%',
+      paddingVertical: 10,
+      borderRadius: 20
+    }
   }
 )
 
