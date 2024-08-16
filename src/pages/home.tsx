@@ -7,11 +7,14 @@ import {
   ScrollView,
   FlatList,
   ActivityIndicator,
+  Image,
 } from "react-native";
 import { useState, useEffect } from "react";
-import * as Font from 'expo-font'
+import * as Font from "expo-font";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import AntDesign from "@expo/vector-icons/AntDesign";
+import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 
 import styles from "../styles/home";
 import FontLoader from "../styles/fontloader/fontloader";
@@ -42,12 +45,12 @@ export default function Home() {
 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
-  
+
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
-        'DMSans-Regular': require('../../assets/fonts/DMSans-Regular.ttf'),
-        'DMSans-Bold': require('../../assets/fonts/DMSans-Bold.ttf'),
+        "DMSans-Regular": require("../../assets/fonts/DMSans-Regular.ttf"),
+        "DMSans-Bold": require("../../assets/fonts/DMSans-Bold.ttf"),
       });
       setFontsLoaded(true);
     };
@@ -62,7 +65,10 @@ export default function Home() {
   // RETORNO DA PÁGINA HOME
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <ScrollView style={styles.ScrollView}>
+      <ScrollView
+        style={styles.ScrollView}
+        showsVerticalScrollIndicator={false}
+      >
         <View style={styles.navbar}>
           <TouchableOpacity>
             <Ionicons name="chatbubbles" size={40} color="#56C596" />
@@ -78,57 +84,210 @@ export default function Home() {
             </TouchableOpacity>
           </View>
         </View>
+
+        <View style={styles.titleCont}>
+          <Text style={[styles.title, styles.DMSansBold]}>
+            Vagas para você:
+          </Text>
+        </View>
+        {/* <FlatList
+          data={vaga}
+          renderItem={vagas}
+          keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
+        /> */}
+        <ScrollView
+          horizontal={true}
+          style={styles.vagasScrollView}
+          showsHorizontalScrollIndicator={false}
+        >
+          <View style={styles.vagaCont}>
+            <View style={styles.vagaHead}>
+              <Text style={[styles.titleVaga, styles.DMSansBold]}>
+                Analista de Banco de Dados
+              </Text>
+              <Text style={[styles.corpText, styles.DMSansBold]}>
+                oferecido por: Dynamo.inc
+              </Text>
+              <Text style={[styles.dateText, styles.DMSansRegular]}>
+                publicado em: 14/05/2024
+              </Text>
+            </View>
+            <View style={styles.vagaBody}>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Modalidade: Remoto
+              </Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Salário: a combinar
+              </Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Cidade: São Paulo
+              </Text>
+            </View>
+            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
+              <Text style={[styles.buttonText, styles.DMSansBold]}>
+                Ver Vaga
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View style={styles.vagaCont}>
+            <View style={styles.vagaHead}>
+              <Text style={[styles.titleVaga, styles.DMSansBold]}>
+                Analista de Banco de Dados
+              </Text>
+              <Text style={[styles.corpText, styles.DMSansBold]}>
+                oferecido por: Dynamo.inc
+              </Text>
+              <Text style={[styles.dateText, styles.DMSansRegular]}>
+                publicado em: 14/05/2024
+              </Text>
+            </View>
+            <View style={styles.vagaBody}>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Modalidade: Remoto
+              </Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Salário: a combinar
+              </Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Cidade: São Paulo
+              </Text>
+            </View>
+            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
+              <Text style={[styles.buttonText, styles.DMSansBold]}>
+                Ver Vaga
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+
+        <View style={styles.titleCont}>
+          <Text style={[styles.title, styles.DMSansBold]}>Outras Vagas:</Text>
+          <Text style={[styles.text, styles.DMSansRegular]}>
+            Veja vagas relacionadas ao que você busca
+          </Text>
+        </View>
+        {/* <FlatList
+          data={vaga}
+          renderItem={vagas}
+          keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
+        /> */}
+        <ScrollView
+          horizontal={true}
+          style={styles.vagasScrollView}
+          showsHorizontalScrollIndicator={false}
+        >
+          <View style={styles.vagaCont}>
+            <View style={styles.vagaHead}>
+              <Text style={[styles.titleVaga, styles.DMSansBold]}>
+                Analista de Banco de Dados
+              </Text>
+              <Text style={[styles.corpText, styles.DMSansBold]}>
+                oferecido por: Dynamo.inc
+              </Text>
+              <Text style={[styles.dateText, styles.DMSansRegular]}>
+                publicado em: 14/05/2024
+              </Text>
+            </View>
+            <View style={styles.vagaBody}>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Modalidade: Remoto
+              </Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Salário: a combinar
+              </Text>
+              <Text style={[styles.descVaga, styles.DMSansBold]}>
+                Cidade: São Paulo
+              </Text>
+            </View>
+            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
+              <Text style={[styles.buttonText, styles.DMSansBold]}>
+                Ver Vaga
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
+
+        <View style={styles.titleCont}>
+          <Text style={[styles.title, styles.DMSansBold]}>Seu Feed:</Text>
+        </View>
+
         {/* <FlatList
           data={vaga}
           renderItem={vagas}
           keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
         /> */}
 
-        <View style={styles.titleCont}>
-          <Text style={[styles.title, styles.DMSansBold]}>Vagas para você:</Text>
-        </View>
-        <ScrollView horizontal={true} style={styles.vagasScrollView}>
-          <View style={styles.vagaCont}>
-            <View style={styles.vagaHead}>
-              <Text style={[styles.titleVaga, styles.DMSansBold]}>Analista de Banco de Dados</Text>
-              <Text style={[styles.corpText, styles.DMSansBold]}>oferecido por: Dynamo.inc</Text>
-              <Text style={[styles.dateText, styles.DMSansRegular]}>publicado em: 14/05/2024</Text>
+        <View style={[styles.postCont]}>
+          <View style={styles.postHeader}>
+            <View style={[styles.postIconBox]}>
+              <Image
+                source={require("../../assets/icons/dynamo.png")}
+                style={styles.postIconImg}
+              />
             </View>
-            <View style={styles.vagaBody}>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>Modalidade: Remoto</Text>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>Salário: a combinar</Text>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>Cidade: São Paulo</Text>
+            <View>
+              <Text style={[styles.DMSansBold, styles.postTile]}>
+                Dynamo Inc
+              </Text>
+              <Text style={[styles.DMSansRegular, styles.dateText]}>
+                publicado em 14/09/2024
+              </Text>
             </View>
-            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
-              <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
-            </TouchableOpacity>
           </View>
 
-        </ScrollView>
-
-        <View style={styles.titleCont}>
-          <Text style={[styles.title, styles.DMSansBold]}>Outras Vagas:</Text>
-          <Text style={[styles.text, styles.DMSansRegular]}>Veja vagas relacionadas ao que você busca</Text>
-        </View>
-
-        <ScrollView horizontal={true} style={styles.vagasScrollView}>
-          <View style={styles.vagaCont}>
-            <View style={styles.vagaHead}>
-              <Text style={[styles.titleVaga, styles.DMSansBold]}>Analista de Banco de Dados</Text>
-              <Text style={[styles.corpText, styles.DMSansBold]}>oferecido por: Dynamo.inc</Text>
-              <Text style={[styles.dateText, styles.DMSansRegular]}>publicado em: 14/05/2024</Text>
+          <View style={styles.postBody}>
+            <Text style={[styles.DMSansRegular, styles.postDesc]}>
+              Comunicado urgente! Abriremos vagas para desenvolvedores
+              iniciantes na carreira e que estejam estudando nas seguintes
+              áreas: Desenvolvimento de Sistemas Análise em Desenvolvimento de
+              Sistemas
+            </Text>
+            <View style={styles.postImgCont}>
+              <Image
+                source={require("../../assets/icons/postbg.jpg")}
+                style={styles.postImg}
+              />
             </View>
-            <View style={styles.vagaBody}>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>Modalidade: Remoto</Text>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>Salário: a combinar</Text>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>Cidade: São Paulo</Text>
+
+            <View style={styles.optionsCont}>
+              <View style={styles.threeIconsCont}>
+                <TouchableOpacity>
+                  <AntDesign name="hearto" size={35} color="black" />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Ionicons
+                    name="chatbubble-ellipses-outline"
+                    size={35}
+                    color="black"
+                  />
+                </TouchableOpacity>
+                <TouchableOpacity>
+                  <Ionicons
+                    name="paper-plane-outline"
+                    size={35}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              </View>
+
+              <TouchableOpacity>
+                <SimpleLineIcons
+                  name="options-vertical"
+                  size={24}
+                  color="black"
+                />
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
-              <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
-            </TouchableOpacity>
+            <View style={styles.postComentCont}>
+              <View style={styles.comentHeader}>
+                <View style={styles.comentIconBox}>
+                  <FontAwesome name="user" size={30} color="black" />
+                </View>
+              </View>
+            </View>
           </View>
-
-        </ScrollView>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
