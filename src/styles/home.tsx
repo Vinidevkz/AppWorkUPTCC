@@ -26,7 +26,11 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginBottom: 10,
+    paddingTop: 5,
+    paddingBottom: 15,
+    paddingHorizontal: 10,
+    borderBottomWidth: 2,
+    borderColor: '#56c596'
   },
 
   searchbar: {

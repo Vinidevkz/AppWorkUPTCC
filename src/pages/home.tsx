@@ -67,32 +67,32 @@ export default function Home() {
   // RETORNO DA PÁGINA HOME
   return (
     <SafeAreaView style={styles.SafeAreaView}>
+      <View style={styles.navbar}>
+        <TouchableOpacity>
+          <Ionicons name="chatbubbles" size={40} color="#56C596" />
+        </TouchableOpacity>
+        <TextInput
+          placeholder="Pesquise por vagas"
+          style={[styles.searchbar, styles.DMSansRegular]}
+        />
+
+        <View style={styles.iconbox}>
+          <TouchableOpacity>
+            <FontAwesome name="user" size={30} color="black" />
+          </TouchableOpacity>
+        </View>
+      </View>
+      
       <ScrollView
         style={styles.ScrollView}
         showsVerticalScrollIndicator={false}
       >
-        <View style={styles.navbar}>
-          <TouchableOpacity>
-            <Ionicons name="chatbubbles" size={40} color="#56C596" />
-          </TouchableOpacity>
-          <TextInput
-            placeholder="Pesquise por vagas"
-            style={[styles.searchbar, styles.DMSansRegular]}
-          />
-
-          <View style={styles.iconbox}>
-            <TouchableOpacity>
-              <FontAwesome name="user" size={30} color="black" />
-            </TouchableOpacity>
-          </View>
-        </View>
-
         <View style={styles.titleCont}>
           <Text style={[styles.title, styles.DMSansBold]}>
             Vagas para você:
           </Text>
         </View>
-        
+
         {/* <FlatList
           data={vaga}
           renderItem={vagas}
@@ -292,20 +292,26 @@ export default function Home() {
                     <FontAwesome name="user" size={30} color="black" />
                   </View>
                   <View>
-                    <Text style={[styles.DMSansBold, styles.comentTitle]}>Marcos Antônio</Text>
-                    <Text style={[styles.DMSansRegular, styles.comentDate]}>09/04/2024</Text>
+                    <Text style={[styles.DMSansBold, styles.comentTitle]}>
+                      Marcos Antônio
+                    </Text>
+                    <Text style={[styles.DMSansRegular, styles.comentDate]}>
+                      09/04/2024
+                    </Text>
                   </View>
                 </View>
                 <TouchableOpacity>
-                <SimpleLineIcons
-                  name="options-vertical"
-                  size={20}
-                  color="black"
-                />
-              </TouchableOpacity>
+                  <SimpleLineIcons
+                    name="options-vertical"
+                    size={20}
+                    color="black"
+                  />
+                </TouchableOpacity>
               </View>
               <View style={styles.comentDescCont}>
-                <Text style={[styles.DMSansRegular, styles.comentDesc]}>Boa vaga!</Text>
+                <Text style={[styles.DMSansRegular, styles.comentDesc]}>
+                  Boa vaga!
+                </Text>
               </View>
             </View>
           </View>
