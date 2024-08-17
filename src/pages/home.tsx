@@ -11,6 +11,8 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import * as Font from "expo-font";
+
+//Libs de ícones
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
@@ -90,11 +92,13 @@ export default function Home() {
             Vagas para você:
           </Text>
         </View>
+        
         {/* <FlatList
           data={vaga}
           renderItem={vagas}
           keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
         /> */}
+
         <ScrollView
           horizontal={true}
           style={styles.vagasScrollView}
@@ -167,11 +171,13 @@ export default function Home() {
             Veja vagas relacionadas ao que você busca
           </Text>
         </View>
+
         {/* <FlatList
           data={vaga}
           renderItem={vagas}
           keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
         /> */}
+
         <ScrollView
           horizontal={true}
           style={styles.vagasScrollView}
