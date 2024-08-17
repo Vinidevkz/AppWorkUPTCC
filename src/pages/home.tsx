@@ -17,11 +17,16 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
+import Entypo from '@expo/vector-icons/Entypo';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import styles from "../styles/home";
 import FontLoader from "../styles/fontloader/fontloader";
 
-export default function Home() {
+import openDrawer from "./routes/drawer";
+
+
+export default function Home({ navigation }) {
   // COMUNICAÇÂO COM A API
 
   // const [vaga, setVaga] = useState("");
@@ -61,7 +66,7 @@ export default function Home() {
   }, []);
 
   if (!fontsLoaded) {
-    return <ActivityIndicator size="large" color="#0000ff" />;
+    return <ActivityIndicator size="large" color="#1b1b1b" />;
   }
 
   // RETORNO DA PÁGINA HOME
@@ -69,20 +74,18 @@ export default function Home() {
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.navbar}>
         <TouchableOpacity>
-          <Ionicons name="chatbubbles" size={40} color="#56C596" />
+          <Ionicons name="chatbubbles" size={30} color="#56C596" />
         </TouchableOpacity>
-        <TextInput
-          placeholder="Pesquise por vagas"
-          style={[styles.searchbar, styles.DMSansRegular]}
-        />
 
         <View style={styles.iconbox}>
           <TouchableOpacity>
-            <FontAwesome name="user" size={30} color="black" />
+            <MaterialCommunityIcons name="bell" size={30} color="#56C596" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('openDrawer')}>
+            <Entypo name="menu" size={35} color="#56C596" />
           </TouchableOpacity>
         </View>
       </View>
-      
       <ScrollView
         style={styles.ScrollView}
         showsVerticalScrollIndicator={false}
@@ -317,6 +320,8 @@ export default function Home() {
           </View>
         </View>
       </ScrollView>
+
+
     </SafeAreaView>
   );
 }

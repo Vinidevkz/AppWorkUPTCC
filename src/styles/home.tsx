@@ -28,27 +28,28 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     paddingTop: 5,
     paddingBottom: 15,
-    paddingHorizontal: 10,
+    paddingHorizontal: 25,
     borderBottomWidth: 2,
     borderColor: '#56c596'
   },
 
-  searchbar: {
-    borderWidth: 3,
-    borderColor: '#56C596',
-    borderRadius: 20,
-    width: 250,
-    paddingVertical: 5,
-    paddingHorizontal: 10,
-  },
+  // searchbar: {
+  //   borderWidth: 3,
+  //   borderColor: '#56C596',
+  //   borderRadius: 20,
+  //   width: 250,
+  //   paddingVertical: 5,
+  //   paddingHorizontal: 5,
+  // },
 
   iconbox: {
-    backgroundColor: '#56C596',
-    width: 50,
+    flexDirection: 'row',
+    width: '30%',
     height: 50,
+
     borderRadius: 50,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
   },
 
   button: {

@@ -79,12 +79,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     borderRadius: 10,
-    width: '70%',
+    width: '60%',
     elevation: 10
   },
 
   buttonText: {
-    fontSize: 20,
+    fontSize: 18,
   },
 
   loginButton: {
