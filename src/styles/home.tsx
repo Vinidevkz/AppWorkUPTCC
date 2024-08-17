@@ -156,7 +156,8 @@ const styles = StyleSheet.create({
   },
 
   postBody: {
-    padding: 10,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     gap: 10,
   },
 
@@ -180,6 +181,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    paddingVertical: 10,
   },
 
   threeIconsCont: {
@@ -194,7 +196,8 @@ const styles = StyleSheet.create({
 
   // Estilo Comentários
   postComentCont: {
-    backgroundColor: '#888888',
+    borderWidth: 3,
+    borderColor: '#56c596',
     borderRadius: 10, // Borda arredondada para estética
     padding: 10, // Espaço interno
     marginTop: 10, // Separação superior
@@ -205,11 +208,16 @@ const styles = StyleSheet.create({
   },
 
   comentHeader: {
-    backgroundColor: '#222222',
-    justifyContent: 'center',
-    padding: 10, // Espaço interno
-    borderTopLeftRadius: 10, // Borda arredondada superior esquerda
-    borderTopRightRadius: 10, // Borda arredondada superior direita
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 10,
+  },
+
+  comentHeaderP1: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
   },
 
   comentIconBox: {
@@ -227,8 +235,20 @@ const styles = StyleSheet.create({
     borderRadius: 50,
   },
 
+  comentTitle: {
+    fontSize: 16
+  },
+
+  comentDate: {
+    fontSize: 13
+  },
+
+  comentDescCont: {
+    padding: 5
+  },
+
   comentDesc: {
-    // Estilo vazio
+    fontSize: 15
   },
 });
 

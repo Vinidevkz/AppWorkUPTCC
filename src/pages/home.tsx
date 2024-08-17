@@ -280,16 +280,32 @@ export default function Home() {
               <TouchableOpacity>
                 <SimpleLineIcons
                   name="options-vertical"
-                  size={24}
+                  size={30}
                   color="black"
                 />
               </TouchableOpacity>
             </View>
             <View style={styles.postComentCont}>
               <View style={styles.comentHeader}>
-                <View style={styles.comentIconBox}>
-                  <FontAwesome name="user" size={30} color="black" />
+                <View style={styles.comentHeaderP1}>
+                  <View style={styles.comentIconBox}>
+                    <FontAwesome name="user" size={30} color="black" />
+                  </View>
+                  <View>
+                    <Text style={[styles.DMSansBold, styles.comentTitle]}>Marcos Antônio</Text>
+                    <Text style={[styles.DMSansRegular, styles.comentDate]}>09/04/2024</Text>
+                  </View>
                 </View>
+                <TouchableOpacity>
+                <SimpleLineIcons
+                  name="options-vertical"
+                  size={20}
+                  color="black"
+                />
+              </TouchableOpacity>
+              </View>
+              <View style={styles.comentDescCont}>
+                <Text style={[styles.DMSansRegular, styles.comentDesc]}>Boa vaga!</Text>
               </View>
             </View>
           </View>

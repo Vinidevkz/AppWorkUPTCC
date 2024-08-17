@@ -3,15 +3,17 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 const Stack = createNativeStackNavigator();
 
-import Home from './src/pages/home';
+
+import Welcome from './src/pages/initialPages/welcome';
+
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName='Home'>
-        <Stack.Screen
-        component={Home}
-        name='Home'
+      <Stack.Navigator initialRouteName='Welcome'>
+      <Stack.Screen
+        component={Welcome}
+        name='Welcome'
         options={{
           headerShown: false
         }}
