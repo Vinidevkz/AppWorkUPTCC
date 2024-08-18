@@ -24,12 +24,12 @@ export default function TabBar() {
           }
         },
         tabBarActiveTintColor: "#56c596", // Cor do ícone ativo
-        tabBarInactiveTintColor: "gray", // Cor do ícone inativo
+        tabBarInactiveTintColor: "#1b1b1b", // Cor do ícone inativo
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#1b1b1b", // Cor de fundo da TabBar
+          backgroundColor: "#808080", // Cor de fundo da TabBar
           paddingBottom: 5, // Ajusta o espaçamento
-          height: 60,
+          height: 50,
           elevation: 40,
           borderTopWidth: 0,
         },

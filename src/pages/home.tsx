@@ -74,15 +74,15 @@ export default function Home({ navigation }) {
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.navbar}>
         <TouchableOpacity>
-          <Ionicons name="chatbubbles" size={30} color="#56C596" />
+          <Ionicons name="chatbubbles" size={30} color="#808080" />
         </TouchableOpacity>
 
         <View style={styles.iconbox}>
           <TouchableOpacity>
-            <MaterialCommunityIcons name="bell" size={30} color="#56C596" />
+            <MaterialCommunityIcons name="bell" size={30} color="#808080" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('openDrawer')}>
-            <Entypo name="menu" size={35} color="#56C596" />
+            <Entypo name="menu" size={35} color="#808080" />
           </TouchableOpacity>
         </View>
       </View>
