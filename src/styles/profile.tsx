@@ -23,29 +23,29 @@ const styles = StyleSheet.create({
 
   profileBackgroundImageCont: {
     width: '100%',
-    height: '20%',
+    height: 200, // Altura fixa em pixels
     alignItems: 'center',
     justifyContent: 'center',
-    overflow: 'hidden',
+    overflow: 'hidden', // Mantém a imagem dentro do container
+    backgroundColor: '#ccc', // Cor de fundo (opcional), caso a imagem não cubra o espaço
   },
-
+  
   profileBackgroundImg: {
     width: '100%',
-    aspectRatio: 16 / 9, // Mantém uma proporção de 16:9, você pode ajustar conforme necessário
-    resizeMode: 'cover',
+    height: '100%', // Faz com que a imagem ocupe todo o container
+    resizeMode: 'cover', // Garante que a imagem cubra o container mantendo as proporções
   },
+  
 
   profileCont: {
     flex: 1,
     width: '100%',  // Garante que o container ocupe 100% da largura da tela
-    backgroundColor: '#808080',
   },
 
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: '#909090',
     padding: 20,
   },
 
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-    backgroundColor: '#707070',
+
     padding: 20,
   },
 
@@ -89,12 +89,74 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-    backgroundColor: '#999999',
     padding: 20,
   },
 
   usersPrefBox: {
     gap: 5
+  },
+
+
+  // A implementar:
+  // profileExpCont: {
+
+  // },
+
+  // profileExpBox: {
+
+  // },
+
+  profileSkillsCont: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: 10,
+    padding: 20,
+  },
+
+  profileLinksCont: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: 10,
+    padding: 20,
+  },
+
+  linkLine: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexDirection: 'row'
+  },
+
+  linkTitle: {
+    fontSize: 16,
+  },
+
+  linkText: {
+
+  },
+
+  linkButton: {
+    alignItems: 'center',
+  },
+
+  profileCVCont: {
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    gap: 25,
+    padding: 20,
+  },
+
+  CVButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+    borderRadius: 50,
+    borderColor: '#56c596',
+    padding: 15,
+    width: 200,
+  },
+
+  CVButtonText: {
+    fontSize: 20
   },
 
   title: {

@@ -8,6 +8,7 @@ import {
   FlatList,
   ActivityIndicator,
   Image,
+  StatusBar
 } from "react-native";
 import { useState, useEffect } from "react";
 import * as Font from "expo-font";
@@ -23,7 +24,12 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 import styles from "../styles/home";
 import FontLoader from "../styles/fontloader/fontloader";
 
-import openDrawer from "./routes/drawer";
+import { createDrawerNavigator } from '@react-navigation/drawer';
+
+const Drawer = createDrawerNavigator();
+
+import Vagas from '../pages/vagas'
+import Favs from '../pages/favs'
 
 
 export default function Home({ navigation }) {
@@ -81,7 +87,7 @@ export default function Home({ navigation }) {
           <TouchableOpacity>
             <MaterialCommunityIcons name="bell" size={30} color="#808080" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.navigate('openDrawer')}>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Entypo name="menu" size={35} color="#808080" />
           </TouchableOpacity>
         </View>
@@ -321,7 +327,8 @@ export default function Home({ navigation }) {
         </View>
       </ScrollView>
 
-
+      <StatusBar backgroundColor="white" barStyle="dark-content" />
     </SafeAreaView>
   );
 }
+

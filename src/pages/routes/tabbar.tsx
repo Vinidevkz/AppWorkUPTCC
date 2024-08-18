@@ -4,6 +4,7 @@ const Tab = createBottomTabNavigator();
 
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import Home from "../home";
 import Search from "../search";
@@ -16,7 +17,7 @@ export default function TabBar() {
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           if (route.name === "Home") {
-            return <Ionicons name={'home'} size={size + 4} color={color} />;
+            return <MaterialCommunityIcons name={'home-variant'} size={size + 4} color={color} />;
           } else if (route.name === "Search") {
             return <Ionicons name={'search'} size={size + 4} color={color} />;
           } else if (route.name === "Profile") {
@@ -27,7 +28,7 @@ export default function TabBar() {
         tabBarInactiveTintColor: "#1b1b1b", // Cor do ícone inativo
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#808080", // Cor de fundo da TabBar
+          backgroundColor: "#e0e0e0", // Cor de fundo da TabBar
           paddingBottom: 5, // Ajusta o espaçamento
           height: 50,
           elevation: 40,
