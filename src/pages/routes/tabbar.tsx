@@ -8,6 +8,7 @@ import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import Home from "../home";
 import Search from "../search";
+import Notifications from "../notifications";
 import Profile from "../profile";
 
 export default function TabBar() {
@@ -20,6 +21,8 @@ export default function TabBar() {
             return <MaterialCommunityIcons name={'home-variant'} size={size + 4} color={color} />;
           } else if (route.name === "Search") {
             return <Ionicons name={'search'} size={size + 4} color={color} />;
+          } else if (route.name === "Notifications") {
+            return <MaterialCommunityIcons name={'bell'} size={size + 4} color={color} />;
           } else if (route.name === "Profile") {
             return <FontAwesome6 name={'user-large'} size={size + 2} color={color} />;
           }
@@ -28,7 +31,7 @@ export default function TabBar() {
         tabBarInactiveTintColor: "#1b1b1b", // Cor do ícone inativo
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#e0e0e0", // Cor de fundo da TabBar
+          backgroundColor: "#FFF", // Cor de fundo da TabBar
           paddingBottom: 5, // Ajusta o espaçamento
           height: 50,
           elevation: 40,
@@ -48,6 +51,11 @@ export default function TabBar() {
         options={{ headerShown: false }}
       />
       <Tab.Screen
+        name="Notifications"
+        component={Notifications}
+        options={{ headerShown: false }}
+      />
+      <Tab.Screen
         name="Profile"
         component={Profile}
         options={{ headerShown: false }}
@@ -55,3 +63,6 @@ export default function TabBar() {
     </Tab.Navigator>
   );
 }
+
+
+//            <MaterialCommunityIcons name="bell" size={30} color="#808080" />

@@ -46,7 +46,7 @@ export default function SimpleScreen() {
 
           <View style={styles.profileBioCont}>
             <Text style={[styles.DMSansBold, styles.title]}>Sobre mim:</Text>
-            <Text style={[styles.DMSansBold, styles.text]}>
+            <Text style={[styles.DMSansRegular, styles.text]}>
               Sou um Jovem Programador apaixonado por tecnologia e que busca
               aprender cada vez mais. Espero poder fazer parte e uma grande
               empresa e aprender com grandes profissionais!

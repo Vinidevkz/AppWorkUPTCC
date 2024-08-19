@@ -8,7 +8,7 @@ import {
   FlatList,
   ActivityIndicator,
   Image,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import { useState, useEffect } from "react";
 import * as Font from "expo-font";
@@ -18,19 +18,18 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
-import Entypo from '@expo/vector-icons/Entypo';
-import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
+import Entypo from "@expo/vector-icons/Entypo";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import styles from "../styles/home";
 import FontLoader from "../styles/fontloader/fontloader";
 
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createDrawerNavigator } from "@react-navigation/drawer";
 
 const Drawer = createDrawerNavigator();
 
-import Vagas from '../pages/vagas'
-import Favs from '../pages/favs'
-
+import Vagas from "../pages/vagas";
+import Favs from "../pages/favs";
 
 export default function Home({ navigation }) {
   // COMUNICAÇÂO COM A API
@@ -79,19 +78,17 @@ export default function Home({ navigation }) {
   return (
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.navbar}>
-        <TouchableOpacity>
-          <Ionicons name="chatbubbles" size={30} color="#808080" />
-        </TouchableOpacity>
-
-        <View style={styles.iconbox}>
+        <Image source={require('../../assets/icons/WUPlogo.png')} style={styles.WUPstyle}/>
+        <View style={styles.iconBox}>
           <TouchableOpacity>
-            <MaterialCommunityIcons name="bell" size={30} color="#808080" />
+            <Ionicons name="chatbubbles" size={30} color="#808080" />
           </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
+          <TouchableOpacity>
             <Entypo name="menu" size={35} color="#808080" />
           </TouchableOpacity>
         </View>
       </View>
+
       <ScrollView
         style={styles.ScrollView}
         showsVerticalScrollIndicator={false}
@@ -232,7 +229,7 @@ export default function Home({ navigation }) {
           renderItem={vagas}
           keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
         /> */}
-
+      <View style={{alignItems: 'center',  justifyContent: 'center', width: '100%'}}>
         <View style={[styles.postCont]}>
           <View style={styles.postHeader}>
             <View style={[styles.postIconBox]}>
@@ -325,10 +322,10 @@ export default function Home({ navigation }) {
             </View>
           </View>
         </View>
+        </View>
       </ScrollView>
 
       <StatusBar backgroundColor="white" barStyle="dark-content" />
     </SafeAreaView>
   );
 }
-

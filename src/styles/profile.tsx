@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   },
 
   profileName: {
-    fontSize: 30,
+    fontSize: 25,
   },
 
   profileUserName: {
@@ -151,6 +151,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 50,
     borderColor: '#56c596',
+    backgroundColor: '#fff',
+    elevation: 3,
     padding: 15,
     width: 200,
   },
@@ -160,11 +162,11 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 25,
+    fontSize: 20,
   },
 
   text: {
-    fontSize: 15,
+    fontSize: 14,
   },
 });
 

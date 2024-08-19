@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
-    paddingVertical: 10
   },
 
   DMSansRegular: {
@@ -18,7 +17,7 @@ const styles = StyleSheet.create({
 
   ScrollView: {
     flex: 1,
-    marginHorizontal: 20,
+
   },
 
   navbar: {
@@ -26,11 +25,22 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     justifyContent: 'space-between',
-    paddingTop: 5,
-    paddingBottom: 15,
+    gap: 20,
+    paddingTop: 15,
+    paddingBottom: 10,
     paddingHorizontal: 25,
     borderBottomWidth: 2,
     borderColor: '#56c596'
+  },
+
+  WUPstyle: {
+    width: 100,
+    height: 50
+  },
+
+  iconBox: {
+    flexDirection: 'row',
+    gap: 30
   },
 
   // searchbar: {
@@ -44,12 +54,11 @@ const styles = StyleSheet.create({
 
   iconbox: {
     flexDirection: 'row',
-    width: '30%',
+    width: '100%',
     height: 50,
-
-    borderRadius: 50,
+    marginLeft: '100%',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    backgroundColor: '#1b1b1b'
   },
 
   button: {
@@ -67,6 +76,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     height: 50,
     marginVertical: 10,
+    marginHorizontal: 20
   },
 
   title: {
@@ -79,7 +89,7 @@ const styles = StyleSheet.create({
 
   vagasScrollView: {
     flex: 1,
-    padding: 5,
+    marginHorizontal: 20,
   },
 
   vagaCont: {
@@ -93,6 +103,8 @@ const styles = StyleSheet.create({
     height: 250,
     padding: 20,
     marginRight: 15,
+    elevation: 5,
+    margin: 10
   },
 
   vagaHead: {
@@ -129,12 +141,13 @@ const styles = StyleSheet.create({
 
   // Estilo Posts
   postCont: {
-    borderWidth: 2,
     borderRadius: 20,
+    backgroundColor: '#fff',
     padding: 15,
     marginBottom: 20,
-    width: '100%',
+    width: '90%',
     maxHeight: 800,
+    elevation: 15,
   },
 
   postHeader: {
