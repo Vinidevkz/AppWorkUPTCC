@@ -140,6 +140,8 @@ export default function Home({ navigation }) {
             </TouchableOpacity>
           </View>
 
+          
+
           <View style={styles.vagaCont}>
             <View style={styles.vagaHead}>
               <Text style={[styles.titleVaga, styles.DMSansBold]}>

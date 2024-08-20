@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 
   vagasScrollView: {
     flex: 1,
-    marginHorizontal: 20,
+    paddingHorizontal: 5,
   },
 
   vagaCont: {
@@ -102,7 +102,6 @@ const styles = StyleSheet.create({
     width: 250,
     height: 250,
     padding: 20,
-    marginRight: 15,
     elevation: 5,
     margin: 10
   },
