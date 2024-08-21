@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#56c596',
+    backgroundColor: '#20dd77',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -89,19 +89,17 @@ const styles = StyleSheet.create({
 
   vagasScrollView: {
     flex: 1,
-    paddingHorizontal: 5,
+    paddingHorizontal: 25,
   },
 
   vagaCont: {
-    backgroundColor: '#f6f6f6',
-    borderWidth: 2,
+    backgroundColor: '#fff',
     borderRadius: 25,
-    borderColor: '#56C596',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: 250,
-    height: 250,
-    padding: 20,
+    width: 320,
+    height: 320,
+    padding: 25,
     elevation: 5,
     margin: 10
   },
@@ -146,7 +144,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     width: '90%',
     maxHeight: 800,
-    elevation: 15,
+    elevation: 5,
   },
 
   postHeader: {

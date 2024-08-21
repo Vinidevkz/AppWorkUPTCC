@@ -1,0 +1,41 @@
+import React, { useState } from 'react';
+import { View, Text, TextInput, Button } from 'react-native';
+
+export default function App() {
+
+  const [nomeCli, setNomeCli] = useState('');  
+
+  const verificar = () => {
+    fetch('http://localhost:8000/api/cliente', {
+      method: 'post',
+      headers: {
+        'Accept': 'application/json',
+        'Content-type': 'application/json'
+      },
+      body: JSON.stringify({
+        nome: nomeCli,
+        email: "testando3dsb@gmail.com",
+        cpf: "333",
+      })
+    })      
+  }
+
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text> Cadastrar Cliente </Text>
+
+      <TextInput
+        placeholder='Digite o nome do cliente'
+        placeholderTextColor='#f00'
+        autoFocus={true}
+        onChangeText={text => setNomeCli(text)}
+      />
+
+      <Button
+        title="Salvar"
+        onPress={() => verificar()}
+      />    
+
+    </View>
+  );
+}

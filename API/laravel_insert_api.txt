@@ -1,0 +1,36 @@
+api.php
+
+Route::get('/cliente','App\Http\Controllers\ClienteController@indexapi');
+Route::post('/cliente','App\Http\Controllers\ClienteController@storeapi');
+
+controller
+
+importar o model (use App\Models\Cliente;)
+
+ public function indexapi()
+    {        
+        $cliente = Cliente::all();
+        return $cliente;
+        
+    }
+
+ public function storeapi(Request $request)
+    {
+        $cliente = new Cliente();
+
+        $cliente->nomeCli = $request->nome;
+        $cliente->cpfCli = $request->cpf;
+        $cliente->emailCli = $request->email;
+        
+        $cliente->save();
+    }
+
+-----
+
+model
+
+ protected $table = 'tbCliente';
+
+    public $fillable = ['idCli','nomeCli','cpfCli','emailCli'];
+
+    public $timestamps = false;
