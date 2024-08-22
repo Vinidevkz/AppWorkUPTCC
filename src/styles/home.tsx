@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 25,
     borderBottomWidth: 2,
-    borderColor: '#56c596'
+    borderColor: '#20dd77'
   },
 
   WUPstyle: {
@@ -79,8 +79,21 @@ const styles = StyleSheet.create({
     marginHorizontal: 20
   },
 
+  titleCont2: {
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    height: 50,
+    marginVertical: 10,
+    marginHorizontal: 20,
+    flexDirection: 'row',
+  },
+
   title: {
     fontSize: 25,
+  },
+
+  row: {
+    flexDirection: 'row'
   },
 
   text: {
@@ -89,7 +102,10 @@ const styles = StyleSheet.create({
 
   vagasScrollView: {
     flex: 1,
-    paddingHorizontal: 25,
+  },
+
+  flatlist: {
+    marginHorizontal: 15,
   },
 
   vagaCont: {
