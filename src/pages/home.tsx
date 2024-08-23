@@ -29,21 +29,24 @@ export default function Home({ navigation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
   // COMUNICAÇÂO COM A API
   useEffect(() => {
     async function buscaVaga() {
       try {
-        const response = await axios.get("http://10.0.2.2:8000/api/vaga"); // Use 10.0.2.2 para emulador Android
+        const response = await axios.get("http://127.0.0.1:8000/api/vaga");
         setData(response.data);
       } catch (error) {
+        console.error("Error fetching data:", error); // Verifique o erro detalhado
         setError(error.message);
       } finally {
         setLoading(false);
       }
     }
-
+  
     buscaVaga();
   }, []);
+  
 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -61,7 +64,7 @@ export default function Home({ navigation }) {
   }, []);
 
   if (!fontsLoaded) {
-    return <ActivityIndicator size="large" color="#1b1b1b" />;
+    return <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}><ActivityIndicator size="large" color="#20dd77" /></View>
   }
   //
 
@@ -96,11 +99,7 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        <ScrollView
-          horizontal={true}
-          style={styles.vagasScrollView}
-          showsHorizontalScrollIndicator={false}
-        >
+          
           <FlatList
             horizontal={true}
             data={data}
@@ -138,7 +137,7 @@ export default function Home({ navigation }) {
               </View>
             )}
           />
-        </ScrollView>
+ 
 
         <View style={styles.titleCont}>
           <Text style={[styles.title, styles.DMSansBold]}>Outras Vagas:</Text>
@@ -146,12 +145,6 @@ export default function Home({ navigation }) {
             Veja vagas relacionadas ao que você busca
           </Text>
         </View>
-
-        {/* <FlatList
-          data={vaga}
-          renderItem={vagas}
-          keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
-        /> */}
 
         <ScrollView
           horizontal={true}
