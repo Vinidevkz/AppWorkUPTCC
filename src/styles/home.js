@@ -29,8 +29,9 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 10,
     paddingHorizontal: 25,
-    borderBottomWidth: 2,
-    borderColor: '#20dd77'
+    backgroundColor: '#fff',
+    elevation: 10,
+    zIndex: 1
   },
 
   WUPstyle: {
@@ -112,12 +113,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     borderRadius: 25,
     alignItems: 'center',
-    justifyContent: 'space-between',
-    width: 320,
-    height: 320,
-    padding: 25,
+    justifyContent: 'space-around',
+    width: 300,
+    height: 300,
+    paddingHorizontal: 25,
     elevation: 5,
-    margin: 10
+    margin: 10,
+    borderBottomWidth: 3,
+    borderColor: '#20dd77'
   },
 
   vagaHead: {
@@ -131,7 +134,7 @@ const styles = StyleSheet.create({
   },
 
   titleVaga: {
-    fontSize: 22,
+    fontSize: 20,
   },
 
   corpText: {
@@ -171,6 +174,7 @@ const styles = StyleSheet.create({
 
   postIconBox: {
     borderWidth: 2,
+    borderColor: '#808080',
     borderRadius: 50,
     width: 50,
     height: 50,
@@ -217,7 +221,7 @@ const styles = StyleSheet.create({
 
   threeIconsCont: {
     flexDirection: 'row',
-    gap: 10,
+    gap: 20,
     alignItems: 'center',
   },
 
