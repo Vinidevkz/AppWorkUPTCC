@@ -34,7 +34,8 @@ export default function Home({ navigation }) {
   useEffect(() => {
     async function buscaVaga() {
       try {
-        const response = await axios.get("http://127.0.0.1:8000/api/vaga");
+        const response = await axios.get("http://10.0.2.2:8000/api/vaga");
+
         setData(response.data);
       } catch (error) {
         console.error("Error fetching data:", error); // Verifique o erro detalhado
