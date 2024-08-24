@@ -17,7 +17,22 @@ const styles = StyleSheet.create({
 
   ScrollView: {
     flex: 1,
+  },
 
+  title: {
+    fontSize: 25,
+  },
+
+  containerTop: {
+    width: '100%',
+    height: 80,
+    maxHeight: 80,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    padding: 20,
+    borderBottomEndRadius: 10,
+    borderBottomLeftRadius: 10,
+    elevation: 10,
   },
 
 });

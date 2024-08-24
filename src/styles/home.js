@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
 
   ScrollView: {
     flex: 1,
-
   },
 
   navbar: {
@@ -161,7 +160,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     padding: 15,
     marginBottom: 20,
-    width: '90%',
+    marginHorizontal: 10,
+    width: 400,
+    maxWidth: 400,
     maxHeight: 800,
     elevation: 5,
   },

@@ -17,21 +17,36 @@ const styles = StyleSheet.create({
 
   ScrollView: {
     flex: 1,
-
   },
 
   containerTop: {
     width: '100%',
+    height: 80,
+    maxHeight: 80,
     backgroundColor: '#fff',
     justifyContent: 'center',
-    height: 100
+    padding: 20,
+    borderBottomEndRadius: 10,
+    borderBottomLeftRadius: 10,
+    elevation: 10,
   },
 
   searchInput: {
     borderWidth: 3,
+    borderRadius: 20,
     borderColor: '#20dd77',
-    padding: 5,
-    backgroundColor: '#1b1b1b'
+    paddingVertical: 5,
+    paddingHorizontal: 10,
+    backgroundColor: '#f4f4f4',
+    flexDirection: 'row',
+    gap: 10,
+    fontSize: 17,
+
+  },
+
+  searchFontSize: {
+    fontSize: 15,
+    flex: 1
   }
 });
 
