@@ -15,6 +15,8 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const Stack = createNativeStackNavigator();
 import TabBar from "../routes/tabbar";
+import SignIN from '../initialPages/signin.js';
+import SignON from '../initialPages/signon.js';
 import styles from "./styles/welcome";
 
 function Welcome({ navigation }) {
@@ -60,12 +62,13 @@ function Welcome({ navigation }) {
         </View>
         <View style={styles.Bottom}>
           <TouchableOpacity
-          onPress={() => navigation.navigate('TabBar')}
+          onPress={() => navigation.navigate('Fazer Login')}
             style={[styles.button, styles.loginButton]}
           >
             <Text style={[styles.DMSansBold, styles.buttonText]}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
+            onPress={() => navigation.navigate('Cadastre-se')}
             style={[styles.button, styles.cadButton]}
           >
             <Text style={[styles.DMSansBold, styles.buttonText, styles.white]}>Cadastre-se</Text>
@@ -98,8 +101,13 @@ export default function App() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="TabBar"
-          component={TabBar}
+          name="Fazer Login"
+          component={SignIN}
+          options={{  }}
+        />
+        <Stack.Screen
+          name="Cadastre-se"
+          component={SignON}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

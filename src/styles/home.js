@@ -234,13 +234,12 @@ const styles = StyleSheet.create({
   postComentCont: {
     borderWidth: 3,
     borderColor: '#56c596',
-    borderRadius: 10, // Borda arredondada para estética
-    padding: 10, // Espaço interno
-    marginTop: 10, // Separação superior
-    marginBottom: 10, // Separação inferior
-    width: '100%', // Largura total
-    // Remova alturas fixas e use flex para ajuste automático
-    flexShrink: 1, // Permite que o container encolha se necessário
+    borderRadius: 10,
+    padding: 10,
+    marginTop: 10,
+    marginBottom: 10,
+    width: '100%',
+    flexShrink: 1,
   },
 
   comentHeader: {
