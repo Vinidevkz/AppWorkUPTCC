@@ -11,18 +11,22 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import styles from "./styles/signon.js";
+import styles from "./styles/signon1.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import AntDesign from '@expo/vector-icons/AntDesign';
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 import useFonts from "../../styles/fontloader/fontloader.js";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
 
 
 export default function SignON1({navigation}) {
+  const {nome, setNome, setUserName} = useContext(Context);
+  const [passwordVisible, setPasswordVisible] = useState()
   //Carregador de fontes
   const fontsLoaded = useFonts();
-  const {nome, setNome, setUserName} = useContext(Context);
+
 
   if (!fontsLoaded) {
     return (
@@ -42,66 +46,38 @@ export default function SignON1({navigation}) {
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>
 
-      <ScrollView style={styles.ScrollView}>
-        <View style={styles.container}>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Nome:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Insira seu nome completo" style={styles.inputText} onChangeText={setNome}/>
-            </View>
-          </View>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Nome de usuário:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Insira seu nome de usuário" style={styles.inputText}/>
-            </View>
-          </View>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Idade:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Insira sua idade" style={styles.inputText}/>
-            </View>
-          </View>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Email:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Insira seu email" style={styles.inputText}/>
-            </View>
-          </View>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Senha:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Crie uma senha" style={styles.inputText}/>
-            </View>
-          </View>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Suas Áreas de interesse:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Escolha suas areas de interesse" style={styles.inputText}/>
-            </View>
-          </View>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Contato:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Digite seu telefone" style={styles.inputText}/>
-            </View>
-          </View>
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>CEP:</Text>
-            <View style={styles.inputCont}>
-              <TextInput placeholder="Digite seu CEP" style={styles.inputText}/>
-            </View>
-          </View>
-          
-
-          <View style={styles.formCont}>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Inserir Currículo Vitae:</Text>
-              <TouchableOpacity style={styles.button}>
-                <Text style={[styles.DMSansBold, styles.buttonText]}>Anexar CV</Text>
-              </TouchableOpacity>
+      <View style={styles.mainContainer}>
+        <View style={styles.formCont}>
+          <Text style={[styles.DMSansBold, styles.title]}>Nome:</Text>
+          <TextInput placeholder="Digite seu nome" style={[styles.DMSansRegular, styles.inputCont]}/>
+        </View>
+        <View style={styles.formCont}>
+          <Text style={[styles.DMSansBold, styles.title]}>Nome de usuário:</Text>
+          <TextInput placeholder="Digite seu nome de usuário" style={[styles.DMSansRegular, styles.inputCont]}/>
+        </View>
+        <View style={styles.formCont}>
+          <Text style={[styles.DMSansBold, styles.title]}>Email:</Text>
+          <TextInput placeholder="Digite seu melhor email" style={[styles.DMSansRegular, styles.inputCont]}/>
+        </View>
+        <View style={styles.formCont}>
+          <Text style={[styles.DMSansBold, styles.title]}>Senha:</Text>
+          <View style={styles.inputCont}>
+          <TextInput placeholder="Crie uma senha" style={[styles.DMSansRegular]} />
+          <FontAwesome6
+              name={passwordVisible ? "eye-slash" : "eye"}
+              size={25}
+              color={"#1b1b1b"}
+            />
           </View>
         </View>
-      </ScrollView>
+      </View>
+
+      <View style={styles.footerCont}>
+        <TouchableOpacity style={styles.nextButton}>
+          <Text style={[styles.DMSansRegular, styles.footerText]}>Próximo</Text>
+          <AntDesign name="right" size={24} color="black" />
+        </TouchableOpacity>
+      </View>
 
       <StatusBar backgroundColor="white" barStyle="dark-content" />
     </SafeAreaView>

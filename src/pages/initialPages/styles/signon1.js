@@ -1,5 +1,4 @@
 import { StyleSheet } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
 
 const styles = StyleSheet.create({
   DMSansRegular: {
@@ -11,22 +10,14 @@ const styles = StyleSheet.create({
   },
 
   SafeAreaView: {
-    flex: 1,
-   
-    backgroundColor: '#f4f4f4'
-  },
-
-  ScrollView: {
     backgroundColor: '#f4f4f4',
-    flexGrow: 1,
   },
 
-  container: {
+  mainContainer: {
+    height: '80%',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    gap: 20,
-    marginTop: 25,
-    marginBottom: 100
+    justifyContent: 'center',
+    gap: 15
   },
 
   header: {
@@ -42,13 +33,13 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 25
+    fontSize: 20
   },
 
   formCont: {
     width: 300,
     maxWidth: 300,
-    gap: 15
+    gap: 5
   },
 
   formTitle: {
@@ -81,6 +72,24 @@ const styles = StyleSheet.create({
 
   buttonText: {
     fontSize: 15
+  },
+
+  footerCont: {
+    flexDirection: 'row',
+    width: '100%',
+    alignItems: 'center',
+    justifyContent: 'flex-end'
+  },
+
+  nextButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingHorizontal: 15
+  },
+  
+  footerText: {
+    fontSize: 17
   }
 });
 
