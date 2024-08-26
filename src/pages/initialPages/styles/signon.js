@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
 
   container: {
-    alignItems: 'flex-start',
+    alignItems: 'center',
     paddingHorizontal: 20,
     gap: 20,
     marginTop: 25,
@@ -52,13 +52,13 @@ const styles = StyleSheet.create({
   },
 
   formTitle: {
-    fontSize: 20
+    fontSize: 18
   },
 
   inputCont: {
     borderWidth: 3,
     borderColor: '#20dd77',
-    borderRadius: 20,
+    borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 5,
     backgroundColor: '#fff'
@@ -73,14 +73,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#20dd77',
-    width: 120,
+    width: 140,
     padding: 10,
     borderRadius: 50,
-    elevation: 5
+    elevation: 2
   },
 
   buttonText: {
-    fontSize: 20
+    fontSize: 15
   }
 });
 

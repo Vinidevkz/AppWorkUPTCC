@@ -11,8 +11,6 @@ const styles = StyleSheet.create({
 
   SafeAreaView: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
     gap: 100,
     backgroundColor: '#f4f4f4'
   },
@@ -21,6 +19,22 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     flex: 1,
     width: '100%'
+  },
+
+  header: {
+    backgroundColor: '#fff',
+    height: 70,
+    maxHeight: 70,
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    gap: 20,
+    flexDirection: 'row',
+    elevation: 10,
+    zIndex: 1
+  },
+
+  titleHeader: {
+    fontSize: 25
   },
 
   loginCont: {

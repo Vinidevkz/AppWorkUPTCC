@@ -14,10 +14,10 @@ import { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
 const Stack = createNativeStackNavigator();
-import TabBar from "../routes/tabbar";
 import SignIN from '../initialPages/signin.js';
-import SignON from '../initialPages/signon.js';
+import SignON1 from '../initialPages/signon1.js';
 import styles from "./styles/welcome";
+import { Provider } from './context/provider';
 
 function Welcome({ navigation }) {
   //Carregador de fontes
@@ -93,24 +93,26 @@ function Welcome({ navigation }) {
 
 export default function App() {
   return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator initialRouteName="Welcome">
-        <Stack.Screen
-          name="Welcome"
-          component={Welcome}
-          options={{ headerShown: false }}
-        />
-        <Stack.Screen
-          name="Fazer Login"
-          component={SignIN}
-          options={{  }}
-        />
-        <Stack.Screen
-          name="Cadastre-se"
-          component={SignON}
-          options={{ headerShown: false }}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider>
+      <NavigationContainer independent={true}>
+        <Stack.Navigator initialRouteName="Welcome">
+          <Stack.Screen
+            name="Welcome"
+            component={Welcome}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Fazer Login"
+            component={SignIN}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Cadastre-se"
+            component={SignON1}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </Provider>
   );
 }

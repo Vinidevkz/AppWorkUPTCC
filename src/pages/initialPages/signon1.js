@@ -11,14 +11,18 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import styles from "../initialPages/styles/signon.js";
+import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import useFonts from "../../styles/fontloader/fontloader.js";
+import { useContext } from "react";
+import { Context } from "./context/provider.js";
 
-export default function SignON() {
+
+export default function SignON1({navigation}) {
   //Carregador de fontes
   const fontsLoaded = useFonts();
+  const {nome, setNome, setUserName} = useContext(Context);
 
   if (!fontsLoaded) {
     return (
@@ -32,7 +36,7 @@ export default function SignON() {
   return (
     <SafeAreaView>
       <View style={styles.header}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="caret-back-circle-sharp" size={35} color="#20dd77" />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
@@ -43,7 +47,7 @@ export default function SignON() {
           <View style={styles.formCont}>
             <Text style={[styles.DMSansBold, styles.formTitle]}>Nome:</Text>
             <View style={styles.inputCont}>
-              <TextInput placeholder="Insira seu nome completo" style={styles.inputText}/>
+              <TextInput placeholder="Insira seu nome completo" style={styles.inputText} onChangeText={setNome}/>
             </View>
           </View>
           <View style={styles.formCont}>
