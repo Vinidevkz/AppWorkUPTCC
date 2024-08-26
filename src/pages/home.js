@@ -30,22 +30,22 @@ export default function Home({ navigation }) {
   const [error, setError] = useState(null);
 
   // COMUNICAÇÂO COM A API
-  // useEffect(() => {
-  //   async function buscaVaga() {
-  //     try {
-  //       const response = await axios.get("http://192.168.18.197/api/vaga");
+   useEffect(() => {
+     async function buscaVaga() {
+       try {
+         const response = await axios.get("http://10.0.2.2:8000/api/vaga");
 
-  //       setData(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error); // Verifique o erro detalhado
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
+         setData(response.data);
+       } catch (error) {
+         console.error("Error fetching data:", error); // Verifique o erro detalhado
+         setError(error.message);
+       } finally {
+         setLoading(false);
+       }
+   }
   
-  //   buscaVaga();
-  // }, []);
+   buscaVaga();
+  }, []);
   
 
   //Carregador de fontes
@@ -112,7 +112,7 @@ export default function Home({ navigation }) {
                     {item.nomeVaga}
                   </Text>
                   <Text style={[styles.corpText, styles.DMSansBold]}>
-                    oferecido por: {item.nomeEmpresa}
+                    oferecido por: {item.idEmpresa}
                   </Text>
                   <Text style={[styles.dateText, styles.DMSansRegular]}>
                     publicada em: {item.dataPublicacaoVaga}

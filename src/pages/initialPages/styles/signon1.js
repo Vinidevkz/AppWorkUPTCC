@@ -52,11 +52,13 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     paddingHorizontal: 10,
     paddingVertical: 5,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
   },
 
   inputText: {
-    fontSize: 18,
     flex: 1
   },
 

@@ -12,4 +12,9 @@ class Empresa extends Model
     protected $table = 'tb_empresa';
 
     public $timestamps = false;
+
+    public function vagas()
+    {
+        return $this->hasMany(Vaga::class, 'idEmpresa');
+    }
 }

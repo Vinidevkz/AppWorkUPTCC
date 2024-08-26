@@ -20,10 +20,17 @@ import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
 
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
+
+
+const Stack = createNativeStackNavigator()
+
 
 export default function SignON1({navigation}) {
   const {nome, setNome, setUserName} = useContext(Context);
-  const [passwordVisible, setPasswordVisible] = useState()
+  const [passwordVisible, setPasswordVisible] = useState(false)
   //Carregador de fontes
   const fontsLoaded = useFonts();
 
@@ -62,18 +69,22 @@ export default function SignON1({navigation}) {
         <View style={styles.formCont}>
           <Text style={[styles.DMSansBold, styles.title]}>Senha:</Text>
           <View style={styles.inputCont}>
-          <TextInput placeholder="Crie uma senha" style={[styles.DMSansRegular]} />
-          <FontAwesome6
-              name={passwordVisible ? "eye-slash" : "eye"}
-              size={25}
-              color={"#1b1b1b"}
-            />
+          <TextInput placeholder="Crie uma senha" style={[styles.DMSansRegular, styles.inputText]} secureTextEntry={!passwordVisible}/>
+          <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
+            <FontAwesome6
+                name={passwordVisible ? "eye-slash" : "eye"}
+                size={20}
+                color={"#1b1b1b"}
+                style={{paddingHorizontal: 10
+                }}
+              />
+          </TouchableOpacity>
           </View>
         </View>
       </View>
 
       <View style={styles.footerCont}>
-        <TouchableOpacity style={styles.nextButton}>
+        <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Cadastre-se 2')}>
           <Text style={[styles.DMSansRegular, styles.footerText]}>Próximo</Text>
           <AntDesign name="right" size={24} color="black" />
         </TouchableOpacity>
@@ -83,3 +94,5 @@ export default function SignON1({navigation}) {
     </SafeAreaView>
   );
 }
+
+

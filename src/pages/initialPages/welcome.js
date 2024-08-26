@@ -19,6 +19,10 @@ import SignON1 from '../initialPages/signon1.js';
 import styles from "./styles/welcome";
 import { Provider } from './context/provider';
 
+import SignON2 from './signon2.js'
+import Home from "../home.js";
+import TabBar from "../routes/tabbar.js";
+
 function Welcome({ navigation }) {
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -62,7 +66,7 @@ function Welcome({ navigation }) {
         </View>
         <View style={styles.Bottom}>
           <TouchableOpacity
-          onPress={() => navigation.navigate('Fazer Login')}
+          onPress={() => navigation.navigate('TabBar')}
             style={[styles.button, styles.loginButton]}
           >
             <Text style={[styles.DMSansBold, styles.buttonText]}>Login</Text>
@@ -107,10 +111,27 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
+            name="Home"
+            component={Home}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="TabBar"
+            component={TabBar}
+            options={{ headerShown: false }}
+          />
+
+          <Stack.Screen
             name="Cadastre-se"
             component={SignON1}
             options={{ headerShown: false }}
           />
+          <Stack.Screen
+            name="Cadastre-se 2"
+            component={SignON2}
+            options={{ headerShown: false }}
+          />
+          
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>
