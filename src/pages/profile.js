@@ -11,7 +11,7 @@ import {
 
 import styles from "../styles/profile";
 
-export default function SimpleScreen() {
+export default function Profile() {
   return (
     <SafeAreaView>
       <ScrollView>
@@ -20,6 +20,12 @@ export default function SimpleScreen() {
             source={require("../../assets/icons/postbg.jpg")}
             style={styles.profileBackgroundImg}
           />
+          <View style={styles.profileIconBox}>
+            <Image
+              source={require("../../assets/icons/manicon.png")}
+              style={styles.icon}
+            />
+          </View>
         </View>
 
         <View style={styles.profileCont}>
@@ -34,13 +40,6 @@ export default function SimpleScreen() {
               <Text style={[styles.DMSansRegular, styles.profileUserLocation]}>
                 sp, São Paulo
               </Text>
-            </View>
-
-            <View style={styles.profileIconBox}>
-              <Image
-                source={require("../../assets/icons/manicon.png")}
-                style={styles.icon}
-              />
             </View>
           </View>
 
@@ -74,7 +73,7 @@ export default function SimpleScreen() {
           <View style={styles.profileSkillsCont}>
             <Text style={[styles.DMSansBold, styles.title]}>Competências</Text>
             <Text style={[styles.DMSansRegular, styles.text]}>Técnico em Desenvolvimento de Sistemas</Text>
-            <Text style={[styles.DMSansRegular, styles.text]}>Curso de Admnistração, 2 meses</Text>
+            <Text style={[styles.DMSansRegular, styles.text]}>Curso de Administração, 2 meses</Text>
           </View>
 
           <View style={styles.profileLinksCont}>

@@ -21,7 +21,7 @@ import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
 
 export default function SignON3({ navigation }) {
-  const { nome, setNome, setUserName } = useContext(Context);
+  const { nome, setNome, userName, setUserName } = useContext(Context);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
   //Carregador de fontes
@@ -68,7 +68,7 @@ export default function SignON3({ navigation }) {
 
           <TextInput
             placeholder="Escreva uma breve biografia sobre você"
-            style={styles.bioCont}
+            style={[styles.bioCont, styles.DMSansRegular]}
             multiline={true}
           ></TextInput>
         </View>

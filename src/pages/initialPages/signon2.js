@@ -19,11 +19,12 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
+import { TextInputMask } from 'react-native-masked-text';
 
 
 
 export default function SignON2({navigation}) {
-  const {nome, setNome, setUserName} = useContext(Context);
+  const {tel, setTel, date, setDate, cep, setCep} = useContext(Context);
   const [passwordVisible, setPasswordVisible] = useState(false)
 
   //Carregador de fontes
@@ -55,15 +56,41 @@ export default function SignON2({navigation}) {
         </View>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>Telefone:</Text>
-          <TextInput placeholder="(99) 99999-9999" style={[styles.DMSansRegular, styles.inputCont]}/>
+          <TextInputMask
+          type={'cel-phone'}
+          options={{
+            maskType: 'BRL',
+            withDDD: true,
+            dddMask: '(99) '
+          }}
+          placeholder="(99) 99999-9999"
+          style={[styles.DMSansRegular, styles.inputCont]}
+          value={tel}
+          onChangeText={text => setTel(text)}
+        />
         </View>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>Data de Nascimento:</Text>
-          <TextInput placeholder="Digite sua data de nascimento" style={[styles.DMSansRegular, styles.inputCont]}/>
+          <TextInputMask
+          type={'datetime'}
+          options={{
+            format: 'DD/MM/YYYY'
+          }}
+          placeholder="DD/MM/AAAA"
+          style={[styles.DMSansRegular, styles.inputCont]}
+          value={date}
+          onChangeText={text => setDate(text)}
+        />
         </View>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>CEP:</Text>
-          <TextInput placeholder="Digite seu CEP" style={[styles.DMSansRegular, styles.inputCont]}/>
+          <TextInputMask
+          type={'zip-code'}
+          placeholder="Digite seu CEP"
+          style={[styles.DMSansRegular, styles.inputCont]}
+          value={cep}
+          onChangeText={text => setCep(text)}
+        />
 
         </View>
 
