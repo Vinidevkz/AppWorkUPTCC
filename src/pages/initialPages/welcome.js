@@ -3,7 +3,6 @@ import {
   View,
   Text,
   Image,
-  SafeAreaView,
   ActivityIndicator,
   TouchableOpacity,
   StatusBar
@@ -16,10 +15,10 @@ import { LinearGradient } from "expo-linear-gradient";
 
 const Stack = createNativeStackNavigator();
 import SignIN from '../initialPages/signin.js';
-import SignON1 from '../initialPages/signon1.js';
 import styles from "./styles/welcome";
 import { Provider } from './context/provider';
 
+import SignON1 from '../initialPages/signon1.js';
 import SignON2 from './signon2.js'
 import SignON3 from "./signon3.js";
 import Home from "../home.js";

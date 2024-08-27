@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#f4f4f4',
   },
 
+  
+
   mainContainer: {
     height: '80%',
     alignItems: 'center',
@@ -27,12 +29,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 20,
     gap: 20,
-    flexDirection: 'row',
-    elevation: 10,
+    flexDirection: 'row',   
     zIndex: 1,
     borderBottomRightRadius: 20,
     borderBottomLeftRadius: 20,
-
   },
 
   title: {
@@ -42,7 +42,6 @@ const styles = StyleSheet.create({
 
   formCont: {
     width: '100%',
-
     paddingHorizontal: 50,
     gap: 5
   },
@@ -50,20 +49,23 @@ const styles = StyleSheet.create({
   pdfCvCont:{
     width: '100%',
     paddingHorizontal: 30,
-    gap: 5
+    gap: 5,
+  },
+
+  pdfDesc: {
+    fontSize: 13,
   },
 
   formTitle: {
-    fontSize: 18,
+    fontSize: 16,
     color: '#1b1b1b'
   },
 
   inputCont: {
-    borderWidth: 3,
-    borderColor: '#20dd77',
-    borderRadius: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    borderRadius: 20,
+    elevation: 2,
+    paddingHorizontal: 15,
+    paddingVertical: 8,
     backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -94,8 +96,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#20dd77',
-    width: 150,
-    padding: 10,
+    width: 160,
+    maxWidth: 160,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
     borderRadius: 50,
     elevation: 2
   },
@@ -111,7 +115,8 @@ const styles = StyleSheet.create({
   footerCont: {
     flexDirection: 'row',
     width: '100%',
-    alignItems: 'flex-end',
+    paddingVertical: 20,
+    alignItems: 'center',
     justifyContent: 'space-between',
   },
 

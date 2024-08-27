@@ -112,7 +112,7 @@ export default function Home({ navigation }) {
                     {item.nomeVaga}
                   </Text>
                   <Text style={[styles.corpText, styles.DMSansBold]}>
-                    oferecido por: {item.idEmpresa}
+                    oferecido por: {item.idEmpresa?.nomeEmpresa}
                   </Text>
                   <Text style={[styles.dateText, styles.DMSansRegular]}>
                     publicada em: {item.dataPublicacaoVaga}

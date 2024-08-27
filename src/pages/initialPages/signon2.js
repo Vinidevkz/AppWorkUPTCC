@@ -21,6 +21,7 @@ import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
 
 
+
 export default function SignON2({navigation}) {
   const {nome, setNome, setUserName} = useContext(Context);
   const [passwordVisible, setPasswordVisible] = useState(false)
@@ -49,20 +50,21 @@ export default function SignON2({navigation}) {
 
       <View style={styles.mainContainer}>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Áreas de Interesse:</Text>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Áreas de Interesse:</Text>
           <TextInput placeholder="Selecione até três áreas de seu interesse" style={[styles.DMSansRegular, styles.inputCont]}/>
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Telefone:</Text>
-          <TextInput placeholder="Digite seu telefone" style={[styles.DMSansRegular, styles.inputCont]}/>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Telefone:</Text>
+          <TextInput placeholder="(99) 99999-9999" style={[styles.DMSansRegular, styles.inputCont]}/>
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Data de Nascimento:</Text>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Data de Nascimento:</Text>
           <TextInput placeholder="Digite sua data de nascimento" style={[styles.DMSansRegular, styles.inputCont]}/>
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>CEP:</Text>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>CEP:</Text>
           <TextInput placeholder="Digite seu CEP" style={[styles.DMSansRegular, styles.inputCont]}/>
+
         </View>
 
       </View>
