@@ -17,11 +17,11 @@ const styles = StyleSheet.create({
     height: '80%',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: 15
+    gap: 35
   },
 
   header: {
-    backgroundColor: '#fff',
+    backgroundColor: '#20dd77',
     height: 70,
     maxHeight: 70,
     alignItems: 'center',
@@ -29,21 +29,33 @@ const styles = StyleSheet.create({
     gap: 20,
     flexDirection: 'row',
     elevation: 10,
-    zIndex: 1
+    zIndex: 1,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
+
   },
 
   title: {
-    fontSize: 20
+    fontSize: 20,
+    color: '#fff'
   },
 
   formCont: {
-    width: 300,
-    maxWidth: 300,
+    width: '100%',
+
+    paddingHorizontal: 50,
+    gap: 5
+  },
+
+  pdfCvCont:{
+    width: '100%',
+    paddingHorizontal: 30,
     gap: 5
   },
 
   formTitle: {
-    fontSize: 18
+    fontSize: 18,
+    color: '#1b1b1b'
   },
 
   inputCont: {
@@ -58,18 +70,38 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
 
+  row: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+
   inputText: {
     flex: 1
+  },
+
+  bioCont: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    elevation: 5,
+    height: 200,
+    width: '100%',
+    padding: 20,
+    textAlignVertical: 'top',
   },
 
   button: {
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#20dd77',
-    width: 140,
+    width: 150,
     padding: 10,
     borderRadius: 50,
     elevation: 2
+  },
+
+  gap: {
+    gap: 20
   },
 
   buttonText: {
@@ -79,19 +111,34 @@ const styles = StyleSheet.create({
   footerCont: {
     flexDirection: 'row',
     width: '100%',
-    alignItems: 'center',
-    justifyContent: 'flex-end'
+    alignItems: 'flex-end',
+    justifyContent: 'space-between',
   },
 
   nextButton: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 5,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    alignSelf: 'flex-end'
+  },
+
+  backButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 5,
+    paddingHorizontal: 15,
+    alignSelf: 'flex-start'
   },
   
   footerText: {
     fontSize: 17
+  },
+  
+  nextText: {
+    fontSize: 17,
+    borderBottomWidth: 2,
+    borderColor: '#20dd77'
   }
 });
 

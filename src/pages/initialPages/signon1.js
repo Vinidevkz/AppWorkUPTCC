@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-import styles from "./styles/signon1.js";
+import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -48,26 +48,26 @@ export default function SignON1({navigation}) {
     <SafeAreaView>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color="#20dd77" />
+          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>
 
       <View style={styles.mainContainer}>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.title]}>Nome:</Text>
+          <Text style={[styles.DMSansBold, styles.formTitle]}>Nome:</Text>
           <TextInput placeholder="Digite seu nome" style={[styles.DMSansRegular, styles.inputCont]}/>
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.title]}>Nome de usuário:</Text>
+          <Text style={[styles.DMSansBold, styles.formTitle]}>Nome de usuário:</Text>
           <TextInput placeholder="Digite seu nome de usuário" style={[styles.DMSansRegular, styles.inputCont]}/>
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.title]}>Email:</Text>
+          <Text style={[styles.DMSansBold, styles.formTitle]}>Email:</Text>
           <TextInput placeholder="Digite seu melhor email" style={[styles.DMSansRegular, styles.inputCont]}/>
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.title]}>Senha:</Text>
+          <Text style={[styles.DMSansBold, styles.formTitle]}>Senha:</Text>
           <View style={styles.inputCont}>
           <TextInput placeholder="Crie uma senha" style={[styles.DMSansRegular, styles.inputText]} secureTextEntry={!passwordVisible}/>
           <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
@@ -84,13 +84,14 @@ export default function SignON1({navigation}) {
       </View>
 
       <View style={styles.footerCont}>
-        <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('Cadastre-se 2')}>
-          <Text style={[styles.DMSansRegular, styles.footerText]}>Próximo</Text>
+        <View></View>
+        <TouchableOpacity style={styles.nextButton} onPress={() => navigation.navigate('SignON2')}>
+          <Text style={[styles.DMSansRegular, styles.nextText]}>Próximo</Text>
           <AntDesign name="right" size={24} color="black" />
         </TouchableOpacity>
       </View>
 
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
+      <StatusBar backgroundColor="#20dd77" barStyle="dark-content" />
     </SafeAreaView>
   );
 }

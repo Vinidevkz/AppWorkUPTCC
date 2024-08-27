@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   TouchableOpacity,
+  StatusBar
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -20,6 +21,7 @@ import styles from "./styles/welcome";
 import { Provider } from './context/provider';
 
 import SignON2 from './signon2.js'
+import SignON3 from "./signon3.js";
 import Home from "../home.js";
 import TabBar from "../routes/tabbar.js";
 
@@ -45,7 +47,9 @@ function Welcome({ navigation }) {
 
   //Retorno da página de boas-vindas
   return (
+    
     <View style={styles.SafeAreaView}>
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <LinearGradient
         colors={["#fff", "#fff", "#fff", "#56c596"]}
         style={styles.background}
@@ -72,7 +76,7 @@ function Welcome({ navigation }) {
             <Text style={[styles.DMSansBold, styles.buttonText]}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('Cadastre-se')}
+            onPress={() => navigation.navigate('SignON1')}
             style={[styles.button, styles.cadButton]}
           >
             <Text style={[styles.DMSansBold, styles.buttonText, styles.white]}>Cadastre-se</Text>
@@ -122,13 +126,18 @@ export default function App() {
           />
 
           <Stack.Screen
-            name="Cadastre-se"
+            name="SignON1"
             component={SignON1}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Cadastre-se 2"
+            name="SignON2"
             component={SignON2}
+            options={{ headerShown: false }}
+          />
+                    <Stack.Screen
+            name="SignON3"
+            component={SignON3}
             options={{ headerShown: false }}
           />
           
