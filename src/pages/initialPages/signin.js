@@ -48,7 +48,7 @@ export default function SignIN({navigation}) {
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color="#20dd77" />
+          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.titleHeader]}>Fazer Login</Text>
       </View>
@@ -97,7 +97,7 @@ export default function SignIN({navigation}) {
           </TouchableOpacity>
         </View>
       </View>
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
+      <StatusBar backgroundColor="#20dd77" barStyle="dark-content" />
     </SafeAreaView>
   );
 }

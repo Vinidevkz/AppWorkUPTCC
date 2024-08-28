@@ -69,7 +69,7 @@ function Welcome({ navigation }) {
         </View>
         <View style={styles.Bottom}>
           <TouchableOpacity
-          onPress={() => navigation.navigate('TabBar')}
+          onPress={() => navigation.navigate('SignIN')}
             style={[styles.button, styles.loginButton]}
           >
             <Text style={[styles.DMSansBold, styles.buttonText]}>Login</Text>
@@ -109,7 +109,7 @@ export default function App() {
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="Fazer Login"
+            name="SignIN"
             component={SignIN}
             options={{ headerShown: false }}
           />

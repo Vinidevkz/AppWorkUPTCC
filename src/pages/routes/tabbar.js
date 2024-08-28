@@ -33,8 +33,9 @@ export default function TabBar() {
         tabBarStyle: {
           backgroundColor: "#FFF", // Cor de fundo da TabBar
           paddingBottom: 5, // Ajusta o espaçamento
-          height: 50,
-          elevation: 40,
+          zIndex: 1,
+          height: 60,
+          elevation: 20,
           borderTopWidth: 0,
         },
         headerShown: false, // Remove o cabeçalho

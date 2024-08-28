@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
   formCont: {
     width: '100%',
     paddingHorizontal: 50,
-    gap: 5
+    gap: 5,
+    justifyContent: 'space-between',
   },
 
   pdfCvCont:{
@@ -59,6 +60,25 @@ const styles = StyleSheet.create({
   formTitle: {
     fontSize: 16,
     color: '#1b1b1b'
+  },
+
+  profileIconBox: {
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: 50,
+    borderWidth: 3,
+    borderColor: '#1b1b1b',
+    backgroundColor: '#fff',
+    zIndex: 1,
+  },
+
+  icon: {
+    width: '100%',
+    height: 100,
+    resizeMode: 'cover',
   },
 
   inputCont: {

@@ -11,7 +11,6 @@ import {
 } from "react-native";
 
 import styles from "./styles/signon.js";
-import stylesProfile from "../../styles/profile.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
@@ -55,10 +54,10 @@ export default function SignON3({ navigation }) {
               Selecione uma foto de Perfil:{" "}
             </Text>
           </View>
-          <View style={stylesProfile.profileIconBox}>
+          <View style={styles.profileIconBox}>
             <Image
               source={require("../../../assets/icons/manicon.png")}
-              style={stylesProfile.icon}
+              style={styles.icon}
             />
           </View>
         </View>
@@ -110,7 +109,7 @@ export default function SignON3({ navigation }) {
           style={styles.nextButton}
           onPress={() => navigation.navigate("SignON3")}
         >
-          <Text style={[styles.DMSansRegular, styles.nextText]}>Próximo</Text>
+          <Text style={[styles.DMSansRegular, styles.nextText]} onPress={() => navigation.navigate('TabBar')}>Próximo</Text>
           <AntDesign name="right" size={24} color="black" />
         </TouchableOpacity>
       </View>

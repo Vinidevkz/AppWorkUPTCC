@@ -22,26 +22,28 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    backgroundColor: '#fff',
+    backgroundColor: '#20dd77',
     height: 70,
     maxHeight: 70,
     alignItems: 'center',
     paddingHorizontal: 20,
     gap: 20,
-    flexDirection: 'row',
-    elevation: 10,
-    zIndex: 1
+    flexDirection: 'row',   
+    zIndex: 1,
+    borderBottomRightRadius: 20,
+    borderBottomLeftRadius: 20,
   },
 
   titleHeader: {
-    fontSize: 25
+    fontSize: 25,
+    color: '#fff'
   },
 
   loginCont: {
     padding: 20,
     gap: 20,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   workuplogo: {
@@ -51,13 +53,8 @@ const styles = StyleSheet.create({
 
   title: {
     fontSize: 25,
-    alignSelf: 'flex-start'
+    alignSelf: 'center'
   },    
-
-  body: {
-    gap: 15,
-    height: 400,
-  },
 
   inputCont: {
     flexDirection: 'row',
