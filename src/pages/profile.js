@@ -43,6 +43,8 @@ export default function Profile() {
             </View>
           </View>
 
+          <View style={styles.line}></View>
+
           <View style={styles.profileBioCont}>
             <Text style={[styles.DMSansBold, styles.title]}>Sobre mim:</Text>
             <Text style={[styles.DMSansRegular, styles.text]}>
@@ -86,11 +88,15 @@ export default function Profile() {
             </View>
           </View>
 
+          <View style={styles.line}></View>
+
           <View style={styles.profileCVCont}>
             <Text style={[styles.DMSansBold, styles.title]}>Currículo Vitae:</Text>
 
-            <View style={{alignItems: 'center', justifyContent: 'center', width: '100%'}}>
-            <TouchableOpacity style={styles.CVButton}><Text style={[styles.DMSansBold, styles.CVButtonText]}>Acessar CV</Text></TouchableOpacity>
+            <View style={{alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row',}}>
+              <TouchableOpacity style={styles.CVButton}><Text style={[styles.DMSansBold, styles.CVButtonText]}>Acessar CV</Text></TouchableOpacity>
+
+              <Text>Arquivo selecionado: cv.pdf</Text>
             </View>
           </View>
         </View>

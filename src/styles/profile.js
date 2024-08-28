@@ -63,14 +63,16 @@ const styles = StyleSheet.create({
   profileCont: {
     flex: 1,
     width: '100%',
-
+    paddingHorizontal: 25,
+    paddingVertical: 30,
+    gap: 30
   },
 
   profileHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    padding: 20,
+    width: '100%'
   },
 
   profileName: {
@@ -89,14 +91,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-    padding: 20,
+
   },
 
   profilePrefsCont: {
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-    padding: 20,
+
   },
 
   usersPrefBox: {
@@ -107,14 +109,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-    padding: 20,
+
   },
 
   profileLinksCont: {
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-    padding: 20,
+
   },
 
   linkLine: {
@@ -128,26 +130,28 @@ const styles = StyleSheet.create({
   },
 
   profileCVCont: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
     gap: 25,
-    padding: 20,
+  },
+
+  line: {
+    alignSelf: 'center',
+    width: '80%',
+    borderBottomWidth: 1
   },
 
   CVButton: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 2,
     borderRadius: 50,
-    borderColor: '#56c596',
-    backgroundColor: '#fff',
-    elevation: 3,
-    padding: 15,
-    width: 200,
+    backgroundColor: '#20dd77',
+    paddingVertical: 10,
+    width: '30%'
+
   },
 
   CVButtonText: {
-    fontSize: 20
+    fontSize: 15,
+    color: '#fff'
   },
 
   title: {
