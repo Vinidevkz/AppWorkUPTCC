@@ -29,23 +29,21 @@ export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // COMUNICAÇÂO COM A API
-  //  useEffect(() => {
-  //    async function buscaVaga() {
-  //      try {
-  //       const response = await axios.get("http://192.168.18.197:8000/api/vaga");
-
-  //        setData(response.data);
-  //      } catch (error) {
-  //        console.error("Error fetching data:", error); // Verifique o erro detalhado
-  //        setError(error.message);
-  //      } finally {
-  //        setLoading(false);
-  //      }
-  //  }
+    useEffect(() => {
+      async function buscaVaga() {
+         try {
+         const response = await axios.get("http://192.168.18.197:8000/api/vaga/");
+          setData(response.data);
+        } catch (error) {
+          console.error("Error fetching data:", error);
+          setError(error.message);
+        } finally {
+          setLoading(false);
+        }
+    }
   
-  //  buscaVaga();
-  // }, []);
+    buscaVaga();
+   }, []);
   
 
   //Carregador de fontes

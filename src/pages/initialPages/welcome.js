@@ -13,6 +13,7 @@ import * as Font from "expo-font";
 import { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
+
 const Stack = createNativeStackNavigator();
 import SignIN from '../initialPages/signin.js';
 import styles from "./styles/welcome";
@@ -25,6 +26,7 @@ import Home from "../home.js";
 import TabBar from "../routes/tabbar.js";
 
 function Welcome({ navigation }) {
+
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
