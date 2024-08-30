@@ -29,7 +29,7 @@ const Stack = createNativeStackNavigator()
 
 
 export default function SignON1({navigation}) {
-  const {nome, setNome, userName, setUserName, email, setEmail, senha, setSenha} = useContext(Context);
+  const {nome, setNome, setUserName, setEmail, setSenha} = useContext(Context);
   const [passwordVisible, setPasswordVisible] = useState(false)
   //Carregador de fontes
   const fontsLoaded = useFonts();
@@ -44,13 +44,13 @@ export default function SignON1({navigation}) {
   }
   //
 
-  //Validação de Campos
-  const handleEmailChange = (text) => {
-    // Filtra apenas caracteres válidos
-    const filteredText = text.replace(/[^a-zA-Z0-9@.]/g, '');
-    setEmail(filteredText);
-  };
-  //
+    //Validação de Campos
+    const handleEmailChange = (text) => {
+      // Filtra apenas caracteres válidos
+      const filteredText = text.replace(/[^a-zA-Z0-9@.]/g, '');
+      setEmail(filteredText);
+    };
+    //
 
   return (
     <SafeAreaView>
@@ -63,21 +63,28 @@ export default function SignON1({navigation}) {
 
       <View style={styles.mainContainer}>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansRegular, styles.formTitle]}>Nome:</Text>
-          <TextInput placeholder="Digite seu nome" style={[styles.DMSansRegular, styles.inputCont]}/>
+          <Text style={[styles.DMSansBold, styles.formTitle]}>Nome:</Text>
+          <TextInput placeholder="Digite seu nome" style={[styles.DMSansRegular, styles.inputCont]}
+          onChangeText={(text)=>setNome(text)}
+          />
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansRegular, styles.formTitle]}>Nome de usuário:</Text>
-          <TextInput placeholder="Digite seu nome de usuário" style={[styles.DMSansRegular, styles.inputCont]}/>
+          <Text style={[styles.DMSansBold, styles.formTitle]}>Nome de usuário:</Text>
+          <TextInput placeholder="Digite seu nome de usuário" style={[styles.DMSansRegular, styles.inputCont]}
+          onChangeText={(text)=>setUserName(text)}
+          
+          />
         </View>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>Email:</Text>
-          <TextInput placeholder="exemplo@gmail.com" style={[styles.DMSansRegular, styles.inputCont]} value={email} onChangeText={handleEmailChange}/>
+          <TextInput placeholder="exemplo@gmail.com" style={[styles.DMSansRegular, styles.inputCont]} onChangeText={handleEmailChange}/>
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansRegular, styles.formTitle]}>Senha:</Text>
+          <Text style={[styles.DMSansBold, styles.formTitle]}>Senha:</Text>
           <View style={styles.inputCont}>
-          <TextInput placeholder="Crie uma senha" style={[styles.DMSansRegular, styles.inputText]} secureTextEntry={!passwordVisible}/>
+          <TextInput placeholder="Crie uma senha" style={[styles.DMSansRegular, styles.inputText]} secureTextEntry={!passwordVisible}
+          onChangeText={(text)=>setSenha(text)}
+          />
           <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
             <FontAwesome6
                 name={passwordVisible ? "eye-slash" : "eye"}

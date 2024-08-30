@@ -10,6 +10,7 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
+import { TextInputMask } from 'react-native-masked-text';
 
 import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -19,13 +20,10 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
-import { TextInputMask } from 'react-native-masked-text';
-
 
 
 export default function SignON2({navigation}) {
-  const {tel, setTel, date, setDate, cep, setCep} = useContext(Context);
-  const [passwordVisible, setPasswordVisible] = useState(false)
+  const {setTel, setNasc, setCep} = useContext(Context);
 
   //Carregador de fontes
   const fontsLoaded = useFonts();
@@ -65,8 +63,7 @@ export default function SignON2({navigation}) {
           }}
           placeholder="(99) 99999-9999"
           style={[styles.DMSansRegular, styles.inputCont]}
-          value={tel}
-          onChangeText={text => setTel(text)}
+          onChangeText={(text)=>setTel(text)}
         />
         </View>
         <View style={styles.formCont}>
@@ -78,8 +75,7 @@ export default function SignON2({navigation}) {
           }}
           placeholder="DD/MM/AAAA"
           style={[styles.DMSansRegular, styles.inputCont]}
-          value={date}
-          onChangeText={text => setDate(text)}
+          onChangeText={text => setNasc(text)}
         />
         </View>
         <View style={styles.formCont}>
@@ -88,7 +84,6 @@ export default function SignON2({navigation}) {
           type={'zip-code'}
           placeholder="Digite seu CEP"
           style={[styles.DMSansRegular, styles.inputCont]}
-          value={cep}
           onChangeText={text => setCep(text)}
         />
 

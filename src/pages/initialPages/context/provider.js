@@ -10,11 +10,13 @@ export const Provider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [tel, setTel] = useState('');
-  const [date, setDate] = useState('');
   const [cep, setCep] = useState('');
+  const [nasc, setNasc] = useState('');
+  const [bio, setBio] = useState('');
+
 
   return (
-    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, tel, setTel, date, setDate, cep, setCep }}>
+    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, tel, setTel, nasc, setNasc, cep, setCep, bio, setBio }}>
       {children}
     </Context.Provider>
   );
