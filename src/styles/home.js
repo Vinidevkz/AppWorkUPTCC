@@ -149,10 +149,23 @@ const styles = StyleSheet.create({
     // Estilo vazio
   },
 
-  buttonVaga: {
+  vagaFooterCont: {
     width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+
+  buttonVaga: {
+    width: '70%',
     paddingVertical: 10,
     borderRadius: 20,
+  },
+
+  addFavButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
   },
 
   // Estilo Posts

@@ -5,7 +5,7 @@ import {
   Image,
   ActivityIndicator,
   TouchableOpacity,
-  StatusBar
+  StatusBar,
 } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -13,20 +13,19 @@ import * as Font from "expo-font";
 import { useState, useEffect } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 
-
 const Stack = createNativeStackNavigator();
-import SignIN from '../initialPages/signin.js';
+import SignIN from "../initialPages/signin.js";
 import styles from "./styles/welcome";
-import { Provider } from './context/provider';
+import { Provider } from "./context/provider";
 
-import SignON1 from '../initialPages/signon1.js';
-import SignON2 from './signon2.js'
+import SignON1 from "../initialPages/signon1.js";
+import SignON2 from "./signon2.js";
 import SignON3 from "./signon3.js";
-import Home from "../home.js";
 import TabBar from "../routes/tabbar.js";
+import Home from "../home.js";
+import Vaga from "../vagas.js";
 
 function Welcome({ navigation }) {
-
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -48,7 +47,6 @@ function Welcome({ navigation }) {
 
   //Retorno da página de boas-vindas
   return (
-    
     <View style={styles.SafeAreaView}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <LinearGradient
@@ -61,7 +59,9 @@ function Welcome({ navigation }) {
             source={require("../../../assets/icons/workuplogo.png")}
             style={styles.workuplogo}
           />
-          <Text style={[styles.DMSansBold, styles.title]}>Aqui você desperta o seu melhor.</Text>
+          <Text style={[styles.DMSansBold, styles.title]}>
+            Aqui você desperta o seu melhor.
+          </Text>
         </View>
         <View style={styles.Body}>
           <Image
@@ -71,30 +71,43 @@ function Welcome({ navigation }) {
         </View>
         <View style={styles.Bottom}>
           <TouchableOpacity
-          onPress={() => navigation.navigate('SignIN')}
+            onPress={() => navigation.navigate("SignIN")}
             style={[styles.button, styles.loginButton]}
           >
             <Text style={[styles.DMSansBold, styles.buttonText]}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate('SignON1')}
+            onPress={() => navigation.navigate("TabBar")}
             style={[styles.button, styles.cadButton]}
           >
-            <Text style={[styles.DMSansBold, styles.buttonText, styles.white]}>Cadastre-se</Text>
+            <Text style={[styles.DMSansBold, styles.buttonText, styles.white]}>
+              Cadastre-se
+            </Text>
           </TouchableOpacity>
           <Text style={[styles.DMSansRegular, styles.title]}>Ou</Text>
-          <TouchableOpacity
-            style={[styles.button, styles.googleButton]}
-          >
-            <Text style={[styles.DMSansBold, styles.buttonText]}>Entre com o </Text>
-            <Image source={require('../../../assets/icons/googleicon.png')} style={styles.icon}/>
+          <TouchableOpacity style={[styles.button, styles.googleButton]}>
+            <Text style={[styles.DMSansBold, styles.buttonText]}>
+              Entre com o
+            </Text>
+            <Image
+              source={require("../../../assets/icons/googleicon.png")}
+              style={styles.icon}
+            />
           </TouchableOpacity>
         </View>
-
       </View>
       <View style={styles.Footer}>
-        <Text style={[styles.DMSansRegular, styles.footerText]}>Ao se cadastrar ou logar, você concorda com nossos <TouchableOpacity><Text style={[styles.DMSansBold, styles.touchText]}>Termos de Política e Privacidade</Text></TouchableOpacity></Text>
-        <Text style={[styles.DMSansRegular, styles.footerText]}>© 2024 Dynamo. Todos os direitos reservados.</Text>
+        <Text style={[styles.DMSansRegular, styles.footerText]}>
+          Ao se cadastrar ou logar, você concorda com nossos{" "}
+          <TouchableOpacity>
+            <Text style={[styles.DMSansBold, styles.touchText]}>
+              Termos de Política e Privacidade
+            </Text>
+          </TouchableOpacity>
+        </Text>
+        <Text style={[styles.DMSansRegular, styles.footerText]}>
+          © 2024 Dynamo. Todos os direitos reservados.
+        </Text>
       </View>
     </View>
   );
@@ -136,12 +149,16 @@ export default function App() {
             component={SignON2}
             options={{ headerShown: false }}
           />
-                    <Stack.Screen
+          <Stack.Screen
             name="SignON3"
             component={SignON3}
             options={{ headerShown: false }}
           />
-          
+          <Stack.Screen
+            name="Vaga"
+            component={Vaga}
+            options={{ headerShown: false }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </Provider>

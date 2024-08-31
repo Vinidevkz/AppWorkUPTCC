@@ -28,23 +28,25 @@ export default function Home({ navigation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [saveIcon, setSaveIcon] = useState(true);
 
-    useEffect(() => {
-      async function buscaVaga() {
-         try {
-         const response = await axios.get("http://192.168.18.197:8000/api/vaga/");
-          setData(response.data);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-          setError(error.message);
-        } finally {
-          setLoading(false);
-        }
-    }
-  
-    buscaVaga();
-   }, []);
-  
+  // useEffect(() => {
+  //   async function buscaVaga() {
+  //     try {
+  //       const response = await axios.get(
+  //         "http://192.168.18.197:8000/api/vaga/"
+  //       );
+  //       setData(response.data);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //       setError(error.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   }
+
+  //   buscaVaga();
+  // }, []);
 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -62,7 +64,11 @@ export default function Home({ navigation }) {
   }, []);
 
   if (!fontsLoaded) {
-    return <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}><ActivityIndicator size="large" color="#20dd77" /></View>
+    return (
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+        <ActivityIndicator size="large" color="#20dd77" />
+      </View>
+    );
   }
   //
 
@@ -76,10 +82,10 @@ export default function Home({ navigation }) {
         />
         <View style={styles.iconBox}>
           <TouchableOpacity>
-            <Ionicons name="chatbubbles" size={30} color="#808080" />
+            <Ionicons name="chatbubbles" size={30} color="#1b1b1b" />
           </TouchableOpacity>
           <TouchableOpacity>
-            <Entypo name="menu" size={35} color="#808080" />
+            <Entypo name="menu" size={35} color="#1b1b1b" />
           </TouchableOpacity>
         </View>
       </View>
@@ -93,49 +99,59 @@ export default function Home({ navigation }) {
             Vagas para você:
           </Text>
           <TouchableOpacity>
-            <Ionicons name="reload" size={30} color="#20dd77" />
+            <FontAwesome name="refresh" size={30} color="#20dd77" />
           </TouchableOpacity>
         </View>
 
-          
-          <FlatList
-            horizontal={true}
-            data={data}
-            style={styles.flatlist}
-            keyExtractor={(item) => item.idVaga.toString()} // Ajuste conforme seu dado
-            renderItem={({ item }) => (
-              <View style={styles.vagaCont}>
-                <View style={styles.vagaHead}>
-                  <Text style={[styles.titleVaga, styles.DMSansBold]}>
-                    {item.nomeVaga}
-                  </Text>
-                  <Text style={[styles.corpText, styles.DMSansBold]}>
-                    oferecido por: {item.idEmpresa?.nomeEmpresa}
-                  </Text>
-                  <Text style={[styles.dateText, styles.DMSansRegular]}>
-                    publicada em: {item.dataPublicacaoVaga}
-                  </Text>
-                </View>
-                <View style={styles.vagaBody}>
-                  <Text style={[styles.descVaga, styles.DMSansBold]}>
-                    Modalidade: {item.modalidadeVaga}
-                  </Text>
-                  <Text style={[styles.descVaga, styles.DMSansBold]}>
-                    Salário: {item.salarioVaga}
-                  </Text>
-                  <Text style={[styles.descVaga, styles.DMSansBold]}>
-                    Cidade: {item.cidadeVaga}
-                  </Text>
-                </View>
+        <FlatList
+          horizontal={true}
+          data={data}
+          style={styles.flatlist}
+          keyExtractor={(item) => item.idVaga.toString()} // Ajuste conforme seu dado
+          renderItem={({ item }) => (
+            <View style={styles.vagaCont}>
+              <View style={styles.vagaHead}>
+                <Text style={[styles.titleVaga, styles.DMSansBold]}>
+                  {item.nomeVaga}
+                </Text>
+                <Text style={[styles.corpText, styles.DMSansBold]}>
+                  oferecido por: {item.idEmpresa?.nomeEmpresa}
+                </Text>
+                <Text style={[styles.dateText, styles.DMSansRegular]}>
+                  publicada em: {item.dataPublicacaoVaga}
+                </Text>
+              </View>
+              <View style={styles.vagaBody}>
+                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                  Modalidade: {item.modalidadeVaga}
+                </Text>
+                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                  Salário: {item.salarioVaga}
+                </Text>
+                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                  Cidade: {item.cidadeVaga}
+                </Text>
+              </View>
+              <View style={styles.vagaFooterCont}>
                 <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
                   <Text style={[styles.buttonText, styles.DMSansBold]}>
                     Ver Vaga
                   </Text>
                 </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.addFavButton}
+                  onPress={() => setSaveIcon(!saveIcon)}
+                >
+                  <Ionicons
+                    name={saveIcon ? "bookmark-outline" : "bookmark"}
+                    size={35}
+                    color="#20dd77"
+                  />
+                </TouchableOpacity>
               </View>
-            )}
-          />
- 
+            </View>
+          )}
+        />
 
         <View style={styles.titleCont}>
           <Text style={[styles.title, styles.DMSansBold]}>Outras Vagas:</Text>
@@ -172,11 +188,23 @@ export default function Home({ navigation }) {
                 Cidade: São Paulo
               </Text>
             </View>
-            <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
-              <Text style={[styles.buttonText, styles.DMSansBold]}>
-                Ver Vaga
-              </Text>
-            </TouchableOpacity>
+            <View style={styles.vagaFooterCont}>
+              <TouchableOpacity style={[styles.button, styles.buttonVaga]} onPress={() => navigation.navigate('Vaga')}>
+                <Text style={[styles.buttonText, styles.DMSansBold]}>
+                  Ver Vaga
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.addFavButton}
+                onPress={() => setSaveIcon(!saveIcon)}
+              >
+                <Ionicons
+                  name={saveIcon ? "bookmark-outline" : "bookmark"}
+                  size={35}
+                  color="#20dd77"
+                />
+              </TouchableOpacity>
+            </View>
           </View>
         </ScrollView>
 
