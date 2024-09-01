@@ -2,8 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   SafeAreaView: {
-    height: '100%',
-    alignItems: 'center',
+    flex: 1,
     backgroundColor: '#fff'
   },
 
@@ -31,8 +30,8 @@ const styles = StyleSheet.create({
   },
 
   profileIconBox: {
-    width: 100,
-    height: 100,
+    width: 70,
+    height: 70,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
 
   icon: {
     width: '100%',
-    height: 100,
+    height: '100%',
     resizeMode: 'cover',
   },
 
@@ -55,7 +54,8 @@ const styles = StyleSheet.create({
 
   vagaHeader: {
     backgroundColor: '#fff',
-    flexDirection: 'row'
+    justifyContent: 'space-between',
+    flexDirection: 'row',
   },
 
   headerTextCont: {
@@ -83,7 +83,26 @@ const styles = StyleSheet.create({
   },
 
   infosCont: {
-    gap: 10
+    gap: 10,
+    marginVertical: 20,
+    paddingVertical: 10,
+  },
+
+  button: {
+    backgroundColor: '#20dd77',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 10,
+    borderRadius: 20,
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+  },
+
+  row: {
+    flexDirection: 'row'
   }
 });
 

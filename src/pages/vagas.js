@@ -1,13 +1,13 @@
 import React from "react";
-import { View, Text, ActivityIndicator, SafeAreaView, ScrollView, Image } from "react-native";
+import { View, Text, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView, Image } from "react-native";
 import { useState, useEffect } from "react";
 import * as Font from "expo-font";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "../styles/vagas.js";
 
-export default function Vaga() {
-  //Carregador de fontes
+export default function Vaga({ navigation }) {
+  // Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
   useEffect(() => {
@@ -32,13 +32,15 @@ export default function Vaga() {
   //
 
   return (
-    <SafeAreaView style={{backgroundColor: '#fff'}}>
+    <SafeAreaView style={styles.SafeAreaView}>
       <View style={styles.navbar}>
-        <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
-        <Text style={[styles.DMSansBold, styles.titleVaga]}>Mais Informações:</Text>
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b"  />
+        </TouchableOpacity>
+        <Text style={[styles.DMSansBold, styles.titleVaga]}>Sobre esta vaga</Text>
       </View>
-      <ScrollView>
-        <View style={styles.container}>
+      <ScrollView style={{ flex: 1, padding: 20, gap: 50 }}>
+
           <View style={styles.vagaHeader}>
             <View style={styles.headerTextCont}>
               <Text style={[styles.DMSansBold, styles.titleVaga]}>
@@ -63,6 +65,10 @@ export default function Vaga() {
             <Text style={[styles.DMSansBold, styles.title]}>Sobre esta vaga:</Text>
 
             <Text style={[styles.DMSansRegular, styles.text]}>Esta vaga djkasjdaskdjasdjaskdjaskdjakjdkasjdkasjdkajdkasjdkasjdkasjdkasjdkasjdasjdasjdkasjdkajdaksdj</Text>
+            <Text style={[styles.DMSansBold, styles.text]}>Modalidade: Remoto</Text>
+            <Text style={[styles.DMSansBold, styles.text]}>Salario: a combinar</Text>
+            <Text style={[styles.DMSansBold, styles.text]}>Cidade: São Paulo</Text>
+
           </View>
           <View style={styles.infosCont}>
             <Text style={[styles.DMSansBold, styles.title]}>Responsabilidades:</Text>
@@ -84,7 +90,12 @@ export default function Vaga() {
             <Text style={[styles.DMSansRegular, styles.text]}>GYM Pass</Text>
             <Text style={[styles.DMSansRegular, styles.text]}>Seguro de Vida</Text>
           </View>
-        </View>
+          <View style={[styles.infosCont, styles.row]}>
+            <TouchableOpacity style={styles.button}>
+              <Text style={[styles.DMSansBold, styles.buttonText]}>Candidatar-se</Text>
+            </TouchableOpacity>
+          </View>
+
       </ScrollView>
     </SafeAreaView>
   );

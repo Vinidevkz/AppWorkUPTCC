@@ -29,6 +29,7 @@ export default function Home({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [saveIcon, setSaveIcon] = useState(true);
+  const [heartIcon, setHeartIcon] = useState(true)
 
   // useEffect(() => {
   //   async function buscaVaga() {
@@ -258,8 +259,8 @@ export default function Home({ navigation }) {
 
               <View style={styles.optionsCont}>
                 <View style={styles.threeIconsCont}>
-                  <TouchableOpacity>
-                    <AntDesign name="hearto" size={35} color="black" />
+                  <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
+                    <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color="#20dd77" />
                   </TouchableOpacity>
                   <TouchableOpacity>
                     <Ionicons
