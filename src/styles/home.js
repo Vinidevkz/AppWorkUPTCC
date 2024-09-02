@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 10,
     paddingHorizontal: 25,
-    backgroundColor: '#fff',
     elevation: 10,
     zIndex: 1
   },
@@ -53,14 +52,6 @@ const styles = StyleSheet.create({
   //   paddingHorizontal: 5,
   // },
 
-  iconbox: {
-    flexDirection: 'row',
-    width: '100%',
-    height: 50,
-    marginLeft: '100%',
-    alignItems: 'center',
-    backgroundColor: '#1b1b1b'
-  },
 
   button: {
     backgroundColor: '#20dd77',

@@ -17,6 +17,7 @@ const Stack = createNativeStackNavigator();
 import SignIN from "../initialPages/signin.js";
 import styles from "./styles/welcome";
 import { Provider } from "./context/provider";
+import { ThemeProvider } from "./context/themecontext.js";
 
 import SignON1 from "../initialPages/signon1.js";
 import SignON2 from "./signon2.js";
@@ -24,6 +25,7 @@ import SignON3 from "./signon3.js";
 import TabBar from "../routes/tabbar.js";
 import Home from "../home.js";
 import Vaga from "../vagas.js";
+import Configurações from "../configuracoes.js";
 
 function Welcome({ navigation }) {
   //Carregador de fontes
@@ -115,52 +117,59 @@ function Welcome({ navigation }) {
 
 export default function App() {
   return (
-    <Provider>
-      <NavigationContainer independent={true}>
-        <Stack.Navigator initialRouteName="Welcome">
-          <Stack.Screen
-            name="Welcome"
-            component={Welcome}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="SignIN"
-            component={SignIN}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Home"
-            component={Home}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="TabBar"
-            component={TabBar}
-            options={{ headerShown: false }}
-          />
+    <ThemeProvider>
+      <Provider>
+        <NavigationContainer independent={true}>
+          <Stack.Navigator initialRouteName="Welcome">
+            <Stack.Screen
+              name="Welcome"
+              component={Welcome}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignIN"
+              component={SignIN}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Home"
+              component={Home}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="TabBar"
+              component={TabBar}
+              options={{ headerShown: false }}
+            />
 
-          <Stack.Screen
-            name="SignON1"
-            component={SignON1}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="SignON2"
-            component={SignON2}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="SignON3"
-            component={SignON3}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen
-            name="Vaga"
-            component={Vaga}
-            options={{ headerShown: false }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
-    </Provider>
+            <Stack.Screen
+              name="SignON1"
+              component={SignON1}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignON2"
+              component={SignON2}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="SignON3"
+              component={SignON3}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Vaga"
+              component={Vaga}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Configurações"
+              component={Configurações}
+              options={{ headerShown: false }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </Provider>
+    </ThemeProvider>
   );
 }

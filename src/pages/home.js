@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { useState, useEffect } from "react";
 import * as Font from "expo-font";
+import { useTheme } from "../pages/initialPages/context/themecontext";
 
 //Lib que faz a requisição pra API
 import axios from "axios";
@@ -30,24 +31,25 @@ export default function Home({ navigation }) {
   const [error, setError] = useState(null);
   const [saveIcon, setSaveIcon] = useState(true);
   const [heartIcon, setHeartIcon] = useState(true)
+  const { theme, toggleTheme } = useTheme({Home});
 
-  // useEffect(() => {
-  //   async function buscaVaga() {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://192.168.18.197:8000/api/vaga/"
-  //       );
+  //  useEffect(() => {
+  //    async function buscaVaga() {
+  //      try {
+  //        const response = await axios.get(
+  //          "http://10.0.2.2:8000/api/vaga/"
+  //        );
   //       setData(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //       setError(error.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
+  //      } catch (error) {
+  //        console.error("Error fetching data:", error);
+  //        setError(error.message);
+  //      } finally {
+  //        setLoading(false);
+  //      }
+  //    }
 
-  //   buscaVaga();
-  // }, []);
+  //    buscaVaga();
+  //  }, []);
 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -75,18 +77,19 @@ export default function Home({ navigation }) {
 
   // RETORNO DA PÁGINA HOME
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
-      <View style={styles.navbar}>
+    <SafeAreaView style={[styles.SafeAreaView, {backgroundColor: theme.backgroundColor}]}>
+            <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
+      <View style={[styles.navbar, {backgroundColor: theme.backgroundColorNavBar}]}>
         <Image
           source={require("../../assets/icons/WUPlogo.png")}
           style={styles.WUPstyle}
         />
         <View style={styles.iconBox}>
           <TouchableOpacity>
-            <Ionicons name="chatbubbles" size={30} color="#1b1b1b" />
+            <Ionicons name="chatbubbles" size={30} color={theme.iconColorWhite} />
           </TouchableOpacity>
           <TouchableOpacity>
-            <Entypo name="menu" size={35} color="#1b1b1b" />
+            <Entypo name="menu" size={35} color={theme.iconColorWhite} />
           </TouchableOpacity>
         </View>
       </View>
@@ -96,7 +99,7 @@ export default function Home({ navigation }) {
         showsVerticalScrollIndicator={false}
       >
         <View style={styles.titleCont2}>
-          <Text style={[styles.title, styles.row, styles.DMSansBold]}>
+          <Text style={[styles.title, styles.row, styles.DMSansBold, {color: theme.textColor}]}>
             Vagas para você:
           </Text>
           <TouchableOpacity>
@@ -155,8 +158,8 @@ export default function Home({ navigation }) {
         />
 
         <View style={styles.titleCont}>
-          <Text style={[styles.title, styles.DMSansBold]}>Outras Vagas:</Text>
-          <Text style={[styles.text, styles.DMSansRegular]}>
+          <Text style={[styles.title, styles.DMSansBold, {color: theme.textColor}]}>Outras Vagas:</Text>
+          <Text style={[styles.text, styles.DMSansRegular, {color: theme.textColor}]}>
             Veja vagas relacionadas ao que você busca
           </Text>
         </View>
@@ -166,26 +169,26 @@ export default function Home({ navigation }) {
           style={styles.vagasScrollView}
           showsHorizontalScrollIndicator={false}
         >
-          <View style={styles.vagaCont}>
+          <View style={[styles.vagaCont, {backgroundColor: theme.backgroundColorNavBar}]}>
             <View style={styles.vagaHead}>
-              <Text style={[styles.titleVaga, styles.DMSansBold]}>
+              <Text style={[styles.titleVaga, styles.DMSansBold, {color: theme.textColor}]}>
                 Analista de Banco de Dados
               </Text>
-              <Text style={[styles.corpText, styles.DMSansBold]}>
+              <Text style={[styles.corpText, styles.DMSansBold, {color: theme.textColor}]}>
                 oferecido por: Dynamo.inc
               </Text>
-              <Text style={[styles.dateText, styles.DMSansRegular]}>
+              <Text style={[styles.dateText, styles.DMSansRegular, {color: theme.textColor}]}>
                 publicado em: 14/05/2024
               </Text>
             </View>
             <View style={styles.vagaBody}>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>
+              <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                 Modalidade: Remoto
               </Text>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>
+              <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                 Salário: a combinar
               </Text>
-              <Text style={[styles.descVaga, styles.DMSansBold]}>
+              <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                 Cidade: São Paulo
               </Text>
             </View>
@@ -210,7 +213,7 @@ export default function Home({ navigation }) {
         </ScrollView>
 
         <View style={styles.titleCont}>
-          <Text style={[styles.title, styles.DMSansBold]}>Seu Feed:</Text>
+          <Text style={[styles.title, styles.DMSansBold, {color: theme.textColor}]}>Seu Feed:</Text>
         </View>
 
         {/* <FlatList
@@ -225,7 +228,7 @@ export default function Home({ navigation }) {
             width: "100%",
           }}
         >
-          <View style={[styles.postCont]}>
+          <View style={[styles.postCont, {backgroundColor: theme.backgroundColorNavBar}]}>
             <View style={styles.postHeader}>
               <View style={[styles.postIconBox]}>
                 <Image
@@ -234,17 +237,17 @@ export default function Home({ navigation }) {
                 />
               </View>
               <View>
-                <Text style={[styles.DMSansBold, styles.postTile]}>
+                <Text style={[styles.DMSansBold, styles.postTile, {color: theme.textColor}]}>
                   Dynamo Inc
                 </Text>
-                <Text style={[styles.DMSansRegular, styles.dateText]}>
+                <Text style={[styles.DMSansRegular, styles.dateText, {color: theme.textColor}]}>
                   publicado em 14/09/2024
                 </Text>
               </View>
             </View>
 
             <View style={styles.postBody}>
-              <Text style={[styles.DMSansRegular, styles.postDesc]}>
+              <Text style={[styles.DMSansRegular, styles.postDesc, {color: theme.textColor}]}>
                 Comunicado urgente! Abriremos vagas para desenvolvedores
                 iniciantes na carreira e que estejam estudando nas seguintes
                 áreas: Desenvolvimento de Sistemas Análise em Desenvolvimento de
@@ -260,20 +263,20 @@ export default function Home({ navigation }) {
               <View style={styles.optionsCont}>
                 <View style={styles.threeIconsCont}>
                   <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
-                    <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color="#20dd77" />
+                    <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color={theme.iconColorGreen} />
                   </TouchableOpacity>
                   <TouchableOpacity>
                     <Ionicons
                       name="chatbubble-ellipses-outline"
                       size={35}
-                      color="black"
+                      color={theme.iconColorWhite}
                     />
                   </TouchableOpacity>
                   <TouchableOpacity>
                     <Ionicons
                       name="paper-plane-outline"
                       size={35}
-                      color="black"
+                      color={theme.iconColorWhite}
                     />
                   </TouchableOpacity>
                 </View>
@@ -282,7 +285,7 @@ export default function Home({ navigation }) {
                   <SimpleLineIcons
                     name="options-vertical"
                     size={30}
-                    color="black"
+                    color={theme.iconColorWhite}
                   />
                 </TouchableOpacity>
               </View>
@@ -293,10 +296,10 @@ export default function Home({ navigation }) {
                       <FontAwesome name="user" size={30} color="black" />
                     </View>
                     <View>
-                      <Text style={[styles.DMSansBold, styles.comentTitle]}>
+                      <Text style={[styles.DMSansBold, styles.comentTitle, {color: theme.textColor}]}>
                         Marcos Antônio
                       </Text>
-                      <Text style={[styles.DMSansRegular, styles.comentDate]}>
+                      <Text style={[styles.DMSansRegular, styles.comentDate, {color: theme.textColor}]}>
                         09/04/2024
                       </Text>
                     </View>
@@ -305,12 +308,12 @@ export default function Home({ navigation }) {
                     <SimpleLineIcons
                       name="options-vertical"
                       size={20}
-                      color="black"
+                      color={theme.iconColorWhite}
                     />
                   </TouchableOpacity>
                 </View>
                 <View style={styles.comentDescCont}>
-                  <Text style={[styles.DMSansRegular, styles.comentDesc]}>
+                  <Text style={[styles.DMSansRegular, styles.comentDesc, {color: theme.textColor}]}>
                     Boa vaga!
                   </Text>
                 </View>
@@ -320,7 +323,7 @@ export default function Home({ navigation }) {
         </View>
       </ScrollView>
 
-      <StatusBar backgroundColor="white" barStyle="dark-content" />
+
     </SafeAreaView>
   );
 }

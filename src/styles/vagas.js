@@ -63,15 +63,15 @@ const styles = StyleSheet.create({
   },
 
   titleVaga: {
-    fontSize: 25,
+    fontSize: 20,
   },
 
   corpText: {
-    fontSize: 18,
+    fontSize: 15,
   },
 
   vagaDateText: {
-    fontSize: 15,
+    fontSize: 13,
   },
 
   title: {

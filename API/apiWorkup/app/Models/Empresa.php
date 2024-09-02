@@ -18,6 +18,6 @@ class Empresa extends Model
 
     public function vagas()
     {
-        return $this->hasMany(Vaga::class, 'idEmpresa');
+        return $this->hasMany(Vaga::class, 'idEmpresa' ,'id');
     }
 }

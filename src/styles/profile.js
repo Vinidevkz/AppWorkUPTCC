@@ -15,9 +15,22 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
   },
 
-  ScrollView: {
-    flex: 1,
+  scrollViewContent: {
+    flexGrow: 1,
+    paddingBottom: 60, // Ajuste conforme a altura da TabBar
+  },
+
+  containerTop: {
     width: '100%',
+    height: 80,
+    maxHeight: 80,
+    backgroundColor: '#fff',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    elevation: 10,
+    paddingHorizontal: 20,
+    zIndex: 1
   },
 
   profileBackgroundImageCont: {

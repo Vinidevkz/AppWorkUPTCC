@@ -1,4 +1,5 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { useState } from "react";
 
 const Tab = createBottomTabNavigator();
 
@@ -10,8 +11,10 @@ import Home from "../home";
 import Search from "../search";
 import Notifications from "../notifications";
 import Profile from "../profile";
+import { useTheme } from "../../pages/initialPages/context/themecontext";
 
 export default function TabBar() {
+  const { theme, toggleTheme } = useTheme({Home});
   return (
     <Tab.Navigator
       initialRouteName="Home"
@@ -31,7 +34,7 @@ export default function TabBar() {
         tabBarInactiveTintColor: "#1b1b1b", // Cor do ícone inativo
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: "#FFF", // Cor de fundo da TabBar
+          backgroundColor: theme.backgroundColorNavBar, // Cor de fundo da TabBar
           paddingBottom: 5, // Ajusta o espaçamento
           zIndex: 1,
           height: 60,
