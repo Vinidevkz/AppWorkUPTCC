@@ -39,11 +39,6 @@ class UsuarioController extends Controller
     {
         $usuario = new Usuario;
 
-        // $request->validate([
-        //     'nomeUsuario' => 'required|string',
-        //     'usernameUsuario' => 'required|string',
-        // ]);
-        
         $usuario->nomeUsuario = $request->nomeUsuario;
         $usuario->usernameUsuario = $request->usernameUsuario;
         $usuario->nascUsuario = $request->nascUsuario;

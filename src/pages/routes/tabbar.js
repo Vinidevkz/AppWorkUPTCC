@@ -30,7 +30,7 @@ export default function TabBar() {
             return <FontAwesome6 name={'user-large'} size={size + 2} color={color} />;
           }
         },
-        tabBarActiveTintColor: "#56c596", // Cor do ícone ativo
+        tabBarActiveTintColor: "#20dd77", // Cor do ícone ativo
         tabBarInactiveTintColor: theme.tabBarIconColor, // Cor do ícone inativo
         tabBarShowLabel: false,
         tabBarStyle: {

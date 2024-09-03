@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Vaga;
 use Illuminate\Http\Request;
-use illuminate\Support\Facades\DB;
 
 class VagaController extends Controller
 {
@@ -15,11 +14,9 @@ class VagaController extends Controller
      */
     public function index()
     {
+        $vaga = Vaga::all();
 
-
-        $vagas = Vaga::with('empresa')->get();
-
-        return response()->json($vagas); // Retorna o resultado como JSON
+        return $vaga;
     }
 
     /**

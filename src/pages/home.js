@@ -33,23 +33,23 @@ export default function Home({ navigation }) {
   const [heartIcon, setHeartIcon] = useState(true)
   const { theme, toggleTheme } = useTheme({Home});
 
-  //  useEffect(() => {
-  //    async function buscaVaga() {
-  //      try {
-  //        const response = await axios.get(
-  //          "http://10.0.2.2:8000/api/vaga/"
-  //        );
-  //       setData(response.data);
-  //      } catch (error) {
-  //        console.error("Error fetching data:", error);
-  //        setError(error.message);
-  //      } finally {
-  //        setLoading(false);
-  //      }
-  //    }
+    useEffect(() => {
+     async function buscaVaga() {
+       try {
+         const response = await axios.get(
+           "http://10.0.2.2:8000/api/vaga/"
+         );
+       setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+         setError(error.message);
+      } finally {
+          setLoading(false);
+        }
+      }
 
-  //    buscaVaga();
-  //  }, []);
+      buscaVaga();
+    }, []);
 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -119,7 +119,7 @@ export default function Home({ navigation }) {
                   {item.nomeVaga}
                 </Text>
                 <Text style={[styles.corpText, styles.DMSansBold]}>
-                  oferecido por: {item.idEmpresa?.nomeEmpresa}
+                  oferecido por: 
                 </Text>
                 <Text style={[styles.dateText, styles.DMSansRegular]}>
                   publicada em: {item.dataPublicacaoVaga}
