@@ -113,26 +113,26 @@ export default function Home({ navigation }) {
           style={styles.flatlist}
           keyExtractor={(item) => item.idVaga.toString()} // Ajuste conforme seu dado
           renderItem={({ item }) => (
-            <View style={styles.vagaCont}>
+            <View style={[styles.vagaCont, {backgroundColor: theme.backgroundColorNavBar}]}>
               <View style={styles.vagaHead}>
-                <Text style={[styles.titleVaga, styles.DMSansBold]}>
+                <Text style={[styles.titleVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   {item.nomeVaga}
                 </Text>
-                <Text style={[styles.corpText, styles.DMSansBold]}>
-                  oferecido por: 
+                <Text style={[styles.corpText, styles.DMSansBold, {color: theme.textColor}]}>
+                  oferecido por: {item.nomeEmpresa}
                 </Text>
-                <Text style={[styles.dateText, styles.DMSansRegular]}>
+                <Text style={[styles.dateText, styles.DMSansRegular, {color: theme.textColor}]}>
                   publicada em: {item.dataPublicacaoVaga}
                 </Text>
               </View>
               <View style={styles.vagaBody}>
-                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   Modalidade: {item.modalidadeVaga}
                 </Text>
-                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   Salário: {item.salarioVaga}
                 </Text>
-                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   Cidade: {item.cidadeVaga}
                 </Text>
               </View>
