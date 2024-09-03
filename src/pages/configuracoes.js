@@ -56,7 +56,7 @@ export default function Configurações({ navigation }) {
             </Text>
             <TouchableOpacity onPress={toggleTheme}>
               <Feather
-                name={theme ? "sun" : "moon"}
+                name={theme.mode}
                 size={24}
                 color={theme.iconColorWhite}
               />

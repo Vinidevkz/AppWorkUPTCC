@@ -1,4 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
+import WUPlogoWhite from '../../../../assets/icons/WUPlogoWhite.png';
+import WUPlogo from '../../../../assets/icons/WUPlogo.png';
 
 // Cria o contexto
 const ThemeContext = createContext();
@@ -13,6 +15,8 @@ export function ThemeProvider({ children }) {
 
   // Define o tema com base no estado
   const theme = {
+    mode: darkMode ? 'moon' : 'sun',
+    WUPLogo: darkMode ? WUPlogoWhite : WUPlogo,
     statusBarBackground: darkMode ? '#383838' : null,
     statusBarColor: darkMode ? '#fff' : null,
     backgroundColor: darkMode ? '#1b1b1b' : '#f4f4f4',

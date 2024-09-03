@@ -81,7 +81,7 @@ export default function Home({ navigation }) {
             <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
       <View style={[styles.navbar, {backgroundColor: theme.backgroundColorNavBar}]}>
         <Image
-          source={require("../../assets/icons/WUPlogo.png")}
+          source={theme.WUPLogo}
           style={styles.WUPstyle}
         />
         <View style={styles.iconBox}>
