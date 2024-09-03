@@ -31,7 +31,7 @@ export default function TabBar() {
           }
         },
         tabBarActiveTintColor: "#56c596", // Cor do ícone ativo
-        tabBarInactiveTintColor: "#1b1b1b", // Cor do ícone inativo
+        tabBarInactiveTintColor: theme.tabBarIconColor, // Cor do ícone inativo
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: theme.backgroundColorNavBar, // Cor de fundo da TabBar

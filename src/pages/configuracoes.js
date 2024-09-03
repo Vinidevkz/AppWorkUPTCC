@@ -12,6 +12,7 @@ import { useTheme } from "../pages/initialPages/context/themecontext";
 import styles from "../styles/configuracoes";
 
 import Feather from "@expo/vector-icons/Feather";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function Configurações({ navigation }) {
   const { theme, toggleTheme } = useTheme();
@@ -24,6 +25,7 @@ export default function Configurações({ navigation }) {
         backgroundColor={theme.statusBarBackground}
         barStyle={theme.statusBarColor}
       />
+
       <View
         style={[
           styles.containerTop,
@@ -31,7 +33,7 @@ export default function Configurações({ navigation }) {
         ]}
       >
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={{color : theme.textColor}}>Voltar</Text>
+         <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite}  />
         </TouchableOpacity>
         <Text
           style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}
@@ -39,24 +41,27 @@ export default function Configurações({ navigation }) {
           Configurações
         </Text>
       </View>
+
       <View style={styles.container}>
-        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
-          <Text
-            style={[
-              styles.DMSansRegular,
-              styles.text,
-              { color: theme.textColor },
-            ]}
-          >
-            Aparência:{" "}
-          </Text>
-          <TouchableOpacity onPress={toggleTheme}>
-            <Feather
-              name={theme.iconColor === "#fff" ? "sun" : "moon"}
-              size={24}
-              color={theme.iconColor}
-            />
-          </TouchableOpacity>
+        <View style={{padding: 20, borderRadius: 15, backgroundColor: theme.backgroundColorNavBar}}>
+          <View style={styles.infosCont}>
+            <Text
+              style={[
+                styles.DMSansBold,
+                styles.text,
+                { color: theme.textColor },
+              ]}
+            >
+              Aparência:{" "}
+            </Text>
+            <TouchableOpacity onPress={toggleTheme}>
+              <Feather
+                name={theme ? "sun" : "moon"}
+                size={24}
+                color={theme.iconColorWhite}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
       </View>
     </SafeAreaView>

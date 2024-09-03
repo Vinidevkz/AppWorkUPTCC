@@ -27,16 +27,22 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
+    gap: 15,
     elevation: 10,
     paddingHorizontal: 20,
     zIndex: 1
   },
 
   container: {
-    height: 300,
-    alignItems: 'center',
-    justifyContent: 'center'
+    height: '100%',
+    padding: 25
+  },
+
+  infosCont: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: 'space-between',
+    gap: 10
   },
 
   title: {

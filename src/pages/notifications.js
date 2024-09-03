@@ -1,16 +1,19 @@
 import React from 'react';
 import { View, Text, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
+import { useTheme } from "../pages/initialPages/context/themecontext";
+import { useState } from 'react';
 
 import styles from '../styles/notifications.js'
 
 export default function Notifications() {
+  const { theme, toggleTheme } = useTheme({Notifications});
   return (
     <SafeAreaView>
-      <View style={styles.containerTop}>
-        <Text style={[styles.DMSansBold, styles.title]}>Notificações:</Text>
+      <View style={[styles.containerTop, {backgroundColor: theme.backgroundColorNavBar}]}>
+        <Text style={[styles.DMSansBold, styles.title, {color: theme.textColor}]}>Notificações:</Text>
       </View>
-      <View style={{height: '90%', alignItems: 'center', justifyContent: 'center'}}>
-        <Text>Nenhuma notificação</Text>
+      <View style={{height: '90%', alignItems: 'center', justifyContent: 'center', backgroundColor: theme.backgroundColor}}>
+        <Text style={{color: theme.textColor}}>Nenhuma notificação</Text>
       </View>
     </SafeAreaView>
   );
