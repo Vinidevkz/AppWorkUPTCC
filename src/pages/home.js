@@ -33,23 +33,23 @@ export default function Home({ navigation }) {
   const [heartIcon, setHeartIcon] = useState(true)
   const { theme, toggleTheme } = useTheme({Home});
 
-  //  useEffect(() => {
-  //    async function buscaVaga() {
-  //      try {
-  //        const response = await axios.get(
-  //          "http://10.0.2.2:8000/api/vaga/"
-  //        );
-  //       setData(response.data);
-  //      } catch (error) {
-  //        console.error("Error fetching data:", error);
-  //        setError(error.message);
-  //      } finally {
-  //        setLoading(false);
-  //      }
-  //    }
+    useEffect(() => {
+     async function buscaVaga() {
+       try {
+         const response = await axios.get(
+           "http://10.0.2.2:8000/api/vaga/"
+         );
+       setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+         setError(error.message);
+      } finally {
+          setLoading(false);
+        }
+      }
 
-  //    buscaVaga();
-  //  }, []);
+      buscaVaga();
+    }, []);
 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -113,26 +113,26 @@ export default function Home({ navigation }) {
           style={styles.flatlist}
           keyExtractor={(item) => item.idVaga.toString()} // Ajuste conforme seu dado
           renderItem={({ item }) => (
-            <View style={styles.vagaCont}>
+            <View style={[styles.vagaCont, {backgroundColor: theme.backgroundColorNavBar}]}>
               <View style={styles.vagaHead}>
-                <Text style={[styles.titleVaga, styles.DMSansBold]}>
+                <Text style={[styles.titleVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   {item.nomeVaga}
                 </Text>
-                <Text style={[styles.corpText, styles.DMSansBold]}>
-                  oferecido por: {item.idEmpresa?.nomeEmpresa}
+                <Text style={[styles.corpText, styles.DMSansBold, {color: theme.textColor}]}>
+                  oferecido por: {item.nomeEmpresa}
                 </Text>
-                <Text style={[styles.dateText, styles.DMSansRegular]}>
+                <Text style={[styles.dateText, styles.DMSansRegular, {color: theme.textColor}]}>
                   publicada em: {item.dataPublicacaoVaga}
                 </Text>
               </View>
               <View style={styles.vagaBody}>
-                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   Modalidade: {item.modalidadeVaga}
                 </Text>
-                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   Salário: {item.salarioVaga}
                 </Text>
-                <Text style={[styles.descVaga, styles.DMSansBold]}>
+                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   Cidade: {item.cidadeVaga}
                 </Text>
               </View>

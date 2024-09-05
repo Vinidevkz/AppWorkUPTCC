@@ -17,10 +17,10 @@ export function ThemeProvider({ children }) {
   const theme = {
     mode: darkMode ? 'moon' : 'sun',
     WUPLogo: darkMode ? WUPlogoWhite : WUPlogo,
-    statusBarBackground: darkMode ? '#383838' : null,
+    statusBarBackground: darkMode ? '#303030' : null,
     statusBarColor: darkMode ? '#fff' : null,
     backgroundColor: darkMode ? '#1b1b1b' : '#f4f4f4',
-    backgroundColorNavBar: darkMode ? '#383838' : '#fff',
+    backgroundColorNavBar: darkMode ? '#303030' : '#fff',
     backgroundColorSearchInput: darkMode ? '#707070' : '#dbdbdb',
     backgroundColorItens: darkMode ? "#1b1b1b" : "fff",
     iconColorGreen: darkMode ? "#20dd77" : "#20dd77",
