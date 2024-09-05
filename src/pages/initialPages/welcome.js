@@ -98,7 +98,7 @@ function Welcome({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.Footer}>
+      <View style={styles.Footer}>                              
         <Text style={[styles.DMSansRegular, styles.footerText]}>
           Ao se cadastrar ou logar, você concorda com nossos{" "}
           <TouchableOpacity>

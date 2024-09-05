@@ -107,29 +107,9 @@ async function cadastroUser(){
 
         <View style={styles.formCont}>
           <Text style={[styles.DMSansBold, styles.formTitle]}>Biografia:</Text>
-
           <TextInput placeholder="Escreva uma breve biografia sobre você" style={styles.bioCont} multiline={true}
           onChangeText={(text)=>setBio(text)}/>
-        
-
         </View>
-
-        <View style={[styles.pdfCvCont, styles.row]}>
-          <View style={styles.gap}>
-         <View>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Anexar Currículo Vitae:</Text>
-          <Text style={styles.DMSansRegular}>OBS: os arquivos devem estar{'\n'}no formato PDF </Text>
-         </View>
-
-         <TouchableOpacity style={styles.button}><Text style={[styles.DMSansBold, styles.buttonText]}>Selecionar Arquivo</Text></TouchableOpacity>
-         </View>
-
-         <View>
-          <Text style={styles.DMSansRegular}>Arquivo Selecionado:</Text>
-          <Text style={styles.DMSansRegular}>cv.pdf</Text>
-         </View>
-        </View>
-
       </View>
 
       <View style={styles.footerCont}>
