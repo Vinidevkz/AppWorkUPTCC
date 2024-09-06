@@ -9,9 +9,10 @@ import {
   Image,
   StatusBar,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import * as Font from "expo-font";
 import { useTheme } from "../pages/initialPages/context/themecontext";
+import { Context } from "../pages/initialPages/context/provider.js";
 
 //Lib que faz a requisição pra API
 import axios from "axios";

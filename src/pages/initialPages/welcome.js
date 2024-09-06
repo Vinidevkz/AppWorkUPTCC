@@ -52,7 +52,7 @@ function Welcome({ navigation }) {
     <View style={styles.SafeAreaView}>
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       <LinearGradient
-        colors={["#fff", "#fff", "#fff", "#56c596"]}
+        colors={["#fff", "#fff", "#fff", "#20dd77"]}
         style={styles.background}
       />
       <View style={styles.container}>
