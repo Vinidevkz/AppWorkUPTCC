@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import {
   View,
   Text,
@@ -9,64 +9,75 @@ import {
   TouchableOpacity,
   Image
 } from "react-native";
-
 import styles from "./styles/signon.js";
-import stylesProfile from "../../styles/profile.js"
+import stylesProfile from "../../styles/profile.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-
 import useFonts from "../../styles/fontloader/fontloader.js";
-import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
 
+export default function SignON3({ navigation }) {
+  const { nome, setBio, bio, email, senha, nasc, cep, tel, userName, setUserId } = useContext(Context);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-export default function SignON3({navigation}) {
-  const {nome, setBio,bio,email,senha,nasc,cep,tel,userName} = useContext(Context);
-  const [passwordVisible, setPasswordVisible] = useState(false)
-  console.log(nome)
-  console.log(bio)
-  console.log(email)
-  console.log(nasc)
-  console.log(cep)
-  console.log(tel)
-  console.log(userName)
+  console.log("Rendering SignON3 component");
+  console.log("User details:", { nome, bio, email, nasc, cep, tel, userName });
 
-async function cadastroUser(){
-  try{
-    const response = await fetch('http://127.0.0.1:8000/api/usuario',{
-      method:'POST',
-      headers:{
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      body:JSON.stringify({
-       // primeiro nome que vai pegar na Api,o segundo é oq que vc manda aqui
-        nome: nome,
-        email:email,
-        nascimento:nasc,
-        cep:cep,
-        telefone:tel,
-        userName:userName,
-        bio:bio
-  
-      })
-    })
-  
-    const resp = await response.json()
-
-    if(resp === 200){
-      alert('usuario cadastrado')
-    }else{
-      alert('faz direito ai kraio')
-    }
-  }catch(error){
-    alert(error)
+  function formatDateToISO(dateString) {
+    const [day, month, year] = dateString.split('/');
+    return `${year}-${month}-${day}`;
   }
- 
 
-  navigation.navigate('SignON3')
-}
+  async function cadastroUser() {
+    console.log("Starting user registration");
+    try {
+      const formattedDate = formatDateToISO(nasc);
+      const response = await fetch('http://10.0.2.2:8000/api/usuario', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          nomeUsuario: nome,
+          usernameUsuario: userName,
+          nascUsuario: formattedDate,
+          emailUsuario: email,
+          senhaUsuario: senha,
+          areaInteresseUsuario: "tecnologia",
+          contatoUsuario: tel,
+          fotoUsuario: "foto1",
+          cidadeUsuario: "sp",
+          estadoUsuario: "sp",
+          logradouroUsuario: "logradouro",
+          cepUsuario: cep,
+          numeroLograUsuario: 515,
+          sobreUsuario: bio,
+          formacaoCompetenciaUsuario: "formacao",
+          dataFormacaoCompetenciaUsuario: "dataFormacao"
+        })
+      });
+
+      console.log("Received response from API:", response);
+
+      const resp = await response.json();
+      console.log("Parsed JSON response:", resp);
+
+      if (response.ok) {
+        console.log("User ID from API:", resp.id);
+        setUserId(resp.id);
+        alert('Usuário cadastrado com sucesso!');
+        navigation.navigate('SignON3');
+      } else {
+        console.error("API returned error response:", resp);
+        alert('Erro ao cadastrar usuário');
+      }
+    } catch (error) {
+      console.error("Error during user registration:", error);
+      alert('Erro ao cadastrar usuário. Verifique o console para mais detalhes.');
+    }
+  }
 
 
   //Carregador de fontes

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usuario;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class UsuarioController extends Controller
@@ -45,21 +46,19 @@ class UsuarioController extends Controller
         $usuario->emailUsuario = $request->emailUsuario;
         $usuario->senhaUsuario = $request->senhaUsuario;
         $usuario->areaInteresseUsuario = $request->areaInteresseUsuario;
-        $usuario->curriculoUsuario = $request->curriculoUsuario;
         $usuario->contatoUsuario = $request->contatoUsuario;
         $usuario->fotoUsuario = $request->fotoUsuario;
         $usuario->cidadeUsuario = $request->cidadeUsuario;
         $usuario->estadoUsuario = $request->estadoUsuario;
-        $usuario->LogradouroUsuario = $request->LogradouroUsuario;
+        $usuario->logradouroUsuario = $request->logradouroUsuario;
         $usuario->cepUsuario = $request->cepUsuario;
         $usuario->numeroLograUsuario = $request->numeroLograUsuario;
         $usuario->sobreUsuario = $request->sobreUsuario;
-        $usuario->experienciaUsuario = $request->experienciaUsuario;
-        $usuario->nomeCompetenciaUsuario = $request->nomeCompetenciaUsuario;
         $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
         $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
         
         $usuario->save();
+        return response()->json($usuario);
     }
 
     /**
