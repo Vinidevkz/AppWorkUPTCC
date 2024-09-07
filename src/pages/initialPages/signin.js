@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
+Alert,
 } from "react-native";
 
 import * as Font from "expo-font";
@@ -18,7 +19,65 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import styles from "../initialPages/styles/signin.js";
 
+
+
+
 export default function SignIN({navigation}) {
+  const [email, setEmail] = useState('');
+  const [senha, setSenha] = useState('');
+
+  async function verificarUsuario() {
+    // Validação dos campos obrigatórios
+    if (!email && !senha) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+    if (!email) {
+      Alert.alert('Erro', 'Por favor, preencha seu email.');
+      return;
+    }
+    if (!senha) {
+      Alert.alert('Erro', 'Por favor, preencha sua senha.');
+      return;
+    }
+  
+    try {
+      // Envio da requisição ao servidor
+      const response = await fetch('http://10.0.2.2:8000/api/usuario/login', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          emailUsuario: email,
+          senhaUsuario: senha,
+        }),
+      });
+  
+      console.log('Email enviado:', email);
+      console.log('Senha enviada:', senha);
+  
+      // Verifica se o response é válido
+      const resp = await response.json();
+  
+      // Verificação de resposta HTTP
+      if (response.ok) {
+      // Alert.alert('Sucesso', 'Usuário logado com sucesso!');
+        // Redireciona o usuário após login bem-sucedido
+        await AsyncStorage.setItem('userId', data.userId);
+        navigation.navigate('TabBar');
+      } else {
+        // Se a resposta não foi ok, mostre o erro específico
+        Alert.alert('Erro', `Erro ao logar: ${resp.message || 'Erro desconhecido.'}`);
+        console.error('Erro de login:', resp);
+      }
+    } catch (error) {
+      // Tratamento de erros de rede ou de execução
+      Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente.');
+      console.error('Erro na tentativa de login:', error);
+    }
+  } 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -63,6 +122,8 @@ export default function SignIN({navigation}) {
           <TextInput
             placeholder="Digite seu nome de usuário"
             style={[styles.DMSansRegular, styles.input]}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
           />
         </View>
 
@@ -72,6 +133,8 @@ export default function SignIN({navigation}) {
             placeholder="Digite sua senha"
             style={[styles.DMSansRegular, styles.input]}
             secureTextEntry={!passwordVisible}
+            onChangeText={(text) => setSenha(text)}
+            value={senha}
           />
           <TouchableOpacity
             onPress={() => setPasswordVisible(!passwordVisible)}
@@ -84,7 +147,7 @@ export default function SignIN({navigation}) {
           </TouchableOpacity>
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={verificarUsuario}>
           <Text style={[styles.DMSansBold, styles.buttonText]}>
             Fazer Login
           </Text>

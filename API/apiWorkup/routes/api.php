@@ -31,6 +31,8 @@ Route::get('/usuario', [UsuarioController::class, 'index']);
 Route::get('/usuario/{idUsuario}', [UsuarioController::class, 'show']);
 //Cadastrar um usuario
 Route::post('/usuario', [UsuarioController::class, 'store']);
+//Login
+Route::post('/usuario/login', [UsuarioController::class, 'login']);
 //Atualizar dado de um usuario...
 //Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'update'])
 

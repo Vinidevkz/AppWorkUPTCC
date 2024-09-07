@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+
 
 class UsuarioController extends Controller
 {
@@ -38,6 +40,29 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate([
+            'nomeUsuario' => 'required|string|max:40',
+            'usernameUsuario' => 'required|string|max:40',
+            'nascUsuario' => 'required|date',
+            'emailUsuario' => 'required|email',
+            'senhaUsuario' => 'required|min:8',
+            'areaInteresseUsuario' => 'required|string|max:40',
+            'contatoUsuario' => 'required|string|max:20',
+            'cidadeUsuario' => 'required|string|max:40',
+            'estadoUsuario' => 'required|string|max:40',
+            'logradouroUsuario' => 'required|string|max:40',
+            'cepUsuario' => 'required|string|max:40',
+            'numeroLograUsuario' => 'required|string|max:40',
+            'sobreUsuario' => 'required|string|max:40',
+            'formacaoCompetenciaUsuario' => 'required|string|max:40',
+            'dataFormacaoCompetenciaUsuario' => 'required|date',
+        ],
+        [
+            //mensagens de erro:
+
+        ]);
+
         $usuario = new Usuario;
 
         $usuario->nomeUsuario = $request->nomeUsuario;
@@ -69,9 +94,9 @@ class UsuarioController extends Controller
      */
     public function show($id)
     {
-        $usuario = Usuario::where('idUsuario', $id)->get();
+        $usuario = Usuario::where('idUsuario', $id)->get()->first();
 
-        return $usuario;
+        return response()->json($usuario);
     }
 
     /**
@@ -106,5 +131,20 @@ class UsuarioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function login(Request $request){
+
+        // Procura o usuário no banco de dados
+        $usuario = Usuario::where('emailUsuario', '=', $request->input('emailUsuario'), 'or', 'usernameUsuario', '=', $request->input('usernameUsuario'))->first();
+
+        if($usuario && $request->input('senhaUsuario') == $usuario->senhaUsuario){
+            return response()->json([
+                'usuario' => $usuario,
+                'message' => 'Login bem-sucedido',
+            ]);
+        }
+
+        return response()->json(['message' => 'Credenciais inválidas'], 401);
     }
 }
