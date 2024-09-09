@@ -1,0 +1,170 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+body{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+}
+main{   
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}   
+.cadastro{
+    background-color: #58AF9C;
+    width: 40%;
+    height: 99vh;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+    flex-direction: column;
+
+}
+.cadastro h1{
+    color: white;
+    font-size: 4rem;
+}
+.cadastro p {
+    max-width: 400px;
+    font-size: 20px;
+    line-height: 20px;
+    color: #ECF0F1;
+}
+.formulario {
+    width: 60%;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+
+}
+.formulario h2{
+    color: #58AF9C;
+    font-size: 50px;
+}
+.formulario p{
+    color: gray;
+
+}
+.formulario form{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.formulario form input{
+    height: 44px;
+    width: 100%;
+    padding-left: 12px;
+    font-size: 15px;
+    background-color: #ECF0F1;
+    border: none;
+}
+.formulario form div{
+    background-color: #ECF0F1;
+     width: 30%;
+     display: flex;
+    padding-left: 10px;
+     align-items: center;
+    
+}
+
+.btnSignIn{
+    border: 1px solid white;
+    padding: 15px 35px;
+    border-radius: 8px;
+    background-color: transparent;
+    color: white;
+    margin-top: 40px;
+    cursor: pointer;
+}
+.btnRegister{
+    background-color: #58AF9C;
+    padding: 10px 148px;
+    border: none;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.sectionBook{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 35px;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+}
+.sectionBook div{
+    display: flex;
+    gap: 30px;
+}
+.divBOOk {
+    display: flex;
+    flex-direction: column;
+
+}   
+.divBOOk img{
+    width: 250px;
+}
+.divBOOk span{
+    display: flex;
+    flex-direction: column;
+    gap: 5x;
+}
+.divBOOk img:hover{
+    opacity: .8;
+    cursor: pointer;
+}
+
+.sectionbtnBook{
+    display: flex;
+    gap: 20px;
+    padding: 30px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+.btnSection{
+    background-color:#007B7C;
+    padding: 10px 105px;
+    color: #Fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.containerLivro{
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2px;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.btnSection:hover{
+    opacity: .8;
+    cursor: pointer;
+}
+header{
+    width: 70%;
+    padding: 20px;
+}
+.tittleLivro{
+    font-weight: bold;
+}
+
+.priceBook span{
+    font-weight: bold;
+}

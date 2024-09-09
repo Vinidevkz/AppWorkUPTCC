@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\VagaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
+Route::get('/welcome', function () {
     return view('welcome');
+});
+
+Route::get('/', function () {
+    return view('cadastrarVaga');
+});
+
+Route::prefix('form')->group(function () {
+
+    //rota para pegar os dados da página lista , buscar o metódo na controller , encontrar a class com o nome do metódo//
+    Route::post('/cadastrar',[VagaController::class, 'index'])->name('form.index');
+    Route::post('insert', [VagaController::class, 'store'])->name('form.insert');
 });
