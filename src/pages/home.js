@@ -38,7 +38,7 @@ export default function Home({ navigation }) {
      async function buscaVaga() {
        try {
          const response = await axios.get(
-           "http://10.0.2.2:8000/api/vaga/"
+           "http://127.0.0.1:8000/api/vaga/"
          );
        setData(response.data);
       } catch (error) {
@@ -79,7 +79,7 @@ export default function Home({ navigation }) {
   // RETORNO DA PÁGINA HOME
   return (
     <SafeAreaView style={[styles.SafeAreaView, {backgroundColor: theme.backgroundColor}]}>
-            <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
+      <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
       <View style={[styles.navbar, {backgroundColor: theme.backgroundColorNavBar}]}>
         <Image
           source={theme.WUPLogo}

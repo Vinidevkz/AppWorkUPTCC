@@ -14,27 +14,28 @@ import {
 import * as Font from "expo-font";
 import { useState, useEffect, useContext } from "react";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "../initialPages/styles/signin.js";
 import { Context } from "./context/provider.js";
 
 export default function SignIN({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [senha, setSenha] = useState('');
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
   const { setUserId, setNome, setUserName } = useContext(Context);
 
   async function verificarUsuario() {
     if (!email || !senha) {
-      Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
+      Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
-    
+
     try {
-      const response = await fetch('http://10.0.2.2:8000/api/usuario/login', {
-        method: 'POST',
+      const response = await fetch("http://10.0.2.2:8000/api/usuario/login", {
+        method: "POST",
         headers: {
-          'Accept': 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
         body: JSON.stringify({
           emailUsuario: email,
@@ -51,14 +52,20 @@ export default function SignIN({ navigation }) {
         setUserName(resp.usernameUsuario);
         setEmail(resp.emailUsuario); // Atualize o email no contexto
         // setSenha(resp.senhaUsuario); // Se desejar armazenar a senha (não recomendado por segurança)
-        navigation.navigate('TabBar');
+        navigation.navigate("TabBar");
       } else {
-        Alert.alert('Erro', `Erro ao logar: ${resp.message || 'Erro desconhecido.'}`);
-        console.error('Erro de login:', resp);
+        Alert.alert(
+          "Erro",
+          `Erro ao logar: ${resp.message || "Erro desconhecido."}`
+        );
+        console.error("Erro de login:", resp);
       }
     } catch (error) {
-      Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente.');
-      console.error('Erro na tentativa de login:', error);
+      Alert.alert(
+        "Erro",
+        "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente."
+      );
+      console.error("Erro na tentativa de login:", error);
     }
   }
 
@@ -101,9 +108,14 @@ export default function SignIN({ navigation }) {
         />
         <Text style={[styles.DMSansBold, styles.title]}>Login</Text>
         <View style={styles.inputCont}>
-          <FontAwesome6 name={"user-large"} size={25} color={"#1b1b1b"} />
+          <Entypo
+            name="mail"
+            size={25}
+            color="black"
+            style={{ borderRightWidth: 2, paddingRight: 8 }}
+          />
           <TextInput
-            placeholder="Digite seu nome de usuário"
+            placeholder="Digite seu email"
             style={[styles.DMSansRegular, styles.input]}
             onChangeText={(text) => setEmail(text)}
             value={email}
@@ -111,7 +123,12 @@ export default function SignIN({ navigation }) {
         </View>
 
         <View style={styles.inputCont}>
-          <FontAwesome6 name={"unlock"} size={25} color={"#1b1b1b"} />
+          <FontAwesome6
+            name={"unlock"}
+            size={25}
+            color={"#1b1b1b"}
+            style={{ borderRightWidth: 2, paddingRight: 10 }}
+          />
           <TextInput
             placeholder="Digite sua senha"
             style={[styles.DMSansRegular, styles.input]}
@@ -126,6 +143,7 @@ export default function SignIN({ navigation }) {
               name={passwordVisible ? "eye-slash" : "eye"}
               size={25}
               color={"#1b1b1b"}
+              style={{paddingHorizontal: 10}}
             />
           </TouchableOpacity>
         </View>

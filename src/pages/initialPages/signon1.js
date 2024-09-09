@@ -2,11 +2,9 @@ import React from "react";
 import {
   View,
   Text,
-  StyleSheet,
   StatusBar,
   TextInput,
   SafeAreaView,
-  ScrollView,
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
@@ -20,16 +18,9 @@ import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState } from "react";
 import { Context } from "./context/provider.js";
 
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
-
-
-const Stack = createNativeStackNavigator()
-
-
 export default function SignON1({navigation}) {
-  const {nome, setNome, setUserName, setEmail, setSenha} = useContext(Context);
+  const {setNome, setUserName, setEmail, setSenha} = useContext(Context);
+  const [emailError, setEmailError] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false)
   //Carregador de fontes
   const fontsLoaded = useFonts();
@@ -46,9 +37,23 @@ export default function SignON1({navigation}) {
 
     //Validação de Campos
     const handleEmailChange = (text) => {
-      // Filtra apenas caracteres válidos
-      const filteredText = text.replace(/[^a-zA-Z0-9@.]/g, '');
-      setEmail(filteredText);
+      // Verificar se há caracteres inválidos
+      const isValid = /^[a-zA-Z0-9@.]*$/.test(text);
+    
+      if (!isValid) {
+        setEmailError('O email deve conter apenas letras, números, "@" e "."');
+      } else {
+        // Verificar se há mais de um "@"
+        const atSymbolCount = (text.match(/@/g) || []).length;
+    
+        if (atSymbolCount > 1) {
+          setEmailError('O email só pode conter um "@"');
+        } else {
+          setEmailError(''); // Sem erros
+        }
+    
+        setEmail(text); // Atualizar o estado do email
+      }
     };
     //
 
@@ -66,18 +71,20 @@ export default function SignON1({navigation}) {
           <Text style={[styles.DMSansBold, styles.formTitle]}>Nome:</Text>
           <TextInput placeholder="Digite seu nome" style={[styles.DMSansRegular, styles.inputCont]}
           onChangeText={(text)=>setNome(text)}
+          maxLength={40}
           />
         </View>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansBold, styles.formTitle]}>Nome de usuário:</Text>
           <TextInput placeholder="Digite seu nome de usuário" style={[styles.DMSansRegular, styles.inputCont]}
           onChangeText={(text)=>setUserName(text)}
-          
+          maxLength={40}
           />
         </View>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>Email:</Text>
           <TextInput placeholder="exemplo@gmail.com" style={[styles.DMSansRegular, styles.inputCont]} onChangeText={handleEmailChange}/>
+          {emailError ? <Text style={{color: 'red'}}>{emailError}</Text> : null}
         </View>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansBold, styles.formTitle]}>Senha:</Text>
