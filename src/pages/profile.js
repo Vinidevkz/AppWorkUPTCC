@@ -69,10 +69,10 @@ export default function Profile({ navigation }) {
                   {dadosUser.nomeUsuario || "Loading..."}
                 </Text>
                 <Text style={[styles.DMSansRegular, styles.profileUserName, { color: theme.textColor }]}>
-                  @{dadosUser?.usernameUsuario || "Loading..."}
+                  @{dadosUser.usernameUsuario || "Loading..."}
                 </Text>
                 <Text style={[styles.DMSansRegular, styles.profileUserLocation, { color: theme.textColor }]}>
-                  {dadosUser?.estadoUsuario || "Loading..."}
+                  {dadosUser.estadoUsuario || "Loading..."}
                 </Text>
               </View>
             </View>
@@ -83,7 +83,7 @@ export default function Profile({ navigation }) {
               <View style={styles.profileBioCont}>
                 <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Sobre mim:</Text>
                 <Text style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>
-                  {dadosUser?.bio || "Loading..."}
+                  {dadosUser.sobreUsuario || "Loading..."}
                 </Text>
               </View>
 
@@ -93,7 +93,7 @@ export default function Profile({ navigation }) {
                   {Array.isArray(interests) && interests.length > 0 ? (
                     interests.map((area, index) => (
                       <Text key={index} style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>
-                        {area}
+                        {dadosUser.areaInteresseUsuario || "Loading..."}
                       </Text>
                     ))
                   ) : (
