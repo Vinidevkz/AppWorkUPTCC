@@ -139,10 +139,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::where('emailUsuario', '=', $request->input('emailUsuario'), 'or', 'usernameUsuario', '=', $request->input('usernameUsuario'))->first();
 
         if($usuario && $request->input('senhaUsuario') == $usuario->senhaUsuario){
-            return response()->json([
-                'usuario' => $usuario,
-                'message' => 'Login bem-sucedido',
-            ]);
+            return response()->json($usuario);
         }
 
         return response()->json(['message' => 'Credenciais inválidas'], 401);

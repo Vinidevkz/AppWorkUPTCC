@@ -14,7 +14,6 @@ import styles from "./styles/signon";
 import stylesProfile from "../../styles/profile";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from '@expo/vector-icons/AntDesign';
-import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import useFonts from "../../styles/fontloader/fontloader";
 import { Context } from "./context/provider";
 

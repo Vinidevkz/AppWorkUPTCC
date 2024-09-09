@@ -1,3 +1,4 @@
+// SignIN Component
 import React from "react";
 import {
   StatusBar,
@@ -8,41 +9,27 @@ import {
   Image,
   TouchableOpacity,
   ActivityIndicator,
-Alert,
+  Alert,
 } from "react-native";
-
 import * as Font from "expo-font";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect, useContext } from "react";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
 import styles from "../initialPages/styles/signin.js";
+import { Context } from "./context/provider.js";
 
-
-
-
-export default function SignIN({navigation}) {
+export default function SignIN({ navigation }) {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
+  const { setUserId, setNome, setUserName } = useContext(Context);
 
   async function verificarUsuario() {
-    // Validação dos campos obrigatórios
-    if (!email && !senha) {
+    if (!email || !senha) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
       return;
     }
-    if (!email) {
-      Alert.alert('Erro', 'Por favor, preencha seu email.');
-      return;
-    }
-    if (!senha) {
-      Alert.alert('Erro', 'Por favor, preencha sua senha.');
-      return;
-    }
-  
+    
     try {
-      // Envio da requisição ao servidor
       const response = await fetch('http://10.0.2.2:8000/api/usuario/login', {
         method: 'POST',
         headers: {
@@ -54,31 +41,28 @@ export default function SignIN({navigation}) {
           senhaUsuario: senha,
         }),
       });
-  
-      console.log('Email enviado:', email);
-      console.log('Senha enviada:', senha);
-  
-      // Verifica se o response é válido
+
       const resp = await response.json();
-  
-      // Verificação de resposta HTTP
+
       if (response.ok) {
-      // Alert.alert('Sucesso', 'Usuário logado com sucesso!');
-        // Redireciona o usuário após login bem-sucedido
-        await AsyncStorage.setItem('userId', data.userId);
+        // Atualize o contexto com os dados do usuário
+        setUserId(resp.idUsuario);
+        setNome(resp.nomeUsuario);
+        setUserName(resp.usernameUsuario);
+        setEmail(resp.emailUsuario); // Atualize o email no contexto
+        // setSenha(resp.senhaUsuario); // Se desejar armazenar a senha (não recomendado por segurança)
         navigation.navigate('TabBar');
       } else {
-        // Se a resposta não foi ok, mostre o erro específico
         Alert.alert('Erro', `Erro ao logar: ${resp.message || 'Erro desconhecido.'}`);
         console.error('Erro de login:', resp);
       }
     } catch (error) {
-      // Tratamento de erros de rede ou de execução
       Alert.alert('Erro', 'Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente.');
       console.error('Erro na tentativa de login:', error);
     }
-  } 
-  //Carregador de fontes
+  }
+
+  // Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -101,7 +85,6 @@ export default function SignIN({navigation}) {
       </View>
     );
   }
-  //
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
