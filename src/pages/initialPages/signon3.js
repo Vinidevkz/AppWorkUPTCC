@@ -60,7 +60,7 @@ export default function SignON3({ navigation }) {
           estadoUsuario: "sp",
           logradouroUsuario: "logradouro",
           cepUsuario: cep,
-          numeroLograUsuario: 515,
+          numeroLograUsuario: "515",
           sobreUsuario: bio,
           formacaoCompetenciaUsuario: "formacao",
           dataFormacaoCompetenciaUsuario: "2012-12-12"

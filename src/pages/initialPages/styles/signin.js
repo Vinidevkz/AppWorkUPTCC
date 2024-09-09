@@ -63,9 +63,8 @@ const styles = StyleSheet.create({
     width: 350,
     height: 60,
     paddingHorizontal: 10,
-    borderWidth: 2,
     borderRadius: 10,
-    borderColor: '#20dd77',
+    elevation: 2,
     backgroundColor: '#fff'
   },
 
@@ -82,7 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     width: 180,
     padding: 15,
-    elevation: 10,
+    elevation: 5,
   },
 
   buttonText: {
