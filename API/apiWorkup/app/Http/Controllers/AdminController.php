@@ -37,6 +37,25 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'nomeAdmin'  => 'required', 
+                'usernameAdmin' => 'required|', 
+                'emailAdmin'=>'required',
+                'contatoAdmin'=>'required',
+                'senhaAdmin'=>'required',
+
+            ],
+            [
+                'nomeAdmin.required'  => 'Digite um nome',
+                'usernameAdmin.required' => 'Digite um apelido', 
+                'emailAdmin.required' =>'Digite um email',
+                'contatoAdmin.required' =>'Digite um contato',
+                'senhaAdmin.required' =>'Digite uma senha',
+
+                ]
+        );
         $admin = new Admin;
 
         $admin->nomeAdmin = $request->nomeAdmin;
@@ -47,6 +66,7 @@ class AdminController extends Controller
         $admin->fotoAdmin = $request->fotoAdmin;
 
         $admin -> save();
+        return view('home');
     }
 
     /**

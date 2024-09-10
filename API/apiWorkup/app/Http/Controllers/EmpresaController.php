@@ -37,6 +37,37 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
+
+        $request->validate(
+            [
+                'usernameEmpresa'  => 'required', 
+                'nomeEmpresa' => 'required|', 
+                'sobreEmpresa'=>'required',
+                'atuacaoEmpresa'=>'required',
+                'cnpjEmpresa'=>'required',
+                'contatoEmpresa'=>'required',
+                'senhaEmpresa'=>'required',
+                'cidadeEmpresa'=>'required',
+                'estadoEmpresa'=>'required',
+                'LogradouroEmpresa'=>'required',
+                'cepEmpresa'=>'required',
+                'numeroLograEmpresa'=>'required',
+            ],
+            [
+                'usernameEmpresa.required'  => 'Digite um APELIDO',
+                'nomeEmpresa.required' => 'Digite um nome', 
+                'sobreEmpresa.required' =>'Digite sobre a empresa',
+                'atuacaoEmpresa.required' =>'Digite a area de atuação',
+                'cnpjEmpresa.required' =>'Digite um cnpj',
+                'contatoEmpresa.required' =>'Digite um contato',
+                'senhaEmpresa.required' =>'Digite uma senha',
+                'cidadeEmpresa.required' =>'Digite uma cidade',
+                'estadoEmpresa.required' =>'Digite um estado',
+                'LogradouroEmpresa.required' =>'Digite um logradouro',
+                'cepEmpresa.required' =>'Digite um cep',
+                'numeroLograEmpresa.required' =>'Digite um numero',
+                ]
+        );
         $empresa = new Empresa;
 
         $empresa->usernameEmpresa = $request->usernameEmpresa;
@@ -54,6 +85,7 @@ class EmpresaController extends Controller
         $empresa->numeroLograEmpresa = $request->numeroLograEmpresa;
 
         $empresa->save();
+        return view('home');
     }
 
     /**

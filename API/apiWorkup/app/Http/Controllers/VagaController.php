@@ -102,6 +102,7 @@ class VagaController extends Controller
         $vaga->idStatusVaga = $request->idStatusVaga;
 
         $vaga->save();
+        return view('home');
         
     }
 

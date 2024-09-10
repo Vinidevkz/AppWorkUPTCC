@@ -27,129 +27,137 @@
 <body>  
     <main>
         <section class="cadastro">
-            <h1>Site para cadastrar uma nova vaga</h1>
+            <h1>Site para cadastrar uma nova empresa</h1>
+
+     
         </section>
         <section class="formulario">
             <h2>Create Account</h2>
             <p>Or use your email for registration</p>
 
-            <form method="POST" action="/formVaga">
+            <form method="POST" action="/formEmpresa">
                 @csrf
 
-                @error('nomeVaga')
+                @error('usernameEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="nomeVaga" placeholder="nomeVaga" value="{{ old('nomeVaga') }}">
+                    <input type="text" name="usernameEmpresa" placeholder="usernameEmpresa" value="{{ old('usernameEmpresa') }}">
                  
                 </div>
 
-                @error('dataPublicacaoVaga')
+                @error('nomeEmpresa')
                         <div  style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-envelope"></i>
-                    <input type="text" name="dataPublicacaoVaga" placeholder="dataPublicacaoVaga" value="{{ old('dataPublicacaoVaga') }}">
+                    <input type="text" name="nomeEmpresa" placeholder="nomeEmpresa" value="{{ old('nomeEmpresa') }}">
                   
                 </div>
 
-                @error('prazoVaga')
+                @error('sobreEmpresa')
                         <div  style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-credit-card"></i>
-                    <input type="text" name="prazoVaga" placeholder="prazoVaga" value="{{ old('prazoVaga') }}">
+                    <input type="text" name="sobreEmpresa" placeholder="sobreEmpresa" value="{{ old('sobreEmpresa') }}">
                     
                 </div>
 
-                @error('modalidadeVaga')
+                @error('atuacaoEmpresa')
                         <div  style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="text" name="modalidadeVaga" placeholder="modalidadeVaga" value="{{ old('modalidadeVaga') }}">
+                    <input type="text" name="atuacaoEmpresa" placeholder="atuacaoEmpresa" value="{{ old('atuacaoEmpresa') }}">
                    
                 </div>
 
-                @error('salarioVaga')
+                @error('cnpjEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
 
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="salarioVaga" placeholder="salarioVaga" value="{{ old('salarioVaga') }}">
+                    <input type="text" name="cnpjEmpresa" placeholder="cnpjEmpresa" value="{{ old('cnpjEmpresa') }}">
                  
                 </div>
 
 
-                @error('cidadeVaga')
+                @error('contatoEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="cidadeVaga" placeholder="cidadeVaga" value="{{ old('cidadeVaga') }}">
+                    <input type="text" name="contatoEmpresa" placeholder="contatoEmpresa" value="{{ old('contatoEmpresa') }}">
                  
                 </div>
 
 
-                @error('estadoVaga')
+                @error('cidadeEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="estadoVaga" placeholder="estadoVaga" value="{{ old('estadoVaga') }}">
+                    <input type="text" name="cidadeEmpresa" placeholder="cidadeEmpresa" value="{{ old('cidadeEmpresa') }}">
                  
                 </div>
 
 
-                @error('areaVaga')
+                @error('estadoEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="areaVaga" placeholder="areaVaga" value="{{ old('areaVaga') }}">
+                    <input type="text" name="estadoEmpresa" placeholder="estadoEmpresa" value="{{ old('estadoEmpresa') }}">
                  
                 </div>
 
-                @error('beneficiosVaga')
+                @error('LogradouroEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
 
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="beneficiosVaga" placeholder="beneficiosVaga" value="{{ old('beneficiosVaga') }}">
+                    <input type="text" name="LogradouroEmpresa" placeholder="LogradouroEmpresa" value="{{ old('LogradouroEmpresa') }}">
                  
                 </div>
 
 
-                @error('diferencialVaga')
+                @error('cepEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="diferencialVaga" placeholder="diferencialVaga" value="{{ old('diferencialVaga') }}">
+                    <input type="text" name="cepEmpresa" placeholder="cepEmpresa" value="{{ old('cepEmpresa') }}">
                  
                 </div>
 
-                @error('idEmpresa')
+                @error('numeroLograEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
             
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="idEmpresa" placeholder="idEmpresa" value="{{ old('idEmpresa') }}">
+                    <input type="text" name="numeroLograEmpresa" placeholder="numeroLograEmpresa" value="{{ old('numeroLograEmpresa') }}">
                  
                 </div>
 
-                @error('idStatusVaga')
+                @error('senhaEmpresa')
                         <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                     @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="idStatusVaga" placeholder="idStatusVaga" value="{{ old('idStatusVaga') }}">
+                    <input type="text" name="senhaEmpresa" placeholder="senhaEmpresa" value="{{ old('senhaEmpresa') }}">
                  
                 </div>
+
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="fotoEmpresa" placeholder="fotoEmpresa" value="{{ old('fotoEmpresa') }}">
+                </div>
+
 
 
             
