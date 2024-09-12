@@ -27,7 +27,7 @@ export default function SignON2({ navigation }) {
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const request = await fetch("https://f602-200-53-198-146.ngrok-free.app/api/areavaga");
+        const request = await fetch("http://10.0.2.2:8000/api/areavaga");
         const response = await request.json();
         setAreaVagas(response);
       } catch (error) {

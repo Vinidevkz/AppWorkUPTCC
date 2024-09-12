@@ -20,6 +20,7 @@ export function ThemeProvider({ children }) {
     statusBarBackground: darkMode ? '#303030' : null,
     statusBarColor: darkMode ? '#fff' : null,
     backgroundColor: darkMode ? '#1b1b1b' : '#f4f4f4',
+    backgroundCont: darkMode ? '#1b1b1b' : '#f4f4f4',
     backgroundColorNavBar: darkMode ? '#303030' : '#fff',
     backgroundColorSearchInput: darkMode ? '#707070' : '#dbdbdb',
     backgroundColorItens: darkMode ? "#1b1b1b" : "fff",

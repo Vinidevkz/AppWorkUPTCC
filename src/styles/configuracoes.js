@@ -35,12 +35,20 @@ const styles = StyleSheet.create({
 
   container: {
     height: '100%',
-    padding: 25
+    padding: 25,
+    gap: 20
   },
 
   infosCont: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: 'space-between',
+    gap: 10
+  },
+
+  profileConfigCont: {
+    flexDirection: "column",
+
     justifyContent: 'space-between',
     gap: 10
   },

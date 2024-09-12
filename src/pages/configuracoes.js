@@ -3,7 +3,6 @@ import {
   Text,
   View,
   SafeAreaView,
-  ScrollView,
   TouchableOpacity,
   StatusBar,
 } from "react-native";
@@ -63,7 +62,30 @@ export default function Configurações({ navigation }) {
             </TouchableOpacity>
           </View>
         </View>
+
+        <View style={{padding: 20, borderRadius: 15, backgroundColor: theme.backgroundColorNavBar}}>
+          <View style={styles.profileConfigCont}>
+            <Text
+              style={[
+                styles.DMSansBold,
+                styles.text,
+                { color: theme.textColor },
+              ]}
+            >
+              Perfil:{" "}
+            </Text>
+
+            <TouchableOpacity onPress={() => navigation.navigate('ProfileChange')}>
+            <Text style={{backgroundColor: theme.backgroundCont, padding: 10, borderRadius: 10, color: theme.textColor, fontFamily: 'DMSans-Regular'} }>Alterar Perfil</Text>
+            </TouchableOpacity>
+            <TouchableOpacity >
+            <Text  style={{backgroundColor: theme.backgroundCont, padding: 10, borderRadius: 10, color: "red", fontFamily: 'DMSans-Regular'} }>Excluir Conta</Text>
+            </TouchableOpacity>
+          </View>
+        </View>
       </View>
+
+      
     </SafeAreaView>
   );
 }

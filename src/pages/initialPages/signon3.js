@@ -40,7 +40,7 @@ export default function SignON3({ navigation }) {
 
     try {
       const formattedDate = formatDateToISO(nasc);
-      const response = await fetch('https://f602-200-53-198-146.ngrok-free.app/api/usuario', {
+      const response = await fetch('https://10.0.2.2:8000/api/usuario', {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

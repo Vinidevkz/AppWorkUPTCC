@@ -26,6 +26,7 @@ import TabBar from "../routes/tabbar.js";
 import Home from "../home.js";
 import Vaga from "../vagas.js";
 import Configurações from "../configuracoes.js";
+import ProfileChange from "../profilechange.js";
 
 function Welcome({ navigation }) {
   //Carregador de fontes
@@ -165,6 +166,11 @@ export default function App() {
             <Stack.Screen
               name="Configurações"
               component={Configurações}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="ProfileChange"
+              component={ProfileChange}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
