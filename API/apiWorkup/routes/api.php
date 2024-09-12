@@ -1,9 +1,11 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AreaVagaController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VagaController;
+use App\Models\AreaVaga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +57,15 @@ Route::get('/vaga', [VagaController::class, 'index']);
 Route::get('/vaga/{idVaga}', [VagaController::class, 'show']);
 //Cadastrar uma vaga
 Route::post('vaga', [VagaController::class, 'store']);
+//Atualizar dado de uma vaga...
+//Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])
+
+//API'S AREAVAGA
+
+//Listar todas as areas
+Route::get('/areavaga', [AreaVagaController::class, 'index']);
+//Visualizar uma area por id
+Route::get('/areavaga/{idAreaInteresseVaga}', [AreaVagaController::class, 'show']);
 //Atualizar dado de uma vaga...
 //Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])
 

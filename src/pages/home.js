@@ -38,7 +38,7 @@ export default function Home({ navigation }) {
      async function buscaVaga() {
        try {
          const response = await axios.get(
-           "http://127.0.0.1:8000/api/vaga/"
+           "https://f602-200-53-198-146.ngrok-free.app/api/vaga/"
          );
        setData(response.data);
       } catch (error) {

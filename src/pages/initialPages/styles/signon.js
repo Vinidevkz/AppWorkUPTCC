@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   },
 
   inputCont: {
-    borderRadius: 20,
+    borderRadius: 10,
     elevation: 2,
     paddingHorizontal: 15,
     paddingVertical: 8,

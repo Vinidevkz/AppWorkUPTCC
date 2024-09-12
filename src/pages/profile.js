@@ -21,7 +21,7 @@ export default function Profile({ navigation }) {
   useEffect(() => {
     async function fetchUserData() {
       try {
-        const response = await fetch(`http://10.0.2.2:8000/api/usuario/${userId}`);
+        const response = await fetch(`https://f602-200-53-198-146.ngrok-free.app/api/usuario/${userId}`);
         const data = await response.json();
         setDadosUser(data);
         console.log("Fetched user data:", data);

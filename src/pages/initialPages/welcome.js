@@ -79,7 +79,7 @@ function Welcome({ navigation }) {
             <Text style={[styles.DMSansBold, styles.buttonText]}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("TabBar")}
+            onPress={() => navigation.navigate("SignON1")}
             style={[styles.button, styles.cadButton]}
           >
             <Text style={[styles.DMSansBold, styles.buttonText, styles.white]}>
