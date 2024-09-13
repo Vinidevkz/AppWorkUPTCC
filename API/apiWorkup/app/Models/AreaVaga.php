@@ -10,14 +10,14 @@ class AreaVaga extends Model
 {
     use HasFactory;
 
-    protected $table = 'tb_areavaga';
+    protected $table = 'tb_areainteressevaga';
 
     public $timestamps = false;
 
-    protected $primaryKey = 'idAreaVaga';
+    protected $primaryKey = 'idAreaInteresseVaga';
 
     public function vagasPorArea()
     {
-        return $this->hasMany(Vaga::class, 'idAreaVaga');
+        return $this->hasMany(Vaga::class, 'idAreaInteresseVaga');
     }
 }

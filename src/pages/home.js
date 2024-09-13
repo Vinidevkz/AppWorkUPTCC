@@ -24,6 +24,9 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 
+import ApisUrls from '../ApisUrls/apisurls.js'
+const { apiNgrokVaga, apiEmulador } = ApisUrls;
+
 import styles from "../styles/home";
 
 export default function Home({ navigation }) {
@@ -34,13 +37,12 @@ export default function Home({ navigation }) {
   const [heartIcon, setHeartIcon] = useState(true)
   const { theme, toggleTheme } = useTheme({Home});
 
-  const apiNgrok = "https://165e-200-53-197-8.ngrok-free.app/api/vaga";
-  const apiEmulador = "http://10.0.2.2:8000/api/vaga";
+
 
   const buscaVaga = async () => {
     setLoading(true); // Inicia o carregamento
     try {
-      const response = await axios.get(apiEmulador);
+      const response = await axios.get('http://bba9-200-53-197-8.ngrok-free.app/api/vaga');
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -140,7 +142,7 @@ export default function Home({ navigation }) {
                   Cidade: {item.cidadeVaga}
                 </Text>
                 <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
-                 AreaVaga: {item.areaVaga?.nomeAreaVaga || 'Não disponível'}
+                 Área: {item.areaVaga?.nomeAreaVaga || 'Não disponível'}
                 </Text>
               </View>
               <View style={styles.vagaFooterCont}>
