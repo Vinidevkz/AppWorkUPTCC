@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Usuario;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 
@@ -119,7 +120,30 @@ class UsuarioController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $usuario = Usuario::where('idUsuario', $id)->get()->first();
+
+            DB::table('tb_usuario')
+            ->where('idUsuario', $id)
+            ->update([
+                'nomeUsuario'=>$request->nomeUsuario,
+                'usernameUsuario' => $request->usernameUsuario,
+                'nascUsuario' => $request->nascUsuario,
+                'emailUsuario' => $request->emailUsuario,
+                'senhaUsuario' => $request->senhaUsuario,
+                'areaInteresseUsuario' => $request->areaInteresseUsuario,
+                'contatoUsuario' => $request->contatoUsuario,
+                'fotoUsuario' => $request->fotoUsuario,
+                'cidadeUsuario' => $request->cidadeUsuario,
+                'estadoUsuario' => $request->estadoUsuario,
+                'logradouroUsuario' => $request->logradouroUsuario,
+                'cepUsuario' => $request->cepUsuario,
+                'numeroLograUsuario' => $request->numeroLograUsuario,
+                'sobreUsuario' => $request->sobreUsuario,
+                'formacaoCompetenciaUsuario' => $request->formacaoCompetenciaUsuario,
+                'dataFormacaoCompetenciaUsuario' => $request->dataFormacaoCompetenciaUsuario
+            ]);
+            
+        return response()->json(['message'=>'Usuario atualizado com sucesso']);
     }
 
     /**
