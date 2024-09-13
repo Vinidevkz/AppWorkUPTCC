@@ -29,7 +29,7 @@ export default function SignON2({ navigation }) {
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const request = await fetch(apiNgrok);
+        const request = await fetch(apiEmulador);
         const response = await request.json();
         setAreaVagas(response);
       } catch (error) {
@@ -75,7 +75,7 @@ export default function SignON2({ navigation }) {
             }}
             mode="dropdown"
           >
-            <Picker.Item label="Selecione uma Área:" value="" />
+            <Picker.Item label="Selecione uma Área:" value=""/>
             {areaVagas.map((area, index) => (
               <Picker.Item
                 key={index}

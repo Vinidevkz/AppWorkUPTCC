@@ -18,11 +18,11 @@ export default function Profile({ navigation }) {
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
   const apiNgrok = 'https://165e-200-53-197-8.ngrok-free.app/api/usuario/'
-  const apiEmulador = "http://10.0.2.2:8000/api/usuario/${userId}"
+  const apiEmulador = "http://10.0.2.2:8000/api/usuario/"
 
   useEffect(() => {
     async function fetchUserData() {
-      const apiUrl = `${apiNgrok}${userId}`;
+      const apiUrl = `${apiEmulador}${userId}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();

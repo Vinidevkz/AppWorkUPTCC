@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 25,
+    fontSize: 20,
   },
 
   containerTop: {
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     maxHeight: 80,
     backgroundColor: '#fff',
     alignItems: 'center',
+    justifyContent: 'space-between',
     gap: 20,
     padding: 20,
     elevation: 10,
@@ -36,14 +37,16 @@ const styles = StyleSheet.create({
   },
 
   changeCont: {
-    marginVertical: 10
+    marginVertical: 10,
+    paddingVertical: 10,
+    gap: 10
   },
 
   textInput: {
     width: 300,
     height: 40,
-    borderRadius: 10,
-    borderWidth: 2,
+    borderRadius: 20,
+    borderWidth: 1,
     borderColor: '#909090',
     paddingHorizontal: 10,
   },
@@ -52,24 +55,31 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginVertical: 18,
+    marginVertical: 15,
   },
 
   contactInput: {
-    borderBottomWidth: 2,
+    borderWidth: 1,
+    padding: 10,
+    width: 200,
+    borderRadius: 50,
     borderColor: '#909090',
   },
 
   button: {
-    backgroundColor: '#20dd77',
-    width: 150,
     alignItems: 'center',
-    alignSelf: 'flex-end',
     justifyContent: 'center',
-    padding: 15,
-    borderRadius: 20,
-    elevation: 5,
-    margin: 10
+    flexDirection: 'row',
+    gap: 5,
+
+    borderWidth: 2,
+    borderColor: '#20dd77',
+    padding: 8,
+    borderRadius: 20
+  },
+
+  saveText: {
+    color: '#20dd77'
   }
 
 });

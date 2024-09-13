@@ -24,7 +24,7 @@ export default function SignIN({ navigation }) {
   const [senha, setSenha] = useState("");
   const { setUserId, setNome, setUserName } = useContext(Context);
   const apiNgrok = "https://165e-200-53-197-8.ngrok-free.app/api/usuario/login"
-  const apiEmulador = "http://10.0.2.2:8000/api/usuario/api/usuario/login"
+  const apiEmulador = "http://10.0.2.2:8000/api/usuario/login"
 
   async function verificarUsuario() {
     if (!email || !senha) {
@@ -33,7 +33,7 @@ export default function SignIN({ navigation }) {
     }
 
     try {
-      const response = await fetch(apiNgrok, {
+      const response = await fetch(apiEmulador, {
         method: "POST",
         headers: {
           Accept: "application/json",
