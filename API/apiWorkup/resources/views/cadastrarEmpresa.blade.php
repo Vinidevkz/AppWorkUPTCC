@@ -158,6 +158,11 @@
                     <input type="text" name="fotoEmpresa" placeholder="fotoEmpresa" value="{{ old('fotoEmpresa') }}">
                 </div>
 
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="emailEmpresa" placeholder="emailEmpresa" value="{{ old('emailEmpresa') }}">
+                </div>
+
 
 
             

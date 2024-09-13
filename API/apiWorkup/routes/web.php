@@ -3,6 +3,7 @@
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,3 +39,5 @@ Route::post('/formVaga', [VagaController::class, 'store']);
 Route::post('/formEmpresa', [EmpresaController::class, 'store']);
 
 Route::post('/formAdmin', [AdminController::class, 'store']);
+
+Route::post('/login', [LoginController::class, 'login']);

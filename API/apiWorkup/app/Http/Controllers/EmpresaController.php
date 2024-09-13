@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class EmpresaController extends Controller
 {
@@ -72,12 +73,13 @@ class EmpresaController extends Controller
 
         $empresa->usernameEmpresa = $request->usernameEmpresa;
         $empresa->nomeEmpresa = $request->nomeEmpresa;
+        $empresa->emailEmpresa = $request->emailEmpresa;
         $empresa->fotoEmpresa = $request->fotoEmpresa;
         $empresa->sobreEmpresa = $request->sobreEmpresa;
         $empresa->atuacaoEmpresa = $request->atuacaoEmpresa;
         $empresa->cnpjEmpresa = $request->cnpjEmpresa;
         $empresa->contatoEmpresa = $request->contatoEmpresa;
-        $empresa->senhaEmpresa = $request->senhaEmpresa;
+        $empresa->senhaEmpresa = Hash::make($request->senhaEmpresa);
         $empresa->cidadeEmpresa	 = $request->cidadeEmpresa;
         $empresa->estadoEmpresa = $request->estadoEmpresa;
         $empresa->LogradouroEmpresa = $request->LogradouroEmpresa;
