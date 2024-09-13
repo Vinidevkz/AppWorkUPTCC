@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 13-Set-2024 às 20:00
+-- Tempo de geração: 13-Set-2024 às 22:28
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -47,6 +47,26 @@ INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tb_areainteresseusuario`
+--
+
+CREATE TABLE `tb_areainteresseusuario` (
+  `idAreaInteresseUsuario` int(11) NOT NULL,
+  `descAreaInteresseUsuario` varchar(200) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tb_areainteresseusuario`
+--
+
+INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `descAreaInteresseUsuario`) VALUES
+(1, 'Tecnologia'),
+(2, 'Alimentação'),
+(3, 'Meio Ambiente');
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `tb_areainteressevaga`
 --
 
@@ -64,6 +84,46 @@ INSERT INTO `tb_areainteressevaga` (`idAreaInteresseVaga`, `nomeAreaInteresseVag
 (2, 'Gastronomia'),
 (3, 'Designer'),
 (7, 'Medicina');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_areavaga`
+--
+
+CREATE TABLE `tb_areavaga` (
+  `idAreaVaga` int(11) NOT NULL,
+  `nomeAreaVaga` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tb_areavaga`
+--
+
+INSERT INTO `tb_areavaga` (`idAreaVaga`, `nomeAreaVaga`) VALUES
+(1, 'Tecnologia'),
+(2, 'Marketing'),
+(3, 'Gestão');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_atuacaoempresa`
+--
+
+CREATE TABLE `tb_atuacaoempresa` (
+  `idAtuacaoEmpresa` int(11) NOT NULL,
+  `descAtuacaoEmpresa` varchar(30) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tb_atuacaoempresa`
+--
+
+INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `descAtuacaoEmpresa`) VALUES
+(1, 'Tecnologia'),
+(2, 'Alimentação'),
+(3, 'Meio Ambiente');
 
 -- --------------------------------------------------------
 
@@ -115,6 +175,26 @@ INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailE
 (10, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', 'teste', '1212', '121212', '$2y$10$ov45KGFlSZra5aShO2E2aex9BnbHDttmVSuA.Oos0eQxluxplHHbe', 'teste', 'teste', 'teste', '111', '1'),
 (11, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', 'teste', '1212', '121212', '$2y$10$ML8XnGbiHfcVrSlefvQyqeSwlED3n2WF0sq6dmct0alFm0YYDY40O', 'teste', 'teste', 'teste', '111', '1'),
 (12, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', 'teste', '1212', '121212', '$2y$10$84eZT9mBUuVS2/W1Kz.FP.TJ/kBo7dGdvYEvDimqjwPAn1yN9EJqq', 'teste', 'teste', 'teste', '111', '1');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_modalidadevaga`
+--
+
+CREATE TABLE `tb_modalidadevaga` (
+  `idModalidadeVaga` int(11) NOT NULL,
+  `descModalidadeVaga` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Extraindo dados da tabela `tb_modalidadevaga`
+--
+
+INSERT INTO `tb_modalidadevaga` (`idModalidadeVaga`, `descModalidadeVaga`) VALUES
+(1, 'Presecial'),
+(2, 'Hibrido'),
+(3, 'Remoto');
 
 -- --------------------------------------------------------
 
@@ -211,21 +291,21 @@ CREATE TABLE `tb_vaga` (
   `salarioVaga` decimal(10,2) NOT NULL,
   `cidadeVaga` varchar(40) NOT NULL,
   `estadoVaga` varchar(40) NOT NULL,
-  `areaVaga` varchar(40) NOT NULL,
   `beneficiosVaga` varchar(40) NOT NULL,
   `diferencialVaga` varchar(40) NOT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
-  `idStatusVaga` int(11) DEFAULT NULL
+  `idStatusVaga` int(11) DEFAULT NULL,
+  `idAreaVaga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Extraindo dados da tabela `tb_vaga`
 --
 
-INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `dataPublicacaoVaga`, `prazoVaga`, `modalidadeVaga`, `salarioVaga`, `cidadeVaga`, `estadoVaga`, `areaVaga`, `beneficiosVaga`, `diferencialVaga`, `idEmpresa`, `idStatusVaga`) VALUES
-(1, 'Desenvolvedor Front-End', '2024-08-01', '2024-09-01', 'Presencial', 8000.00, 'São Paulo', 'SP', 'Tecnologia', 'Vale Transporte, Vale Alimentação', 'Conhecimento em React é um diferencial', 1, 1),
-(2, 'Analista de Marketing', '2024-08-10', '2024-09-10', 'Híbrido', 6000.00, 'Rio de Janeiro', 'RJ', 'Marketing', 'Plano de Saúde, Seguro de Vida', 'Experiência com campanhas digitais é um ', 2, 2),
-(3, 'Gerente de Projetos', '2024-08-15', '2024-09-15', 'Remoto', 12000.00, 'Belo Horizonte', 'MG', 'Gestão', 'Bônus por desempenho, Participação nos l', 'Certificação PMP é um diferencial', 3, 1);
+INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `dataPublicacaoVaga`, `prazoVaga`, `modalidadeVaga`, `salarioVaga`, `cidadeVaga`, `estadoVaga`, `beneficiosVaga`, `diferencialVaga`, `idEmpresa`, `idStatusVaga`, `idAreaVaga`) VALUES
+(1, 'Desenvolvedor Front-End', '2024-08-01', '2024-09-01', 'Presencial', 8000.00, 'São Paulo', 'SP', 'Vale Transporte, Vale Alimentação', 'Conhecimento em React é um diferencial', 1, 1, 1),
+(2, 'Analista de Marketing', '2024-08-10', '2024-09-10', 'Híbrido', 6000.00, 'Rio de Janeiro', 'RJ', 'Plano de Saúde, Seguro de Vida', 'Experiência com campanhas digitais é um ', 2, 2, 2),
+(3, 'Gerente de Projetos', '2024-08-15', '2024-09-15', 'Remoto', 12000.00, 'Belo Horizonte', 'MG', 'Bônus por desempenho, Participação nos l', 'Certificação PMP é um diferencial', 3, 1, 3);
 
 --
 -- Índices para tabelas despejadas
@@ -242,6 +322,12 @@ ALTER TABLE `tb_admin`
 --
 ALTER TABLE `tb_areainteressevaga`
   ADD PRIMARY KEY (`idAreaInteresseVaga`);
+
+--
+-- Índices para tabela `tb_areavaga`
+--
+ALTER TABLE `tb_areavaga`
+  ADD PRIMARY KEY (`idAreaVaga`);
 
 --
 -- Índices para tabela `tb_chat`
@@ -290,8 +376,9 @@ ALTER TABLE `tb_usuario`
 --
 ALTER TABLE `tb_vaga`
   ADD PRIMARY KEY (`idVaga`),
-  ADD KEY `idEmpresa` (`idEmpresa`),
-  ADD KEY `idStatusVaga` (`idStatusVaga`);
+  ADD KEY `idStatusVaga` (`idStatusVaga`),
+  ADD KEY `idAreaVaga` (`idAreaVaga`),
+  ADD KEY `idEmpresa` (`idEmpresa`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -308,6 +395,12 @@ ALTER TABLE `tb_admin`
 --
 ALTER TABLE `tb_areainteressevaga`
   MODIFY `idAreaInteresseVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT de tabela `tb_areavaga`
+--
+ALTER TABLE `tb_areavaga`
+  MODIFY `idAreaVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_chat`
@@ -375,8 +468,9 @@ ALTER TABLE `tb_publicacao`
 -- Limitadores para a tabela `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
-  ADD CONSTRAINT `tb_vaga_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
-  ADD CONSTRAINT `tb_vaga_ibfk_2` FOREIGN KEY (`idStatusVaga`) REFERENCES `tb_statusvaga` (`idStatusVaga`);
+  ADD CONSTRAINT `tb_vaga_ibfk_1` FOREIGN KEY (`idStatusVaga`) REFERENCES `tb_statusvaga` (`idStatusVaga`),
+  ADD CONSTRAINT `tb_vaga_ibfk_2` FOREIGN KEY (`idAreaVaga`) REFERENCES `tb_areavaga` (`idAreaVaga`),
+  ADD CONSTRAINT `tb_vaga_ibfk_3` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
