@@ -35,7 +35,7 @@ export default function SignON3({ navigation }) {
   // Function to handle user registration
   async function cadastroUser() {
     // Validation for required fields
-    if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio) {
+    if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio ) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
       return;
     }

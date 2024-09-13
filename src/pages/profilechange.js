@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from 'react';
 import {
   View,
   Text,
@@ -6,23 +6,52 @@ import {
   ScrollView,
   TextInput,
   TouchableOpacity,
-} from "react-native";
-import { useTheme } from "../pages/initialPages/context/themecontext";
-import { Context } from "../pages/initialPages/context/provider.js";
-import { Picker } from "@react-native-picker/picker";
-import Ionicons from "@expo/vector-icons/Ionicons";
+  Alert,
+} from 'react-native';
+import { useTheme } from '../pages/initialPages/context/themecontext';
+import { Context } from '../pages/initialPages/context/provider.js';
+import { Picker } from '@react-native-picker/picker';
+import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
-import styles from "../styles/profilechange.js";
+import styles from '../styles/profilechange.js';
 
 export default function ProfileChange({ navigation }) {
   const { theme } = useTheme();
-  const { userId } = useContext(Context);
+  const {
+    userId,
+    nomeUsuario,
+    setNomeUsuario,
+    usernameUsuario,
+    setUsernameUsuario,
+    sobreUsuario,
+    setSobreUsuario,
+    areaInt,
+    setAreaInt,
+    formacaoCompetenciaUsuario,
+    setFormacaoUsuario,
+    tel,
+    setTel,
+  } = useContext(Context);
+
+  // Verifique se os valores retornados não são undefined
+  if (
+    typeof setNomeUsuario === 'undefined' ||
+    typeof setUsernameUsuario === 'undefined' ||
+    typeof setSobreUsuario === 'undefined' ||
+    typeof setAreaInt === 'undefined' ||
+    typeof setFormacaoUsuario === 'undefined' ||
+    typeof setTel === 'undefined'
+  ) {
+    console.error('Context values are not correctly defined.');
+  }
+
   const [areaVagas, setAreaVagas] = useState([]);
   const [dadosUser, setDadosUser] = useState({});
-  const [areaInteresseUsuario, setAreaInteresseUsuario] = useState("");
+  const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
 
-  const apiEmulador = "http://10.0.2.2:8000/api/usuario/";
-  const apiEmuladorAreas = "http://10.0.2.2:8000/api/areavaga";
+  const apiEmulador = 'http://10.0.2.2:8000/api/usuario/';
+  const apiEmuladorAreas = 'http://10.0.2.2:8000/api/areavaga';
+  const apiEmuladorAlterar = 'http://10.0.2.2:8000/api/usuario/';
 
   useEffect(() => {
     async function fetchUserData() {
@@ -31,9 +60,9 @@ export default function ProfileChange({ navigation }) {
         const response = await fetch(apiUrl);
         const data = await response.json();
         setDadosUser(data);
-        console.log("Fetched user data:", data);
+        console.log('Fetched user data:', data);
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error('Error fetching user data:', error);
       }
     }
 
@@ -47,15 +76,46 @@ export default function ProfileChange({ navigation }) {
       try {
         const response = await fetch(apiEmuladorAreas);
         const data = await response.json();
-        console.log("Fetched areas:", data);
+        console.log('Fetched areas:', data);
         setAreaVagas(data);
       } catch (error) {
-        console.error("Erro ao buscar áreas de vagas:", error);
+        console.error('Erro ao buscar áreas de vagas:', error);
       }
     }
 
     pegarAreaVaga();
   }, []);
+
+  const alterarUsuario = async () => {
+    try {
+      const response = await fetch(apiEmuladorAlterar, {
+        method: 'PUT', // Mudança de 'UPDATE' para 'PUT'
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          nomeUsuario,
+          usernameUsuario,
+          sobreUsuario,
+          areaInt,
+          formacaoCompetenciaUsuario,
+          tel,
+        }),
+      });
+
+      const jsonResponse = await response.json();
+
+      if (response.ok) {
+        Alert.alert('Sucesso', 'Dados atualizados com sucesso');
+      } else {
+        Alert.alert('Erro', jsonResponse.message || 'Erro ao atualizar dados');
+      }
+    } catch (error) {
+      Alert.alert('Erro', 'Erro ao se comunicar com o servidor');
+      console.error(error);
+    }
+  };
 
   return (
     <SafeAreaView
@@ -67,7 +127,7 @@ export default function ProfileChange({ navigation }) {
           { backgroundColor: theme.backgroundColorNavBar },
         ]}
       >
-        <View style={{alignItems: 'center', flexDirection: 'row', gap: 20}}>
+        <View style={{ alignItems: 'center', flexDirection: 'row', gap: 20 }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Ionicons
               name="caret-back-circle-sharp"
@@ -82,15 +142,14 @@ export default function ProfileChange({ navigation }) {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.button}>
+        <TouchableOpacity style={styles.button} onPress={alterarUsuario}>
           <Text style={[styles.DMSansBold, styles.saveText]}>Salvar</Text>
           <AntDesign name="plus" size={15} color="#20dd77" />
         </TouchableOpacity>
-
       </View>
       <ScrollView
         style={{
-          height: "100%",
+          height: '100%',
           padding: 20,
           backgroundColor: theme.backgroundColor,
         }}
@@ -99,7 +158,7 @@ export default function ProfileChange({ navigation }) {
           <Text
             style={{
               color: theme.textColor,
-              fontFamily: "DMSans-Regular",
+              fontFamily: 'DMSans-Regular',
               fontSize: 18,
             }}
           >
@@ -111,14 +170,15 @@ export default function ProfileChange({ navigation }) {
               styles.DMSansRegular,
               { color: theme.textColor },
             ]}
-            value={dadosUser.nomeUsuario || ""}
+            value={dadosUser.nomeUsuario || ''}
+            onChangeText={(text) => setNomeUsuario(text)}
           />
         </View>
         <View style={styles.changeCont}>
           <Text
             style={{
               color: theme.textColor,
-              fontFamily: "DMSans-Regular",
+              fontFamily: 'DMSans-Regular',
               fontSize: 18,
             }}
           >
@@ -130,14 +190,15 @@ export default function ProfileChange({ navigation }) {
               styles.DMSansRegular,
               { color: theme.textColor },
             ]}
-            value={dadosUser.usernameUsuario || ""}
+            value={dadosUser.usernameUsuario || ''}
+            onChangeText={(text) => setUsernameUsuario(text)}
           />
         </View>
         <View style={styles.changeCont}>
           <Text
             style={{
               color: theme.textColor,
-              fontFamily: "DMSans-Regular",
+              fontFamily: 'DMSans-Regular',
               fontSize: 18,
             }}
           >
@@ -149,21 +210,22 @@ export default function ProfileChange({ navigation }) {
               styles.DMSansRegular,
               { color: theme.textColor },
             ]}
-            value={dadosUser.sobreUsuario || ""}
+            value={dadosUser.sobreUsuario || ''}
+            onChangeText={(text) => setSobreUsuario(text)}
           />
         </View>
         <View style={styles.changeCont}>
           <Text
             style={{
               color: theme.textColor,
-              fontFamily: "DMSans-Regular",
+              fontFamily: 'DMSans-Regular',
               fontSize: 18,
             }}
           >
             Área de Interesse:
           </Text>
           <Picker
-            selectedValue={areaInteresseUsuario}
+            selectedValue={areaInt}
             style={[
               styles.inputCont,
               styles.text,
@@ -171,6 +233,7 @@ export default function ProfileChange({ navigation }) {
               { color: theme.textColor },
             ]}
             onValueChange={(itemValue) => {
+              setAreaInt(itemValue);
               setAreaInteresseUsuario(itemValue);
             }}
             mode="dropdown"
@@ -190,7 +253,7 @@ export default function ProfileChange({ navigation }) {
           <Text
             style={{
               color: theme.textColor,
-              fontFamily: "DMSans-Regular",
+              fontFamily: 'DMSans-Regular',
               fontSize: 18,
             }}
           >
@@ -202,14 +265,15 @@ export default function ProfileChange({ navigation }) {
               styles.DMSansRegular,
               { color: theme.textColor },
             ]}
-            value={dadosUser.formacaoCompetenciaUsuario || ""}
+            value={dadosUser.formacaoCompetenciaUsuario || ''}
+            onChangeText={(text) => setFormacaoUsuario(text)}
           />
         </View>
         <View style={styles.changeCont}>
           <Text
             style={{
               color: theme.textColor,
-              fontFamily: "DMSans-Regular",
+              fontFamily: 'DMSans-Regular',
               fontSize: 18,
             }}
           >
@@ -230,48 +294,12 @@ export default function ProfileChange({ navigation }) {
                 styles.DMSansRegular,
                 { color: theme.textColor },
               ]}
-              value={dadosUser.contatoUsuario || ""}
+              value={dadosUser.tel || ''}
+              onChangeText={(text) => setTel(text)}
             />
           </View>
-          <View style={styles.contactCont}>
-            <Text
-              style={[
-                styles.DMSansRegular,
-                { color: theme.textColor, fontSize: 16 },
-              ]}
-            >
-              Rede 1:
-            </Text>
-            <TextInput
-              style={[
-                styles.contactInput,
-                styles.DMSansRegular,
-                { color: theme.textColor },
-              ]}
-              value={dadosUser.contatoUsuario || ""}
-            />
-          </View>
-          <View style={styles.contactCont}>
-            <Text
-              style={[
-                styles.DMSansRegular,
-                { color: theme.textColor, fontSize: 16 },
-              ]}
-            >
-              Rede 2:
-            </Text>
-            <TextInput
-              style={[
-                styles.contactInput,
-                styles.DMSansRegular,
-                { color: theme.textColor },
-              ]}
-              value={dadosUser.contatoUsuario || ""}
-            />
-          </View>
+          {/* Adicione os campos de Rede 1 e Rede 2 aqui, se necessário */}
         </View>
-
-
       </ScrollView>
     </SafeAreaView>
   );
