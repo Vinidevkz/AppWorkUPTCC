@@ -35,6 +35,23 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
 
+  textInput: {
+    width: 300,
+    height: 40,
+    borderRadius: 10,
+    backgroundColor: '#707070'
+  },
+
+  button: {
+    backgroundColor: '#20dd77',
+    width: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 15,
+    borderRadius: 20,
+    elevation: 5,
+  }
+
 });
 
 export default styles;

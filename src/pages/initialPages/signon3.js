@@ -19,8 +19,10 @@ import { Context } from "./context/provider";
 
 export default function SignON3({ navigation }) {
   const {
-    nome, setBio, bio, email, senha, nasc, cep, tel, userName, setUserId
+    nome, setBio, bio, email, senha, areaInt, nasc, cep, tel, userName, setUserId
   } = useContext(Context);
+  const apiNgrok = "https://ec87-200-53-198-146.ngrok-free.app/api/usuario"
+  const apiEmulador = "http://10.0.2.2:8000/api/usuario"
   
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -40,7 +42,7 @@ export default function SignON3({ navigation }) {
 
     try {
       const formattedDate = formatDateToISO(nasc);
-      const response = await fetch('https://10.0.2.2:8000/api/usuario', {
+      const response = await fetch(apiNgrok, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',
@@ -52,7 +54,7 @@ export default function SignON3({ navigation }) {
           nascUsuario: formattedDate,
           emailUsuario: email,
           senhaUsuario: senha,
-          areaInteresseUsuario: "tecnologia",
+          areaInteresseUsuario: areaInt,
           contatoUsuario: tel,
           fotoUsuario: "foto1",
           cidadeUsuario: "sp",

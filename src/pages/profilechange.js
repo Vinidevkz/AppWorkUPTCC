@@ -9,15 +9,20 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from '../styles/profilechange.js'
 
 export default function ProfileChange({navigation}) {
-  const { theme, toggleTheme } = useTheme({ProfileChange});
+  const { theme, toggleTheme } = useTheme();
   const { userId } = useContext(Context);
 
   const [dadosUser, setDadosUser] = useState([]);
 
+  //URLs para cada emulação
+  const apiNgrok = "https://0545-200-53-198-146.ngrok-free.app/api/usuario/${userId}"
+  const apiEmulador = "http://10.0.2.2:8000/api/usuario/${userId}"
+
   useEffect(() => {
     async function fetchUserData() {
+      const apiUrl = `${apiNgrok}${userId}`;
       try {
-        const response = await fetch(`https://f602-200-53-198-146.ngrok-free.app/api/usuario/${userId}`);
+        const response = await fetch(apiUrl);
         const data = await response.json();
         setDadosUser(data);
         console.log("Fetched user data:", data);
@@ -39,31 +44,37 @@ export default function ProfileChange({navigation}) {
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title, {color: theme.textColor}]}>Alterar Perfil:</Text>
       </View>
-      <View style={{height: '90%', padding: 20,  backgroundColor: theme.backgroundColor, gap: 20}}>
+      <View style={{height: '100%', padding: 20,  backgroundColor: theme.backgroundColor, gap: 20}}>
         <View>
         <Text style={{color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18}}>Nome:</Text>
-        <TextInput style={{backgroundColor:'#303030', width: 300, height: 40, borderRadius: 10,}}/>
+
+        <TextInput  style={styles.textInput}/>
+
         </View>
         <View>
         <Text style={{color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18}}>Nome de usuário:</Text>
-        <TextInput style={{backgroundColor:'#303030', width: 300, height: 40, borderRadius: 10,}}/>
+        <TextInput style={styles.textInput}/>
         </View>
         <View>
         <Text style={{color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18}}>Biografia:</Text>
-        <TextInput style={{backgroundColor:'#303030', width: 300, height: 40, borderRadius: 10,}}/>
+        <TextInput style={styles.textInput}/>
         </View>
         <View>
         <Text style={{color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18}}>Área de Interesse:</Text>
-        <TextInput style={{backgroundColor:'#303030', width: 300, height: 40, borderRadius: 10,}}/>
+        <TextInput style={styles.textInput}/>
         </View>
         <View>
         <Text style={{color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18}}>Competência:</Text>
-        <TextInput style={{backgroundColor:'#303030', width: 300, height: 40, borderRadius: 10,}}/>
+        <TextInput style={styles.textInput}/>
         </View>
         <View>
         <Text style={{color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18}}>Contatos:</Text>
-        <TextInput style={{backgroundColor:'#303030', width: 300, height: 40, borderRadius: 10,}}/>
+        <TextInput style={styles.textInput}/>
         </View>
+
+        <TouchableOpacity style={styles.button}>
+          <Text style={[styles.DMSansBold]}>Salvar Alterações</Text>
+        </TouchableOpacity>
       </View>
       
     </SafeAreaView>

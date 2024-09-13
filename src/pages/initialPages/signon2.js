@@ -3,7 +3,6 @@ import {
   View,
   Text,
   StatusBar,
-  TextInput,
   SafeAreaView,
   ActivityIndicator,
   TouchableOpacity,
@@ -20,14 +19,17 @@ import { useContext, useState, useEffect } from "react";
 import { Context } from "./context/provider.js";
 
 export default function SignON2({ navigation }) {
-  const { setTel, setNasc, setCep } = useContext(Context);
+  const { areaInt, setAreaInt, setTel, setNasc, setCep } = useContext(Context);
   const [areaVagas, setAreaVagas] = useState([]);
-  const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('')
+  const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
+  
+  const apiNgrok = "https://0545-200-53-198-146.ngrok-free.app/api/areavaga";
+  const apiEmulador = "http://10.0.2.2:8000/api/areavaga";
 
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const request = await fetch("http://10.0.2.2:8000/api/areavaga");
+        const request = await fetch(apiNgrok);
         const response = await request.json();
         setAreaVagas(response);
       } catch (error) {
@@ -38,7 +40,7 @@ export default function SignON2({ navigation }) {
     pegarAreaVaga();
   }, []);
 
-  //Carregador de fontes
+  // Carregador de fontes
   const fontsLoaded = useFonts();
 
   if (!fontsLoaded) {
@@ -48,7 +50,6 @@ export default function SignON2({ navigation }) {
       </View>
     );
   }
-  //
 
   return (
     <SafeAreaView>
@@ -67,20 +68,28 @@ export default function SignON2({ navigation }) {
 
           <Picker
             selectedValue={areaInteresseUsuario}
-            style={[styles.inputCont, styles.text, styles.DMSansRegular] }
-            onValueChange={(itemValue) => setAreaInteresseUsuario(itemValue)}
+            style={[styles.inputCont, styles.text, styles.DMSansRegular]}
+            onValueChange={(itemValue) => {
+              setAreaInteresseUsuario(itemValue);
+              setAreaInt(itemValue); // Atualiza o estado areaInt com o valor selecionado
+            }}
             mode="dropdown"
           >
             <Picker.Item label="Selecione uma Área:" value="" />
             {areaVagas.map((area, index) => (
-              <Picker.Item key={index} label={area.nomeAreaInteresseVaga} value={area.nomeAreaInteresseVaga} />
+              <Picker.Item
+                key={index}
+                label={area.nomeAreaInteresseVaga}
+                value={area.nomeAreaInteresseVaga}
+              />
             ))}
           </Picker>
-
         </View>
+
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
             Telefone:
+            <Text>{areaInt}</Text>
           </Text>
           <TextInputMask
             type={"cel-phone"}
@@ -94,6 +103,7 @@ export default function SignON2({ navigation }) {
             onChangeText={(text) => setTel(text)}
           />
         </View>
+
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
             Data de Nascimento:
@@ -108,6 +118,7 @@ export default function SignON2({ navigation }) {
             onChangeText={(text) => setNasc(text)}
           />
         </View>
+
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>CEP:</Text>
           <TextInputMask

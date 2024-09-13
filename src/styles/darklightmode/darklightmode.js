@@ -14,6 +14,7 @@ export function useAppearance() {
     statusBarBackground: darkMode ? '#474747' : null,
     statusBarColor: darkMode ? '#474747' : null,
     backgroundColor: darkMode ? '#1b1b1b' : '#fff',
+    backgroundColorInput: darkMode ? '#909090' : '#f4f4f4',
     backgroundColorNavBar: darkMode ? '#474747' : '#fff',
     backgroundColorItens: darkMode ? "#1b1b1b" : "fff",
     iconColor: darkMode ? "#20dd77" : "#1b1b1b",

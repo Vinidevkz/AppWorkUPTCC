@@ -17,11 +17,14 @@ export default function Profile({ navigation }) {
   const { theme } = useTheme({ Profile });
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
+  const apiNgrok = 'https://ec87-200-53-198-146.ngrok-free.app/api/usuario/'
+  const apiEmulador = "http://10.0.2.2:8000/api/usuario/${userId}"
 
   useEffect(() => {
     async function fetchUserData() {
+      const apiUrl = `${apiNgrok}${userId}`;
       try {
-        const response = await fetch(`http://10.0.2.2:8000/api/usuario/${userId}`);
+        const response = await fetch(apiUrl);
         const data = await response.json();
         setDadosUser(data);
         console.log("Fetched user data:", data);
@@ -45,6 +48,7 @@ export default function Profile({ navigation }) {
         <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Meu Perfil</Text>
         <TouchableOpacity onPress={() => navigation.navigate('Configurações')}>
           <Octicons name="gear" size={30} color={theme.iconColorWhite} />
+
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
@@ -90,15 +94,11 @@ export default function Profile({ navigation }) {
               <View style={styles.profilePrefsCont}>
                 <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Áreas de Interesse:</Text>
                 <View style={styles.usersPrefBox}>
-                  {Array.isArray(interests) && interests.length > 0 ? (
-                    interests.map((area, index) => (
-                      <Text key={index} style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>
+
+                      <Text  style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>
                         {dadosUser.areaInteresseUsuario || "Loading..."}
                       </Text>
-                    ))
-                  ) : (
-                    <Text style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>Loading...</Text>
-                  )}
+
                 </View>
               </View>
 
