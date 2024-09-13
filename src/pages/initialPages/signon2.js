@@ -23,7 +23,7 @@ export default function SignON2({ navigation }) {
   const [areaVagas, setAreaVagas] = useState([]);
   const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
   
-  const apiNgrok = "https://0545-200-53-198-146.ngrok-free.app/api/areavaga";
+  const apiNgrok = "https://165e-200-53-197-8.ngrok-free.app/api/areavaga";
   const apiEmulador = "http://10.0.2.2:8000/api/areavaga";
 
   useEffect(() => {
@@ -89,7 +89,6 @@ export default function SignON2({ navigation }) {
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
             Telefone:
-            <Text>{areaInt}</Text>
           </Text>
           <TextInputMask
             type={"cel-phone"}

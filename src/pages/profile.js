@@ -17,7 +17,7 @@ export default function Profile({ navigation }) {
   const { theme } = useTheme({ Profile });
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
-  const apiNgrok = 'https://ec87-200-53-198-146.ngrok-free.app/api/usuario/'
+  const apiNgrok = 'https://165e-200-53-197-8.ngrok-free.app/api/usuario/'
   const apiEmulador = "http://10.0.2.2:8000/api/usuario/${userId}"
 
   useEffect(() => {

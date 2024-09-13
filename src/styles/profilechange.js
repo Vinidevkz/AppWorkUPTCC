@@ -35,21 +35,41 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
 
+  changeCont: {
+    marginVertical: 10
+  },
+
   textInput: {
     width: 300,
     height: 40,
     borderRadius: 10,
-    backgroundColor: '#707070'
+    borderWidth: 2,
+    borderColor: '#909090',
+    paddingHorizontal: 10,
+  },
+
+  contactCont: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginVertical: 18,
+  },
+
+  contactInput: {
+    borderBottomWidth: 2,
+    borderColor: '#909090',
   },
 
   button: {
     backgroundColor: '#20dd77',
     width: 150,
     alignItems: 'center',
+    alignSelf: 'flex-end',
     justifyContent: 'center',
     padding: 15,
     borderRadius: 20,
     elevation: 5,
+    margin: 10
   }
 
 });
