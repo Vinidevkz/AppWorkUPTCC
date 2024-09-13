@@ -34,23 +34,26 @@ export default function Home({ navigation }) {
   const [heartIcon, setHeartIcon] = useState(true)
   const { theme, toggleTheme } = useTheme({Home});
 
-    useEffect(() => {
-     async function buscaVaga() {
-       try {
-         const response = await axios.get(
-           "https://165e-200-53-197-8.ngrok-free.app/api/vaga/"
-         );
-       setData(response.data);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-         setError(error.message);
-      } finally {
-          setLoading(false);
-        }
-      }
+  const apiNgrok = "https://165e-200-53-197-8.ngrok-free.app/api/vaga";
+  const apiEmulador = "http://10.0.2.2:8000/api/vaga";
 
-      buscaVaga();
-    }, []);
+  const buscaVaga = async () => {
+    setLoading(true); // Inicia o carregamento
+    try {
+      const response = await axios.get(apiEmulador);
+      setData(response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      setError(error.message);
+    } finally {
+      setLoading(false); // Termina o carregamento
+    }
+  };
+
+  // Chama a buscaVaga na primeira renderização
+  useEffect(() => {
+    buscaVaga();
+  }, []);
 
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -103,12 +106,12 @@ export default function Home({ navigation }) {
           <Text style={[styles.title, styles.row, styles.DMSansBold, {color: theme.textColor}]}>
             Vagas para você:
           </Text>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => buscaVaga()}>
             <FontAwesome name="refresh" size={30} color="#20dd77" />
           </TouchableOpacity>
         </View>
 
-        <FlatList
+        {loading ? <View style={{width: '100%', height: 320, alignItems: 'center', justifyContent: 'center'}}><ActivityIndicator size={"large"}></ActivityIndicator></View> :         <FlatList
           horizontal={true}
           data={data}
           style={styles.flatlist}
@@ -156,7 +159,8 @@ export default function Home({ navigation }) {
               </View>
             </View>
           )}
-        />
+        /> }
+
 
         <View style={styles.titleCont}>
           <Text style={[styles.title, styles.DMSansBold, {color: theme.textColor}]}>Outras Vagas:</Text>

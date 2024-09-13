@@ -39,7 +39,7 @@ Route::post('/usuario', [UsuarioController::class, 'store']);
 //Login
 Route::post('/usuario/login', [UsuarioController::class, 'login']);
 //Atualizar dado de um usuario...
-//Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'update'])
+Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'update']);
 
 //API'S ADMIN
 
