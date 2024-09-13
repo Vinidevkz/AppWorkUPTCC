@@ -39,36 +39,19 @@
             <h2>Login</h2>
             <p>Or use your email for registration</p>
 
-            <form method="POST" action="">
-                @csrf
-
-                @error('nomeAdmin')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="nomeAdmin" placeholder="nomeAdmin" value="{{ old('nomeAdmin') }}">
-                 
-                </div>
-
-                @error('usernameAdmin')
-                        <div  style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="text" name="usernameAdmin" placeholder="usernameAdmin" value="{{ old('usernameAdmin') }}">
-                  
-                </div>
-
-
-
-                <a class="btnSignIn" href="/cadastrarVaga" >cadastrar vaga</a>   
-            
-                
-                <button class="btnRegister">
-                    <p >Login</p>
-                </button>
-            </form>
+            <form action="/login" method="POST">
+        @csrf
+        <label for="email">Email:</label>
+        <input type="email" name="email" required placeholder="teste@teste.com">
+        <br>
+        <label for="password">Senha:</label>
+        <input type="password" name="password" required placeholder="123">
+        <br>
+        <button type="submit">Login</button>
+    </form>
+    @if(session('error'))
+        <p>{{ session('error') }}</p>
+    @endif
         </section>
 
     </main>

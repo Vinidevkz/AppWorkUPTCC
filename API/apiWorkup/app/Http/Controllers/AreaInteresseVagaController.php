@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
 use App\Models\AreaVaga;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,9 @@ class AreaVagaController extends Controller
      */
     public function index()
     {
-        $areaVaga = AreaVaga::all();
+        $area = AreaVaga::all();
 
-        return $areaVaga;
+        return $area;
     }
 
     /**

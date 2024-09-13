@@ -123,7 +123,7 @@ export default function Home({ navigation }) {
                   {item.nomeVaga}
                 </Text>
                 <Text style={[styles.corpText, styles.DMSansBold, {color: theme.textColor}]}>
-                  oferecido por: {item.nomeEmpresa}
+                  oferecido por: {item.empresa?.nomeEmpresa}
                 </Text>
                 <Text style={[styles.dateText, styles.DMSansRegular, {color: theme.textColor}]}>
                   publicada em: {item.dataPublicacaoVaga}
@@ -138,6 +138,9 @@ export default function Home({ navigation }) {
                 </Text>
                 <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
                   Cidade: {item.cidadeVaga}
+                </Text>
+                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
+                 AreaVaga: {item.areaVaga?.nomeAreaVaga || 'Não disponível'}
                 </Text>
               </View>
               <View style={styles.vagaFooterCont}>
