@@ -21,25 +21,20 @@ export default function ProfileChange({ navigation }) {
   const { theme } = useTheme();
   const {
     userId,
+    setNome,
+    setUserName,
+    setBio,
+    setAreaInt,
+    setFormacaoUsuario,
+    setTel
   } = useContext(Context);
-
-  // Verifica se os valores do contexto não são undefined
-  if (
-    typeof setNomeUsuario === 'undefined' ||
-    typeof setUsernameUsuario === 'undefined' ||
-    typeof setSobreUsuario === 'undefined' ||
-    typeof setAreaInt === 'undefined' ||
-    typeof setFormacaoUsuario === 'undefined' ||
-    typeof setTel === 'undefined'
-  ) {
-    console.error('Context values are not correctly defined.');
-  }
 
   const [areaVagas, setAreaVagas] = useState([]);
   const [dadosUser, setDadosUser] = useState({});
   const [nomeUsuarioAlterado, setNomeUsuarioAlterado] = useState('');
   const [userNameAlterado, setUsernameAlterado] = useState('');
   const [sobreUsuarioAlterado, setSobreUsuarioAlterado] = useState('');
+  const [nascUsuarioAlterado, setNascUsuarioAlterado] = useState('');
   const [areaIntAlterado, setAreaIntUsuarioAlterado] = useState('');
   const [formacaoCompetenciaUsuarioAlterado, setFormacaoCompetenciaUsuarioAlterado] = useState('');
   const [telAlterado, setTelAlterado] = useState('');
@@ -53,10 +48,10 @@ export default function ProfileChange({ navigation }) {
         const response = await fetch(apiUrl);
         const data = await response.json();
         setDadosUser(data);
-        // Inicializa os estados dos inputs com os dados recebidos
         setNomeUsuarioAlterado(data.nomeUsuario || '');
         setUsernameAlterado(data.usernameUsuario || '');
         setSobreUsuarioAlterado(data.sobreUsuario || '');
+        setNascUsuarioAlterado(data.nascUsuario || '');
         setAreaIntUsuarioAlterado(data.areaInt || '');
         setFormacaoCompetenciaUsuarioAlterado(data.formacaoCompetenciaUsuario || '');
         setTelAlterado(data.contatoUsuario || '');
@@ -84,9 +79,41 @@ export default function ProfileChange({ navigation }) {
     pegarAreaVaga();
   }, []);
 
+  function formatDateToISO(dateString) {
+    if (!dateString) {
+      return ''; // Retorne uma string vazia se a data não for fornecida
+    }
+    
+    const [day, month, year] = dateString.split('/');
+    
+    // Verifique se todos os componentes da data estão presentes
+    if (!day || !month || !year) {
+      return ''; // Retorne uma string vazia ou uma data padrão se algum componente estiver ausente
+    }
+    
+    // Formate a data no formato ISO esperado pelo backend
+    return `${year}-${month}-${day}`;
+  }
+  
+
   const alterarUsuario = async () => {
+    if (!nomeUsuarioAlterado || !userNameAlterado || !sobreUsuarioAlterado || !areaIntAlterado || !nascUsuarioAlterado || !formacaoCompetenciaUsuarioAlterado || !telAlterado) {
+      Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
+      return;
+    }
+  
+    const formattedDate = formatDateToISO(nascUsuarioAlterado);
+    
+    console.log('Data formatada:', formattedDate); // Adicione um log para verificar a data formatada
+    
+    if (!formattedDate) {
+      Alert.alert('Erro', 'Data de nascimento é obrigatória.');
+      return;
+    }
+  
+    const apiUrl = `${apiNgrokUsuario}${userId}`;
     try {
-      const response = await fetch(apiNgrokAlterar, {
+      const response = await fetch(apiUrl, {
         method: 'PUT',
         headers: {
           'Accept': 'application/json',
@@ -96,24 +123,36 @@ export default function ProfileChange({ navigation }) {
           nomeUsuario: nomeUsuarioAlterado,
           usernameUsuario: userNameAlterado,
           sobreUsuario: sobreUsuarioAlterado,
+          nascUsuario: formattedDate,
           areaInt: areaIntAlterado,
           formacaoCompetenciaUsuario: formacaoCompetenciaUsuarioAlterado,
           tel: telAlterado,
         }),
       });
-
+  
       const jsonResponse = await response.json();
-
+      
       if (response.ok) {
         Alert.alert('Sucesso', 'Dados atualizados com sucesso');
+        // Atualize os valores do contexto após a atualização
+        setNome(nomeUsuarioAlterado);
+        setUserName(userNameAlterado);
+        setBio(sobreUsuarioAlterado);
+        setNasc(nascUsuarioAlterado);
+        setAreaInt(areaIntAlterado);
+        setFormacaoUsuario(formacaoCompetenciaUsuarioAlterado);
+        setTel(telAlterado);
       } else {
         Alert.alert('Erro', jsonResponse.message || 'Erro ao atualizar dados');
+        console.log(jsonResponse.message);
       }
     } catch (error) {
       Alert.alert('Erro', 'Erro ao se comunicar com o servidor');
       console.error(error);
     }
   };
+  
+  
 
   return (
     <SafeAreaView style={{ height: '100%', backgroundColor: theme.backgroundColor }}>
@@ -125,7 +164,6 @@ export default function ProfileChange({ navigation }) {
           <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>
             Alterar Perfil
           </Text>
-          <Text>{nomeUsuarioAlterado}</Text>
         </View>
 
         <TouchableOpacity style={styles.button} onPress={alterarUsuario}>
@@ -173,17 +211,21 @@ export default function ProfileChange({ navigation }) {
         <View style={styles.changeCont}>
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
             Data de Nascimento:
+            {nascUsuarioAlterado}
           </Text>
           <TextInputMask
-            type={"datetime"}
-            value={dadosUser.nascUsuario}
-            options={{
-              format: "DD/MM/YYYY",
-            }}
-            placeholder="DD/MM/AAAA"
-            style={[styles.DMSansRegular, styles.textInput, {color: theme.textColor}]}
-            onChangeText={(text) => setNasc(text)}
-          />
+  type={"datetime"}
+  value={nascUsuarioAlterado}
+  options={{
+    format: "DD/MM/YYYY",
+  }}
+  placeholder="DD/MM/AAAA"
+  style={[styles.DMSansRegular, styles.textInput, {color: theme.textColor}]}
+  onChangeText={(text) => {
+    console.log('Valor da data:', text); // Adicione um log para verificar o valor da data
+    setNascUsuarioAlterado(text);
+  }}
+/>
         </View>
         <View style={styles.changeCont}>
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
@@ -215,8 +257,6 @@ export default function ProfileChange({ navigation }) {
             value={formacaoCompetenciaUsuarioAlterado}
             onChangeText={(text) => setFormacaoCompetenciaUsuarioAlterado(text)}
           />
-
-      
         </View>
         <View style={styles.changeCont}>
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
@@ -232,7 +272,6 @@ export default function ProfileChange({ navigation }) {
               onChangeText={(text) => setTelAlterado(text)}
             />
           </View>
-          {/* Adicione os campos de Rede 1 e Rede 2 aqui, se necessário */}
         </View>
       </ScrollView>
     </SafeAreaView>
