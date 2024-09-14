@@ -14,7 +14,7 @@ class VagaController extends Controller
      */
     public function index()
     {
-        $vagas = Vaga::with('empresa','areaInteresseVaga')->get();
+        $vagas = Vaga::with('empresa')->get();
 
         return response()->json($vagas);
     }

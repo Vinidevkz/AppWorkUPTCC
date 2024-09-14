@@ -128,23 +128,24 @@ class UsuarioController extends Controller
                 'nomeUsuario'=>$request->nomeUsuario,
                 'usernameUsuario' => $request->usernameUsuario,
                 'nascUsuario' => $request->nascUsuario,
-                'emailUsuario' => $request->emailUsuario,
-                'senhaUsuario' => $request->senhaUsuario,
+                //'emailUsuario' => $request->emailUsuario,
+                //'senhaUsuario' => $request->senhaUsuario,
                 'areaInteresseUsuario' => $request->areaInteresseUsuario,
                 'contatoUsuario' => $request->contatoUsuario,
-                'fotoUsuario' => $request->fotoUsuario,
-                'cidadeUsuario' => $request->cidadeUsuario,
-                'estadoUsuario' => $request->estadoUsuario,
-                'logradouroUsuario' => $request->logradouroUsuario,
-                'cepUsuario' => $request->cepUsuario,
-                'numeroLograUsuario' => $request->numeroLograUsuario,
+                //'fotoUsuario' => $request->fotoUsuario,
+                //'cidadeUsuario' => $request->cidadeUsuario,
+                //'estadoUsuario' => $request->estadoUsuario,
+                //'logradouroUsuario' => $request->logradouroUsuario,
+                //'cepUsuario' => $request->cepUsuario,
+                //'numeroLograUsuario' => $request->numeroLograUsuario,
                 'sobreUsuario' => $request->sobreUsuario,
                 'formacaoCompetenciaUsuario' => $request->formacaoCompetenciaUsuario,
-                'dataFormacaoCompetenciaUsuario' => $request->dataFormacaoCompetenciaUsuario
+                //'dataFormacaoCompetenciaUsuario' => $request->dataFormacaoCompetenciaUsuario
             ]);
             
         return response()->json(['message'=>'Usuario atualizado com sucesso']);
     }
+    
 
     /**
      * Remove the specified resource from storage.

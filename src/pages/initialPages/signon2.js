@@ -18,18 +18,19 @@ import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState, useEffect } from "react";
 import { Context } from "./context/provider.js";
 
+import ApisUrls from '../../ApisUrls/apisurls.js'
+
 export default function SignON2({ navigation }) {
   const { areaInt, setAreaInt, setTel, setNasc, setCep } = useContext(Context);
   const [areaVagas, setAreaVagas] = useState([]);
   const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
   
-  const apiNgrok = "https://165e-200-53-197-8.ngrok-free.app/api/areavaga";
-  const apiEmulador = "http://10.0.2.2:8000/api/areavaga";
+  const { apiNgrokArea, apiEmuladorArea } = ApisUrls;
 
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const request = await fetch(apiEmulador);
+        const request = await fetch(apiNgrokArea);
         const response = await request.json();
         setAreaVagas(response);
       } catch (error) {

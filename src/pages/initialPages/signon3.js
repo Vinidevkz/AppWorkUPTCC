@@ -17,12 +17,13 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 import useFonts from "../../styles/fontloader/fontloader";
 import { Context } from "./context/provider";
 
+import ApisUrls from '../../ApisUrls/apisurls.js'
+
 export default function SignON3({ navigation }) {
   const {
     nome, setBio, bio, email, senha, areaInt, nasc, cep, tel, userName, setUserId
   } = useContext(Context);
-  const apiNgrok = "https://ec87-200-53-198-146.ngrok-free.app/api/usuario"
-  const apiEmulador = "http://10.0.2.2:8000/api/usuario"
+  const { apiNgrokCad, apiEmuladorCad } = ApisUrls;
   
   const [passwordVisible, setPasswordVisible] = useState(false);
 
@@ -42,7 +43,7 @@ export default function SignON3({ navigation }) {
 
     try {
       const formattedDate = formatDateToISO(nasc);
-      const response = await fetch(apiEmulador, {
+      const response = await fetch(apiNgrokCad, {
         method: 'POST',
         headers: {
           'Accept': 'application/json',

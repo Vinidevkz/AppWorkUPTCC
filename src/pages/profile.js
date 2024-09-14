@@ -13,16 +13,18 @@ import Entypo from "@expo/vector-icons/Entypo";
 import Octicons from '@expo/vector-icons/Octicons';
 import styles from "../styles/profile";
 
+import ApisUrls from '../ApisUrls/apisurls.js'
+
 export default function Profile({ navigation }) {
   const { theme } = useTheme({ Profile });
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
-  const apiNgrok = 'https://165e-200-53-197-8.ngrok-free.app/api/usuario/'
-  const apiEmulador = "http://10.0.2.2:8000/api/usuario/"
+
+  const { apiNgrokId, apiNgrokUsuario } = ApisUrls;
 
   useEffect(() => {
     async function fetchUserData() {
-      const apiUrl = `${apiEmulador}${userId}`;
+      const apiUrl = `${apiNgrokUsuario}${userId}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();

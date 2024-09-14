@@ -42,7 +42,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true); // Inicia o carregamento
     try {
-      const response = await axios.get('http://bba9-200-53-197-8.ngrok-free.app/api/vaga');
+      const response = await axios.get(apiNgrokVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
