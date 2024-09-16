@@ -11,7 +11,7 @@ import {
 import { useTheme } from '../pages/initialPages/context/themecontext';
 import { Context } from '../pages/initialPages/context/provider.js';
 import { Picker } from '@react-native-picker/picker';
-import { TextInputMask } from "react-native-masked-text";
+import { TextInputMask } from 'react-native-masked-text';
 import Ionicons from '@expo/vector-icons/Ionicons';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import styles from '../styles/profilechange.js';
@@ -25,6 +25,9 @@ export default function ProfileChange({ navigation }) {
     setUserName,
     setBio,
     setAreaInt,
+    areaInt,
+    setNasc,
+    nasc,
     setFormacaoUsuario,
     setTel
   } = useContext(Context);
@@ -35,15 +38,15 @@ export default function ProfileChange({ navigation }) {
   const [userNameAlterado, setUsernameAlterado] = useState('');
   const [sobreUsuarioAlterado, setSobreUsuarioAlterado] = useState('');
   const [nascUsuarioAlterado, setNascUsuarioAlterado] = useState('');
-  const [areaIntAlterado, setAreaIntUsuarioAlterado] = useState('');
+  const [areaIntUsuarioAlterado, setAreaIntUsuarioAlterado] = useState('');
   const [formacaoCompetenciaUsuarioAlterado, setFormacaoCompetenciaUsuarioAlterado] = useState('');
   const [telAlterado, setTelAlterado] = useState('');
 
-  const { apiNgrokArea, apiNgrokUsuario, apiNgrokAlterar } = ApisUrls;
+  const { apiNgrokArea, apiNgrokUsuario, apiNgrokAlterar, apiEmuladorUsuario, apiEmuladorArea } = ApisUrls;
 
   useEffect(() => {
     async function fetchUserData() {
-      const apiUrl = `${apiNgrokUsuario}${userId}`;
+      const apiUrl = `${apiEmuladorUsuario}${userId}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -68,7 +71,7 @@ export default function ProfileChange({ navigation }) {
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const response = await fetch(apiNgrokArea);
+        const response = await fetch(apiEmuladorArea);
         const data = await response.json();
         setAreaVagas(data);
       } catch (error) {
@@ -83,25 +86,24 @@ export default function ProfileChange({ navigation }) {
     if (!dateString) {
       return ''; // Retorne uma string vazia se a data não for fornecida
     }
-    
+
     const [day, month, year] = dateString.split('/');
-    
+
     // Verifique se todos os componentes da data estão presentes
     if (!day || !month || !year) {
       return ''; // Retorne uma string vazia ou uma data padrão se algum componente estiver ausente
     }
-    
+
     // Formate a data no formato ISO esperado pelo backend
     return `${year}-${month}-${day}`;
   }
-  
 
   const alterarUsuario = async () => {
-    if (!nomeUsuarioAlterado || !userNameAlterado || !sobreUsuarioAlterado || !areaIntAlterado || !nascUsuarioAlterado || !formacaoCompetenciaUsuarioAlterado || !telAlterado) {
+    if (!nomeUsuarioAlterado.trim() || !userNameAlterado.trim() || !sobreUsuarioAlterado.trim() || !areaIntUsuarioAlterado.trim() || !nascUsuarioAlterado.trim() || !formacaoCompetenciaUsuarioAlterado.trim() || !telAlterado.trim()) {
       Alert.alert('Erro', 'Por favor, preencha todos os campos obrigatórios.');
       return;
     }
-  
+
     const formattedDate = formatDateToISO(nascUsuarioAlterado);
     
     console.log('Data formatada:', formattedDate); // Adicione um log para verificar a data formatada
@@ -110,8 +112,8 @@ export default function ProfileChange({ navigation }) {
       Alert.alert('Erro', 'Data de nascimento é obrigatória.');
       return;
     }
-  
-    const apiUrl = `${apiNgrokUsuario}${userId}`;
+
+    const apiUrl = `${apiEmuladorUsuario}${userId}`;
     try {
       const response = await fetch(apiUrl, {
         method: 'PUT',
@@ -124,12 +126,12 @@ export default function ProfileChange({ navigation }) {
           usernameUsuario: userNameAlterado,
           sobreUsuario: sobreUsuarioAlterado,
           nascUsuario: formattedDate,
-          areaInt: areaIntAlterado,
+          areaInteresseUsuario: areaIntUsuarioAlterado,
           formacaoCompetenciaUsuario: formacaoCompetenciaUsuarioAlterado,
-          tel: telAlterado,
+          contatoUsuario: telAlterado,
         }),
       });
-  
+
       const jsonResponse = await response.json();
       
       if (response.ok) {
@@ -139,7 +141,7 @@ export default function ProfileChange({ navigation }) {
         setUserName(userNameAlterado);
         setBio(sobreUsuarioAlterado);
         setNasc(nascUsuarioAlterado);
-        setAreaInt(areaIntAlterado);
+        setAreaInt(areaIntUsuarioAlterado);
         setFormacaoUsuario(formacaoCompetenciaUsuarioAlterado);
         setTel(telAlterado);
       } else {
@@ -151,8 +153,6 @@ export default function ProfileChange({ navigation }) {
       console.error(error);
     }
   };
-  
-  
 
   return (
     <SafeAreaView style={{ height: '100%', backgroundColor: theme.backgroundColor }}>
@@ -192,11 +192,14 @@ export default function ProfileChange({ navigation }) {
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
             Nome de usuário:
           </Text>
+          <View style={[styles.textInput, styles.DMSansRegular, { flexDirection: 'row', alignItems: 'center', gap: 5,color: theme.textColor }]}>
+            <Text style={{borderRightWidth: 1, borderColor: theme.textColor, padding: 3, color: theme.textColor}}>@</Text>
           <TextInput
-            style={[styles.textInput, styles.DMSansRegular, { color: theme.textColor }]}
+          style={{flex: 1, color: theme.textColor}}
             value={userNameAlterado}
             onChangeText={(text) => setUsernameAlterado(text)}
           />
+          </View>
         </View>
         <View style={styles.changeCont}>
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
@@ -206,33 +209,36 @@ export default function ProfileChange({ navigation }) {
             style={[styles.textInput, styles.DMSansRegular, { color: theme.textColor }]}
             value={sobreUsuarioAlterado}
             onChangeText={(text) => setSobreUsuarioAlterado(text)}
+            multiline={true}
+            textAlignVertical="top"
           />
         </View>
         <View style={styles.changeCont}>
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
             Data de Nascimento:
-            {nascUsuarioAlterado}
+            {nasc}
           </Text>
           <TextInputMask
-  type={"datetime"}
-  value={nascUsuarioAlterado}
-  options={{
-    format: "DD/MM/YYYY",
-  }}
-  placeholder="DD/MM/AAAA"
-  style={[styles.DMSansRegular, styles.textInput, {color: theme.textColor}]}
-  onChangeText={(text) => {
-    console.log('Valor da data:', text); // Adicione um log para verificar o valor da data
-    setNascUsuarioAlterado(text);
-  }}
-/>
+            type={'datetime'}
+            value={nasc}
+            options={{
+              format: 'DD/MM/YYYY', // Exibição no formato DD/MM/YYYY
+            }}
+            placeholder="DD/MM/YYYY"
+            placeholderTextColor={theme.textColor}
+            style={[styles.DMSansRegular, styles.textInput, { color: theme.textColor }]}
+            onChangeText={(text) => {
+              console.log('Valor da data:', text); // Adicione um log para verificar o valor da data
+              setNascUsuarioAlterado(text);
+            }}
+          />
         </View>
         <View style={styles.changeCont}>
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
             Área de Interesse:
           </Text>
           <Picker
-            selectedValue={areaIntAlterado}
+            selectedValue={areaIntUsuarioAlterado}
             style={[styles.inputCont, styles.text, styles.DMSansRegular, { color: theme.textColor }]}
             onValueChange={(itemValue) => setAreaIntUsuarioAlterado(itemValue)}
             mode="dropdown"

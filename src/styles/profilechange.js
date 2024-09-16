@@ -44,11 +44,11 @@ const styles = StyleSheet.create({
 
   textInput: {
     width: 300,
-    height: 40,
+
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#909090',
-    paddingHorizontal: 10,
+    padding: 10,
   },
 
   contactCont: {
