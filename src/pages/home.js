@@ -25,7 +25,7 @@ import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 
 import ApisUrls from '../ApisUrls/apisurls.js'
-const { apiNgrokVaga, apiEmulador } = ApisUrls;
+const { apiNgrokVaga, apiEmulador, apiEmuladorVaga } = ApisUrls;
 
 import styles from "../styles/home";
 
@@ -42,7 +42,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true); // Inicia o carregamento
     try {
-      const response = await axios.get(apiNgrokVaga);
+      const response = await axios.get(apiEmuladorVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

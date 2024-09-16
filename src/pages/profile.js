@@ -20,11 +20,11 @@ export default function Profile({ navigation }) {
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
 
-  const { apiNgrokId, apiNgrokUsuario } = ApisUrls;
+  const { apiNgrokId, apiNgrokUsuario, apiEmuladorUsuario } = ApisUrls;
 
   useEffect(() => {
     async function fetchUserData() {
-      const apiUrl = `${apiNgrokUsuario}${userId}`;
+      const apiUrl = `${apiEmuladorUsuario}${userId}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();

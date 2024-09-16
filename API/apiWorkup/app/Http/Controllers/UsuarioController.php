@@ -161,7 +161,10 @@ class UsuarioController extends Controller
     public function login(Request $request){
 
         // Procura o usuário no banco de dados
-        $usuario = Usuario::where('emailUsuario', '=', $request->input('emailUsuario'), 'or', 'usernameUsuario', '=', $request->input('usernameUsuario'))->first();
+        $usuario = Usuario::where('emailUsuario', '=', $request->input('emailUsuario'))
+                        ->orWhere('usernameUsuario', $request->input('emailUsuario'))
+                        ->get()
+                        ->first();
 
         if($usuario && $request->input('senhaUsuario') == $usuario->senhaUsuario){
             return response()->json($usuario);
