@@ -30,7 +30,15 @@ Route::get('/cadastrarAdmin', function () {
 });
 
 Route::get('/', function () {
-    return view('home');
+    return view('login');
+});
+
+Route::get('/homeAdmin', function () {
+    return view('admin');
+});
+
+Route::get('/homeEmpresa', function () {
+    return view('empresa');
 });
 
 
