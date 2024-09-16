@@ -119,7 +119,7 @@ export default function SignIN({ navigation }) {
             style={{ borderRightWidth: 2, paddingRight: 8 }}
           />
           <TextInput
-            placeholder="Digite seu email"
+            placeholder="Digite seu email ou usuario"
             style={[styles.DMSansRegular, styles.input]}
             onChangeText={(text) => setEmail(text)}
             value={email}
