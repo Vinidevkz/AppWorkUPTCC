@@ -15,10 +15,22 @@ class Vaga extends Model
 
     public $timestamps = false;
 
+    /*
+|--------------------------------------------------------------------------
+|Definindo relacionamento
+|--------------------------------------------------------------------------
+*/
+
     public function empresa()
     {
         return $this->belongsTo(Empresa::class, 'idEmpresa');
     }
+
+/*
+|--------------------------------------------------------------------------
+|Definindo relacionamento
+|--------------------------------------------------------------------------
+*/
 
     public function areaVaga()
     {

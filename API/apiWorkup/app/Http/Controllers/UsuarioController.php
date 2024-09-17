@@ -21,6 +21,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::all();
 
         return $usuario;
+  
     }
 
     /**
@@ -41,6 +42,12 @@ class UsuarioController extends Controller
      */
     public function store(Request $request)
     {
+
+/*
+|--------------------------------------------------------------------------
+Validação
+|--------------------------------------------------------------------------
+*/
 
         $request->validate([
             'nomeUsuario' => 'required|string|max:40',

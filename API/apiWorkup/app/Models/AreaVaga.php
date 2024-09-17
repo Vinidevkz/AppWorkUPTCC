@@ -14,8 +14,17 @@ class AreaVaga extends Model
 
     public $timestamps = false;
 
+/*
+|--------------------------------------------------------------------------
+|Definindo chave primaria
+|--------------------------------------------------------------------------
+*/
     protected $primaryKey = 'idAreaInteresseVaga';
-
+/*
+|--------------------------------------------------------------------------
+|Definindo relacionamento
+|--------------------------------------------------------------------------
+*/
     public function vagasPorArea()
     {
         return $this->hasMany(Vaga::class, 'idAreaInteresseVaga');

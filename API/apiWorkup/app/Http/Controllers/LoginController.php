@@ -6,7 +6,11 @@ use App\Models\Empresa;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Hash;
 
-
+/*
+|--------------------------------------------------------------------------
+validar email e senha pra fazer login
+|--------------------------------------------------------------------------
+*/
 class LoginController extends Controller
 {
 

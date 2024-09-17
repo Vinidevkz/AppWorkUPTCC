@@ -38,6 +38,11 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
+/*
+|--------------------------------------------------------------------------
+Validação
+|--------------------------------------------------------------------------
+*/
 
         $request->validate(
             [

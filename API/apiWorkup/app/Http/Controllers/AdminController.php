@@ -39,6 +39,12 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
+/*
+|--------------------------------------------------------------------------
+Validação
+|--------------------------------------------------------------------------
+*/
+
         $request->validate(
             [
                 'nomeAdmin'  => 'required', 

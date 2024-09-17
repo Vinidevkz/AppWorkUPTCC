@@ -14,6 +14,11 @@ class VagaController extends Controller
      */
     public function index()
     {
+        /*
+|--------------------------------------------------------------------------
+|Definindo para alem de pegar informaçoes de vaga pegar tbm de empresa
+|--------------------------------------------------------------------------
+*/
         $vagas = Vaga::with('empresa')->get();
 
         return response()->json($vagas);
@@ -37,6 +42,12 @@ class VagaController extends Controller
      */
     public function store(Request $request)
     {
+
+/*
+|--------------------------------------------------------------------------
+|Validação
+|--------------------------------------------------------------------------
+*/
 
         $request->validate(
             [

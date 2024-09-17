@@ -13,8 +13,19 @@ class Empresa extends Model
     protected $table = 'tb_empresa';
 
     public $timestamps = false;
+    /*
+|--------------------------------------------------------------------------
+|Definindo chave primaria
+|--------------------------------------------------------------------------
+*/
 
     protected $primaryKey = 'idEmpresa';
+
+/*
+|--------------------------------------------------------------------------
+|Definindo realacionamento
+|--------------------------------------------------------------------------
+*/
 
     public function vagasEmpresas()
     {

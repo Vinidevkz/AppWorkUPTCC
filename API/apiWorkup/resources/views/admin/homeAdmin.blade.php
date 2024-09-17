@@ -1,3 +1,12 @@
+<?php
+
+/*
+|--------------------------------------------------------------------------
+| Precisa ajustar css
+|--------------------------------------------------------------------------
+
+*/
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
   <head>
@@ -11,7 +20,7 @@
 
     <link rel="stylesheet" href="{{url('assets/css/navbarAdmin.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
-    <link rel="stylesheet" href="./styles.css">
+
 
     <title>Administrador | Dashboard</title>
   </head>
@@ -31,17 +40,17 @@
         <h3>Dashboard</h3>
       </a>
 
-      <a href="usuario.php">
+      <a href="/verUsuario">
         <span class="material-symbols-outlined">person</span>
         <h3>Usuários</h3>
       </a>
 
-      <a href="./vagas.php">
+      <a href="/verVaga">
         <span class="material-symbols-outlined">work</span>
         <h3>Vagas </h3>
       </a>
 
-      <a href="">
+      <a href="/verEmpresa">
         <span class="material-symbols-outlined">apartment</span>
         <h3>Empresas</h3>
       </a>
