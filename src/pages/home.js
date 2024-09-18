@@ -9,38 +9,28 @@ import {
   Image,
   StatusBar,
 } from "react-native";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import * as Font from "expo-font";
 import { useTheme } from "../pages/initialPages/context/themecontext";
-import { Context } from "../pages/initialPages/context/provider.js";
-
-//Lib que faz a requisição pra API
 import axios from "axios";
-
-//Libs de ícones
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
-
-import ApisUrls from '../ApisUrls/apisurls.js'
-const { apiNgrokVaga, apiEmulador, apiEmuladorVaga } = ApisUrls;
-
+import ApisUrls from '../ApisUrls/apisurls.js';
+const { apiEmuladorVaga } = ApisUrls;
 import styles from "../styles/home";
 
 export default function Home({ navigation }) {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [saveIcon, setSaveIcon] = useState(true);
-  const [heartIcon, setHeartIcon] = useState(true)
-  const { theme, toggleTheme } = useTheme({Home});
-
-
+  const [savedIcons, setSavedIcons] = useState({});
+  const { theme } = useTheme({ Home });
 
   const buscaVaga = async () => {
-    setLoading(true); // Inicia o carregamento
+    setLoading(true);
     try {
       const response = await axios.get(apiEmuladorVaga);
       setData(response.data);
@@ -48,18 +38,15 @@ export default function Home({ navigation }) {
       console.error("Error fetching data:", error);
       setError(error.message);
     } finally {
-      setLoading(false); // Termina o carregamento
+      setLoading(false);
     }
   };
 
-  // Chama a buscaVaga na primeira renderização
   useEffect(() => {
     buscaVaga();
   }, []);
 
-  //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);
-
   useEffect(() => {
     const loadFonts = async () => {
       await Font.loadAsync({
@@ -79,17 +66,19 @@ export default function Home({ navigation }) {
       </View>
     );
   }
-  //
 
-  // RETORNO DA PÁGINA HOME
+  const toggleSaveIcon = (id) => {
+    setSavedIcons((prev) => ({
+      ...prev,
+      [id]: !prev[id],
+    }));
+  };
+
   return (
-    <SafeAreaView style={[styles.SafeAreaView, {backgroundColor: theme.backgroundColor}]}>
+    <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
       <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
-      <View style={[styles.navbar, {backgroundColor: theme.backgroundColorNavBar}]}>
-        <Image
-          source={theme.WUPLogo}
-          style={styles.WUPstyle}
-        />
+      <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
+        <Image source={theme.WUPLogo} style={styles.WUPstyle} />
         <View style={styles.iconBox}>
           <TouchableOpacity>
             <Ionicons name="chatbubbles" size={30} color={theme.iconColorWhite} />
@@ -100,12 +89,9 @@ export default function Home({ navigation }) {
         </View>
       </View>
 
-      <ScrollView
-        style={styles.ScrollView}
-        showsVerticalScrollIndicator={false}
-      >
+      <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.titleCont2}>
-          <Text style={[styles.title, styles.row, styles.DMSansBold, {color: theme.textColor}]}>
+          <Text style={[styles.title, styles.row, styles.DMSansBold, { color: theme.textColor }]}>
             Vagas para você:
           </Text>
           <TouchableOpacity onPress={() => buscaVaga()}>
@@ -113,63 +99,68 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         </View>
 
-        {loading ? <View style={{width: '100%', height: 320, alignItems: 'center', justifyContent: 'center'}}><ActivityIndicator size={"large"}></ActivityIndicator></View> :         <FlatList
-          horizontal={true}
-          data={data}
-          style={styles.flatlist}
-          keyExtractor={(item) => item.idVaga.toString()} // Ajuste conforme seu dado
-          renderItem={({ item }) => (
-            <View style={[styles.vagaCont, {backgroundColor: theme.backgroundColorNavBar}]}>
-              <View style={styles.vagaHead}>
-                <Text style={[styles.titleVaga, styles.DMSansBold, {color: theme.textColor}]}>
-                  {item.nomeVaga}
-                </Text>
-                <Text style={[styles.corpText, styles.DMSansBold, {color: theme.textColor}]}>
-                  oferecido por: {item.empresa?.nomeEmpresa}
-                </Text>
-                <Text style={[styles.dateText, styles.DMSansRegular, {color: theme.textColor}]}>
-                  publicada em: {item.dataPublicacaoVaga}
-                </Text>
-              </View>
-              <View style={styles.vagaBody}>
-                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
-                  Modalidade: {item.modalidadeVaga}
-                </Text>
-                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
-                  Salário: {item.salarioVaga}
-                </Text>
-                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
-                  Cidade: {item.cidadeVaga}
-                </Text>
-                <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
-                 Área: {item.areaVaga?.nomeAreaVaga || 'Não disponível'}
-                </Text>
-              </View>
-              <View style={styles.vagaFooterCont}>
-                <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
-                  <Text style={[styles.buttonText, styles.DMSansBold]}>
-                    Ver Vaga
+        {loading ? (
+          <View style={{ width: '100%', height: 320, alignItems: 'center', justifyContent: 'center' }}>
+            <ActivityIndicator size={"large"} />
+          </View>
+        ) : (
+          <FlatList
+            horizontal={true}
+            data={data}
+            style={styles.flatlist}
+            keyExtractor={(item) => item.idVaga.toString()}
+            renderItem={({ item }) => (
+              <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
+                <View style={styles.vagaHead}>
+                  <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]}>
+                    {item.nomeVaga}
                   </Text>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  style={styles.addFavButton}
-                  onPress={() => setSaveIcon(!saveIcon)}
-                >
-                  <Ionicons
-                    name={saveIcon ? "bookmark-outline" : "bookmark"}
-                    size={35}
-                    color="#20dd77"
-                  />
-                </TouchableOpacity>
+                  <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>
+                    oferecido por: {item.empresa?.nomeEmpresa}
+                  </Text>
+                  <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>
+                    publicada em: {item.dataPublicacaoVaga}
+                  </Text>
+                </View>
+                <View style={styles.vagaBody}>
+                  <Text style={[styles.descVaga, styles.DMSansBold, { color: theme.textColor }]}>
+                    Modalidade: {item.modalidadeVaga}
+                  </Text>
+                  <Text style={[styles.descVaga, styles.DMSansBold, { color: theme.textColor }]}>
+                    Salário: {item.salarioVaga}
+                  </Text>
+                  <Text style={[styles.descVaga, styles.DMSansBold, { color: theme.textColor }]}>
+                    Cidade: {item.cidadeVaga}
+                  </Text>
+                  <Text style={[styles.descVaga, styles.DMSansBold, { color: theme.textColor }]}>
+                    Área: {item.areaVaga?.nomeAreaVaga || 'Não disponível'}
+                  </Text>
+                </View>
+                <View style={styles.vagaFooterCont}>
+                  <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
+                    <Text style={[styles.buttonText, styles.DMSansBold]}>
+                      Ver Vaga
+                    </Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.addFavButton}
+                    onPress={() => toggleSaveIcon(item.idVaga)} // Chama a função para alternar o estado
+                  >
+                    <Ionicons
+                      name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Usa savedIcons
+                      size={35}
+                      color="#20dd77"
+                    />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </View>
-          )}
-        /> }
-
+            )}
+          />
+        )}
 
         <View style={styles.titleCont}>
-          <Text style={[styles.title, styles.DMSansBold, {color: theme.textColor}]}>Outras Vagas:</Text>
-          <Text style={[styles.text, styles.DMSansRegular, {color: theme.textColor}]}>
+          <Text style={[styles.title, styles.DMSansBold, { color: theme.textColor }]}>Outras Vagas:</Text>
+          <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>
             Veja vagas relacionadas ao que você busca
           </Text>
         </View>
@@ -179,26 +170,26 @@ export default function Home({ navigation }) {
           style={styles.vagasScrollView}
           showsHorizontalScrollIndicator={false}
         >
-          <View style={[styles.vagaCont, {backgroundColor: theme.backgroundColorNavBar}]}>
+          <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
             <View style={styles.vagaHead}>
-              <Text style={[styles.titleVaga, styles.DMSansBold, {color: theme.textColor}]}>
+              <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]}>
                 Analista de Banco de Dados
               </Text>
-              <Text style={[styles.corpText, styles.DMSansBold, {color: theme.textColor}]}>
+              <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>
                 oferecido por: Dynamo.inc
               </Text>
-              <Text style={[styles.dateText, styles.DMSansRegular, {color: theme.textColor}]}>
+              <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>
                 publicado em: 14/05/2024
               </Text>
             </View>
             <View style={styles.vagaBody}>
-              <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
+              <Text style={[styles.descVaga, styles.DMSansBold, { color: theme.textColor }]}>
                 Modalidade: Remoto
               </Text>
-              <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
+              <Text style={[styles.descVaga, styles.DMSansBold, { color: theme.textColor }]}>
                 Salário: a combinar
               </Text>
-              <Text style={[styles.descVaga, styles.DMSansBold, {color: theme.textColor}]}>
+              <Text style={[styles.descVaga, styles.DMSansBold, { color: theme.textColor }]}>
                 Cidade: São Paulo
               </Text>
             </View>
@@ -210,10 +201,10 @@ export default function Home({ navigation }) {
               </TouchableOpacity>
               <TouchableOpacity
                 style={styles.addFavButton}
-                onPress={() => setSaveIcon(!saveIcon)}
+                onPress={() => toggleSaveIcon(1)} // Exemplo de ID fixo
               >
                 <Ionicons
-                  name={saveIcon ? "bookmark-outline" : "bookmark"}
+                  name={savedIcons[1] ? "bookmark" : "bookmark-outline"}
                   size={35}
                   color="#20dd77"
                 />
@@ -223,14 +214,9 @@ export default function Home({ navigation }) {
         </ScrollView>
 
         <View style={styles.titleCont}>
-          <Text style={[styles.title, styles.DMSansBold, {color: theme.textColor}]}>Seu Feed:</Text>
+          <Text style={[styles.title, styles.DMSansBold, { color: theme.textColor }]}>Seu Feed:</Text>
         </View>
 
-        {/* <FlatList
-          data={vaga}
-          renderItem={vagas}
-          keyExtractor={(item) => item.id.toString()} // Substitua 'id' pelo campo único da vaga
-        /> */}
         <View
           style={{
             alignItems: "center",
@@ -238,7 +224,7 @@ export default function Home({ navigation }) {
             width: "100%",
           }}
         >
-          <View style={[styles.postCont, {backgroundColor: theme.backgroundColorNavBar}]}>
+          <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
             <View style={styles.postHeader}>
               <View style={[styles.postIconBox]}>
                 <Image
@@ -247,17 +233,17 @@ export default function Home({ navigation }) {
                 />
               </View>
               <View>
-                <Text style={[styles.DMSansBold, styles.postTile, {color: theme.textColor}]}>
+                <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>
                   Dynamo Inc
                 </Text>
-                <Text style={[styles.DMSansRegular, styles.dateText, {color: theme.textColor}]}>
+                <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
                   publicado em 14/09/2024
                 </Text>
               </View>
             </View>
 
             <View style={styles.postBody}>
-              <Text style={[styles.DMSansRegular, styles.postDesc, {color: theme.textColor}]}>
+              <Text style={[styles.DMSansRegular, styles.postDesc, { color: theme.textColor }]}>
                 Comunicado urgente! Abriremos vagas para desenvolvedores
                 iniciantes na carreira e que estejam estudando nas seguintes
                 áreas: Desenvolvimento de Sistemas Análise em Desenvolvimento de
@@ -272,9 +258,9 @@ export default function Home({ navigation }) {
 
               <View style={styles.optionsCont}>
                 <View style={styles.threeIconsCont}>
-                  <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
+                  {/* <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
                     <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color={theme.iconColorGreen} />
-                  </TouchableOpacity>
+                  </TouchableOpacity> */}
                   <TouchableOpacity>
                     <Ionicons
                       name="chatbubble-ellipses-outline"
@@ -306,10 +292,10 @@ export default function Home({ navigation }) {
                       <FontAwesome name="user" size={30} color="black" />
                     </View>
                     <View>
-                      <Text style={[styles.DMSansBold, styles.comentTitle, {color: theme.textColor}]}>
+                      <Text style={[styles.DMSansBold, styles.comentTitle, { color: theme.textColor }]}>
                         Marcos Antônio
                       </Text>
-                      <Text style={[styles.DMSansRegular, styles.comentDate, {color: theme.textColor}]}>
+                      <Text style={[styles.DMSansRegular, styles.comentDate, { color: theme.textColor }]}>
                         09/04/2024
                       </Text>
                     </View>
@@ -323,7 +309,7 @@ export default function Home({ navigation }) {
                   </TouchableOpacity>
                 </View>
                 <View style={styles.comentDescCont}>
-                  <Text style={[styles.DMSansRegular, styles.comentDesc, {color: theme.textColor}]}>
+                  <Text style={[styles.DMSansRegular, styles.comentDesc, { color: theme.textColor }]}>
                     Boa vaga!
                   </Text>
                 </View>
@@ -332,8 +318,6 @@ export default function Home({ navigation }) {
           </View>
         </View>
       </ScrollView>
-
-
     </SafeAreaView>
   );
 }

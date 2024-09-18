@@ -51,11 +51,15 @@ export default function ProfileChange({ navigation }) {
         const response = await fetch(apiUrl);
         const data = await response.json();
         setDadosUser(data);
+
+        // Converte a data para o formato DD/MM/YYYY
+        const formattedDate = convertDateToDDMMYYYY(data.nascUsuario);
+        
         setNomeUsuarioAlterado(data.nomeUsuario || '');
         setUsernameAlterado(data.usernameUsuario || '');
         setSobreUsuarioAlterado(data.sobreUsuario || '');
-        setNascUsuarioAlterado(data.nascUsuario || '');
-        setAreaIntUsuarioAlterado(data.areaInt || '');
+        setNascUsuarioAlterado(formattedDate || ''); // Usando a data formatada
+        setAreaIntUsuarioAlterado(data.areaInt || ''); // Definindo a área de interesse atual
         setFormacaoCompetenciaUsuarioAlterado(data.formacaoCompetenciaUsuario || '');
         setTelAlterado(data.contatoUsuario || '');
       } catch (error) {
@@ -81,6 +85,13 @@ export default function ProfileChange({ navigation }) {
 
     pegarAreaVaga();
   }, []);
+
+  // Função para converter data do formato YYYY-MM-DD para DD/MM/YYYY
+  function convertDateToDDMMYYYY(dateString) {
+    if (!dateString) return '';
+    const [year, month, day] = dateString.split('-');
+    return `${day}/${month}/${year}`;
+  }
 
   function formatDateToISO(dateString) {
     if (!dateString) {
@@ -125,7 +136,7 @@ export default function ProfileChange({ navigation }) {
           nomeUsuario: nomeUsuarioAlterado,
           usernameUsuario: userNameAlterado,
           sobreUsuario: sobreUsuarioAlterado,
-          nascUsuario: formattedDate,
+          nascUsuario: formattedDate, // Enviando a data no formato correto
           areaInteresseUsuario: areaIntUsuarioAlterado,
           formacaoCompetenciaUsuario: formacaoCompetenciaUsuarioAlterado,
           contatoUsuario: telAlterado,
@@ -192,13 +203,13 @@ export default function ProfileChange({ navigation }) {
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
             Nome de usuário:
           </Text>
-          <View style={[styles.textInput, styles.DMSansRegular, { flexDirection: 'row', alignItems: 'center', gap: 5,color: theme.textColor }]}>
-            <Text style={{borderRightWidth: 1, borderColor: theme.textColor, padding: 3, color: theme.textColor}}>@</Text>
-          <TextInput
-          style={{flex: 1, color: theme.textColor}}
-            value={userNameAlterado}
-            onChangeText={(text) => setUsernameAlterado(text)}
-          />
+          <View style={[styles.textInput, styles.DMSansRegular, { flexDirection: 'row', alignItems: 'center', gap: 5, color: theme.textColor }]}>
+            <Text style={{ borderRightWidth: 1, borderColor: theme.textColor, padding: 3, color: theme.textColor }}>@</Text>
+            <TextInput
+              style={{ flex: 1, color: theme.textColor }}
+              value={userNameAlterado}
+              onChangeText={(text) => setUsernameAlterado(text)}
+            />
           </View>
         </View>
         <View style={styles.changeCont}>
@@ -216,16 +227,15 @@ export default function ProfileChange({ navigation }) {
         <View style={styles.changeCont}>
           <Text style={{ color: theme.textColor, fontFamily: 'DMSans-Regular', fontSize: 18 }}>
             Data de Nascimento:
-            {nasc}
           </Text>
           <TextInputMask
             type={'datetime'}
-            value={nasc}
+            value={nascUsuarioAlterado}
             options={{
               format: 'DD/MM/YYYY', // Exibição no formato DD/MM/YYYY
             }}
             placeholder="DD/MM/YYYY"
-            placeholderTextColor={theme.textColor}
+            placeholderTextColor={'#909090'}
             style={[styles.DMSansRegular, styles.textInput, { color: theme.textColor }]}
             onChangeText={(text) => {
               console.log('Valor da data:', text); // Adicione um log para verificar o valor da data
