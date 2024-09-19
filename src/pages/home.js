@@ -9,7 +9,7 @@ import {
   Image,
   StatusBar,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import * as Font from "expo-font";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import axios from "axios";
@@ -21,6 +21,7 @@ import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from '../ApisUrls/apisurls.js';
 const { apiEmuladorVaga } = ApisUrls;
 import styles from "../styles/home";
+import { Context } from "../pages/initialPages/context/provider";
 
 export default function Home({ navigation }) {
   const [data, setData] = useState(null);
@@ -28,6 +29,8 @@ export default function Home({ navigation }) {
   const [error, setError] = useState(null);
   const [savedIcons, setSavedIcons] = useState({});
   const { theme } = useTheme({ Home });
+
+  const { vagaID, setVagaID } = useContext(Context);
 
   const buscaVaga = async () => {
     setLoading(true);
@@ -137,7 +140,7 @@ export default function Home({ navigation }) {
                   </Text>
                 </View>
                 <View style={styles.vagaFooterCont}>
-                  <TouchableOpacity style={[styles.button, styles.buttonVaga]}>
+                  <TouchableOpacity style={[styles.button, styles.buttonVaga]} onPress={() => {setVagaID(item.idVaga); navigation.navigate('Vaga')}}>
                     <Text style={[styles.buttonText, styles.DMSansBold]}>
                       Ver Vaga
                     </Text>

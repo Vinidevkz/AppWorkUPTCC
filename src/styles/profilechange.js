@@ -49,6 +49,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: '#909090',
     padding: 10,
+    paddingHorizontal: 15
   },
 
   contactCont: {

@@ -204,7 +204,7 @@ export default function ProfileChange({ navigation }) {
             Nome de usuário:
           </Text>
           <View style={[styles.textInput, styles.DMSansRegular, { flexDirection: 'row', alignItems: 'center', gap: 5, color: theme.textColor }]}>
-            <Text style={{ borderRightWidth: 1, borderColor: theme.textColor, padding: 3, color: theme.textColor }}>@</Text>
+            <Text style={{ borderRightWidth: 1, borderColor: theme.textColor, paddingRight: 5, color: theme.textColor }}>@</Text>
             <TextInput
               style={{ flex: 1, color: theme.textColor }}
               value={userNameAlterado}
