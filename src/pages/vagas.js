@@ -1,101 +1,101 @@
 import React from "react";
 import { View, Text, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView, Image } from "react-native";
-import { useState, useEffect } from "react";
-import * as Font from "expo-font";
+import { useState, useContext } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import { Context } from "../pages/initialPages/context/provider";
+import ApisUrls from "../ApisUrls/apisurls.js";
+import { useFocusEffect } from "@react-navigation/native";
+import axios from "axios";
 import styles from "../styles/vagas.js";
+import { useTheme } from "../pages/initialPages/context/themecontext";
 
 export default function Vaga({ navigation }) {
-  // Carregador de fontes
-  const [fontsLoaded, setFontsLoaded] = useState(false);
+  const { theme } = useTheme({ Vaga });
+  const [loading, setLoading] = useState(true);
+  const [infosVaga, setInfosVaga] = useState([]); // Mudei para array
 
-  useEffect(() => {
-    const loadFonts = async () => {
-      await Font.loadAsync({
-        "DMSans-Regular": require("../../assets/fonts/DMSans-Regular.ttf"),
-        "DMSans-Bold": require("../../assets/fonts/DMSans-Bold.ttf"),
-      });
-      setFontsLoaded(true);
-    };
+  const { vagaID } = useContext(Context);
+  const { apiEmuladorVaga } = ApisUrls;
 
-    loadFonts();
-  }, []);
+  const buscaVaga = async () => {
+    setLoading(true);
+    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
+    console.log("URL da API:", apiUrl);
+    try {
+      const response = await axios.get(apiUrl);
+      setInfosVaga(response.data); // Define todos os itens do array
+      console.log("Dados da vaga:", response.data);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-  if (!fontsLoaded) {
+  useFocusEffect(
+    React.useCallback(() => {
+      if (vagaID) {
+        buscaVaga();
+      }
+    }, [vagaID])
+  );
+
+  if (loading) {
     return (
       <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
         <ActivityIndicator size="large" color="#20dd77" />
       </View>
     );
   }
-  //
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
-      <View style={styles.navbar}>
+      <View style={[styles.navbar, {backgroundColor: theme.backgroundColorNavBar}]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b"  />
+          <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
         </TouchableOpacity>
-        <Text style={[styles.DMSansBold, styles.titleVaga]}>Sobre esta vaga</Text>
+        <Text style={[styles.DMSansBold, styles.titleVaga, {color: theme.textColor}]}>Sobre esta vaga</Text>
       </View>
-      <ScrollView style={{ flex: 1, padding: 20, gap: 50 }}>
-
-          <View style={styles.vagaHeader}>
-            <View style={styles.headerTextCont}>
-              <Text style={[styles.DMSansBold, styles.titleVaga]}>
-                Analista de Banco de Dados
-              </Text>
-              <Text style={[styles.DMSansRegular, styles.corpText]}>
-                Oferecido por: Dynamo Inc.
-              </Text>
-              <View style={{paddingVertical: 5}}>
-                <Text style={[styles.DMSansRegular, styles.vagaDateText]}>publicada em 14/05/2024</Text>
-                <Text style={[styles.DMSansRegular, styles.vagaDateText]}>se candidatar até 24/05/2024</Text>
+      <ScrollView style={{ flex: 1, padding: 20, gap: 50, backgroundColor:theme.backgroundColor }}>
+        {infosVaga.map((vaga, index) => (
+          <View key={index} style={styles.infosCont}>
+            <View style={{flexDirection:'row', justifyContent: 'space-between'}}>
+              <View>
+                <Text style={[styles.DMSansBold, styles.titleVaga, {color: theme.textColor}]}>
+                  {vaga.nomeVaga}
+                </Text>
+                <Text style={[styles.DMSansRegular, styles.corpText, {color: theme.textColor}]}>
+                  Oferecido por: {vaga.empresa?.nomeEmpresa}
+                </Text>
+                <View style={{ paddingVertical: 3 }}>
+                  <Text style={[styles.DMSansRegular, styles.vagaDateText, {color: theme.textColor}]}>
+                    publicada em {vaga.dataPublicacaoVaga}
+                  </Text>
+                  <Text style={[styles.DMSansRegular, styles.vagaDateText, {color: theme.textColor}]}>
+                    se candidatar até {vaga.prazoVaga}
+                  </Text>
+                </View>
               </View>
-            </View>
-            <View style={styles.profileIconBox}>
+              <View style={[styles.profileIconBox, {borderColor: theme.textColor}]}>
               <Image
                 source={require("../../assets/icons/dynamo.png")}
                 style={styles.icon}
               />
             </View>
+            </View>
+            <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>
+              Descrição: {vaga.descricaoVaga}
+            </Text>
+            <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Modalidade: {vaga.modalidadeVaga}</Text>
+            <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Salario: {vaga.salarioVaga}</Text>
+            <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Cidade: {vaga.cidadeVaga}, {vaga.estadoVaga}</Text>
           </View>
-          <View style={styles.infosCont}>
-            <Text style={[styles.DMSansBold, styles.title]}>Sobre esta vaga:</Text>
-
-            <Text style={[styles.DMSansRegular, styles.text]}>Descrição: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
-            <Text style={[styles.DMSansBold, styles.text]}>Modalidade: Remoto</Text>
-            <Text style={[styles.DMSansBold, styles.text]}>Salario: a combinar</Text>
-            <Text style={[styles.DMSansBold, styles.text]}>Cidade: São Paulo</Text>
-
-          </View>
-          <View style={styles.infosCont}>
-            <Text style={[styles.DMSansBold, styles.title]}>Responsabilidades:</Text>
-
-            <Text style={[styles.DMSansRegular, styles.text]}>Analisar o Banco</Text>
-            <Text style={[styles.DMSansRegular, styles.text]}>Analisar o Banco</Text>
-            <Text style={[styles.DMSansRegular, styles.text]}>Analisar o Banco</Text>
-          </View>
-          <View style={styles.infosCont}>
-            <Text style={[styles.DMSansBold, styles.title]}>Requisitos:</Text>
-
-            <Text style={[styles.DMSansRegular, styles.text]}>Estar cursando Desenvolvimento de Sistemas ou Ánalise e Desenvolvimento de Sistemas</Text>
-            <Text style={[styles.DMSansRegular, styles.title]}>Será um diferencial: Dominar NOSQL</Text>
-          </View>
-          <View style={styles.infosCont}>
-            <Text style={[styles.DMSansBold, styles.title]}>Benefícios:</Text>
-
-            <Text style={[styles.DMSansRegular, styles.text]}>VA, VT e VR</Text>
-            <Text style={[styles.DMSansRegular, styles.text]}>GYM Pass</Text>
-            <Text style={[styles.DMSansRegular, styles.text]}>Seguro de Vida</Text>
-          </View>
-          <View style={[styles.infosCont, styles.row]}>
-            <TouchableOpacity style={styles.button}>
-              <Text style={[styles.DMSansBold, styles.buttonText]}>Candidatar-se</Text>
-            </TouchableOpacity>
-          </View>
-
+        ))}
+        <View style={[styles.infosCont, styles.row]}>
+          <TouchableOpacity style={styles.button}>
+            <Text style={[styles.DMSansBold, styles.buttonText]}>Candidatar-se</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
