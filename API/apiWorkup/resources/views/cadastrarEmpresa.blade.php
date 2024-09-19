@@ -45,6 +45,13 @@
             <p>Or use your email for registration</p>
 
             <form method="POST" action="/formEmpresa">
+
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
                 @csrf
 
                 @error('usernameEmpresa')

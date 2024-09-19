@@ -16,11 +16,16 @@ class UsuarioController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $usuario = Usuario::all();
 
-        return $usuario;
+        if ($request->ajax()) {
+            return response()->json($usuario); // Retorna JSON se for uma requisição AJAX
+        }
+    
+        // Caso contrário, retorna a view com os usuários
+        return view('admin.usuario.usuarioAdmin', compact('usuario'));
   
     }
 
@@ -102,9 +107,9 @@ Validação
      */
     public function show($id)
     {
-        $usuario = Usuario::where('idUsuario', $id)->get()->first();
+        $usuario = Usuario::where('idUsuario', $id)->firstOrFail(); // Retorna 404 se não encontrar
 
-        return response()->json($usuario);
+        return view('admin.usuario.allusuarioAdmin', compact('usuario')); // Retorna a view com detalhes
     }
 
     /**

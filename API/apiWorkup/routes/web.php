@@ -4,8 +4,10 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\UsuarioController;
 
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -52,9 +54,10 @@ Route::get('/empresa', function () {
 
 */
 
-Route::get('/verUsuario', function () {
-    return view('/admin/usuario/usuarioAdmin');
-});
+
+Route::get('/verUsuario', [UsuarioController::class, 'index']);
+
+Route::get('/usuarios/{id}', [UsuarioController::class, 'show'])->name('usuarios.show');
 
 Route::get('/verVaga', function () {
     return view('/admin/vaga/vagaAdmin');

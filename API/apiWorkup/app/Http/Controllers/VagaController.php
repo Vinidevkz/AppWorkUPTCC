@@ -89,7 +89,7 @@ class VagaController extends Controller
         $vaga->salarioVaga = $request->salarioVaga;
         $vaga->cidadeVaga = $request->cidadeVaga;
         $vaga->estadoVaga = $request->estadoVaga;
-        $vaga->areaVaga = $request->areaVaga;
+        $vaga->idAreaVaga = $request->areaVaga;
         $vaga->beneficiosVaga = $request->beneficiosVaga;
         $vaga->diferencialVaga = $request->diferencialVaga;
         $vaga->idEmpresa = $request->idEmpresa;
@@ -106,7 +106,7 @@ class VagaController extends Controller
         $vaga->salarioVaga = $request->salarioVaga;
         $vaga->cidadeVaga = $request->cidadeVaga;
         $vaga->estadoVaga = $request->estadoVaga;
-        $vaga->areaVaga = $request->areaVaga;
+        $vaga->idAreaVaga = $request->areaVaga;
         $vaga->beneficiosVaga = $request->beneficiosVaga;
         $vaga->diferencialVaga = $request->diferencialVaga;
         $vaga->idEmpresa = $request->idEmpresa;
