@@ -86,7 +86,7 @@ export default function Home({ navigation }) {
           <TouchableOpacity>
             <Ionicons name="chatbubbles" size={30} color={theme.iconColorWhite} />
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.openDrawer()}>
             <Entypo name="menu" size={35} color={theme.iconColorWhite} />
           </TouchableOpacity>
         </View>
@@ -140,7 +140,7 @@ export default function Home({ navigation }) {
                   </Text>
                 </View>
                 <View style={styles.vagaFooterCont}>
-                  <TouchableOpacity style={[styles.button, styles.buttonVaga]} onPress={() => {setVagaID(item.idVaga); navigation.navigate('Vaga')}}>
+                  <TouchableOpacity style={[styles.button, styles.buttonVaga]} onPress={() => {setVagaID(item.idVaga); navigation.navigate('Vagas')}}>
                     <Text style={[styles.buttonText, styles.DMSansBold]}>
                       Ver Vaga
                     </Text>

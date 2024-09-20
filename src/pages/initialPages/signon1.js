@@ -68,14 +68,14 @@ export default function SignON1({navigation}) {
 
       <View style={styles.mainContainer}>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Nome:</Text>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Nome:</Text>
           <TextInput placeholder="Digite seu nome" style={[styles.DMSansRegular, styles.inputCont]}
           onChangeText={(text)=>setNome(text)}
           maxLength={40}
           />
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Nome de usuário:</Text>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Nome de usuário:</Text>
           <TextInput placeholder="Digite seu nome de usuário" style={[styles.DMSansRegular, styles.inputCont]}
           onChangeText={(text)=>setUserName(text)}
           maxLength={40}
@@ -87,7 +87,7 @@ export default function SignON1({navigation}) {
           {emailError ? <Text style={{color: 'red'}}>{emailError}</Text> : null}
         </View>
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Senha:</Text>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Senha:</Text>
           <View style={styles.inputCont}>
           <TextInput placeholder="Crie uma senha" style={[styles.DMSansRegular, styles.inputText]} secureTextEntry={!passwordVisible}
           onChangeText={(text)=>setSenha(text)}

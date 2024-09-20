@@ -106,7 +106,7 @@ export default function SignON3({ navigation }) {
       <View style={styles.mainContainer}>
         <View style={[styles.formCont, styles.row]}>
           <View>
-            <Text style={[styles.DMSansBold, styles.formTitle]}>Foto de Perfil:</Text>
+            <Text style={[styles.DMSansRegular, styles.formTitle]}>Foto de Perfil:</Text>
             <Text style={styles.DMSansRegular}>Selecione uma foto de Perfil: </Text>
           </View>
           <View style={stylesProfile.profileIconBox}>
@@ -118,7 +118,7 @@ export default function SignON3({ navigation }) {
         </View>
 
         <View style={styles.formCont}>
-          <Text style={[styles.DMSansBold, styles.formTitle]}>Biografia:</Text>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Biografia:</Text>
           <TextInput
             placeholder="Escreva uma breve biografia sobre você"
             style={styles.bioCont}

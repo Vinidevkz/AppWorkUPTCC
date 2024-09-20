@@ -7,6 +7,8 @@ import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
+import Drawer from '../routes/drawer.js'
+
 import Home from "../home";
 import Search from "../search";
 import Notifications from "../notifications";
@@ -17,10 +19,10 @@ export default function TabBar() {
   const { theme, toggleTheme } = useTheme({Home});
   return (
     <Tab.Navigator
-      initialRouteName="Home"
+      initialRouteName="Drawer"
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
-          if (route.name === "Home") {
+          if (route.name === "Drawer") {
             return <MaterialCommunityIcons name={'home-variant'} size={size + 4} color={color} />;
           } else if (route.name === "Search") {
             return <Ionicons name={'search'} size={size + 4} color={color} />;
@@ -45,8 +47,8 @@ export default function TabBar() {
       })}
     >
       <Tab.Screen
-        name="Home"
-        component={Home}
+        name="Drawer"
+        component={Drawer}
         options={{ headerShown: false }}
       />
       <Tab.Screen

@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     borderWidth: 3,
     borderColor: '#1b1b1b',
     backgroundColor: '#fff',
-    zIndex: 1,
+
   },
 
   icon: {
