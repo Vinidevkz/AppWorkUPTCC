@@ -3,9 +3,9 @@
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuarioController;
-
 use Illuminate\Support\Facades\Route;
 
 
@@ -16,17 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 */
 
-Route::get('/cadastrarEmpresa', function () {
-    return view('cadastrarEmpresa');
-});
+Route::get('/cadastrarEmpresa', [EmpresaController::class, 'create'])->name('cadastrarEmpresa');
 
-Route::get('/cadastrarVaga', function () {
-    return view('cadastrarVaga');
-});
+Route::get('/cadastrarVaga', [VagaController::class, 'create'])->middleware('auth:empresas')->name('cadastrarVaga');
 
-Route::get('/cadastrarAdmin', function () {
-    return view('cadastrarAdmin');
-});
+Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->middleware('auth:admins')->name('cadastrarAdmin');
 
 /*
 |--------------------------------------------------------------------------
@@ -35,13 +29,9 @@ Route::get('/cadastrarAdmin', function () {
 
 */
 
-Route::get('/', function () {
-    return view('login');
-});
-
 Route::get('/admin', function () {
     return view('/admin/homeAdmin');
-});
+})->middleware('auth:admins');
 
 Route::get('/empresa', function () {
     return view('homeEmpresa');
@@ -105,4 +95,8 @@ Route::post('/formAdmin', [AdminController::class, 'store']);
 
 */
 
-Route::post('/login', [LoginController::class, 'login']);
+Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
+
+Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');

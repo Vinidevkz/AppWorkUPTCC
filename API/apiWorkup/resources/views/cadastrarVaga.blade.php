@@ -9,6 +9,7 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,153 +22,168 @@
             color: red;
             font-size: 0.875rem;
         }
+
         .input-container {
             margin-bottom: 1rem;
         }
+
         .input-container i {
             margin-right: 0.5rem;
         }
+
         .btnRegister a {
             text-decoration: none;
             color: inherit;
         }
     </style>
 </head>
-<body>  
+
+<body>
     <main>
         <section class="cadastro">
             <h1>Site para cadastrar uma nova vaga</h1>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
+                @csrf
+                <input type="submit" class="btn btn-light" value="Sair">
+            </form>
         </section>
         <section class="formulario">
             <h2>Create Account</h2>
             <p>Or use your email for registration</p>
 
+
+
             <form method="POST" action="/formVaga">
                 @csrf
 
                 @error('nomeVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="nomeVaga" placeholder="nomeVaga" value="{{ old('nomeVaga') }}">
-                 
+
                 </div>
 
                 @error('dataPublicacaoVaga')
-                        <div  style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-envelope"></i>
                     <input type="text" name="dataPublicacaoVaga" placeholder="dataPublicacaoVaga" value="{{ old('dataPublicacaoVaga') }}">
-                  
+
                 </div>
 
                 @error('prazoVaga')
-                        <div  style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-credit-card"></i>
                     <input type="text" name="prazoVaga" placeholder="prazoVaga" value="{{ old('prazoVaga') }}">
-                    
+
                 </div>
 
                 @error('modalidadeVaga')
-                        <div  style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-solid fa-lock"></i>
                     <input type="text" name="modalidadeVaga" placeholder="modalidadeVaga" value="{{ old('modalidadeVaga') }}">
-                   
+
                 </div>
 
                 @error('salarioVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
 
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="salarioVaga" placeholder="salarioVaga" value="{{ old('salarioVaga') }}">
-                 
+
                 </div>
 
 
                 @error('cidadeVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="cidadeVaga" placeholder="cidadeVaga" value="{{ old('cidadeVaga') }}">
-                 
+
                 </div>
 
 
                 @error('estadoVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="estadoVaga" placeholder="estadoVaga" value="{{ old('estadoVaga') }}">
-                 
+
                 </div>
 
 
                 @error('areaVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="areaVaga" placeholder="areaVaga" value="{{ old('areaVaga') }}">
-                 
+
                 </div>
 
                 @error('beneficiosVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
 
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="beneficiosVaga" placeholder="beneficiosVaga" value="{{ old('beneficiosVaga') }}">
-                 
+
                 </div>
 
 
                 @error('diferencialVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="diferencialVaga" placeholder="diferencialVaga" value="{{ old('diferencialVaga') }}">
-                 
+
                 </div>
 
                 @error('idEmpresa')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
-            
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="idEmpresa" placeholder="idEmpresa" value="{{ old('idEmpresa') }}">
-                 
+
                 </div>
 
                 @error('idStatusVaga')
-                        <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                    @enderror
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="idStatusVaga" placeholder="idStatusVaga" value="{{ old('idStatusVaga') }}">
-                 
+
                 </div>
 
 
-            
-                
+
+
                 <button class="btnRegister">
-                    <p >Register</p>
+                    <p>Register</p>
                 </button>
+
+
+
             </form>
         </section>
     </main>
 </body>
+
 </html>

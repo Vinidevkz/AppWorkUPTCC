@@ -6,6 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
 use App\Models\AreaVaga;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Vaga extends Model
 {
@@ -21,7 +24,7 @@ class Vaga extends Model
 |--------------------------------------------------------------------------
 */
 
-    public function empresa()
+    public function empresa() : BelongsTo
     {
         return $this->belongsTo(Empresa::class, 'idEmpresa');
     }
@@ -32,8 +35,13 @@ class Vaga extends Model
 |--------------------------------------------------------------------------
 */
 
-    public function areaVaga()
+    public function areaVaga() : BelongsTo
     {
         return $this->belongsTo(AreaVaga::class, 'idAreaVaga');
     }
+
+    // public function usuarios() : BelongsToMany
+    // {
+    //     return $this->belongsToMany(Usuario::class, 'tb_vagausuario', 'idVaga', 'idUsuario');
+    // }
 }

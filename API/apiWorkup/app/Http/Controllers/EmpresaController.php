@@ -27,7 +27,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrarEmpresa');
     }
 
     /**
@@ -38,7 +38,7 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-/*
+        /*
 |--------------------------------------------------------------------------
 Validação
 |--------------------------------------------------------------------------
@@ -46,33 +46,33 @@ Validação
 
         $request->validate(
             [
-                'usernameEmpresa'  => 'required', 
-                'nomeEmpresa' => 'required|', 
-                'sobreEmpresa'=>'required',
-                'atuacaoEmpresa'=>'required',
-                'cnpjEmpresa'=>'required',
-                'contatoEmpresa'=>'required',
-                'senhaEmpresa'=>'required',
-                'cidadeEmpresa'=>'required',
-                'estadoEmpresa'=>'required',
-                'LogradouroEmpresa'=>'required',
-                'cepEmpresa'=>'required',
-                'numeroLograEmpresa'=>'required',
+                'usernameEmpresa'  => 'required',
+                'nomeEmpresa' => 'required|',
+                'sobreEmpresa' => 'required',
+                'atuacaoEmpresa' => 'required',
+                'cnpjEmpresa' => 'required',
+                'contatoEmpresa' => 'required',
+                'senhaEmpresa' => 'required',
+                'cidadeEmpresa' => 'required',
+                'estadoEmpresa' => 'required',
+                'LogradouroEmpresa' => 'required',
+                'cepEmpresa' => 'required',
+                'numeroLograEmpresa' => 'required',
             ],
             [
                 'usernameEmpresa.required'  => 'Digite um APELIDO',
-                'nomeEmpresa.required' => 'Digite um nome', 
-                'sobreEmpresa.required' =>'Digite sobre a empresa',
-                'atuacaoEmpresa.required' =>'Digite a area de atuação',
-                'cnpjEmpresa.required' =>'Digite um cnpj',
-                'contatoEmpresa.required' =>'Digite um contato',
-                'senhaEmpresa.required' =>'Digite uma senha',
-                'cidadeEmpresa.required' =>'Digite uma cidade',
-                'estadoEmpresa.required' =>'Digite um estado',
-                'LogradouroEmpresa.required' =>'Digite um logradouro',
-                'cepEmpresa.required' =>'Digite um cep',
-                'numeroLograEmpresa.required' =>'Digite um numero',
-                ]
+                'nomeEmpresa.required' => 'Digite um nome',
+                'sobreEmpresa.required' => 'Digite sobre a empresa',
+                'atuacaoEmpresa.required' => 'Digite a area de atuação',
+                'cnpjEmpresa.required' => 'Digite um cnpj',
+                'contatoEmpresa.required' => 'Digite um contato',
+                'senhaEmpresa.required' => 'Digite uma senha',
+                'cidadeEmpresa.required' => 'Digite uma cidade',
+                'estadoEmpresa.required' => 'Digite um estado',
+                'LogradouroEmpresa.required' => 'Digite um logradouro',
+                'cepEmpresa.required' => 'Digite um cep',
+                'numeroLograEmpresa.required' => 'Digite um numero',
+            ]
         );
         $empresa = new Empresa;
 
@@ -85,7 +85,7 @@ Validação
         $empresa->cnpjEmpresa = $request->cnpjEmpresa;
         $empresa->contatoEmpresa = $request->contatoEmpresa;
         $empresa->senhaEmpresa = Hash::make($request->senhaEmpresa);
-        $empresa->cidadeEmpresa	 = $request->cidadeEmpresa;
+        $empresa->cidadeEmpresa     = $request->cidadeEmpresa;
         $empresa->estadoEmpresa = $request->estadoEmpresa;
         $empresa->LogradouroEmpresa = $request->LogradouroEmpresa;
         $empresa->cepEmpresa = $request->cepEmpresa;

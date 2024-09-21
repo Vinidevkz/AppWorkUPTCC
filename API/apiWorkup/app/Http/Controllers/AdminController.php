@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller
 {
@@ -27,7 +28,8 @@ class AdminController extends Controller
      */
     public function create()
     {
-        //
+        Log::info('Accessing cadastrarAdmin view');
+        return view('cadastrarAdmin');
     }
 
     /**
@@ -39,7 +41,7 @@ class AdminController extends Controller
     public function store(Request $request)
     {
 
-/*
+        /*
 |--------------------------------------------------------------------------
 Validação
 |--------------------------------------------------------------------------
@@ -47,21 +49,21 @@ Validação
 
         $request->validate(
             [
-                'nomeAdmin'  => 'required', 
-                'usernameAdmin' => 'required|', 
-                'emailAdmin'=>'required',
-                'contatoAdmin'=>'required',
-                'senhaAdmin'=>'required',
+                'nomeAdmin'  => 'required',
+                'usernameAdmin' => 'required|',
+                'emailAdmin' => 'required',
+                'contatoAdmin' => 'required',
+                'senhaAdmin' => 'required',
 
             ],
             [
                 'nomeAdmin.required'  => 'Digite um nome',
-                'usernameAdmin.required' => 'Digite um apelido', 
-                'emailAdmin.required' =>'Digite um email',
-                'contatoAdmin.required' =>'Digite um contato',
-                'senhaAdmin.required' =>'Digite uma senha',
+                'usernameAdmin.required' => 'Digite um apelido',
+                'emailAdmin.required' => 'Digite um email',
+                'contatoAdmin.required' => 'Digite um contato',
+                'senhaAdmin.required' => 'Digite uma senha',
 
-                ]
+            ]
         );
         $admin = new Admin;
 
@@ -72,8 +74,8 @@ Validação
         $admin->senhaAdmin = Hash::make($request->senhaAdmin);
         $admin->fotoAdmin = $request->fotoAdmin;
 
-        $admin -> save();
-        return view('home');
+        $admin->save();
+        return view('admin.homeAdmin');
     }
 
     /**

@@ -31,7 +31,7 @@ class VagaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrarVaga');
     }
 
     /**
@@ -43,7 +43,7 @@ class VagaController extends Controller
     public function store(Request $request)
     {
 
-/*
+        /*
 |--------------------------------------------------------------------------
 |Validação
 |--------------------------------------------------------------------------
@@ -51,33 +51,33 @@ class VagaController extends Controller
 
         $request->validate(
             [
-                'nomeVaga'  => 'required', 
-                'dataPublicacaoVaga' => 'required|', 
-                'prazoVaga'=>'required',
-                'modalidadeVaga'=>'required',
-                'salarioVaga'=>'required',
-                'cidadeVaga'=>'required',
-                'estadoVaga'=>'required',
-                'areaVaga'=>'required',
-                'beneficiosVaga'=>'required',
-                'diferencialVaga'=>'required',
-                'idEmpresa'=>'required',
-                'idStatusVaga'=>'required',
+                'nomeVaga'  => 'required',
+                'dataPublicacaoVaga' => 'required|',
+                'prazoVaga' => 'required',
+                'modalidadeVaga' => 'required',
+                'salarioVaga' => 'required',
+                'cidadeVaga' => 'required',
+                'estadoVaga' => 'required',
+                'areaVaga' => 'required',
+                'beneficiosVaga' => 'required',
+                'diferencialVaga' => 'required',
+                'idEmpresa' => 'required',
+                'idStatusVaga' => 'required',
             ],
             [
                 'nomeVaga.required'  => 'Digite um nome para continuar',
-                'dataPublicacaoVaga.required' => 'Digite uma data', 
-                'prazoVaga.required' =>'Digite um prazo',
-                'modalidadeVaga.required' =>'Digite uma modalidade',
-                'salarioVaga.required' =>'Digite um salario',
-                'cidadeVaga.required' =>'Digite uma cidade',
-                'estadoVaga.required' =>'Digite um estado',
-                'areaVaga.required' =>'Digite uma area',
-                'beneficiosVaga.required' =>'Digite um beneficio',
-                'diferencialVaga.required' =>'Digite um diferencal',
-                'idEmpresa.required' =>'Digite o id da empresa',
-                'idStatusVaga.required' =>'Digite um id vaga',
-                ]
+                'dataPublicacaoVaga.required' => 'Digite uma data',
+                'prazoVaga.required' => 'Digite um prazo',
+                'modalidadeVaga.required' => 'Digite uma modalidade',
+                'salarioVaga.required' => 'Digite um salario',
+                'cidadeVaga.required' => 'Digite uma cidade',
+                'estadoVaga.required' => 'Digite um estado',
+                'areaVaga.required' => 'Digite uma area',
+                'beneficiosVaga.required' => 'Digite um beneficio',
+                'diferencialVaga.required' => 'Digite um diferencal',
+                'idEmpresa.required' => 'Digite o id da empresa',
+                'idStatusVaga.required' => 'Digite um id vaga',
+            ]
         );
 
         $vaga = new Vaga;
@@ -97,7 +97,7 @@ class VagaController extends Controller
 
         $vaga->save();
 
-                $vaga = new Vaga;
+        $vaga = new Vaga;
 
         $vaga->nomeVaga = $request->nomeVaga;
         $vaga->dataPublicacaoVaga = $request->dataPublicacaoVaga;
@@ -114,7 +114,6 @@ class VagaController extends Controller
 
         $vaga->save();
         return view('home');
-        
     }
 
     /**
