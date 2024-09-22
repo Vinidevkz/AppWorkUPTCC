@@ -2,79 +2,120 @@
 
 /*
 |--------------------------------------------------------------------------
-| Precisa editar
+| Precisa ajustar css
 |--------------------------------------------------------------------------
 
 */
 ?>
-<?php 
-session_start(); 
-require './conexao.php';
-?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <link rel="stylesheet" href="./componentes/css-componentes/navbar.css">
-  <title>Administrador | Editar Usuário</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
+    <style>
+        .error-message {
+            color: red;
+            font-size: 0.875rem;
+        }
+
+        .input-container {
+            margin-bottom: 1rem;
+        }
+
+        .input-container i {
+            margin-right: 0.5rem;
+        }
+
+        .btnRegister a {
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
 </head>
 
 <body>
-  <!-- NAVBAR -->
-  <?php include('./componentes/navbar.php'); ?>
 
-  <div class="container">
-    <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header">
-            <h4>Editar Usuário</h4>
-            <a href="./usuario.php" class="btn btn-danger float-end">Voltar</a>
-          </div>
-          <div class="card-body">
-            <?php 
-            if (isset($_GET['id'])) {
-              $user_id = mysqli_real_escape_string($conection, $_GET['id']);
-              $sql = "SELECT * FROM tb_Usuario WHERE idUsuario = '$user_id'";
-              $query = mysqli_query($conection, $sql);
 
-              if (mysqli_num_rows($query) > 0) {
-                $user = mysqli_fetch_array($query);
-            ?>
-            <form action="./acoes.php" method="post">
-              <input type="hidden" name="usuario_id" value="<?= $user['idUsuario']; ?>">
-              <div class="mb-3">
-                <label for="nome">Nome</label>
-                <input type="text" name="nomeUsuario" id="nome" value="<?= $user['nomeUsuario']; ?>" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <label for="email">E-mail</label>
-                <input type="email" name="emailUsuario" id="email" value="<?= $user['emailUsuario']; ?>" class="form-control" required>
-              </div>
-              <div class="mb-3">
-                <button type="submit" name="update_usuario" class="btn btn-primary">Salvar</button>
-              </div>
+    <main>
+
+
+
+
+        <section class="formulario">
+            <h2>Create Account</h2>
+            <p>Or use your email for registration</p>
+
+            <form method="POST" action="{{ route('usuarios.update', $usuario->idUsuario) }}">
+                @csrf
+                @method('PUT')
+
+                @error('nomeUsuario')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="nomeUsuario" placeholder="{{ $usuario->nomeUsuario }}" value="{{ $usuario->nomeUsuario }}">
+
+                </div>
+
+                @error('usernameUsuario')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="text" name="usernameUsuario" placeholder="{{ $usuario->usernameUsuario }}" value="{{ $usuario->usernameUsuario }}">
+
+                </div>
+
+                @error('nascUsuario')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-regular fa-credit-card"></i>
+                    <input type="text" name="nascUsuario" placeholder="{{ $usuario->nascUsuario }}" value="{{ $usuario->nascUsuario }}">
+
+                </div>
+
+                @error('areaInteresseUsuario')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="text" name="areaInteresseUsuario" placeholder="{{ $usuario->areaInteresseUsuario }}" value="{{ $usuario->areaInteresseUsuario }}">
+
+                </div>
+
+                @error('contatoUsuario')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="contatoUsuario" placeholder="{{ $usuario->contatoUsuario }}" value="{{ $usuario->contatoUsuario }}">
+
+                </div>
+
+
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="sobreUsuario" placeholder="{{ $usuario->sobreUsuario }}" value="{{ $usuario->sobreUsuario }}">
+                </div>
+
+
+
+                <button class="btnRegister">
+                    <p>Register</p>
+                </button>
+
+
             </form>
-            <?php } 
-            } else {
-              echo '<h5>Usuário não encontrado</h5>';
-            }
-            ?>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <script src="script.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+        </section>
+    </main>
 </body>
 
 </html>

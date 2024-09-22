@@ -50,6 +50,8 @@ class Empresa extends Authenticatable
         'numeroLograEmpresa',
     ];
 
+    
+
 }
 
 

@@ -8,8 +8,10 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="{{ url('assets/css/navbarAdmin.css') }}">
   <link rel="stylesheet" href="{{ url('assets/css/admin.css') }}">
+  
   <title>Administrador | Usuários</title>
 </head>
+
 <body>
 <nav class="navbar">
   <div class="d-flex align-items-center justify-content-center">
@@ -26,15 +28,15 @@
               <span class="material-symbols-outlined">grid_view</span>
               <h3>Dashboard</h3>
             </a>
-            <a href="usuario.php">
+            <a href="/verUsuario">
               <span class="material-symbols-outlined">person</span>
               <h3>Usuários</h3>
             </a>
-            <a href="./vagas.php">
+            <a href="./verVaga">
               <span class="material-symbols-outlined">work</span>
               <h3>Vagas</h3>
             </a>
-            <a href="">
+            <a href="/verEmpresa">
               <span class="material-symbols-outlined">apartment</span>
               <h3>Empresas</h3>
             </a>
@@ -73,14 +75,14 @@
                 </tr>
               </thead>
               <tbody>
-                @forelse($usuario as $u) <!-- Usando um alias diferente -->
+                @forelse($usuarios as $u) <!-- Usando um alias diferente -->
                   <tr>
                     <td>{{ $u->idUsuario }}</td>
                     <td>{{ $u->nomeUsuario }}</td>
                     <td>{{ $u->usernameUsuario }}</td>
                     <td>
                       <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
-                      <a href="" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
+                      <a href="{{ route('usuarios.edit', $u->idUsuario) }}" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
                       <form action="" method="post" class="d-inline">
                         @csrf
                         @method('DELETE')

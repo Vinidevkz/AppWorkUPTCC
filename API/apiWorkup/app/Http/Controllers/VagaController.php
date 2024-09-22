@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Vaga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class VagaController extends Controller
 {
@@ -12,16 +13,22 @@ class VagaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         /*
 |--------------------------------------------------------------------------
 |Definindo para alem de pegar informaçoes de vaga pegar tbm de empresa
 |--------------------------------------------------------------------------
 */
-        $vagas = Vaga::with('empresa')->get();
 
-        return response()->json($vagas);
+$vagas = Vaga::with('empresa')->get();
+
+if ($request->ajax()) {
+    return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
+}
+
+// Caso contrário, retorna a view com os usuários
+return view('admin.vaga.vagaAdmin', compact('vagas'));
     }
 
     /**
@@ -124,9 +131,9 @@ class VagaController extends Controller
      */
     public function show($id)
     {
-        $vaga = Vaga::where('idVaga', $id)->get();
+        $vaga = Vaga::where('idVaga', $id)->firstOrFail(); // Retorna 404 se não encontrar
 
-        return $vaga;
+        return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
     }
 
     /**
@@ -137,7 +144,8 @@ class VagaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vaga = Vaga::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404
+        return view('admin.vaga.vagaEditarAdmin', compact('vaga')); // Passa o usuário para a view
     }
 
     /**
@@ -149,7 +157,28 @@ class VagaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vaga = Vaga::where('idVaga', $id)->get()->first();
+
+        DB::table('tb_vaga')
+            ->where('idVaga', $id)
+            ->update([
+                'nomeVaga' => $request->nomeVaga,
+                'modalidadeVaga' => $request->modalidadeVaga,
+                'estadoVaga' => $request->estadoVaga,
+
+            ]);
+
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Vaga atualizado com sucesso']); // Retorna JSON se for uma requisição AJAX
+        }
+
+        // Caso contrário, retorna a view com os usuários
+
+        $vaga = Vaga::findOrFail($id);
+        $vaga->update($request->all());
+    
+        // Redirecionar para a lista de usuários
+        return redirect('/verVaga')->with('success', 'Vaga atualizado com sucesso.');
     }
 
     /**

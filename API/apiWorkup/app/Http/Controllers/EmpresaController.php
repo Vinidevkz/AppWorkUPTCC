@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class EmpresaController extends Controller
 {
@@ -13,11 +14,16 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $empresa = Empresa::all();
+        $empresas = Empresa::all();
 
-        return $empresa;
+        if ($request->ajax()) {
+            return response()->json($empresas); // Retorna JSON se for uma requisição AJAX
+        }
+
+        // Caso contrário, retorna a view com os usuários
+        return view('admin.empresa.empresaAdmin', compact('empresas'));
     }
 
     /**
@@ -103,9 +109,9 @@ Validação
      */
     public function show($id)
     {
-        $empresa = Empresa::where('idEmpresa', $id)->get();
+        $empresa = Empresa::where('idEmpresa', $id)->firstOrFail(); // Retorna 404 se não encontrar
 
-        return $empresa;
+        return view('admin.empresa.allempresaAdmin', compact('empresa')); // Retorna a view com detalhes
     }
 
     /**
@@ -116,7 +122,8 @@ Validação
      */
     public function edit($id)
     {
-        //
+        $empresa = Empresa::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404
+        return view('admin.empresa.empresaEditarAdmin', compact('empresa')); // Passa o usuário para a view
     }
 
     /**
@@ -128,7 +135,31 @@ Validação
      */
     public function update(Request $request, $id)
     {
-        //
+        $empresa = Empresa::where('idEmpresa', $id)->get()->first();
+
+        DB::table('tb_empresa')
+            ->where('idEmpresa', $id)
+            ->update([
+                'nomeEmpresa' => $request->nomeEmpresa,
+                'usernameEmpresa' => $request->usernameEmpresa,
+                'emailEmpresa' => $request->emailEmpresa,
+                'atuacaoEmpresa' => $request->atuacaoEmpresa,
+                'contatoEmpresa' => $request->contatoEmpresa,
+                'sobreEmpresa' => $request->sobreEmpresa,
+
+            ]);
+
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Empresa atualizado com sucesso']); // Retorna JSON se for uma requisição AJAX
+        }
+
+        // Caso contrário, retorna a view com os usuários
+
+        $empresas = Empresa::findOrFail($id);
+        $empresas->update($request->all());
+    
+        // Redirecionar para a lista de usuários
+        return redirect('/verEmpresa')->with('success', 'Empresa atualizado com sucesso.');
     }
 
     /**

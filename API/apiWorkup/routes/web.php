@@ -22,16 +22,25 @@ Route::get('/cadastrarVaga', [VagaController::class, 'create'])->middleware('aut
 
 Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->middleware('auth:admins')->name('cadastrarAdmin');
 
+Route::post('/formVaga', [VagaController::class, 'store']);
+
+Route::post('/formEmpresa', [EmpresaController::class, 'store']);
+
+Route::post('/formAdmin', [AdminController::class, 'store']);
+
 /*
 |--------------------------------------------------------------------------
 | paginas de home
 |--------------------------------------------------------------------------
 
 */
+// Admin
 
 Route::get('/admin', function () {
     return view('/admin/homeAdmin');
 })->middleware('auth:admins');
+
+// Empresa
 
 Route::get('/empresa', function () {
     return view('homeEmpresa');
@@ -44,18 +53,22 @@ Route::get('/empresa', function () {
 
 */
 
-
+// Usuario
 Route::get('/verUsuario', [UsuarioController::class, 'index']);
 
 Route::get('/usuarios/{id}', [UsuarioController::class, 'show'])->name('usuarios.show');
 
-Route::get('/verVaga', function () {
-    return view('/admin/vaga/vagaAdmin');
-});
+// Empresa
 
-Route::get('/verEmpresa', function () {
-    return view('/admin/empresa/empresaAdmin');
-});
+Route::get('/verEmpresa', [EmpresaController::class, 'index']);
+
+Route::get('/empresas/{id}', [EmpresaController::class, 'show'])->name('empresas.show');
+
+// Vaga
+
+Route::get('/verVaga', [VagaController::class, 'index']);
+
+Route::get('/vagas/{id}', [VagaController::class, 'show'])->name('vagas.show');
 
 /*
 |--------------------------------------------------------------------------
@@ -63,30 +76,20 @@ Route::get('/verEmpresa', function () {
 |--------------------------------------------------------------------------
 
 */
-Route::get('/editarUsuario', function () {
-    return view('/admin/usuario/usuarioEditarAdmin');
-});
+// Usuario
+Route::get('/usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
 
-Route::get('/editarVaga', function () {
-    return view('/admin/vaga/vagaEditarAdmin');
-});
+Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
 
-Route::get('/editarEmpresa', function () {
-    return view('/admin/empresa/empresaEditarAdmin');
-});
+// Empresa
+Route::get('/Empresas/{id}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
 
+Route::put('/Empresas/{id}', [EmpresaController::class, 'update'])->name('empresas.update');
 
-/*
-|--------------------------------------------------------------------------
-| formularios de cadastros
-|--------------------------------------------------------------------------
+//Vaga
+Route::get('/Vagas/{id}/edit', [VagaController::class, 'edit'])->name('vagas.edit');
 
-*/
-Route::post('/formVaga', [VagaController::class, 'store']);
-
-Route::post('/formEmpresa', [EmpresaController::class, 'store']);
-
-Route::post('/formAdmin', [AdminController::class, 'store']);
+Route::put('/Vagas/{id}', [VagaController::class, 'update'])->name('vagas.update');
 
 /*
 |--------------------------------------------------------------------------

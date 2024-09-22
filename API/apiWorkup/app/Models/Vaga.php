@@ -16,6 +16,8 @@ class Vaga extends Model
 
     protected $table = 'tb_vaga';
 
+    protected $primaryKey = 'idVaga';
+
     public $timestamps = false;
 
     /*
@@ -44,4 +46,13 @@ class Vaga extends Model
     // {
     //     return $this->belongsToMany(Usuario::class, 'tb_vagausuario', 'idVaga', 'idUsuario');
     // }
+
+    public $fillable = [
+        'nomeVaga',
+        'modalidadeVaga',
+        'estadoVaga',
+
+    ];
 }
+
+

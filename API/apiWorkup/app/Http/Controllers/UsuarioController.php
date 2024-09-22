@@ -18,14 +18,14 @@ class UsuarioController extends Controller
      */
     public function index(Request $request)
     {
-        $usuario = Usuario::all();
+        $usuarios = Usuario::all();
 
         if ($request->ajax()) {
-            return response()->json($usuario); // Retorna JSON se for uma requisição AJAX
+            return response()->json($usuarios); // Retorna JSON se for uma requisição AJAX
         }
 
         // Caso contrário, retorna a view com os usuários
-        return view('admin.usuario.usuarioAdmin', compact('usuario'));
+        return view('admin.usuario.usuarioAdmin', compact('usuarios'));
     }
 
     /**
@@ -121,8 +121,10 @@ Validação
      */
     public function edit($id)
     {
-        //
+        $usuario = Usuario::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404
+        return view('admin.usuario.usuarioEditarAdmin', compact('usuario')); // Passa o usuário para a view
     }
+    
 
     /**
      * Update the specified resource in storage.
@@ -152,11 +154,22 @@ Validação
                 //'cepUsuario' => $request->cepUsuario,
                 //'numeroLograUsuario' => $request->numeroLograUsuario,
                 'sobreUsuario' => $request->sobreUsuario,
-                'formacaoCompetenciaUsuario' => $request->formacaoCompetenciaUsuario,
+                // 'formacaoCompetenciaUsuario' => $request->formacaoCompetenciaUsuario,
                 //'dataFormacaoCompetenciaUsuario' => $request->dataFormacaoCompetenciaUsuario
             ]);
 
-        return response()->json(['message' => 'Usuario atualizado com sucesso']);
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Usuario atualizado com sucesso']); // Retorna JSON se for uma requisição AJAX
+        }
+
+        // Caso contrário, retorna a view com os usuários
+
+        $usuario = Usuario::findOrFail($id);
+        $usuario->update($request->all());
+    
+        // Redirecionar para a lista de usuários
+        return redirect('/verUsuario')->with('success', 'Usuário atualizado com sucesso.');
+    
     }
 
 
