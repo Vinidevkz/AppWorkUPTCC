@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
+use App\Models\AreaEmpresa;
 use Illuminate\Http\Request;
 
-class AreaController extends Controller
+class AreaEmpresaController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::all();
+        $areasEmpresa = AreaEmpresa::all();
 
-        return $areas;
+        return $areasEmpresa;
     }
 
     /**
@@ -39,20 +39,22 @@ class AreaController extends Controller
     {
         $request->validate(
             [
-                'nomeArea'  => 'required',
+                'idArea'  => 'required',
+
 
             ],
             [
-                'nomeArea.required'  => 'Digite nome',
+                'idArea.required'  => 'Escolha uma area',
 
             ]
         );
-        $area= new Area;
+        $areaEmpresa= new AreaEmpresa();
 
-        $area->nomeArea = $request->nomeArea;
+        $areaEmpresa->idArea = $request->idArea;
+        $areaEmpresa->idEmpresa = $request->idEmpresa;
 
 
-        $area->save();
+        $areaEmpresa->save();
         return view('area');
     }
     

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Area;
+use App\Models\VagaUsuario;
 use Illuminate\Http\Request;
 
-class AreaController extends Controller
+class VagaUsuarioController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class AreaController extends Controller
      */
     public function index()
     {
-        $areas = Area::all();
+        $vagasUsuario = VagaUsuario::all();
 
-        return $areas;
+        return $vagasUsuario;
     }
 
     /**
@@ -39,20 +39,22 @@ class AreaController extends Controller
     {
         $request->validate(
             [
-                'nomeArea'  => 'required',
+                'idVaga'  => 'required',
+
 
             ],
             [
-                'nomeArea.required'  => 'Digite nome',
+                'idVaga.required'  => 'Escolha uma vaga',
 
             ]
         );
-        $area= new Area;
+        $vagasUsuario= new VagaUsuario();
 
-        $area->nomeArea = $request->nomeArea;
+        $vagasUsuario->idVaga= $request->idVaga;
+        $vagasUsuario->idUsuario = $request->idUsuario;
 
 
-        $area->save();
+        $vagasUsuario->save();
         return view('area');
     }
     

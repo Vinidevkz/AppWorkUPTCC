@@ -96,7 +96,7 @@ Validação
         $empresa->idStatus = 1;
 
         $empresa->save();
-        return view('/homeEmpresa');
+        return view('/verEmpresa');
     }
 
     /**

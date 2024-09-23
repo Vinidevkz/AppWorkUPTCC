@@ -63,6 +63,7 @@
           <div class="card-header">
             <h1>Empresas <span class="bi bi-people"></span></h1>
             <a href="/cadastrarEmpresa" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;Adicionar usuários</a>
+            <a href="/Area" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;Area</a>
           </div>
           <div class="card-body">
             <table class="table table-dark table-striped">
@@ -83,6 +84,7 @@
                     <td>
                       <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
                       <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
+
                       <form action="" method="post" class="d-inline">
                         @csrf
                         @method('DELETE')

@@ -6,6 +6,11 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuarioController;
+use App\Http\Controllers\AreaController;
+use App\Http\Controllers\AreaEmpresaController;
+use App\Http\Controllers\AreaInteresseUsuarioController;
+use App\Http\Controllers\VagaUsuarioController;
+use App\Models\AreaInteresseUsuario;
 use Illuminate\Support\Facades\Route;
 
 
@@ -20,13 +25,27 @@ Route::get('/cadastrarEmpresa', [EmpresaController::class, 'create'])->name('cad
 
 Route::get('/cadastrarVaga', [VagaController::class, 'create'])->middleware('auth:empresas')->name('cadastrarVaga');
 
-Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->name('cadastrarAdmin');
+Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->middleware('admins')->name('cadastrarAdmin');
+
+Route::get('/Area', [AreaController::class, 'create'])->name('cadastrarArea');
 
 Route::post('/formVaga', [VagaController::class, 'store']);
 
 Route::post('/formEmpresa', [EmpresaController::class, 'store']);
 
 Route::post('/formAdmin', [AdminController::class, 'store']);
+
+Route::post('/formArea', [AreaController::class, 'store']);
+
+/*provavelmente vai pra api
+
+Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
+
+Route::post('/areaEmpresa', [AreaEmpresaController::class,'store']);
+
+Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
+
+*/
 
 /*
 |--------------------------------------------------------------------------
