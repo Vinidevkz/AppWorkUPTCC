@@ -14,7 +14,7 @@ class Usuario extends Model
 
     protected $primaryKey = 'idUsuario';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     public $fillable = [
         'nomeUsuario',
@@ -22,8 +22,8 @@ class Usuario extends Model
         'nascUsuario',
         'emailUsuario',
         'senhaUsuario',
-        'areaInteresseUsuario',
         'contatoUsuario',
+        'fotoUsuario',
         'cidadeUsuario',
         'estadoUsuario',
         'logradouroUsuario',
@@ -32,8 +32,13 @@ class Usuario extends Model
         'sobreUsuario',
         'formacaoCompetenciaUsuario',
         'dataFormacaoCompetenciaUsuario',
+        'idStatus',
     ];
 
+    public function areas()
+    {
+        return $this->belongsToMany(Area::class, 'tb_AreaInteresseUsuario', 'idUsuario', 'idArea');
+    }
     // public function vagas() : BelongsToMany
     // {
     //     return $this->belongsToMany(Usuario::class, 'tb_vagausuario', 'idUsuario', 'idVaga');

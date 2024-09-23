@@ -54,6 +54,9 @@ Validação
                 'emailAdmin' => 'required',
                 'contatoAdmin' => 'required',
                 'senhaAdmin' => 'required',
+                'fotoAdmin' => 'required',
+
+                
 
             ],
             [
@@ -62,6 +65,7 @@ Validação
                 'emailAdmin.required' => 'Digite um email',
                 'contatoAdmin.required' => 'Digite um contato',
                 'senhaAdmin.required' => 'Digite uma senha',
+                'fotoAdmin.required' => 'Digite uma foto',
 
             ]
         );
@@ -73,6 +77,7 @@ Validação
         $admin->contatoAdmin = $request->contatoAdmin;
         $admin->senhaAdmin = Hash::make($request->senhaAdmin);
         $admin->fotoAdmin = $request->fotoAdmin;
+        $admin->idStatus = 1;
 
         $admin->save();
         return view('admin.homeAdmin');

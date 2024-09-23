@@ -81,14 +81,6 @@
 
                 </div>
 
-                @error('atuacaoEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="text" name="atuacaoEmpresa" placeholder="{{ $empresa->atuacaoEmpresa }}" value="{{ $empresa->atuacaoEmpresa }}">
-
-                </div>
 
                 @error('contatoEmpresa')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>

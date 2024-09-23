@@ -2,8 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
-use App\Models\AreaVaga;
+use App\Models\Area;
 use Illuminate\Http\Request;
 
 class AreaVagaController extends Controller
@@ -15,9 +14,9 @@ class AreaVagaController extends Controller
      */
     public function index()
     {
-        $area = AreaVaga::all();
+        $areas = Area::all();
 
-        return $area;
+        return $areas;
     }
 
     /**
@@ -38,8 +37,25 @@ class AreaVagaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'nomeArea'  => 'required',
+
+            ],
+            [
+                'nomeArea.required'  => 'Digite nome',
+
+            ]
+        );
+        $area= new Area;
+
+        $area->nomeArea = $request->nomeArea;
+
+
+        $area->save();
+        return view('home');
     }
+    
 
     /**
      * Display the specified resource.

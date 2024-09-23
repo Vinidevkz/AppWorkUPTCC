@@ -66,14 +66,6 @@
 
                 </div>
 
-                @error('dataPublicacaoVaga')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="text" name="dataPublicacaoVaga" placeholder="dataPublicacaoVaga" value="{{ old('dataPublicacaoVaga') }}">
-
-                </div>
 
                 @error('prazoVaga')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
@@ -84,14 +76,7 @@
 
                 </div>
 
-                @error('modalidadeVaga')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="text" name="modalidadeVaga" placeholder="modalidadeVaga" value="{{ old('modalidadeVaga') }}">
 
-                </div>
 
                 @error('salarioVaga')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
@@ -124,15 +109,6 @@
                 </div>
 
 
-                @error('areaVaga')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="areaVaga" placeholder="areaVaga" value="{{ old('areaVaga') }}">
-
-                </div>
-
                 @error('beneficiosVaga')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                 @enderror
@@ -163,17 +139,23 @@
 
                 </div>
 
-                @error('idStatusVaga')
+                @error('idArea')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                 @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
-                    <input type="text" name="idStatusVaga" placeholder="idStatusVaga" value="{{ old('idStatusVaga') }}">
+                    <input type="text" name="idArea" placeholder="idArea" value="{{ old('idArea') }}">
 
                 </div>
 
+                @error('idModalidadeVaga')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="text" name="idModalidadeVaga" placeholder="idModalidadeVaga" value="{{ old('idModalidadeVaga') }}">
 
-
+                </div>
 
                 <button class="btnRegister">
                     <p>Register</p>

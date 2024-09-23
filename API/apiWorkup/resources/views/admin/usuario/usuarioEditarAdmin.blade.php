@@ -81,14 +81,6 @@
 
                 </div>
 
-                @error('areaInteresseUsuario')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="text" name="areaInteresseUsuario" placeholder="{{ $usuario->areaInteresseUsuario }}" value="{{ $usuario->areaInteresseUsuario }}">
-
-                </div>
 
                 @error('contatoUsuario')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>

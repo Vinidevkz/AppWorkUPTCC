@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 21/09/2024 às 20:52
+-- Tempo de geração: 23/09/2024 às 04:27
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -34,15 +34,39 @@ CREATE TABLE `tb_admin` (
   `emailAdmin` varchar(40) NOT NULL,
   `contatoAdmin` varchar(20) NOT NULL,
   `senhaAdmin` varchar(100) NOT NULL,
-  `fotoAdmin` varchar(40) NOT NULL
+  `fotoAdmin` varchar(40) NOT NULL,
+  `idStatus` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_admin`
 --
 
-INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `contatoAdmin`, `senhaAdmin`, `fotoAdmin`) VALUES
-(2, 'teste', 'teste', 'testeAdmin@teste.com', '123', '$2y$10$nxOfpiyxmq1Qz6ahhDc3r.pwGseoIYaVyXKsVy.IEOuXdOH3kS2TC', 'a');
+INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `contatoAdmin`, `senhaAdmin`, `fotoAdmin`, `idStatus`, `created_at`, `updated_at`) VALUES
+(2, 'teste', 'teste', 'testeAdmin@teste.com', '123', '$2y$10$nxOfpiyxmq1Qz6ahhDc3r.pwGseoIYaVyXKsVy.IEOuXdOH3kS2TC', 'a', 1, NULL, NULL),
+(4, 'testeBanco', 'teste', 'teste@tt.com', '12211', '$2y$10$41ttpIgP9VlUZbrOMAH3hutQ0FxQW2W.78CnYwbBFfCH0x2ahZFsG', 'a', 2, '2024-09-23 00:47:11', '2024-09-23 00:47:11');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_area`
+--
+
+CREATE TABLE `tb_area` (
+  `idArea` int(11) NOT NULL,
+  `nomeArea` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_area`
+--
+
+INSERT INTO `tb_area` (`idArea`, `nomeArea`) VALUES
+(1, 'Tecnologia'),
+(2, 'Marketing'),
+(3, 'Gestão');
 
 -- --------------------------------------------------------
 
@@ -52,58 +76,17 @@ INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `
 
 CREATE TABLE `tb_areainteresseusuario` (
   `idAreaInteresseUsuario` int(11) NOT NULL,
-  `descAreaInteresseUsuario` varchar(200) NOT NULL
+  `idArea` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_areainteresseusuario`
 --
 
-INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `descAreaInteresseUsuario`) VALUES
-(1, 'Tecnologia'),
-(2, 'Alimentação'),
-(3, 'Meio Ambiente');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `tb_areainteressevaga`
---
-
-CREATE TABLE `tb_areainteressevaga` (
-  `idAreaInteresseVaga` int(11) NOT NULL,
-  `nomeAreaInteresseVaga` varchar(120) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `tb_areainteressevaga`
---
-
-INSERT INTO `tb_areainteressevaga` (`idAreaInteresseVaga`, `nomeAreaInteresseVaga`) VALUES
-(1, 'Tecnologia'),
-(2, 'Gastronomia'),
-(3, 'Designer'),
-(7, 'Medicina');
-
--- --------------------------------------------------------
-
---
--- Estrutura para tabela `tb_areavaga`
---
-
-CREATE TABLE `tb_areavaga` (
-  `idAreaVaga` int(11) NOT NULL,
-  `nomeAreaVaga` varchar(40) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `tb_areavaga`
---
-
-INSERT INTO `tb_areavaga` (`idAreaVaga`, `nomeAreaVaga`) VALUES
-(1, 'Tecnologia'),
-(2, 'Marketing'),
-(3, 'Gestão');
+INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `idArea`, `idUsuario`) VALUES
+(4, 1, 1),
+(5, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -113,17 +96,17 @@ INSERT INTO `tb_areavaga` (`idAreaVaga`, `nomeAreaVaga`) VALUES
 
 CREATE TABLE `tb_atuacaoempresa` (
   `idAtuacaoEmpresa` int(11) NOT NULL,
-  `descAtuacaoEmpresa` varchar(30) NOT NULL
+  `idArea` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_atuacaoempresa`
 --
 
-INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `descAtuacaoEmpresa`) VALUES
-(1, 'Tecnologia'),
-(2, 'Alimentação'),
-(3, 'Meio Ambiente');
+INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `idArea`, `idEmpresa`) VALUES
+(1, 1, 1),
+(2, 2, 3);
 
 -- --------------------------------------------------------
 
@@ -153,7 +136,6 @@ CREATE TABLE `tb_empresa` (
   `emailEmpresa` varchar(100) NOT NULL,
   `fotoEmpresa` varchar(40) NOT NULL,
   `sobreEmpresa` text NOT NULL,
-  `atuacaoEmpresa` varchar(40) NOT NULL,
   `cnpjEmpresa` varchar(40) NOT NULL,
   `contatoEmpresa` varchar(20) NOT NULL,
   `senhaEmpresa` varchar(100) NOT NULL,
@@ -161,20 +143,26 @@ CREATE TABLE `tb_empresa` (
   `estadoEmpresa` varchar(40) NOT NULL,
   `LogradouroEmpresa` varchar(40) NOT NULL,
   `cepEmpresa` varchar(40) NOT NULL,
-  `numeroLograEmpresa` varchar(40) NOT NULL
+  `numeroLograEmpresa` varchar(40) NOT NULL,
+  `idStatus` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_empresa`
 --
 
-INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailEmpresa`, `fotoEmpresa`, `sobreEmpresa`, `atuacaoEmpresa`, `cnpjEmpresa`, `contatoEmpresa`, `senhaEmpresa`, `cidadeEmpresa`, `estadoEmpresa`, `LogradouroEmpresa`, `cepEmpresa`, `numeroLograEmpresa`) VALUES
-(1, 'empresa001', 'Tech Innovations', '', 'tech_innovations.jpg', 'Especializada em tecnologia avançada', 'Tecnologia e Inovação', '12.345.678/0001-90', '(11) 1234-5678', 'senha123', 'São Paulo', 'SP', 'Rua das Inovações', '01234-567', '123'),
-(2, 'empresa002', 'Green Solutions', '', 'green_solutions.jpg', 'Focada em soluções ecológicas', 'Meio Ambiente', '98.765.432/0001-01', '(21) 2345-6789', 'senha456', 'Rio de Janeiro', 'RJ', 'Av. Verde', '87654-321', '456'),
-(3, 'empresa003', 'Foodies Inc.', '', 'foodies_inc.jpg', 'Comércio de alimentos gourmet', 'Alimentação', '11.223.344/0001-22', '(31) 3456-7890', 'senha789', 'Belo Horizonte', 'MG', 'Rua dos Sabores', '34567-890', '789'),
-(10, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', 'teste', '1212', '121212', '$2y$10$ov45KGFlSZra5aShO2E2aex9BnbHDttmVSuA.Oos0eQxluxplHHbe', 'teste', 'teste', 'teste', '111', '1'),
-(11, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', 'teste', '1212', '121212', '$2y$10$ML8XnGbiHfcVrSlefvQyqeSwlED3n2WF0sq6dmct0alFm0YYDY40O', 'teste', 'teste', 'teste', '111', '1'),
-(12, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', 'teste', '1212', '121212', '$2y$10$84eZT9mBUuVS2/W1Kz.FP.TJ/kBo7dGdvYEvDimqjwPAn1yN9EJqq', 'teste', 'teste', 'teste', '111', '1');
+INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailEmpresa`, `fotoEmpresa`, `sobreEmpresa`, `cnpjEmpresa`, `contatoEmpresa`, `senhaEmpresa`, `cidadeEmpresa`, `estadoEmpresa`, `LogradouroEmpresa`, `cepEmpresa`, `numeroLograEmpresa`, `idStatus`, `created_at`, `updated_at`) VALUES
+(1, 'empresa001', 'Tech Innovations', '', 'tech_innovations.jpg', 'Especializada em tecnologia avançada', '12.345.678/0001-90', '(11) 1234-5678', 'senha123', 'São Paulo', 'SP', 'Rua das Inovações', '01234-567', '123', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(2, 'empresa002', 'Green Solutions', '', 'green_solutions.jpg', 'Focada em soluções ecológicas', '98.765.432/0001-01', '(21) 2345-6789', 'senha456', 'Rio de Janeiro', 'RJ', 'Av. Verde', '87654-321', '456', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(3, 'empresa003', 'Foodies Inc.', '', 'foodies_inc.jpg', 'Comércio de alimentos gourmet', '11.223.344/0001-22', '(31) 3456-7890', 'senha789', 'Belo Horizonte', 'MG', 'Rua dos Sabores', '34567-890', '789', 1, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(10, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', '1212', '121212', '$2y$10$ov45KGFlSZra5aShO2E2aex9BnbHDttmVSuA.Oos0eQxluxplHHbe', 'teste', 'teste', 'teste', '111', '1', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(11, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', '1212', '121212', '$2y$10$ML8XnGbiHfcVrSlefvQyqeSwlED3n2WF0sq6dmct0alFm0YYDY40O', 'teste', 'teste', 'teste', '111', '1', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 'teste', 'teste', 'teste@teste.com', 'a', 'teste', '1212', '121212', '$2y$10$84eZT9mBUuVS2/W1Kz.FP.TJ/kBo7dGdvYEvDimqjwPAn1yN9EJqq', 'teste', 'teste', 'teste', '111', '1', 2, '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 'testeBanco', 'teste', 'teste@tt.com', 't', 't', '1', '12', '$2y$10$rels43zkMss3NrJj.9G8uum6Ftz8J8qXjXI9Q43IAjuSh9/mrNkM6', 's', 's', 'sa', '12', '2', 1, '2024-09-23 00:57:52', '2024-09-23 00:57:52'),
+(14, 'testeBanco', 'teste', 'teste@tt.com', 't', 't', '1', '12', '$2y$10$VJvvpG5WbNGsz84lWpqtCOi7pq4F.hBMmCyc3Umb36UCk6/BGdU3W', 's', 's', 'sa', '12', '2', 1, '2024-09-23 00:59:57', '2024-09-23 00:59:57'),
+(15, 'testeBanco', 'teste', 'teste@tt.com', 't', 't', '1', '12', '$2y$10$Yg4qaSEmOHSrRv6RAPVaHuxoI2BrHfRR7NqPGYaJlME5VMJMKa7cu', 's', 's', 'sa', '12', '2', 1, '2024-09-23 01:00:18', '2024-09-23 01:00:18');
 
 -- --------------------------------------------------------
 
@@ -214,21 +202,21 @@ CREATE TABLE `tb_publicacao` (
 -- --------------------------------------------------------
 
 --
--- Estrutura para tabela `tb_statusvaga`
+-- Estrutura para tabela `tb_status`
 --
 
-CREATE TABLE `tb_statusvaga` (
-  `idStatusVaga` int(11) NOT NULL,
-  `tipoStatusVaga` varchar(40) NOT NULL
+CREATE TABLE `tb_status` (
+  `idStatus` int(11) NOT NULL,
+  `tipoStatus` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Despejando dados para a tabela `tb_statusvaga`
+-- Despejando dados para a tabela `tb_status`
 --
 
-INSERT INTO `tb_statusvaga` (`idStatusVaga`, `tipoStatusVaga`) VALUES
-(1, 'Ativa'),
-(2, 'Inativa');
+INSERT INTO `tb_status` (`idStatus`, `tipoStatus`) VALUES
+(1, 'Ativo'),
+(2, 'Inativo');
 
 -- --------------------------------------------------------
 
@@ -254,7 +242,6 @@ CREATE TABLE `tb_usuario` (
   `nascUsuario` date NOT NULL,
   `emailUsuario` varchar(40) NOT NULL,
   `senhaUsuario` varchar(100) NOT NULL,
-  `areaInteresseUsuario` varchar(40) NOT NULL,
   `contatoUsuario` varchar(20) NOT NULL,
   `fotoUsuario` varchar(40) NOT NULL,
   `cidadeUsuario` varchar(40) NOT NULL,
@@ -264,17 +251,20 @@ CREATE TABLE `tb_usuario` (
   `numeroLograUsuario` varchar(40) NOT NULL,
   `sobreUsuario` text NOT NULL,
   `formacaoCompetenciaUsuario` varchar(40) NOT NULL,
-  `dataFormacaoCompetenciaUsuario` date NOT NULL
+  `dataFormacaoCompetenciaUsuario` date NOT NULL,
+  `idStatus` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_usuario`
 --
 
-INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `areaInteresseUsuario`, `contatoUsuario`, `fotoUsuario`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`) VALUES
-(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', 'Tecnologia', '1234567890', 'eu.jpg', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28'),
-(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', 'tecnologia', '(11) 11111-1111', 'foto1', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12'),
-(3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', 'tecnologia', '(56) 95959-5959', 'foto1', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12');
+INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `fotoUsuario`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
+(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', 'eu.jpg', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', 1, NULL, NULL),
+(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', 'foto1', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', 1, NULL, NULL),
+(3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', '(56) 95959-5959', 'foto1', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -285,27 +275,31 @@ INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUs
 CREATE TABLE `tb_vaga` (
   `idVaga` int(11) NOT NULL,
   `nomeVaga` varchar(40) NOT NULL,
-  `dataPublicacaoVaga` date NOT NULL,
   `prazoVaga` date NOT NULL,
-  `modalidadeVaga` varchar(40) NOT NULL,
   `salarioVaga` decimal(10,2) NOT NULL,
   `cidadeVaga` varchar(40) NOT NULL,
   `estadoVaga` varchar(40) NOT NULL,
   `beneficiosVaga` varchar(40) NOT NULL,
   `diferencialVaga` varchar(40) NOT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
-  `idStatusVaga` int(11) DEFAULT NULL,
-  `idAreaVaga` int(11) DEFAULT NULL
+  `idArea` int(11) NOT NULL,
+  `idStatus` int(11) NOT NULL,
+  `idModalidadeVaga` int(11) NOT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Despejando dados para a tabela `tb_vaga`
 --
 
-INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `dataPublicacaoVaga`, `prazoVaga`, `modalidadeVaga`, `salarioVaga`, `cidadeVaga`, `estadoVaga`, `beneficiosVaga`, `diferencialVaga`, `idEmpresa`, `idStatusVaga`, `idAreaVaga`) VALUES
-(1, 'Desenvolvedor Front-End', '2024-08-01', '2024-09-01', 'Presencial', 8000.00, 'São Paulo', 'SP', 'Vale Transporte, Vale Alimentação', 'Conhecimento em React é um diferencial', 1, 1, 1),
-(2, 'Analista de Marketing', '2024-08-10', '2024-09-10', 'Híbrido', 6000.00, 'Rio de Janeiro', 'RJ', 'Plano de Saúde, Seguro de Vida', 'Experiência com campanhas digitais é um ', 2, 2, 2),
-(3, 'Gerente de Projetos', '2024-08-15', '2024-09-15', 'Remoto', 12000.00, 'Belo Horizonte', 'MG', 'Bônus por desempenho, Participação nos l', 'Certificação PMP é um diferencial', 3, 1, 3);
+INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidadeVaga`, `estadoVaga`, `beneficiosVaga`, `diferencialVaga`, `idEmpresa`, `idArea`, `idStatus`, `idModalidadeVaga`, `created_at`, `updated_at`) VALUES
+(1, 'Desenvolvedor Front-End', '2024-09-01', 8000.00, 'São Paulo', 'SP', 'Vale Transporte, Vale Alimentação', 'Conhecimento em React é um diferencial', 1, 1, 1, 1, NULL, NULL),
+(2, 'Analista de Marketing', '2024-09-10', 6000.00, 'Rio de Janeiro', 'RJ', 'Plano de Saúde, Seguro de Vida', 'Experiência com campanhas digitais é um ', 2, 1, 1, 2, NULL, NULL),
+(3, 'Gerente de Projetos', '2024-09-15', 12000.00, 'Belo Horizonte', 'MG', 'Bônus por desempenho, Participação nos l', 'Certificação PMP é um diferencial', 3, 2, 1, 3, NULL, NULL),
+(4, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:06:32', '2024-09-23 01:06:32'),
+(5, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:06:32', '2024-09-23 01:06:32'),
+(6, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:08:05', '2024-09-23 01:08:05');
 
 -- --------------------------------------------------------
 
@@ -327,19 +321,28 @@ CREATE TABLE `tb_vagausuario` (
 -- Índices de tabela `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  ADD PRIMARY KEY (`idAdmin`);
+  ADD PRIMARY KEY (`idAdmin`),
+  ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices de tabela `tb_areainteressevaga`
+-- Índices de tabela `tb_area`
 --
-ALTER TABLE `tb_areainteressevaga`
-  ADD PRIMARY KEY (`idAreaInteresseVaga`);
+ALTER TABLE `tb_area`
+  ADD PRIMARY KEY (`idArea`);
 
 --
--- Índices de tabela `tb_areavaga`
+-- Índices de tabela `tb_areainteresseusuario`
 --
-ALTER TABLE `tb_areavaga`
-  ADD PRIMARY KEY (`idAreaVaga`);
+ALTER TABLE `tb_areainteresseusuario`
+  ADD KEY `idArea` (`idArea`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices de tabela `tb_atuacaoempresa`
+--
+ALTER TABLE `tb_atuacaoempresa`
+  ADD KEY `idArea` (`idArea`),
+  ADD KEY `idEmpresa` (`idEmpresa`);
 
 --
 -- Índices de tabela `tb_chat`
@@ -354,7 +357,14 @@ ALTER TABLE `tb_chat`
 -- Índices de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
-  ADD PRIMARY KEY (`idEmpresa`);
+  ADD PRIMARY KEY (`idEmpresa`),
+  ADD KEY `idStatus` (`idStatus`);
+
+--
+-- Índices de tabela `tb_modalidadevaga`
+--
+ALTER TABLE `tb_modalidadevaga`
+  ADD PRIMARY KEY (`idModalidadeVaga`);
 
 --
 -- Índices de tabela `tb_publicacao`
@@ -366,10 +376,10 @@ ALTER TABLE `tb_publicacao`
   ADD KEY `idVaga` (`idVaga`);
 
 --
--- Índices de tabela `tb_statusvaga`
+-- Índices de tabela `tb_status`
 --
-ALTER TABLE `tb_statusvaga`
-  ADD PRIMARY KEY (`idStatusVaga`);
+ALTER TABLE `tb_status`
+  ADD PRIMARY KEY (`idStatus`);
 
 --
 -- Índices de tabela `tb_statusvagausuario`
@@ -381,16 +391,18 @@ ALTER TABLE `tb_statusvagausuario`
 -- Índices de tabela `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  ADD PRIMARY KEY (`idUsuario`);
+  ADD PRIMARY KEY (`idUsuario`),
+  ADD KEY `idStatus` (`idStatus`);
 
 --
 -- Índices de tabela `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
   ADD PRIMARY KEY (`idVaga`),
-  ADD KEY `idStatusVaga` (`idStatusVaga`),
-  ADD KEY `idAreaVaga` (`idAreaVaga`),
-  ADD KEY `idEmpresa` (`idEmpresa`);
+  ADD KEY `idEmpresa` (`idEmpresa`),
+  ADD KEY `idArea` (`idArea`),
+  ADD KEY `idModalidadeVaga` (`idModalidadeVaga`),
+  ADD KEY `idStatus` (`idStatus`);
 
 --
 -- Índices de tabela `tb_vagausuario`
@@ -408,19 +420,13 @@ ALTER TABLE `tb_vagausuario`
 -- AUTO_INCREMENT de tabela `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT de tabela `tb_areainteressevaga`
+-- AUTO_INCREMENT de tabela `tb_area`
 --
-ALTER TABLE `tb_areainteressevaga`
-  MODIFY `idAreaInteresseVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de tabela `tb_areavaga`
---
-ALTER TABLE `tb_areavaga`
-  MODIFY `idAreaVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `tb_area`
+  MODIFY `idArea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_chat`
@@ -432,7 +438,13 @@ ALTER TABLE `tb_chat`
 -- AUTO_INCREMENT de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de tabela `tb_modalidadevaga`
+--
+ALTER TABLE `tb_modalidadevaga`
+  MODIFY `idModalidadeVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_publicacao`
@@ -441,10 +453,10 @@ ALTER TABLE `tb_publicacao`
   MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de tabela `tb_statusvaga`
+-- AUTO_INCREMENT de tabela `tb_status`
 --
-ALTER TABLE `tb_statusvaga`
-  MODIFY `idStatusVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+ALTER TABLE `tb_status`
+  MODIFY `idStatus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tb_statusvagausuario`
@@ -462,7 +474,7 @@ ALTER TABLE `tb_usuario`
 -- AUTO_INCREMENT de tabela `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
-  MODIFY `idVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `tb_vagausuario`
@@ -475,12 +487,38 @@ ALTER TABLE `tb_vagausuario`
 --
 
 --
+-- Restrições para tabelas `tb_admin`
+--
+ALTER TABLE `tb_admin`
+  ADD CONSTRAINT `tb_admin_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
+
+--
+-- Restrições para tabelas `tb_areainteresseusuario`
+--
+ALTER TABLE `tb_areainteresseusuario`
+  ADD CONSTRAINT `tb_areainteresseusuario_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
+  ADD CONSTRAINT `tb_areainteresseusuario_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`);
+
+--
+-- Restrições para tabelas `tb_atuacaoempresa`
+--
+ALTER TABLE `tb_atuacaoempresa`
+  ADD CONSTRAINT `tb_atuacaoempresa_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
+  ADD CONSTRAINT `tb_atuacaoempresa_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
+
+--
 -- Restrições para tabelas `tb_chat`
 --
 ALTER TABLE `tb_chat`
   ADD CONSTRAINT `tb_chat_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
   ADD CONSTRAINT `tb_chat_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
   ADD CONSTRAINT `tb_chat_ibfk_3` FOREIGN KEY (`idAdmin`) REFERENCES `tb_admin` (`idAdmin`);
+
+--
+-- Restrições para tabelas `tb_empresa`
+--
+ALTER TABLE `tb_empresa`
+  ADD CONSTRAINT `tb_empresa_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
 -- Restrições para tabelas `tb_publicacao`
@@ -491,12 +529,19 @@ ALTER TABLE `tb_publicacao`
   ADD CONSTRAINT `tb_publicacao_ibfk_3` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
 
 --
+-- Restrições para tabelas `tb_usuario`
+--
+ALTER TABLE `tb_usuario`
+  ADD CONSTRAINT `tb_usuario_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
+
+--
 -- Restrições para tabelas `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
-  ADD CONSTRAINT `tb_vaga_ibfk_1` FOREIGN KEY (`idStatusVaga`) REFERENCES `tb_statusvaga` (`idStatusVaga`),
-  ADD CONSTRAINT `tb_vaga_ibfk_2` FOREIGN KEY (`idAreaVaga`) REFERENCES `tb_areavaga` (`idAreaVaga`),
-  ADD CONSTRAINT `tb_vaga_ibfk_3` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
+  ADD CONSTRAINT `tb_vaga_ibfk_3` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
+  ADD CONSTRAINT `tb_vaga_ibfk_4` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
+  ADD CONSTRAINT `tb_vaga_ibfk_5` FOREIGN KEY (`idModalidadeVaga`) REFERENCES `tb_modalidadevaga` (`idModalidadeVaga`),
+  ADD CONSTRAINT `tb_vaga_ibfk_6` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
 -- Restrições para tabelas `tb_vagausuario`

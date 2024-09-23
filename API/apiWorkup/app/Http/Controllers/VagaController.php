@@ -59,68 +59,47 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
         $request->validate(
             [
                 'nomeVaga'  => 'required',
-                'dataPublicacaoVaga' => 'required|',
                 'prazoVaga' => 'required',
-                'modalidadeVaga' => 'required',
                 'salarioVaga' => 'required',
                 'cidadeVaga' => 'required',
                 'estadoVaga' => 'required',
-                'areaVaga' => 'required',
                 'beneficiosVaga' => 'required',
                 'diferencialVaga' => 'required',
                 'idEmpresa' => 'required',
-                'idStatusVaga' => 'required',
+                'idArea' => 'required',
+                'idModalidadeVaga' => 'required',
             ],
             [
                 'nomeVaga.required'  => 'Digite um nome para continuar',
-                'dataPublicacaoVaga.required' => 'Digite uma data',
                 'prazoVaga.required' => 'Digite um prazo',
-                'modalidadeVaga.required' => 'Digite uma modalidade',
                 'salarioVaga.required' => 'Digite um salario',
                 'cidadeVaga.required' => 'Digite uma cidade',
                 'estadoVaga.required' => 'Digite um estado',
-                'areaVaga.required' => 'Digite uma area',
                 'beneficiosVaga.required' => 'Digite um beneficio',
                 'diferencialVaga.required' => 'Digite um diferencal',
                 'idEmpresa.required' => 'Digite o id da empresa',
-                'idStatusVaga.required' => 'Digite um id vaga',
+                'idArea.required' => 'Digite um id vaga',
+                'idModalidadeVaga.required' => 'Digite uma modalidade',
             ]
         );
 
         $vaga = new Vaga;
 
         $vaga->nomeVaga = $request->nomeVaga;
-        $vaga->dataPublicacaoVaga = $request->dataPublicacaoVaga;
         $vaga->prazoVaga = $request->prazoVaga;
-        $vaga->modalidadeVaga = $request->modalidadeVaga;
         $vaga->salarioVaga = $request->salarioVaga;
         $vaga->cidadeVaga = $request->cidadeVaga;
         $vaga->estadoVaga = $request->estadoVaga;
-        $vaga->idAreaVaga = $request->areaVaga;
         $vaga->beneficiosVaga = $request->beneficiosVaga;
         $vaga->diferencialVaga = $request->diferencialVaga;
         $vaga->idEmpresa = $request->idEmpresa;
-        $vaga->idStatusVaga = $request->idStatusVaga;
+        $vaga->idArea = $request->idArea;
+        $vaga->idStatus = 1;
+        $vaga->idModalidadeVaga = $request->idModalidadeVaga;
 
         $vaga->save();
 
-        $vaga = new Vaga;
-
-        $vaga->nomeVaga = $request->nomeVaga;
-        $vaga->dataPublicacaoVaga = $request->dataPublicacaoVaga;
-        $vaga->prazoVaga = $request->prazoVaga;
-        $vaga->modalidadeVaga = $request->modalidadeVaga;
-        $vaga->salarioVaga = $request->salarioVaga;
-        $vaga->cidadeVaga = $request->cidadeVaga;
-        $vaga->estadoVaga = $request->estadoVaga;
-        $vaga->idAreaVaga = $request->areaVaga;
-        $vaga->beneficiosVaga = $request->beneficiosVaga;
-        $vaga->diferencialVaga = $request->diferencialVaga;
-        $vaga->idEmpresa = $request->idEmpresa;
-        $vaga->idStatusVaga = $request->idStatusVaga;
-
-        $vaga->save();
-        return view('home');
+        return view('/homeEmpresa');
     }
 
     /**
@@ -131,7 +110,7 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
      */
     public function show($id)
     {
-        $vaga = Vaga::where('idVaga', $id)->firstOrFail(); // Retorna 404 se não encontrar
+        $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); // Retorna 404 se não encontrar
 
         return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
     }
@@ -146,6 +125,7 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
     {
         $vaga = Vaga::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404
         return view('admin.vaga.vagaEditarAdmin', compact('vaga')); // Passa o usuário para a view
+
     }
 
     /**
@@ -163,7 +143,7 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
             ->where('idVaga', $id)
             ->update([
                 'nomeVaga' => $request->nomeVaga,
-                'modalidadeVaga' => $request->modalidadeVaga,
+                'idModalidadeVaga' => $request->idModalidadeVaga,
                 'estadoVaga' => $request->estadoVaga,
 
             ]);

@@ -20,7 +20,7 @@ Route::get('/cadastrarEmpresa', [EmpresaController::class, 'create'])->name('cad
 
 Route::get('/cadastrarVaga', [VagaController::class, 'create'])->middleware('auth:empresas')->name('cadastrarVaga');
 
-Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->middleware('auth:admins')->name('cadastrarAdmin');
+Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->name('cadastrarAdmin');
 
 Route::post('/formVaga', [VagaController::class, 'store']);
 

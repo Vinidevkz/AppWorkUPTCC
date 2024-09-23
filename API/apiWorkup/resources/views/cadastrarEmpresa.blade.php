@@ -61,6 +61,12 @@
                 <br>
                 <br>
                 <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
+                <br>
                 @csrf
 
                 @error('usernameEmpresa')
@@ -81,21 +87,29 @@
 
                 </div>
 
+                @error('emailEmpresa')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="emailEmpresa" placeholder="emailEmpresa" value="{{ old('emailEmpresa') }}">
+                </div>
+
+                @error('fotoEmpresa')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="fotoEmpresa" placeholder="fotoEmpresa" value="{{ old('fotoEmpresa') }}">
+                </div>
+
+
                 @error('sobreEmpresa')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                 @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-credit-card"></i>
                     <input type="text" name="sobreEmpresa" placeholder="sobreEmpresa" value="{{ old('sobreEmpresa') }}">
-
-                </div>
-
-                @error('atuacaoEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-solid fa-lock"></i>
-                    <input type="text" name="atuacaoEmpresa" placeholder="atuacaoEmpresa" value="{{ old('atuacaoEmpresa') }}">
 
                 </div>
 
@@ -116,6 +130,15 @@
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="contatoEmpresa" placeholder="contatoEmpresa" value="{{ old('contatoEmpresa') }}">
+
+                </div>
+
+                @error('senhaEmpresa')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="senhaEmpresa" placeholder="senhaEmpresa" value="{{ old('senhaEmpresa') }}">
 
                 </div>
 
@@ -168,26 +191,6 @@
                     <input type="text" name="numeroLograEmpresa" placeholder="numeroLograEmpresa" value="{{ old('numeroLograEmpresa') }}">
 
                 </div>
-
-                @error('senhaEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="senhaEmpresa" placeholder="senhaEmpresa" value="{{ old('senhaEmpresa') }}">
-
-                </div>
-
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="fotoEmpresa" placeholder="fotoEmpresa" value="{{ old('fotoEmpresa') }}">
-                </div>
-
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="emailEmpresa" placeholder="emailEmpresa" value="{{ old('emailEmpresa') }}">
-                </div>
-
 
 
 

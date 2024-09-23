@@ -60,8 +60,8 @@ Validação
                 'nascUsuario' => 'required|date',
                 'emailUsuario' => 'required|email',
                 'senhaUsuario' => 'required|min:8',
-                'areaInteresseUsuario' => 'required|string|max:40',
                 'contatoUsuario' => 'required|string|max:20',
+                'fotoUsuario' => 'required',
                 'cidadeUsuario' => 'required|string|max:40',
                 'estadoUsuario' => 'required|string|max:40',
                 'logradouroUsuario' => 'required|string|max:40',
@@ -84,7 +84,6 @@ Validação
         $usuario->nascUsuario = $request->nascUsuario;
         $usuario->emailUsuario = $request->emailUsuario;
         $usuario->senhaUsuario = $request->senhaUsuario;
-        $usuario->areaInteresseUsuario = $request->areaInteresseUsuario;
         $usuario->contatoUsuario = $request->contatoUsuario;
         $usuario->fotoUsuario = $request->fotoUsuario;
         $usuario->cidadeUsuario = $request->cidadeUsuario;
@@ -95,6 +94,7 @@ Validação
         $usuario->sobreUsuario = $request->sobreUsuario;
         $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
         $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
+        $usuario->idStatus = 1;
 
         $usuario->save();
         return response()->json($usuario);
@@ -108,7 +108,7 @@ Validação
      */
     public function show($id)
     {
-        $usuario = Usuario::where('idUsuario', $id)->firstOrFail(); // Retorna 404 se não encontrar
+        $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
 
         return view('admin.usuario.allusuarioAdmin', compact('usuario')); // Retorna a view com detalhes
     }
@@ -145,7 +145,6 @@ Validação
                 'nascUsuario' => $request->nascUsuario,
                 //'emailUsuario' => $request->emailUsuario,
                 //'senhaUsuario' => $request->senhaUsuario,
-                'areaInteresseUsuario' => $request->areaInteresseUsuario,
                 'contatoUsuario' => $request->contatoUsuario,
                 //'fotoUsuario' => $request->fotoUsuario,
                 //'cidadeUsuario' => $request->cidadeUsuario,

@@ -13,7 +13,7 @@ class Admin extends Authenticatable
 
     protected $table = 'tb_admin';
 
-    public $timestamps = false;
+    public $timestamps = true;
     
     protected $fillable = [
         'nomeAdmin',
@@ -21,6 +21,8 @@ class Admin extends Authenticatable
         'emailAdmin',
         'contatoAdmin',
         'senhaAdmin',
+        'fotoAdmin',
+        'idStatus',
     ];
 
 

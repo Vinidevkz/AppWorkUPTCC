@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
-use App\Models\AreaVaga;
+use App\Models\Area;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -18,7 +18,7 @@ class Vaga extends Model
 
     protected $primaryKey = 'idVaga';
 
-    public $timestamps = false;
+    public $timestamps = true;
 
     /*
 |--------------------------------------------------------------------------
@@ -31,16 +31,25 @@ class Vaga extends Model
         return $this->belongsTo(Empresa::class, 'idEmpresa');
     }
 
-/*
-|--------------------------------------------------------------------------
-|Definindo relacionamento
-|--------------------------------------------------------------------------
-*/
-
-    public function areaVaga() : BelongsTo
+    public function area()
     {
-        return $this->belongsTo(AreaVaga::class, 'idAreaVaga');
+        return $this->belongsTo(Area::class, 'idArea');
     }
+
+    
+
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'idStatus');
+    }
+
+    public function modalidade()
+    {
+        return $this->belongsTo(Modalidade::class, 'idModalidadeVaga');
+    }
+
+
 
     // public function usuarios() : BelongsToMany
     // {
@@ -49,8 +58,16 @@ class Vaga extends Model
 
     public $fillable = [
         'nomeVaga',
-        'modalidadeVaga',
+        'prazoVaga',
+        'salarioVaga',
+        'cidadeVaga',
         'estadoVaga',
+        'beneficioVaga',
+        'diferencialVaga',
+        'idEmpresa',
+        'idArea',
+        'idStatus',
+        'idModalidadeVaga',
 
     ];
 }

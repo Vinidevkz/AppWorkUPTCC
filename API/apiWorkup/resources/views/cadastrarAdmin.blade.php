@@ -41,7 +41,7 @@
 <body>
     <main>
         <section class="cadastro">
-            <h1>Site para cadastrar uma nova empresa</h1>
+            <h1>Site para cadastrar um novo admin</h1>
 
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
@@ -105,15 +105,21 @@
 
                 </div>
 
-
+                @error('fotoAdmin')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-user"></i>
                     <input type="text" name="fotoAdmin" placeholder="fotoAdmin" value="{{ old('fotoAdmin') }}">
                 </div>
 
-
-                <a class="btnSignIn" href="/cadastrarVaga">cadastrar vaga</a>
-
+                @error('idStatus')
+                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                @enderror
+                <div class="input-container">
+                    <i class="fa-regular fa-user"></i>
+                    <input type="text" name="idStatus" placeholder="idStatus" value="{{ old('idStatus') }}">
+                </div>
 
                 <button class="btnRegister">
                     <p>Register</p>

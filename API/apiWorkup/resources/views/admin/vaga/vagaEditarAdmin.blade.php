@@ -63,14 +63,14 @@
 
                 </div>
 
-                @error('modalidadeVaga')
+                <!-- @error('modalidadeVaga')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                 @enderror
                 <div class="input-container">
                     <i class="fa-regular fa-envelope"></i>
                     <input type="text" name="modalidadeVaga" placeholder="{{ $vaga->modalidadeVaga }}" value="{{ $vaga->modalidadeVaga }}">
 
-                </div>
+                </div> -->
 
                 @error('estadoVaga')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>

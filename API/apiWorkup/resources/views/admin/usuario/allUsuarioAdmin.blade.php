@@ -13,7 +13,6 @@
         <p><strong>Username:</strong> {{ $usuario->usernameUsuario }}</p>
         <p><strong>nascUsuario:</strong> {{ $usuario->nascUsuario }}</p>
         <p><strong>Email:</strong> {{ $usuario->emailUsuario }}</p>
-        <p><strong>Área de Interesse:</strong> {{ $usuario->areaInteresseUsuario }}</p>
         <p><strong>Contato:</strong> {{ $usuario->contatoUsuario }}</p>
         <p><strong>fotoUsuario:</strong> {{ $usuario->fotoUsuario }}</p>
         <p><strong>cidadeUsuario:</strong> {{ $usuario->cidadeUsuario }}</p>
@@ -25,6 +24,12 @@
         <p><strong>formacaoCompetenciaUsuario:</strong> {{ $usuario->formacaoCompetenciaUsuario }}</p>
         <p><strong>dataFormacaoCompetenciaUsuario:</strong> {{ $usuario->dataFormacaoCompetenciaUsuario }}</p>
 
+        <h3>Áreas de Interrese:</h3>
+        <ul>
+            @foreach($usuario->areas as $area)
+                <li>{{ $area->nomeArea }}</li> <!-- Exibe o nome da área -->
+            @endforeach
+        </ul>
         <!-- Adicione mais detalhes conforme necessário -->
         <a href="/verUsuario" class="btn btn-primary">Voltar</a>
 

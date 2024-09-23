@@ -14,7 +14,7 @@ class Empresa extends Authenticatable
 
     protected $table = 'tb_empresa';
 
-    public $timestamps = false;
+    public $timestamps = true;
     /*
 |--------------------------------------------------------------------------
 |Definindo chave primaria
@@ -35,11 +35,11 @@ class Empresa extends Authenticatable
     }
 
     protected $fillable = [
-        'emailEmpresa', 
         'usernameEmpresa', 
         'nomeEmpresa', 
+        'emailEmpresa', 
+        'fotoEmpresa',
         'sobreEmpresa',
-        'atuacaoEmpresa',
         'cnpjEmpresa',
         'contatoEmpresa',
         'senhaEmpresa',
@@ -48,8 +48,18 @@ class Empresa extends Authenticatable
         'LogradouroEmpresa',
         'cepEmpresa',
         'numeroLograEmpresa',
+        'idStatus',
     ];
 
+    public function areas()
+{
+    return $this->belongsToMany(Area::class, 'tb_AtuacaoEmpresa', 'idEmpresa', 'idArea');
+}
+
+public function vagas()
+{
+    return $this->hasMany(Vaga::class, 'idEmpresa');
+}
     
 
 }

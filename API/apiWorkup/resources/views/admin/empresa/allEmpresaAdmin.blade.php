@@ -14,9 +14,15 @@
         <p><strong>Email:</strong> {{ $empresa->emailEmpresa }}</p>
         <p><strong>Foto:</strong> {{ $empresa->fotoEmpresa }}</p>
         <p><strong>Sobre :</strong> {{ $empresa->sobreEmpresa }}</p>
-        <p><strong>Atuação:</strong> {{ $empresa->atuacaoEmpresa }}</p>
         <p><strong>Cnpj:</strong> {{ $empresa->cnpjEmpresa }}</p>
         <p><strong>Contato:</strong> {{ $empresa->contatoEmpresa }}</p>
+
+        <h3>Áreas de Atuação:</h3>
+        <ul>
+            @foreach($empresa->areas as $area)
+                <li>{{ $area->nomeArea }}</li> <!-- Exibe o nome da área -->
+            @endforeach
+        </ul>
         <!-- Adicione mais detalhes conforme necessário -->
         <a href="/verEmpresa" class="btn btn-primary">Voltar</a>
 
