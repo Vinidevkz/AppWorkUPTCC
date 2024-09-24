@@ -65,6 +65,10 @@ Route::get('/empresa', function () {
     return view('homeEmpresa');
 });
 
+Route::get('/admin', function () {
+    return view('admin.homeAdmin');
+});
+
 /*
 |--------------------------------------------------------------------------
 | paginas de visualização
@@ -122,3 +126,11 @@ Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::prefix('/admin')->group(function () {
+    Route::get('/', [UsuarioController::class, 'dashboard']);
+});
+
+Route::get('/infoAdmin', function () {
+    return view('admin.infoAdmin');
+});

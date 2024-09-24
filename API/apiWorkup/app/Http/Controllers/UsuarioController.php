@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Area;
 use App\Models\Usuario;
+use App\Models\AreaInteresseUsuario;
+use App\Models\Vaga;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -198,4 +201,72 @@ Validação
 
         return response()->json(['message' => 'Credenciais inválidas'], 401);
     }
-}
+
+
+    // CONTRROLLER PARA AS TELAS DE ADMIN
+    public function dashboard()
+    {
+        $totalUsuariosTecnologia = Area::where('idArea', 1)->count();
+        $totalAreasAlimentacao = Area::where('idArea', 2)->count();
+        $totalUsuariosGestao = Area::where('idArea', 3)->count();
+        $totalUsuariosEngenharia = Area::where('idArea', 4)->count();
+        $totalUsuariosAdministracao = Area::where('idArea',5 )->count();
+        $totalUsuariosMarketing = Area::where('idArea', 2)->count();
+        $totalUsuariosSaude = Area::where('idArea',7 )->count();
+        $totalUsuariosEducacao = Area::where('idArea', 8)->count();
+        $totalUsuariosFinancas = Area::where('idArea', 9)->count();
+        $totalUsuariosRecursosHumanos = Area::where('idArea', 10)->count();
+        $totalUsuariosLogistica = Area::where('idArea', 11)->count();
+        $totalUsuariosDesign = Area::where('idArea', 12)->count();  
+            //   
+        $totalVagaTecnologia = Vaga::where('idArea', 1)->count();
+        $totalVagaMarketing = Vaga::where('idArea', 2)->count();
+        $totalVagaDesigner = Vaga::where('idArea', 3)->count();
+        $totalVagaEngenharia = Vaga::where('idArea', 4)->count();
+        $totalVagaAdministracao = Vaga::where('idArea', 5)->count();
+        $totalVagaGastronomia = Vaga::where('idArea', 6)->count();
+        $totalVagaMedicina = Vaga::where('idArea', 7)->count();
+        $totalVagaEducacao = Vaga::where('idArea', 8)->count();
+        $totalVagaFinanca = Vaga::where('idArea', 9)->count();
+        $totalVagaRh = Vaga::where('idArea', 10)->count();
+        $totalVagaLogistica = Vaga::where('idArea', 11)->count();
+        $totalVagaAlimentacao = Vaga::where('idArea', 12)->count();
+        $totalUsuariosMeioAmbiente = Area::where('idArea', 13)->count();
+        $totalRegistrosVaga = DB::table('tb_vaga')->count();
+        $totalRegistrosUsuario = DB::table('tb_usuario')->count();
+        $totalRegistrosEmpresa = DB::table('tb_empresa')->count();
+        $usuarios = Usuario::all();
+    
+        return view('admin.homeAdmin', [
+            'totalUsuariosTecnologia' => $totalUsuariosTecnologia,
+            'totalUsuariosAlimentacao' => $totalAreasAlimentacao,
+            'totalUsuariosGestao' => $totalUsuariosGestao,
+            'totalUsuariosEngenharia' => $totalUsuariosEngenharia,
+            'totalUsuariosAdministracao' => $totalUsuariosAdministracao,
+            'totalUsuariosMarketing' => $totalUsuariosMarketing,
+            'totalUsuariosSaude' => $totalUsuariosSaude,
+            'totalUsuariosEducacao' => $totalUsuariosEducacao,
+            'totalUsuariosFinancas' => $totalUsuariosFinancas,
+            'totalUsuariosRecursosHumanos' => $totalUsuariosRecursosHumanos,
+            'totalUsuariosLogistica' => $totalUsuariosLogistica,
+            'totalUsuariosDesign' => $totalUsuariosDesign,
+            'totalRegistrosVaga' => $totalRegistrosVaga,
+            'usuarios' => $usuarios,
+            'totalRegistrosUsuario' => $totalRegistrosUsuario,
+            'totalRegistrosEmpresa' => $totalRegistrosEmpresa,
+            'totalVagaTecnologia' => $totalVagaTecnologia,
+            'totalVagaGatronomia' => $totalVagaGastronomia,
+            'totalVagaDesigner' => $totalVagaDesigner,
+            'totalVagaEngenharia' => $totalVagaEngenharia,
+            'totalVagaAdministracao' => $totalVagaAdministracao,
+            'totalVagaMarketing' => $totalVagaMarketing,
+            'totalVagaMedicina' => $totalVagaMedicina,
+            'totalVagaEducacao' => $totalVagaEducacao,
+            'totalVagaFinanca' => $totalVagaFinanca,
+            'totalVagaRh' => $totalVagaRh,
+            'totalVagaLogistica' => $totalVagaLogistica,
+            'totalVagaAlimentacao' => $totalVagaAlimentacao,
+            'totalUsuariosMeioAmbiente' => $totalUsuariosMeioAmbiente
+        ]);
+    }};
+
