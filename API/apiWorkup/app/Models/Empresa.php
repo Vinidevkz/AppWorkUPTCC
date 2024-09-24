@@ -60,6 +60,12 @@ public function vagas()
 {
     return $this->hasMany(Vaga::class, 'idEmpresa');
 }
+
+public function status()
+{
+    return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
+}
+
     
 
 }

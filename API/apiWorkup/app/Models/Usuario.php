@@ -39,6 +39,12 @@ class Usuario extends Model
     {
         return $this->belongsToMany(Area::class, 'tb_AreaInteresseUsuario', 'idUsuario', 'idArea');
     }
+
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
+    }
+
     // public function vagas() : BelongsToMany
     // {
     //     return $this->belongsToMany(Usuario::class, 'tb_vagausuario', 'idUsuario', 'idVaga');

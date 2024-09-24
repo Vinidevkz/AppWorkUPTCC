@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 23/09/2024 às 04:27
+-- Tempo de geração: 24/09/2024 às 04:52
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -86,7 +86,8 @@ CREATE TABLE `tb_areainteresseusuario` (
 
 INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `idArea`, `idUsuario`) VALUES
 (4, 1, 1),
-(5, 2, 2);
+(5, 2, 2),
+(6, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -106,7 +107,9 @@ CREATE TABLE `tb_atuacaoempresa` (
 
 INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `idArea`, `idEmpresa`) VALUES
 (1, 1, 1),
-(2, 2, 3);
+(2, 2, 3),
+(3, 1, 2),
+(4, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -116,8 +119,7 @@ INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `idArea`, `idEmpresa`) VALU
 
 CREATE TABLE `tb_chat` (
   `idChat` int(11) NOT NULL,
-  `mensagemChat` varchar(40) NOT NULL,
-  `conversaChat` varchar(40) NOT NULL,
+  `idMensagem` int(11) NOT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL,
   `idAdmin` int(11) DEFAULT NULL
@@ -163,6 +165,20 @@ INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailE
 (13, 'testeBanco', 'teste', 'teste@tt.com', 't', 't', '1', '12', '$2y$10$rels43zkMss3NrJj.9G8uum6Ftz8J8qXjXI9Q43IAjuSh9/mrNkM6', 's', 's', 'sa', '12', '2', 1, '2024-09-23 00:57:52', '2024-09-23 00:57:52'),
 (14, 'testeBanco', 'teste', 'teste@tt.com', 't', 't', '1', '12', '$2y$10$VJvvpG5WbNGsz84lWpqtCOi7pq4F.hBMmCyc3Umb36UCk6/BGdU3W', 's', 's', 'sa', '12', '2', 1, '2024-09-23 00:59:57', '2024-09-23 00:59:57'),
 (15, 'testeBanco', 'teste', 'teste@tt.com', 't', 't', '1', '12', '$2y$10$Yg4qaSEmOHSrRv6RAPVaHuxoI2BrHfRR7NqPGYaJlME5VMJMKa7cu', 's', 's', 'sa', '12', '2', 1, '2024-09-23 01:00:18', '2024-09-23 01:00:18');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_mensagem`
+--
+
+CREATE TABLE `tb_mensagem` (
+  `idMensagem` int(11) NOT NULL,
+  `idUsuario` int(11) DEFAULT NULL,
+  `idEmpresa` int(11) DEFAULT NULL,
+  `idAdmin` int(11) DEFAULT NULL,
+  `mensagem` varchar(1000) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -216,7 +232,8 @@ CREATE TABLE `tb_status` (
 
 INSERT INTO `tb_status` (`idStatus`, `tipoStatus`) VALUES
 (1, 'Ativo'),
-(2, 'Inativo');
+(2, 'Bloqueado'),
+(3, 'Pendente');
 
 -- --------------------------------------------------------
 
@@ -228,6 +245,15 @@ CREATE TABLE `tb_statusvagausuario` (
   `idStatusVagaUsuario` int(11) NOT NULL,
   `tipoStatusVaga` varchar(40) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_statusvagausuario`
+--
+
+INSERT INTO `tb_statusvagausuario` (`idStatusVagaUsuario`, `tipoStatusVaga`) VALUES
+(1, 'Pendente'),
+(2, 'Chamado'),
+(3, 'Reprovado');
 
 -- --------------------------------------------------------
 
@@ -263,7 +289,7 @@ CREATE TABLE `tb_usuario` (
 
 INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `fotoUsuario`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
 (1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', 'eu.jpg', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', 1, NULL, NULL),
-(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', 'foto1', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', 1, NULL, NULL),
+(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', 'foto1', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', 2, NULL, '2024-09-24 02:26:31'),
 (3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', '(56) 95959-5959', 'foto1', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12', 2, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -296,8 +322,8 @@ CREATE TABLE `tb_vaga` (
 INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidadeVaga`, `estadoVaga`, `beneficiosVaga`, `diferencialVaga`, `idEmpresa`, `idArea`, `idStatus`, `idModalidadeVaga`, `created_at`, `updated_at`) VALUES
 (1, 'Desenvolvedor Front-End', '2024-09-01', 8000.00, 'São Paulo', 'SP', 'Vale Transporte, Vale Alimentação', 'Conhecimento em React é um diferencial', 1, 1, 1, 1, NULL, NULL),
 (2, 'Analista de Marketing', '2024-09-10', 6000.00, 'Rio de Janeiro', 'RJ', 'Plano de Saúde, Seguro de Vida', 'Experiência com campanhas digitais é um ', 2, 1, 1, 2, NULL, NULL),
-(3, 'Gerente de Projetos', '2024-09-15', 12000.00, 'Belo Horizonte', 'MG', 'Bônus por desempenho, Participação nos l', 'Certificação PMP é um diferencial', 3, 2, 1, 3, NULL, NULL),
-(4, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:06:32', '2024-09-23 01:06:32'),
+(3, 'Gerente de Projetos', '2024-09-15', 12000.00, 'Belo Horizonte', 'MG', 'Bônus por desempenho, Participação nos l', 'Certificação PMP é um diferencial', 3, 2, 2, 3, NULL, NULL),
+(4, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 2, 1, '2024-09-23 01:06:32', '2024-09-24 02:16:17'),
 (5, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:06:32', '2024-09-23 01:06:32'),
 (6, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:08:05', '2024-09-23 01:08:05');
 
@@ -310,7 +336,8 @@ INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidade
 CREATE TABLE `tb_vagausuario` (
   `idVagaUsuario` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `idVaga` int(11) NOT NULL
+  `idVaga` int(11) NOT NULL,
+  `idStatusVagaUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -334,6 +361,7 @@ ALTER TABLE `tb_area`
 -- Índices de tabela `tb_areainteresseusuario`
 --
 ALTER TABLE `tb_areainteresseusuario`
+  ADD PRIMARY KEY (`idAreaInteresseUsuario`),
   ADD KEY `idArea` (`idArea`),
   ADD KEY `idUsuario` (`idUsuario`);
 
@@ -341,6 +369,7 @@ ALTER TABLE `tb_areainteresseusuario`
 -- Índices de tabela `tb_atuacaoempresa`
 --
 ALTER TABLE `tb_atuacaoempresa`
+  ADD PRIMARY KEY (`idAtuacaoEmpresa`),
   ADD KEY `idArea` (`idArea`),
   ADD KEY `idEmpresa` (`idEmpresa`);
 
@@ -351,7 +380,8 @@ ALTER TABLE `tb_chat`
   ADD PRIMARY KEY (`idChat`),
   ADD KEY `idEmpresa` (`idEmpresa`),
   ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idAdmin` (`idAdmin`);
+  ADD KEY `idAdmin` (`idAdmin`),
+  ADD KEY `idMensagem` (`idMensagem`);
 
 --
 -- Índices de tabela `tb_empresa`
@@ -359,6 +389,12 @@ ALTER TABLE `tb_chat`
 ALTER TABLE `tb_empresa`
   ADD PRIMARY KEY (`idEmpresa`),
   ADD KEY `idStatus` (`idStatus`);
+
+--
+-- Índices de tabela `tb_mensagem`
+--
+ALTER TABLE `tb_mensagem`
+  ADD PRIMARY KEY (`idMensagem`);
 
 --
 -- Índices de tabela `tb_modalidadevaga`
@@ -410,7 +446,8 @@ ALTER TABLE `tb_vaga`
 ALTER TABLE `tb_vagausuario`
   ADD PRIMARY KEY (`idVagaUsuario`),
   ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idVaga` (`idVaga`);
+  ADD KEY `idVaga` (`idVaga`),
+  ADD KEY `idStatusVagaUsuario` (`idStatusVagaUsuario`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
@@ -429,6 +466,18 @@ ALTER TABLE `tb_area`
   MODIFY `idArea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT de tabela `tb_areainteresseusuario`
+--
+ALTER TABLE `tb_areainteresseusuario`
+  MODIFY `idAreaInteresseUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT de tabela `tb_atuacaoempresa`
+--
+ALTER TABLE `tb_atuacaoempresa`
+  MODIFY `idAtuacaoEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT de tabela `tb_chat`
 --
 ALTER TABLE `tb_chat`
@@ -439,6 +488,12 @@ ALTER TABLE `tb_chat`
 --
 ALTER TABLE `tb_empresa`
   MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de tabela `tb_mensagem`
+--
+ALTER TABLE `tb_mensagem`
+  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_modalidadevaga`
@@ -456,13 +511,13 @@ ALTER TABLE `tb_publicacao`
 -- AUTO_INCREMENT de tabela `tb_status`
 --
 ALTER TABLE `tb_status`
-  MODIFY `idStatus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idStatus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_statusvagausuario`
 --
 ALTER TABLE `tb_statusvagausuario`
-  MODIFY `idStatusVagaUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idStatusVagaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_usuario`
@@ -512,7 +567,8 @@ ALTER TABLE `tb_atuacaoempresa`
 ALTER TABLE `tb_chat`
   ADD CONSTRAINT `tb_chat_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
   ADD CONSTRAINT `tb_chat_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
-  ADD CONSTRAINT `tb_chat_ibfk_3` FOREIGN KEY (`idAdmin`) REFERENCES `tb_admin` (`idAdmin`);
+  ADD CONSTRAINT `tb_chat_ibfk_3` FOREIGN KEY (`idAdmin`) REFERENCES `tb_admin` (`idAdmin`),
+  ADD CONSTRAINT `tb_chat_ibfk_4` FOREIGN KEY (`idMensagem`) REFERENCES `tb_mensagem` (`idMensagem`);
 
 --
 -- Restrições para tabelas `tb_empresa`
@@ -548,7 +604,8 @@ ALTER TABLE `tb_vaga`
 --
 ALTER TABLE `tb_vagausuario`
   ADD CONSTRAINT `idUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `idVaga` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `idVaga` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `tb_vagausuario_ibfk_1` FOREIGN KEY (`idStatusVagaUsuario`) REFERENCES `tb_statusvagausuario` (`idStatusVagaUsuario`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

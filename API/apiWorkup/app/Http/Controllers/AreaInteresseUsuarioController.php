@@ -37,17 +37,7 @@ class AreaInteresseUsuarioController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'idArea'  => 'required',
 
-
-            ],
-            [
-                'idArea.required'  => 'Escolha uma area',
-
-            ]
-        );
         $areaUsuario= new AreaInteresseUsuario();
 
         $areaUsuario->idArea = $request->idArea;

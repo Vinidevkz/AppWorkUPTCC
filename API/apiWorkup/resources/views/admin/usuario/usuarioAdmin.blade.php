@@ -69,8 +69,14 @@
               <thead>
                 <tr>
                   <th>ID</th>
+
                   <th>NOME</th>
                   <th>E-MAIL</th>
+                  @if(request()->has('order') && request()->order == 'status')
+                  <th><a href="{{ route('usuarios.index') }}" class="btn btn-outline-primary">status</th>
+                  @else
+                  <th><a href="{{ route('usuarios.index', ['order' => 'status']) }}" class="btn btn-outline-primary">Status</a>
+                  @endif
                   <th>Ações</th>
                 </tr>
               </thead>
@@ -80,10 +86,11 @@
                     <td>{{ $u->idUsuario }}</td>
                     <td>{{ $u->nomeUsuario }}</td>
                     <td>{{ $u->usernameUsuario }}</td>
+                    <td>{{ $u->status->tipoStatus }}</td>
                     <td>
                       <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
                       <a href="{{ route('usuarios.edit', $u->idUsuario) }}" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
-                      <form action="" method="post" class="d-inline">
+                      <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Deletar</button>

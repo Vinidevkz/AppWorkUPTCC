@@ -18,7 +18,14 @@ class UsuarioController extends Controller
      */
     public function index(Request $request)
     {
-        $usuarios = Usuario::all();
+
+        if ($request->has('order') && $request->order == 'status') {
+            // Ordena para trazer idStatus = 2 primeiro
+            $usuarios = Usuario::with('status')->orderByRaw("FIELD(idStatus, 2, 1), nomeUsuario ASC")->get();
+        } else {
+            // Caso contrário, traz os Usuario normalmente (com idStatus = 1 primeiro)
+            $usuarios = Usuario::with('status')->orderBy('idStatus', 'asc')->get();
+        }
 
         if ($request->ajax()) {
             return response()->json($usuarios); // Retorna JSON se for uma requisição AJAX
@@ -94,7 +101,7 @@ Validação
         $usuario->sobreUsuario = $request->sobreUsuario;
         $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
         $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
-        $usuario->idStatus = 1;
+        $usuario->idStatus = 3;
 
         $usuario->save();
         return response()->json($usuario);
@@ -178,9 +185,21 @@ Validação
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+                // Encontra o usuario pelo ID
+                $usuario = Usuario::findOrFail($id);
+    
+                // Atualiza o status da usuario para 2
+                $usuario->update(['idStatus' => 2]);
+            
+                // Verifica se a requisição foi feita via AJAX
+                if ($request->ajax()) {
+                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
+                }
+            
+                // Redireciona para a lista de usuarios com mensagem de sucesso
+                return redirect('/verUsuario')->with('success', 'Vaga atualizada com sucesso.');
     }
 
     public function login(Request $request)

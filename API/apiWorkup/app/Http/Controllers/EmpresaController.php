@@ -16,7 +16,13 @@ class EmpresaController extends Controller
      */
     public function index(Request $request)
     {
-        $empresas = Empresa::all();
+        if ($request->has('order') && $request->order == 'status') {
+            // Ordena para trazer idStatus = 2 primeiro
+            $empresas = Empresa::with('status')->orderByRaw("FIELD(idStatus, 2, 1), nomeEmpresa ASC")->get();
+        } else {
+            // Caso contrário, traz as empresas normalmente (com idStatus = 1 primeiro)
+            $empresas = Empresa::with('status')->orderBy('idStatus', 'asc')->get();
+        }
 
         if ($request->ajax()) {
             return response()->json($empresas); // Retorna JSON se for uma requisição AJAX
@@ -93,7 +99,7 @@ Validação
         $empresa->LogradouroEmpresa = $request->LogradouroEmpresa;
         $empresa->cepEmpresa = $request->cepEmpresa;
         $empresa->numeroLograEmpresa = $request->numeroLograEmpresa;
-        $empresa->idStatus = 1;
+        $empresa->idStatus = 3;
 
         $empresa->save();
         return view('/verEmpresa');
@@ -165,8 +171,21 @@ Validação
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        // Encontra a empresa pelo ID
+        $empresa = Empresa::findOrFail($id);
+    
+        // Atualiza o status da empresa para 2
+        $empresa->update(['idStatus' => 2]);
+    
+        // Verifica se a requisição foi feita via AJAX
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Empresa atualizada com sucesso']);
+        }
+    
+        // Redireciona para a lista de empresas com mensagem de sucesso
+        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
     }
-}
+    }
+

@@ -37,11 +37,9 @@ class Vaga extends Model
     }
 
     
-
-
     public function status()
     {
-        return $this->belongsTo(Status::class, 'idStatus');
+        return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
     }
 
     public function modalidade()

@@ -4,13 +4,11 @@ use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\LoginController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaEmpresaController;
 use App\Http\Controllers\AreaInteresseUsuarioController;
 use App\Http\Controllers\VagaUsuarioController;
-use App\Models\AreaInteresseUsuario;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,15 +35,16 @@ Route::post('/formAdmin', [AdminController::class, 'store']);
 
 Route::post('/formArea', [AreaController::class, 'store']);
 
-/*provavelmente vai pra api
+Route::post('/areaEmpresa', [AreaEmpresaController::class,'store']);
+
+
+/* na api provavelmente
 
 Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
 
-Route::post('/areaEmpresa', [AreaEmpresaController::class,'store']);
-
 Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
-
 */
+
 
 /*
 |--------------------------------------------------------------------------
@@ -73,21 +72,27 @@ Route::get('/empresa', function () {
 */
 
 // Usuario
-Route::get('/verUsuario', [UsuarioController::class, 'index']);
+Route::get('/verUsuario', [UsuarioController::class, 'index'])->name('usuarios.index');
 
 Route::get('/usuarios/{id}', [UsuarioController::class, 'show'])->name('usuarios.show');
 
+Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.delete');
+
 // Empresa
 
-Route::get('/verEmpresa', [EmpresaController::class, 'index']);
+Route::get('/verEmpresa', [EmpresaController::class, 'index'])->name('empresas.index');
 
 Route::get('/empresas/{id}', [EmpresaController::class, 'show'])->name('empresas.show');
 
+Route::delete('/Empresas/{id}', [EmpresaController::class, 'destroy'])->name('empresas.delete');
+
 // Vaga
 
-Route::get('/verVaga', [VagaController::class, 'index']);
+Route::get('/verVaga', [VagaController::class, 'index'])->name('vagas.index');
 
 Route::get('/vagas/{id}', [VagaController::class, 'show'])->name('vagas.show');
+
+Route::delete('/vagas/{id}', [VagaController::class, 'destroy'])->name('vagas.delete');
 
 /*
 |--------------------------------------------------------------------------
@@ -104,6 +109,7 @@ Route::put('/usuarios/{id}', [UsuarioController::class, 'update'])->name('usuari
 Route::get('/Empresas/{id}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
 
 Route::put('/Empresas/{id}', [EmpresaController::class, 'update'])->name('empresas.update');
+
 
 //Vaga
 Route::get('/Vagas/{id}/edit', [VagaController::class, 'edit'])->name('vagas.edit');

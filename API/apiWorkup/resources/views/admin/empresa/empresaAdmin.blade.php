@@ -62,17 +62,26 @@
         <div class="card bg-dark" style="--bs-bg-opacity: .8;">
           <div class="card-header">
             <h1>Empresas <span class="bi bi-people"></span></h1>
-            <a href="/cadastrarEmpresa" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;Adicionar usuários</a>
-            <a href="/Area" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;Area</a>
+            <a href="/cadastrarEmpresa" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;Acho que pode tirar</a>
+            <a href="/Area" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;cadastrar Area precisa ficar em outro lugar</a>
           </div>
           <div class="card-body">
+
             <table class="table table-dark table-striped">
               <thead>
                 <tr>
                   <th>ID</th>
                   <th>NOME</th>
                   <th>E-MAIL</th>
-                  <th>Ações</th>
+
+                  <!-- para procurar pelo status -->
+                  @if(request()->has('order') && request()->order == 'status')
+                  <th><a href="{{ route('empresas.index') }}" class="btn btn-outline-primary">status</th>
+                  @else
+                  <th><a href="{{ route('empresas.index', ['order' => 'status']) }}" class="btn btn-outline-primary">Status</a>
+                  @endif
+
+<th>Ações</th>
                 </tr>
               </thead>
               <tbody>
@@ -81,11 +90,12 @@
                     <td>{{ $em->idEmpresa }}</td>
                     <td>{{ $em->nomeEmpresa }}</td>
                     <td>{{ $em->usernameEmpresa }}</td>
+                    <td>{{ $em->status->tipoStatus}}</td>
                     <td>
                       <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
                       <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
 
-                      <form action="" method="post" class="d-inline">
+                      <form action="{{ route('empresas.delete', $em->idEmpresa) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
                         <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Deletar</button>

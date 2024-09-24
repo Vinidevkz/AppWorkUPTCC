@@ -52,6 +52,7 @@ class VagaUsuarioController extends Controller
 
         $vagasUsuario->idVaga= $request->idVaga;
         $vagasUsuario->idUsuario = $request->idUsuario;
+        $vagasUsuario->idStatusVagaUsuario = 1;
 
 
         $vagasUsuario->save();

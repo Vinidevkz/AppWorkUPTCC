@@ -20,15 +20,21 @@ class VagaController extends Controller
 |Definindo para alem de pegar informaçoes de vaga pegar tbm de empresa
 |--------------------------------------------------------------------------
 */
-
-$vagas = Vaga::with('empresa')->get();
+if ($request->has('order') && $request->order == 'status') {
+    // Ordena para trazer idStatus = 2 primeiro
+    $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')->orderByRaw("FIELD(idStatus, 2, 1), nomeVaga ASC")->get();
+} else {
+    $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')->orderBy('idStatus', 'asc')->get();
+}
 
 if ($request->ajax()) {
     return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
 }
 
-// Caso contrário, retorna a view com os usuários
+// Caso contrário, retorna a view com as vagas
 return view('admin.vaga.vagaAdmin', compact('vagas'));
+
+
     }
 
     /**
@@ -94,7 +100,7 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
         $vaga->diferencialVaga = $request->diferencialVaga;
         $vaga->idEmpresa = $request->idEmpresa;
         $vaga->idArea = $request->idArea;
-        $vaga->idStatus = 1;
+        $vaga->idStatus = 3;
         $vaga->idModalidadeVaga = $request->idModalidadeVaga;
 
         $vaga->save();
@@ -110,6 +116,8 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
      */
     public function show($id)
     {
+
+        
         $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); // Retorna 404 se não encontrar
 
         return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
@@ -167,8 +175,20 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+                // Encontra a vaga pelo ID
+                $vaga = Vaga::findOrFail($id);
+    
+                // Atualiza o status da vaga para 2
+                $vaga->update(['idStatus' => 2]);
+            
+                // Verifica se a requisição foi feita via AJAX
+                if ($request->ajax()) {
+                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
+                }
+            
+                // Redireciona para a lista de vagas com mensagem de sucesso
+                return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
     }
 }

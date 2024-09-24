@@ -12,18 +12,15 @@ class VagaUsuario extends Model
 
     protected $table = 'tb_VagaUsuario';
 
+    protected $primaryKey = 'idVagaUsuario';
+
     public $timestamps = false;
 
     protected $fillable = [
         'idUsuario',
         'idVaga',
+        'StatusVagaUsuario',
     ];
-
-/*
-|--------------------------------------------------------------------------
-|Definindo chave primaria
-|--------------------------------------------------------------------------
-*/
-    protected $primaryKey = 'idVagaUsuario';
+    
 
 }
