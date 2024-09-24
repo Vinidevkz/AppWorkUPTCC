@@ -166,7 +166,7 @@ location_city
     <tbody>
       <tr class="p-3">
         <td class="">
-        <div class="grafico-barras d-flex flex-row">
+        <div class="grafico-barras d-flex flex-row justify-content-center align-items-center">
           <!-- <canvas id="pizzaGraph"></canvas> -->
           <div id="piechart_3d"></div>
      
