@@ -274,3 +274,45 @@ table{
 /* .underline{
   text-decoration: underline;
 } */
+ .btn-acoes{
+  width: 72px;
+  margin: 0;
+  text-align: center;
+ }
+ .blue{
+   background-color: rgba(32, 107, 196, 0.05);
+   width: 70px;
+   text-align: center;
+ }
+ .btn-acoes-add{
+  border: 1px solid var(--clr-primary);
+  border-radius: 0;
+  font-size: 0.9rem;
+  padding: 2px;
+ }
+ .btn-acoes-add:hover{
+  color: white;
+  background-color: var(--clr-primary);
+ }
+ .nav-list{
+  list-style: none;
+ }
+ .text-adm{
+  font-size: 0.7rem;
+  margin-right: 2px;
+ }
+ .table-user{
+  font-size: 0.8rem;
+ }
+ .user-initials {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 10px;
+  background-color: orange;
+}

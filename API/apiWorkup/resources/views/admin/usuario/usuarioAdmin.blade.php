@@ -13,78 +13,160 @@
 </head>
 
 <body>
-<nav class="navbar">
-  <div class="d-flex align-items-center justify-content-center">
-    <a class="navbar-brand text-light" href="#">Work<span class="verde">Up</span></a>
-  </div>
-</nav>
+<header class="">
+
+
+<p class="text-light fs-4 fw-bold">Work<span class="verde">Up</span></p>
+<div class="d-flex flex-row align-items-center justify-content-center">
+  <div class="d-flex flex-column justify-content-center align-items-start p-2">
+<p class="text-light text-adm p-0 m-0">Técnico - admin</p>
+<p class="text-light text-adm m-0">WorkUp - Ti</p>
+</div>
+<div class="dropdown d-flex flex-row">
+ <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="material-symbols-outlined text-light ">
+keyboard_arrow_down
+</span>
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Log out</a></li>
+  </ul>
+</div>
+</div>
+
+
+</header>
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-3">
-      <div class="aside-container container">
+  <div class="col-2">
+      <div class="aside-container">
         <aside>
-          <div class="aside-sidebar">
-            <a href="index.php" class="aside-active">
-              <span class="material-symbols-outlined">grid_view</span>
-              <h3>Dashboard</h3>
-            </a>
-            <a href="/verUsuario">
-              <span class="material-symbols-outlined">person</span>
-              <h3>Usuários</h3>
-            </a>
-            <a href="./verVaga">
-              <span class="material-symbols-outlined">work</span>
-              <h3>Vagas</h3>
-            </a>
-            <a href="/verEmpresa">
-              <span class="material-symbols-outlined">apartment</span>
-              <h3>Empresas</h3>
-            </a>
-            <a href="">
-              <span class="material-symbols-outlined">settings</span>
-              <h3>Configurações</h3>
-            </a>
-            <a href="">
-              <span class="material-symbols-outlined">info</span>
-              <h3>Suporte</h3>
-            </a>
-            <a href="">
-              <span class="material-symbols-outlined">logout</span>
-              <h3>Sair</h3>
-            </a>
-          </div>
+          <div class="aside-sidebar d-flex flex-column">
+
+            <div class="d-flex">
+              <a href="/admin" class="aside-active d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">grid_view</span>
+                Dashboard
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/verUsuario" class="d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">person</span>
+                Usuários
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/verVaga" class="d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">work</span>
+                Vagas
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/verEmpresa" class="d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">apartment</span>
+                Empresas
+              </a>
+            </div>
+
+            <div class="">
+              <a href="/infoAdmin" class="d-flex flex-row align-items-center h6">
+              <span class="material-symbols-outlined p-2">info</span>
+                Info
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/SuporteAdmin" class="d-flex flex-row align-items-center h6" id="btn-support">
+                <span class="material-symbols-outlined p-2">info</span>
+                Suporte
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="" class="d-flex flex-row align-items-center h6" id="btn-exit">
+                <span class="material-symbols-outlined p-2">logout</span>
+                Sair
+              </a>
+            </div>
         </aside>
       </div>
     </div>
 
-    <div class="col-md-9">
-      <div class="container md-4">
-        <div class="card bg-dark" style="--bs-bg-opacity: .8;">
-          <div class="card-header">
-            <h1>USUÁRIOS <span class="bi bi-people"></span></h1>
-            <a href="" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;Adicionar usuários</a>
+    <div class="col-md-9 mt-4">
+
+      <div class="">
+        <ul class="nav-list list-group list-group-horizontal list-none p-2">
+          <li class="p-1 d-flex flex-row justify-content-center"><span class="material-symbols-outlined p-1">
+grid_view
+</span><a href="#" class="text-dark p-1">Dashboard</a></li>
+          <li class="p-2">/</li>
+          <li class="p-1 d-flex flex-row justify-content-center"><span class="material-symbols-outlined p-1">
+person
+</span><a href="#" class="text-dark p-1">Usuários</a></li>
+        </ul>
+      </div>
+
+      <div class="container md-4 mt-3">
+
+      <div class="d-flex flex-row ">
+        <div class="blue d-flex align-items-center justify-content-center">
+        <p class="m-0 fw-bold text-center">Ação</p>
+        </div>
+        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row ">
+        <span class="material-symbols-outlined m-1">
+person_add
+</span>
+       <p class="m-0 p-0 m-1">Adicionar usuários</p>
+      </div>
+    </div>
+     
+        <div class="card mt-3">
+        <table class="table table-striped m-0 table-user">
+         
+            <div class="">
+          <thead>
+            <tr>
+              <td class="fw-bold">Id</td>
+              <td class="fw-bold">Usuário</td>
+              <td>
+                <div class="d-flex align-items-center">
+                <span class="material-symbols-outlined">
+alternate_email
+</span>
+<p class="m-0 fw-bold">E-mail</p>
+                </div>
+              </td>
+              <td>
+                <div class="d-flex align-items-center">
+                <span class="material-symbols-outlined">
+autorenew
+</span>
+<p class="m-0 fw-bold">Status</p>
+                </div>
+              </td>
+              <td > <div class="d-flex btn-acoes align-items-center">
+              <span class="material-symbols-outlined">
+keyboard_double_arrow_down
+</span>
+<p class="m-0 fw-bold">Ações</p>
+              </div></td>
+            </tr>
+          </thead>
           </div>
           <div class="card-body">
-            <table class="table table-dark table-striped">
-              <thead>
-                <tr>
-                  <th>ID</th>
-
-                  <th>NOME</th>
-                  <th>E-MAIL</th>
-                  @if(request()->has('order') && request()->order == 'status')
-                  <th><a href="{{ route('usuarios.index') }}" class="btn btn-outline-primary">status</th>
-                  @else
-                  <th><a href="{{ route('usuarios.index', ['order' => 'status']) }}" class="btn btn-outline-primary">Status</a>
-                  @endif
-                  <th>Ações</th>
-                </tr>
-              </thead>
-              <tbody>
-                @forelse($usuarios as $u) <!-- Usando um alias diferente -->
+          <tbody>
+          @forelse($usuarios as $u) <!-- Usando um alias diferente -->
                   <tr>
                     <td>{{ $u->idUsuario }}</td>
-                    <td>{{ $u->nomeUsuario }}</td>
+                    <td class="d-flex flex-row">
+                       <!-- Imagem gerada com as iniciais -->
+          <div class="user-initials">
+            {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
+          </div>  
+                    
+                    {{ $u->nomeUsuario }}</td>
                     <td>{{ $u->usernameUsuario }}</td>
                     <td>{{ $u->status->tipoStatus }}</td>
                     <td>
@@ -102,10 +184,12 @@
                     <td colspan="4">Nenhum usuário encontrado.</td>
                   </tr>
                 @endforelse
-              </tbody>
-            </table>
+          </tbody>
           </div>
+          
+        </table>
         </div>
+      </div>
       </div>
     </div>
   </div>
