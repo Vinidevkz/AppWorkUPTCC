@@ -35,6 +35,7 @@ keyboard_arrow_down
 
 
 </header>
+
 <div class="container-fluid">
   <div class="row">
   <div class="col-2">
@@ -105,6 +106,7 @@ grid_view
           <li class="p-1 d-flex flex-row justify-content-center"><span class="material-symbols-outlined p-1">
 person
 </span><a href="#" class="text-dark p-1">Usuários</a></li>
+
         </ul>
       </div>
 
@@ -122,7 +124,7 @@ person_add
       </div>
     </div>
      
-        <div class="card mt-3">
+        <div class="card mt-3" style="border-radius: 0;">
         <table class="table table-striped m-0 table-user">
          
             <div class="">
@@ -157,11 +159,11 @@ keyboard_double_arrow_down
           </div>
           <div class="card-body">
           <tbody>
-          @forelse($usuarios as $u) <!-- Usando um alias diferente -->
+          @forelse($usuarios as $u) 
                   <tr>
                     <td>{{ $u->idUsuario }}</td>
                     <td class="d-flex flex-row">
-                       <!-- Imagem gerada com as iniciais -->
+                     
           <div class="user-initials">
             {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
           </div>  

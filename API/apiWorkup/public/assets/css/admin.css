@@ -314,5 +314,5 @@ table{
   font-weight: bold;
   text-transform: uppercase;
   margin-right: 10px;
-  background-color: orange;
+  background-color: var(--clr-primary);
 }
