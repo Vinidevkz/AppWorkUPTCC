@@ -276,37 +276,43 @@ location_city
     // CONFIGURAÇÕES DO GRÁFICO DE BARRAS
 // CONFIGURAÇÕES DO GRÁFICO DE BARRAS
 
-const labelsBarChart = ['Tecnologia', 'Alimentação', 'Meio Ambiente', 'Engenharia', 'Administração',  'Marketing', 'Saúde',' Educação', ' Finanças',' Recursos Humanos', 'Logística','Design'];
-const totalUsuariosTecnologia = {{ $totalUsuariosTecnologia }};
-const totalUsuariosAlimentacao = {{ $totalUsuariosAlimentacao }};
-const totalUsuariosMeioAmbiente = {{ $totalUsuariosMeioAmbiente }};
-const totalUsuariosEngenharia = {{ $totalUsuariosEngenharia }};
-const totalUsuariosAdministracao = {{ $totalUsuariosAdministracao }};
-const totalUsuariosMarketing = {{ $totalUsuariosMarketing }};
-const totalUsuariosSaude = {{ $totalUsuariosSaude }};
-const totalUsuariosEducacao = {{ $totalUsuariosEducacao }};
-const totalUsuariosFinancas = {{ $totalUsuariosFinancas }};
-const totalUsuariosRecursosHumanos = {{ $totalUsuariosRecursosHumanos }};
-const totalUsuariosLogistica = {{ $totalUsuariosLogistica }};
-const totalUsuariosDesign = {{ $totalUsuariosDesign }};
+const labelsBarChart = ['Tecnologia', 'Marketing', 'Gestão', 'Gastronomia', 'Administração', 'Medicina', 'Educação', 'Finança', 'Recursos Humanos', 'Logística', 'Alimentação', 'Serviços Gerais', 'Higienização', 'Enegenharia', 'Meio Ambiente'];
+const totalUsuarioTecnologia = {{$totalUsuariosTecnologia}};
+const totalUsuarioMarketing = {{$totalUsuariosMarketing}};
+const totalUsuarioGestao = {{$totalUsuariosGestao}};
+const totalUsuarioGastronomia = {{$totalUsuarioGastronomia}};
+const totalUsuariosAdministracao = {{$totalUsuariosAdministracao}};
+const totalUsuarioMedicina = {{$totalUsuarioMedicina}};
+const totalUsuarioEducacao = {{$totalUsuariosEducacao}};
+const totalUsuarioFinanca = {{$totalUsuariosFinancas}};
+const totalUsuarioRecursosHumanos = {{$totalUsuariosRecursosHumanos}};
+const totalUsuarioLogistica = {{$totalUsuariosLogistica}};
+const totalUsuarioAlimentacao = {{$totalUsuariosAlimentacao}};
+const totalUsuarioServicosGerais = {{$totalUsuariosServicosGerais}};
+const totalUsuarioHigienizacao = {{$totalUsuarioHigienizacao}};
+const totalUsuarioEngenharia = {{$totalUsuariosEngenharia}};
+const totalUsuariosMeioAmbiente = {{$totalUsuariosMeioAmbiente}};
  // Corrigido
 const dataBarChart = {
   labels: labelsBarChart,
   datasets: [{
     label: 'Interesse dos usuário por áreas',
     data: [
-  totalUsuariosTecnologia,
-  totalUsuariosAlimentacao,
-  totalUsuariosMeioAmbiente,
-  totalUsuariosEngenharia,
+  totalUsuarioTecnologia,
+  totalUsuarioMarketing,
+  totalUsuarioGestao,
+  totalUsuarioGastronomia,
   totalUsuariosAdministracao,
-  totalUsuariosMarketing,
-  totalUsuariosSaude,
-  totalUsuariosEducacao,
-  totalUsuariosFinancas,
-  totalUsuariosRecursosHumanos,
-  totalUsuariosLogistica,
-  totalUsuariosDesign
+  totalUsuarioMedicina,
+  totalUsuarioEducacao,
+  totalUsuarioFinanca,
+  totalUsuarioRecursosHumanos,
+  totalUsuarioLogistica,
+  totalUsuarioAlimentacao,
+  totalUsuarioServicosGerais,
+  totalUsuarioHigienizacao,
+  totalUsuarioEngenharia,
+  totalUsuariosMeioAmbiente
 ],
 backgroundColor: [
   '#20dd77',    // Tecnologia
@@ -361,7 +367,6 @@ var myBarChart = new Chart(
 
 // const totalVagaTecnologia = {{ $totalVagaTecnologia }};
 // const totalVagaGatronomia = {{$totalVagaGatronomia}};
-// const totalVagaDesigner = {{$totalVagaDesigner}};
 // const totalVagaEngenharia = {{$totalVagaEngenharia}};
 // const totalVagaAdministracao = {{$totalVagaAdministracao}};
 // const totalVagaMarketing = {{$totalVagaMarketing}};
@@ -536,7 +541,6 @@ var myBarChart = new Chart(
 // GRÁFICO DE ROSCA DO GOOGLE
 const totalVagaTecnologia = {{ $totalVagaTecnologia }};
 const totalVagaGatronomia = {{$totalVagaGatronomia}};
-const totalVagaDesigner = {{$totalVagaDesigner}};
 const totalVagaEngenharia = {{$totalVagaEngenharia}};
 const totalVagaAdministracao = {{$totalVagaAdministracao}};
 const totalVagaMarketing = {{$totalVagaMarketing}};
@@ -546,23 +550,30 @@ const totalVagaFinanca = {{$totalVagaFinanca}};
 const totalVagaRh = {{$totalVagaRh}};
 const totalVagaLogistica = {{$totalVagaLogistica}};
 const totalVagaAlimentacao = {{$totalVagaAlimentacao}};
+const totalVagaGestao = {{$totalVagaGestao}};
+const totalVagaHigienizacao = {{$totalVagaHigienizacao}};
+const totalVagaServiçosGerais = {{$totalVagaServiçosGerais}};
+const totalVagaMeioAmbiente = {{$totalVagaMeioAmbiente}};
 google.charts.load("current", {packages:["corechart"]});
       google.charts.setOnLoadCallback(drawChart);
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Task', 'Total de vagas por setor'],
           ['Tecnologia',     totalVagaTecnologia],
-          ['Gastronomia',      totalVagaGatronomia],
-          ['Dsigner',  totalVagaDesigner],
-          ['Enegenharia', totalVagaEngenharia],
+          ['Marketing',      totalVagaMarketing],
+          ['Gestão',  totalVagaGestao],
+          ['Gastronomia', totalVagaGatronomia],
           ['Administração',    totalVagaAdministracao],
-          ['Marketing', totalVagaMarketing],
           ['Medicina', totalVagaMedicina],
           ['Educação', totalVagaEducacao],
           ['Finança', totalVagaFinanca],
-          ['Rh', totalVagaRh],
+          ['Recursos Humanos', totalVagaRh],
           ['Logística', totalVagaLogistica],
-          ['Alimentação', totalVagaAlimentacao]
+          ['Alimentação', totalVagaAlimentacao],
+          ['Serviços Gerais', totalVagaServiçosGerais],
+          ['Higienização', totalVagaHigienizacao],
+          ['Engenharia', totalVagaEngenharia],
+          ['Meio Ambiente', totalVagaLogistica],
         ]);
 
         var options = {
