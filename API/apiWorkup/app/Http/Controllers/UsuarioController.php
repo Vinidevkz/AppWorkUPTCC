@@ -242,38 +242,39 @@ Validação
     // CONTRROLLER PARA AS TELAS DE ADMIN
     public function dashboard()
     {
-        $totalUsuariosTecnologia = Usuario::where('areaInteresseUsuario', 'Tecnologia')->count();
-        $totalUsuariosAlimentacao = Usuario::where('areaInteresseUsuario', 'Alimentação')->count();
-        $totalUsuariosGestao = Usuario::where('areaInteresseUsuario', 'Gestão')->count();
-        $totalUsuarioGastronomia = Usuario::where('areaInteresseUsuario', 'Gastronomia')->count();
-        $totalUsuariosEngenharia = Usuario::where('areaInteresseUsuario', 'Engenharia')->count();
-        $totalUsuariosAdministracao = Usuario::where('areaInteresseUsuario', 'Administração')->count();
-        $totalUsuariosMarketing = Usuario::where('areaInteresseUsuario', 'Marketing')->count();
-        $totalUsuariosEducacao = Usuario::where('areaInteresseUsuario', 'Educação')->count();
-        $totalUsuariosFinancas = Usuario::where('areaInteresseUsuario', 'Finanças')->count();
-        $totalUsuariosRecursosHumanos = Usuario::where('areaInteresseUsuario', 'Recursos Humanos')->count();
-        $totalUsuariosLogistica = Usuario::where('areaInteresseUsuario', 'Logística')->count();
-        $totalUsuariosServicosGerais = Usuario::where('areaInteresseUsuario', 'Serviços Gerais')->count();
-        $totalUsuariosMeioAmbiente = Usuario::where('areaInteresseUsuario', 'Meio Ambiente')->count();
-        $totalUsuarioMedicina = Usuario::where('areaInteresseUsuario', 'Medicina')->count();
-        $totalUsuarioHigienizacao = Usuario::where('areaInteresseUsuario', 'Higienização')->count();  
+        $totalUsuariosTecnologia = AreaInteresseUsuario::where('idArea', 1)->count();
+        $totalUsuariosAlimentacao = AreaInteresseUsuario::where('idArea', 11)->count();
+        $totalUsuariosGestao = AreaInteresseUsuario::where('idArea', 3)->count();
+        $totalUsuarioGastronomia = AreaInteresseUsuario::where('idArea', 4)->count();
+        $totalUsuariosEngenharia = AreaInteresseUsuario::where('idArea', 14)->count();
+        $totalUsuariosAdministracao = AreaInteresseUsuario::where('idArea', 5)->count();
+        $totalUsuariosMarketing = AreaInteresseUsuario::where('idArea', 2)->count();
+        $totalUsuariosEducacao = AreaInteresseUsuario::where('idArea', 7)->count();
+        $totalUsuariosFinancas = AreaInteresseUsuario::where('idArea', 8)->count();
+        $totalUsuariosRecursosHumanos = AreaInteresseUsuario::where('idArea', 9)->count();
+        $totalUsuariosLogistica = AreaInteresseUsuario::where('idArea', 10)->count();
+        $totalUsuariosServicosGerais = AreaInteresseUsuario::where('idArea', 12)->count();
+        $totalUsuariosMeioAmbiente = AreaInteresseUsuario::where('idArea', 15)->count();
+        $totalUsuarioMedicina = AreaInteresseUsuario::where('idArea', 6)->count();
+        $totalUsuarioHigienizacao = AreaInteresseUsuario::where('idArea', 13)->count();
+        
 
 
-        $totalVagaTecnologia = Vaga::where('idAreaVaga', 1)->count();
-        $totalVagaMarketing = Vaga::where('idAreaVaga', 2)->count();
-        $totalVagaGestao = Vaga::where('idAreaVaga', 3)->count();
-        $totalVagaEngenharia = Vaga::where('idAreaVaga', 14)->count();
-        $totalVagaAdministracao = Vaga::where('idAreaVaga', 5)->count();
-        $totalVagaGastronomia = Vaga::where('idAreaVaga', 4)->count();
-        $totalVagaMedicina = Vaga::where('idAreaVaga', 6)->count();
-        $totalVagaEducacao = Vaga::where('idAreaVaga', 7)->count();
-        $totalVagaFinanca = Vaga::where('idAreaVaga', 8)->count();
-        $totalVagaRh = Vaga::where('idAreaVaga', 9)->count();
-        $totalVagaLogistica = Vaga::where('idAreaVaga', 10)->count();
-        $totalVagaAlimentacao = Vaga::where('idAreaVaga', 11)->count();
-        $totalVagaMeioAmbiente = Vaga::where('idAreaVaga', 15)->count();
-        $totalVagaServiçosGerais = Vaga::where('idAreaVaga', 12)->count();
-        $totalVagaHigienizacao = Vaga::where('idAreaVaga', 13)->count();
+        $totalVagaTecnologia = Vaga::where('idArea', 1)->count();
+        $totalVagaMarketing = Vaga::where('idArea', 2)->count();
+        $totalVagaGestao = Vaga::where('idArea', 3)->count();
+        $totalVagaEngenharia = Vaga::where('idArea', 14)->count();
+        $totalVagaAdministracao = Vaga::where('idArea', 5)->count();
+        $totalVagaGastronomia = Vaga::where('idArea', 4)->count();
+        $totalVagaMedicina = Vaga::where('idArea', 6)->count();
+        $totalVagaEducacao = Vaga::where('idArea', 7)->count();
+        $totalVagaFinanca = Vaga::where('idArea', 8)->count();
+        $totalVagaRh = Vaga::where('idArea', 9)->count();
+        $totalVagaLogistica = Vaga::where('idArea', 10)->count();
+        $totalVagaAlimentacao = Vaga::where('idArea', 11)->count();
+        $totalVagaMeioAmbiente = Vaga::where('idArea', 15)->count();
+        $totalVagaServiçosGerais = Vaga::where('idArea', 12)->count();
+        $totalVagaHigienizacao = Vaga::where('idArea', 13)->count();
         $totalRegistrosVaga = DB::table('tb_vaga')->count();
 
         $totalRegistrosUsuario = DB::table('tb_usuario')->count();

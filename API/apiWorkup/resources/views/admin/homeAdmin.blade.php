@@ -299,20 +299,20 @@ const dataBarChart = {
     label: 'Interesse dos usuário por áreas',
     data: [
   totalUsuarioTecnologia,
-  totalUsuarioAlimentacao,
-  totalUsuariosMeioAmbiente,
-  totalUsuarioEngenharia,
-  totalUsuariosAdministracao,
   totalUsuarioMarketing,
+  totalUsuarioGestao,
+  totalUsuarioGastronomia,
+  totalUsuariosAdministracao,
+  totalUsuarioMedicina,
   totalUsuarioEducacao,
   totalUsuarioFinanca,
   totalUsuarioRecursosHumanos,
   totalUsuarioLogistica,
-  totalUsuarioGastronomia,
-  totalUsuarioHigienizacao,
+  totalUsuarioAlimentacao,
   totalUsuarioServicosGerais,
-  totalUsuariosMeioAmbiente,
-  totalUsuarioGestao
+  totalUsuarioHigienizacao,
+  totalUsuarioEngenharia,
+  totalUsuariosMeioAmbiente
 ],
 backgroundColor: [
   '#20dd77',    // Tecnologia
