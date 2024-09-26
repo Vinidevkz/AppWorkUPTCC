@@ -82,6 +82,8 @@ Route::get('/usuarios/{id}', [UsuarioController::class, 'show'])->name('usuarios
 
 Route::delete('/usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.delete');
 
+Route::Post('/usuarios/{id}', [UsuarioController::class, 'aprovar'])->name('usuarios.aprovar');
+
 // Empresa
 
 Route::get('/verEmpresa', [EmpresaController::class, 'index'])->name('empresas.index');
@@ -90,6 +92,8 @@ Route::get('/empresas/{id}', [EmpresaController::class, 'show'])->name('empresas
 
 Route::delete('/Empresas/{id}', [EmpresaController::class, 'destroy'])->name('empresas.delete');
 
+Route::Post('/Empresas/{id}', [EmpresaController::class, 'aprovar'])->name('empresas.aprovar');
+
 // Vaga
 
 Route::get('/verVaga', [VagaController::class, 'index'])->name('vagas.index');
@@ -97,6 +101,8 @@ Route::get('/verVaga', [VagaController::class, 'index'])->name('vagas.index');
 Route::get('/vagas/{id}', [VagaController::class, 'show'])->name('vagas.show');
 
 Route::delete('/vagas/{id}', [VagaController::class, 'destroy'])->name('vagas.delete');
+
+Route::Post('/vagas/{id}', [VagaController::class, 'aprovar'])->name('vagas.aprovar');
 
 /*
 |--------------------------------------------------------------------------

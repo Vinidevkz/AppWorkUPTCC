@@ -187,5 +187,22 @@ Validação
         // Redireciona para a lista de empresas com mensagem de sucesso
         return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
     }
+
+    public function aprovar(Request $request, $id)
+    {
+        // Encontra a empresa pelo ID
+        $empresa = Empresa::findOrFail($id);
+    
+        // Atualiza o status da empresa para 2
+        $empresa->update(['idStatus' => 1]);
+    
+        // Verifica se a requisição foi feita via AJAX
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Empresa atualizada com sucesso']);
+        }
+    
+        // Redireciona para a lista de empresas com mensagem de sucesso
+        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
     }
+}
 

@@ -113,13 +113,6 @@
                     <input type="text" name="fotoAdmin" placeholder="fotoAdmin" value="{{ old('fotoAdmin') }}">
                 </div>
 
-                @error('idStatus')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="idStatus" placeholder="idStatus" value="{{ old('idStatus') }}">
-                </div>
 
                 <button class="btnRegister">
                     <p>Register</p>
