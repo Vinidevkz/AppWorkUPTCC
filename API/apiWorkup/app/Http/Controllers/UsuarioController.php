@@ -5,12 +5,13 @@ namespace App\Http\Controllers;
 use App\Models\Area;
 use App\Models\Usuario;
 use App\Models\AreaInteresseUsuario;
+use App\Models\Status;
 use App\Models\Vaga;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
+use NunoMaduro\Collision\Adapters\Phpunit\State;
 
 class UsuarioController extends Controller
 {
@@ -257,6 +258,10 @@ Validação
         $totalUsuariosMeioAmbiente = AreaInteresseUsuario::where('idArea', 15)->count();
         $totalUsuarioMedicina = AreaInteresseUsuario::where('idArea', 6)->count();
         $totalUsuarioHigienizacao = AreaInteresseUsuario::where('idArea', 13)->count();
+
+        // STATUS
+        $statusAtivo = Usuario::where('idStatus', 1)->count();
+        $statusBloqueado = Usuario::where('idStatus', 2)->count();
         
 
 
@@ -317,7 +322,9 @@ Validação
             'totalUsuarioGastronomia' => $totalUsuarioGastronomia,
             'totalUsuariosServicosGerais' => $totalUsuariosServicosGerais,
             'totalUsuarioMedicina' => $totalUsuarioMedicina,
-            'totalUsuarioHigienizacao' => $totalUsuarioHigienizacao
+            'totalUsuarioHigienizacao' => $totalUsuarioHigienizacao,
+            'statusAtivo' => $statusAtivo,
+            'statusBloqueado' => $statusBloqueado
         ]);
     }};
 
