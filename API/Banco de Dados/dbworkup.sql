@@ -66,7 +66,20 @@ CREATE TABLE `tb_area` (
 INSERT INTO `tb_area` (`idArea`, `nomeArea`) VALUES
 (1, 'Tecnologia'),
 (2, 'Marketing'),
-(3, 'Gestão');
+(3, 'Gestão'),
+(4, 'Gastronomia'),
+(5, 'Administração'),
+(6, 'Medicina'),
+(7, 'Educação'),
+(8, 'Finança'),
+(9, 'Recursos Humanos'),
+(10, 'Logística'),
+(11, 'Alimentação'),
+(12, 'Serviços Gerais'),
+(13, 'Higienização'),
+(14, 'Engenharia'),
+(15, 'Meio Ambiente');
+
 
 -- --------------------------------------------------------
 

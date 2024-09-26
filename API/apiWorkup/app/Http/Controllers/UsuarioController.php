@@ -225,57 +225,65 @@ Validação
     // CONTRROLLER PARA AS TELAS DE ADMIN
     public function dashboard()
     {
-        $totalUsuariosTecnologia = Area::where('idArea', 1)->count();
-        $totalAreasAlimentacao = Area::where('idArea', 2)->count();
-        $totalUsuariosGestao = Area::where('idArea', 3)->count();
-        $totalUsuariosEngenharia = Area::where('idArea', 4)->count();
-        $totalUsuariosAdministracao = Area::where('idArea',5 )->count();
-        $totalUsuariosMarketing = Area::where('idArea', 2)->count();
-        $totalUsuariosSaude = Area::where('idArea',7 )->count();
-        $totalUsuariosEducacao = Area::where('idArea', 8)->count();
-        $totalUsuariosFinancas = Area::where('idArea', 9)->count();
-        $totalUsuariosRecursosHumanos = Area::where('idArea', 10)->count();
-        $totalUsuariosLogistica = Area::where('idArea', 11)->count();
-        $totalUsuariosDesign = Area::where('idArea', 12)->count();  
-            //   
-        $totalVagaTecnologia = Vaga::where('idArea', 1)->count();
-        $totalVagaMarketing = Vaga::where('idArea', 2)->count();
-        $totalVagaDesigner = Vaga::where('idArea', 3)->count();
-        $totalVagaEngenharia = Vaga::where('idArea', 4)->count();
-        $totalVagaAdministracao = Vaga::where('idArea', 5)->count();
-        $totalVagaGastronomia = Vaga::where('idArea', 6)->count();
-        $totalVagaMedicina = Vaga::where('idArea', 7)->count();
-        $totalVagaEducacao = Vaga::where('idArea', 8)->count();
-        $totalVagaFinanca = Vaga::where('idArea', 9)->count();
-        $totalVagaRh = Vaga::where('idArea', 10)->count();
-        $totalVagaLogistica = Vaga::where('idArea', 11)->count();
-        $totalVagaAlimentacao = Vaga::where('idArea', 12)->count();
-        $totalUsuariosMeioAmbiente = Area::where('idArea', 13)->count();
+        $totalUsuariosTecnologia = Usuario::where('areaInteresseUsuario', 'Tecnologia')->count();
+        $totalUsuariosAlimentacao = Usuario::where('areaInteresseUsuario', 'Alimentação')->count();
+        $totalUsuariosGestao = Usuario::where('areaInteresseUsuario', 'Gestão')->count();
+        $totalUsuarioGastronomia = Usuario::where('areaInteresseUsuario', 'Gastronomia')->count();
+        $totalUsuariosEngenharia = Usuario::where('areaInteresseUsuario', 'Engenharia')->count();
+        $totalUsuariosAdministracao = Usuario::where('areaInteresseUsuario', 'Administração')->count();
+        $totalUsuariosMarketing = Usuario::where('areaInteresseUsuario', 'Marketing')->count();
+        $totalUsuariosEducacao = Usuario::where('areaInteresseUsuario', 'Educação')->count();
+        $totalUsuariosFinancas = Usuario::where('areaInteresseUsuario', 'Finanças')->count();
+        $totalUsuariosRecursosHumanos = Usuario::where('areaInteresseUsuario', 'Recursos Humanos')->count();
+        $totalUsuariosLogistica = Usuario::where('areaInteresseUsuario', 'Logística')->count();
+        $totalUsuariosServicosGerais = Usuario::where('areaInteresseUsuario', 'Serviços Gerais')->count();
+        $totalUsuariosMeioAmbiente = Usuario::where('areaInteresseUsuario', 'Meio Ambiente')->count();
+        $totalUsuarioMedicina = Usuario::where('areaInteresseUsuario', 'Medicina')->count();
+        $totalUsuarioHigienizacao = Usuario::where('areaInteresseUsuario', 'Higienização')->count();  
+
+
+        $totalVagaTecnologia = Vaga::where('idAreaVaga', 1)->count();
+        $totalVagaMarketing = Vaga::where('idAreaVaga', 2)->count();
+        $totalVagaGestao = Vaga::where('idAreaVaga', 3)->count();
+        $totalVagaEngenharia = Vaga::where('idAreaVaga', 14)->count();
+        $totalVagaAdministracao = Vaga::where('idAreaVaga', 5)->count();
+        $totalVagaGastronomia = Vaga::where('idAreaVaga', 4)->count();
+        $totalVagaMedicina = Vaga::where('idAreaVaga', 6)->count();
+        $totalVagaEducacao = Vaga::where('idAreaVaga', 7)->count();
+        $totalVagaFinanca = Vaga::where('idAreaVaga', 8)->count();
+        $totalVagaRh = Vaga::where('idAreaVaga', 9)->count();
+        $totalVagaLogistica = Vaga::where('idAreaVaga', 10)->count();
+        $totalVagaAlimentacao = Vaga::where('idAreaVaga', 11)->count();
+        $totalVagaMeioAmbiente = Vaga::where('idAreaVaga', 15)->count();
+        $totalVagaServiçosGerais = Vaga::where('idAreaVaga', 12)->count();
+        $totalVagaHigienizacao = Vaga::where('idAreaVaga', 13)->count();
         $totalRegistrosVaga = DB::table('tb_vaga')->count();
+
         $totalRegistrosUsuario = DB::table('tb_usuario')->count();
         $totalRegistrosEmpresa = DB::table('tb_empresa')->count();
         $usuarios = Usuario::all();
     
         return view('admin.homeAdmin', [
             'totalUsuariosTecnologia' => $totalUsuariosTecnologia,
-            'totalUsuariosAlimentacao' => $totalAreasAlimentacao,
+            'totalUsuariosAlimentacao' => $totalUsuariosAlimentacao,
             'totalUsuariosGestao' => $totalUsuariosGestao,
             'totalUsuariosEngenharia' => $totalUsuariosEngenharia,
             'totalUsuariosAdministracao' => $totalUsuariosAdministracao,
             'totalUsuariosMarketing' => $totalUsuariosMarketing,
-            'totalUsuariosSaude' => $totalUsuariosSaude,
+            // 'totalUsuariosSaude' => $totalUsuariosSaude,
             'totalUsuariosEducacao' => $totalUsuariosEducacao,
             'totalUsuariosFinancas' => $totalUsuariosFinancas,
             'totalUsuariosRecursosHumanos' => $totalUsuariosRecursosHumanos,
             'totalUsuariosLogistica' => $totalUsuariosLogistica,
-            'totalUsuariosDesign' => $totalUsuariosDesign,
+            // 'totalUsuariosDesign' => $totalUsuariosDesign,
             'totalRegistrosVaga' => $totalRegistrosVaga,
             'usuarios' => $usuarios,
             'totalRegistrosUsuario' => $totalRegistrosUsuario,
             'totalRegistrosEmpresa' => $totalRegistrosEmpresa,
             'totalVagaTecnologia' => $totalVagaTecnologia,
             'totalVagaGatronomia' => $totalVagaGastronomia,
-            'totalVagaDesigner' => $totalVagaDesigner,
+            'totalVagaServiçosGerais' => $totalVagaServiçosGerais,
+            'totalVagaHigienizacao' => $totalVagaHigienizacao,
             'totalVagaEngenharia' => $totalVagaEngenharia,
             'totalVagaAdministracao' => $totalVagaAdministracao,
             'totalVagaMarketing' => $totalVagaMarketing,
@@ -285,7 +293,13 @@ Validação
             'totalVagaRh' => $totalVagaRh,
             'totalVagaLogistica' => $totalVagaLogistica,
             'totalVagaAlimentacao' => $totalVagaAlimentacao,
-            'totalUsuariosMeioAmbiente' => $totalUsuariosMeioAmbiente
+            'totalUsuariosMeioAmbiente' => $totalUsuariosMeioAmbiente,
+            'totalVagaGestao' => $totalVagaGestao,
+            'totalVagaMeioAmbiente' => $totalVagaMeioAmbiente,
+            'totalUsuarioGastronomia' => $totalUsuarioGastronomia,
+            'totalUsuariosServicosGerais' => $totalUsuariosServicosGerais,
+            'totalUsuarioMedicina' => $totalUsuarioMedicina,
+            'totalUsuarioHigienizacao' => $totalUsuarioHigienizacao
         ]);
     }};
 
