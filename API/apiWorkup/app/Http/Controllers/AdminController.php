@@ -53,10 +53,7 @@ Validação
                 'usernameAdmin' => 'required|',
                 'emailAdmin' => 'required',
                 'contatoAdmin' => 'required',
-                'senhaAdmin' => 'required',
-                'fotoAdmin' => 'required',
-
-                
+                'senhaAdmin' => 'required', 
 
             ],
             [
@@ -65,8 +62,6 @@ Validação
                 'emailAdmin.required' => 'Digite um email',
                 'contatoAdmin.required' => 'Digite um contato',
                 'senhaAdmin.required' => 'Digite uma senha',
-                'fotoAdmin.required' => 'Digite uma foto',
-
             ]
         );
         $admin = new Admin;
