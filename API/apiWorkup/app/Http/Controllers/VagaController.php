@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Vaga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Modalidade;
+use App\Models\Area;
 
 class VagaController extends Controller
 {
@@ -44,7 +47,12 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
      */
     public function create()
     {
-        return view('cadastrarVaga');
+
+    $idEmpresa = Auth::guard('empresas')->id(); // Pega o ID da empresa autenticada
+    $modalidades = Modalidade::all();
+    $areas = Area::all();
+    return view('cadastrarVaga', compact('idEmpresa', 'modalidades', 'areas'));
+
     }
 
     /**
@@ -71,7 +79,6 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
                 'estadoVaga' => 'required',
                 'beneficiosVaga' => 'required',
                 'diferencialVaga' => 'required',
-                'idEmpresa' => 'required',
                 'idArea' => 'required',
                 'idModalidadeVaga' => 'required',
             ],
@@ -83,7 +90,6 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
                 'estadoVaga.required' => 'Digite um estado',
                 'beneficiosVaga.required' => 'Digite um beneficio',
                 'diferencialVaga.required' => 'Digite um diferencal',
-                'idEmpresa.required' => 'Digite o id da empresa',
                 'idArea.required' => 'Digite um id vaga',
                 'idModalidadeVaga.required' => 'Digite uma modalidade',
             ]
@@ -98,7 +104,7 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
         $vaga->estadoVaga = $request->estadoVaga;
         $vaga->beneficiosVaga = $request->beneficiosVaga;
         $vaga->diferencialVaga = $request->diferencialVaga;
-        $vaga->idEmpresa = $request->idEmpresa;
+        $vaga->idEmpresa = Auth::guard('empresas')->id();
         $vaga->idArea = $request->idArea;
         $vaga->idStatus = 3;
         $vaga->idModalidadeVaga = $request->idModalidadeVaga;
@@ -182,6 +188,23 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
     
                 // Atualiza o status da vaga para 2
                 $vaga->update(['idStatus' => 2]);
+            
+                // Verifica se a requisição foi feita via AJAX
+                if ($request->ajax()) {
+                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
+                }
+            
+                // Redireciona para a lista de vagas com mensagem de sucesso
+                return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
+    }
+
+    public function aprovar($id, Request $request)
+    {
+                // Encontra a vaga pelo ID
+                $vaga = Vaga::findOrFail($id);
+    
+                // Atualiza o status da vaga para 2
+                $vaga->update(['idStatus' => 1]);
             
                 // Verifica se a requisição foi feita via AJAX
                 if ($request->ajax()) {

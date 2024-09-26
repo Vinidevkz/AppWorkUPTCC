@@ -129,32 +129,41 @@
 
                 </div>
 
-                @error('idEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="idEmpresa" placeholder="idEmpresa" value="{{ old('idEmpresa') }}">
-
-                </div>
 
                 @error('idArea')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                 @enderror
                 <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="idArea" placeholder="idArea" value="{{ old('idArea') }}">
+                    <i class="fa-solid fa-lock"></i>
+                <!-- Esta parte precisa ficar pode tirar o select contato que de o mesmo nome ao campo -->
+                    <select name="idArea">
+                        <option value="">Selecione a Area</option>
 
+                        @foreach($areas as $area)
+                            <option value="{{ $area->idArea }}" {{ old('idArea') == $area->idArea ? 'selected' : '' }}>
+                                {{ $area->nomeArea }}
+                            </option>
+                        @endforeach
+                    </select>
+                <!-- Esta parte precisa ficar -->
                 </div>
+
 
                 @error('idModalidadeVaga')
                 <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                 @enderror
                 <div class="input-container">
                     <i class="fa-solid fa-lock"></i>
-                    <input type="text" name="idModalidadeVaga" placeholder="idModalidadeVaga" value="{{ old('idModalidadeVaga') }}">
-
+                    <!-- Esta parte precisa ficar pode tirar o select contato que de o mesmo nome ao campo -->
+                    <select name="idModalidadeVaga">
+                        <option value="">Selecione a Modalidade</option>
+                        @foreach($modalidades as $modalidade)
+                            <option value="{{ $modalidade->idModalidadeVaga }}" {{ old('idModalidadeVaga') == $modalidade->idModalidadeVaga ? 'selected' : '' }}>
+                                {{ $modalidade->descModalidadeVaga }} <!-- Supondo que há um campo nomeModalidade na tabela -->
+                            </option>
+                        @endforeach
+                        <!-- Esta parte precisa ficar -->
+                    </select>
                 </div>
 
                 <button class="btnRegister">
