@@ -30,9 +30,9 @@ if ($request->has('order') && $request->order == 'status') {
     $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')->orderBy('idStatus', 'asc')->get();
 }
 
-if ($request->ajax()) {
+
     return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
-}
+ 
 
 // Caso contrário, retorna a view com as vagas
 return view('admin.vaga.vagaAdmin', compact('vagas'));
@@ -126,7 +126,9 @@ return view('admin.vaga.vagaAdmin', compact('vagas'));
         
         $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); // Retorna 404 se não encontrar
 
-        return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
+        //return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
+
+        return response()->json($vaga);
     }
 
     /**

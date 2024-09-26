@@ -1,21 +1,16 @@
-<?php
-
-/*
-|--------------------------------------------------------------------------
-| Precisa ajustar css
-|--------------------------------------------------------------------------
-
-*/
-?>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Cadastro de Empresa</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <link rel="stylesheet" href="{{ url('assets/css/style.css') }}">
     <style>
         .error-message {
@@ -25,6 +20,8 @@
 
         .input-container {
             margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
         }
 
         .input-container i {
@@ -35,172 +32,340 @@
             text-decoration: none;
             color: inherit;
         }
+
+        .form-container {
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .custom-input {
+            padding: 10px;
+            border: 4px solid #3f4b45;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            background-color: #ffffff;
+            width: 100%;
+        }
+
+        .background {
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-color: #f4f4f4;
+        }
+
+        .panel-heading {
+            font-size: 3vh;
+            background-color: #18e47e;
+            color: rgb(26, 25, 25);
+            padding: 5px;
+            text-align: left;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .form-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #ffffff;
+        }
+
+        .btn-custom {
+            border-radius: 30px;
+            padding: 10px 20px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn-primary-custom {
+            background-color: #00eb00;
+            color: rgb(14, 14, 14);
+            border: none;
+            margin-top: 20px;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: #c8ec8d;
+            margin-top: 20px;
+        }
+
+        .btn-secondary-custom {
+            background-color: #33ff00;
+            color: rgb(0, 0, 0);
+            border: none;
+            margin-top: 20px;
+        }
+
+        .btn-secondary-custom:hover {
+            background-color: #20f10d;
+            margin-top: 20px;
+        }
+
+        .form__group {
+            position: relative;
+            padding: 20px 0 0;
+            width: 100%;
+        }
+
+        .custom-input {
+            font-family: inherit;
+            width: 100%;
+            border: none;
+            border-bottom: 2px solid #9b9b9b;
+            outline: 0;
+            font-size: 17px;
+            color: #000;
+            padding: 7px 0;
+            background: transparent;
+            transition: border-color 0.2s;
+        }
+
+        .custom-input::placeholder {
+            color: transparent;
+        }
+
+        .custom-input:placeholder-shown~.form__label {
+            font-size: 17px;
+            cursor: text;
+            top: 20px;
+        }
+
+        .form__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: 0.2s;
+            font-size: 17px;
+            color: #9b9b9b;
+            pointer-events: none;
+        }
+
+        .custom-input:focus {
+            padding-bottom: 6px;
+            font-weight: 700;
+            border-width: 3px;
+            border-color: #3f4b45;
+        }
+
+        .custom-input:focus~.form__label {
+            position: absolute;
+            top: 0;
+            display: block;
+            transition: 0.2s;
+            font-size: 17px;
+            color: #3f4b45;
+            font-weight: 700;
+        }
+
+        .custom-input:required,
+        .custom-input:invalid {
+            box-shadow: none;
+        }
+
+        .cardsform {
+            background-image: url('/assets/img/login/formss.png');
+            padding-top: 50px;
+            padding-bottom: 50px;
+            border-radius: 10px;
+            margin-top: 50px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .image-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .form-image {
+            max-width: 100%;
+            max-height: 100%;
+        }
     </style>
 </head>
 
-<body>
-    <main>
-        <section class="cadastro">
-            <h1>Site para cadastrar uma nova empresa</h1>
+<body class="background">
+    <main class="cardsform">
+        <div class="container">
+            <div class="row form-wrapper">
+                <!-- Coluna do formulário -->
+                <div class="col-md-8 form-container">
+                    <div class="panel-heading">
+                        Cadastre sua Empresa
+                    </div>
 
+                    <form method="POST" action="/formEmpresa" id="registerForm">
+                        @csrf
+                        <div class="form-step">
+                            @error('usernameEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="usernameEmpresa" placeholder="Nome de Usuário da Empresa" value="{{ old('usernameEmpresa') }}">
+                                <label for="usernameEmpresa" class="form__label">Nome de Usuário da Empresa</label>
+                            </div>
 
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: inline;">
-                @csrf
-                <input type="submit" class="btn btn-light" value="Sair">
-            </form>
-        </section>
-        <section class="formulario">
-            <h2>Create Account</h2>
-            <p>Or use your email for registration</p>
+                            @error('emailEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="email" class="form-control custom-input" name="emailEmpresa" placeholder="E-mail da Empresa" value="{{ old('emailEmpresa') }}">
+                                <label for="emailEmpresa" class="form__label">E-mail da Empresa</label>
+                            </div>
 
-            <form method="POST" action="/formEmpresa">
+                            @error('senhaEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="password" class="form-control custom-input" name="senhaEmpresa" placeholder="Senha da Empresa" value="{{ old('senhaEmpresa') }}">
+                                <label for="senhaEmpresa" class="form__label">Senha da Empresa</label>
+                            </div>
+                            <button type="button" class="btn btn-primary-custom btn-custom" onclick="nextStep()">Próximo</button>
+                        </div>
 
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                <br>
-                @csrf
+                        <div class="form-step" style="display: none;">
+                            @error('nomeEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="nomeEmpresa" placeholder="Nome da Empresa" value="{{ old('nomeEmpresa') }}">
+                                <label for="nomeEmpresa" class="form__label">Nome da Empresa</label>
+                            </div>
 
-                @error('usernameEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="usernameEmpresa" placeholder="usernameEmpresa" value="{{ old('usernameEmpresa') }}">
+                            @error('sobreEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="sobreEmpresa" placeholder="Sobre a Empresa" value="{{ old('sobreEmpresa') }}">
+                                <label for="sobreEmpresa" class="form__label">Sobre a Empresa</label>
+                            </div>
+<!-- 
+                            @error('atuacaoEmpresa') precisa arrumar
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="atuacaoEmpresa" placeholder="Atuação da Empresa" value="{{ old('atuacaoEmpresa') }}">
+                                <label for="atuacaoEmpresa" class="form__label">Atuação da Empresa</label>
+                            </div> -->
+                            <button type="button" class="btn btn-secondary-custom btn-custom" onclick="prevStep()">Anterior</button>
+                            <button type="button" class="btn btn-primary-custom btn-custom" onclick="nextStep()">Próximo</button>
+                        </div>
 
+                        <div class="form-step" style="display: none;">
+                            @error('cnpjEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="cnpjEmpresa" placeholder="CNPJ da Empresa" value="{{ old('cnpjEmpresa') }}">
+                                <label for="cnpjEmpresa" class="form__label">CNPJ da Empresa</label>
+                            </div>
+
+                            @error('contatoEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="contatoEmpresa" placeholder="Contato da Empresa" value="{{ old('contatoEmpresa') }}">
+                                <label for="contatoEmpresa" class="form__label">Contato da Empresa</label>
+                            </div>
+
+                            @error('cidadeEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="cidadeEmpresa" placeholder="Cidade da Empresa" value="{{ old('cidadeEmpresa') }}">
+                                <label for="cidadeEmpresa" class="form__label">Cidade da Empresa</label>
+                            </div>
+                            <button type="button" class="btn btn-secondary-custom btn-custom" onclick="prevStep()">Anterior</button>
+                            <button type="button" class="btn btn-primary-custom btn-custom" onclick="nextStep()">Próximo</button>
+                        </div>
+
+                        <div class="form-step" style="display: none;">
+                            @error('estadoEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="estadoEmpresa" placeholder="Estado da Empresa" value="{{ old('estadoEmpresa') }}">
+                                <label for="estadoEmpresa" class="form__label">Estado da Empresa</label>
+                            </div>
+
+                            @error('LogradouroEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="LogradouroEmpresa" placeholder="Logradouro da Empresa" value="{{ old('LogradouroEmpresa') }}">
+                                <label for="LogradouroEmpresa" class="form__label">Logradouro da Empresa</label>
+                            </div>
+
+                            @error('cepEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="cepEmpresa" placeholder="CEP da Empresa" value="{{ old('cepEmpresa') }}">
+                                <label for="cepEmpresa" class="form__label">CEP da Empresa</label>
+                            </div>
+
+                            @error('numeroLograEmpresa')
+                            <div class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="Número do Logradouro da Empresa" value="{{ old('numeroLograEmpresa') }}">
+                                <label for="numeroLograEmpresa" class="form__label">Número do Logradouro da Empresa</label>
+                            </div>
+
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="fotoEmpresa" placeholder="Foto da Empresa" value="{{ old('fotoEmpresa') }}">
+                                <label for="fotoEmpresa" class="form__label">Foto da Empresa</label>
+                            </div>
+
+                            <button type="button" class="btn btn-secondary-custom btn-custom" onclick="prevStep()">Anterior</button>
+                            <input type="submit" class="btn btn-success-custom btn-custom" value="Enviar">
+                        </div>
+                    </form>
                 </div>
 
-                @error('nomeEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-envelope"></i>
-                    <input type="text" name="nomeEmpresa" placeholder="nomeEmpresa" value="{{ old('nomeEmpresa') }}">
-
+                <!-- Coluna da imagem -->
+                <div class="col-md-4 image-container">
+                    <img src="https://via.placeholder.com/300" alt="Imagem da Empresa" class="form-image">
                 </div>
-
-                @error('emailEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="emailEmpresa" placeholder="emailEmpresa" value="{{ old('emailEmpresa') }}">
-                </div>
-
-                @error('fotoEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="fotoEmpresa" placeholder="fotoEmpresa" value="{{ old('fotoEmpresa') }}">
-                </div>
-
-
-                @error('sobreEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-credit-card"></i>
-                    <input type="text" name="sobreEmpresa" placeholder="sobreEmpresa" value="{{ old('sobreEmpresa') }}">
-
-                </div>
-
-                @error('cnpjEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="cnpjEmpresa" placeholder="cnpjEmpresa" value="{{ old('cnpjEmpresa') }}">
-
-                </div>
-
-
-                @error('contatoEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="contatoEmpresa" placeholder="contatoEmpresa" value="{{ old('contatoEmpresa') }}">
-
-                </div>
-
-                @error('senhaEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="senhaEmpresa" placeholder="senhaEmpresa" value="{{ old('senhaEmpresa') }}">
-
-                </div>
-
-
-                @error('cidadeEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="cidadeEmpresa" placeholder="cidadeEmpresa" value="{{ old('cidadeEmpresa') }}">
-
-                </div>
-
-
-                @error('estadoEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="estadoEmpresa" placeholder="estadoEmpresa" value="{{ old('estadoEmpresa') }}">
-
-                </div>
-
-                @error('LogradouroEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="LogradouroEmpresa" placeholder="LogradouroEmpresa" value="{{ old('LogradouroEmpresa') }}">
-
-                </div>
-
-
-                @error('cepEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="cepEmpresa" placeholder="cepEmpresa" value="{{ old('cepEmpresa') }}">
-
-                </div>
-
-                @error('numeroLograEmpresa')
-                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-
-                <div class="input-container">
-                    <i class="fa-regular fa-user"></i>
-                    <input type="text" name="numeroLograEmpresa" placeholder="numeroLograEmpresa" value="{{ old('numeroLograEmpresa') }}">
-
-                </div>
-
-
-
-
-                <button class="btnRegister">
-                    <p>Register</p>
-                </button>
-            </form>
-        </section>
+            </div>
+        </div>
     </main>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const formSteps = document.querySelectorAll('.form-step');
+        let currentStep = 0;
+
+        function showStep(step) {
+            formSteps.forEach((formStep, index) => {
+                formStep.style.display = index === step ? 'block' : 'none';
+            });
+        }
+
+        function nextStep() {
+            if (currentStep < formSteps.length - 1) {
+                currentStep++;
+                showStep(currentStep);
+            }
+        }
+
+        function prevStep() {
+            if (currentStep > 0) {
+                currentStep--;
+                showStep(currentStep);
+            }
+        }
+
+        showStep(currentStep);
+    </script>
 </body>
 
 </html>

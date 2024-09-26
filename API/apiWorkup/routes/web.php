@@ -23,7 +23,7 @@ Route::get('/cadastrarEmpresa', [EmpresaController::class, 'create'])->name('cad
 
 Route::get('/cadastrarVaga', [VagaController::class, 'create'])->middleware('auth:empresas')->name('cadastrarVaga');
 
-Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->middleware('admins')->name('cadastrarAdmin');
+Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->name('cadastrarAdmin');
 
 Route::get('/Area', [AreaController::class, 'create'])->name('cadastrarArea');
 
