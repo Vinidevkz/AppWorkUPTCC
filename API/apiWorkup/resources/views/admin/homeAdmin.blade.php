@@ -15,6 +15,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link
     rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
     href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
@@ -109,7 +113,7 @@ database
 
         <div class="row">
           <div class="col-3">
-            <div class="card rounded card-data-job ">
+            <div class="card rounded card-data-job shadow-sm">
               <div class="card-header bg-light centralizar-dados d-flex  align-items-center flex-row">
               <span class="material-symbols-outlined">
                 badge
@@ -123,7 +127,7 @@ database
 
           </div>
           <div class="col-3">
-            <div class="  card rounded card-data-user ">
+            <div class="  card rounded card-data-user shadow-sm ">
               <div class="card-header bg-light centralizar-dados d-flex  align-items-center flex-row">
               <span class="material-symbols-outlined">
 bar_chart
@@ -136,7 +140,7 @@ bar_chart
             </div>
           </div>
           <div class="col-3">
-            <div class=" card rounded card-data-company ">
+            <div class=" card rounded card-data-company shadow-sm ">
               <div class=" card-header bg-light centralizar-dados d-flex  align-items-center flex-row">
               <span class="material-symbols-outlined">
 location_city
@@ -160,31 +164,56 @@ location_city
 
             
           </div>
-          <div id="donutchart" style="width: 900px; height: 500px;"></div>
+       
         </div>
 
-  <div class="container align-graph d-flex justify-content-center">
+  <!-- <div class="">
 
   <table>
     <tbody>
       <tr class="p-3">
+
         <td class="">
-        <div class="grafico-barras d-flex flex-row justify-content-center align-items-center">
-          <!-- <canvas id="pizzaGraph"></canvas> -->
-          <div id="piechart_3d"></div>
      
-        </div>
         </td>
+
         <td id="gambiarra">aa</td>
+
         <td>
-        <div class="grafico-barras d-flex align-items-center justify-content-center">
-        <canvas id="myBarChart"></canvas>
-</div>
+   
         </td>
       </tr>
 
+      <tr>
+        <td>
+    
+        </td>
+        <td class="gambiarra">aa</td>
+        <td> 
+          <h3>GRÁFICO</h3>
+        </td>
+      </tr>
     </tbody>
-  </table>
+  </table> -->
+
+  <div class="container mt-2 shadow">
+        <div class="row shadow">
+            <div class="col-md-6 bg-white">
+                <div id="piechart_3d" style="height: 180px;"></div>
+            </div>
+            <div class="col-md-6 bg-white">
+                <div id="donutchart" style="height: 180px;"></div>
+            </div>
+        </div>
+        <div class="row">
+      
+            <div class=" bg-white" >
+                <canvas id="myBarChart" class="col" style="height: 200px;"></canvas>
+            </div>
+        </div>
+  </div>
+
+
 
 
         
@@ -580,8 +609,24 @@ google.charts.load("current", {packages:["corechart"]});
         ]);
 
         var options = {
-          title: 'Total de vagas por setor',
+          title: 'Percentual de vagas por setor',
           is3D: true,
+          backgroundColor: 'transparent',
+          titleTextStyle: {
+        fontSize: 14 // Aumenta o tamanho da fonte do título
+      },
+      legend: {
+        textStyle: {
+          fontSize: 11 // Aumenta o tamanho da fonte da legenda
+        }},
+
+        slices: {
+          0: { color: '#1E90FF' }, // Azul
+        1: { color: '#32CD32' }, // Verde
+        2: { color: '#FFA500' }, // Laranja
+        3: { color: '#8A2BE2' }, // Roxo
+        4: { color: '#FF4500' }  // Vermelho
+      }
         };
 
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
@@ -631,7 +676,20 @@ function drawChart() {
 
     var options = {
         title: 'Situação dos usuários',
-        pieHole: 0.4,
+        pieHole: 0.1,
+        backgroundColor: 'transparent',
+        titleTextStyle: {
+        fontSize: 14 // Aumenta o tamanho da fonte do título
+      },
+      legend: {
+        textStyle: {
+          fontSize: 11 // Aumenta o tamanho da fonte da legenda
+        }},
+        slices: {
+          0: { color: '#1E90FF' }, // Azul
+          1: { color: '#FF4500' }  // Vermelho
+      }
+      
     };
 
     var donutChart = new google.visualization.PieChart(document.getElementById('donutchart'));
