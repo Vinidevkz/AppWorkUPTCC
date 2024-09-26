@@ -630,7 +630,7 @@ function drawChart() {
     ]);
 
     var options = {
-        title: 'My Daily Activities',
+        title: 'Situação dos usuários',
         pieHole: 0.4,
     };
 
