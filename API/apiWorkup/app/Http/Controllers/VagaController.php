@@ -220,4 +220,16 @@ class VagaController extends Controller
                 // Redireciona para a lista de vagas com mensagem de sucesso
                 return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
     }
+
+    public function search(Request $request){
+
+        $query = $request->input('search');
+
+        $vagas = DB::table('tb_vaga')
+            ->select('tb_vaga.*', 'nomeVaga')
+            ->where('nomeVaga', 'LIKE', "%{$query}%")
+            ->get();
+        
+        return response()->json($vagas);
+    }
 }
