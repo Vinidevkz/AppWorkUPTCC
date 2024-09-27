@@ -46,7 +46,31 @@ const styles = StyleSheet.create({
   searchFontSize: {
     fontSize: 15,
     flex: 1,
-  }
+  },
+
+  title: {
+    fontSize: 25,
+  },
+
+  row: {
+    flexDirection: 'row'
+  },
+
+  text: {
+    fontSize: 16,
+  },
+
+  buttonVaga: {
+    width: '30%',
+    paddingVertical: 10,
+    borderRadius: 20,
+  },
+
+  button: {
+    backgroundColor: '#20dd77',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
 export default styles;

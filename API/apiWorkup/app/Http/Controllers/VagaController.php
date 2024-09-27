@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\Vaga;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Modalidade;
+use App\Models\Area;
+use Exception;
 
 class VagaController extends Controller
 {
@@ -12,16 +17,32 @@ class VagaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         /*
-|--------------------------------------------------------------------------
-|Definindo para alem de pegar informaçoes de vaga pegar tbm de empresa
-|--------------------------------------------------------------------------
-*/
-        $vagas = Vaga::with('empresa')->get();
+        |----------------------------------------------------------------------
+        | Definindo para além de pegar informações de vaga pegar também de empresa
+        |----------------------------------------------------------------------
+        */
+        
+        if ($request->has('order') && $request->order == 'status') {
+            // Ordena para trazer idStatus = 2 primeiro
+            $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
+                         ->orderByRaw("FIELD(idStatus, 2, 1), nomeVaga ASC")
+                         ->get();
+        } else {
+            $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
+                         ->orderBy('idStatus', 'asc')
+                         ->get();
+        }
+    
+        // Verifica se a requisição é AJAX
 
-        return response()->json($vagas);
+            return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
+        
+    
+        // Caso contrário, retorna a view com as vagas
+        return view('admin.vaga.vagaAdmin', compact('vagas'));
     }
 
     /**
@@ -31,7 +52,12 @@ class VagaController extends Controller
      */
     public function create()
     {
-        //
+
+    $idEmpresa = Auth::guard('empresas')->id(); // Pega o ID da empresa autenticada
+    $modalidades = Modalidade::all();
+    $areas = Area::all();
+    return view('cadastrarVaga', compact('idEmpresa', 'modalidades', 'areas'));
+
     }
 
     /**
@@ -43,7 +69,7 @@ class VagaController extends Controller
     public function store(Request $request)
     {
 
-/*
+        /*
 |--------------------------------------------------------------------------
 |Validação
 |--------------------------------------------------------------------------
@@ -51,70 +77,46 @@ class VagaController extends Controller
 
         $request->validate(
             [
-                'nomeVaga'  => 'required', 
-                'dataPublicacaoVaga' => 'required|', 
-                'prazoVaga'=>'required',
-                'modalidadeVaga'=>'required',
-                'salarioVaga'=>'required',
-                'cidadeVaga'=>'required',
-                'estadoVaga'=>'required',
-                'areaVaga'=>'required',
-                'beneficiosVaga'=>'required',
-                'diferencialVaga'=>'required',
-                'idEmpresa'=>'required',
-                'idStatusVaga'=>'required',
+                'nomeVaga'  => 'required',
+                'prazoVaga' => 'required',
+                'salarioVaga' => 'required',
+                'cidadeVaga' => 'required',
+                'estadoVaga' => 'required',
+                'beneficiosVaga' => 'required',
+                'diferencialVaga' => 'required',
+                'idArea' => 'required',
+                'idModalidadeVaga' => 'required',
             ],
             [
                 'nomeVaga.required'  => 'Digite um nome para continuar',
-                'dataPublicacaoVaga.required' => 'Digite uma data', 
-                'prazoVaga.required' =>'Digite um prazo',
-                'modalidadeVaga.required' =>'Digite uma modalidade',
-                'salarioVaga.required' =>'Digite um salario',
-                'cidadeVaga.required' =>'Digite uma cidade',
-                'estadoVaga.required' =>'Digite um estado',
-                'areaVaga.required' =>'Digite uma area',
-                'beneficiosVaga.required' =>'Digite um beneficio',
-                'diferencialVaga.required' =>'Digite um diferencal',
-                'idEmpresa.required' =>'Digite o id da empresa',
-                'idStatusVaga.required' =>'Digite um id vaga',
-                ]
+                'prazoVaga.required' => 'Digite um prazo',
+                'salarioVaga.required' => 'Digite um salario',
+                'cidadeVaga.required' => 'Digite uma cidade',
+                'estadoVaga.required' => 'Digite um estado',
+                'beneficiosVaga.required' => 'Digite um beneficio',
+                'diferencialVaga.required' => 'Digite um diferencal',
+                'idArea.required' => 'Digite um id vaga',
+                'idModalidadeVaga.required' => 'Digite uma modalidade',
+            ]
         );
 
         $vaga = new Vaga;
 
         $vaga->nomeVaga = $request->nomeVaga;
-        $vaga->dataPublicacaoVaga = $request->dataPublicacaoVaga;
         $vaga->prazoVaga = $request->prazoVaga;
-        $vaga->modalidadeVaga = $request->modalidadeVaga;
         $vaga->salarioVaga = $request->salarioVaga;
         $vaga->cidadeVaga = $request->cidadeVaga;
         $vaga->estadoVaga = $request->estadoVaga;
-        $vaga->idAreaVaga = $request->areaVaga;
         $vaga->beneficiosVaga = $request->beneficiosVaga;
         $vaga->diferencialVaga = $request->diferencialVaga;
-        $vaga->idEmpresa = $request->idEmpresa;
-        $vaga->idStatusVaga = $request->idStatusVaga;
+        $vaga->idEmpresa = Auth::guard('empresas')->id();
+        $vaga->idArea = $request->idArea;
+        $vaga->idStatus = 3;
+        $vaga->idModalidadeVaga = $request->idModalidadeVaga;
 
         $vaga->save();
 
-                $vaga = new Vaga;
-
-        $vaga->nomeVaga = $request->nomeVaga;
-        $vaga->dataPublicacaoVaga = $request->dataPublicacaoVaga;
-        $vaga->prazoVaga = $request->prazoVaga;
-        $vaga->modalidadeVaga = $request->modalidadeVaga;
-        $vaga->salarioVaga = $request->salarioVaga;
-        $vaga->cidadeVaga = $request->cidadeVaga;
-        $vaga->estadoVaga = $request->estadoVaga;
-        $vaga->idAreaVaga = $request->areaVaga;
-        $vaga->beneficiosVaga = $request->beneficiosVaga;
-        $vaga->diferencialVaga = $request->diferencialVaga;
-        $vaga->idEmpresa = $request->idEmpresa;
-        $vaga->idStatusVaga = $request->idStatusVaga;
-
-        $vaga->save();
-        return view('home');
-        
+        return view('/homeEmpresa');
     }
 
     /**
@@ -125,9 +127,13 @@ class VagaController extends Controller
      */
     public function show($id)
     {
-        $vaga = Vaga::where('idVaga', $id)->get();
 
-        return $vaga;
+        
+        $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); // Retorna 404 se não encontrar
+
+        //return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
+
+        return response()->json($vaga);
     }
 
     /**
@@ -138,7 +144,9 @@ class VagaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $vaga = Vaga::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404
+        return view('admin.vaga.vagaEditarAdmin', compact('vaga')); // Passa o usuário para a view
+
     }
 
     /**
@@ -150,7 +158,28 @@ class VagaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $vaga = Vaga::where('idVaga', $id)->get()->first();
+
+        DB::table('tb_vaga')
+            ->where('idVaga', $id)
+            ->update([
+                'nomeVaga' => $request->nomeVaga,
+                'idModalidadeVaga' => $request->idModalidadeVaga,
+                'estadoVaga' => $request->estadoVaga,
+
+            ]);
+
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Vaga atualizado com sucesso']); // Retorna JSON se for uma requisição AJAX
+        }
+
+        // Caso contrário, retorna a view com os usuários
+
+        $vaga = Vaga::findOrFail($id);
+        $vaga->update($request->all());
+    
+        // Redirecionar para a lista de usuários
+        return redirect('/verVaga')->with('success', 'Vaga atualizado com sucesso.');
     }
 
     /**
@@ -159,8 +188,65 @@ class VagaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+                // Encontra a vaga pelo ID
+                $vaga = Vaga::findOrFail($id);
+    
+                // Atualiza o status da vaga para 2
+                $vaga->update(['idStatus' => 2]);
+            
+                // Verifica se a requisição foi feita via AJAX
+                if ($request->ajax()) {
+                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
+                }
+            
+                // Redireciona para a lista de vagas com mensagem de sucesso
+                return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
     }
+
+    public function aprovar($id, Request $request)
+    {
+                // Encontra a vaga pelo ID
+                $vaga = Vaga::findOrFail($id);
+    
+                // Atualiza o status da vaga para 2
+                $vaga->update(['idStatus' => 1]);
+            
+                // Verifica se a requisição foi feita via AJAX
+                if ($request->ajax()) {
+                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
+                }
+            
+                // Redireciona para a lista de vagas com mensagem de sucesso
+                return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
+    }
+
+    public function search(Request $request) {
+        try {
+            $query = $request->input('search');
+    
+            if ($query) {
+                $vagas = DB::table('tb_vaga')
+                    ->leftJoin('tb_empresa', 'tb_vaga.idEmpresa', '=', 'tb_empresa.idEmpresa')
+                    ->select('tb_vaga.*', 'tb_empresa.nomeEmpresa as nome_empresa', 'tb_empresa.usernameEmpresa as username_empresa')
+                    ->where('tb_vaga.nomeVaga', 'LIKE', "%{$query}%")
+                    ->orWhere('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
+                    ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
+                    ->get();
+    
+                if ($vagas->isEmpty()) {
+                    return response()->json(['message' => 'Nenhuma vaga foi encontrada'], 404);
+                }
+    
+                return response()->json($vagas);
+            }
+    
+            return response()->json(['message' => 'A busca não pode estar vazia'], 400);
+        } catch (Exception $exception) {
+            return response()->json(['message' => 'Erro ao realizar a busca', 'error' => $exception->getMessage()], 500);
+        }
+    }
+    
+    
 }

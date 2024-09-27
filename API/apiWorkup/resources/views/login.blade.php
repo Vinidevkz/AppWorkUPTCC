@@ -11,20 +11,20 @@
     
     <section>
         <div class="row w-100 linha-index">
-            <div class="col col-6 h-100 col-index-1">
+            <div class="col col-6 h-100 col-index-1 d-none d-md-block"> <!-- Esconde em telas menores -->
                 <div class="container h-100 w-100">
                     <div class="row">
                         <div class="col-1-1">
-                            <img src="{{url('assets/img/WorkUp-Logo.png')}}" alt="">
+                            <img src="{{url('assets/img/login/WorkUp-Logo.png')}}" alt="">
                             <p>Seja bem vindo ao nosso site</p>
                         </div>
                         <div class="col-1-2">
-                            <img src="{{url('assets/img/col-img-1-2.png')}}" alt="">
+                            <img src="{{url('assets/img/login/col-img-1-2.png')}}" alt="">
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col col-6 h-100 col-index-2">
+            <div class="col col-12 col-md-6 h-100 col-index-2">
                 <div class="box-login">
                     <h2>Fazer Login</h2>
                     <form action="/login" method="POST">
@@ -48,12 +48,11 @@
                                
                             
                         </div>
-
                     </div>
                     
                     @if(session('error'))
-        <p>{{ session('error') }}</p>
-    @endif
+                        <p>{{ session('error') }}</p>
+                    @endif
                 </div>
             </div>
         </div>

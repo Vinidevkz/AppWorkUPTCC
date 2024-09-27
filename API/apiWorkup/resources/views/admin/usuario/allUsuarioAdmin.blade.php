@@ -7,26 +7,49 @@
 </head>
 <body>
     <div class="container">
-        <h1>Detalhes do Usuário</h1>
-        <p><strong>ID:</strong> {{ $usuario->idUsuario }}</p>
-        <p><strong>Nome:</strong> {{ $usuario->nomeUsuario }}</p>
-        <p><strong>Username:</strong> {{ $usuario->usernameUsuario }}</p>
-        <p><strong>nascUsuario:</strong> {{ $usuario->nascUsuario }}</p>
-        <p><strong>Email:</strong> {{ $usuario->emailUsuario }}</p>
-        <p><strong>Área de Interesse:</strong> {{ $usuario->areaInteresseUsuario }}</p>
-        <p><strong>Contato:</strong> {{ $usuario->contatoUsuario }}</p>
-        <p><strong>fotoUsuario:</strong> {{ $usuario->fotoUsuario }}</p>
-        <p><strong>cidadeUsuario:</strong> {{ $usuario->cidadeUsuario }}</p>
-        <p><strong>estadoUsuario:</strong> {{ $usuario->estadoUsuario }}</p>
-        <p><strong>logradouroUsuario:</strong> {{ $usuario->logradouroUsuario }}</p>
-        <p><strong>cepUsuario:</strong> {{ $usuario->cepUsuario }}</p>
-        <p><strong>numeroLograUsuario:</strong> {{ $usuario->numeroLograUsuario }}</p>
-        <p><strong>sobreUsuario:</strong> {{ $usuario->sobreUsuario }}</p>
-        <p><strong>formacaoCompetenciaUsuario:</strong> {{ $usuario->formacaoCompetenciaUsuario }}</p>
-        <p><strong>dataFormacaoCompetenciaUsuario:</strong> {{ $usuario->dataFormacaoCompetenciaUsuario }}</p>
 
-        <!-- Adicione mais detalhes conforme necessário -->
-        <a href="/verUsuario" class="btn btn-primary">Voltar</a>
+    <div class="card" style="width: 500px;">
+    <div class="card-header text-center">
+        <h1>Detalhes do Usuário</h1>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
+            <p><strong>ID:</strong> {{ $usuario->idUsuario }}</p>
+            <p><strong>Nome:</strong> {{ $usuario->nomeUsuario }}</p>
+            <p><strong>Username:</strong> {{ $usuario->usernameUsuario }}</p>
+            <p><strong>Data de Nascimento:</strong> {{ $usuario->nascUsuario }}</p>
+            <p><strong>Email:</strong> {{ $usuario->emailUsuario }}</p>
+            <p><strong>Contato:</strong> {{ $usuario->contatoUsuario }}</p>
+            <p><strong>Foto:</strong> {{ $usuario->fotoUsuario }}</p>
+            <p><strong>Cidade:</strong> {{ $usuario->cidadeUsuario }}</p>
+            <p><strong>Estado:</strong> {{ $usuario->estadoUsuario }}</p>
+            <p><strong>Logradouro:</strong> {{ $usuario->logradouroUsuario }}</p>
+            <p><strong>CEP:</strong> {{ $usuario->cepUsuario }}</p>
+            <p><strong>Número:</strong> {{ $usuario->numeroLograUsuario }}</p>
+            <p><strong>Sobre:</strong> {{ $usuario->sobreUsuario }}</p>
+            <p><strong>Formação:</strong> {{ $usuario->formacaoCompetenciaUsuario }}</p>
+            <p><strong>Data da Formação:</strong> {{ $usuario->dataFormacaoCompetenciaUsuario }}</p>
+        </div>
+
+        <h3>Áreas de Interesse:</h3>
+        <ul>
+            @foreach($usuario->areas as $area)
+                <li>{{ $area->nomeArea }}</li>
+            @endforeach
+        </ul>
+
+        <div class="mt-4">
+            <a href="/verUsuario" class="btn btn-primary">Voltar</a>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+        
+       
 
     </div>
 </body>

@@ -1,0 +1,443 @@
+/* CSS para o background da página */
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-image: url('/assets/img/home/fundo.png'); /* Certifique-se de que a imagem esteja no caminho correto */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+   
+ 
+    /* Altere a altura conforme necessário */
+    
+    /* Efeito parallax */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* Remova background-attachment: fixed; para evitar problemas de compatibilidade */
+}
+
+.section-spacing {
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+/* Estilos para a barra de navegação (navbar) */
+.navbar {
+    background-color: #01ff01; /* Cor de fundo da navbar */
+    border-radius: 25% 0% -25px 25%; /* Bordas arredondadas */
+    border-bottom: 3px solid #c9ffb95b; /* Borda inferior */
+    box-shadow: -25px 0 35px #def8d3; /* Sombra da navbar */
+}
+
+.logo-mobile {
+    display: none; /* Esconde a logo móvel por padrão */
+}
+
+@media (max-width: 768px) {
+    .logo-desktop {
+        display: none; /* Esconde a logo de desktop em telas pequenas */
+    }
+
+    .logo-mobile {
+        display: block; /* Mostra a logo móvel em telas pequenas */
+        max-width: 150px; /* Tamanho máximo da logo móvel */
+        height: auto; /* Ajusta a altura automaticamente */
+    }
+}
+
+.navbar-brand {
+    font-size: 1.9rem; /* Tamanho da fonte do texto da marca */
+    color: #fdfffd; /* Cor do texto da marca */
+}
+
+.navbar-brand img {
+    max-width: 150px; /* Largura máxima das imagens da marca */
+    height: auto; /* Ajusta altura automaticamente */
+}
+
+.navbar-toggler-icon {
+    color: #93eef1; /* Cor do ícone do toggler */
+}
+
+.nav-link {
+    color: #0f0f0f; /* Cor dos links de navegação */
+    text-decoration: none; /* Remove sublinhado dos links */
+    font-size: 20px; /* Tamanho da fonte dos links */
+    font-weight: 500;
+}
+
+.nav-link:hover {
+    color: #ffffff; /* Cor dos links ao passar o mouse */
+}
+
+.dropdown-menu {
+    background-color: #102909; /* Cor de fundo do menu dropdown */
+}
+
+.dropdown-item {
+    color: #fff; /* Cor dos itens do menu dropdown */
+}
+
+.dropdown-item:hover {
+    background-color: #46f846; /* Cor de fundo dos itens ao passar o mouse */
+}
+
+.nav-link i {
+    font-size: 1.2rem; /* Tamanho dos ícones nos links de navegação */
+}
+
+.img-headertpl {
+    opacity: 0; /* Inicia com opacidade zero */
+    transition: opacity 1s ease-in-out; /* Transição suave de opacidade */
+}
+
+.img-visible {
+    opacity: 1; /* Torna a imagem visível */
+
+}
+
+.offcanvas-body {
+    background-color: #09ff09; /* Cor de fundo do corpo do sidebar */
+}
+
+.imgquemsomos {
+    width: 70%; /* Largura ajustável ao conteúdo */
+    height: auto; /* Altura ajustada automaticamente */
+}
+
+
+
+.list-group-item {
+    color: #ff0404; /* Cor do texto dos itens de lista */
+    background-color: #f2fff2; /* Cor de fundo dos itens de lista */
+}
+
+.offcanvas-header {
+    background-color: #f2fff2; /* Cor de fundo do cabeçalho do sidebar */
+    color: #ec0d0d; /* Cor do texto do cabeçalho do sidebar */
+}
+
+.conteudo {
+    margin-top: 7%; /* Margem superior do conteúdo principal */
+    position: relative; /* Posição relativa do conteúdo */
+ 
+}
+
+.init-hidden {
+    opacity: 0; /* Inicia com opacidade zero */
+    transition: opacity 0.5s linear; /* Transição suave de opacidade */
+}
+
+.init-hidden-off {
+    opacity: 1; /* Torna o elemento visível */
+}
+
+a, a:hover, a:focus, a:active {
+    text-decoration: none; /* Remove sublinhado dos links */
+    outline: none; /* Remove contorno dos links */
+    color: #333; /* Cor do texto dos links */
+    transition: color 0.2s ease-in-out; /* Transição suave de cor */
+}
+
+ul {
+    margin: 0; /* Remove margem das listas */
+    padding: 0; /* Remove padding das listas */
+    list-style: none; /* Remove marcadores de lista */
+}
+
+img {
+    max-width: 100%; /* Largura máxima das imagens */
+    height: auto; /* Ajusta altura automaticamente */
+}
+
+section {
+    padding: 60px 0; /* Espaçamento vertical das seções */
+}
+
+.bg-left {
+    background-image: url('/public/assets/img/home/5.png'); /* Imagem de fundo à esquerda */
+    background-repeat: no-repeat; /* Não repete a imagem de fundo */
+    background-position: center; /* Centraliza a imagem de fundo */
+}
+
+.card {
+    position: relative; /* Posição relativa do cartão */
+    display: flex; /* Exibe como flexbox */
+    align-items: center; /* Alinha itens ao centro verticalmente */
+    justify-content: center; /* Centraliza itens horizontalmente */
+    width: 320px; /* Largura do cartão */
+    border-radius: 24px; /* Bordas arredondadas */
+    border-bottom: #0f0f0f;
+    line-height: 1.6; /* Altura da linha */
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1); /* Transição suave */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra do cartão */
+    max-width: 300px; /* Largura máxima do cartão */
+    margin: auto; /* Centraliza o cartão */
+
+}
+
+.content {
+    display: flex; /* Exibe como flexbox */
+    flex-direction: column; /* Direção dos itens em coluna */
+    align-items: flex-start; /* Alinha itens à esquerda */
+    gap: 24px; /* Espaçamento entre itens */
+    padding: 36px; /* Padding interno */
+    border-radius: 22px; /* Bordas arredondadas */
+    color: #ffffff; /* Cor do texto */
+    overflow: hidden; /* Esconde conteúdo excedente */
+    background: #014306; /* Cor de fundo */
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1); /* Transição suave */
+}
+
+.content::before, .content::after {
+    position: absolute; /* Posição absoluta para camadas */
+    content: ""; /* Sem conteúdo textual */
+    top: -8%; /* Posição superior */
+    left: 50%; /* Posição à esquerda */
+    width: 80%; /* Largura da camada */
+    height: 80%; /* Altura da camada */
+    transform: translate(-50%); /* Centraliza horizontalmente */
+    z-index: -2; /* Nível de empilhamento */
+    border-radius: inherit; /* Herda bordas arredondadas */
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1); /* Transição suave */
+}
+
+.content::before {
+    top: -4%; /* Posição superior ajustada */
+    width: 90%; /* Largura ajustada */
+    background: #03f760; /* Cor de fundo */
+    z-index: -1; /* Nível de empilhamento */
+}
+
+.content::after {
+    background: #99d342; /* Cor de fundo */
+}
+
+.content .para {
+    z-index: 1; /* Nível de empilhamento */
+    opacity: 1; /* Opacidade total */
+    font-size: 18px; /* Tamanho da fonte */
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1); /* Transição suave */
+}
+
+.content .link {
+    z-index: 1; /* Nível de empilhamento */
+    color: #fea000; /* Cor do link */
+    text-decoration: none; /* Remove sublinhado */
+    font-family: inherit; /* Herda família de fontes */
+    font-size: 16px; /* Tamanho da fonte */
+    transition: all 0.48s cubic-bezier(0.23, 1, 0.32, 1); /* Transição suave */
+}
+
+.content .link:hover {
+    text-decoration: underline; /* Sublinhado ao passar o mouse */
+}
+
+.card:hover {
+    transform: translate(0px, -16px); /* Move o cartão */
+}
+
+.card:hover .content::before {
+    rotate: -8deg; /* Rotaciona camada antes */
+    top: 0; /* Posição superior */
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+}
+
+.card:hover .content::after {
+    rotate: 8deg; /* Rotaciona camada depois */
+    top: 0; /* Posição superior */
+    width: 100%; /* Largura total */
+    height: 100%; /* Altura total */
+}
+
+.seccf {
+    background-color: #e5fcca; /* Cor de fundo */
+    border-radius:0 0 20% 0 ;
+    padding-left: 20px;
+    height: 80%;
+
+ 
+}
+
+
+@media (max-width: 768px) {
+    .container-fluid.init-hidden {
+        padding: 20px 0; /* Diminui ainda mais o espaçamento vertical em telas menores */
+    }
+}
+
+.footer {
+    background-color: #0f0f0f; /* Gradiente de fundo */
+    padding: 25px 0 10px; /* Padding interno */
+}
+
+#logo-footer {
+    width: 10%; /* Largura do logo */
+    height: auto; /* Altura automática */
+}
+
+.single_footer {
+    margin-bottom: 30px; /* Margem inferior */
+}
+
+.single_footer h4 {
+    color: #ffffff; /* Cor do título */
+    margin: 0 0 25px; /* Margem inferior */
+    font-weight: 700; /* Peso da fonte */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    font-size: 30px; /* Tamanho da fonte */
+}
+
+.single_footer h4::after {
+    content: ""; /* Sem conteúdo textual */
+    display: block; /* Exibição em bloco */
+    height: 4px; /* Altura da linha */
+    width: 40px; /* Largura da linha */
+    background: #05f105; /* Cor da linha */
+    margin-top: 20px; /* Margem superior */
+}
+
+.single_footer p {
+    color: #aa9999; /* Cor do texto */
+}
+
+.single_footer ul li a {
+    color: #ffffff; /* Cor dos links */
+    transition: color 0.3s ease; /* Transição suave de cor */
+    line-height: 36px; /* Altura da linha */
+    font-size: 30px; /* Tamanho da fonte */
+    text-transform: capitalize; /* Texto em capitalização */
+    font-weight: 600; /* Peso da fonte */
+}
+
+.single_footer ul li a:hover {
+    color: #57ff09; /* Cor dos links ao passar o mouse */
+}
+
+.contact_social ul {
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0; /* Remove margem */
+    padding: 0; /* Remove padding */
+}
+
+/* CSS da newsletter */
+.subscribe {
+    display: block; /* Exibição em bloco */
+    position: relative; /* Posição relativa */
+    margin-top: 15px; /* Margem superior */
+    width: 100%; /* Largura total */
+}
+
+.subscribe__input {
+    background-color: #fff; /* Cor de fundo */
+    border: none; /* Sem borda */
+    border-radius: 5px; /* Bordas arredondadas */
+    color: #333; /* Cor do texto */
+    font-size: 15px; /* Tamanho da fonte */
+    font-weight: 500; /* Peso da fonte */
+    height: 60px; /* Altura */
+    padding: 0 150px 0 20px; /* Padding interno */
+    text-align: center; /* Alinhamento do texto */
+    text-transform: capitalize; /* Texto em capitalização */
+    width: 100%; /* Largura total */
+}
+
+@media only screen and (max-width: 768px) {
+    .subscribe__input {
+        padding: 0 50px 0 20px; /* Ajuste de padding em telas pequenas */
+    }
+}
+
+.subscribe__btn {
+    background-color: transparent; /* Fundo transparente */
+    border-radius: 0 25px 25px 0; /* Bordas arredondadas */
+    color: #09ff00; /* Cor do botão */
+    cursor: pointer; /* Cursor de ponteiro */
+    display: block; /* Exibição em bloco */
+    font-size: 20px; /* Tamanho da fonte */
+    height: 60px; /* Altura */
+    position: absolute; /* Posição absoluta */
+    right: 0; /* Alinhamento à direita */
+    top: 0; /* Alinhamento ao topo */
+    width: 60px; /* Largura */
+}
+
+.subscribe__btn i {
+    transition: color 0.3s ease; /* Transição suave de cor */
+}
+
+.subscribe__btn:hover i {
+    color: #1cff07; /* Cor dos ícones ao passar o mouse */
+}
+
+button {
+    padding: 0; /* Remove padding */
+    border: none; /* Sem borda */
+    background-color: transparent; /* Fundo transparente */
+}
+
+/* CSS do perfil social */
+.social_profile {
+    margin-top: 40px; /* Margem superior */
+}
+
+.social_profile ul {
+    list-style: none; /* Remove marcadores de lista */
+    margin: 0; /* Remove margem */
+    padding: 0; /* Remove padding */
+}
+
+.social_profile ul li {
+    float: left; /* Flutuação à esquerda */
+}
+
+.social_profile ul li a {
+    text-align: center; /* Alinhamento centralizado */
+    text-transform: uppercase; /* Texto em maiúsculas */
+    transition: background 0.3s ease, color 0.3s ease; /* Transição suave de cor e fundo */
+    margin: 0 5px; /* Margem dos links */
+    font-size: 18px; /* Tamanho da fonte */
+    color: #fff; /* Cor do texto */
+    border-radius: 30px; /* Bordas arredondadas */
+    width: 50px; /* Largura */
+    height: 50px; /* Altura */
+    line-height: 50px; /* Altura da linha */
+    display: block; /* Exibição em bloco */
+    border: 1px solid rgb(253, 255, 254); /* Borda */
+}
+
+@media only screen and (max-width: 768px) {
+    .social_profile ul li a {
+        margin-right: 10px; /* Margem à direita */
+        margin-bottom: 10px; /* Margem inferior */
+    }
+}
+
+@media only screen and (max-width: 480px) {
+    .social_profile ul li a {
+        width: 40px; /* Largura */
+        height: 40px; /* Altura */
+        line-height: 40px; /* Altura da linha */
+    }
+}
+
+.social_profile ul li a:hover {
+    background: #2e2e2e; /* Cor de fundo ao passar o mouse */
+    border: 1px solid #c6eed0; /* Cor da borda ao passar o mouse */
+    color: #3df705; /* Cor do texto ao passar o mouse */
+    font-size: 50px;
+}
+
+/* CSS dos direitos autorais no rodapé */
+.copyright {
+    margin-top: 70px; /* Margem superior */
+    padding-top: 40px; /* Padding superior */
+    color: #fff; /* Cor do texto */
+    font-size: 15px; /* Tamanho da fonte */
+    border-top: 5px solid rgb(34, 247, 6); /* Borda superior */
+    text-align: center; /* Alinhamento centralizado */
+}
+

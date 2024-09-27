@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 
 class EmpresaController extends Controller
 {
@@ -13,11 +14,22 @@ class EmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $empresa = Empresa::all();
+        if ($request->has('order') && $request->order == 'status') {
+            // Ordena para trazer idStatus = 2 primeiro
+            $empresas = Empresa::with('status')->orderByRaw("FIELD(idStatus, 2, 1), nomeEmpresa ASC")->get();
+        } else {
+            // Caso contrário, traz as empresas normalmente (com idStatus = 1 primeiro)
+            $empresas = Empresa::with('status')->orderBy('idStatus', 'asc')->get();
+        }
 
-        return $empresa;
+        if ($request->ajax()) {
+            return response()->json($empresas); // Retorna JSON se for uma requisição AJAX
+        }
+
+        // Caso contrário, retorna a view com os usuários
+        return view('admin.empresa.empresaAdmin', compact('empresas'));
     }
 
     /**
@@ -27,7 +39,12 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        //
+        return view('cadastrarEmpresa');
+    }
+
+    public function area()
+    {
+        return view('cadastrarAreaEmpresa');
     }
 
     /**
@@ -38,7 +55,7 @@ class EmpresaController extends Controller
      */
     public function store(Request $request)
     {
-/*
+        /*
 |--------------------------------------------------------------------------
 Validação
 |--------------------------------------------------------------------------
@@ -46,33 +63,31 @@ Validação
 
         $request->validate(
             [
-                'usernameEmpresa'  => 'required', 
-                'nomeEmpresa' => 'required|', 
-                'sobreEmpresa'=>'required',
-                'atuacaoEmpresa'=>'required',
-                'cnpjEmpresa'=>'required',
-                'contatoEmpresa'=>'required',
-                'senhaEmpresa'=>'required',
-                'cidadeEmpresa'=>'required',
-                'estadoEmpresa'=>'required',
-                'LogradouroEmpresa'=>'required',
-                'cepEmpresa'=>'required',
-                'numeroLograEmpresa'=>'required',
+                'usernameEmpresa'  => 'required',
+                'nomeEmpresa' => 'required|',
+                'sobreEmpresa' => 'required',
+                'cnpjEmpresa' => 'required',
+                'contatoEmpresa' => 'required',
+                'senhaEmpresa' => 'required',
+                'cidadeEmpresa' => 'required',
+                'estadoEmpresa' => 'required',
+                'LogradouroEmpresa' => 'required',
+                'cepEmpresa' => 'required',
+                'numeroLograEmpresa' => 'required',
             ],
             [
                 'usernameEmpresa.required'  => 'Digite um APELIDO',
-                'nomeEmpresa.required' => 'Digite um nome', 
-                'sobreEmpresa.required' =>'Digite sobre a empresa',
-                'atuacaoEmpresa.required' =>'Digite a area de atuação',
-                'cnpjEmpresa.required' =>'Digite um cnpj',
-                'contatoEmpresa.required' =>'Digite um contato',
-                'senhaEmpresa.required' =>'Digite uma senha',
-                'cidadeEmpresa.required' =>'Digite uma cidade',
-                'estadoEmpresa.required' =>'Digite um estado',
-                'LogradouroEmpresa.required' =>'Digite um logradouro',
-                'cepEmpresa.required' =>'Digite um cep',
-                'numeroLograEmpresa.required' =>'Digite um numero',
-                ]
+                'nomeEmpresa.required' => 'Digite um nome',
+                'sobreEmpresa.required' => 'Digite sobre a empresa',
+                'cnpjEmpresa.required' => 'Digite um cnpj',
+                'contatoEmpresa.required' => 'Digite um contato',
+                'senhaEmpresa.required' => 'Digite uma senha',
+                'cidadeEmpresa.required' => 'Digite uma cidade',
+                'estadoEmpresa.required' => 'Digite um estado',
+                'LogradouroEmpresa.required' => 'Digite um logradouro',
+                'cepEmpresa.required' => 'Digite um cep',
+                'numeroLograEmpresa.required' => 'Digite um numero',
+            ]
         );
         $empresa = new Empresa;
 
@@ -81,18 +96,18 @@ Validação
         $empresa->emailEmpresa = $request->emailEmpresa;
         $empresa->fotoEmpresa = $request->fotoEmpresa;
         $empresa->sobreEmpresa = $request->sobreEmpresa;
-        $empresa->atuacaoEmpresa = $request->atuacaoEmpresa;
         $empresa->cnpjEmpresa = $request->cnpjEmpresa;
         $empresa->contatoEmpresa = $request->contatoEmpresa;
         $empresa->senhaEmpresa = Hash::make($request->senhaEmpresa);
-        $empresa->cidadeEmpresa	 = $request->cidadeEmpresa;
+        $empresa->cidadeEmpresa     = $request->cidadeEmpresa;
         $empresa->estadoEmpresa = $request->estadoEmpresa;
         $empresa->LogradouroEmpresa = $request->LogradouroEmpresa;
         $empresa->cepEmpresa = $request->cepEmpresa;
         $empresa->numeroLograEmpresa = $request->numeroLograEmpresa;
+        $empresa->idStatus = 3;
 
         $empresa->save();
-        return view('home');
+        return redirect()->route('cadastrarAreaEmpresa', ['id' => $empresa->idEmpresa]);
     }
 
     /**
@@ -103,9 +118,8 @@ Validação
      */
     public function show($id)
     {
-        $empresa = Empresa::where('idEmpresa', $id)->get();
-
-        return $empresa;
+        $empresa = Empresa::where('idEmpresa', $id)->with('areas')->firstOrFail(); // Carrega a empresa com suas áreas
+        return view('admin.empresa.allempresaAdmin', compact('empresa'));
     }
 
     /**
@@ -116,7 +130,8 @@ Validação
      */
     public function edit($id)
     {
-        //
+        $empresa = Empresa::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404
+        return view('admin.empresa.empresaEditarAdmin', compact('empresa')); // Passa o usuário para a view
     }
 
     /**
@@ -128,7 +143,31 @@ Validação
      */
     public function update(Request $request, $id)
     {
-        //
+        $empresa = Empresa::where('idEmpresa', $id)->get()->first();
+
+
+        DB::table('tb_empresa')
+            ->where('idEmpresa', $id)
+            ->update([
+                'nomeEmpresa' => $request->nomeEmpresa,
+                'usernameEmpresa' => $request->usernameEmpresa,
+                'emailEmpresa' => $request->emailEmpresa,
+                'contatoEmpresa' => $request->contatoEmpresa,
+                'sobreEmpresa' => $request->sobreEmpresa,
+
+            ]);
+
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Empresa atualizado com sucesso']); // Retorna JSON se for uma requisição AJAX
+        }
+
+        // Caso contrário, retorna a view com os usuários
+
+        $empresas = Empresa::findOrFail($id);
+        $empresas->update($request->all());
+    
+        // Redirecionar para a lista de usuários
+        return redirect('/verEmpresa')->with('success', 'Empresa atualizado com sucesso.');
     }
 
     /**
@@ -137,8 +176,38 @@ Validação
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        // Encontra a empresa pelo ID
+        $empresa = Empresa::findOrFail($id);
+    
+        // Atualiza o status da empresa para 2
+        $empresa->update(['idStatus' => 2]);
+    
+        // Verifica se a requisição foi feita via AJAX
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Empresa atualizada com sucesso']);
+        }
+    
+        // Redireciona para a lista de empresas com mensagem de sucesso
+        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
+    }
+
+    public function aprovar(Request $request, $id)
+    {
+        // Encontra a empresa pelo ID
+        $empresa = Empresa::findOrFail($id);
+    
+        // Atualiza o status da empresa para 2
+        $empresa->update(['idStatus' => 1]);
+    
+        // Verifica se a requisição foi feita via AJAX
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Empresa atualizada com sucesso']);
+        }
+    
+        // Redireciona para a lista de empresas com mensagem de sucesso
+        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
     }
 }
+

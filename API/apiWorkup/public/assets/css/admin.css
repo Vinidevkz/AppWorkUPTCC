@@ -28,12 +28,14 @@
 
   body {
     font-family: Poppins, sans-serif;
-    width: 100vw;
+    /* width: 100vw; */
     height: 100vh;
     font-size: 0.88rem;
     user-select: none;
     overflow-x: hidden;
     background: var(--clr-color-background);
+    margin: 0;
+    padding: 0;
   }
 
 
@@ -52,3 +54,274 @@
     font-weight: 500;
 
   }
+  .navbaradmin{
+    background-color: #303030;
+  }
+/* 
+  navbaradmin a{
+    margin-left: 55%;
+    font-weight: 800;
+    font-style: italic;
+} */
+ header{
+  background-color: #303030;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  padding: 0 20px; 
+}
+header p{
+  margin-right: auto;
+}
+header a{
+  margin-left: 10px;
+}
+header .nav-text{
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.navbar{
+
+}
+.lo{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-around;
+}
+.verde{
+  color: var(--clr-verde);
+}
+
+/* ESTILIZAÇÃO DO ASIDE */
+aside{
+  width: 100%;
+  /* background-color: #f4f4f4; */
+  min-height: 100vh;
+  padding: 20px;
+  background-color: #303030;
+}
+.aside-container{
+  height: 100%;
+
+}
+.aside-sidebar{
+  padding: 7%;
+}
+.aside-sidebar a{
+  padding-bottom: 22px;
+  text-decoration: none;
+  width: 100%;
+}
+.aside-sidebar a:hover{
+  /* background-color: #11bf6b; */
+  margin-left: 5px;
+  transition: 0.2s;
+  border-left: 5px solid #11bf6b;
+}
+.aside-sidebar #btn-exit:hover{
+  /* background-color: #11bf6b; */
+  margin-left: 5px;
+  transition: 0.2s;
+  border-left: 5px solid red;
+}
+.aside-sidebar #btn-support:hover{
+  /* background-color: #11bf6b; */
+  margin-left: 5px;
+  transition: 0.2s;
+  border-left: 5px solid blue;
+}
+
+.aside-sidebar a:active{
+  border-left: 5px solid #11bf6b;
+}
+
+.aside-active{
+  border-left: 5px solid #11bf6b;
+}
+ #myBarChart, #barGraph{
+  width: 90%;
+  height: 50%;
+}
+
+
+/* ESTILIZAÇÃO DO RELÓGIO */
+ #hour, #min, #sec, .reg-point{
+  font-size: 15px;
+  margin: 0px;
+  padding: 5px;
+  color: red;
+  font-weight: 600;
+}
+/* {
+  color: red;
+
+} */
+
+@media (max-width: 500px){
+  span{
+    font-size: 50px;
+    margin: 0;
+    
+  }
+}
+
+.relogio {
+  background-color: #f0f0f0;
+  width: 150px;
+  border-radius: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 2px;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  font-size: 20px;
+  text-align: center;
+}
+
+.relogio span {
+  display: inline-block;
+  min-width: 30px;
+}
+
+.reg-point {
+  color: #ff0000;
+  animation: blink 1s step-start infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+
+#hour, #min, #sec{
+
+}
+
+
+@media (max-width: 500px) {
+  span {
+    font-size: 50px;
+    margin: 0;
+  }
+}
+
+/* ESTILIZAÇÃO DO GRÁFICO */
+.align-graph{
+  margin-top: 5%;
+}
+
+
+
+/* ESTILIZAÇÃO DOS CARDS SUSPENSOS */
+.card-data-user, .card-data-job, .card-data-company{
+  height: 100px;
+  background-color: white;
+  
+}
+
+
+
+.group-list-users{
+  background-color: transparent;
+}
+
+/* .grafico-barras, .grafico-polar{
+  background-color: white;
+  width: 100%;
+  height: 100%;
+}
+.grafico-pizza{
+  background-color: white;
+  width: 100%;
+      height: 100%;
+} */
+#myBarChart, #barGraph, #pizzaGraph, #piechart_3d{
+      width: 80%;
+      height: 80%;
+}
+.grafico-barras{
+  height: 500px;
+  width: 500px;
+  background-color: white;
+  border-radius: 7px;
+  /* border: 1px solid black; */
+}
+table{
+  padding: 10px;
+  margin: 10px;
+}
+#gambiarra{
+  color: transparent;
+}
+#labels-list{
+  list-style: none;
+}
+.centralizar-dados{
+  display: flex;
+  justify-content: space-between;
+  /* border-bottom: 1px solid black; */
+  }
+/* TELA DE SUPORTE */
+
+/* .underline{
+  text-decoration: underline;
+} */
+ .btn-acoes{
+  width: 72px;
+  margin: 0;
+  text-align: center;
+ }
+ .blue{
+   background-color: rgba(32, 107, 196, 0.05);
+   width: 70px;
+   text-align: center;
+ }
+ .btn-acoes-add{
+  border: 1px solid var(--clr-primary);
+  border-radius: 0;
+  font-size: 0.9rem;
+  padding: 2px;
+ }
+ .btn-acoes-add:hover{
+  color: white;
+  background-color: var(--clr-primary);
+ }
+ .nav-list{
+  list-style: none;
+ }
+ .text-adm{
+  font-size: 0.7rem;
+  margin-right: 2px;
+ }
+ .table-user{
+  font-size: 0.8rem;
+ }
+ .user-initials {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 10px;
+  background-color: var(--clr-primary);
+}
+
+
+.hidden {
+  opacity: 0;
+  transform: translateX(-100%); /* Move para a esquerda */
+  pointer-events: none; /* Desativa interações quando escondido */
+}

@@ -1,0 +1,99 @@
+.error-message {
+      color: red;
+      font-size: 0.875rem;
+}
+
+.input-container {
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+}
+
+.input-container i {
+      margin-right: 0.5rem;
+}
+
+.form-container {
+      background-color: #f9f9f9;
+      border-radius: 10px;
+      padding: 2rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin-left: auto;
+      
+      /* Alinha o formulário à direita */
+}
+
+.custom-input {
+      padding: 10px;
+      border: 4px solid #3f4b45;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+      background-color: #ffffff;
+      width: 100%;
+}
+
+.form-section {
+      display: none;
+}
+
+.form-section.active {
+      display: block;
+}
+
+.image-container img {
+      max-width: 100%;
+      border-radius: 10px;
+      margin-top: 50px;
+}
+
+.cardsform {
+      background-image: url('/assets/img/login/formss.png');
+
+      padding-top: 50px;
+      padding-bottom: 50px;
+      border-radius: 10px;
+      margin-top: 50px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.panel-heading {
+      background-color: #18e47e;
+      color: rgb(26, 25, 25);
+      padding: 5px;
+      text-align: left;
+      border-radius: 10px ;
+      font-weight: 600;
+      
+    
+}
+.btn-custom {
+      border-radius: 30px; /* Bordas arredondadas */
+      padding: 10px 20px; /* Espaçamento interno */
+      font-size: 16px; /* Tamanho da fonte */
+      transition: background-color 0.3s ease; /* Transição suave */
+  }
+
+  .btn-primary-custom {
+      background-color: #00eb00; /* Cor azul personalizada */
+      color: rgb(14, 14, 14);
+      border: none;
+  }
+
+  .btn-primary-custom:hover {
+      background-color: #c8ec8d; /* Cor azul mais escura no hover */
+  }
+
+  .btn-secondary-custom {
+      background-color: #33ff00; /* Cor laranja personalizada */
+      color: rgb(0, 0, 0);
+      border: none;
+  }
+
+  .btn-secondary-custom:hover {
+      background-color: #20f10d; /* Cor laranja mais escura no hover */
+  }
+  .btn-success-custom {
+      background-color: #00ff00; /* Cor laranja personalizada */
+      color: rgb(0, 0, 0);
+      border: none;
+  }

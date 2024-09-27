@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-@import url('https://fonts.cdnfonts.com/css/glacial-indifference-2');
+@import url("https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap");
+@import url("https://fonts.cdnfonts.com/css/glacial-indifference-2");
 
 * {
     box-sizing: border-box;
@@ -18,8 +18,8 @@ section .linha-index {
 }
 
 .col-index-1 {
-    font-family: 'Glacial Indifference', sans-serif;
-    background-image: url("../img/fundo-index-1.png");
+    font-family: "Glacial Indifference", sans-serif;
+    background-image: url("../img/login/fundo-index-1.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -29,13 +29,14 @@ section .linha-index {
     color: #f4f4f4;
 }
 
-.col-index-1 .container .row{
+.col-index-1 .container .row {
     height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
-.col-1-1, .col-1-2 {
+.col-1-1,
+.col-1-2 {
     display: flex;
     justify-content: center;
     flex-direction: column;
@@ -63,7 +64,7 @@ section .linha-index {
 }
 
 .col-index-2 {
-    background-image: url("../img/fundo-index-2.png");
+    background-image: url("../img/login/fundo-index-2.png");
     background-size: cover;
     background-repeat: no-repeat;
     display: grid;
@@ -71,22 +72,31 @@ section .linha-index {
 }
 
 .box-login {
+    position: relative; /* Necessário para posicionar o pseudo-elemento */
     background-color: #fff;
+    opacity: 2px;
     min-height: 32rem;
     min-width: 27rem;
     display: grid;
     place-items: center;
+    border-radius: 5%;
+    overflow: hidden; /* Garante que o pseudo-elemento não exceda os limites do box-login */
 }
 
-.box-login h2 {
-    place-self: center start;
-    font-size: 1.8rem;
-    font-weight: 300;
-    margin-bottom: 2rem;
-    color: black;
-    margin: 3rem 0 0 3rem;
+.box-login::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url("../img/login/fundo-index-2.png");
+    background-size: cover;
+    background-position: center;
+    opacity: 1; /* Define a opacidade da imagem de fundo */
+    z-index: -1; /* Coloca a imagem atrás do conteúdo do box-login */
+    border-radius: 5%; /* Aplica o mesmo arredondamento do box-login */
 }
-
 .inputs-login {
     display: flex;
     justify-content: space-between;
@@ -95,18 +105,30 @@ section .linha-index {
     margin-bottom: 3rem;
 }
 
-.inputs-login div{
+.inputs-login div {
     display: flex;
     flex-direction: column;
     align-items: start;
-    width: 95%;
+    width: 85%;
 }
 
-.inputs-login input{
-    border-style: none;
-    border-radius: 5rem;
-    background-color: #f4f4f4;
+.inputs-login input {
+    color: #c7eed9;
+    text-transform: uppercase;
+    background: #ffffff;
+    padding: 20px;
+    border: 4px solid #141414;
+    border-radius: 6px;
     width: 100%;
+    transition: all 0.3s ease 0s;
+    outline: none;
+}
+
+.inputs-login input:hover {
+    color: #494949;
+    border-radius: 50px;
+    border-color: #494949;
+    transition: all 0.3s ease 0s;
 }
 
 .botoes-login {
@@ -115,12 +137,14 @@ section .linha-index {
     align-items: center;
     justify-content: space-between;
     height: 8rem;
+    border-radius: 10px;
 }
 
 .botoes-login button {
     width: 75%;
     height: 3rem;
     border-style: none;
+    border-radius: 5px;
 }
 
 .logar {
@@ -130,7 +154,7 @@ section .linha-index {
 }
 
 .logar a {
-    color: #f4f4f4;
+    color: #111010;
     text-decoration: none;
 }
 
@@ -138,6 +162,16 @@ section .linha-index {
     background-color: transparent;
     color: #20dd77;
     font-weight: 500;
+}
+
+@media (max-width: 767.98px) {
+    .col-index-1 {
+        display: none; /* Esconder a coluna da imagem em telas pequenas */
+    }
+    .col-index-2 {
+        background-image: url("../img/login/fundo-index-1.png"); /* Usar a mesma imagem de fundo na coluna do formulário */
+        background-size: cover;
+    }
 }
 
 /*home*/

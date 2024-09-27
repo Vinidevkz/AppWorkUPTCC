@@ -5,14 +5,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Vaga;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class Empresa extends Model
+class Empresa extends Authenticatable
 {
     use HasFactory;
 
     protected $table = 'tb_empresa';
 
-    public $timestamps = false;
+    public $timestamps = true;
     /*
 |--------------------------------------------------------------------------
 |Definindo chave primaria
@@ -27,8 +29,45 @@ class Empresa extends Model
 |--------------------------------------------------------------------------
 */
 
-    public function vagasEmpresas()
+    public function vagasEmpresas() :HasMany
     {
         return $this->hasMany(Vaga::class, 'idEmpresa');
     }
+
+    protected $fillable = [
+        'usernameEmpresa', 
+        'nomeEmpresa', 
+        'emailEmpresa', 
+        'fotoEmpresa',
+        'sobreEmpresa',
+        'cnpjEmpresa',
+        'contatoEmpresa',
+        'senhaEmpresa',
+        'cidadeEmpresa',
+        'estadoEmpresa',
+        'LogradouroEmpresa',
+        'cepEmpresa',
+        'numeroLograEmpresa',
+        'idStatus',
+    ];
+
+    public function areas()
+{
+    return $this->belongsToMany(Area::class, 'tb_AtuacaoEmpresa', 'idEmpresa', 'idArea');
 }
+
+public function vagas()
+{
+    return $this->hasMany(Vaga::class, 'idEmpresa');
+}
+
+public function status()
+{
+    return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
+}
+
+    
+
+}
+
+

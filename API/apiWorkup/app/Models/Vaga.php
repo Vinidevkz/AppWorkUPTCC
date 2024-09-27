@@ -5,7 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Empresa;
-use App\Models\AreaVaga;
+use App\Models\Area;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Vaga extends Model
 {
@@ -13,7 +16,9 @@ class Vaga extends Model
 
     protected $table = 'tb_vaga';
 
-    public $timestamps = false;
+    protected $primaryKey = 'idVaga';
+
+    public $timestamps = true;
 
     /*
 |--------------------------------------------------------------------------
@@ -21,19 +26,48 @@ class Vaga extends Model
 |--------------------------------------------------------------------------
 */
 
-    public function empresa()
+    public function empresa() : BelongsTo
     {
         return $this->belongsTo(Empresa::class, 'idEmpresa');
     }
 
-/*
-|--------------------------------------------------------------------------
-|Definindo relacionamento
-|--------------------------------------------------------------------------
-*/
-
-    public function areaVaga()
+    public function area()
     {
-        return $this->belongsTo(AreaVaga::class, 'idAreaVaga');
+        return $this->belongsTo(Area::class, 'idArea');
     }
+
+    
+    public function status()
+    {
+        return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
+    }
+
+    public function modalidade()
+    {
+        return $this->belongsTo(Modalidade::class, 'idModalidadeVaga');
+    }
+
+
+
+    // public function usuarios() : BelongsToMany
+    // {
+    //     return $this->belongsToMany(Usuario::class, 'tb_vagausuario', 'idVaga', 'idUsuario');
+    // }
+
+    public $fillable = [
+        'nomeVaga',
+        'prazoVaga',
+        'salarioVaga',
+        'cidadeVaga',
+        'estadoVaga',
+        'beneficioVaga',
+        'diferencialVaga',
+        'idEmpresa',
+        'idArea',
+        'idStatus',
+        'idModalidadeVaga',
+
+    ];
 }
+
+

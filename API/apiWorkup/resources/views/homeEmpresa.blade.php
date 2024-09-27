@@ -25,7 +25,7 @@
                     <div class="row">
                         <div class="col-1-1">
                             <img src="{{url('assets/img/WorkUp-Logo.png')}}" alt="">
-                            <p>Seja bem vindo ao nosso site</p>
+                            <p>ainda ta fazendo</p>
                         </div>
                         <div class="col-1-2">
                             <img src="{{url('assets/img/col-img-1-2.png')}}" alt="">
