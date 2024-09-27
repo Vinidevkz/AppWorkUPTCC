@@ -13,48 +13,80 @@
 </head>
 
 <body>
-<nav class="navbar">
-  <div class="d-flex align-items-center justify-content-center">
-    <a class="navbar-brand text-light" href="#">Work<span class="verde">Up</span></a>
-  </div>
-</nav>
-<div class="container-fluid">
+<header class="">
+
+
+<p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
+
+<div class="dropdown">
+  <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+  <ul class="dropdown-menu">
+    <li><a class="dropdown-item" href="#">Log out</a></li>
+  </ul>
+</div>
+
+
+</header>
+
+<div class="">
   <div class="row">
-    <div class="col-md-3">
-      <div class="aside-container container">
-        <aside>
-          <div class="aside-sidebar">
-            <a href="index.php" class="aside-active">
-              <span class="material-symbols-outlined">grid_view</span>
-              <h3>Dashboard</h3>
-            </a>
-            <a href="/verUsuario">
-              <span class="material-symbols-outlined">person</span>
-              <h3>Usuários</h3>
-            </a>
-            <a href="./verVaga">
-              <span class="material-symbols-outlined">work</span>
-              <h3>Vagas</h3>
-            </a>
-            <a href="/verEmpresa">
-              <span class="material-symbols-outlined">apartment</span>
-              <h3>Empresas</h3>
-            </a>
-            <a href="">
-              <span class="material-symbols-outlined">settings</span>
-              <h3>Configurações</h3>
-            </a>
-            <a href="">
-              <span class="material-symbols-outlined">info</span>
-              <h3>Suporte</h3>
-            </a>
-            <a href="">
-              <span class="material-symbols-outlined">logout</span>
-              <h3>Sair</h3>
-            </a>
-          </div>
-        </aside>
+  <div class="col-2">
+    <aside class="h-auto">
+      <div class="aside-container">
+       
+          <div class="aside-sidebar d-flex flex-column h-auto text-white">
+
+            <div class="d-flex">
+              <a href="/admin" class="aside-active d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">grid_view</span>
+                Dashboard
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/verUsuario" class="d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">person</span>
+                Usuários
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/verVaga" class="d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">work</span>
+                Vagas
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/verEmpresa" class="d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">apartment</span>
+                Empresas
+              </a>
+            </div>
+
+            <div class="">
+              <a href="/infoAdmin" class="d-flex flex-row align-items-center h6">
+              <span class="material-symbols-outlined p-2">info</span>
+                Info
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="/SuporteAdmin" class="d-flex flex-row align-items-center h6" id="btn-support">
+                <span class="material-symbols-outlined p-2">info</span>
+                Suporte
+              </a>
+            </div>
+
+            <div class="d-flex">
+              <a href="" class="d-flex flex-row align-items-center h6" id="btn-exit">
+                <span class="material-symbols-outlined p-2">logout</span>
+                Sair
+              </a>
+            </div>
+       
       </div>
+      </aside>
     </div>
 
     <div class="col-md-9">

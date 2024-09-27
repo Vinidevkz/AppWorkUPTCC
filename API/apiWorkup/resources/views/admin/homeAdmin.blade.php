@@ -32,7 +32,7 @@
   <header class="">
 
 
-    <p class="text-light fs-4 fw-bold">Work<span class="verde">Up</span></p>
+    <p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
 
     <div class="dropdown">
       <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -46,9 +46,11 @@
 
   <div class="row">
     <div class="col-2">
+    <button id="toggle-aside" class="btn btn-primary">Toggle Aside</button>
+    <aside class="h-auto"  id="sidebar">
       <div class="aside-container">
-        <aside>
-          <div class="aside-sidebar d-flex flex-column">
+       
+          <div class="aside-sidebar d-flex flex-column h-auto text-white">
 
             <div class="d-flex">
               <a href="/admin" class="aside-active d-flex flex-row align-items-center h6">
@@ -98,20 +100,23 @@
                 Sair
               </a>
             </div>
-        </aside>
+       
       </div>
+      </aside>
     </div>
     <div class="col-9">
       <div class="p-0">
-        <div class="align-text d-flex flex-row align-items-center">
+
+       
+        <div class="container">
+
+        <div class="mb-2 mt-2 d-flex flex-row align-items-center">
         <span class="material-symbols-outlined">
 database
 </span>
-<h2>Dashboard</h1>
+<h3 class="m-0">Dashboard</h1>
         </div>
-       
-
-        <div class="row">
+        <div class="row d-flex justify-content-between">
           <div class="col-3">
             <div class="card rounded card-data-job shadow-sm">
               <div class="card-header bg-light centralizar-dados d-flex  align-items-center flex-row">
@@ -153,7 +158,7 @@ location_city
             </div>
 
           </div>
-          <div class="col-3 ">
+          <!-- <div class="col-3 ">
             <div class="relogio d-flex justify-content-center">
               <span id="hour">00</span>
               <span class="reg-point">:</span>
@@ -163,9 +168,10 @@ location_city
             </div>
 
             
-          </div>
+          </div> -->
        
         </div>
+        
 
   <!-- <div class="">
 
@@ -196,21 +202,23 @@ location_city
     </tbody>
   </table> -->
 
-  <div class="container mt-2 shadow">
-        <div class="row shadow">
-            <div class="col-md-6 bg-white">
-                <div id="piechart_3d" style="height: 180px;"></div>
-            </div>
-            <div class="col-md-6 bg-white">
-                <div id="donutchart" style="height: 180px;"></div>
-            </div>
-        </div>
+  <div class="container mt-5  h-100 w-100 " >
         <div class="row">
-      
-            <div class=" bg-white" >
-                <canvas id="myBarChart" class="col" style="height: 200px;"></canvas>
+            <div class="col-md-6 shadow rounded">
+                <div id="piechart_3d" style="height: 230px;"></div>
+            </div>
+            <div class="col-sm-1 p-0"></div>
+            <div class="col-md-5 bg-white shadow rounded">
+                <div id="donutchart" style="height: 230px;"></div>
             </div>
         </div>
+        <div class="row mt-5 pb-5">
+      
+            <div class="bg-white shadow rounded" >
+                <canvas id="myBarChart" class="col" style="height: 338px;" ></canvas>
+            </div>
+        </div>
+  </div>
   </div>
 
 
@@ -610,7 +618,7 @@ google.charts.load("current", {packages:["corechart"]});
 
         var options = {
           title: 'Percentual de vagas por setor',
-          is3D: true,
+          // is3D: true,
           backgroundColor: 'transparent',
           titleTextStyle: {
         fontSize: 14 // Aumenta o tamanho da fonte do título
@@ -676,7 +684,7 @@ function drawChart() {
 
     var options = {
         title: 'Situação dos usuários',
-        pieHole: 0.1,
+        pieHole: 0,
         backgroundColor: 'transparent',
         titleTextStyle: {
         fontSize: 14 // Aumenta o tamanho da fonte do título
@@ -698,7 +706,10 @@ function drawChart() {
 
 
 
-    
+document.getElementById('toggle-aside').addEventListener('click', function() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('hidden');
+}); 
   </script>
 
 

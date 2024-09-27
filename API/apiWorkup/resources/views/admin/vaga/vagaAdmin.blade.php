@@ -16,33 +16,25 @@
 <header class="">
 
 
-<p class="text-light fs-4 fw-bold">Work<span class="verde">Up</span></p>
-<div class="d-flex flex-row align-items-center justify-content-center">
-  <div class="d-flex flex-column justify-content-center align-items-start p-2">
-<p class="text-light text-adm p-0 m-0">Técnico - admin</p>
-<p class="text-light text-adm m-0">WorkUp - Ti</p>
-</div>
-<div class="dropdown d-flex flex-row">
- <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="material-symbols-outlined text-light ">
-keyboard_arrow_down
-</span>
+<p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
+
+<div class="dropdown">
+  <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
   <ul class="dropdown-menu">
     <li><a class="dropdown-item" href="#">Log out</a></li>
   </ul>
-</div>
 </div>
 
 
 </header>
 
-
-<div class="container-fluid">
+<div class="">
   <div class="row">
   <div class="col-2">
+    <aside class="h-auto">
       <div class="aside-container">
-        <aside>
-          <div class="aside-sidebar d-flex flex-column">
+       
+          <div class="aside-sidebar d-flex flex-column h-auto text-white">
 
             <div class="d-flex">
               <a href="/admin" class="aside-active d-flex flex-row align-items-center h6">
@@ -92,8 +84,9 @@ keyboard_arrow_down
                 Sair
               </a>
             </div>
-        </aside>
+       
       </div>
+      </aside>
     </div>
 
     <div class="col-md-9">
