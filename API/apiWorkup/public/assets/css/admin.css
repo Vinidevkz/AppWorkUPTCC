@@ -103,13 +103,15 @@ header .nav-text{
 
 /* ESTILIZAÇÃO DO ASIDE */
 aside{
-  width: 25%;
+  width: 100%;
   /* background-color: #f4f4f4; */
   min-height: 100%;
   padding: 20px;
+  background-color: #303030;
 }
 .aside-container{
-  height: 100vh;
+  height: 100%;
+
 }
 .aside-sidebar{
   padding: 7%;
