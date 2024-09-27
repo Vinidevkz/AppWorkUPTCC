@@ -57,7 +57,19 @@ const styles = StyleSheet.create({
   },
 
   text: {
-    fontSize: 18,
+    fontSize: 16,
+  },
+
+  buttonVaga: {
+    width: '30%',
+    paddingVertical: 10,
+    borderRadius: 20,
+  },
+
+  button: {
+    backgroundColor: '#20dd77',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

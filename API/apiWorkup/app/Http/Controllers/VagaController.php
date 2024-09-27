@@ -222,30 +222,31 @@ class VagaController extends Controller
                 return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
     }
 
-    public function search(Request $request){
-
-        try{
+    public function search(Request $request) {
+        try {
             $query = $request->input('search');
-
-            if($query){
-
+    
+            if ($query) {
                 $vagas = DB::table('tb_vaga')
-                ->leftjoin('tb_empresa', 'tb_vaga.idEmpresa', '=', 'tb_empresa.idEmpresa')
-                ->select('tb_vaga.*', 'tb_empresa.nomeEmpresa as nome_empresa', 'tb_empresa.usernameEmpresa as username_empresa')
-                ->where('tb_vaga.nomeVaga', 'LIKE', "%{$query}%")
-                ->orWhere('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
-                ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
-                ->get();
-
-                if($vagas->isEmpty()){
-                    return response()->json(['message'=>'Nenhuma vaga foi encontrada']);
+                    ->leftJoin('tb_empresa', 'tb_vaga.idEmpresa', '=', 'tb_empresa.idEmpresa')
+                    ->select('tb_vaga.*', 'tb_empresa.nomeEmpresa as nome_empresa', 'tb_empresa.usernameEmpresa as username_empresa')
+                    ->where('tb_vaga.nomeVaga', 'LIKE', "%{$query}%")
+                    ->orWhere('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
+                    ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
+                    ->get();
+    
+                if ($vagas->isEmpty()) {
+                    return response()->json(['message' => 'Nenhuma vaga foi encontrada'], 404);
                 }
+    
                 return response()->json($vagas);
             }
-
-        }catch(Exception $exception){
-            return response()->json(['message'=>'Não foi possivel realizar a busca', $exception]);
+    
+            return response()->json(['message' => 'A busca não pode estar vazia'], 400);
+        } catch (Exception $exception) {
+            return response()->json(['message' => 'Erro ao realizar a busca', 'error' => $exception->getMessage()], 500);
         }
-        
     }
+    
+    
 }
