@@ -46,7 +46,8 @@
 
   <div class="row">
     <div class="col-2">
-    <aside class="h-auto">
+    <button id="toggle-aside" class="btn btn-primary">Toggle Aside</button>
+    <aside class="h-auto"  id="sidebar">
       <div class="aside-container">
        
           <div class="aside-sidebar d-flex flex-column h-auto text-white">
@@ -705,7 +706,10 @@ function drawChart() {
 
 
 
-    
+document.getElementById('toggle-aside').addEventListener('click', function() {
+  const sidebar = document.getElementById('sidebar');
+  sidebar.classList.toggle('hidden');
+}); 
   </script>
 
 
