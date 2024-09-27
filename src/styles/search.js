@@ -46,7 +46,19 @@ const styles = StyleSheet.create({
   searchFontSize: {
     fontSize: 15,
     flex: 1,
-  }
+  },
+
+  title: {
+    fontSize: 25,
+  },
+
+  row: {
+    flexDirection: 'row'
+  },
+
+  text: {
+    fontSize: 18,
+  },
 });
 
 export default styles;
