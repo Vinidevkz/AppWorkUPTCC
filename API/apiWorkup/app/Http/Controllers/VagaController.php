@@ -226,9 +226,13 @@ class VagaController extends Controller
         $query = $request->input('search');
 
         $vagas = DB::table('tb_vaga')
-            ->select('tb_vaga.*', 'nomeVaga')
-            ->where('nomeVaga', 'LIKE', "%{$query}%")
+            ->leftjoin('tb_empresa', 'tb_vaga.idEmpresa', '=', 'tb_empresa.idEmpresa')
+            ->select('tb_vaga.*', 'tb_empresa.nomeEmpresa as nome_empresa', 'tb_empresa.usernameEmpresa as username_empresa')
+            ->where('tb_vaga.nomeVaga', 'LIKE', "%{$query}%")
+            ->orWhere('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
+            ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
             ->get();
+        
         
         return response()->json($vagas);
     }
