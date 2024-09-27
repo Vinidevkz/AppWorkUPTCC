@@ -7,7 +7,7 @@ const ThemeContext = createContext();
 
 // Provedor do contexto
 export function ThemeProvider({ children }) {
-  const [darkMode, setDarkMode] = useState(true); // Estado do tema
+  const [darkMode, setDarkMode] = useState(false); // Estado do tema
 
   const toggleTheme = () => {
     setDarkMode(prevMode => !prevMode);
