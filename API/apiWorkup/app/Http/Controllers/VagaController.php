@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Modalidade;
 use App\Models\Area;
+use Exception;
 
 class VagaController extends Controller
 {
@@ -223,17 +224,28 @@ class VagaController extends Controller
 
     public function search(Request $request){
 
-        $query = $request->input('search');
+        try{
+            $query = $request->input('search');
 
-        $vagas = DB::table('tb_vaga')
-            ->leftjoin('tb_empresa', 'tb_vaga.idEmpresa', '=', 'tb_empresa.idEmpresa')
-            ->select('tb_vaga.*', 'tb_empresa.nomeEmpresa as nome_empresa', 'tb_empresa.usernameEmpresa as username_empresa')
-            ->where('tb_vaga.nomeVaga', 'LIKE', "%{$query}%")
-            ->orWhere('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
-            ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
-            ->get();
+            if($query){
+
+                $vagas = DB::table('tb_vaga')
+                ->leftjoin('tb_empresa', 'tb_vaga.idEmpresa', '=', 'tb_empresa.idEmpresa')
+                ->select('tb_vaga.*', 'tb_empresa.nomeEmpresa as nome_empresa', 'tb_empresa.usernameEmpresa as username_empresa')
+                ->where('tb_vaga.nomeVaga', 'LIKE', "%{$query}%")
+                ->orWhere('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
+                ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
+                ->get();
+
+                if($vagas->isEmpty()){
+                    return response()->json(['message'=>'Nenhuma vaga foi encontrada']);
+                }
+                return response()->json($vagas);
+            }
+
+        }catch(Exception $exception){
+            return response()->json(['message'=>'Não foi possivel realizar a busca', $exception]);
+        }
         
-        
-        return response()->json($vagas);
     }
 }
