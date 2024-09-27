@@ -36,9 +36,9 @@ class VagaController extends Controller
         }
     
         // Verifica se a requisição é AJAX
-        if ($request->ajax()) {
+
             return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
-        }
+        
     
         // Caso contrário, retorna a view com as vagas
         return view('admin.vaga.vagaAdmin', compact('vagas'));

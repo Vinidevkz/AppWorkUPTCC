@@ -3,6 +3,8 @@ import { View, Text, TextInput, SafeAreaView, ScrollView, ActivityIndicator, Fla
 import { useState, useEffect } from "react";
 import * as Font from "expo-font";
 import { useTheme } from "../pages/initialPages/context/themecontext";
+import ApisUrls from '../ApisUrls/apisurls.js';
+const { apiEmuladorVaga } = ApisUrls;
 
 import FontAwesome from '@expo/vector-icons/FontAwesome';
 
@@ -11,8 +13,26 @@ import styles from '../styles/search.js'
 export default function Search() {
      const { theme, toggleTheme } = useTheme({Search});
 
+     const [data, setData] = useState(null);
+
     const [searchText, setSearchText] = useState('')
-''
+
+    const buscaVaga = async () => {
+      setLoading(true);
+      try {
+        const response = await axios.get(apiEmuladorVaga);
+        setData(response.data);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+  
+    useEffect(() => {
+      buscaVaga();
+    }, []);
 
 
     //Carregador de fontes
@@ -54,9 +74,11 @@ export default function Search() {
                     </View>
                 ) : (
                     <FlatList
-                        data={[]} // Adicione sua lógica de dados aqui
-                        renderItem={() => null} // Renderize itens vazios
-                        keyExtractor={(item, index) => index.toString()}
+                        data={[data]} 
+                        keyExtractor={(item) => item.idVaga.toString()}
+                        renderItem={({item}) => (
+                          <Text>{data.nomeVaga}</Text>
+                        )} 
                     />
                 )}
         </View>
