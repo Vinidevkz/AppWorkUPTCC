@@ -27,6 +27,8 @@ Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->name('cadastr
 
 Route::get('/Area', [AreaController::class, 'create'])->name('cadastrarArea');
 
+Route::get('/cadastrarAreaEmpresa/{id}', [AreaEmpresaController::class, 'create'])->name('cadastrarAreaEmpresa');
+
 Route::post('/formVaga', [VagaController::class, 'store']);
 
 Route::post('/formEmpresa', [EmpresaController::class, 'store']);
@@ -66,6 +68,10 @@ Route::get('/empresa', function () {
 
 Route::get('/admin', function () {
     return view('admin.homeAdmin');
+});
+
+Route::get('/', function () {
+    return view('/home');
 });
 
 /*
@@ -133,7 +139,7 @@ Route::put('/Vagas/{id}', [VagaController::class, 'update'])->name('vagas.update
 
 */
 
-Route::get('/', [AuthController::class, 'showFormLogin'])->name('login');
+Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 
 Route::post('/login', [AuthController::class, 'login']);
 

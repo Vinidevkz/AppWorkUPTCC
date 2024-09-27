@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\AreaEmpresa;
 use Illuminate\Http\Request;
+use App\Models\Empresa;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\DB;
+
 
 class AreaEmpresaController extends Controller
 {
@@ -24,9 +28,10 @@ class AreaEmpresaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('Area');
+        $empresa = Empresa::findOrFail($id); // Isso vai lançar uma exceção se a empresa não for encontrada
+        return view('cadastrarAreaEmpresa', compact('empresa'));
     }
 
     /**
@@ -37,28 +42,44 @@ class AreaEmpresaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'idArea'  => 'required',
-
-
-            ],
-            [
-                'idArea.required'  => 'Escolha uma area',
-
-            ]
-        );
-        $areaEmpresa= new AreaEmpresa();
-
-        $areaEmpresa->idArea = $request->idArea;
-        $areaEmpresa->idEmpresa = $request->idEmpresa;
-
-
-        $areaEmpresa->save();
-        return view('area');
+        // Ativa o log de consultas para depuração
+        DB::enableQueryLog();
+        
+        try {
+            // Valida os dados do request
+            $request->validate(
+                [
+                    'idArea' => 'required|array',
+                    'idArea.*' => 'exists:tb_area,idArea', // Ajustado para usar 'idArea'
+                ],
+                [
+                    'idArea.required' => 'Escolha pelo menos uma área',
+                    'idArea.array' => 'Área inválida',
+                    'idArea.*.exists' => 'Uma ou mais áreas selecionadas não existem',
+                ]
+            );
+    
+            $idEmpresa = $request->idEmpresa; // Obtém o ID da empresa
+    
+            // Loop para salvar as áreas selecionadas
+            foreach ($request->idArea as $idArea) {
+                $areaEmpresa = new AreaEmpresa();
+                $areaEmpresa->idArea = $idArea;
+                $areaEmpresa->idEmpresa = $idEmpresa;
+    
+                // Salva a área da empresa
+                $areaEmpresa->save();
+            }
+    
+            // Redireciona após o sucesso
+            return redirect()->route('verUsuario')->with('success', 'Áreas cadastradas com sucesso!');
+            
+        } catch (\Exception $e) {
+            // Captura o erro e retorna uma mensagem amigável
+            return back()->withErrors(['error' => 'Erro ao salvar: ' . $e->getMessage()]);
+        }
     }
     
-
     /**
      * Display the specified resource.
      *

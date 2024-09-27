@@ -26,7 +26,7 @@ class AuthController extends Controller
         if ($empresa) {
             if (Hash::check($password, $empresa->senhaEmpresa)) {
                 Auth::guard('empresas')->login($empresa);
-                return redirect('/cadastrarVaga');
+                return redirect('/empresa');
             }
         }
 

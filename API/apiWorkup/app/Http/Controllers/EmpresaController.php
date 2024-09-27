@@ -42,6 +42,11 @@ class EmpresaController extends Controller
         return view('cadastrarEmpresa');
     }
 
+    public function area()
+    {
+        return view('cadastrarAreaEmpresa');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -102,7 +107,7 @@ Validação
         $empresa->idStatus = 3;
 
         $empresa->save();
-        return view('/verEmpresa');
+        return redirect()->route('cadastrarAreaEmpresa', ['id' => $empresa->idEmpresa]);
     }
 
     /**

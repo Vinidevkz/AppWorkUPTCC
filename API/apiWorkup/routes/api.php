@@ -5,7 +5,7 @@ use App\Http\Controllers\AreaVagaController;
 use App\Http\Controllers\EmpresaController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VagaController;
-use App\Models\AreaVaga;
+use App\Http\Controllers\AreaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -66,9 +66,9 @@ Route::post('vaga', [VagaController::class, 'store']);
 //API'S AREAVAGA
 
 //Listar todas as areas
-Route::get('/areavaga', [AreaVagaController::class, 'index']);
+Route::get('/areavaga', [AreaController::class, 'index']);
 //Visualizar uma area por id
-Route::get('/areavaga/{idAreaInteresseVaga}', [AreaVagaController::class, 'show']);
+Route::get('/areavaga/{idAreaInteresseVaga}', [AreaController::class, 'show']);
 //Atualizar dado de uma vaga...
 //Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])
 

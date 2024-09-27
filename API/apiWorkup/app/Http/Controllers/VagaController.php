@@ -19,25 +19,29 @@ class VagaController extends Controller
     public function index(Request $request)
     {
         /*
-|--------------------------------------------------------------------------
-|Definindo para alem de pegar informaçoes de vaga pegar tbm de empresa
-|--------------------------------------------------------------------------
-*/
-if ($request->has('order') && $request->order == 'status') {
-    // Ordena para trazer idStatus = 2 primeiro
-    $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')->orderByRaw("FIELD(idStatus, 2, 1), nomeVaga ASC")->get();
-} else {
-    $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')->orderBy('idStatus', 'asc')->get();
-}
-
-
-    return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
- 
-
-// Caso contrário, retorna a view com as vagas
-return view('admin.vaga.vagaAdmin', compact('vagas'));
-
-
+        |----------------------------------------------------------------------
+        | Definindo para além de pegar informações de vaga pegar também de empresa
+        |----------------------------------------------------------------------
+        */
+        
+        if ($request->has('order') && $request->order == 'status') {
+            // Ordena para trazer idStatus = 2 primeiro
+            $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
+                         ->orderByRaw("FIELD(idStatus, 2, 1), nomeVaga ASC")
+                         ->get();
+        } else {
+            $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
+                         ->orderBy('idStatus', 'asc')
+                         ->get();
+        }
+    
+        // Verifica se a requisição é AJAX
+        if ($request->ajax()) {
+            return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
+        }
+    
+        // Caso contrário, retorna a view com as vagas
+        return view('admin.vaga.vagaAdmin', compact('vagas'));
     }
 
     /**
