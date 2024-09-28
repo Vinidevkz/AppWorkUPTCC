@@ -10,7 +10,10 @@ use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AreaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\http\Controllers\AreaInteresseUsuarioController;
 
+
+Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
 
 /*
 |--------------------------------------------------------------------------
