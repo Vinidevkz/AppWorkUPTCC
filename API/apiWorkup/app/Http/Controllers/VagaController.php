@@ -24,23 +24,23 @@ class VagaController extends Controller
         | Definindo para além de pegar informações de vaga pegar também de empresa
         |----------------------------------------------------------------------
         */
-        
+
         if ($request->has('order') && $request->order == 'status') {
             // Ordena para trazer idStatus = 2 primeiro
             $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
-                         ->orderByRaw("FIELD(idStatus, 2, 1), nomeVaga ASC")
-                         ->get();
+                ->orderByRaw("FIELD(idStatus, 2, 1), nomeVaga ASC")
+                ->get();
         } else {
             $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
-                         ->orderBy('idStatus', 'asc')
-                         ->get();
+                ->orderBy('idStatus', 'asc')
+                ->get();
         }
-    
+
         // Verifica se a requisição é AJAX
 
-           // return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
-        
-    
+        // return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
+
+
         // Caso contrário, retorna a view com as vagas
         return view('admin.vaga.vagaAdmin', compact('vagas'));
     }
@@ -53,11 +53,10 @@ class VagaController extends Controller
     public function create()
     {
 
-    $idEmpresa = Auth::guard('empresas')->id(); // Pega o ID da empresa autenticada
-    $modalidades = Modalidade::all();
-    $areas = Area::all();
-    return view('cadastrarVaga', compact('idEmpresa', 'modalidades', 'areas'));
-
+        $idEmpresa = Auth::guard('empresas')->id(); // Pega o ID da empresa autenticada
+        $modalidades = Modalidade::all();
+        $areas = Area::all();
+        return view('cadastrarVaga', compact('idEmpresa', 'modalidades', 'areas'));
     }
 
     /**
@@ -128,7 +127,7 @@ class VagaController extends Controller
     public function show($id)
     {
 
-        
+
         $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); // Retorna 404 se não encontrar
 
 
@@ -187,7 +186,7 @@ class VagaController extends Controller
 
         $vaga = Vaga::findOrFail($id);
         $vaga->update($request->all());
-    
+
         // Redirecionar para a lista de usuários
         return redirect('/verVaga')->with('success', 'Vaga atualizado com sucesso.');
     }
@@ -200,63 +199,73 @@ class VagaController extends Controller
      */
     public function destroy($id, Request $request)
     {
-                // Encontra a vaga pelo ID
-                $vaga = Vaga::findOrFail($id);
-    
-                // Atualiza o status da vaga para 2
-                $vaga->update(['idStatus' => 2]);
-            
-                // Verifica se a requisição foi feita via AJAX
-                if ($request->ajax()) {
-                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
-                }
-            
-                // Redireciona para a lista de vagas com mensagem de sucesso
-                return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
+        // Encontra a vaga pelo ID
+        $vaga = Vaga::findOrFail($id);
+
+        // Atualiza o status da vaga para 2
+        $vaga->update(['idStatus' => 2]);
+
+        // Verifica se a requisição foi feita via AJAX
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Vaga atualizada com sucesso']);
+        }
+
+        // Redireciona para a lista de vagas com mensagem de sucesso
+        return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
     }
 
     public function aprovar($id, Request $request)
     {
-                // Encontra a vaga pelo ID
-                $vaga = Vaga::findOrFail($id);
-    
-                // Atualiza o status da vaga para 2
-                $vaga->update(['idStatus' => 1]);
-            
-                // Verifica se a requisição foi feita via AJAX
-                if ($request->ajax()) {
-                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
-                }
-            
-                // Redireciona para a lista de vagas com mensagem de sucesso
-                return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
+        // Encontra a vaga pelo ID
+        $vaga = Vaga::findOrFail($id);
+
+        // Atualiza o status da vaga para 2
+        $vaga->update(['idStatus' => 1]);
+
+        // Verifica se a requisição foi feita via AJAX
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Vaga atualizada com sucesso']);
+        }
+
+        // Redireciona para a lista de vagas com mensagem de sucesso
+        return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
     }
 
-    public function search(Request $request) {
+    public function search(Request $request)
+    {
         try {
             $query = $request->input('search');
-    
+
             if ($query) {
                 $vagas = DB::table('tb_vaga')
                     ->leftJoin('tb_empresa', 'tb_vaga.idEmpresa', '=', 'tb_empresa.idEmpresa')
-                    ->select('tb_vaga.*', 'tb_empresa.nomeEmpresa as nome_empresa', 'tb_empresa.usernameEmpresa as username_empresa')
+                    ->select('tb_vaga.*')
                     ->where('tb_vaga.nomeVaga', 'LIKE', "%{$query}%")
                     ->orWhere('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
                     ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
                     ->get();
-    
-                if ($vagas->isEmpty()) {
-                    return response()->json(['message' => 'Nenhuma vaga foi encontrada'], 404);
+
+                $empresas = DB::table('tb_empresa')
+                    ->select('tb_empresa.nomeEmpresa', 'tb_empresa.usernameEmpresa')
+                    ->where('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
+                    ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
+                    ->get();
+
+                if ($vagas->isEmpty() && $empresas->isNotEmpty()) {
+                    return response()->json($empresas, 200);
                 }
-    
-                return response()->json($vagas);
+
+                if ($vagas->isEmpty() && $empresas->isEmpty()) {
+                    return response()->json(['message' => 'Não foi possivel encontrar nenhuma vaga ou empresa.'], 400);
+                }
+
+                return response()->json(['empresas' => $empresas, 'vagas' => $vagas]);
             }
-    
+
             return response()->json(['message' => 'A busca não pode estar vazia'], 400);
+
         } catch (Exception $exception) {
             return response()->json(['message' => 'Erro ao realizar a busca', 'error' => $exception->getMessage()], 500);
         }
     }
-    
-    
 }
