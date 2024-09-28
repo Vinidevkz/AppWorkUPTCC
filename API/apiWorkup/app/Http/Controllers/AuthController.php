@@ -33,14 +33,21 @@ class AuthController extends Controller
         // Verificar na tabela tb_admin
         $admin = Admin::where('emailAdmin', $email)->first();
         if ($admin) {
-            if (Hash::check($password, $admin->senhaAdmin)) {
+           
+            $credentials = $request->only('email', 'password');
+            $admin = Admin::where('emailAdmin', $credentials['email'])->first(); // Busque pelo emailAdmin
+            
+            if ($admin && Hash::check($credentials['password'], $admin->senhaAdmin)) {
                 Auth::guard('admins')->login($admin);
-                Log::info('Admin logged in:', ['email' => $email]); // Log de sucesso
-                return redirect()->route('admin');
-            } else {
-                    Log::warning('Incorrect password for email:', ['email' => $email]); // Log de falha
-                return redirect()->back()->with('error', 'Senha incorreta para o email informado.');
+                Log::info('Admin logged in:', ['email' => $credentials['email']]);
+                return redirect('/admin');
             }
+        
+            Log::warning('Incorrect password for email:', ['email' => $credentials['email']]);
+            return redirect()->back()->with('error', 'Senha incorreta para o email informado.');
+
+
+            
         }
         
 

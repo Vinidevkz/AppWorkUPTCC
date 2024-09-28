@@ -1,0 +1,248 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+
+/* inicio css da home page */
+:root {
+  --navbar: #fff;
+  --fundo: #f8f8f8;
+  --rosa: #FD0051;
+  --back-home: url(../../assets/img/homepage/background-home.png);
+  --back-sobre: url(../../assets/img/homepage/background-sobre.png);
+  --1b: #1b1b1b;
+  --f4: #f4f4f4;
+  --4d: #4d4d4d;
+  --txt-leve: 300;
+  --fs-1: 1.5rem,
+}
+
+.dark-mode:root {
+  --navbar: #1b1b1b;
+  --fundo: #0c0c0c;
+  --back-home: url(../../assets/img/homepage/background-home-dark.png);
+  --back-sobre: url(../../assets/img/homepage/background-sobre-dark.png);
+  --1b: #f4f4f4;
+  --4d: #f4f4f4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+body {
+  background-color: var(--fundo);
+}
+
+/*--tipografia--*/
+
+.wrap {
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.titulo-1, .titulo-2 {
+  color: var(--1b);
+  font-weight: 700;
+  margin-bottom: 0;
+  font-family: "League Spartan", sans-serif;
+}
+
+.titulo-1 {
+  font-size: 5rem;
+}
+
+.titulo-2 {
+  font-size: 4rem;
+}
+
+.texto {
+  font-size: 1.25rem;
+  color: var(--1b);
+}
+
+/*--navbar--*/
+
+.logo {
+  width: 80px;
+}
+
+li, a, button {
+  font-family: "DM Sans", sans-serif;
+  text-decoration: none;
+}
+
+header {
+  display: flex;
+  height: 80px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 10%;
+  background-color: var(--navbar);
+  gap: 10px;
+  border-bottom: 0.5px solid #d4d4d4 ;
+}
+
+header nav {
+  align-items: center;
+}
+
+.nav-itens {
+  list-style: none;
+  margin: 0;
+}
+
+.nav-itens a {
+  color: var(--4d);
+  font-weight: var(--txt-leve);
+}
+
+.nav-itens li {
+  display: inline-block;
+  padding: 0px 20px;
+  font-size: 17px;
+}
+
+#botoes-nav a {
+  color: var(--4d);
+}
+
+#darkmode {
+
+  background-image: url(../../assets/img/homepage/dark-mode-icon.png);
+  background-size: cover;
+  background-color: transparent;
+  width: 3ch;
+  height: 3ch;
+  border-style: none;
+}
+
+/*--seção padrão--*/
+
+.secao {
+  background-color: var(--fundo);
+  height: 100vh;
+  width: 100%;
+  padding-top: 80px;
+}
+
+/*--seção home--*/
+
+#home {
+  background-image: var(--back-home);
+  background-size: cover;
+  display: grid;
+  place-content: center;
+}
+
+hr {
+  color: var(--rosa);
+  width: 170px;
+  border: 2px solid;
+  opacity: 1;
+  margin: 0;
+}
+
+.home-content {
+  height: 50vh;
+}
+
+.home-div-1 {
+  background-image: url(../../assets/img/homepage/fundo-home.png);
+  background-size: 110%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#intro, #intro a  {
+  color: var(--1b);
+}
+
+.num {
+  color: var(--rosa);
+  margin-bottom: 60px;
+  padding-right: 10px;
+}
+
+#botao-home {
+  background-color: var(--rosa);
+  padding: 8px 15px 8px 15px;
+  margin: 10px;
+  color: #fff;
+}
+
+/*--seção sobre--*/
+
+#sobre {
+  background-image: var(--back-sobre);
+  margin-top: 10rem;
+}
+
+#wrap-sobre {
+  height: 100%;
+  min-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.titulo-2 span {
+  background-color: var(--rosa);
+  color: #fff;
+  padding: 0.5rem 0.5rem 0 0.5rem;
+}
+
+.sobre-content {
+  height: 90vh;
+  padding: 0;
+}
+
+.sobre-div-1 {
+  display: grid;
+  place-items: center;
+}
+
+.sobre-div-2 {
+  background-image: url(../../assets/img/homepage/fundo-sobre.png);
+  background-size: cover;
+  background-repeat: no-repeat;
+  align-items: center;
+  display: flex;
+}
+
+.caixa-sobre{
+  height: 100%;
+}
+
+.caixa-sobre div {
+  color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  width: 75%;
+  align-self: center;
+}
+
+.caixa-sobre div i {
+  display: flex;
+  background-color: var(--rosa);
+  padding: 1.5rem;
+  height: 4ch;
+  width: 4ch;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4rem;
+}
+
+.caixa-sobre div p {
+  font-size: var(--fs-1);
+}
+
+/* fim do css da home page */
+

@@ -24,6 +24,8 @@
                 <div class="container h-100 w-100">
                     <div class="row">
                         <div class="col-1-1">
+
+                        
                             <img src="{{url('assets/img/WorkUp-Logo.png')}}" alt="">
                             <p>ainda ta fazendo</p>
                         </div>

@@ -1,0 +1,115 @@
+:root {
+    --telaY--: 100vh;
+    --fundo: #f4f4f4;
+    --txt-padrao: 15px
+    --titulo-padrao: 21px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--fundo);
+    font-family: "DM Sans", sans-serif; 
+}
+
+
+.gallery {
+    width: 90vw;
+    height: auto;
+    overflow-y: hidden;
+    display: flex;
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}   
+
+.gallery div {
+    width: 100%;
+    display: flex;
+    grid-gap: 8%;
+    flex: none;
+}
+
+span {
+    height: 280px;
+    width: 20%;
+    display: grid;
+    place-items: center;
+}
+
+.gallery div img {
+    width: 150px;
+}
+
+.gallery-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#bckBtn, #nextBtn {
+    width: 100px;
+}
+
+.wrap-card {
+    flex-direction: column;
+    text-align: center;
+}
+
+.title-txt {
+    font-size: var(--titulo-padrao);
+    font-weight:300;
+}
+
+.sub-txt {
+    font-size: var(--txt-padrao);
+    color: #1b1b1b;
+}
+
+.icones {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.equipe {
+    width: 100%;
+    justify-content: center;
+}
+
+#equipe {
+    height: var(--telaY);
+    background-color: var(--fundo);
+}
+
+@media (max-width: 1270px) {
+
+    .gallery div img {
+        width: 130px;
+    }
+}
+
+@media (max-width: 1140px) {
+
+    .gallery div img {
+        width: 100px;
+    }
+
+
+
+    :root {
+    --titulo-padrao: 18px;
+    --txt-padrao: 12px;
+}
+}
+
+@media screen and (max-width: 936px) {
+    span {
+        width: 33%;
+}
+}

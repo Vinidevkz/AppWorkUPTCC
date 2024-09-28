@@ -29,6 +29,7 @@
             <p><strong>Sobre:</strong> {{ $usuario->sobreUsuario }}</p>
             <p><strong>Formação:</strong> {{ $usuario->formacaoCompetenciaUsuario }}</p>
             <p><strong>Data da Formação:</strong> {{ $usuario->dataFormacaoCompetenciaUsuario }}</p>
+            <p><strong>data criação Perfil:</strong> {{ $usuario->created_at }}</p>
         </div>
 
         <h3>Áreas de Interesse:</h3>
@@ -43,13 +44,6 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-        
-       
 
     </div>
 </body>
