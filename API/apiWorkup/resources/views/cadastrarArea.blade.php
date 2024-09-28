@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+                <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -166,62 +166,29 @@
                 <!-- Coluna do formulário -->
                 <div class="col-md-8 form-container">
                     <div class="panel-heading text mb-5">
-                        Editar Usuario
+                        Cadastre uma Area
                     </div>
 
-                    <form method="POST" action="{{ route('usuarios.update', $usuario->idUsuario) }}">
+                    <form method="POST" action="/formArea">
                         @csrf
-                        @method('PUT')
 
                         <div class="row">
                             <!-- Primeira Coluna -->
                             <div class="col-md-6">
-                                @error('nomeUsuario')
+                                @error('nomeArea')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
                                 <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="nomeUsuario" placeholder="{{ $usuario->nomeUsuario }}" value="{{ $usuario->nomeUsuario }}" required>
-                                    <label for="nomeUsuario" class="form__label">Nome do Usuario</label>
-                                </div>
-
-                                @error('usernameUsuario')
-                                <div class="error-message">{{ $message }}</div>
-                                @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="usernameUsuario" placeholder="{{ $usuario->usernameUsuario }}" value="{{ $usuario->usernameUsuario }}" required>
-                                    <label for="usernameUsuario" class="form__label">Username</label>
-                                </div>
-
-                                @error('nascUsuario')
-                                <div class="error-message">{{ $message }}</div>
-                                @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="nascUsuario" placeholder="{{ $usuario->nascUsuario }}" value="{{ $usuario->nascUsuario }}" required>
-                                    <label for="nascUsuario" class="form__label">nasUsuario</label>
-                                </div>
-
-                                @error('contatoUsuario')
-                                <div class="error-message">{{ $message }}</div>
-                                @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="contatoUsuario" placeholder="{{ $usuario->contatoUsuario }}" value="{{ $usuario->contatoUsuario }}" required>
-                                    <label for="contatoUsuario" class="form__label">Contato</label>
+                                    <input type="text" class="form-control custom-input" name="nomeArea" placeholder="Nome do Administrador" value="{{ old('nomeArea') }}" required>
+                                    <label for="nomeArea" class="form__label">Nome da Area</label>
                                 </div>
                             </div>
 
                             <!-- Segunda Coluna -->
-                            <div class="col-md-6">
 
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="sobreUsuario" placeholder="{{ $usuario->sobreUsuario }}" value="{{ $usuario->sobreUsuario }}" required>
-                                    <label for="sobreUsuario" class="form__label">Sobre</label>
-                                </div>
-
-
-                            </div>
                         </div>
 
-                        <button class="btn btn-primary-custom btn-block" >
+                        <button class="btn btn-primary-custom btn-block">
                             Registrar
                         </button>
                     </form>
@@ -237,7 +204,7 @@
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
- 
+   
 
 </body>
 

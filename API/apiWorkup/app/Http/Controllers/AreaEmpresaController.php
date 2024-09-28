@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AreaEmpresa;
 use Illuminate\Http\Request;
 use App\Models\Empresa;
+use App\Models\Area;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
@@ -72,7 +73,8 @@ class AreaEmpresaController extends Controller
             }
     
             // Redireciona após o sucesso
-            return redirect()->route('verUsuario')->with('success', 'Áreas cadastradas com sucesso!');
+            return redirect('/verEmpresa')->with('success', 'Áreas cadastradas com sucesso!');
+
             
         } catch (\Exception $e) {
             // Captura o erro e retorna uma mensagem amigável
@@ -99,7 +101,16 @@ class AreaEmpresaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $empresa = Empresa::findOrFail($id);
+        // Supondo que você tenha um relacionamento definido entre Empresa e Áreas
+        $areasSelecionadas = $empresa->areas()->pluck('idArea')->toArray(); // Pega os IDs das áreas selecionadas
+        $areas = Area::all(); // Ou a lógica que você utiliza para buscar as áreas
+    
+        return view('admin.empresa.editarAreaEmpresa', [
+            'empresa' => $empresa,
+            'areas' => $areas,
+            'areasSelecionadas' => $areasSelecionadas,
+        ]);
     }
 
     /**
@@ -111,7 +122,7 @@ class AreaEmpresaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
     }
 
     /**

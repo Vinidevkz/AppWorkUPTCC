@@ -154,6 +154,11 @@ Validação
                 'emailEmpresa' => $request->emailEmpresa,
                 'contatoEmpresa' => $request->contatoEmpresa,
                 'sobreEmpresa' => $request->sobreEmpresa,
+                'cidadeEmpresa' => $request->cidadeEmpresa,
+                'estadoEmpresa' => $request->estadoEmpresa,
+                'LogradouroEmpresa' => $request->LogradouroEmpresa,
+                'cepEmpresa' => $request->cepEmpresa,
+                'numeroLograEmpresa' => $request->numeroLograEmpresa,
 
             ]);
 
@@ -167,7 +172,7 @@ Validação
         $empresas->update($request->all());
     
         // Redirecionar para a lista de usuários
-        return redirect('/verEmpresa')->with('success', 'Empresa atualizado com sucesso.');
+        return view('admin.empresa.editarAreaEmpresa', ['empresa' => $empresas]); // Passa o usuário para a view
     }
 
     /**

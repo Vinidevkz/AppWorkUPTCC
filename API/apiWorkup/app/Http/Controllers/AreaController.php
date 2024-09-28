@@ -26,7 +26,7 @@ class AreaController extends Controller
      */
     public function create()
     {
-        return view('Area');
+        return view('/cadastrarArea');
     }
 
     /**
@@ -53,7 +53,8 @@ class AreaController extends Controller
 
 
         $area->save();
-        return view('area');
+        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
+
     }
     
 

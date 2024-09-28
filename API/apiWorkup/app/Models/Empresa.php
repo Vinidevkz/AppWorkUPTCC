@@ -66,7 +66,6 @@ public function status()
     return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
 }
 
-    
 
 }
 

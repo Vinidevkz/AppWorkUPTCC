@@ -12,6 +12,24 @@ use App\Http\Controllers\VagaUsuarioController;
 use Illuminate\Support\Facades\Route;
 
 
+// rotas Dynamo
+
+Route::get('/', function () {
+    return view('home');
+});
+
+Route::get('/#home', function () {
+    return view('home');
+});
+
+Route::get('/#sobre', function () {
+    return view('home');
+});
+
+Route::get('/contato', function () {
+    return view('contato');
+});
+
 /*
 |--------------------------------------------------------------------------
 | paginas de cadastros
@@ -57,8 +75,8 @@ Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
 // Admin
 
 Route::get('/admin', function () {
-    return view('/admin/homeAdmin');
-})->middleware('auth:admins');
+    return view('admin.homeAdmin');
+})->middleware('auth:admins')->name('admin');
 
 // Empresa
 
@@ -66,17 +84,15 @@ Route::get('/empresa', function () {
     return view('homeEmpresa');
 });
 
-Route::get('/admin', function () {
-    return view('admin.homeAdmin');
-});
 
-Route::get('/', function () {
-    return view('/home');
+
+Route::get('/home', function () {
+    return view('/homeW');
 });
 
 /*
 |--------------------------------------------------------------------------
-| paginas de visualização
+| paginas de visualização Admin
 |--------------------------------------------------------------------------
 
 */

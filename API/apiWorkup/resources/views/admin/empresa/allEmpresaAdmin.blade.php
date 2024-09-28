@@ -7,6 +7,13 @@
 </head>
 <body>
     <div class="container">
+
+    <div class="card" style="width: 500px;">
+    <div class="card-header text-center">
+        <h1>Detalhes do Usuário</h1>
+    </div>
+    <div class="card-body">
+        <div class="mb-3">
         <h1>Detalhes das Empresas</h1>
         <p><strong>ID:</strong> {{ $empresa->idEmpresa }}</p>
         <p><strong>Username:</strong> {{ $empresa->usernameEmpresa }}</p>
@@ -16,6 +23,12 @@
         <p><strong>Sobre :</strong> {{ $empresa->sobreEmpresa }}</p>
         <p><strong>Cnpj:</strong> {{ $empresa->cnpjEmpresa }}</p>
         <p><strong>Contato:</strong> {{ $empresa->contatoEmpresa }}</p>
+        <p><strong>cidade:</strong> {{ $empresa->cidadeEmpresa}}</p>
+        <p><strong>estado:</strong> {{ $empresa->estadoEmpresa }}</p>
+        <p><strong>data da criação do perfil :</strong> {{ $empresa->created_at }}</p>
+        <p><strong>Logradouro:</strong> {{ $empresa->logradouroEmpresa }}</p>
+        <p><strong>CEP:</strong> {{ $empresa->cepEmpresa }}</p>
+        <p><strong>Número:</strong> {{ $empresa->numeroLograEmpresa }}</p>
 
         <h3>Áreas de Atuação:</h3>
         <ul>
@@ -24,7 +37,11 @@
             @endforeach
         </ul>
         <!-- Adicione mais detalhes conforme necessário -->
-        <a href="/verEmpresa" class="btn btn-primary">Voltar</a>
+        <div class="mt-4">
+                <a href="/verEmpresa" class="btn btn-primary">Voltar</a>
+        </div>
+    </div>
+</div>
 
     </div>
 </body>

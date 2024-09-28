@@ -38,7 +38,7 @@ class VagaController extends Controller
     
         // Verifica se a requisição é AJAX
 
-            return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
+           // return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
         
     
         // Caso contrário, retorna a view com as vagas
@@ -131,9 +131,10 @@ class VagaController extends Controller
         
         $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); // Retorna 404 se não encontrar
 
-        //return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
 
-        return response()->json($vaga);
+        return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
+
+        //return response()->json($vaga);
     }
 
     /**
@@ -144,8 +145,12 @@ class VagaController extends Controller
      */
     public function edit($id)
     {
+
+        $idEmpresa = Auth::guard('empresas')->id();
+        $modalidades = Modalidade::all();
+        $areas = Area::all();
         $vaga = Vaga::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404
-        return view('admin.vaga.vagaEditarAdmin', compact('vaga')); // Passa o usuário para a view
+        return view('admin.vaga.vagaEditarAdmin', compact('vaga', 'idEmpresa', 'modalidades', 'areas')); // Passa o usuário para a view
 
     }
 
@@ -164,7 +169,12 @@ class VagaController extends Controller
             ->where('idVaga', $id)
             ->update([
                 'nomeVaga' => $request->nomeVaga,
+                'estadoVaga' => $request->estadoVaga,
+                'prazoVaga' => $request->prazoVaga,
                 'idModalidadeVaga' => $request->idModalidadeVaga,
+                'salarioVaga' => $request->salarioVaga,
+                'cidadeVaga' => $request->cidadeVaga,
+                'estadoVaga' => $request->estadoVaga,
                 'estadoVaga' => $request->estadoVaga,
 
             ]);
