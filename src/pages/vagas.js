@@ -13,12 +13,12 @@ export default function Vaga({ navigation }) {
   const [loading, setLoading] = useState(true);
   const [infosVaga, setInfosVaga] = useState([]); // Inicializa como array
 
-  const { vagaID } = useContext(Context);
-  const { apiEmuladorVaga } = ApisUrls;
+  const { vagaID, userID } = useContext(Context);
+  const { apiEmuladorVaga, apiNgrokVaga } = ApisUrls;
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
+    const apiUrl = `${apiNgrokVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);

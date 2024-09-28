@@ -38,11 +38,11 @@ class VagaController extends Controller
 
         // Verifica se a requisição é AJAX
 
-        // return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
+         return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
 
 
         // Caso contrário, retorna a view com as vagas
-        return view('admin.vaga.vagaAdmin', compact('vagas'));
+        //return view('admin.vaga.vagaAdmin', compact('vagas'));
     }
 
     /**
@@ -131,9 +131,9 @@ class VagaController extends Controller
         $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); // Retorna 404 se não encontrar
 
 
-        return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
+        //return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
 
-        //return response()->json($vaga);
+        return response()->json($vaga);
     }
 
     /**
@@ -246,7 +246,7 @@ class VagaController extends Controller
                     ->get();
 
                 $empresas = DB::table('tb_empresa')
-                    ->select('tb_empresa.nomeEmpresa', 'tb_empresa.usernameEmpresa')
+                    ->select('tb_empresa.nomeEmpresa', 'tb_empresa.usernameEmpresa', 'tb_empresa.estadoEmpresa')
                     ->where('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
                     ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
                     ->get();

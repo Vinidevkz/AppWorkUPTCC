@@ -16,11 +16,12 @@ import axios from "axios";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import styles from "../styles/search.js";
 
-const { apiEmuladorVagaPesquisa, apiNgrokVagaPesquisa } = ApisUrls;
+const { apiNgrokVagaPesquisa } = ApisUrls;
 
 export default function Search() {
   const { theme } = useTheme({ Search });
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([]); // Para vagas
+  const [companies, setCompanies] = useState([]); // Para empresas
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -30,17 +31,19 @@ export default function Search() {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log("URL da requisição:", `${apiNgrokVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(`${apiNgrokVagaPesquisa}`, { search }); // Passando o termo de pesquisa como corpo da requisição
-      console.log("URL da requisição:", `${apiNgrokVagaPesquisa}`); // Log da URL
-      console.log(response.data); // Logar a resposta da API
+      const response = await axios.post(apiNgrokVagaPesquisa, { search });
+      console.log("Resposta da API:", response.data);
+
       if (response.data.message) {
         setErrorMessage(response.data.message);
         setData([]);
+        setCompanies([]);
       } else {
-        setData(response.data);
+        setData(response.data.vagas); // Supondo que `vagas` está no response
+        setCompanies(response.data.empresas); // Supondo que `empresas` está no response
       }
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -97,6 +100,7 @@ export default function Search() {
         buscaVaga(text);
       } else {
         setData([]); // Limpa os dados se o texto tiver 0 caracteres
+        setCompanies([]); // Limpa as empresas
         setErrorMessage("");
       }
     }, 300);
@@ -186,14 +190,14 @@ export default function Search() {
                   </Text>
                 ) : (
                   <FlatList
-                    data={data}
+                    data={data} // Exibindo vagas
                     style={{
                       maxHeight: 250,
                       width: "100%",
                       overflow: 'hidden',
                       marginVertical: 10,
                     }}
-                    keyExtractor={(item) => item.idVaga.toString()}
+                    keyExtractor={(item) => item.idVaga ? item.idVaga.toString() : Math.random().toString()}
                     renderItem={({ item }) => (
                       <View
                         style={{
@@ -223,10 +227,9 @@ export default function Search() {
                               { color: theme.textColor },
                             ]}
                           >
-                            {item.nome_empresa}
+                            {item.nomeEmpresa}
                           </Text>
-
-                          <Text style={{color: theme.textColor}}>
+                          <Text style={{ color: theme.textColor }}>
                             R${item.salarioVaga} - {item.cidadeVaga}
                           </Text>
                         </View>
@@ -237,7 +240,7 @@ export default function Search() {
                           //   navigation.navigate("Vagas");
                           // }}
                         >
-                          <Text style={[styles.buttonText, styles.DMSansBold, {color: '#fff'}]}>
+                          <Text style={[styles.buttonText, styles.DMSansBold, { color: '#fff' }]}>
                             Ver Vaga
                           </Text>
                         </TouchableOpacity>
@@ -257,14 +260,14 @@ export default function Search() {
               Empresas:
             </Text>
             <FlatList
-              data={data}
+              data={companies} // Usando o estado para empresas
               style={{
                 maxHeight: 350,
                 width: "100%",
                 borderRadius: 50,
                 marginVertical: 10,
               }}
-              keyExtractor={(item) => item.idVaga.toString()}
+              keyExtractor={(item) => item.id_empresa ? item.id_empresa.toString() : Math.random().toString()} // Assumindo que id_empresa é único
               renderItem={({ item }) => (
                 <View
                   style={{
@@ -277,7 +280,7 @@ export default function Search() {
                     borderRadius: 10,
                   }}
                 >
-                  <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
                     <View style={[styles.postIconBox]}>
                       <Image
                         source={require("../../assets/icons/dynamo.png")}
@@ -285,37 +288,35 @@ export default function Search() {
                       />
                     </View>
                     <View>
-                    <Text
-                      style={[
-                        styles.text,
-                        styles.DMSansBold,
-                        { color: theme.textColor },
-                      ]}
-                    >
-                      {item.nome_empresa}
-                    </Text>
-
-                    <Text
-                      style={[
-                        styles.text,
-                        styles.DMSansRegular,
-                        { color: theme.textColor },
-                      ]}
-                    >
-                      {item.estadoVaga} - Tecnologia
-                    </Text>
+                      <Text
+                        style={[
+                          styles.text,
+                          styles.DMSansBold,
+                          { color: theme.textColor },
+                        ]}
+                      >
+                        {item.nomeEmpresa}
+                      </Text>
+                      <Text
+                        style={[
+                          styles.text,
+                          styles.DMSansRegular,
+                          { color: theme.textColor },
+                        ]}
+                      >
+                        {item.estadoEmpresa} - Tecnologia
+                      </Text>
                     </View>
-
                   </View>
                   <TouchableOpacity
-                    style={[styles.button, styles.buttonVaga, {backgroundColor: theme.backgroundColorNavBar, borderWidth: 2, borderColor: '#20dd77'}]}
+                    style={[styles.button, styles.buttonVaga, { backgroundColor: theme.backgroundColorNavBar, borderWidth: 2, borderColor: '#20dd77' }]}
                     // onPress={() => {
-                    //   setVagaID(item.idVaga);
-                    //   navigation.navigate("Vagas");
+                    //   setVagaID(item.id_empresa);
+                    //   navigation.navigate("Empresas");
                     // }}
                   >
-                    <Text style={[styles.buttonText, styles.DMSansBold, {color: theme.textColor}]}>
-                      Ver Perfil
+                    <Text style={[styles.buttonText, styles.DMSansBold, { color: theme.textColor }]}>
+                      Ver Empresa
                     </Text>
                   </TouchableOpacity>
                 </View>
