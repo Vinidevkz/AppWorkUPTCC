@@ -19,7 +19,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from '../ApisUrls/apisurls.js';
-const { apiEmuladorVaga } = ApisUrls;
+const { apiEmuladorVaga, apiNgrokVaga } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
 
@@ -35,7 +35,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(apiEmuladorVaga);
+      const response = await axios.get(apiNgrokVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);

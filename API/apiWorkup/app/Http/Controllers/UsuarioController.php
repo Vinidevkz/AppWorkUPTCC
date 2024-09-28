@@ -31,12 +31,12 @@ class UsuarioController extends Controller
             $usuarios = Usuario::with('status')->orderBy('idStatus', 'asc')->get();
         }
 
-        if ($request->ajax()) {
-            return response()->json($usuarios); // Retorna JSON se for uma requisição AJAX
-        }
+
+        return response()->json($usuarios); // Retorna JSON se for uma requisição AJAX
+
 
         // Caso contrário, retorna a view com os usuários
-        return view('admin.usuario.usuarioAdmin', compact('usuarios'));
+        //return view('admin.usuario.usuarioAdmin', compact('usuarios'));
     }
 
     /**
@@ -121,7 +121,9 @@ Validação
     {
         $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
 
-        return view('admin.usuario.allusuarioAdmin', compact('usuario')); // Retorna a view com detalhes
+        return response()->json($usuario);
+
+        //return view('admin.usuario.allusuarioAdmin', compact('usuario')); // Retorna a view com detalhes
     }
 
     /**

@@ -70,6 +70,7 @@ export default function SignIN({ navigation }) {
         "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente."
       );
       console.error("Erro na tentativa de login:", error);
+      console.log(apiNgrok)
     }
   }
 
@@ -155,6 +156,12 @@ export default function SignIN({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={verificarUsuario}>
           <Text style={[styles.DMSansBold, styles.buttonText]}>
             Fazer Login
+          </Text>
+        </TouchableOpacity>
+        
+        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TabBar')}>
+          <Text style={[styles.DMSansBold, styles.buttonText]}>
+            ir para home
           </Text>
         </TouchableOpacity>
 

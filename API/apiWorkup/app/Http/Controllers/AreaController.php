@@ -16,7 +16,7 @@ class AreaController extends Controller
     {
         $areas = Area::all();
 
-        return $areas;
+        return response()->json($areas);
     }
 
     /**

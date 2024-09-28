@@ -61,7 +61,7 @@ Route::get('/vaga/{idVaga}', [VagaController::class, 'show']);
 //Cadastrar uma vaga
 Route::post('/vaga', [VagaController::class, 'store']);
 
-Route::get('/vaga/busca', [VagaController::class, 'search']);
+Route::post('/vaga/busca', [VagaController::class, 'search']);
 //Atualizar dado de uma vaga...
 //Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])
 

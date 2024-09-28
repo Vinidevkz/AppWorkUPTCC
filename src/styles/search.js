@@ -71,6 +71,20 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  postIconBox: {
+    borderWidth: 2,
+    borderColor: '#808080',
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+  },
+
+  postIconImg: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50,
+  },
 });
 
 export default styles;
