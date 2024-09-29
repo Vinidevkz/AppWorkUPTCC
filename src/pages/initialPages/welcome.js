@@ -28,6 +28,7 @@ import Vaga from "../vagas.js";
 import Configurações from "../configuracoes.js";
 import ProfileChange from "../profilechange.js";
 
+
 function Welcome({ navigation }) {
   //Carregador de fontes
   const [fontsLoaded, setFontsLoaded] = useState(false);

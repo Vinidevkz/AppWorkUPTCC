@@ -14,11 +14,43 @@ export default function Vaga({ navigation }) {
   const [infosVaga, setInfosVaga] = useState([]); // Inicializa como array
 
   const { vagaID } = useContext(Context);
-  const { apiEmuladorVaga } = ApisUrls;
+  const { userId } = useContext(Context);
+  const { apiEmuladorVaga, apiNgrokVaga, apiNgrokUsuarioVaga } = ApisUrls;
+
+  const seCandidatar = async () => {
+    console.log("User ID:", userID); // Para verificar se o userID está definido
+
+    try {
+        const response = await fetch(apiNgrokUsuarioVaga, {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                idVaga: vagaID,
+                idUsuario: userId
+            })
+        });
+
+        const resp = await response.json();
+        console.log(resp); // Para verificar a resposta
+
+        if (response.ok) {
+            alert(resp.message); // Mensagem de sucesso
+        } else {
+            alert('Erro ao se candidatar: ' + resp.message); // Mensagem de erro
+        }
+    } catch (error) {
+        console.log(error);
+        alert('Erro de conexão: ' + error.message); // Mensagem de erro de conexão
+    }
+};
+
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
+    const apiUrl = `${apiNgrokVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -40,6 +72,8 @@ export default function Vaga({ navigation }) {
       }
     }, [vagaID])
   );
+
+
 
   if (loading) {
     return (
@@ -101,7 +135,7 @@ export default function Vaga({ navigation }) {
           </View>
         ))}
         <View style={[styles.infosCont, styles.row]}>
-          <TouchableOpacity style={styles.button}>
+          <TouchableOpacity style={styles.button} onPress={() => seCandidatar()}>
             <Text style={[styles.DMSansBold, styles.buttonText]}>Candidatar-se</Text>
           </TouchableOpacity>
         </View>
