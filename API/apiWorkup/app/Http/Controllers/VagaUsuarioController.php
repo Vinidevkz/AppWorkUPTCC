@@ -39,25 +39,28 @@ class VagaUsuarioController extends Controller
     {
         $request->validate(
             [
-                'idVaga'  => 'required',
-
-
+                'idVaga' => 'required',
+                'idUsuario' => 'required', // Adicione esta linha
             ],
             [
-                'idVaga.required'  => 'Escolha uma vaga',
-
+                'idVaga.required' => 'Escolha uma vaga',
+                'idUsuario.required' => 'O ID do usuário é necessário', // Mensagem de erro personalizada
             ]
         );
-        $vagasUsuario= new VagaUsuario();
-
-        $vagasUsuario->idVaga= $request->idVaga;
+        
+    
+        $vagasUsuario = new VagaUsuario();
+        $vagasUsuario->idVaga = $request->idVaga;
         $vagasUsuario->idUsuario = $request->idUsuario;
         $vagasUsuario->idStatusVagaUsuario = 1;
-
-
-        $vagasUsuario->save();
-        return view('area');
+    
+        if ($vagasUsuario->save()) {
+            return response()->json(['message' => 'Candidatura realizada com sucesso!'], 201);
+        }
+    
+        return response()->json(['message' => 'Erro ao cadastrar candidatura.'], 500);
     }
+    
     
 
     /**

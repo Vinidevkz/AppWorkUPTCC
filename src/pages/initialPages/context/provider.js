@@ -4,7 +4,7 @@ import React, { createContext, useState } from 'react';
 export const Context = createContext();
 
 export const Provider = ({ children }) => {
-  const [userId, setUserId] = useState(null);
+  const [userId, setUserId] = useState();
   const [nome, setNome] = useState('');
   const [userName, setUserName] = useState('');
   const [idade, setIdade] = useState('');

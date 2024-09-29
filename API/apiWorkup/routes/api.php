@@ -10,7 +10,7 @@ use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AreaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\http\Controllers\AreaInteresseUsuarioController;
+
 
 
 Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
@@ -46,7 +46,7 @@ Route::post('/usuario/login', [UsuarioController::class, 'login']);
 //Atualizar dado de um usuario...
 Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'update']);
 
-Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
+Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
 
 
 //API'S ADMIN
