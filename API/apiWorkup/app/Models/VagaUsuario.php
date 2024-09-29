@@ -4,7 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Vaga;
+use App\Models\Usuario;
+use App\Models\StatusVaga;
 
 class VagaUsuario extends Model
 {
@@ -21,6 +22,15 @@ class VagaUsuario extends Model
         'idVaga',
         'StatusVagaUsuario',
     ];
-    
+
+    public function usuario()
+    {
+        return $this->belongsTo(Usuario::class, 'idUsuario');
+    }
+
+    public function status()
+    {
+        return $this->belongsTo(StatusVaga::class, 'idStatusVagaUsuario');
+    }
 
 }

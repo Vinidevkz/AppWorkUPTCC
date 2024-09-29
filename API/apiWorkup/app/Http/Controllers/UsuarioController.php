@@ -106,6 +106,7 @@ class UsuarioController extends Controller
             $usuario->sobreUsuario = $request->sobreUsuario;
             $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
             $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
+            $usuario->fotoUsuario = $request->fotoUsuario;
     
             // Lê a imagem da requisição e a converte para binário
             if ($request->hasFile('fotoUsuario')) {

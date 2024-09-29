@@ -142,6 +142,30 @@ class VagaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+     public function showVagasPorEmpresa()
+     {
+        // Verifica se o usuário está autenticado
+        if (!Auth::guard('empresas')->check()) {
+            return redirect()->route('login'); // Redireciona para a página de login se não estiver autenticado
+        }
+
+        $empresaId = Auth::guard('empresas')->id(); // Pega o ID da empresa autenticada
+
+
+        // Busca todas as vagas cadastradas pela empresa
+        $vagas = Vaga::where('idEmpresa', $empresaId)->with('status', 'area', 'modalidade')->get();
+
+
+        // Para debug, mostre as vagas recuperadas
+
+
+        return view('homeEmpresa', compact('vagas')); // Passa a variável $vagas para a view
+    }
+
+     
+
+
     public function edit($id)
     {
 

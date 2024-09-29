@@ -1,16 +1,46 @@
-@extends('layouts.main')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{url('assets/css/dynamo.css')}}">
 
-@section('title', 'Dynamo')
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>Document</title>
+</head>
+<body class="dark-mode">
 
-@section('content')
-<div class="d-flex flex-column align-items-center">
+    <section class="secao" id="home">
+
+        <header class="fixed-top">
+            <img class="logo" src="{{url('assets/img/dynamo/logo.png')}}">
+            <nav>
+                <ul class="nav-itens">
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#sobre">Sobre</a></li>
+                    <li><a href="#equipe">Equipe</a></li>
+                    <li><a href="">Projetos</a></li>
+                    <li><a href="#parceiros">Parceiros</a></li>
+                    <li><a href="#contato">Contato</a></li>
+                </ul>
+            </nav>
+            <nav id="botoes-nav" class="d-flex justify-content-around" style="width: 15%;">
+                <a class="px-2"><i class="bi bi-globe-americas px-2"></i>pt-br</a>
+                <input type="button" id="darkmode">
+            </nav>
+        </header>
+
+
+
+        <div class="d-flex flex-column align-items-center">
             <div class="wrap">
-                <h1 class="titulo-1">DYNAMO</h1>
-                <hr>
+                <h1 class="titulo-1 oculto">DYNAMO</h1>
+                <hr class="oculto">
             </div>
         </div>
 
-        <div class="container" style="width: 70vw;">
+        <div class="container oculto" style="width: 70vw;">
             <div class="row">
 
                 <div class="col col-7 home-content home-div-1"></div>
@@ -19,7 +49,7 @@
                     <a class="num fs-1">1°</a>
 
                     <div class="wrap w-75" id="intro">
-                        <p class="fs-5" style="font-weight: var(--txt-leve);">Bem-vindo ao site da <a class="fw-semibold">Dynamo</a>. Continue e conheça um pouco sobre nós!</p>
+                        <p class="texto-1" style="font-weight: var(--txt-leve);">Bem-vindo ao site da <a class="fw-semibold">Dynamo</a>. Continue e conheça um pouco sobre nós!</p>
                     </div>
 
                 </div>
@@ -31,217 +61,22 @@
 
     </section>
 
-    <section class="secao d-flex justify-content-center" id="sobre">
+    {{-- resources/views/home.blade.php --}}
+@extends('layouts.dynamo')
 
-        <div class="container d-flex justify-content-center" id="wrap-sobre">
-            <div class="row" style="width: 100%;">
-
-                <div class="col col-5 sobre-content sobre-div-1">
-
-                    <div class="wrap w-75">
-                        <h1 class="titulo-2 py-3">
-                            <span>Sobre</span> a Dynamo
-                        </h1>
-                        <p class="texto py-4">
-                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit dicta doloribus sequi? Recusandae quos praesentium
-                            facere dignissimos illo nostrum, nam, eligendi quo aliquam reprehenderit ipsa ipsam voluptatem eos veritatis temporibus.
-                        </p>
-                    </div>
-
-                </div>
-
-                <div class="col col-7 sobre-content sobre-div-2">
-                    <div class="container d-flex align-items-center" style="height: 80vh;">
-                        <div class="row d-flex justify-content-center flex-column caixa-sobre">
-
-                            <div class="col">
-                                <i class="bi bi-pencil-fill fs-2"></i>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus non placeat quam praesentium provident numquam exercitationem, iste fugit.</p>
-                            </div>
-
-                            <div class="col">
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus non placeat quam praesentium provident numquam exercitationem, iste fugit.</p>
-                                <i class="bi bi-lightbulb-fill fs-2"></i>
-                            </div>
-
-                            <div class="col">
-                                <i class="bi bi-book-fill fs-2"></i>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloribus non placeat quam praesentium provident numquam exercitationem, iste fugit.</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </section>
-
-    <section id="equipe" style="height: 100vh; padding: 0; margin: 0; align-content: center;">
-
-        <div class="gallery-wrap">
-
-            <img src= "{{url('assets/img/integrantes/bckBtn.png')}}" id="bckBtn">
-            <div class="gallery">
-                <div class="equipe">
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/feh.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Fernanda Luiza</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/edu.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Eduardo Felipe</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                        
-                    </span>
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/muh.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Murilo Henrique</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-                    
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/vini.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Vinicius Eduardo</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/felipe.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Fernanda Luiza</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-                    
-                </div>
-                <div class="equipe">
-                    <span>
-                        <img src="{{url('assets/img/integrantes/dan.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Danilo da Silva</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/ale.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Alessandra Marins</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/papi.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Inácio Guey</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/chad.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Vitor Augusto</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-
-                    <span>
-                        <img src="{{url('assets/img/integrantes/daniel.png')}}">
-                        <div class="wrap-card">
-                            <p class="title-txt">Daniel Nogueira</p>
-                            <p class="sub-txt">Analista - Designer</p>
-                            <div class="icones">
-                                <i class="bi bi-instagram" style="color: #FD0051;"></i>
-                                <i class="bi bi-linkedin" style="color: #FD0051;"></i>
-                                <i class="bi bi-github" style="color: #FD0051;"></i>
-                            </div>
-                        </div>
-                    </span>
-
-                </div>
-
-            </div>
-            <img src="{{url('assets/img/integrantes/nextBtn.png')}}" id="nextBtn">
-        </div>
-
-    </section>
-
-    <script>
-
-        let scrollContainer = document.querySelector(".gallery");
-        let bckBtn = document.getElementById("bckBtn");
-        let nextBtn = document.getElementById("nextBtn");
-         
-        nextBtn.addEventListener("click", ()=> {
-            scrollContainer.style.scrollBehavior = "smooth";
-            scrollContainer.scrollLeft += 1200;
-        });
-
-        bckBtn.addEventListener("click", ()=> {
-            scrollContainer.style.scrollBehavior = "smooth";
-            scrollContainer.scrollLeft -= 1200;
-        });
-
-    </script>
+@section('content')
+    @include('components.sobre')
+    @include('components.equipe')
+    @include('components.parceiros')
+    @include('components.contato')
 @endsection
+
+    <script src="{{url('assets/js/dynamo/dark-mode.js')}}"></script>
+    <script src="{{url('assets/js/dynamo/animacao.js')}}"></script>
+    <script src="{{url('assets/js/dynamo/card-equipe.js')}}"></script>
+    <script src="{{url('assets/js/dynamo/carrossel.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -45,9 +45,10 @@ Route::post('/usuario', [UsuarioController::class, 'store']);
 Route::post('/usuario/login', [UsuarioController::class, 'login']);
 //Atualizar dado de um usuario...
 Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'update']);
-
+// Se candidatar a vaga
 Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
-
+// Deletar vaga
+Route::delete('/vagaUsuario', [VagaUsuarioController::class,'destroy']);
 
 //API'S ADMIN
 

@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\VagaUsuario;
 use Illuminate\Http\Request;
+use App\Models\Vaga;
+use Illuminate\Support\Facades\Auth;
 
 class VagaUsuarioController extends Controller
 {
@@ -82,8 +84,48 @@ class VagaUsuarioController extends Controller
      */
     public function edit($id)
     {
-        //
+
     }
+
+
+
+    public function verVagaCadastrada($idVaga)
+    {
+        // Encontre a vaga com o ID passado
+        $vaga = Vaga::findOrFail($idVaga);
+
+        $empresaId = Auth::guard('empresas')->id();
+        if ($vaga->idEmpresa !== $empresaId) {
+            return redirect()->route('home')->with('error', 'Você não tem permissão para ver os candidatos dessa vaga.');
+        }
+    
+        // Busque os candidatos que se inscreveram para esta vaga, incluindo o status
+        $candidatos = VagaUsuario::where('idVaga', $idVaga)
+            ->with(['usuario', 'status']) // Inclui a relação status
+            ->get();
+    
+        return view('verVagaCadastrada', compact('vaga', 'candidatos'));
+    }
+
+    public function aprovarCandidatura($id)
+{
+    $vagaUsuario = VagaUsuario::findOrFail($id);
+    $vagaUsuario->idStatusVagaUsuario = 2; // 2 para aprovado
+    $vagaUsuario->save();
+
+    return redirect()->back()->with('success', 'Candidatura aprovada com sucesso.');
+}
+
+public function negarCandidatura($id)
+{
+    $vagaUsuario = VagaUsuario::findOrFail($id);
+    $vagaUsuario->idStatusVagaUsuario = 3; // 3 para negado
+    $vagaUsuario->save();
+
+    return redirect()->back()->with('success', 'Candidatura negada com sucesso.');
+}
+
+    
 
     /**
      * Update the specified resource in storage.
@@ -103,8 +145,16 @@ class VagaUsuarioController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, Request $request)
     {
-        //
+                // Encontra o usuario pelo ID
+                $vagasUsuario = VagaUsuario::findOrFail($id);
+    
+                // Atualiza o status da usuario para 2
+                $vagasUsuario->delete();
+            
+                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
+                
+        
     }
 }

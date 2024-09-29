@@ -51,6 +51,12 @@ class Usuario extends Model
         return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
     }
 
+    public function vagas()
+    {
+        return $this->hasMany(VagaUsuario::class, 'idUsuario');
+    }
+
+
     // public function vagas() : BelongsToMany
     // {
     //     return $this->belongsToMany(Usuario::class, 'tb_vagausuario', 'idUsuario', 'idVaga');
