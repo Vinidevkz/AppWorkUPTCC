@@ -11,12 +11,10 @@ class Usuario extends Model
     use HasFactory;
 
     protected $table = 'tb_usuario';
-
     protected $primaryKey = 'idUsuario';
-
     public $timestamps = true;
 
-    public $fillable = [
+    protected $fillable = [
         'nomeUsuario',
         'usernameUsuario',
         'nascUsuario',
@@ -33,6 +31,14 @@ class Usuario extends Model
         'formacaoCompetenciaUsuario',
         'dataFormacaoCompetenciaUsuario',
         'idStatus',
+    ];
+
+    protected $casts = [
+        'fotoUsuario' => 'string', // Armazena como string
+    ];
+
+    protected $hidden = [
+        'senhaUsuario', // Oculta a senha ao serializar
     ];
 
     public function areas()

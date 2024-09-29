@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView, Image } from "react-native";
+import { View, Text, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Context } from "../pages/initialPages/context/provider";
 import ApisUrls from "../ApisUrls/apisurls.js";
@@ -11,42 +11,55 @@ import { useTheme } from "../pages/initialPages/context/themecontext";
 export default function Vaga({ navigation }) {
   const { theme } = useTheme({ Vaga });
   const [loading, setLoading] = useState(true);
-  const [infosVaga, setInfosVaga] = useState([]); // Inicializa como array
+  const [infosVaga, setInfosVaga] = useState([]);
+  const [isCandidated, setIsCandidated] = useState(false); // Estado para controlar a candidatura
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
   const { apiEmuladorVaga, apiNgrokVaga, apiNgrokUsuarioVaga } = ApisUrls;
 
   const seCandidatar = async () => {
-    console.log("User ID:", userID); // Para verificar se o userID está definido
+    console.log("User ID:", userId);
 
     try {
-        const response = await fetch(apiNgrokUsuarioVaga, {
-            method: "POST",
-            headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                idVaga: vagaID,
-                idUsuario: userId
-            })
-        });
+      const response = await fetch(apiNgrokUsuarioVaga, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          idVaga: vagaID,
+          idUsuario: userId,
+        }),
+      });
 
-        const resp = await response.json();
-        console.log(resp); // Para verificar a resposta
+      const resp = await response.json();
+      console.log(resp);
 
-        if (response.ok) {
-            alert(resp.message); // Mensagem de sucesso
-        } else {
-            alert('Erro ao se candidatar: ' + resp.message); // Mensagem de erro
-        }
+      if (response.ok) {
+        Alert.alert("Parabéns!", resp.message);
+        setIsCandidated(true); // Atualiza para indicar que o usuário já se candidatou
+      } else {
+        alert("Erro ao se candidatar: " + resp.message);
+      }
     } catch (error) {
-        console.log(error);
-        alert('Erro de conexão: ' + error.message); // Mensagem de erro de conexão
+      console.log(error);
+      alert("Erro de conexão: " + error.message);
     }
-};
+  };
 
+  const cancelarCandidatura = async () => {
+    // Lógica para cancelar a candidatura (se aplicável)
+    try {
+      // Envie uma requisição para cancelar a candidatura
+      Alert.alert("Candidatura cancelada com sucesso.");
+      setIsCandidated(false); // Atualiza para indicar que o usuário cancelou a candidatura
+    } catch (error) {
+      console.log(error);
+      alert("Erro ao cancelar a candidatura: " + error.message);
+    }
+  };
 
   const buscaVaga = async () => {
     setLoading(true);
@@ -54,7 +67,6 @@ export default function Vaga({ navigation }) {
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
-      // Verifica se a resposta é um objeto e o coloca em um array
       const vagasData = Array.isArray(response.data) ? response.data : [response.data];
       setInfosVaga(vagasData);
       console.log("Dados da vaga:", vagasData);
@@ -72,8 +84,6 @@ export default function Vaga({ navigation }) {
       }
     }, [vagaID])
   );
-
-
 
   if (loading) {
     return (
@@ -102,7 +112,7 @@ export default function Vaga({ navigation }) {
       <ScrollView style={{ flex: 1, padding: 20, gap: 50, backgroundColor: theme.backgroundColor }}>
         {infosVaga.map((vaga, index) => (
           <View key={index} style={styles.infosCont}>
-            <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
               <View>
                 <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>
                   {vaga.nomeVaga}
@@ -120,24 +130,27 @@ export default function Vaga({ navigation }) {
                 </View>
               </View>
               <View style={[styles.profileIconBox, { borderColor: theme.textColor }]}>
-                <Image
-                  source={require("../../assets/icons/dynamo.png")}
-                  style={styles.icon}
-                />
+                <Image source={require("../../assets/icons/dynamo.png")} style={styles.icon} />
               </View>
             </View>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>
-              Descrição: {vaga.descricaoVaga}
-            </Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Descrição: {vaga.descricaoVaga}</Text>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Modalidade: {vaga.modalidadeVaga}</Text>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Salário: {vaga.salarioVaga}</Text>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Cidade: {vaga.cidadeVaga}, {vaga.estadoVaga}</Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>
+              Cidade: {vaga.cidadeVaga}, {vaga.estadoVaga}
+            </Text>
           </View>
         ))}
         <View style={[styles.infosCont, styles.row]}>
-          <TouchableOpacity style={styles.button} onPress={() => seCandidatar()}>
-            <Text style={[styles.DMSansBold, styles.buttonText]}>Candidatar-se</Text>
-          </TouchableOpacity>
+          {isCandidated ? (
+            <TouchableOpacity style={[styles.button, {backgroundColor: '', borderWidth: 2, borderColor: '#20dd77'}]} onPress={() => cancelarCandidatura()}>
+              <Text style={[styles.DMSansBold, styles.buttonText, {color: theme.textColor}]}>Cancelar Candidatura</Text>
+            </TouchableOpacity>
+          ) : (
+            <TouchableOpacity style={styles.button} onPress={() => seCandidatar()}>
+              <Text style={[styles.DMSansBold, styles.buttonText]}>Candidatar-se</Text>
+            </TouchableOpacity>
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>

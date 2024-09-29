@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use NunoMaduro\Collision\Adapters\Phpunit\State;
 
+
 class UsuarioController extends Controller
 {
     /**
@@ -54,62 +55,91 @@ class UsuarioController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
+     * 
      */
+    
     public function store(Request $request)
     {
-
-        /*
-|--------------------------------------------------------------------------
-Validação
-|--------------------------------------------------------------------------
-*/
-
-        $request->validate(
-            [
-                'nomeUsuario' => 'required|string|max:40',
-                'usernameUsuario' => 'required|string|max:40',
-                'nascUsuario' => 'required|date',
-                'emailUsuario' => 'required|email',
-                'senhaUsuario' => 'required|min:8',
-                'contatoUsuario' => 'required|string|max:20',
-                'fotoUsuario' => 'required',
-                'cidadeUsuario' => 'required|string|max:40',
-                'estadoUsuario' => 'required|string|max:40',
-                'logradouroUsuario' => 'required|string|max:40',
-                'cepUsuario' => 'required|string|max:40',
-                'numeroLograUsuario' => 'required|string|max:40',
-                'sobreUsuario' => 'required|string|max:40',
-                'formacaoCompetenciaUsuario' => 'required|string|max:40',
-                'dataFormacaoCompetenciaUsuario' => 'required|date',
-            ],
-            [
-                //mensagens de erro:
-
-            ]
-        );
-
-        $usuario = new Usuario;
-
-        $usuario->nomeUsuario = $request->nomeUsuario;
-        $usuario->usernameUsuario = $request->usernameUsuario;
-        $usuario->nascUsuario = $request->nascUsuario;
-        $usuario->emailUsuario = $request->emailUsuario;
-        $usuario->senhaUsuario = $request->senhaUsuario;
-        $usuario->contatoUsuario = $request->contatoUsuario;
-        $usuario->fotoUsuario = $request->fotoUsuario;
-        $usuario->cidadeUsuario = $request->cidadeUsuario;
-        $usuario->estadoUsuario = $request->estadoUsuario;
-        $usuario->logradouroUsuario = $request->logradouroUsuario;
-        $usuario->cepUsuario = $request->cepUsuario;
-        $usuario->numeroLograUsuario = $request->numeroLograUsuario;
-        $usuario->sobreUsuario = $request->sobreUsuario;
-        $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
-        $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
-        $usuario->idStatus = 3;
-
-        $usuario->save();
-        return response()->json($usuario);
+        try {
+            // Log dos dados da requisição
+            Log::info("Request data: ", $request->all());
+    
+            /*
+            |----------------------------------------------------------------------
+            | Validação
+            |----------------------------------------------------------------------
+            */
+            $request->validate(
+                [
+                    'nomeUsuario' => 'required|string|max:40',
+                    'usernameUsuario' => 'required|string|max:40',
+                    'nascUsuario' => 'required|date',
+                    'emailUsuario' => 'required|email',
+                    'senhaUsuario' => 'required|min:8',
+                    'contatoUsuario' => 'required|string|max:20',
+                    'fotoUsuario' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validação da imagem
+                    'cidadeUsuario' => 'required|string|max:40',
+                    'estadoUsuario' => 'required|string|max:40',
+                    'logradouroUsuario' => 'required|string|max:40',
+                    'cepUsuario' => 'required|string|max:40',
+                    'numeroLograUsuario' => 'required|string|max:40',
+                    'sobreUsuario' => 'required|string|max:40',
+                    'formacaoCompetenciaUsuario' => 'required|string|max:40',
+                    'dataFormacaoCompetenciaUsuario' => 'required|date',
+                ]
+            );
+    
+            // Criação do novo usuário
+            $usuario = new Usuario;
+    
+            $usuario->nomeUsuario = $request->nomeUsuario;
+            $usuario->usernameUsuario = $request->usernameUsuario;
+            $usuario->nascUsuario = $request->nascUsuario;
+            $usuario->emailUsuario = $request->emailUsuario;
+            $usuario->senhaUsuario = bcrypt($request->senhaUsuario); // Hash a senha antes de salvar
+            $usuario->contatoUsuario = $request->contatoUsuario;
+            $usuario->cidadeUsuario = $request->cidadeUsuario;
+            $usuario->estadoUsuario = $request->estadoUsuario;
+            $usuario->logradouroUsuario = $request->logradouroUsuario;
+            $usuario->cepUsuario = $request->cepUsuario;
+            $usuario->numeroLograUsuario = $request->numeroLograUsuario;
+            $usuario->sobreUsuario = $request->sobreUsuario;
+            $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
+            $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
+    
+            // Lê a imagem da requisição e a converte para binário
+            if ($request->hasFile('fotoUsuario')) {
+                $foto = $request->file('fotoUsuario'); // Recebe o arquivo da foto
+                $usuario->fotoUsuario = file_get_contents($foto->getRealPath()); // Converte a imagem para binário
+            }
+    
+            $usuario->idStatus = 3;
+    
+            // Salva o usuário no banco de dados
+            $usuario->save();
+    
+            // Log de sucesso
+            Log::info("User registered successfully: ", $usuario->toArray());
+    
+            return response()->json($usuario, 201); // Retorna um status 201 (Created)
+    
+        } catch (\Illuminate\Validation\ValidationException $e) {
+            // Tratamento de erro de validação
+            Log::error("Validation error: ", $e->errors());
+            return response()->json([
+                'errors' => $e->errors()
+            ], 422); // Retorna um status 422 (Unprocessable Entity)
+    
+        } catch (\Exception $e) {
+            // Tratamento de erro geral
+            Log::error("Error during user registration: ", ['message' => $e->getMessage()]);
+            return response()->json([
+                'message' => 'Erro ao cadastrar o usuário. Por favor, tente novamente mais tarde.',
+            
+            ], 500); // Retorna um status 500 (Internal Server Error)
+        }
     }
+    
 
     /**
      * Display the specified resource.

@@ -43,7 +43,6 @@ const styles = StyleSheet.create({
   formCont: {
     width: '100%',
     paddingHorizontal: 50,
-    gap: 5,
     justifyContent: 'space-between',
   },
 
@@ -69,10 +68,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 50,
-    borderWidth: 3,
+    borderWidth: 2,
     borderColor: '#1b1b1b',
     backgroundColor: '#fff',
-
   },
 
   icon: {

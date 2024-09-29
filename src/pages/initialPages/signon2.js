@@ -80,8 +80,8 @@ export default function SignON2({ navigation }) {
             {areaVagas.map((area, index) => (
               <Picker.Item
                 key={index}
-                label={area.nomeAreaInteresseVaga}
-                value={area.nomeAreaInteresseVaga}
+                label={area.nomeArea}
+                value={area.nomeArea}
               />
             ))}
           </Picker>
