@@ -20,7 +20,7 @@
                     <li><a href="#home">Início</a></li>
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#equipe">Equipe</a></li>
-                    <li><a href="">Projetos</a></li>
+                    <li><a href="/home">Projetos</a></li>
                     <li><a href="#parceiros">Parceiros</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
@@ -61,7 +61,7 @@
 
     </section>
 
-    {{-- resources/views/home.blade.php --}}
+
 @extends('layouts.dynamo')
 
 @section('content')

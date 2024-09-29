@@ -68,7 +68,7 @@
   }
   
   .home-div-1 {
-    background-image: url(../img/fundo-home.png);
+    background-image: url("../img/dynamo/fundo-home.png");
     background-size: 110%;
     background-repeat: no-repeat;
     background-position: center;
@@ -117,7 +117,7 @@
   }
   
   .sobre-div-2 {
-    background-image: url(../img/fundo-sobre.png);
+    background-image: url("../img/dynamo/fundo-sobre.png");
     background-size: cover;
     background-repeat: no-repeat;
     align-items: center;
@@ -190,7 +190,7 @@
     place-items: center;
     min-height: 100vh; /*debativel*/
     background-color: var(--fundo);
-    background-image: url(../img/background-equipe.png);
+    background-image: url("../img/dynamo/background-equipe.png");
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
@@ -379,7 +379,7 @@
   
   .contato-div-1 {
     height: 100%;
-    background-image: url(../img/fundo-contato.png);
+    background-image: url("../img/dynamo/fundo-contato.png");
     background-size: 150%;
     background-repeat: no-repeat;
     background-position: center;

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // rotas Dynamo
+
 // Home
 Route::get('/', function () {
     return view('home');
