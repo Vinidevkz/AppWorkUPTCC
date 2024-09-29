@@ -252,7 +252,7 @@ class VagaController extends Controller
                     ->get();
 
                 if ($vagas->isEmpty() && $empresas->isNotEmpty()) {
-                    return response()->json($empresas, 200);
+                    return response()->json($empresas);
                 }
 
                 if ($vagas->isEmpty() && $empresas->isEmpty()) {
