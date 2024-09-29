@@ -60,7 +60,7 @@ Route::post('/candidaturas/negar/{idVaga}', [VagaUsuarioController::class, 'nega
 // Home Admin
 Route::get('/admin', function () {
     return view('admin.homeAdmin');
-})->middleware('auth:admins')->name('admin');
+})->middleware('auth:admin')->name('adminDashboard');
 
 
 // Home WorkUp
@@ -123,7 +123,7 @@ Route::get('/Vagas/{id}/edit', [VagaController::class, 'edit'])->name('vagas.edi
 // Editar Vaga
 Route::put('/Vagas/{id}', [VagaController::class, 'update'])->name('vagas.update');
 //Cadastrar Vaga
-Route::get('/cadastrarVaga', [VagaController::class, 'create'])->middleware('auth:empresas')->name('cadastrarVaga');
+Route::get('/cadastrarVaga', [VagaController::class, 'create'])->middleware('auth:empresa')->name('cadastrarVaga');
 //Formularo Vaga
 Route::post('/formVaga', [VagaController::class, 'store']);
 
@@ -132,7 +132,7 @@ Route::post('/formVaga', [VagaController::class, 'store']);
 // Admin
 
 //Cadastrar Admin
-Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->name('cadastrarAdmin');
+Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->middleware('auth:admin')->name('cadastrarAdmin');
 //Cadastrar Area
 Route::get('/Area', [AreaController::class, 'create'])->name('cadastrarArea');
 //Formulario Admin
@@ -150,7 +150,7 @@ Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 
 Route::post('/login', [AuthController::class, 'login']);
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::prefix('/admin')->group(function () {
     Route::get('/', [UsuarioController::class, 'dashboard']);

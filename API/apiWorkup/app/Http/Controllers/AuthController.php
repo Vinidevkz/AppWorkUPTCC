@@ -13,6 +13,7 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
+        // Validação de entrada
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
@@ -24,35 +25,32 @@ class AuthController extends Controller
         // Verificar na tabela tb_empresa
         $empresa = Empresa::where('emailEmpresa', $email)->first();
         if ($empresa) {
+            // Se a senha estiver correta, faça o login
             if (Hash::check($password, $empresa->senhaEmpresa)) {
-                Auth::guard('empresas')->login($empresa);
+                Auth::guard('empresa')->login($empresa);
                 return redirect('/empresa');
+            } else {
+                // Senha incorreta para empresa
+                return redirect()->back()->with('error', 'Senha incorreta para empresa.');
             }
         }
 
         // Verificar na tabela tb_admin
         $admin = Admin::where('emailAdmin', $email)->first();
         if ($admin) {
-           
-            $credentials = $request->only('email', 'password');
-            $admin = Admin::where('emailAdmin', $credentials['email'])->first(); // Busque pelo emailAdmin
-            
-            if ($admin && Hash::check($credentials['password'], $admin->senhaAdmin)) {
-                Auth::guard('admins')->login($admin);
-                Log::info('Admin logged in:', ['email' => $credentials['email']]);
-                return redirect('/admin');
+            // Se a senha estiver correta, faça o login
+            if (Hash::check($password, $admin->senhaAdmin)) {
+                Auth::guard('admin')->login($admin);
+                Log::info('Admin logged in:', ['email' => $email]);
+                    return redirect('/cadastrarAdmin');  // Adicionado redirecionamento correto
+            } else {
+                // Senha incorreta para admin
+                return redirect()->back()->with('error', 'Senha incorreta para admin.');
             }
-        
-            Log::warning('Incorrect password for email:', ['email' => $credentials['email']]);
-            return redirect()->back()->with('error', 'Senha incorreta para o email informado.');
-
-
-            
         }
-        
 
-
-        return redirect()->back()->with(['error' => 'Credenciais inválidas.']);
+        // Se nenhum usuário for encontrado (nem empresa nem admin)
+        return redirect()->back()->with('error', 'Credenciais inválidas.');
     }
 
     public function showFormLogin()
@@ -62,7 +60,13 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('empresas')->logout(); // Use o guard correto
-        return redirect('/')->with('message', 'Logout realizado com sucesso.'); // Redireciona para a página de login
+        if (Auth::guard('empresa')->check()) {
+            Auth::guard('empresa')->logout();
+        } elseif (Auth::guard('admin')->check()) {
+            Auth::guard('admin')->logout();
+        }
+
+        return redirect('/')->with('message', 'Logout realizado com sucesso.');
     }
 }
+

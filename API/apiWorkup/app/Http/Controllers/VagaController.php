@@ -36,13 +36,15 @@ class VagaController extends Controller
                 ->get();
         }
 
-        // Verifica se a requisição é AJAX
+        // Verifica se a requisição espera um json
+        if($request->expectsJson()){
+            return response()->json($vagas); // Retorna o JSON esperado
+        }
 
-         return response()->json($vagas); // Retorna JSON se for uma requisição AJAX
 
 
         // Caso contrário, retorna a view com as vagas
-        //return view('admin.vaga.vagaAdmin', compact('vagas'));
+        return view('admin.vaga.vagaAdmin', ['vagas'=>$vagas]);
     }
 
     /**
@@ -53,7 +55,7 @@ class VagaController extends Controller
     public function create()
     {
 
-        $idEmpresa = Auth::guard('empresas')->id(); // Pega o ID da empresa autenticada
+        $idEmpresa = Auth::guard('empresa')->id(); // Pega o ID da empresa autenticada
         $modalidades = Modalidade::all();
         $areas = Area::all();
         return view('cadastrarVaga', compact('idEmpresa', 'modalidades', 'areas'));
@@ -108,7 +110,7 @@ class VagaController extends Controller
         $vaga->estadoVaga = $request->estadoVaga;
         $vaga->beneficiosVaga = $request->beneficiosVaga;
         $vaga->diferencialVaga = $request->diferencialVaga;
-        $vaga->idEmpresa = Auth::guard('empresas')->id();
+        $vaga->idEmpresa = Auth::guard('empresa')->id();
         $vaga->idArea = $request->idArea;
         $vaga->idStatus = 3;
         $vaga->idModalidadeVaga = $request->idModalidadeVaga;
@@ -146,11 +148,11 @@ class VagaController extends Controller
      public function showVagasPorEmpresa()
      {
         // Verifica se o usuário está autenticado
-        if (!Auth::guard('empresas')->check()) {
+        if (!Auth::guard('empresa')->check()) {
             return redirect()->route('login'); // Redireciona para a página de login se não estiver autenticado
         }
 
-        $empresaId = Auth::guard('empresas')->id(); // Pega o ID da empresa autenticada
+        $empresaId = Auth::guard('empresa')->id(); // Pega o ID da empresa autenticada
 
 
         // Busca todas as vagas cadastradas pela empresa
@@ -169,7 +171,7 @@ class VagaController extends Controller
     public function edit($id)
     {
 
-        $idEmpresa = Auth::guard('empresas')->id();
+        $idEmpresa = Auth::guard('empresa')->id();
         $modalidades = Modalidade::all();
         $areas = Area::all();
         $vaga = Vaga::findOrFail($id); // Encontra o usuário pelo ID ou lança um erro 404

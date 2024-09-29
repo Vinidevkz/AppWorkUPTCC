@@ -126,7 +126,7 @@ check
             </div>
 
             <div class="d-flex">
-              <a href="" class=" d-flex flex-row align-items-center h6" id="btn-exit">
+              <a href="/logout" class=" d-flex flex-row align-items-center h6" id="btn-exit">
                 <span class="material-symbols-outlined p-2">logout</span>
                 Sair
               </a>

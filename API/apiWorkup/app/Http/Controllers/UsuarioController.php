@@ -32,12 +32,13 @@ class UsuarioController extends Controller
             $usuarios = Usuario::with('status')->orderBy('idStatus', 'asc')->get();
         }
 
-
-        return response()->json($usuarios); // Retorna JSON se for uma requisição AJAX
-
+        if($request->expectsJson()){
+            return response()->json($usuarios); // Retorna o JSON esperado
+        }
 
         // Caso contrário, retorna a view com os usuários
-        //return view('admin.usuario.usuarioAdmin', compact('usuarios'));
+        return view('admin.usuario.usuarioAdmin', ['usuarios'=>$usuarios]);
+
     }
 
     /**

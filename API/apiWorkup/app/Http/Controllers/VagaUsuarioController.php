@@ -94,7 +94,7 @@ class VagaUsuarioController extends Controller
         // Encontre a vaga com o ID passado
         $vaga = Vaga::findOrFail($idVaga);
 
-        $empresaId = Auth::guard('empresas')->id();
+        $empresaId = Auth::guard('empresa')->id();
         if ($vaga->idEmpresa !== $empresaId) {
             return redirect()->route('home')->with('error', 'Você não tem permissão para ver os candidatos dessa vaga.');
         }
