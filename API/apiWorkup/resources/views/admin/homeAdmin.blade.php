@@ -35,9 +35,38 @@
     <p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
 
     <div class="dropdown">
-      <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Log out</a></li>
+      <div class="section-adm dropdown-toggle d-flex flex-row align-items-center text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <div class="img-adm " >VA</div>  
+      <p class="m-0 text-white">Colaborador</p>
+      </div>    
+      <!-- <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
+      <ul class="dropdown-menu p-0 m-0 list-section">
+      
+        <div class="d-flex flex-column justify-content-center">
+        <li class="titulo-section-adm"><span>Usuário:</span> vitor.souza</li>
+       
+        <div class="d-flex align-items-center justify-content-around">
+        <span class=" material-symbols-outlined">
+key
+</span>
+
+        
+        <li class="corpo-section-adm p-0 m-0">Alterar senha</li>
+        </div>
+
+
+        </div>
+
+        <div class="d-flex flex-column justify-content-center">
+        <li class="titulo-section-adm">Papéis</li>
+
+        <div class="d-flex align-items-center justify-content-around">
+        <span class="material-symbols-outlined">
+check
+</span>
+        <li class="corpo-section-adm m-0 p-0">Colaborador</li>
+        </div>
+        </div>
       </ul>
     </div>
 
@@ -45,65 +74,69 @@
   </header>
 
   <div class="row">
-    <div class="col-2">
-    <button id="toggle-aside" class="btn btn-primary">Toggle Aside</button>
-    <aside class="h-auto"  id="sidebar">
+  <aside class="col-2"  id="sidebar">
+    <div class="col-2 h-auto col-aside">
+
+
+   
       <div class="aside-container">
        
           <div class="aside-sidebar d-flex flex-column h-auto text-white">
 
             <div class="d-flex">
-              <a href="/admin" class="aside-active d-flex flex-row align-items-center h6">
+              <a  href="/admin" class="asisde-sidebar-active d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">grid_view</span>
                 Dashboard
               </a>
             </div>
 
             <div class="d-flex">
-              <a href="/verUsuario" class="d-flex flex-row align-items-center h6">
+              <a href="/verUsuario" class=" d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">person</span>
                 Usuários
               </a>
             </div>
 
             <div class="d-flex">
-              <a href="/verVaga" class="d-flex flex-row align-items-center h6">
+              <a href="/verVaga" class=" d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">work</span>
                 Vagas
               </a>
             </div>
 
             <div class="d-flex">
-              <a href="/verEmpresa" class="d-flex flex-row align-items-center h6">
+              <a href="/verEmpresa" class=" d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">apartment</span>
                 Empresas
               </a>
             </div>
 
             <div class="">
-              <a href="/infoAdmin" class="d-flex flex-row align-items-center h6">
+              <a href="/infoAdmin" class=" d-flex flex-row align-items-center h6">
               <span class="material-symbols-outlined p-2">info</span>
                 Info
               </a>
             </div>
 
             <div class="d-flex">
-              <a href="/SuporteAdmin" class="d-flex flex-row align-items-center h6" id="btn-support">
+              <a href="/SuporteAdmin" class=" d-flex flex-row align-items-center h6" id="btn-support">
                 <span class="material-symbols-outlined p-2">info</span>
                 Suporte
               </a>
             </div>
 
             <div class="d-flex">
-              <a href="" class="d-flex flex-row align-items-center h6" id="btn-exit">
+              <a href="" class=" d-flex flex-row align-items-center h6" id="btn-exit">
                 <span class="material-symbols-outlined p-2">logout</span>
                 Sair
               </a>
             </div>
        
       </div>
-      </aside>
+     
     </div>
+    </aside>
+
     <div class="col-9">
       <div class="p-0">
 
@@ -706,10 +739,23 @@ function drawChart() {
 
 
 
-document.getElementById('toggle-aside').addEventListener('click', function() {
-  const sidebar = document.getElementById('sidebar');
-  sidebar.classList.toggle('hidden');
-}); 
+// document.getElementById('toggle-aside').addEventListener('click', function() {
+//   const sidebar = document.getElementById('aside-text');
+//   sidebar.classList.toggle('hidden esconder-texto');
+// }); 
+
+const sidebarlinks = document.querySelectorAll('.h6');
+
+// Adicionando eventos
+sidebarlinks.forEach(link => {
+  link.addEventListener('click', function() {
+    // Removendo classe
+    sidebarlinks.forEach(item => item.classList.remove('asisde-sidebar-active'));
+
+
+    this.classList.add('asisde-sidebar-active')
+  })
+})
   </script>
 
 

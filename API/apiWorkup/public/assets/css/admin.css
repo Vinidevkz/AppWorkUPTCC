@@ -102,6 +102,9 @@ header .nav-text{
 }
 
 /* ESTILIZAÇÃO DO ASIDE */
+.col-aside{
+  min-height: 100vh;
+}
 aside{
   width: 100%;
   /* background-color: #f4f4f4; */
@@ -125,6 +128,10 @@ aside{
   /* background-color: #11bf6b; */
   margin-left: 5px;
   transition: 0.2s;
+  border-left: 5px solid #11bf6b;
+}
+.asisde-sidebar-active{
+  margin-left: 5px;
   border-left: 5px solid #11bf6b;
 }
 .aside-sidebar #btn-exit:hover{
@@ -318,10 +325,41 @@ table{
   margin-right: 10px;
   background-color: var(--clr-primary);
 }
-
-
-.hidden {
-  opacity: 0;
-  transform: translateX(-100%); /* Move para a esquerda */
-  pointer-events: none; /* Desativa interações quando escondido */
+.img-adm{
+  width: 35px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-right: 10px;
+  background-color: var(--clr-primary);
 }
+.section-adm:hover{
+  background-color: gray;
+}
+.titulo-section-adm{
+  font-size: 1.0rem;
+  background-color: #eaedf2;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+  color: #17497B;
+}
+.corpo-section-adm{
+  font-size: 0.8rem;
+}
+.list-section{
+  width: 13vw;
+}
+
+/* Estilo para esconder o aside */
+/* .hidden {
+ width: 10px;
+}
+.esconder-texto{
+  font-size: 0;
+} */
+
+
