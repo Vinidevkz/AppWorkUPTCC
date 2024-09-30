@@ -145,16 +145,17 @@ public function negarCandidatura($id)
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id, Request $request)
+    public function destroy($idUsuario, $idVaga, Request $request)
     {
-                // Encontra o usuario pelo ID
-                $vagasUsuario = VagaUsuario::findOrFail($id);
+        // Encontra a candidatura pelo ID da vaga e do usuário
+        $vagaUsuario = VagaUsuario::where('idUsuario', $idUsuario)
+            ->where('idVaga', $idVaga)
+            ->firstOrFail();
     
-                // Atualiza o status da usuario para 2
-                $vagasUsuario->delete();
-            
-                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
-                
-        
+        // Deleta a candidatura
+        $vagaUsuario->delete();
+    
+        return response()->json(['message' => 'Candidatura cancelada com sucesso']);
     }
+    
 }
