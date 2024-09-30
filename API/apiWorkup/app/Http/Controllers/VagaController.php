@@ -158,10 +158,6 @@ class VagaController extends Controller
         // Busca todas as vagas cadastradas pela empresa
         $vagas = Vaga::where('idEmpresa', $empresaId)->with('status', 'area', 'modalidade')->get();
 
-
-        // Para debug, mostre as vagas recuperadas
-
-
         return view('homeEmpresa', compact('vagas')); // Passa a variável $vagas para a view
     }
 

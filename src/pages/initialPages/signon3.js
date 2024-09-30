@@ -16,8 +16,10 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import useFonts from "../../styles/fontloader/fontloader";
 import { Context } from "./context/provider";
-import * as ImagePicker from "expo-image-picker"; // Importa o Image Picker
+import * as ImagePicker from "expo-image-picker";
 import ApisUrls from "../../ApisUrls/apisurls.js";
+import { storage } from './firebase.js';
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 export default function SignON3({ navigation }) {
   const {
@@ -33,10 +35,30 @@ export default function SignON3({ navigation }) {
     userName,
     setUserId,
   } = useContext(Context);
-  const { apiNgrokCad } = ApisUrls;
+  const { apiEmuladorCad } = ApisUrls;
 
-  const [passwordVisible, setPasswordVisible] = useState(false);
-  const [selectedImage, setSelectedImage] = useState(null); // Estado para armazenar a imagem selecionada
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [imgURL, setImgURL] = useState(null);
+
+  const pickImage = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      Alert.alert("Erro", "Permissão para acessar as imagens foi negada!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedImage(result.assets[0].uri);
+    }
+  };
 
   // Função para formatar a data para o formato ISO
   function formatDateToISO(dateString) {
@@ -44,43 +66,32 @@ export default function SignON3({ navigation }) {
     return `${year}-${month}-${day}`;
   }
 
-  // Função para abrir o seletor de imagens
-  const pickImage = async () => {
-    // Pedir permissão para acessar a galeria
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
-
-    if (!permissionResult.granted) {
-      Alert.alert("Erro", "Permissão para acessar as imagens foi negada!");
-      return;
-    }
-
-    // Abrir o seletor de imagens
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      allowsEditing: true, // Permite o corte da imagem
-      aspect: [1, 1], // Mantém o aspecto quadrado
-      quality: 1,
-    });
-
-    if (!result.canceled) {
-      setSelectedImage(result.assets[0].uri); // Armazena o URI da imagem selecionada
-    }
-  };
-
-  // Função para lidar com o cadastro de usuário
   async function cadastroUser() {
     if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
+
+    const uploadImageToFirebase = async (uri) => {
+      const response = await fetch(uri);
+      const blob = await response.blob();
+      
+      const filename = `profile_images/${Date.now()}.jpg`;
+      const imageRef = ref(storage, filename);
   
+      await uploadBytes(imageRef, blob);
+      const downloadURL = await getDownloadURL(imageRef);
+      setImgURL(downloadURL); // Armazena a URL antes de retornar
+      return downloadURL; // Retorna a URL da imagem
+    };
+
     try {
       const formattedDate = formatDateToISO(nasc);
-      const formData = new FormData(); // Usando FormData
-      const dataToSend = {}; // Objeto para armazenar os dados
-  
-      // Adicionando os campos ao FormData e ao objeto
+      const dataToSend = {};
+
+      const photoURL = selectedImage ? await uploadImageToFirebase(selectedImage) : null;
+
+      // Adicionando os campos ao objeto
       dataToSend.nomeUsuario = nome;
       dataToSend.usernameUsuario = userName;
       dataToSend.nascUsuario = formattedDate;
@@ -88,11 +99,7 @@ export default function SignON3({ navigation }) {
       dataToSend.senhaUsuario = senha;
       dataToSend.areaInteresseUsuario = areaInt;
       dataToSend.contatoUsuario = tel;
-      dataToSend.fotoUsuario = {
-        uri: selectedImage, // URI da imagem selecionada
-        name: "photo.jpg", // Nome do arquivo
-        type: "image/jpeg", // Tipo da imagem
-      };
+      dataToSend.fotoUsuario = imgURL; // URL da imagem do Firebase
       dataToSend.cidadeUsuario = "sp";
       dataToSend.estadoUsuario = "sp";
       dataToSend.logradouroUsuario = "logradouro";
@@ -101,27 +108,30 @@ export default function SignON3({ navigation }) {
       dataToSend.sobreUsuario = bio;
       dataToSend.formacaoCompetenciaUsuario = "formacao";
       dataToSend.dataFormacaoCompetenciaUsuario = "2012-12-12";
-  
-      // Log para inspecionar os dados que serão enviados
-      console.log("Dados a serem enviados:", dataToSend);
-  
-      // Preenchendo o FormData
-      for (const [key, value] of Object.entries(dataToSend)) {
-        formData.append(key, value);
-      }
-  
-      const response = await fetch(apiNgrokCad, {
+
+      console.log("Data to send:", dataToSend); // Log para depuração
+
+      const response = await fetch(apiEmuladorCad, {
         method: "POST",
-        body: formData, // Enviando FormData
         headers: {
           Accept: "application/json",
+          "Content-Type": "application/json",
         },
+        body: JSON.stringify(dataToSend),
       });
-  
-      const resp = await response.json();
-      console.log("Response object:", response);
-      console.log("Response body:", resp);
-  
+
+      const textResponse = await response.text(); // Mudado para text()
+      console.log("Response text:", textResponse);
+
+      let resp;
+      try {
+        resp = JSON.parse(textResponse);
+      } catch (error) {
+        console.error("Erro ao analisar JSON:", error);
+        Alert.alert("Erro", "Resposta do servidor não é um JSON válido.");
+        return;
+      }
+
       if (response.ok) {
         setUserId(resp.id);
         Alert.alert("Sucesso", "Usuário cadastrado com sucesso!");
@@ -138,8 +148,6 @@ export default function SignON3({ navigation }) {
       Alert.alert("Erro", "Erro ao cadastrar usuário. Verifique o console para mais detalhes.");
     }
   }
-  
-  
 
   // Carregar as fontes
   const fontsLoaded = useFonts();
@@ -167,11 +175,10 @@ export default function SignON3({ navigation }) {
             <Text style={styles.DMSansRegular}>Selecione uma foto de perfil:</Text>
           </View>
 
-          {/* Caixa de seleção de imagem */}
           <TouchableOpacity onPress={pickImage} style={[stylesProfile.profileIconBox]}>
             <Image
-              source={selectedImage ? { uri: selectedImage } : require("../../../assets/icons/manicon.png")} // Mostra a imagem selecionada
-              style={{ width: 100, height: 100, borderRadius: 50 }} // Define largura e altura fixas para a imagem
+              source={selectedImage ? { uri: selectedImage } : require("../../../assets/icons/manicon.png")}
+              style={{ width: 100, height: 100, borderRadius: 50 }}
             />
           </TouchableOpacity>
         </View>
@@ -183,7 +190,7 @@ export default function SignON3({ navigation }) {
             style={styles.bioCont}
             multiline={true}
             onChangeText={(text) => setBio(text)}
-            value={bio} // Certifique-se de que o valor esteja controlado
+            value={bio}
           />
         </View>
       </View>
@@ -196,7 +203,7 @@ export default function SignON3({ navigation }) {
         <TouchableOpacity
           style={[styles.nextButton, { opacity: !nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio ? 0.5 : 1 }]}
           onPress={cadastroUser}
-          disabled={!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio} // Desabilita se houver campos obrigatórios vazios
+          disabled={!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio}
         >
           <Text style={[styles.DMSansRegular, styles.nextText]}>Cadastrar</Text>
           <AntDesign name="right" size={24} color="black" />
