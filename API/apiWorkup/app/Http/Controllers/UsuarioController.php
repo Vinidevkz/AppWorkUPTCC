@@ -59,88 +59,92 @@ class UsuarioController extends Controller
      * 
      */
     
-    public function store(Request $request)
-    {
-        try {
-            // Log dos dados da requisição
-            Log::info("Request data: ", $request->all());
-    
-            /*
-            |----------------------------------------------------------------------
-            | Validação
-            |----------------------------------------------------------------------
-            */
-            $request->validate(
-                [
-                    'nomeUsuario' => 'required|string|max:40',
-                    'usernameUsuario' => 'required|string|max:40',
-                    'nascUsuario' => 'required|date',
-                    'emailUsuario' => 'required|email',
-                    'senhaUsuario' => 'required|min:8',
-                    'contatoUsuario' => 'required|string|max:20',
-                    'fotoUsuario' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validação da imagem
-                    'cidadeUsuario' => 'required|string|max:40',
-                    'estadoUsuario' => 'required|string|max:40',
-                    'logradouroUsuario' => 'required|string|max:40',
-                    'cepUsuario' => 'required|string|max:40',
-                    'numeroLograUsuario' => 'required|string|max:40',
-                    'sobreUsuario' => 'required|string|max:40',
-                    'formacaoCompetenciaUsuario' => 'required|string|max:40',
-                    'dataFormacaoCompetenciaUsuario' => 'required|date',
-                ]
-            );
-    
-            // Criação do novo usuário
-            $usuario = new Usuario;
-    
-            $usuario->nomeUsuario = $request->nomeUsuario;
-            $usuario->usernameUsuario = $request->usernameUsuario;
-            $usuario->nascUsuario = $request->nascUsuario;
-            $usuario->emailUsuario = $request->emailUsuario;
-            $usuario->senhaUsuario = bcrypt($request->senhaUsuario); // Hash a senha antes de salvar
-            $usuario->contatoUsuario = $request->contatoUsuario;
-            $usuario->cidadeUsuario = $request->cidadeUsuario;
-            $usuario->estadoUsuario = $request->estadoUsuario;
-            $usuario->logradouroUsuario = $request->logradouroUsuario;
-            $usuario->cepUsuario = $request->cepUsuario;
-            $usuario->numeroLograUsuario = $request->numeroLograUsuario;
-            $usuario->sobreUsuario = $request->sobreUsuario;
-            $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
-            $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
-            $usuario->fotoUsuario = $request->fotoUsuario;
-    
-            // Lê a imagem da requisição e a converte para binário
-            if ($request->hasFile('fotoUsuario')) {
-                $foto = $request->file('fotoUsuario'); // Recebe o arquivo da foto
-                $usuario->fotoUsuario = file_get_contents($foto->getRealPath()); // Converte a imagem para binário
-            }
-    
-            $usuario->idStatus = 3;
-    
-            // Salva o usuário no banco de dados
-            $usuario->save();
-    
-            // Log de sucesso
-            Log::info("User registered successfully: ", $usuario->toArray());
-    
-            return response()->json($usuario, 201); // Retorna um status 201 (Created)
-    
-        } catch (\Illuminate\Validation\ValidationException $e) {
-            // Tratamento de erro de validação
-            Log::error("Validation error: ", $e->errors());
-            return response()->json([
-                'errors' => $e->errors()
-            ], 422); // Retorna um status 422 (Unprocessable Entity)
-    
-        } catch (\Exception $e) {
-            // Tratamento de erro geral
-            Log::error("Error during user registration: ", ['message' => $e->getMessage()]);
-            return response()->json([
-                'message' => 'Erro ao cadastrar o usuário. Por favor, tente novamente mais tarde.',
-            
-            ], 500); // Retorna um status 500 (Internal Server Error)
-        }
-    }
+     public function store(Request $request)
+     {
+         try {
+             // Log dos dados da requisição
+             Log::info("Request data: ", $request->all());
+     
+             /*
+             |----------------------------------------------------------------------
+             | Validação
+             |----------------------------------------------------------------------
+             */
+             $request->validate([
+                 'nomeUsuario' => 'required|string|max:40',
+                 'usernameUsuario' => 'required|string|max:40',
+                 'nascUsuario' => 'required|date',
+                 'emailUsuario' => 'required|email',
+                 'senhaUsuario' => 'required|min:8',
+                 'contatoUsuario' => 'required|string|max:20',
+                 'fotoUsuario' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048', // Validação da imagem
+                 'cidadeUsuario' => 'required|string|max:40',
+                 'estadoUsuario' => 'required|string|max:40',
+                 'logradouroUsuario' => 'required|string|max:40',
+                 'cepUsuario' => 'required|string|max:40',
+                 'numeroLograUsuario' => 'required|string|max:40',
+                 'sobreUsuario' => 'required|string|max:40',
+                 'formacaoCompetenciaUsuario' => 'required|string|max:40',
+                 'dataFormacaoCompetenciaUsuario' => 'required|date',
+             ]);
+     
+             // Verificar se a imagem foi enviada
+             if ($request->hasFile('fotoUsuario')) {
+                 $file = $request->file('fotoUsuario');
+     
+                 // Gera um nome único para a imagem
+                 $fileName = time() . '_' . $file->getClientOriginalName();
+     
+                 // Salva a imagem no diretório 'uploads' (você pode ajustar o caminho)
+                 $path = $file->storeAs('uploads', $fileName, 'public');
+     
+                 // Log para verificar o caminho da imagem
+                 Log::info("Image stored at: ", [$path]);
+             } else {
+                 return response()->json(['message' => 'Nenhum arquivo foi enviado.'], 400);
+             }
+     
+             // Cria uma nova instância do usuário
+             $usuario = new Usuario;
+     
+             $usuario->nomeUsuario = $request->nomeUsuario;
+             $usuario->usernameUsuario = $request->usernameUsuario;
+             $usuario->nascUsuario = $request->nascUsuario;
+             $usuario->emailUsuario = $request->emailUsuario;
+             $usuario->senhaUsuario = bcrypt($request->senhaUsuario);
+             $usuario->contatoUsuario = $request->contatoUsuario;
+             $usuario->fotoUsuario = $path; // Salva o caminho da imagem no banco de dados
+             $usuario->cidadeUsuario = $request->cidadeUsuario;
+             $usuario->estadoUsuario = $request->estadoUsuario;
+             $usuario->logradouroUsuario = $request->logradouroUsuario;
+             $usuario->cepUsuario = $request->cepUsuario;
+             $usuario->numeroLograUsuario = $request->numeroLograUsuario;
+             $usuario->sobreUsuario = $request->sobreUsuario;
+             $usuario->formacaoCompetenciaUsuario = $request->formacaoCompetenciaUsuario;
+             $usuario->dataFormacaoCompetenciaUsuario = $request->dataFormacaoCompetenciaUsuario;
+     
+             // Define o status do usuário e salva
+             $usuario->idStatus = 3;
+             $usuario->save();
+     
+             Log::info("User registered successfully: ", $usuario->toArray());
+     
+             return response()->json($usuario, 201);
+             
+         } catch (\Illuminate\Validation\ValidationException $e) {
+             Log::error("Validation error: ", $e->errors());
+             return response()->json([
+                 'errors' => $e->errors()
+             ], 422);
+         } catch (\Exception $e) {
+             Log::error("Error during user registration: ", ['message' => $e->getMessage()]);
+             return response()->json([
+                 'message' => 'Erro ao cadastrar o usuário. Por favor, tente novamente mais tarde.',
+             ], 500);
+         }
+     }
+     
+     
     
 
     /**

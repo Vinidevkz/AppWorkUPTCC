@@ -11,7 +11,7 @@ import {
   Alert,
 } from "react-native";
 import styles from "./styles/signon";
-import stylesProfile from "../../styles/profile";
+import stylesProfile from "./styles/profileIcon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import useFonts from "../../styles/fontloader/fontloader";
@@ -78,47 +78,55 @@ export default function SignON3({ navigation }) {
     try {
       const formattedDate = formatDateToISO(nasc);
       const formData = new FormData(); // Usando FormData
+      const dataToSend = {}; // Objeto para armazenar os dados
   
-      // Adicionando os campos ao FormData
-      formData.append("nomeUsuario", nome);
-      formData.append("usernameUsuario", userName);
-      formData.append("nascUsuario", formattedDate);
-      formData.append("emailUsuario", email);
-      formData.append("senhaUsuario", senha);
-      formData.append("areaInteresseUsuario", areaInt);
-      formData.append("contatoUsuario", tel);
-      formData.append("fotoUsuario", {
+      // Adicionando os campos ao FormData e ao objeto
+      dataToSend.nomeUsuario = nome;
+      dataToSend.usernameUsuario = userName;
+      dataToSend.nascUsuario = formattedDate;
+      dataToSend.emailUsuario = email;
+      dataToSend.senhaUsuario = senha;
+      dataToSend.areaInteresseUsuario = areaInt;
+      dataToSend.contatoUsuario = tel;
+      dataToSend.fotoUsuario = {
         uri: selectedImage, // URI da imagem selecionada
         name: "photo.jpg", // Nome do arquivo
         type: "image/jpeg", // Tipo da imagem
-      });
-      formData.append("cidadeUsuario", "sp");
-      formData.append("estadoUsuario", "sp");
-      formData.append("logradouroUsuario", "logradouro");
-      formData.append("cepUsuario", cep);
-      formData.append("numeroLograUsuario", "515");
-      formData.append("sobreUsuario", bio);
-      formData.append("formacaoCompetenciaUsuario", "formacao");
-      formData.append("dataFormacaoCompetenciaUsuario", "2012-12-12");
+      };
+      dataToSend.cidadeUsuario = "sp";
+      dataToSend.estadoUsuario = "sp";
+      dataToSend.logradouroUsuario = "logradouro";
+      dataToSend.cepUsuario = cep;
+      dataToSend.numeroLograUsuario = "515";
+      dataToSend.sobreUsuario = bio;
+      dataToSend.formacaoCompetenciaUsuario = "formacao";
+      dataToSend.dataFormacaoCompetenciaUsuario = "2012-12-12";
+  
+      // Log para inspecionar os dados que serão enviados
+      console.log("Dados a serem enviados:", dataToSend);
+  
+      // Preenchendo o FormData
+      for (const [key, value] of Object.entries(dataToSend)) {
+        formData.append(key, value);
+      }
   
       const response = await fetch(apiNgrokCad, {
         method: "POST",
         body: formData, // Enviando FormData
         headers: {
           Accept: "application/json",
-          "Content-Type": "multipart/form-data", // Importante para FormData
         },
       });
   
-      // Obtém o corpo da resposta
       const resp = await response.json();
+      console.log("Response object:", response);
+      console.log("Response body:", resp);
   
       if (response.ok) {
         setUserId(resp.id);
         Alert.alert("Sucesso", "Usuário cadastrado com sucesso!");
         navigation.navigate("TabBar");
       } else {
-        // Aqui você faz o log da mensagem de erro
         console.error("Erro 500:", resp);
         Alert.alert(
           "Erro",
@@ -130,6 +138,7 @@ export default function SignON3({ navigation }) {
       Alert.alert("Erro", "Erro ao cadastrar usuário. Verifique o console para mais detalhes.");
     }
   }
+  
   
 
   // Carregar as fontes

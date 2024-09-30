@@ -34,8 +34,8 @@ Route::post('/usuario/login', [UsuarioController::class, 'login']);
 Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'update']);
 // Se candidatar a vaga
 Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
-// Deletar vaga
-Route::delete('/vagaUsuario', [VagaUsuarioController::class,'destroy']);
+// Cancelar candidatura de uma vaga
+Route::delete('/vagaUsuario/{$id}', [VagaUsuarioController::class,'destroy']);
 
 //API'S ADMIN
 

@@ -16,7 +16,7 @@ export default function Vaga({ navigation }) {
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiEmuladorVaga, apiNgrokVaga, apiNgrokUsuarioVaga } = ApisUrls;
+  const { apiEmuladorVaga, apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar } = ApisUrls;
 
   const seCandidatar = async () => {
     console.log("User ID:", userId);
@@ -49,17 +49,31 @@ export default function Vaga({ navigation }) {
     }
   };
 
-  const cancelarCandidatura = async () => {
-    // Lógica para cancelar a candidatura (se aplicável)
+  const cancelarCandidatura = async (idCandidatura) => {
     try {
-      // Envie uma requisição para cancelar a candidatura
-      Alert.alert("Candidatura cancelada com sucesso.");
-      setIsCandidated(false); // Atualiza para indicar que o usuário cancelou a candidatura
+      // Envie uma requisição DELETE para o servidor, passando o ID da candidatura
+      const response = await fetch(`${apiNgrokUsuarioVagaCancelar}/${vagaID}`, {
+        method: "DELETE", // Faz uma requisição DELETE
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+  
+      if (response.ok) {
+        const data = await response.json();
+        Alert.alert("Sucesso", data.message); // Exibe a mensagem de sucesso do backend
+        setIsCandidated(false); // Atualiza o estado para indicar que a candidatura foi cancelada
+      } else {
+        const errorData = await response.json();
+        Alert.alert("Erro", errorData.message || "Erro ao cancelar a candidatura.");
+      }
     } catch (error) {
-      console.log(error);
-      alert("Erro ao cancelar a candidatura: " + error.message);
+      console.log("Erro:", error);
+      Alert.alert("Erro", "Erro ao cancelar a candidatura: " + error.message);
     }
   };
+  
 
   const buscaVaga = async () => {
     setLoading(true);
