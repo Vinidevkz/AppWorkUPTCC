@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 29/09/2024 às 22:47
+-- Tempo de geração: 27/09/2024 às 05:18
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -352,6 +352,7 @@ CREATE TABLE `tb_usuario` (
   `emailUsuario` varchar(40) NOT NULL,
   `senhaUsuario` varchar(100) NOT NULL,
   `contatoUsuario` varchar(20) NOT NULL,
+  `fotoUsuario` varchar(300) NOT NULL,
   `cidadeUsuario` varchar(40) NOT NULL,
   `estadoUsuario` varchar(40) NOT NULL,
   `logradouroUsuario` varchar(40) NOT NULL,
@@ -360,7 +361,6 @@ CREATE TABLE `tb_usuario` (
   `sobreUsuario` text NOT NULL,
   `formacaoCompetenciaUsuario` varchar(40) NOT NULL,
   `dataFormacaoCompetenciaUsuario` date NOT NULL,
-  `fotoUsuario` longblob NOT NULL,
   `idStatus` int(11) NOT NULL,
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
@@ -370,12 +370,10 @@ CREATE TABLE `tb_usuario` (
 -- Despejando dados para a tabela `tb_usuario`
 --
 
-INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `fotoUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
-(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', '', 1, NULL, NULL),
-(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', '', 2, NULL, '2024-09-24 02:26:31'),
-(3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', '(56) 95959-5959', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12', '', 2, NULL, NULL);
-
-
+INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `fotoUsuario`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
+(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', 'eu.jpg', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', 1, NULL, NULL),
+(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', 'foto1', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', 2, NULL, '2024-09-24 02:26:31'),
+(3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', '(56) 95959-5959', 'foto1', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12', 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -425,21 +423,6 @@ CREATE TABLE `tb_vagausuario` (
   `idVaga` int(11) NOT NULL,
   `idStatusVagaUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Despejando dados para a tabela `tb_vagausuario`
---
-
-INSERT INTO `tb_vagausuario` (`idVagaUsuario`, `idUsuario`, `idVaga`, `idStatusVagaUsuario`) VALUES
-(1, 2, 1, 1),
-(2, 2, 1, 1),
-(3, 2, 1, 1),
-(4, 2, 1, 1),
-(5, 2, 1, 1),
-(6, 2, 1, 1),
-(7, 2, 1, 1),
-(8, 2, 1, 1),
-(9, 2, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -693,7 +676,7 @@ ALTER TABLE `tb_statusvagausuario`
 -- AUTO_INCREMENT de tabela `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de tabela `tb_vaga`
@@ -705,7 +688,7 @@ ALTER TABLE `tb_vaga`
 -- AUTO_INCREMENT de tabela `tb_vagausuario`
 --
 ALTER TABLE `tb_vagausuario`
-  MODIFY `idVagaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `idVagaUsuario` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `users`

@@ -16,13 +16,13 @@ export default function Vaga({ navigation }) {
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiEmuladorVaga, apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar } = ApisUrls;
+  const { apiEmuladorVaga, apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiEmuladorUsuarioVagaCancelar, apiEmuladorUsuarioVaga } = ApisUrls;
 
   const seCandidatar = async () => {
     console.log("User ID:", userId);
 
     try {
-      const response = await fetch(apiNgrokUsuarioVaga, {
+      const response = await fetch(apiEmuladorUsuarioVaga, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -49,11 +49,11 @@ export default function Vaga({ navigation }) {
     }
   };
 
-  const cancelarCandidatura = async (idCandidatura) => {
+  const cancelarCandidatura = async () => {
     try {
-      // Envie uma requisição DELETE para o servidor, passando o ID da candidatura
-      const response = await fetch(`${apiNgrokUsuarioVagaCancelar}/${vagaID}`, {
-        method: "DELETE", // Faz uma requisição DELETE
+      // Monta a URL com o ID da candidatura
+      const response = await fetch(`${apiEmuladorUsuarioVagaCancelar}/${userId}/${vagaID}`, {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
@@ -74,10 +74,11 @@ export default function Vaga({ navigation }) {
     }
   };
   
+  
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiNgrokVaga}${vagaID}`;
+    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
