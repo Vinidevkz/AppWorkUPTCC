@@ -351,7 +351,7 @@ table{
   font-size: 0.8rem;
 }
 .list-section{
-  width: 13vw;
+  width: 10vw;
 }
 
 /* Estilo para esconder o aside */
@@ -362,4 +362,45 @@ table{
   font-size: 0;
 } */
 
+.tabela-scroll{
+  height: 100px;
+}
+/* Para navegadores WebKit (Chrome, Safari) */
+.tabela-container::-webkit-scrollbar {
+  width: 3px; /* Largura da barra de rolagem */
+}
 
+.tabela-container::-webkit-scrollbar-thumb {
+  background-color: #888; /* Cor do "thumb" (parte que você arrasta) */
+  border-radius: 5px; /* Bordas arredondadas */
+}
+
+.tabela-container::-webkit-scrollbar-thumb:hover {
+  background-color: #555; /* Cor do "thumb" ao passar o mouse */
+}
+
+.tabela-container::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Cor do fundo da barra de rolagem */
+}
+.search-container {
+  position: relative;
+  margin-bottom: 10px;
+}
+#searchInput {
+  width: 13%;
+  padding: 1px 40px 1px 30px; /* Espaço para o ícone */
+  box-sizing: border-box; /* Para incluir o padding na largura total */
+}
+.search-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  pointer-events: none; /* Para que o clique passe através do ícone */
+}
+.no-results {
+  display: none; /* Oculto inicialmente */
+  text-align: center;
+  padding: 10px;
+  color: #999;
+}

@@ -15,8 +15,9 @@
 <body>
 <header class="">
 
-
+<div class="d-flex ms-5">
 <p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
+</div>
 
 <div class="dropdown">
   <div class="section-adm dropdown-toggle d-flex flex-row align-items-center text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -26,16 +27,16 @@
   <!-- <img src="{{url('assets/img/adminImages/perfil.png')}}" alt="" class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false"> -->
   <ul class="dropdown-menu p-0 m-0 list-section">
   
-    <div class="d-flex flex-column justify-content-center">
+    <div class="d-flex flex-column">
     <li class="titulo-section-adm"><span>Usuário:</span> vitor.souza</li>
    
-    <div class="d-flex align-items-center justify-content-around">
+    <div class="d-flex align-items-center justify-content-start">
     <span class=" material-symbols-outlined">
 key
 </span>
 
     
-    <li class="corpo-section-adm p-0 m-0">Alterar senha</li>
+    <li class="corpo-section-adm p-0 m-0"><a href="">Alterar senha</a></li>
     </div>
 
 
@@ -44,11 +45,20 @@ key
     <div class="d-flex flex-column justify-content-center">
     <li class="titulo-section-adm">Papéis</li>
 
-    <div class="d-flex align-items-center justify-content-around">
+    <div class="d-flex  flex-column justify-content-start">
+      <div class="d-flex flex-row">
     <span class="material-symbols-outlined">
 check
 </span>
     <li class="corpo-section-adm m-0 p-0">Colaborador</li>
+    </div>
+
+<div class="d-flex flex-row">
+        <span class="material-symbols-outlined">
+check
+</span>
+    <li class="corpo-section-adm m-0 p-0">Gestor</li>
+    </div>
     </div>
     </div>
   </ul>
@@ -59,58 +69,58 @@ check
 
 <div class="">
   <div class="row">
-  <aside class="col-2"  id="sidebar">
+  <aside class="col-2 p-4"  id="sidebar">
     <div class="col-2 h-auto col-aside">
 
 
    
       <div class="aside-container">
        
-          <div class="aside-sidebar d-flex flex-column h-auto text-white">
+          <div class="aside-sidebar d-flex flex-column h-auto text-white p-2">
 
-            <div class="d-flex">
+            <div class="d-flex mb-4">
               <a  href="/admin" class="d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">grid_view</span>
                 Dashboard
               </a>
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex mb-4">
               <a href="/verUsuario" class=" d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">person</span>
                 Usuários
               </a>
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex mb-4">
               <a href="/verVaga" class=" d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">work</span>
                 Vagas
               </a>
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex mb-4">
               <a href="/verEmpresa" class="asisde-sidebar-active d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">apartment</span>
                 Empresas
               </a>
             </div>
 
-            <div class="">
+            <div class="mb-4">
               <a href="/infoAdmin" class=" d-flex flex-row align-items-center h6">
               <span class="material-symbols-outlined p-2">info</span>
                 Info
               </a>
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex mb-4">
               <a href="/SuporteAdmin" class=" d-flex flex-row align-items-center h6" id="btn-support">
                 <span class="material-symbols-outlined p-2">info</span>
                 Suporte
               </a>
             </div>
 
-            <div class="d-flex">
+            <div class="d-flex mb-4">
               <a href="" class=" d-flex flex-row align-items-center h6" id="btn-exit">
                 <span class="material-symbols-outlined p-2">logout</span>
                 Sair
@@ -147,15 +157,19 @@ person
         </ul>
       </div>
       <div class="container md-4">
-        <div class="card bg-dark" style="--bs-bg-opacity: .8;">
-          <div class="card-header">
-            <h1>Empresas <span class="bi bi-people"></span></h1>
-            <a href="/cadastrarEmpresa" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;Acho que pode tirar</a>
-            <a href="/Area" class="btn btn-outline-info float-end"><span class="bi bi-plus-circle"></span>&nbsp;cadastrar Area precisa ficar em outro lugar</a>
-          </div>
-          <div class="card-body">
+        <div >
+         
+          <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
 
-            <table class="table table-dark table-striped">
+
+          <div class="search-container">
+          <span class="material-symbols-outlined search-icon">
+search
+</span>
+    <input type="text" id="searchInput" placeholder="Buscar..." onkeyup="filterTable()">
+</div>
+
+            <table class="table table-striped" id="myTable">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -204,6 +218,10 @@ person
                 @endforelse
               </tbody>
             </table>
+            <div class="no-results" id="noResults">
+              <img src="{{url('assets/img/adminImages/not-found.png')}}" alt="">
+              <p>Nenhum registro encontrado.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -224,6 +242,38 @@ sidebarlinks.forEach(link => {
     this.classList.add('asisde-sidebar-active')
   })
 })
+
+
+
+
+function filterTable() {
+        const input = document.getElementById('searchInput');
+        const filter = input.value.toLowerCase();
+        const table = document.getElementById('myTable');
+        const tr = table.getElementsByTagName('tr');
+        const noResultsMessage = document.getElementById('noResults');
+
+        let hasResults = false; // Flag para verificar se há resultados
+
+        for (let i = 1; i < tr.length; i++) {
+            let found = false;
+            const td = tr[i].getElementsByTagName('td');
+            for (let j = 0; j < td.length; j++) {
+                if (td[j]) {
+                    const txtValue = td[j].textContent || td[j].innerText;
+                    if (txtValue.toLowerCase().indexOf(filter) > -1) {
+                        found = true;
+                        hasResults = true; // Se encontrado, altera a flag
+                        break;
+                    }
+                }
+            }
+            tr[i].style.display = found ? "" : "none"; // Exibe ou esconde a linha
+        }
+
+        // Exibe a mensagem se não houver resultados
+        noResultsMessage.style.display = hasResults ? "none" : "block";
+    }
 </script>
 
 <script src="script.js"></script>
