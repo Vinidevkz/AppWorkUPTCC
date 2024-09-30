@@ -22,18 +22,18 @@
             <div class="row">
                 <div class="col col-lg-2 col-md-3 col-4 box-img">
                     <img src="{{url('assets/img/dynamo/sevenLogo.png')}}" alt="Imagem 1" class="thumbnail"
-                        onclick="changeImage('../img/sevenLogo.png')">
+                        onclick="changeImage(('assets/img/dynamo/sevenLogo.png'))">
                 </div>
 
                 <div class="col col-lg-2 col-md-3 col-4 box-img">
-                    <img src="../img/chronosLogo.png" alt="Imagem 2" class="thumbnail"
-                        onclick="changeImage('../img/chronosLogo.png')">
+                    <img src="{{url('assets/img/dynamo/chronosLogo.png')}}" alt="Imagem 2" class="thumbnail"
+                        onclick="changeImage(('assets/img/dynamo/chronosLogo.png'))">
                 </div>
 
 
                 <div class="col col-lg-2 col-md-3 col-4 box-img">
-                    <img src="../img/sunsetLogo.png" alt="Imagem 3" class="thumbnail"
-                        onclick="changeImage('../img/sunsetLogo.png')">
+                    <img src="{{url('assets/img/dynamo/sunsetLogo.png')}}" alt="Imagem 3" class="thumbnail"
+                        onclick="changeImage('assets/img/dynamo/sunsetLogo.png')">
                 </div>
 
             </div>

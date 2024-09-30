@@ -10,7 +10,7 @@
 
         <div class="wrap-carrossel">
 
-            <img src="{{url('assets/img/dynamo/bckBtn.png')}}" class="btn-carrossel" id="backBtn">
+            <img src="{{asset('assets/img/dynamo/bckBtn.png')}}" class="btn-carrossel" id="backBtn">
 
             <div class="carrossel">
 
