@@ -23,8 +23,9 @@ export default function Profile({ navigation }) {
 
   useFocusEffect(
     React.useCallback(() => {
+      console.log(userId)
       async function fetchUserData() {
-        const apiUrl = `${apiNgrokUsuario}${userId}`;
+        const apiUrl = `${apiEmuladorUsuario}${userId}`;
         console.log('Fetching URL:', apiUrl);
 
         try {
@@ -81,7 +82,7 @@ export default function Profile({ navigation }) {
             />
             <View style={[styles.profileIconBox, { borderColor: theme.borderColor }]}>
               <Image
-                source={require("../../assets/icons/manicon.png")}
+                source={{uri:dadosUser.fotoUsuario}}
                 style={styles.icon}
               />
             </View>

@@ -2,17 +2,38 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AreaInteresseUsuario;
 use App\Models\Usuario;
-use App\Models\Vaga;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class UsuarioController extends Controller
 {
-    // Métodos omitidos para brevidade...
+    // Método para retornar todos os usuários
+    public function index(): JsonResponse
+    {
+        try {
+            $usuarios = Usuario::all(); // Recupera todos os usuários
+            return response()->json($usuarios, 200); // Retorna em formato JSON
+        } catch (\Exception $e) {
+            Log::error("Error retrieving users: ", ['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Erro ao recuperar usuários.'], 500);
+        }
+    }
+
+    public function show($id): JsonResponse
+    {
+        try {
+            $usuario = Usuario::findOrFail($id); // Busca o usuário pelo ID
+            return response()->json($usuario, 200); // Retorna o usuário em formato JSON
+        } catch (\ModelNotFoundException $e) {
+            Log::error("User not found: ", ['id' => $id]);
+            return response()->json(['message' => 'Usuário não encontrado.'], 404);
+        } catch (\Exception $e) {
+            Log::error("Error retrieving user: ", ['message' => $e->getMessage()]);
+            return response()->json(['message' => 'Erro ao recuperar usuário.'], 500);
+        }
+    }
 
     public function store(Request $request)
     {
@@ -27,7 +48,7 @@ class UsuarioController extends Controller
                 'emailUsuario' => 'required|email|unique:tb_usuario,emailUsuario',
                 'senhaUsuario' => 'required|min:8',
                 'contatoUsuario' => 'required|string|max:20',
-                'fotoUsuario' => 'required|string', // Altera aqui para aceitar como string
+                'fotoUsuario' => 'nullable|string', // Tornado não obrigatório
                 'cidadeUsuario' => 'required|string|max:40',
                 'estadoUsuario' => 'required|string|max:40',
                 'logradouroUsuario' => 'required|string|max:40',
@@ -71,8 +92,6 @@ class UsuarioController extends Controller
             return response()->json(['message' => 'Erro ao cadastrar o usuário. Por favor, tente novamente mais tarde.'], 500);
         }
     }
-    
-    
 
     public function update(Request $request, $id)
     {

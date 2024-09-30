@@ -67,6 +67,7 @@ export default function SignON3({ navigation }) {
   }
 
   async function cadastroUser() {
+    
     if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
@@ -85,6 +86,8 @@ export default function SignON3({ navigation }) {
       return downloadURL; // Retorna a URL da imagem
     };
 
+    console.log(imgURL)
+
     try {
       const formattedDate = formatDateToISO(nasc);
       const dataToSend = {};
@@ -99,7 +102,7 @@ export default function SignON3({ navigation }) {
       dataToSend.senhaUsuario = senha;
       dataToSend.areaInteresseUsuario = areaInt;
       dataToSend.contatoUsuario = tel;
-      dataToSend.fotoUsuario = imgURL; // URL da imagem do Firebase
+      dataToSend.fotoUsuario = imgURL || ""; // Use a URL da imagem ou uma string vazia
       dataToSend.cidadeUsuario = "sp";
       dataToSend.estadoUsuario = "sp";
       dataToSend.logradouroUsuario = "logradouro";
@@ -123,7 +126,8 @@ export default function SignON3({ navigation }) {
       const textResponse = await response.text(); // Mudado para text()
       console.log("Response text:", textResponse);
 
-      let resp;
+      let resp = textResponse;
+
       try {
         resp = JSON.parse(textResponse);
       } catch (error) {
@@ -133,9 +137,15 @@ export default function SignON3({ navigation }) {
       }
 
       if (response.ok) {
-        setUserId(resp.id);
-        Alert.alert("Sucesso", "Usuário cadastrado com sucesso!");
-        navigation.navigate("TabBar");
+        setUserId(resp.idUsuario);
+
+        // Depois, exiba o alerta e navegue
+        Alert.alert("Sucesso", "Usuário cadastrado com sucesso!", [
+          {
+            text: "OK",
+            onPress: () => navigation.navigate("TabBar"),
+          },
+        ]);
       } else {
         console.error("Erro 500:", resp);
         Alert.alert(
@@ -147,6 +157,7 @@ export default function SignON3({ navigation }) {
       console.error("Error during user registration:", error);
       Alert.alert("Erro", "Erro ao cadastrar usuário. Verifique o console para mais detalhes.");
     }
+
   }
 
   // Carregar as fontes
