@@ -38,9 +38,8 @@ export default function SignON3({ navigation }) {
   const { apiNgrokCad, apiEmuladorCad } = ApisUrls;
 
   const [selectedImage, setSelectedImage] = useState(null);
-  const [selectedBannerImage, setSelectedBannerImage] = useState(null); // Estado para a imagem do banner
-  const [imgURL, setImgURL] = useState(null);
-  const [bannerURL, setBannerURL] = useState(null); // Estado para a URL do banner
+  const [selectedBannerImage, setSelectedBannerImage] = useState(null);
+  const [loading, setLoading] = useState(false); // Estado para loading
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -62,7 +61,6 @@ export default function SignON3({ navigation }) {
     }
   };
 
-  // Nova função para selecionar a imagem do banner
   const pickBannerImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
@@ -74,7 +72,7 @@ export default function SignON3({ navigation }) {
     const result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
-      aspect: [16, 9], // Aspecto típico para banners
+      aspect: [16, 9],
       quality: 1,
     });
 
@@ -89,7 +87,7 @@ export default function SignON3({ navigation }) {
       return;
     }
 
-    
+    setLoading(true); // Inicia o loading
 
     const uploadImageToFirebase = async (uri) => {
       const response = await fetch(uri);
@@ -100,7 +98,7 @@ export default function SignON3({ navigation }) {
     
       await uploadBytes(imageRef, blob);
       const downloadURL = await getDownloadURL(imageRef);
-      return downloadURL; // Retorna a URL da imagem
+      return downloadURL;
     };
 
     try {
@@ -109,17 +107,16 @@ export default function SignON3({ navigation }) {
   
       const photoURL = selectedImage ? await uploadImageToFirebase(selectedImage) : null;
       const bannerImageURL = selectedBannerImage ? await uploadImageToFirebase(selectedBannerImage) : null;
-  
-      // Adicionando os campos ao objeto
+
       dataToSend.nomeUsuario = nome;
       dataToSend.usernameUsuario = userName;
       dataToSend.nascUsuario = formattedDate;
       dataToSend.emailUsuario = email;
       dataToSend.senhaUsuario = senha;
       dataToSend.contatoUsuario = tel;
-      dataToSend.areaInteresseUsuario = areaInt; // Enviando para o backend
-      dataToSend.fotoBanner = bannerImageURL || ""; // URL da imagem do banner
-      dataToSend.fotoUsuario = photoURL || ""; // Use a URL da imagem do usuário ou uma string vazia
+      dataToSend.areaInteresseUsuario = areaInt;
+      dataToSend.fotoUsuario = photoURL || "";
+      dataToSend.fotoBanner = bannerImageURL || "";
       dataToSend.cidadeUsuario = "sp";
       dataToSend.estadoUsuario = "sp";
       dataToSend.logradouroUsuario = "logradouro";
@@ -128,9 +125,7 @@ export default function SignON3({ navigation }) {
       dataToSend.sobreUsuario = bio;
       dataToSend.formacaoCompetenciaUsuario = "formacao";
       dataToSend.dataFormacaoCompetenciaUsuario = "2012-12-12";
-  
-      console.log("Data to send:", dataToSend); // Log para depuração
-  
+
       const response = await fetch(apiEmuladorCad, {
         method: "POST",
         headers: {
@@ -139,24 +134,19 @@ export default function SignON3({ navigation }) {
         },
         body: JSON.stringify(dataToSend),
       });
-  
-      const textResponse = await response.text(); // Mudado para text()
-      console.log("Response text:", textResponse);
-  
-      let resp = textResponse;
-  
+
+      const textResponse = await response.text();
+      let resp;
+
       try {
         resp = JSON.parse(textResponse);
       } catch (error) {
-        console.error("Erro ao analisar JSON:", error);
         Alert.alert("Erro", "Resposta do servidor não é um JSON válido.");
         return;
       }
-  
+
       if (response.ok) {
         setUserId(resp.idUsuario);
-  
-        // Depois, exiba o alerta e navegue
         Alert.alert("Sucesso", "Usuário cadastrado com sucesso!", [
           {
             text: "OK",
@@ -164,19 +154,18 @@ export default function SignON3({ navigation }) {
           },
         ]);
       } else {
-        console.error("Erro 500:", resp);
         Alert.alert(
           "Erro",
-          `Erro ao cadastrar usuário: ${resp.message || "Verifique o console para mais detalhes."}`
+          `Erro ao cadastrar usuário. ${resp.message}`
         );
       }
     } catch (error) {
-      console.error("Error during user registration:", error);
       Alert.alert("Erro", "Erro ao cadastrar usuário. Verifique o console para mais detalhes.");
+    } finally {
+      setLoading(false); // Finaliza o loading
     }
   }
 
-  // Carregar as fontes
   const fontsLoaded = useFonts();
   if (!fontsLoaded) {
     return (
@@ -187,7 +176,23 @@ export default function SignON3({ navigation }) {
   }
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
+      {loading && (
+        <View style={{ 
+          position: "absolute", 
+          top: 0, 
+          left: 0, 
+          right: 0, 
+          bottom: 0, 
+          backgroundColor: "rgba(0, 0, 0, 0.5)", 
+          justifyContent: "center", 
+          alignItems: "center",
+          zIndex: 1000 // Para garantir que o indicador fique em cima dos outros elementos
+        }}>
+          <ActivityIndicator size="large" color="#ffffff" />
+        </View>
+      )}
+
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
           <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
@@ -204,7 +209,7 @@ export default function SignON3({ navigation }) {
 
           <TouchableOpacity onPress={pickImage} style={[stylesProfile.profileIconBox]}>
             <Image
-              source={selectedImage ? { uri: selectedImage } : require("../../../assets/icons/manicon.png")}
+              source={selectedImage ? { uri: selectedImage } : require("../../../assets/icons/manicon.jpg")}
               style={{ width: 100, height: 100, borderRadius: 50 }}
             />
           </TouchableOpacity>
@@ -213,10 +218,10 @@ export default function SignON3({ navigation }) {
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>Banner:</Text>
           <Text style={styles.DMSansRegular}>Selecione um banner:</Text>
-          <TouchableOpacity onPress={pickBannerImage} style={{}}>
+          <TouchableOpacity onPress={pickBannerImage}>
             <Image
-              source={selectedBannerImage ? { uri: selectedBannerImage } : require("../../../assets/icons/profilebgempty.png")} // Coloque um placeholder apropriado
-              style={{ width: '100%', height: 150, borderRadius: 10 }} // Ajuste o estilo para o banner
+              source={selectedBannerImage ? { uri: selectedBannerImage } : require("../../../assets/icons/profilebgempty.png")}
+              style={{ width: '100%', height: 150, borderRadius: 10 }}
             />
           </TouchableOpacity>
         </View>
@@ -238,8 +243,8 @@ export default function SignON3({ navigation }) {
           <AntDesign name="left" size={24} color="black" />
           <Text style={[styles.DMSansRegular, styles.footerText]}>Voltar</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.confirmButton} onPress={cadastroUser}>
-          <Text style={[styles.DMSansBold, styles.footerText]}>Finalizar Cadastro</Text>
+        <TouchableOpacity style={[styles.confirmButton, {borderWidth: 2, borderColor: '#20dd77', borderRadius: 20, padding: 5, marginRight: 10}]} onPress={cadastroUser}>
+          <Text style={[styles.DMSansRegular, styles.footerText]}>Finalizar Cadastro</Text>
         </TouchableOpacity>
       </View>
     </SafeAreaView>
