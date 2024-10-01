@@ -44,8 +44,8 @@ class UsuarioController extends Controller
                 'senhaUsuario' => 'required|min:8',
                 'contatoUsuario' => 'required|string|max:20',
                 'areaInteresseUsuario' => 'required|string|max:100',
-                'fotoUsuario' => 'required|string|max:300',
-                'fotoBanner' => 'required|string|max:300',
+                'fotoUsuario' => 'nullable|string|max:300',
+                'fotoBanner' => 'nullable|string|max:300',
                 'cidadeUsuario' => 'required|string|max:40',
                 'estadoUsuario' => 'required|string|max:40',
                 'logradouroUsuario' => 'required|string|max:40',
@@ -87,7 +87,11 @@ class UsuarioController extends Controller
             return response()->json(['errors' => $e->errors()], 422);
         } catch (\Exception $e) {
             Log::error("Error during user registration: ", ['message' => $e->getMessage()]);
-            return response()->json(['message' => 'Erro ao cadastrar o usuário. Por favor, tente novamente mais tarde.'], 500);
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao cadastrar o usuário. Por favor, tente novamente mais tarde.',
+                'error' => $e->getMessage() // Para depuração, você pode retornar a mensagem de erro.
+            ], 500);
         }
     }
 

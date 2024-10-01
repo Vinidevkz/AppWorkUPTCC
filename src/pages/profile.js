@@ -25,7 +25,7 @@ export default function Profile({ navigation }) {
     React.useCallback(() => {
       console.log(userId);
       async function fetchUserData() {
-        const apiUrl = `${apiNgrokUsuario}${userId}`;
+        const apiUrl = `${apiEmuladorUsuario}${userId}`;
         console.log("Fetching URL:", apiUrl);
 
         try {
@@ -100,7 +100,7 @@ export default function Profile({ navigation }) {
               ]}
             >
               <Image
-                source={{ uri: dadosUser.fotoUsuario }}
+                source={dadosUser.fotoUsuario ? { uri: dadosUser.fotoUsuario } : require("../../assets/icons/manicon.jpg")}
                 style={styles.icon}
               />
             </View>
