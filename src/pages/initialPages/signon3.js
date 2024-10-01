@@ -35,7 +35,7 @@ export default function SignON3({ navigation }) {
     userName,
     setUserId,
   } = useContext(Context);
-  const { apiNgrokCad } = ApisUrls;
+  const { apiNgrokCad, apiEmuladorCad } = ApisUrls;
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedBannerImage, setSelectedBannerImage] = useState(null); // Estado para a imagem do banner
@@ -131,7 +131,7 @@ export default function SignON3({ navigation }) {
   
       console.log("Data to send:", dataToSend); // Log para depuração
   
-      const response = await fetch(apiNgrokCad, {
+      const response = await fetch(apiEmuladorCad, {
         method: "POST",
         headers: {
           Accept: "application/json",
