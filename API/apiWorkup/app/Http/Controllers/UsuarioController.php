@@ -44,7 +44,7 @@ class UsuarioController extends Controller
                 'senhaUsuario' => 'required|min:8',
                 'contatoUsuario' => 'required|string|max:20',
                 'areaInteresseUsuario' => 'required|string|max:100',
-                'fotoUsuario' => 'required|string',
+                'fotoUsuario' => 'required|string|max:300',
                 'fotoBanner' => 'required|string|max:300',
                 'cidadeUsuario' => 'required|string|max:40',
                 'estadoUsuario' => 'required|string|max:40',
@@ -146,50 +146,88 @@ class UsuarioController extends Controller
 
     public function dashboard()
     {
-        $areaCounts = [
-            'Tecnologia' => AreaInteresseUsuario::where('idArea', 1)->count(),
-            'Alimentacao' => AreaInteresseUsuario::where('idArea', 11)->count(),
-            'Gestao' => AreaInteresseUsuario::where('idArea', 3)->count(),
-            'Gastronomia' => AreaInteresseUsuario::where('idArea', 4)->count(),
-            'Engenharia' => AreaInteresseUsuario::where('idArea', 14)->count(),
-            'Administracao' => AreaInteresseUsuario::where('idArea', 5)->count(),
-            'Marketing' => AreaInteresseUsuario::where('idArea', 2)->count(),
-            'Educacao' => AreaInteresseUsuario::where('idArea', 7)->count(),
-            'Financas' => AreaInteresseUsuario::where('idArea', 8)->count(),
-            'RecursosHumanos' => AreaInteresseUsuario::where('idArea', 9)->count(),
-            'Logistica' => AreaInteresseUsuario::where('idArea', 10)->count(),
-            'ServicosGerais' => AreaInteresseUsuario::where('idArea', 12)->count(),
-            'MeioAmbiente' => AreaInteresseUsuario::where('idArea', 15)->count(),
-            'Medicina' => AreaInteresseUsuario::where('idArea', 6)->count(),
-            'Higienizacao' => AreaInteresseUsuario::where('idArea', 13)->count(),
-        ];
+        $totalUsuariosTecnologia = AreaInteresseUsuario::where('idArea', 1)->count();
+        $totalUsuariosAlimentacao = AreaInteresseUsuario::where('idArea', 11)->count();
+        $totalUsuariosGestao = AreaInteresseUsuario::where('idArea', 3)->count();
+        $totalUsuarioGastronomia = AreaInteresseUsuario::where('idArea', 4)->count();
+        $totalUsuariosEngenharia = AreaInteresseUsuario::where('idArea', 14)->count();
+        $totalUsuariosAdministracao = AreaInteresseUsuario::where('idArea', 5)->count();
+        $totalUsuariosMarketing = AreaInteresseUsuario::where('idArea', 2)->count();
+        $totalUsuariosEducacao = AreaInteresseUsuario::where('idArea', 7)->count();
+        $totalUsuariosFinancas = AreaInteresseUsuario::where('idArea', 8)->count();
+        $totalUsuariosRecursosHumanos = AreaInteresseUsuario::where('idArea', 9)->count();
+        $totalUsuariosLogistica = AreaInteresseUsuario::where('idArea', 10)->count();
+        $totalUsuariosServicosGerais = AreaInteresseUsuario::where('idArea', 12)->count();
+        $totalUsuariosMeioAmbiente = AreaInteresseUsuario::where('idArea', 15)->count();
+        $totalUsuarioMedicina = AreaInteresseUsuario::where('idArea', 6)->count();
+        $totalUsuarioHigienizacao = AreaInteresseUsuario::where('idArea', 13)->count();
 
         // STATUS
-        $statusCounts = [
-            'Ativo' => Usuario::where('idStatus', 1)->count(),
-            'Bloqueado' => Usuario::where('idStatus', 2)->count(),
-        ];
+        $statusAtivo = Usuario::where('idStatus', 1)->count();
+        $statusBloqueado = Usuario::where('idStatus', 2)->count();
+        
 
-        // Vaga counts
-        $vagaCounts = [
-            'Tecnologia' => Vaga::where('idArea', 1)->count(),
-            'Marketing' => Vaga::where('idArea', 2)->count(),
-            'Gestao' => Vaga::where('idArea', 3)->count(),
-            'Engenharia' => Vaga::where('idArea', 14)->count(),
-            'Administracao' => Vaga::where('idArea', 5)->count(),
-            'Gastronomia' => Vaga::where('idArea', 4)->count(),
-            'Medicina' => Vaga::where('idArea', 6)->count(),
-            'Educacao' => Vaga::where('idArea', 7)->count(),
-            'Financa' => Vaga::where('idArea', 8)->count(),
-            'Rh' => Vaga::where('idArea', 9)->count(),
-            'Logistica' => Vaga::where('idArea', 10)->count(),
-            'Alimentacao' => Vaga::where('idArea', 11)->count(),
-            'MeioAmbiente' => Vaga::where('idArea', 15)->count(),
-            'ServicosGerais' => Vaga::where('idArea', 12)->count(),
-            'Higienizacao' => Vaga::where('idArea', 13)->count(),
-        ];
 
+        $totalVagaTecnologia = Vaga::where('idArea', 1)->count();
+        $totalVagaMarketing = Vaga::where('idArea', 2)->count();
+        $totalVagaGestao = Vaga::where('idArea', 3)->count();
+        $totalVagaEngenharia = Vaga::where('idArea', 14)->count();
+        $totalVagaAdministracao = Vaga::where('idArea', 5)->count();
+        $totalVagaGastronomia = Vaga::where('idArea', 4)->count();
+        $totalVagaMedicina = Vaga::where('idArea', 6)->count();
+        $totalVagaEducacao = Vaga::where('idArea', 7)->count();
+        $totalVagaFinanca = Vaga::where('idArea', 8)->count();
+        $totalVagaRh = Vaga::where('idArea', 9)->count();
+        $totalVagaLogistica = Vaga::where('idArea', 10)->count();
+        $totalVagaAlimentacao = Vaga::where('idArea', 11)->count();
+        $totalVagaMeioAmbiente = Vaga::where('idArea', 15)->count();
+        $totalVagaServiçosGerais = Vaga::where('idArea', 12)->count();
+        $totalVagaHigienizacao = Vaga::where('idArea', 13)->count();
         $totalRegistrosVaga = DB::table('tb_vaga')->count();
+
         $totalRegistrosUsuario = DB::table('tb_usuario')->count();
-       
-    }}
+        $totalRegistrosEmpresa = DB::table('tb_empresa')->count();
+        $usuarios = Usuario::all();
+    
+        return view('admin.homeAdmin', [
+            'totalUsuariosTecnologia' => $totalUsuariosTecnologia,
+            'totalUsuariosAlimentacao' => $totalUsuariosAlimentacao,
+            'totalUsuariosGestao' => $totalUsuariosGestao,
+            'totalUsuariosEngenharia' => $totalUsuariosEngenharia,
+            'totalUsuariosAdministracao' => $totalUsuariosAdministracao,
+            'totalUsuariosMarketing' => $totalUsuariosMarketing,
+            // 'totalUsuariosSaude' => $totalUsuariosSaude,
+            'totalUsuariosEducacao' => $totalUsuariosEducacao,
+            'totalUsuariosFinancas' => $totalUsuariosFinancas,
+            'totalUsuariosRecursosHumanos' => $totalUsuariosRecursosHumanos,
+            'totalUsuariosLogistica' => $totalUsuariosLogistica,
+            // 'totalUsuariosDesign' => $totalUsuariosDesign,
+            'totalRegistrosVaga' => $totalRegistrosVaga,
+            'usuarios' => $usuarios,
+            'totalRegistrosUsuario' => $totalRegistrosUsuario,
+            'totalRegistrosEmpresa' => $totalRegistrosEmpresa,
+            'totalVagaTecnologia' => $totalVagaTecnologia,
+            'totalVagaGatronomia' => $totalVagaGastronomia,
+            'totalVagaServiçosGerais' => $totalVagaServiçosGerais,
+            'totalVagaHigienizacao' => $totalVagaHigienizacao,
+            'totalVagaEngenharia' => $totalVagaEngenharia,
+            'totalVagaAdministracao' => $totalVagaAdministracao,
+            'totalVagaMarketing' => $totalVagaMarketing,
+            'totalVagaMedicina' => $totalVagaMedicina,
+            'totalVagaEducacao' => $totalVagaEducacao,
+            'totalVagaFinanca' => $totalVagaFinanca,
+            'totalVagaRh' => $totalVagaRh,
+            'totalVagaLogistica' => $totalVagaLogistica,
+            'totalVagaAlimentacao' => $totalVagaAlimentacao,
+            'totalUsuariosMeioAmbiente' => $totalUsuariosMeioAmbiente,
+            'totalVagaGestao' => $totalVagaGestao,
+            'totalVagaMeioAmbiente' => $totalVagaMeioAmbiente,
+            'totalUsuarioGastronomia' => $totalUsuarioGastronomia,
+            'totalUsuariosServicosGerais' => $totalUsuariosServicosGerais,
+            'totalUsuarioMedicina' => $totalUsuarioMedicina,
+            'totalUsuarioHigienizacao' => $totalUsuarioHigienizacao,
+            'statusAtivo' => $statusAtivo,
+            'statusBloqueado' => $statusBloqueado
+        ]);
+    }
+}
