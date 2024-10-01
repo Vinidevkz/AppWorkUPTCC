@@ -162,6 +162,14 @@ person_add
     </div>
      
         <div class="card mt-3" style="border-radius: 0;">
+
+        <div class="search-container">
+          <span class="material-symbols-outlined search-icon">
+search
+</span>
+    <input type="text" id="searchInput" placeholder="Buscar..." onkeyup="filterTable()">
+</div>
+
         <table class="table table-striped m-0 table-user">
          
             <div class="">

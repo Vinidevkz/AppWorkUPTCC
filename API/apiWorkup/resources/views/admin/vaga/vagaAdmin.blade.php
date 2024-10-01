@@ -148,10 +148,19 @@ person
         </ul>
       </div>
       <div class="container md-4">
-      <div class="card mt-3" style="--bs-bg-opacity: .8;">
-   
-    <div class="">
-        <table class="table table-striped m-0 table-user">
+      <div>
+
+    <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
+
+    <div class="search-container">
+          <span class="material-symbols-outlined search-icon">
+search
+</span>
+    <input type="text" id="searchInput" placeholder="Buscar..." onkeyup="filterTable()">
+</div>
+
+
+        <table class="table table-striped m-0 table-user" id="myTable">
             <thead>
                 <tr>
                     <th class="fw-bold">ID</th>
@@ -218,6 +227,10 @@ filter_list
                 @endforelse
             </tbody>
         </table>
+        <div class="no-results" id="noResults">
+              <img src="{{url('assets/img/adminImages/not-found.png')}}" alt="">
+              <p>Nenhum registro encontrado.</p>
+            </div>
     </div>
 </div>
 
@@ -244,7 +257,48 @@ sidebarlinks.forEach(link => {
 
     this.classList.add('asisde-sidebar-active')
   })
-})
+});
+
+function filterTable() {
+    const input = document.getElementById('searchInput');
+    const filter = input.value.toLowerCase();
+    const table = document.getElementById('myTable');
+    const tr = table.getElementsByTagName('tr');
+    const noResultsMessage = document.getElementById('noResults');
+
+    let hasResults = false; // Flag para verificar se há resultados
+
+    for (let i = 1; i < tr.length; i++) {
+        let found = false;
+        const td = tr[i].getElementsByTagName('td');
+
+        for (let j = 0; j < td.length; j++) {
+            if (td[j]) {
+                const txtValue = td[j].textContent || td[j].innerText;
+
+                // Limpa o conteúdo da célula antes de aplicar destaque
+                td[j].innerHTML = txtValue; 
+
+                // Se o campo de busca não estiver vazio
+                if (filter && txtValue.toLowerCase().indexOf(filter) > -1) {
+                    found = true;
+                    hasResults = true; // Se encontrado, altera a flag
+
+                    // GRIFA OS RESULTADOS
+                    const highlightedText = txtValue.replace(new RegExp(`(${filter})`, 'gi'), '<mark>$1</mark>');
+                    td[j].innerHTML = highlightedText; 
+                }
+            }
+        }
+        
+        // tr[i].style.display = found ? "" : "none"; 
+         tr[i].style.display = filter ? (found ? "" : "none") : ""; 
+    }
+
+    // // Exibe a mensagem se não houver resultados
+    // noResultsMessage.style.display = hasResults ? "none" : "block";
+}
+
 </script>
 <script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
