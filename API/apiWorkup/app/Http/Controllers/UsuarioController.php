@@ -21,18 +21,13 @@ class UsuarioController extends Controller
         }
     }
 
-    public function show($id): JsonResponse
+    public function show($id)
     {
-        try {
-            $usuario = Usuario::findOrFail($id); // Busca o usuário pelo ID
-            return response()->json($usuario, 200); // Retorna o usuário em formato JSON
-        } catch (\ModelNotFoundException $e) {
-            Log::error("User not found: ", ['id' => $id]);
-            return response()->json(['message' => 'Usuário não encontrado.'], 404);
-        } catch (\Exception $e) {
-            Log::error("Error retrieving user: ", ['message' => $e->getMessage()]);
-            return response()->json(['message' => 'Erro ao recuperar usuário.'], 500);
-        }
+        $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
+
+        return response()->json($usuario);
+
+        //return view('admin.usuario.allusuarioAdmin', compact('usuario')); // Retorna a view com detalhes
     }
 
     public function store(Request $request)
@@ -48,7 +43,9 @@ class UsuarioController extends Controller
                 'emailUsuario' => 'required|email|unique:tb_usuario,emailUsuario',
                 'senhaUsuario' => 'required|min:8',
                 'contatoUsuario' => 'required|string|max:20',
-                'fotoUsuario' => 'nullable|string', // Tornado não obrigatório
+                'areaInteresseUsuario' => 'nullable|string|max:100', // Campo novo
+                'fotoUsuario' => 'nullable|string',  // Tornado não obrigatório
+                'fotoBanner' => 'nullable|string|max:300', // Campo novo
                 'cidadeUsuario' => 'required|string|max:40',
                 'estadoUsuario' => 'required|string|max:40',
                 'logradouroUsuario' => 'required|string|max:40',
@@ -61,6 +58,7 @@ class UsuarioController extends Controller
     
             Log::info("Validated data: ", $request->all());
     
+            // Criação do usuário com os novos campos
             $usuario = Usuario::create([
                 'nomeUsuario' => $request->nomeUsuario,
                 'usernameUsuario' => $request->usernameUsuario,
@@ -68,7 +66,9 @@ class UsuarioController extends Controller
                 'emailUsuario' => $request->emailUsuario,
                 'senhaUsuario' => bcrypt($request->senhaUsuario),
                 'contatoUsuario' => $request->contatoUsuario,
-                'fotoUsuario' => $request->fotoUsuario, // Aqui você deve receber a string da URL
+                'areaInteresseUsuario' => $request->areaInteresseUsuario,  // Campo novo
+                'fotoUsuario' => $request->fotoUsuario,  // Aqui você deve receber a string da URL
+                'fotoBanner' => $request->fotoBanner,  // Campo novo
                 'cidadeUsuario' => $request->cidadeUsuario,
                 'estadoUsuario' => $request->estadoUsuario,
                 'logradouroUsuario' => $request->logradouroUsuario,
@@ -92,6 +92,7 @@ class UsuarioController extends Controller
             return response()->json(['message' => 'Erro ao cadastrar o usuário. Por favor, tente novamente mais tarde.'], 500);
         }
     }
+    
 
     public function update(Request $request, $id)
     {
@@ -134,11 +135,14 @@ class UsuarioController extends Controller
 
     public function login(Request $request)
     {
-        $usuario = Usuario::where('emailUsuario', $request->input('emailUsuario'))
+
+        // Procura o usuário no banco de dados
+        $usuario = Usuario::where('emailUsuario', '=', $request->input('emailUsuario'))
             ->orWhere('usernameUsuario', $request->input('emailUsuario'))
+            ->get()
             ->first();
 
-        if ($usuario && password_verify($request->input('senhaUsuario'), $usuario->senhaUsuario)) {
+        if ($usuario && $request->input('senhaUsuario') == $usuario->senhaUsuario) {
             return response()->json($usuario);
         }
 

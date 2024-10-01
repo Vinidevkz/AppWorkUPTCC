@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Hash;
 
 class Usuario extends Model
 {
@@ -21,7 +22,9 @@ class Usuario extends Model
         'emailUsuario',
         'senhaUsuario',
         'contatoUsuario',
+        'areaInteresseUsuario',
         'fotoUsuario',
+        'fotoBanner', // Adicionando fotoBanner
         'cidadeUsuario',
         'estadoUsuario',
         'logradouroUsuario',
@@ -35,11 +38,18 @@ class Usuario extends Model
 
     protected $casts = [
         'fotoUsuario' => 'string', // Armazena como string
+        'fotoBanner' => 'string', // Armazena fotoBanner como string
     ];
 
     protected $hidden = [
         'senhaUsuario', // Oculta a senha ao serializar
     ];
+
+    // Mutador para criptografar a senha antes de salvar
+    public function setSenhaUsuarioAttribute($value)
+    {
+        $this->attributes['senhaUsuario'] = Hash::make($value);
+    }
 
     public function areas()
     {
@@ -56,9 +66,9 @@ class Usuario extends Model
         return $this->hasMany(VagaUsuario::class, 'idUsuario');
     }
 
-
+    // Se a relação entre Usuario e Vaga for muitos-para-muitos, descomente a função abaixo
     // public function vagas() : BelongsToMany
     // {
-    //     return $this->belongsToMany(Usuario::class, 'tb_vagausuario', 'idUsuario', 'idVaga');
+    //     return $this->belongsToMany(Vaga::class, 'tb_vagausuario', 'idUsuario', 'idVaga');
     // }
 }

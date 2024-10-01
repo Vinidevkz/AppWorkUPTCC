@@ -35,10 +35,12 @@ export default function SignON3({ navigation }) {
     userName,
     setUserId,
   } = useContext(Context);
-  const { apiEmuladorCad } = ApisUrls;
+  const { apiNgrokCad } = ApisUrls;
 
   const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedBannerImage, setSelectedBannerImage] = useState(null); // Estado para a imagem do banner
   const [imgURL, setImgURL] = useState(null);
+  const [bannerURL, setBannerURL] = useState(null); // Estado para a URL do banner
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -60,18 +62,34 @@ export default function SignON3({ navigation }) {
     }
   };
 
-  // Função para formatar a data para o formato ISO
-  function formatDateToISO(dateString) {
-    const [day, month, year] = dateString.split("/");
-    return `${year}-${month}-${day}`;
-  }
+  // Nova função para selecionar a imagem do banner
+  const pickBannerImage = async () => {
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
+
+    if (!permissionResult.granted) {
+      Alert.alert("Erro", "Permissão para acessar as imagens foi negada!");
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [16, 9], // Aspecto típico para banners
+      quality: 1,
+    });
+
+    if (!result.canceled) {
+      setSelectedBannerImage(result.assets[0].uri);
+    }
+  };
 
   async function cadastroUser() {
-    
     if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
+
+    
 
     const uploadImageToFirebase = async (uri) => {
       const response = await fetch(uri);
@@ -79,30 +97,29 @@ export default function SignON3({ navigation }) {
       
       const filename = `profile_images/${Date.now()}.jpg`;
       const imageRef = ref(storage, filename);
-  
+    
       await uploadBytes(imageRef, blob);
       const downloadURL = await getDownloadURL(imageRef);
-      setImgURL(downloadURL); // Armazena a URL antes de retornar
       return downloadURL; // Retorna a URL da imagem
     };
-
-    console.log(imgURL)
 
     try {
       const formattedDate = formatDateToISO(nasc);
       const dataToSend = {};
-
+  
       const photoURL = selectedImage ? await uploadImageToFirebase(selectedImage) : null;
-
+      const bannerImageURL = selectedBannerImage ? await uploadImageToFirebase(selectedBannerImage) : null;
+  
       // Adicionando os campos ao objeto
       dataToSend.nomeUsuario = nome;
       dataToSend.usernameUsuario = userName;
       dataToSend.nascUsuario = formattedDate;
       dataToSend.emailUsuario = email;
       dataToSend.senhaUsuario = senha;
-      dataToSend.areaInteresseUsuario = areaInt;
       dataToSend.contatoUsuario = tel;
-      dataToSend.fotoUsuario = imgURL || ""; // Use a URL da imagem ou uma string vazia
+      dataToSend.areaInteresseUsuario = areaInt; // Enviando para o backend
+      dataToSend.fotoBanner = bannerImageURL || ""; // URL da imagem do banner
+      dataToSend.fotoUsuario = photoURL || ""; // Use a URL da imagem do usuário ou uma string vazia
       dataToSend.cidadeUsuario = "sp";
       dataToSend.estadoUsuario = "sp";
       dataToSend.logradouroUsuario = "logradouro";
@@ -111,10 +128,10 @@ export default function SignON3({ navigation }) {
       dataToSend.sobreUsuario = bio;
       dataToSend.formacaoCompetenciaUsuario = "formacao";
       dataToSend.dataFormacaoCompetenciaUsuario = "2012-12-12";
-
+  
       console.log("Data to send:", dataToSend); // Log para depuração
-
-      const response = await fetch(apiEmuladorCad, {
+  
+      const response = await fetch(apiNgrokCad, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -122,12 +139,12 @@ export default function SignON3({ navigation }) {
         },
         body: JSON.stringify(dataToSend),
       });
-
+  
       const textResponse = await response.text(); // Mudado para text()
       console.log("Response text:", textResponse);
-
+  
       let resp = textResponse;
-
+  
       try {
         resp = JSON.parse(textResponse);
       } catch (error) {
@@ -135,10 +152,10 @@ export default function SignON3({ navigation }) {
         Alert.alert("Erro", "Resposta do servidor não é um JSON válido.");
         return;
       }
-
+  
       if (response.ok) {
         setUserId(resp.idUsuario);
-
+  
         // Depois, exiba o alerta e navegue
         Alert.alert("Sucesso", "Usuário cadastrado com sucesso!", [
           {
@@ -157,7 +174,6 @@ export default function SignON3({ navigation }) {
       console.error("Error during user registration:", error);
       Alert.alert("Erro", "Erro ao cadastrar usuário. Verifique o console para mais detalhes.");
     }
-
   }
 
   // Carregar as fontes
@@ -195,6 +211,17 @@ export default function SignON3({ navigation }) {
         </View>
 
         <View style={styles.formCont}>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Banner:</Text>
+          <Text style={styles.DMSansRegular}>Selecione um banner:</Text>
+          <TouchableOpacity onPress={pickBannerImage} style={{}}>
+            <Image
+              source={selectedBannerImage ? { uri: selectedBannerImage } : require("../../../assets/icons/profilebgempty.png")} // Coloque um placeholder apropriado
+              style={{ width: '100%', height: 150, borderRadius: 10 }} // Ajuste o estilo para o banner
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>Biografia:</Text>
           <TextInput
             placeholder="Escreva uma breve biografia sobre você"
@@ -211,17 +238,15 @@ export default function SignON3({ navigation }) {
           <AntDesign name="left" size={24} color="black" />
           <Text style={[styles.DMSansRegular, styles.footerText]}>Voltar</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.nextButton, { opacity: !nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio ? 0.5 : 1 }]}
-          onPress={cadastroUser}
-          disabled={!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio}
-        >
-          <Text style={[styles.DMSansRegular, styles.nextText]}>Cadastrar</Text>
-          <AntDesign name="right" size={24} color="black" />
+        <TouchableOpacity style={styles.confirmButton} onPress={cadastroUser}>
+          <Text style={[styles.DMSansBold, styles.footerText]}>Finalizar Cadastro</Text>
         </TouchableOpacity>
       </View>
-
-      <StatusBar backgroundColor="#20dd77" barStyle="dark-content" />
     </SafeAreaView>
   );
 }
+
+const formatDateToISO = (date) => {
+  const [day, month, year] = date.split("/");
+  return `${year}-${month}-${day}`;
+};
