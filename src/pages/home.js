@@ -150,7 +150,7 @@ export default function Home({ navigation }) {
                     oferecido por: {item.empresa?.nomeEmpresa}
                   </Text>
                   <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>
-                    publicada em: {item.dataPublicacaoVaga}
+                    publicada em: {item.prazoVaga}
                   </Text>
                 </View>
                 <View style={styles.vagaBody}>
