@@ -38,7 +38,7 @@
                 </div>
                 <div class="col">
                     <div class="row row-card flex flex-column justify-content-around align-items-center">
-                        <button class="botao-card botao-vaga">Criar vaga <i class="fa-solid fa-plus"></i></button>
+                         <button class="botao-card botao-vaga"> <a href="/cadastrarVaga" class="text-light"> Criar vaga <i class="fa-solid fa-plus"></i></button></a>
                         <button class="botao-card botao-vaga"> <a href="/logout" class="text-light">Sair</a></i></button>
                         
                         <button class="botao-card botao-post">Fazer post</button>

@@ -117,7 +117,7 @@ class VagaController extends Controller
 
         $vaga->save();
 
-        return view('/homeEmpresa');
+        return view('/empresa');
     }
 
     /**

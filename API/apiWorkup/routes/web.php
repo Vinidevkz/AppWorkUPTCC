@@ -9,6 +9,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaEmpresaController;
 use App\Http\Controllers\VagaUsuarioController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContatoController;
 
 
 // rotas Dynamo
@@ -29,6 +30,8 @@ Route::get('/#sobre', function () {
 Route::get('/contato', function () {
     return view('contato');
 });
+//email
+Route::post('/contato', [ContatoController::class, 'enviar']);
 
 /*
 |--------------------------------------------------------------------------
