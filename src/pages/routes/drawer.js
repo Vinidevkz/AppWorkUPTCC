@@ -1,10 +1,12 @@
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { NavigationContainer } from '@react-navigation/native';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import Ionicons from "@expo/vector-icons/Ionicons";
 
-import MinhasVagas from '../minhasvagas';
-import Vagas from '../vagas';
-import Home from '../home';
+import MinhasVagas from '../minhasvagas.js';
+import VagasSalvas from '../vagassalvas.js';
+import Vagas from '../vagas.js';
+import Home from '../home.js';
 
 import styles from '../../styles/home';
 
@@ -49,14 +51,6 @@ export default function AppDrawer() {
           }} 
         />
                 <Drawer.Screen 
-          name="Vagas" 
-          component={Vagas} 
-          options={{ 
-            headerShown: false,
-            drawerItemStyle: { display: 'none' } // Oculta a tela Home no drawer
-          }} 
-        />
-        <Drawer.Screen 
           name="Minhas Vagas" 
           component={MinhasVagas} 
           options={{ 
@@ -71,6 +65,47 @@ export default function AppDrawer() {
             )
           }} 
         />
+                <Drawer.Screen 
+          name="Vagas Salvas" 
+          component={VagasSalvas} 
+          options={{
+            drawerLabelStyle: { 
+              color: theme.textColor, 
+              fontFamily: 'DMSansRegular', 
+              fontSize: 15 
+            },
+            headerShown: false,
+            drawerIcon: ({ color }) => (
+              <Ionicons
+              name="bookmark" // Usa savedIcons
+              size={24}
+              color={theme.iconColorGreen ||color}
+            />// Ícone aqui
+            )
+
+          }} 
+        />
+                        <Drawer.Screen 
+          name="Vagas" 
+          component={Vagas} 
+          options={{
+            drawerLabelStyle: { 
+              color: theme.textColor, 
+              fontFamily: 'DMSansRegular', 
+              fontSize: 15 
+            },
+            headerShown: false,
+            drawerIcon: ({ color }) => (
+              <Ionicons
+              name="bookmark" // Usa savedIcons
+              size={24}
+              color={theme.iconColorGreen ||color}
+            />// Ícone aqui
+            )
+
+          }} 
+        />
+
       </Drawer.Navigator>
     </NavigationContainer>
   );

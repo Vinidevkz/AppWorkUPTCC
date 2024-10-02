@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
 
   buttonVaga: {
-    width: '30%',
+    width: 100,
     paddingVertical: 10,
     borderRadius: 20,
   },

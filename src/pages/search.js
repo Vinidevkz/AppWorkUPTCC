@@ -11,14 +11,18 @@ import {
 } from "react-native";
 import * as Font from "expo-font";
 import { useTheme } from "../pages/initialPages/context/themecontext";
+import { useContext } from "react";
 import ApisUrls from "../ApisUrls/apisurls.js";
 import axios from "axios";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import styles from "../styles/search.js";
+import { Context } from "../pages/initialPages/context/provider";
 
-const { apiNgrokVagaPesquisa } = ApisUrls;
+const { apiNgrokVagaPesquisa, apiEmuladorVagaPesquisa } = ApisUrls;
 
-export default function Search() {
+export default function Search({navigation}) {
+  const {  vagaID, setVagaID } = useContext(Context);
+
   const { theme } = useTheme({ Search });
   const [data, setData] = useState([]); // Para vagas
   const [companies, setCompanies] = useState([]); // Para empresas
@@ -31,10 +35,10 @@ export default function Search() {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiEmuladorVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiNgrokVagaPesquisa, { search });
+      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -191,10 +195,10 @@ export default function Search() {
                 ) : (
                   <FlatList
                     data={data} // Exibindo vagas
+                    showsVerticalScrollIndicator={false}
+                    horizontal={true}
                     style={{
-                      maxHeight: 250,
-                      width: "100%",
-                      overflow: 'hidden',
+                      maxHeight: 300,
                       marginVertical: 10,
                     }}
                     keyExtractor={(item) => item.idVaga ? item.idVaga.toString() : Math.random().toString()}
@@ -203,11 +207,12 @@ export default function Search() {
                         style={{
                           marginVertical: 10,
                           backgroundColor: theme.backgroundColorNavBar,
-                          padding: 10,
-                          flexDirection: "row",
-                          alignItems: "center",
-                          justifyContent: "space-between",
+                          padding: 20,
                           borderRadius: 10,
+                          gap: 20,
+                          height: 180,
+                          marginLeft: 10,
+                          justifyContent: "space-between",
                         }}
                       >
                         <View>
@@ -227,7 +232,7 @@ export default function Search() {
                               { color: theme.textColor },
                             ]}
                           >
-                            {item.nomeEmpresa}
+                            {item.empresas ? empresa.nomeEmpresa : "não disponível"}
                           </Text>
                           <Text style={{ color: theme.textColor }}>
                             R${item.salarioVaga} - {item.cidadeVaga}
@@ -240,7 +245,7 @@ export default function Search() {
                           //   navigation.navigate("Vagas");
                           // }}
                         >
-                          <Text style={[styles.buttonText, styles.DMSansBold, { color: '#fff' }]}>
+                          <Text style={[styles.buttonText, styles.DMSansBold, { color: '#fff' }]} onPress={() => {setVagaID(item.idVaga); navigation.navigate('Vagas')}}>
                             Ver Vaga
                           </Text>
                         </TouchableOpacity>

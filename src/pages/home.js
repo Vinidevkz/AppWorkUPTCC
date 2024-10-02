@@ -30,7 +30,7 @@ export default function Home({ navigation }) {
   const [savedIcons, setSavedIcons] = useState({});
   const { theme } = useTheme({ Home });
 
-  const { vagaID, setVagaID } = useContext(Context);
+  const { userId, vagaID, setVagaID } = useContext(Context);
 
   const buscaVaga = async () => {
     setLoading(true);
@@ -45,9 +45,37 @@ export default function Home({ navigation }) {
     }
   };
 
+
+
   useEffect(() => {
     buscaVaga();
   }, []);
+
+  const salvarVaga = async () => {
+    console.log('salvamento da vaga')
+    try{
+      const response = await axios.post(apiEmuladorSalvarVaga, {
+        idUsuario: userId,
+        idVaga: vagaID,
+      });
+      Alert.Alert('Vaga Salvar com sucesso!');      
+    }catch(error){
+      console.log(error)
+    }
+  }
+
+  const cancelSalvarVaga = async () => {
+    console.log('cancelando salvamento da vaga')
+    try{
+      const response = await axios.post(apiEmuladorCancelSalvarVaga, {
+        idUsuario: userId,
+        idVaga: vagaID,
+      });
+      Alert.Alert('Vaga Salvar com sucesso!');      
+    }catch(error){
+      console.log(error)
+    }
+  }
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -147,7 +175,14 @@ export default function Home({ navigation }) {
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={styles.addFavButton}
-                    onPress={() => toggleSaveIcon(item.idVaga)} // Chama a função para alternar o estado
+                    onPress={() => {
+                      toggleSaveIcon(item.idVaga);
+                      if (savedIcons[item.idVaga]) {
+                        cancelSalvarVaga(item.idVaga);
+                      } else {
+                        salvarVaga(item.idVaga)
+                      }
+                    }} 
                   >
                     <Ionicons
                       name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Usa savedIcons
