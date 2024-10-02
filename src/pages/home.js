@@ -19,7 +19,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from '../ApisUrls/apisurls.js';
-const { apiEmuladorVaga, apiNgrokVaga, apiEmuladorSalvarVaga, apiNgrokUsuarioSalvarVaga, apiEmuladorCancelSalvarVaga, apiNgrokUsuarioCancelSalvarVaga } = ApisUrls;
+const { apiEmuladorVaga, apiNgrokVaga, apiEmuladorUsuarioSalvarVaga, apiNgrokUsuarioSalvarVaga, apiEmuladorCancelSalvarVaga, apiNgrokUsuarioCancelSalvarVaga } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
 
@@ -52,17 +52,32 @@ export default function Home({ navigation }) {
   }, []);
 
   const salvarVaga = async () => {
-    console.log('salvamento da vaga')
-    try{
-      const response = await axios.post(apiEmuladorSalvarVaga, {
-        idVaga: vagaID,
-        idUsuario: userId,
+    const idUsuario = userId; // Certifique-se de que userId esteja definido
+    const idVaga = vagaID;     // Certifique-se de que vagaID esteja definido
+    const url = `http://10.0.2.2:8000/api/vagaUsuario/salvarVaga/${idUsuario}/${idVaga}`;
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
       });
-      Alert.Alert('Vaga Salvar com sucesso!');      
-    }catch(error){
-      console.log(error)
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Sucesso', data.message);
+      } else {
+        const errorData = await response.json();
+        console.log('Erro', errorData.message || 'Erro ao salvar a vaga.');
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      console.log('Erro', 'Ocorreu um erro na requisição.');
     }
-  }
+  };
+  
+  
 
   const cancelSalvarVaga = async () => {
     console.log('cancelando salvamento da vaga')

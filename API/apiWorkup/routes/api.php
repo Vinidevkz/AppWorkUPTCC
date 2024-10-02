@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\SalvarVagaController;
 
-Route::post('/salvarVaga/{idVaga}/{idUsuario}',[SalvarVagaController::class, 'store']);
+Route::post('/salvarVaga/{idUsuario}/{idVaga}',[SalvarVagaController::class, 'store']);
 
 Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
 
