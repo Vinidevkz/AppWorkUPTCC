@@ -50,7 +50,7 @@ class UsuarioController extends Controller
                 'usernameUsuario' => 'required|string|max:40',
                 'nascUsuario' => 'required|date',
                 'emailUsuario' => 'required|email|unique:tb_usuario,emailUsuario',
-                'senhaUsuario' => 'required|min:8',
+                'senhaUsuario' => 'required|min:3',
                 'contatoUsuario' => 'required|string|max:20',
                 'areaInteresseUsuario' => 'required|string|max:100',
                 'fotoUsuario' => 'nullable|string|max:300',

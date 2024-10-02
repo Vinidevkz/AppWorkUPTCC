@@ -139,7 +139,7 @@ export default function Profile({ navigation }) {
                     { color: theme.textColor },
                   ]}
                 >
-                  {dadosUser.estadoUsuario || "Loading..."}
+                  {dadosUser.cidadeUsuario  || "Loading..."} - {dadosUser.estadoUsuario || "Loading..."}
                 </Text>
               </View>
             </View>

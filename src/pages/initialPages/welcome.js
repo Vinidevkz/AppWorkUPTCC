@@ -27,6 +27,7 @@ import Home from "../home.js";
 import Vaga from "../vagas.js";
 import Configurações from "../configuracoes.js";
 import ProfileChange from "../profilechange.js";
+import Search from "../search.js";
 
 
 function Welcome({ navigation }) {
@@ -160,7 +161,7 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
-              name="Vaga"
+              name="Vagas"
               component={Vaga}
               options={{ headerShown: false }}
             />
@@ -172,6 +173,11 @@ export default function App() {
             <Stack.Screen
               name="ProfileChange"
               component={ProfileChange}
+              options={{ headerShown: false }}
+            />
+                        <Stack.Screen
+              name="Search"
+              component={Search}
               options={{ headerShown: false }}
             />
           </Stack.Navigator>
