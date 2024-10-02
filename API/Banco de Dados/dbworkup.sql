@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 01-Out-2024 às 22:44
--- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Tempo de geração: 02-Out-2024 às 22:20
+-- Versão do servidor: 10.4.28-MariaDB
+-- versão do PHP: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -301,6 +301,18 @@ CREATE TABLE `tb_publicacao` (
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `tb_salvarvaga`
+--
+
+CREATE TABLE `tb_salvarvaga` (
+  `idSalvarVaga` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idVaga` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `tb_status`
 --
 
@@ -416,7 +428,8 @@ INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidade
 (4, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 2, 1, '2024-09-23 01:06:32', '2024-09-24 02:16:17'),
 (5, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:06:32', '2024-09-23 01:06:32'),
 (6, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:08:05', '2024-09-23 01:08:05'),
-(7, 'Vitor Augusto', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 7, 1, 1, '2024-09-23 01:08:05', '2024-09-23 01:08:05');
+(7, 'Vitor Augusto', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 7, 1, 1, '2024-09-23 01:08:05', '2024-09-23 01:08:05'),
+(8, 'teste', '2024-09-01', 2000.00, 'sao paulo', 'sp', 'pessimo', 'muito ruim', 10, 3, 3, 1, '2024-10-02 15:04:28', '2024-10-02 15:04:28');
 
 -- --------------------------------------------------------
 
@@ -547,6 +560,14 @@ ALTER TABLE `tb_publicacao`
   ADD KEY `idVaga` (`idVaga`);
 
 --
+-- Índices para tabela `tb_salvarvaga`
+--
+ALTER TABLE `tb_salvarvaga`
+  ADD PRIMARY KEY (`idSalvarVaga`),
+  ADD KEY `idUsuario` (`idUsuario`),
+  ADD KEY `idVaga` (`idVaga`);
+
+--
 -- Índices para tabela `tb_status`
 --
 ALTER TABLE `tb_status`
@@ -668,6 +689,12 @@ ALTER TABLE `tb_publicacao`
   MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de tabela `tb_salvarvaga`
+--
+ALTER TABLE `tb_salvarvaga`
+  MODIFY `idSalvarVaga` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT de tabela `tb_status`
 --
 ALTER TABLE `tb_status`
@@ -689,7 +716,7 @@ ALTER TABLE `tb_usuario`
 -- AUTO_INCREMENT de tabela `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
-  MODIFY `idVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `idVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de tabela `tb_vagausuario`
@@ -749,6 +776,13 @@ ALTER TABLE `tb_publicacao`
   ADD CONSTRAINT `tb_publicacao_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
   ADD CONSTRAINT `tb_publicacao_ibfk_2` FOREIGN KEY (`idAdmin`) REFERENCES `tb_admin` (`idAdmin`),
   ADD CONSTRAINT `tb_publicacao_ibfk_3` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
+
+--
+-- Limitadores para a tabela `tb_salvarvaga`
+--
+ALTER TABLE `tb_salvarvaga`
+  ADD CONSTRAINT `tb_salvarvaga_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
+  ADD CONSTRAINT `tb_salvarvaga_ibfk_2` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
 
 --
 -- Limitadores para a tabela `tb_usuario`
