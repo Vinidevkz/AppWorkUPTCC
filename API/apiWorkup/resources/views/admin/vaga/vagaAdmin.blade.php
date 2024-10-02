@@ -167,22 +167,33 @@ search
                     <th class="fw-bold">NOME</th>
                     <th>
                         <div class="d-flex align-items-center">
-                            <span class="material-symbols-outlined">alternate_email</span>
-                            <p class="m-0 fw-bold">E-MAIL</p>
+                        <span class="material-symbols-outlined">
+devices
+</span>
+                            <p class="m-0 fw-bold">MODALIDADE</p>
                         </div>
                     </th>
                     @if(request()->has('order') && request()->order == 'status')
                     <th>
-                        <a href="{{ route('vagas.index') }}" class="btn btn-outline-primary">Status</a>
+                    <div class="d-flex flex-row align-items-center justify-content-center p-0 ">
+                        <a href="{{ route('vagas.index') }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;" >
+                        <span class="material-symbols-outlined ">
+filter_list
+</span>  
+<p class="p-0 m-0 ">Status
+</p>                     
+</a>
+</div>
+                        
                     </th>
                     @else
                     <th>
-                      <div class="d-flex flex-row align-items-center justify-content-center p-0">
-                        <a href="{{ route('vagas.index', ['order' => 'status']) }}" class="btn btn-outline-primary d-flex flex-row p-1" style="border-radius: 0;" >
-                        <span class="material-symbols-outlined">
+                      <div class="d-flex flex-row align-items-center justify-content-center p-0 ">
+                        <a href="{{ route('vagas.index', ['order' => 'status']) }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;" >
+                        <span class="material-symbols-outlined ">
 filter_list
 </span>  
-<p class="p-0 m-0">Status
+<p class="p-0 m-0 ">Status
 </p>                     
 </a>
 </div>
@@ -200,22 +211,24 @@ filter_list
                 @forelse($vagas as $v) <!-- Usando um alias diferente -->
                 <tr>
                     <td>{{ $v->idVaga }}</td>
-                    <td>{{ $v->nomeVaga }}</td>
-                    <td>{{ $v->modalidadeVaga }}</td>
+                    <td> 
+                    <a href="{{ route('vagas.show', $v->idVaga) }}" class="visualizar-link">{{ $v->nomeVaga }}</a>
+  
+                    </td>
+                    <td>{{  $v->modalidade->descModalidadeVaga}}</td>
                     <td>{{ $v->status->tipoStatus }}</td>
                     <td>
-                        <a href="{{ route('vagas.show', $v->idVaga) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
-                        <a href="{{ route('vagas.edit', $v->idVaga) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
+                        <a href="{{ route('vagas.edit', $v->idVaga) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;</a>
                         <form action="{{ route('vagas.delete', $v->idVaga) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
-                            <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Deletar</button>
+                            <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;</button>
                         </form>
 
                         <form action="{{ route('vagas.aprovar', $v->idVaga) }}" method="POST" class="d-inline">
                             @csrf
                             @method('Post')
-                            <button onclick="return confirm('Realmente deseja aprovar essa vaga?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;Aprovar</button>
+                            <button onclick="return confirm('Realmente deseja aprovar essa vaga?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;</button>
                         </form>
                         
                     </td>

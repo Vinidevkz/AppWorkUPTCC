@@ -387,13 +387,13 @@ table{
   margin-bottom: 10px;
 }
 #searchInput {
-  width: 13%;
+  width: 15%;
   padding: 1px 40px 1px 30px; /* Espaço para o ícone */
   box-sizing: border-box; /* Para incluir o padding na largura total */
 }
 .search-icon {
   position: absolute;
-  left: 10px;
+  left: 7px;
   top: 50%;
   transform: translateY(-50%); /* Centraliza verticalmente */
   pointer-events: none; /* Para que o clique passe através do ícone */
@@ -403,4 +403,7 @@ table{
   text-align: center;
   padding: 10px;
   color: #999;
+}
+.visualizar-link{
+  color: #111e88;
 }

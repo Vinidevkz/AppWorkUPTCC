@@ -161,16 +161,18 @@ person_add
       </div>
     </div>
      
-        <div class="card mt-3" style="border-radius: 0;">
-
-        <div class="search-container">
+        <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
+        <div class="search-container mt-3">
           <span class="material-symbols-outlined search-icon">
 search
 </span>
     <input type="text" id="searchInput" placeholder="Buscar..." onkeyup="filterTable()">
 </div>
+ 
 
-        <table class="table table-striped m-0 table-user">
+        <table class="table table-striped m-0 table-user" id="myTable">
+
+
          
             <div class="">
           <thead>
@@ -186,7 +188,7 @@ alternate_email
                 </div>
               </td>
               <td>
-                <div class="d-flex align-items-center">
+                <div class="">
                 <span class="material-symbols-outlined">
 autorenew
 </span>
@@ -212,23 +214,25 @@ keyboard_double_arrow_down
           <div class="user-initials">
             {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
           </div>  
-                    
-                    {{ $u->nomeUsuario }}</td>
+          <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link">
+          {{ $u->nomeUsuario }}
+          </a>
+
+                    </td>
                     <td>{{ $u->usernameUsuario }}</td>
                     <td>{{ $u->status->tipoStatus }}</td>
                     <td>
-                      <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
-                      <a href="{{ route('usuarios.edit', $u->idUsuario) }}" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
+                      <a href="{{ route('usuarios.edit', $u->idUsuario) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;</a>
                       <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Deletar</button>
+                        <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;</button>
                       </form>
 
                       <form action="{{ route('usuarios.aprovar', $u->idUsuario) }}" method="POST" class="d-inline">
                             @csrf
                             @method('Post')
-                            <button onclick="return confirm('Realmente deseja aprovar esse Usuario?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Aprovar</button>
+                            <button onclick="return confirm('Realmente deseja aprovar esse Usuario?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;</button>
                         </form>
                         
                     </td>

@@ -239,4 +239,26 @@ class UsuarioController extends Controller
             'statusBloqueado' => $statusBloqueado
         ]);
     }
+
+    public function aprovar($id, Request $request)
+    {
+                // Encontra o usuario pelo ID
+                $usuario = Usuario::findOrFail($id);
+    
+                // Atualiza o status da usuario para 2
+                $usuario->update(['idStatus' => 1]);
+            
+                // Verifica se a requisição foi feita via AJAX
+                if ($request->ajax()) {
+                    return response()->json(['message' => 'Vaga atualizada com sucesso']);
+                }
+            
+                // Redireciona para a lista de usuarios com mensagem de sucesso
+                return redirect('/verUsuario')->with('success', 'Vaga atualizada com sucesso.');
+        if ($request->ajax()) {
+            return response()->json(['message' => 'Usuário desativado com sucesso']);
+        }
+
+        return redirect('/verUsuario')->with('success', 'Usuário desativado com sucesso.');
+    }
 }

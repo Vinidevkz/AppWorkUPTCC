@@ -178,9 +178,20 @@ search
 
                   <!-- para procurar pelo status -->
                   @if(request()->has('order') && request()->order == 'status')
-                  <th><a href="{{ route('empresas.index') }}" class="btn btn-outline-primary">status</th>
+                  <th>
+                    <a href="{{ route('empresas.index') }}" class="btn btn-outline-secondary">
+                    <div class="d-flex flex-row align-items-center justify-content-center p-0 ">
+                        <a href="{{ route('vagas.index') }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;" >
+                        <span class="material-symbols-outlined ">
+filter_list
+</span>  
+<p class="p-0 m-0 ">Status
+</p>                     
+</a>
+</div>
+                    </th>
                   @else
-                  <th><a href="{{ route('empresas.index', ['order' => 'status']) }}" class="btn btn-outline-primary">Status</a>
+                  <th><a href="{{ route('empresas.index', ['order' => 'status']) }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;">Status</a>
                   @endif
 
 <th>Ações</th>
@@ -190,23 +201,30 @@ search
                 @forelse($empresas as $em) <!-- Usando um alias diferente -->
                   <tr>
                     <td>{{ $em->idEmpresa }}</td>
-                    <td>{{ $em->nomeEmpresa }}</td>
+                    <td>
+                      
+                    <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="visualizar-link"> 
+                    {{ $em->nomeEmpresa }}
+                  
+                  </a>
+
+
+                    </td>
                     <td>{{ $em->usernameEmpresa }}</td>
                     <td>{{ $em->status->tipoStatus}}</td>
                     <td>
-                      <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
-                      <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
+                      <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;</a>
 
                       <form action="{{ route('empresas.delete', $em->idEmpresa) }}" method="POST" class="d-inline">
                         @csrf
                         @method('DELETE')
-                        <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Deletar</button>
+                        <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;</button>
                       </form>
 
                       <form action="{{ route('empresas.aprovar', $em->idEmpresa) }}" method="POST" class="d-inline">
                             @csrf
                             @method('Post')
-                            <button onclick="return confirm('Realmente deseja aprovar essa Empresa?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Aprovar</button>
+                            <button onclick="return confirm('Realmente deseja aprovar essa Empresa?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;</button>
                         </form>
 
                     </td>
