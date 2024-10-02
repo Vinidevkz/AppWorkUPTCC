@@ -13,21 +13,26 @@ use Illuminate\Support\Facades\DB;
 class UsuarioController extends Controller
 {
     // Método para retornar todos os usuários
-    public function index(): JsonResponse
+    public function index()
     {
         try {
             $usuarios = Usuario::all(); // Recupera todos os usuários
-            return response()->json($usuarios, 200); // Retorna em formato JSON
+            return view('admin.usuario.usuarioAdmin',['usuarios'=>$usuarios]); // Retorna em formato JSON
         } catch (\Exception $e) {
             Log::error("Error retrieving users: ", ['message' => $e->getMessage()]);
             return response()->json(['message' => 'Erro ao recuperar usuários.'], 500);
         }
     }
 
-    public function show($id)
+    public function show(Request $request, $id)
     {
         $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
-        return response()->json($usuario);
+        
+        if($request->expectsJson()){
+            return response()->json($usuario, 201);
+        }
+
+        return view('admin.usuario.allUsuarioAdmin', ['usuario'=>$usuario]);
     }
 
     public function store(Request $request)

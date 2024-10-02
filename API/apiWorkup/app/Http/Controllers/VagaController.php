@@ -126,7 +126,7 @@ class VagaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(request $request, $id)
     {
 
 
@@ -135,7 +135,11 @@ class VagaController extends Controller
 
         //return view('admin.vaga.allvagaAdmin', compact('vaga')); // Retorna a view com detalhes
 
-        return response()->json($vaga);
+        if($request->expectsJson()){
+            return response()->json($vaga, 201);
+        }
+
+        return view('admin.vaga.allVagaAdmin', ['vaga'=>$vaga]);
     }
 
     /**

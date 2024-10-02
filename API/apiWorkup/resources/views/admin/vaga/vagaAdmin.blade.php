@@ -205,7 +205,7 @@ filter_list
                     <td>{{ $v->status->tipoStatus }}</td>
                     <td>
                         <a href="{{ route('vagas.show', $v->idVaga) }}" class="btn btn-outline-secondary btn-sm"><span class="bi-eye-fill"></span>&nbsp; Visualizar</a>
-                        <a href="{{ route('vagas.edit', $v->idVaga) }}" class="btn btn-outline-success btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
+                        <a href="{{ route('vagas.edit', $v->idVaga) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
                         <form action="{{ route('vagas.delete', $v->idVaga) }}" method="POST" class="d-inline">
                             @csrf
                             @method('DELETE')
@@ -215,7 +215,7 @@ filter_list
                         <form action="{{ route('vagas.aprovar', $v->idVaga) }}" method="POST" class="d-inline">
                             @csrf
                             @method('Post')
-                            <button onclick="return confirm('Realmente deseja aprovar essa vaga?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Aprovar</button>
+                            <button onclick="return confirm('Realmente deseja aprovar essa vaga?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;Aprovar</button>
                         </form>
                         
                     </td>
@@ -259,45 +259,7 @@ sidebarlinks.forEach(link => {
   })
 });
 
-function filterTable() {
-    const input = document.getElementById('searchInput');
-    const filter = input.value.toLowerCase();
-    const table = document.getElementById('myTable');
-    const tr = table.getElementsByTagName('tr');
-    const noResultsMessage = document.getElementById('noResults');
 
-    let hasResults = false; // Flag para verificar se há resultados
-
-    for (let i = 1; i < tr.length; i++) {
-        let found = false;
-        const td = tr[i].getElementsByTagName('td');
-
-        for (let j = 0; j < td.length; j++) {
-            if (td[j]) {
-                const txtValue = td[j].textContent || td[j].innerText;
-
-                // Limpa o conteúdo da célula antes de aplicar destaque
-                td[j].innerHTML = txtValue; 
-
-                // Se o campo de busca não estiver vazio
-                if (filter && txtValue.toLowerCase().indexOf(filter) > -1) {
-                    found = true;
-                    hasResults = true; // Se encontrado, altera a flag
-
-                    // GRIFA OS RESULTADOS
-                    const highlightedText = txtValue.replace(new RegExp(`(${filter})`, 'gi'), '<mark>$1</mark>');
-                    td[j].innerHTML = highlightedText; 
-                }
-            }
-        }
-        
-        // tr[i].style.display = found ? "" : "none"; 
-         tr[i].style.display = filter ? (found ? "" : "none") : ""; 
-    }
-
-    // // Exibe a mensagem se não houver resultados
-    // noResultsMessage.style.display = hasResults ? "none" : "block";
-}
 
 </script>
 <script src="script.js"></script>
