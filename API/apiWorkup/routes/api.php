@@ -10,8 +10,9 @@ use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AreaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\http\Controllers\SalvarVagaController;
 
-
+Route::post('/salvarVaga/{idVaga}/{idUsuario}',[SalvarVagaController::class, 'store']);
 
 Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
 
@@ -23,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //API'S USUARIO
 
 //Listar todos os usuarios
-Route::get('/usuario', [UsuarioController::class, 'index']);
+Route::get('/usuario', [UsuarioController::class, 'indexApp']);
 //Visualizar usuario por id
 Route::get('/usuario/{idUsuario}', [UsuarioController::class, 'show']);
 //Cadastrar um usuario

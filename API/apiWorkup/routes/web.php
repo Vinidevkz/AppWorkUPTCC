@@ -9,6 +9,7 @@ use App\Http\Controllers\AreaController;
 use App\Http\Controllers\AreaEmpresaController;
 use App\Http\Controllers\VagaUsuarioController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ContatoController;
 
 
 // rotas Dynamo
@@ -29,6 +30,8 @@ Route::get('/#sobre', function () {
 Route::get('/contato', function () {
     return view('contato');
 });
+//email
+Route::post('/contato', [ContatoController::class, 'enviar']);
 
 /*
 |--------------------------------------------------------------------------
@@ -48,11 +51,12 @@ Route::post('/areaEmpresa', [AreaEmpresaController::class,'store']);
 Route::get('/vagas/empresa', [VagaController::class, 'showVagasPorEmpresa'])->name('vagas.empresa');
 //Detalhes Vagas que a empresa postou
 Route::get('/verVagaCadastrada/{idVaga}', [VagaUsuarioController::class, 'verVagaCadastrada'])->name('verVagaCadastrada');
-
 //Chamar Usuario pra entrevista
 Route::post('/candidaturas/aprovar/{idVaga}', [VagaUsuarioController::class, 'aprovarCandidatura'])->name('candidaturas.aprovar');
 //Reporvar Usuario que tentou
 Route::post('/candidaturas/negar/{idVaga}', [VagaUsuarioController::class, 'negarCandidatura'])->name('candidaturas.negar');
+
+
 
 /*
 |--------------------------------------------------------------------------

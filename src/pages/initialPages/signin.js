@@ -35,7 +35,7 @@ export default function SignIN({ navigation }) {
     }
 
     try {
-      const response = await fetch(apiNgrok, {
+      const response = await fetch(apiEmulador, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -47,6 +47,7 @@ export default function SignIN({ navigation }) {
         }),
       });
 
+      console.log(email, senha)
       const resp = await response.json();
 
       if (response.ok) {

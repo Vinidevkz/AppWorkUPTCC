@@ -117,7 +117,7 @@ export default function SignON3({ navigation }) {
       dataToSend.areaInteresseUsuario = areaInt;
       dataToSend.fotoUsuario = photoURL || "";
       dataToSend.fotoBanner = bannerImageURL || "";
-      dataToSend.cidadeUsuario = "sp";
+      dataToSend.cidadeUsuario = "São Paulo";
       dataToSend.estadoUsuario = "sp";
       dataToSend.logradouroUsuario = "logradouro";
       dataToSend.cepUsuario = cep;

@@ -117,7 +117,7 @@ class VagaController extends Controller
 
         $vaga->save();
 
-        return view('/homeEmpresa');
+        return view('/empresa');
     }
 
     /**
@@ -164,6 +164,8 @@ class VagaController extends Controller
 
         return view('homeEmpresa', compact('vagas')); // Passa a variável $vagas para a view
     }
+
+
 
      
 

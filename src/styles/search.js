@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
   },
 
   buttonVaga: {
-    width: '30%',
+    width: 100,
     paddingVertical: 10,
     borderRadius: 20,
   },
@@ -70,6 +70,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#20dd77',
     alignItems: 'center',
     justifyContent: 'center',
+    paddingHorizontal: 10,
   },
 
   postIconBox: {
@@ -84,6 +85,46 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     borderRadius: 50,
+  },
+
+  profileBackgroundImageCont: {
+    width: '100%',
+    height: 150,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ccc',
+ 
+    position: 'relative',
+    zIndex: 1,
+    
+  },
+
+  profileIconBox: {
+    width: 100,
+    height: 100,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: 50,
+    borderWidth: 5,
+    backgroundColor: '#fff',
+    zIndex: 1,
+    position: 'absolute',
+    bottom: -50, // Posiciona a metade do ícone abaixo da imagem de fundo
+    left: '40%',
+    transform: [{ translateX: 80 }], // Centraliza horizontalmente
+  },
+
+  profileBackgroundImg: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+  },
+
+  icon: {
+    width: '100%',
+    height: 100,
+    resizeMode: 'cover',
   },
 });
 
