@@ -35,13 +35,13 @@ const ApisUrls = {
 
   //Salvar e cancelar salvamento da vaga
 
-  apiEmuladorUsuarioSalvarVaga: "http://10.0.2.2:8000/api/vagaUsuario",
+  apiEmuladorUsuarioSalvarVaga: "http://10.0.2.2:8000/api/vagaUsuario/",
   apiNgrokUsuarioSalvarVaga:
-    "http://a67f-200-53-192-195.ngrok-free.app/api/vagaUsuario",
+    "http://a67f-200-53-192-195.ngrok-free.app/api/vagaUsuario/",
 
     apiEmuladorUsuarioCancelSalvarVaga: "http://10.0.2.2:8000/api/salvarVaga/",
     apiNgrokUsuarioCancelSalvarVaga:
-      "http://a67f-200-53-192-195.ngrok-free.app/api/salvarVaga",
+      "http://a67f-200-53-192-195.ngrok-free.app/api/salvarVaga/",
 };
 
 export default ApisUrls;

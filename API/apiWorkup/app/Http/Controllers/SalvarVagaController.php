@@ -52,8 +52,14 @@ class SalvarVagaController extends Controller
         $vagaSalva = new SalvarVaga();
         $vagaSalva->idUsuario = $idUsuario; // Usando o idUsuario da rota
         $vagaSalva->idVaga = $idVaga;       // Usando o idVaga da rota
-        $vagaSalva->save();
+    
+        if ($vagaSalva->save()) {
+            return response()->json(['message' => 'Vaga salva com sucesso!'], 201);
+        } else {
+            return response()->json(['message' => 'Erro ao salvar a vaga.'], 500);
+        }
     }
+    
     
 
     /**
