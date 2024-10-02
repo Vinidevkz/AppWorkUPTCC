@@ -24,7 +24,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //API'S USUARIO
 
 //Listar todos os usuarios
-Route::get('/usuario', [UsuarioController::class, 'index']);
+Route::get('/usuario', [UsuarioController::class, 'indexApp']);
 //Visualizar usuario por id
 Route::get('/usuario/{idUsuario}', [UsuarioController::class, 'show']);
 //Cadastrar um usuario

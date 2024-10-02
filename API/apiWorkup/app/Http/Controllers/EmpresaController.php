@@ -32,6 +32,8 @@ class EmpresaController extends Controller
         return view('admin.empresa.empresaAdmin', compact('empresas'));
     }
 
+    
+
     /**
      * Show the form for creating a new resource.
      *

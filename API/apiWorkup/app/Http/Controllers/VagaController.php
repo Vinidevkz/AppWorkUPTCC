@@ -165,6 +165,8 @@ class VagaController extends Controller
         return view('homeEmpresa', compact('vagas')); // Passa a variável $vagas para a view
     }
 
+
+
      
 
 

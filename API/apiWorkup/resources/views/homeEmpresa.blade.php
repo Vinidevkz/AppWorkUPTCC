@@ -36,6 +36,7 @@
                         @endif
 
                 </div>
+                
                 <div class="col">
                     <div class="row row-card flex flex-column justify-content-around align-items-center">
                          <button class="botao-card botao-vaga"> <a href="/cadastrarVaga" class="text-light"> Criar vaga <i class="fa-solid fa-plus"></i></button></a>

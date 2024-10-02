@@ -15,13 +15,17 @@ class UsuarioController extends Controller
     // Método para retornar todos os usuários
     public function index()
     {
-        try {
+
             $usuarios = Usuario::all(); // Recupera todos os usuários
             return view('admin.usuario.usuarioAdmin',['usuarios'=>$usuarios]); // Retorna em formato JSON
-        } catch (\Exception $e) {
-            Log::error("Error retrieving users: ", ['message' => $e->getMessage()]);
+
+    }
+
+    public function indexApp()
+    {
+
             return response()->json(['message' => 'Erro ao recuperar usuários.'], 500);
-        }
+        
     }
 
     public function show(Request $request, $id)

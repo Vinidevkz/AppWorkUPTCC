@@ -7,7 +7,7 @@
     </ul>
     <div class="wrap-user">
         <div>
-            <a href="placeholder">user</a>
+
             <img src="{{url('assets/img/homeEmpresa/user.png')}}" alt="">
         </div>
     </div>

@@ -51,11 +51,12 @@ Route::post('/areaEmpresa', [AreaEmpresaController::class,'store']);
 Route::get('/vagas/empresa', [VagaController::class, 'showVagasPorEmpresa'])->name('vagas.empresa');
 //Detalhes Vagas que a empresa postou
 Route::get('/verVagaCadastrada/{idVaga}', [VagaUsuarioController::class, 'verVagaCadastrada'])->name('verVagaCadastrada');
-
 //Chamar Usuario pra entrevista
 Route::post('/candidaturas/aprovar/{idVaga}', [VagaUsuarioController::class, 'aprovarCandidatura'])->name('candidaturas.aprovar');
 //Reporvar Usuario que tentou
 Route::post('/candidaturas/negar/{idVaga}', [VagaUsuarioController::class, 'negarCandidatura'])->name('candidaturas.negar');
+
+
 
 /*
 |--------------------------------------------------------------------------
