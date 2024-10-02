@@ -1,99 +1,121 @@
-.error-message {
-    color: red;
-    font-size: 0.875rem;
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
+
+:root {
+  --navbar: #fff;
+  --fundo: #f8f8f8;
+  --rosa: #FD0051;
+  --branco: #fff;
+  --1b: #1b1b1b;
+  --f4: #f4f4f4;
+  --4d: #4d4d4d;
+  --back-home: url("../img/dynamo/background-home.png");
+  --back-sobre: url("../img/dynamo/background-sobre.png");
+  --back-parceiros: url("../img/dynamo/background-parceiros.png");
+  --back-contato: url("../img/dynamo/dynamobackground-contato.png");
+  --txt-leve: 300;
+  --fonte-padrao: 0.9rem;
+  --font-1: 1.2rem;
 }
 
-.input-container {
-    margin-bottom: 1rem;
-    display: flex;
-    align-items: center;
+.dark-mode:root {
+  --navbar: #1b1b1b;
+  --fundo: #0c0c0c;
+  --branco: #303030;
+  --1b: #f4f4f4;
+  --f4: #4d4d4d;
+  --4d: #f4f4f4;
+  --back-home: url("../img/dynamo/background-home-dark.png");
+  --back-sobre: url("../img/dynamo/background-sobre-dark.png");
+  --back-parceiros: url("../img/dynamo/background-parceiros-dark.png");
+  --back-contato: url("../img/dynamo/background-contato-dark.png");
 }
 
-.input-container i {
-    margin-right: 0.5rem;
-}
-
-.form-container {
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    padding: 2rem;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin-left: auto;
-    
-    /* Alinha o formulário à direita */
-}
-
-.custom-input {
-    padding: 10px;
-    border: 4px solid #3f4b45;
-    border-radius: 6px;
-    transition: all 0.3s ease;
-    background-color: #ffffff;
-    width: 100%;
-}
-
-.form-section {
-    display: none;
-}
-
-.form-section.active {
-    display: block;
-}
-
-.image-container img {
-    max-width: 100%;
-    border-radius: 10px;
-    margin-top: 50px;
-}
-
-.cardsform {
-    background-image: url('/assets/img/login/formss.png');
-
-    padding-top: 50px;
-    padding-bottom: 50px;
-    border-radius: 10px;
-    margin-top: 50px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-.panel-heading {
-    background-color: #18e47e;
-    color: rgb(26, 25, 25);
-    padding: 5px;
-    text-align: left;
-    border-radius: 10px ;
-    font-weight: 600;
-    
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
   
-}
-.btn-custom {
-    border-radius: 30px; /* Bordas arredondadas */
-    padding: 10px 20px; /* Espaçamento interno */
-    font-size: 16px; /* Tamanho da fonte */
-    transition: background-color 0.3s ease; /* Transição suave */
+  html {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  body {
+    background-color: var(--fundo);
+    font-size: var(--fonte-padrao);
+    font-family: "DM Sans", sans-serif;
+    color: var(--1b);
+  }
+
+  /*--tipografia--*/
+
+.wrap {
+    padding: 0.75rem;
+    display: flex;
+    flex-direction: column;
 }
 
-.btn-primary-custom {
-    background-color: #00eb00; /* Cor azul personalizada */
-    color: rgb(14, 14, 14);
-    border: none;
+
+.titulo-1 {
+    font-size: 5rem;
+    font-weight: 700;
+    color: var(--1b);
 }
 
-.btn-primary-custom:hover {
-    background-color: #c8ec8d; /* Cor azul mais escura no hover */
+.titulo-2 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    font-family: "League Spartan", system-ui;
+    color: var(--1b);
 }
 
-.btn-secondary-custom {
-    background-color: #33ff00; /* Cor laranja personalizada */
-    color: rgb(0, 0, 0);
-    border: none;
+p {
+    padding: 0;
+    margin: 0;
 }
 
-.btn-secondary-custom:hover {
-    background-color: #20f10d; /* Cor laranja mais escura no hover */
+.texto {
+    font-size: var(--fonte-padrao);
+    color: var(--1b);
 }
-.btn-success-custom {
-    background-color: #00ff00; /* Cor laranja personalizada */
-    color: rgb(0, 0, 0);
-    border: none;
+
+.texto-1 {
+    font-size: 1.25rem;
+    color: var(--1b);
 }
+
+/*--animação--*/
+
+.oculto {
+    opacity: 0;
+    transition: all 0.5s;
+    transform: translateY(1rem);
+    filter: blur(1px);
+}
+
+.visivel {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+}
+
+#darkmode {
+    background-image: url("../img/dynamo/dark-mode-icon.png");
+    background-size: cover;
+    background-color: transparent;
+    width: 3ch;
+    height: 3ch;
+    border-style: none;
+  }
+  
+  /*--seção padrão--*/
+  
+  .secao {
+    background-color: var(--fundo);
+    height: 100vh;
+    width: 100%;
+    margin: 60px 0 60px 0;
+  }
+
