@@ -19,7 +19,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from '../ApisUrls/apisurls.js';
-const { apiEmuladorVaga, apiNgrokVaga } = ApisUrls;
+const { apiEmuladorVaga, apiNgrokVaga, apiEmuladorSalvarVaga, apiNgrokUsuarioSalvarVaga, apiEmuladorCancelSalvarVaga, apiNgrokUsuarioCancelSalvarVaga } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
 
@@ -55,8 +55,8 @@ export default function Home({ navigation }) {
     console.log('salvamento da vaga')
     try{
       const response = await axios.post(apiEmuladorSalvarVaga, {
-        idUsuario: userId,
         idVaga: vagaID,
+        idUsuario: userId,
       });
       Alert.Alert('Vaga Salvar com sucesso!');      
     }catch(error){

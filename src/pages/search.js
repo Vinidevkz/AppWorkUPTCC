@@ -20,8 +20,8 @@ import { Context } from "../pages/initialPages/context/provider";
 
 const { apiNgrokVagaPesquisa, apiEmuladorVagaPesquisa } = ApisUrls;
 
-export default function Search({navigation}) {
-  const {  vagaID, setVagaID } = useContext(Context);
+export default function Search({ navigation }) {
+  const { vagaID, setVagaID } = useContext(Context);
 
   const { theme } = useTheme({ Search });
   const [data, setData] = useState([]); // Para vagas
@@ -195,13 +195,17 @@ export default function Search({navigation}) {
                 ) : (
                   <FlatList
                     data={data} // Exibindo vagas
-                    showsVerticalScrollIndicator={false}
+                    showsHorizontalScrollIndicator={false}
                     horizontal={true}
                     style={{
                       maxHeight: 300,
                       marginVertical: 10,
                     }}
-                    keyExtractor={(item) => item.idVaga ? item.idVaga.toString() : Math.random().toString()}
+                    keyExtractor={(item) =>
+                      item.idVaga
+                        ? item.idVaga.toString()
+                        : Math.random().toString()
+                    }
                     renderItem={({ item }) => (
                       <View
                         style={{
@@ -232,7 +236,9 @@ export default function Search({navigation}) {
                               { color: theme.textColor },
                             ]}
                           >
-                            {item.empresas ? empresa.nomeEmpresa : "não disponível"}
+                            {item.empresas
+                              ? empresa.nomeEmpresa
+                              : "não disponível"}
                           </Text>
                           <Text style={{ color: theme.textColor }}>
                             R${item.salarioVaga} - {item.cidadeVaga}
@@ -245,7 +251,17 @@ export default function Search({navigation}) {
                           //   navigation.navigate("Vagas");
                           // }}
                         >
-                          <Text style={[styles.buttonText, styles.DMSansBold, { color: '#fff' }]} onPress={() => {setVagaID(item.idVaga); navigation.navigate('Vagas')}}>
+                          <Text
+                            style={[
+                              styles.buttonText,
+                              styles.DMSansBold,
+                              { color: "#fff" },
+                            ]}
+                            onPress={() => {
+                              setVagaID(item.idVaga);
+                              navigation.navigate("Vagas");
+                            }}
+                          >
                             Ver Vaga
                           </Text>
                         </TouchableOpacity>
@@ -266,33 +282,68 @@ export default function Search({navigation}) {
             </Text>
             <FlatList
               data={companies} // Usando o estado para empresas
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
               style={{
                 maxHeight: 350,
-                width: "100%",
-                borderRadius: 50,
                 marginVertical: 10,
               }}
-              keyExtractor={(item) => item.id_empresa ? item.id_empresa.toString() : Math.random().toString()} // Assumindo que id_empresa é único
+              keyExtractor={(item) =>
+                item.id_empresa
+                  ? item.id_empresa.toString()
+                  : Math.random().toString()
+              } // Assumindo que id_empresa é único
               renderItem={({ item }) => (
                 <View
                   style={{
                     marginVertical: 10,
                     backgroundColor: theme.backgroundColorNavBar,
-                    padding: 10,
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
+                    height: 300,
+                    width: 300,
+                    marginLeft: 10,
+                    overflow: 'hidden',
                     borderRadius: 10,
                   }}
                 >
-                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 5 }}>
-                    <View style={[styles.postIconBox]}>
+                  <View
+                    style={{
+                      
+                      gap: 5,
+                    }}
+                  >
+
+
+
+                    <View style={styles.profileBackgroundImageCont}>
                       <Image
-                        source={require("../../assets/icons/dynamo.png")}
-                        style={styles.postIconImg}
+                        source={
+                          item.fotoBanner
+                            ? { uri: dadosUser.fotoBanner }
+                            : require("../../assets/icons/profilebgempty.png")
+                        }
+                        style={styles.profileBackgroundImg}
                       />
+
+                      <View
+                        style={[
+                          styles.profileIconBox,
+                          { borderColor: theme.borderColor },
+                        ]}
+                      >
+                        <Image
+                          source={
+                            item.fotoUsuario
+                              ? { uri: dadosUser.fotoUsuario }
+                              : require("../../assets/icons/manicon.jpg")
+                          }
+                          style={styles.icon}
+                        />
+                      </View>
                     </View>
-                    <View>
+
+
+
+                    <View style={{margin: 15}}>
                       <Text
                         style={[
                           styles.text,
@@ -314,13 +365,29 @@ export default function Search({navigation}) {
                     </View>
                   </View>
                   <TouchableOpacity
-                    style={[styles.button, styles.buttonVaga, { backgroundColor: theme.backgroundColorNavBar, borderWidth: 2, borderColor: '#20dd77' }]}
+                    style={[
+                      styles.button,
+                      styles.buttonVaga,
+                      {
+                        backgroundColor: theme.backgroundColorNavBar,
+                        borderWidth: 2,
+                        borderColor: "#20dd77",
+                        margin: 15,
+                        width: 130
+                      },
+                    ]}
                     // onPress={() => {
                     //   setVagaID(item.id_empresa);
                     //   navigation.navigate("Empresas");
                     // }}
                   >
-                    <Text style={[styles.buttonText, styles.DMSansBold, { color: theme.textColor }]}>
+                    <Text
+                      style={[
+                        styles.buttonText,
+                        styles.DMSansBold,
+                        { color: theme.textColor },
+                      ]}
+                    >
                       Ver Empresa
                     </Text>
                   </TouchableOpacity>
