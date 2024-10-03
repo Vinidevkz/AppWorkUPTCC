@@ -9,6 +9,7 @@ use App\Models\Vaga;
 use App\Models\AreaInteresseUsuario;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -73,7 +74,7 @@ class UsuarioController extends Controller
                 'usernameUsuario' => $request->usernameUsuario,
                 'nascUsuario' => $request->nascUsuario,
                 'emailUsuario' => $request->emailUsuario,
-                'senhaUsuario' => bcrypt($request->senhaUsuario),
+                'senhaUsuario' => $request->senhaUsuario,
                 'contatoUsuario' => $request->contatoUsuario,
                 'areaInteresseUsuario' => $request->areaInteresseUsuario,
                 'fotoUsuario' => $request->fotoUsuario,
@@ -152,7 +153,7 @@ class UsuarioController extends Controller
             ->orWhere('usernameUsuario', $request->input('emailUsuario'))
             ->first();
 
-        if ($usuario && password_verify($request->input('senhaUsuario'), $usuario->senhaUsuario)) {
+        if ($usuario && Hash::check($request->input('senhaUsuario'), $usuario->senhaUsuario)) {
             return response()->json($usuario);
         }
 

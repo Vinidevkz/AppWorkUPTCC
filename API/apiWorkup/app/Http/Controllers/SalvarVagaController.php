@@ -35,9 +35,8 @@ class SalvarVagaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $idVaga, $idUsuario)
+    public function store(Request $request)
     {
-        // Validação opcional se você não precisar validar aqui
         $request->validate(
             [
                 'idUsuario' => 'required',
@@ -49,16 +48,29 @@ class SalvarVagaController extends Controller
             ]
         );
     
-        $vagaSalva = new SalvarVaga();
-        $vagaSalva->idUsuario = $idUsuario; // Usando o idUsuario da rota
-        $vagaSalva->idVaga = $idVaga;       // Usando o idVaga da rota
+        $idUsuario = $request->idUsuario; // Obtenha do corpo da requisição
+        $idVaga = $request->idVaga; // Obtenha do corpo da requisição
     
-        if ($vagaSalva->save()) {
-            return response()->json(['message' => 'Vaga salva com sucesso!'], 201);
-        } else {
-            return response()->json(['message' => 'Erro ao salvar a vaga.'], 500);
+        try {
+            $vagaSalva = new SalvarVaga();
+            $vagaSalva->idUsuario = $idUsuario;
+            $vagaSalva->idVaga = $idVaga;
+    
+            if ($vagaSalva->save()) {
+                return response()->json(['message' => 'Vaga salva com sucesso!'], 201);
+            } else {
+                return response()->json(['message' => 'Erro ao salvar a vaga.'], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao salvar a vaga.',
+                'error' => $e->getMessage(), // Mensagem de erro detalhada
+                'code' => $e->getCode() // Código de erro, se disponível
+            ], 500);
         }
     }
+    
+    
     
     
 

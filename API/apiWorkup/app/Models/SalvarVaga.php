@@ -8,11 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class SalvarVaga extends Model
 {
     use HasFactory;
-    protected $table = 'tb_SalvarVaga';
+    protected $table = 'tb_salvarvaga';
     protected $primaryKey = 'idSalvarVaga';
 
     protected $fillable = [
         'idUsuario',
         'idVaga',
     ];
+
+    public $timestamps = false;
 }

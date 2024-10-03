@@ -12,7 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\SalvarVagaController;
 
-Route::post('/salvarVaga/{idUsuario}/{idVaga}',[SalvarVagaController::class, 'store']);
+Route::post('/salvarVaga',[SalvarVagaController::class, 'store']);
 
 Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
 
@@ -38,25 +38,12 @@ Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
 // Cancelar candidatura de uma vaga
 Route::delete('/vagaUsuario/{idVaga}/{idUsuario}', [VagaUsuarioController::class,'destroy']);
 
-//API'S ADMIN
-
-//Listar todos os admins
-Route::get('/admin', [AdminController::class, 'index']);
-//Visualizar admin por id
-Route::get('/admin/{idAdmin}', [AdminController::class, 'show']);
-//Cadastrar um admin
-Route::post('/admin', [AdminController::class, 'store']);
-//Atualizar dado de um admin...
-//Route::put('/admin/{idAdmin}', [AdminController::class, 'update'])
-
 //API'S VAGA
 
 //Listar todas as vagas
 Route::get('/vaga', [VagaController::class, 'index']);
 //Visualizar vaga por id
 Route::get('/vaga/{idVaga}', [VagaController::class, 'show']);
-//Cadastrar uma vaga
-Route::post('/vaga', [VagaController::class, 'store']);
 
 Route::post('/vaga/busca', [VagaController::class, 'search']);
 //Atualizar dado de uma vaga...
@@ -77,7 +64,5 @@ Route::get('/areavaga/{idAreaInteresseVaga}', [AreaController::class, 'show']);
 Route::get('/empresa', [EmpresaController::class, 'index']);
 //Visualizar empresa por id
 Route::get('/empresa/{idEmpresa}', [EmpresaController::class, 'show']);
-//Cadastrar uma empresa
-Route::post('empresa', [EmpresaController::class, 'store']);
 //Atualizar dado de uma empresa...
 //Route::put('/empresa/{idEmpresa}', [EmpresaController::class, 'update'])

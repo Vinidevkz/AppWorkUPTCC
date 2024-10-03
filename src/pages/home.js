@@ -19,7 +19,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from '../ApisUrls/apisurls.js';
-const { apiEmuladorVaga, apiNgrokVaga, apiEmuladorUsuarioSalvarVaga, apiNgrokUsuarioSalvarVaga, apiEmuladorCancelSalvarVaga, apiNgrokUsuarioCancelSalvarVaga } = ApisUrls;
+const { apiEmuladorVaga, apiNgrokVaga, apiEmuladorSalvarVaga, apiNgrokSalvarVaga, apiEmuladorCancelSalvarVaga, apiNgrokCancelSalvarVaga } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
 
@@ -51,11 +51,11 @@ export default function Home({ navigation }) {
     buscaVaga();
   }, []);
 
-  const salvarVaga = async () => {
+  const salvarVaga = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const idVaga = vagaID;     // Certifique-se de que vagaID esteja definido
-    const url = `apiEmuladorUsuarioSalvarVaga${idUsuario}/${idVaga}`;
+    const url = `${apiEmuladorSalvarVaga}${idUsuario}/${vagaID}`; // Use vagaID recebido como argumento
   
+    console.log(url);
     try {
       const response = await fetch(url, {
         method: 'POST',
@@ -67,26 +67,30 @@ export default function Home({ navigation }) {
       if (response.ok) {
         const data = await response.json();
         console.log('Sucesso', data.message);
+        // Aqui você pode adicionar uma notificação ou mensagem de sucesso na interface
       } else {
         const errorData = await response.json();
-        console.log('Erro', errorData.message || 'Erro ao salvar a vaga.');
+        console.error('Erro detalhado', errorData.error); // Log detalhado do erro
+        // Exibir a mensagem de erro na interface
+        Alert.alert('Erro', errorData.message || errorData.error || 'Erro ao salvar a vaga.');
       }
     } catch (error) {
       console.error('Erro na requisição:', error);
-      console.log('Erro', 'Ocorreu um erro na requisição.');
+      Alert.alert('Erro', 'Ocorreu um erro na requisição.');
     }
   };
+  
   
   
 
   const cancelSalvarVaga = async () => {
     console.log('cancelando salvamento da vaga')
     try{
-      const response = await axios.post(apiEmuladorUsuarioCancelSalvarVaga, {
+      const response = await axios.post(apiEmuladorCancelSalvarVaga, {
         idUsuario: userId,
         idVaga: vagaID,
       });
-      Alert.Alert('Vaga Salvar com sucesso!');      
+      Alert.Alert('Salvamento cancelado');      
     }catch(error){
       console.log(error)
     }
@@ -189,16 +193,16 @@ export default function Home({ navigation }) {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    style={styles.addFavButton}
-                    onPress={() => {
-                      toggleSaveIcon(item.idVaga);
-                      if (savedIcons[item.idVaga]) {
-                        cancelSalvarVaga(item.idVaga);
-                      } else {
-                        salvarVaga(item.idVaga)
-                      }
-                    }} 
-                  >
+        style={styles.addFavButton}
+        onPress={() => {
+          toggleSaveIcon(item.idVaga);
+          if (savedIcons[item.idVaga]) {
+            cancelSalvarVaga(item.idVaga);
+          } else {
+            salvarVaga(item.idVaga); // Passa o idVaga para a função
+          }
+        }}
+      >
                     <Ionicons
                       name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Usa savedIcons
                       size={35}
