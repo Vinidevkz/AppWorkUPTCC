@@ -141,16 +141,16 @@
                 <td>{{ $u->usernameUsuario }}</td>
                 <td>{{ $u->status->tipoStatus }}</td>
                 <td>
-                  <a href="{{ route('usuarios.edit', $u->idUsuario) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;</a>
+          
                   <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;</button>
+                    <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Bloquear</button>
                   </form>
                   <form action="{{ route('usuarios.aprovar', $u->idUsuario) }}" method="POST" class="d-inline">
                     @csrf
                     @method('POST')
-                    <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;</button>
+                    <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;Ativar</button>
                   </form>
                 </td>
               </tr>

@@ -122,19 +122,7 @@ check
               </a>
             </div>
 
-            <div class="mb-4">
-              <a href="/infoAdmin" class=" d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">info</span>
-                Info
-              </a>
-            </div>
-
-            <div class="d-flex">
-              <a href="/SuporteAdmin" class=" d-flex flex-row align-items-center h6" id="btn-support">
-                <span class="material-symbols-outlined p-2">info</span>
-                Suporte
-              </a>
-            </div>
+           
 
             <div class="d-flex">
               <a href="/logout" class=" d-flex flex-row align-items-center h6" id="btn-exit">
@@ -142,6 +130,14 @@ check
                 Sair
               </a>
             </div>
+
+
+<div class="d-flex">
+<span class="material-symbols-outlined">
+fast_rewind
+</span>
+<p>Recolher menu</p>
+</div>  
        
       </div>
      
