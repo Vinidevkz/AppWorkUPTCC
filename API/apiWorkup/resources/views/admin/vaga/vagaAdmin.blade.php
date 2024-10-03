@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -106,19 +108,6 @@ check
               </a>
             </div>
 
-            <div class="mb-4">
-              <a href="/infoAdmin" class=" d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">info</span>
-                Info
-              </a>
-            </div>
-
-            <div class="d-flex mb-4">
-              <a href="/SuporteAdmin" class=" d-flex flex-row align-items-center h6" id="btn-support">
-                <span class="material-symbols-outlined p-2">info</span>
-                Suporte
-              </a>
-            </div>
 
             <div class="d-flex mb-4">
               <a href="" class=" d-flex flex-row align-items-center h6" id="btn-exit">
@@ -177,9 +166,7 @@ devices
                     <th>
                     <div class="d-flex flex-row align-items-center justify-content-center p-0 ">
                         <a href="{{ route('vagas.index') }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;" >
-                        <span class="material-symbols-outlined ">
-filter_list
-</span>  
+
 <p class="p-0 m-0 ">Status
 </p>                     
 </a>
@@ -190,9 +177,7 @@ filter_list
                     <th>
                       <div class="d-flex flex-row align-items-center justify-content-center p-0 ">
                         <a href="{{ route('vagas.index', ['order' => 'status']) }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;" >
-                        <span class="material-symbols-outlined ">
-filter_list
-</span>  
+ 
 <p class="p-0 m-0 ">Status
 </p>                     
 </a>
@@ -272,7 +257,32 @@ sidebarlinks.forEach(link => {
   })
 });
 
+ // Adiciona um evento de entrada ao campo de busca
+ document.getElementById('searchInput').addEventListener('input', function () {
+    const filter = this.value.toLowerCase(); // Valor digitado na barra de busca
+    const rows = document.querySelectorAll('tbody'); // Todas as linhas da tabela
+    let visibleRows = 0; // Contador de linhas visíveis
 
+    // Itera por todas as linhas da tabela para verificar se devem ser exibidas ou ocultadas
+    rows.forEach(row => {
+      // Verifica se alguma célula da linha corresponde ao valor de busca
+      const textContent = row.textContent.toLowerCase();
+      if (textContent.includes(filter)) {
+        row.style.display = ''; // Exibe a linha
+        visibleRows++; // Incrementa o contador de linhas visíveis
+      } else {
+        row.style.display = 'none'; // Oculta a linha
+      }
+    });
+
+    // Exibe ou oculta a mensagem "Nenhum usuário encontrado" com base nas linhas visíveis
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    if (visibleRows === 0) {
+      noResultsMessage.classList.remove('d-none');
+    } else {
+      noResultsMessage.classList.add('d-none');
+    }
+  });
 
 </script>
 <script src="script.js"></script>
