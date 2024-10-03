@@ -141,12 +141,10 @@ person
 
     <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
 
-    <div class="search-container">
-          <span class="material-symbols-outlined search-icon">
-search
-</span>
-    <input type="text" id="searchInput" placeholder="Buscar..." onkeyup="filterTable()">
-</div>
+    <div class="search-container mt-3">
+          <span class="material-symbols-outlined search-icon">search</span>
+          <input type="text" id="searchInput" placeholder="Buscar...">
+        </div>
 
 
         <table class="table table-striped m-0 table-user" id="myTable">
@@ -257,31 +255,30 @@ sidebarlinks.forEach(link => {
   })
 });
 
- // Adiciona um evento de entrada ao campo de busca
- document.getElementById('searchInput').addEventListener('input', function () {
+
+  // Adiciona um evento de entrada ao campo de busca
+  document.getElementById('searchInput').addEventListener('input', function() {
     const filter = this.value.toLowerCase(); // Valor digitado na barra de busca
-    const rows = document.querySelectorAll('tbody'); // Todas as linhas da tabela
+    const rows = document.querySelectorAll('#myTable tbody tr'); // Todas as linhas da tabela
     let visibleRows = 0; // Contador de linhas visíveis
+    const noResults = document.getElementById('noResults');
 
     // Itera por todas as linhas da tabela para verificar se devem ser exibidas ou ocultadas
     rows.forEach(row => {
-      // Verifica se alguma célula da linha corresponde ao valor de busca
       const textContent = row.textContent.toLowerCase();
       if (textContent.includes(filter)) {
         row.style.display = ''; // Exibe a linha
         visibleRows++; // Incrementa o contador de linhas visíveis
+        
       } else {
         row.style.display = 'none'; // Oculta a linha
-      }
+         
+      }  
+      noResults.style.display = (visibleRows > 0) ? 'none' : 'block';
     });
 
-    // Exibe ou oculta a mensagem "Nenhum usuário encontrado" com base nas linhas visíveis
-    const noResultsMessage = document.getElementById('noResultsMessage');
-    if (visibleRows === 0) {
-      noResultsMessage.classList.remove('d-none');
-    } else {
-      noResultsMessage.classList.add('d-none');
-    }
+
+
   });
 
 </script>

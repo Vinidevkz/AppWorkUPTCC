@@ -398,8 +398,8 @@ table{
   transform: translateY(-50%); /* Centraliza verticalmente */
   pointer-events: none; /* Para que o clique passe através do ícone */
 }
-.no-results {
-  display: none; /* Oculto inicialmente */
+#noResults{
+  display: none;
   text-align: center;
   padding: 10px;
   color: #999;
