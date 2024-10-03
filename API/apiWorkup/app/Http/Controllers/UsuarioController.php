@@ -198,9 +198,9 @@ class UsuarioController extends Controller
         $totalVagaHigienizacao = Vaga::where('idArea', 13)->count();
         $totalRegistrosVaga = DB::table('tb_vaga')->count();
 
-        $totalRegistrosUsuario = DB::table('tb_usuario')->count();
+        $totalRegistrosUsuario =  Usuario::where('idStatus', 1)->count();
         $totalRegistrosEmpresa = DB::table('tb_empresa')->count();
-        $usuarios = Usuario::all();
+        $usuarios = Usuario::where('idStatus', 1)->get();
     
         return view('admin.homeAdmin', [
             'totalUsuariosTecnologia' => $totalUsuariosTecnologia,
@@ -265,4 +265,17 @@ class UsuarioController extends Controller
 
         return redirect('/verUsuario')->with('success', 'Usuário desativado com sucesso.');
     }
+
+    public function edit($id)
+{
+    // Recupera o usuário pelo ID ou lança um erro 404 se não encontrar
+    $usuario = Usuario::findOrFail($id);
+
+    // Adiciona outras informações que deseja passar para a view, como áreas de interesse, se necessário
+    $areasInteresse = AreaInteresseUsuario::all();
+
+    // Retorna a view de edição com os dados do usuário
+    return view('admin.usuario.usuarioEditarAdmin', compact('usuario', 'areasInteresse'));
+}
+
 }

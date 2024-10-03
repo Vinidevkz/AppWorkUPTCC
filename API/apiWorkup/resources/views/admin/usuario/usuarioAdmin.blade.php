@@ -3,6 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
+
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -113,19 +115,6 @@ check
               </a>
             </div>
 
-            <div class="d-flex">
-              <a href="/SuporteAdmin" class=" d-flex flex-row align-items-center h6" id="btn-support">
-                <span class="material-symbols-outlined p-2">info</span>
-                Suporte
-              </a>
-            </div>
-
-            <div class="d-flex">
-              <a href="" class=" d-flex flex-row align-items-center h6" id="btn-exit">
-                <span class="material-symbols-outlined p-2">logout</span>
-                Sair
-              </a>
-            </div>
        
       </div>
      
@@ -188,7 +177,7 @@ alternate_email
                 </div>
               </td>
               <td>
-                <div class="">
+                <div class="d-flex flex-row">
                 <span class="material-symbols-outlined">
 autorenew
 </span>
@@ -269,6 +258,35 @@ sidebarlinks.forEach(link => {
     this.classList.add('asisde-sidebar-active')
   })
 });
+
+ // Adiciona um evento de entrada ao campo de busca
+ document.getElementById('searchInput').addEventListener('input', function () {
+    const filter = this.value.toLowerCase(); // Valor digitado na barra de busca
+    const rows = document.querySelectorAll('#userTableBody tr'); // Todas as linhas da tabela
+    let visibleRows = 0; // Contador de linhas visíveis
+
+    // Itera por todas as linhas da tabela para verificar se devem ser exibidas ou ocultadas
+    rows.forEach(row => {
+      // Verifica se alguma célula da linha corresponde ao valor de busca
+      const textContent = row.textContent.toLowerCase();
+      if (textContent.includes(filter)) {
+        row.style.display = ''; // Exibe a linha
+        visibleRows++; // Incrementa o contador de linhas visíveis
+      } else {
+        row.style.display = 'none'; // Oculta a linha
+      }
+    });
+
+    // Exibe ou oculta a mensagem "Nenhum usuário encontrado" com base nas linhas visíveis
+    const noResultsMessage = document.getElementById('noResultsMessage');
+    if (visibleRows === 0) {
+      noResultsMessage.classList.remove('d-none');
+    } else {
+      noResultsMessage.classList.add('d-none');
+    }
+  });
+
+  
 </script>
 <script src="script.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
