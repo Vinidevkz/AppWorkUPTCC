@@ -25,11 +25,15 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <!-- Custom CSS -->
-    <link rel="stylesheet" href="css/style.css">
-    <link rel="stylesheet" href="assets/css/navEfooterhome.css">
+    <link rel="stylesheet" href="assets/css/bodyhomeW.css">
+
+    <link rel="stylesheet" href="assets/css/cssHomeWup/navbarhomeW.css">
+
+    <link rel="stylesheet" href="assets/css/cssHomeWup/footerhomeW.css">
 
     <!-- Custom JS -->
-    <script src="/resources/js/home.js" async></script>
+    <!-- <script src="/resources/js/homew.js" async></script> -->
+
 </head>
 
 <body>
@@ -58,7 +62,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg fixed-top">
+    <nav class="navbar navbar-expand-lg ">
         <div class="container-fluid navbarcf">
             <a class="navbar-brand" href="#">
                 <img src="<?php echo e(url('/assets/img/home/workuplogo.png')); ?>" alt="Logo Desktop" class="logo-desktop">
@@ -69,9 +73,9 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#Work">Trabalho</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#Work">Nosso Trabalho</a></li>
                     <li class="nav-item"><a class="nav-link" href="#Metas">Metas</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#Time">Time</a></li>
+
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Principais</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -96,137 +100,288 @@
 
     <main class="conteudo">
 
+
+
         <!-- cabeçalho -->
-        <header class="cabecalho bg-dark py-4 init-hidden">
+
+        <header class="quemsomosf bg-dark py-5">
+
             <div class="container px-5">
                 <div class="row gx-5 align-items-center justify-content-center">
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
                         <div class="my-6 text-center text-xl-start">
-                            <h1 class="display-5 fw-bolder text-white mb-2">WorkUP</h1>
-                            <p class="lead fw-normal text-white-50 mb-4">ligando mentes inovadoras a empresas brilhantes</p>
+                            <img src="<?php echo e(url('/assets/img/home/workuplogo.png')); ?>" alt="Logoheader" class="logoheader mb-3">
+                            <p class="lead fw-normal text-white mb-4">Ligando mentes inovadoras a empresas brilhantes</p>
                             <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                                <a class="btn btn-success btn-lg px-4 me-sm-3" href="/login">venha conosco</a>
-                                <a class="btn btn-outline-light btn-lg px-4" href="#!">saiba mais</a>
+                                <a class="btn btn-success btn-lg px-4 me-sm-3" href="/login">Venha conosco</a>
+                                <a class="btn btn-success btn-lg px-4" href="#!">Saiba mais</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                 
-                        <img class="img-fluid rounded-3 my-5" src="<?php echo e(url('/assets/img/home/WUPlogo.png')); ?>" alt="imgHeader" />
+                        <img class="img-fluid rounded-4 my-0" src="<?php echo e(url('/assets/img/home/cell2.png')); ?>" alt="imgHeader" />
                     </div>
                 </div>
             </div>
         </header>
 
-        <!-- sobre nos -->
-        <section class="container-fluid seccf init-hidden py-5 section-spacing">
-            <div class="row p-4">
-                <div class="col-md-6">
-                    <div class="p-4">
+
+
+
+
+
+
+
+
+        <div class="rowsobrenos">
+            <!-- cardshome -->
+            <div class="container">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-6">
+                        <!-- Card 1 -->
+                        <div class="card mb-3">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h5 class="card-title mb-0">Sobre nós</h5>
+                                    <h6 class="card-subtitle mb-0 text-muted">Nossa missão e visão</h6>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSobreNos">
+                                   Abrir
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
                         <div class="card">
-                            <div class="content">
-                                <h1>Quem Somos</h1>
-                                <p class="para">
-                                    Somos uma plataforma dedicada a unir jovens talentos e empresas em busca da primeira grande oportunidade. Acreditamos que todos merecem uma chance de brilhar, e nossa missão é fazer essa conexão acontecer. Combinamos paixão, inovação e comprometimento para transformar sonhos em realidade.
-                                </p>
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h5 class="card-title mb-0">Nossos jovens</h5>
+                                    <h6 class="card-subtitle mb-0 text-muted">Iniciativas e Programas</h6>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNossosJovens">
+                                   Abrir
+                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="col-md-6">
-                    <img class="imgquemsomos" src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem" class="img-fluid">
-                </div>
-            </div>
-        </section>
-
-        <section class="container-fluid seccf init-hidden py-5 section-spacing">
-            <div class="row p-4">
-                <!-- Imagem à esquerda com margem ajustada -->
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                    <img class="imgquemsomos img-fluid" src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem" style="max-width: 100%; height: auto; margin: 0 20px;">
-                </div>
-
-                <!-- Card à direita -->
-                <div class="col-md-6">
-                    <div class="p-4">
-                        <div class="card">
-                            <div class="content">
-                                <h1>Por que Escolher Nossa Plataforma?</h1>
-                                <p class="para">
-                                    Se você é uma empresa que valoriza o potencial dos jovens e busca diversidade e energia fresca, você está no lugar certo. Nossa plataforma oferece acesso a uma base de talentos promissores, prontos para contribuir com ideias inovadoras e entusiasmo. Juntos, podemos construir um futuro brilhante.
-                                </p>
+                    <div class="col-md-6">
+                        <!-- Card maior (apenas imagem) -->
+                        <div class="card h-100 d-flex align-items-center justify-content-center">
+                            <div class="laptop-frame">
+                                <div class="laptop-screen">
+                                    <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="container-fluid seccf init-hidden py-5 section-spacing">
-            <div class="row p-4">
-                <div class="col-md-6">
-                    <div class="p-4">
-                        <div class="card">
-                            <div class="content">
-                                <h1>Sua Primeira Oportunidade Começa Aqui</h1>
-                                <p class="para">
-                                    Você é jovem, ambicioso e cheio de potencial? Nós entendemos. Na nossa plataforma, você encontrará oportunidades reais para dar o primeiro passo na sua carreira. De estágios a empregos de entrada, estamos aqui para apoiá-lo(a) em cada etapa. Vamos construir o seu caminho para o sucesso juntos!
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-6">
-                    <img class="imgquemsomos" src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem" class="img-fluid">
-                </div>
-            </div>
-        </section>
-
-        <!-- depoimentos -->
-        <div class="py-5 bg-light init-hidden pt-2 mt-6">
-            <div class="container px-5 my-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-10 col-xl-7">
-                        <div class="text-center">
-                            <div class="fs-4 mb-4 fst-italic">"trabalho incrivel dos estudantes de ds para a comuninade jovem e desamparada"</div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <img class="rounded-circle me-3" src="<?php echo e(url('/')); ?>" alt="..." />
-                                <div class="fw-bold">
-                                    fernada silva
-                                    <span class="fw-bold text-primary mx-1">/</span>
-                                    Analista, empregada
+                    <!-- Modal Sobre Nós -->
+                    <!-- Modal Sobre Nós -->
+                    <div class="modal fade" id="modalSobreNos" tabindex="-1" aria-labelledby="modalSobreNosLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalSobreNosLabel">Sobre Nós</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    
+                                    <p class="mt-3">
+                                        Somos uma plataforma dedicada a unir jovens talentos e empresas em busca da primeira grande oportunidade. Acreditamos que todos merecem uma chance de brilhar, e nossa missão é fazer essa conexão acontecer.
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Modal Nossos Jovens -->
+                <div class="modal fade" id="modalNossosJovens" tabindex="-1" aria-labelledby="modalNossosJovensLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="modalNossosJovensLabel">Nossos Jovens</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p> Você é jovem, ambicioso e cheio de potencial? Nós entendemos. Na nossa plataforma, você encontrará oportunidades reais para dar o primeiro passo na sua carreira. De estágios a empregos de entrada, estamos aqui para apoiá-lo(a) em cada etapa. Vamos construir o seu caminho para o sucesso juntos!</p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+               
             </div>
         </div>
+        </div>
 
-        <!-- mais depoimentos -->
-        <div class="py-5 bg-light init-hidden">
-            <div class="container px-5 my-5">
-                <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-10 col-xl-7">
-                        <div class="text-center">
-                            <div class="fs-4 mb-4 fst-italic">"trabalho incrivel dos estudantes de ds para a comuninade jovem e desamparada"</div>
-                            <div class="d-flex align-items-center justify-content-center">
-                                <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                                <div class="fw-bold">
-                                    fernada silva
-                                    <span class="fw-bold text-primary mx-1">/</span>
-                                    Analista, empregada
+        <div class="rowinovacoes">
+            <div class="container pt-6">
+                <div class="row">
+                    <div class="col-md-6">
+                        <!-- Card maior (apenas imagem) -->
+                        <div class="card h-50">
+                            <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="" class="card-img-top" alt="Imagem 3">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Card 1 -->
+                        <div class="card mb-3">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h5 class="card-title mb-0">quem somos</h5>
+                                    <h6 class="card-subtitle mb-0 text-muted">Nossa missão e visão</h6>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSobreNos">
+                                   Abrir
+                                </button>
+                            </div>
+                        </div>
+                        <!-- Card 2 -->
+                        <div class="card align-middle">
+                            <div class="card-body d-flex align-items-center justify-content-between">
+                                <div>
+                                    <h5 class="card-title mb-0">inovaçoes</h5>
+                                    <h6 class="card-subtitle mb-0 text-muted">Iniciativas e Programas</h6>
+                                </div>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#moda</p>linovacoes">
+                                   Abrir
+                                </button>
+                            </div>
+                            <!-- Modal Sobre Nós -->
+                            <div class="modal fade" id="modalSobreNos" tabindex="-1" aria-labelledby="modalSobreNosLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalSobreNosLabel">Sobre Nós</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                           
+                                            <p class="mt-3">
+                                                Somos uma empresa dedicada a fornecer soluçõe</div>s inovadoras no campo da tecnologia. Nossa missão é entregar produtos de alta qualidade que atendam às necessidades de nossos clientes, sempre com foco em excelência e inovação .
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Modal Nossos Jovens -->
+                            <div class="modal fade" id="modalinovacoes" tabindex="-1" aria-labelledby="modalinovacoesLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalinovacoesLabel">INOVACOES</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p> Somos uma empresa dedicada a fornecer soluções inovadoras no campo da tecnologia. Nossa missão é entregar produtos de alta qualidade que atendam às necessidades de nossos clientes, sempre com foco em excelência e inovação . </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+
+        <div class="rowdepoimento">
+
+            <!-- mais depoimentos -->
+            <div class=" depoimento  ">
+                <div class="container">
+                    <div class="row gx-5 justify-content-center">
+                        <div class="col-lg-10 col-xl-7">
+                            <div class="text-center">
+                                <div class="fs-4 mb-4 fst-italic">"trabalho incrivel dos estudantes de ds para a comuninade jovem e desamparada"</div>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                    <div class="fw-bold">
+                                        fernada silva
+                                        <span class="fw-bold text-primary mx-1">/</span>
+                                        Analista, empregada
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
+            </div>
     </main>
+
+    <div class="partners-logo-slider">
+
+        <div class="slide-track">
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/eteclogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/cpslogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/logoestado.jpeg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/eteclogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/eteclogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/cpslogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/logoestado.jpeg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/eteclogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/eteclogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/cpslogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/logoestado.jpeg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/eteclogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/cpslogo.jpg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/logoestado.jpeg')); ?>" height="100" width="250" alt="" />
+            </div>
+            <div class="slide">
+                <img src="<?php echo e(url('/assets/img/carouselLogos/logoestado.jpeg')); ?>" height="100" width="250" alt="" />
+            </div>
+
+        </div>
+    </div>
 
     <!-- Rodapé -->
     <div class="footer init-hidden">
@@ -275,6 +430,27 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <p class="copyright">
+
+                        <img href="#">
+
+                    </p>
+                    <div class="login-adms">
+                        <span>Login para</span>
+                        <button class="animated-button">
+                            <svg viewBox="0 0 24 24" class="arr-2" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                            </svg>
+                            <span class="text">Admin</span>
+                            <span class="circle"></span>
+                            <svg viewBox="0 0 24 24" class="arr-1" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M16.1716 10.9999L10.8076 5.63589L12.2218 4.22168L20 11.9999L12.2218 19.778L10.8076 18.3638L16.1716 12.9999H4V10.9999H16.1716Z"></path>
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+
                 <div class="col-lg-12 col-md-12 col-sm-12">
 
                     <p class="copyright">Copyright © 2024 <img href="#"><img id="logo-footer" src="<?php echo e(url('/assets/img/login/workuplogo.png')); ?>" alt="Descrição da imagem" class="rounded"></a>.</p>
