@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Listar todos os usuarios
 Route::get('/usuario', [UsuarioController::class, 'indexApp']);
 //Visualizar usuario por id
-Route::get('/usuario/{idUsuario}', [UsuarioController::class, 'show']);
+Route::get('/usuario/{idUsuario}', [UsuarioController::class, 'showApp']);
 //Cadastrar um usuario
 Route::post('/usuario', [UsuarioController::class, 'store']);
 //Login
@@ -41,11 +41,11 @@ Route::delete('/vagaUsuario/{idVaga}/{idUsuario}', [VagaUsuarioController::class
 //API'S ADMIN
 
 //Listar todos os admins
-Route::get('/admin', [AdminController::class, 'index']);
-//Visualizar admin por id
-Route::get('/admin/{idAdmin}', [AdminController::class, 'show']);
-//Cadastrar um admin
-Route::post('/admin', [AdminController::class, 'store']);
+// Route::get('/admin', [AdminController::class, 'index']);
+// //Visualizar admin por id
+// Route::get('/admin/{idAdmin}', [AdminController::class, 'show']);
+// //Cadastrar um admin
+// Route::post('/admin', [AdminController::class, 'store']);
 //Atualizar dado de um admin...
 //Route::put('/admin/{idAdmin}', [AdminController::class, 'update'])
 
@@ -78,6 +78,6 @@ Route::get('/empresa', [EmpresaController::class, 'index']);
 //Visualizar empresa por id
 Route::get('/empresa/{idEmpresa}', [EmpresaController::class, 'show']);
 //Cadastrar uma empresa
-Route::post('empresa', [EmpresaController::class, 'store']);
+// Route::post('empresa', [EmpresaController::class, 'store']);
 //Atualizar dado de uma empresa...
 //Route::put('/empresa/{idEmpresa}', [EmpresaController::class, 'update'])

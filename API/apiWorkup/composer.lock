@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3d4469b56e67c06dd5a90295945685f3",
+    "content-hash": "34cb2c7a5a76217fb483296875c62c1c",
     "packages": [
         {
             "name": "brick/math",
@@ -4014,20 +4014,21 @@
         },
         {
             "name": "symfony/mime",
-            "version": "v6.0.19",
+            "version": "v6.4.12",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/mime.git",
-                "reference": "d7052547a0070cbeadd474e172b527a00d657301"
+                "reference": "abe16ee7790b16aa525877419deb0f113953f0e1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/mime/zipball/d7052547a0070cbeadd474e172b527a00d657301",
-                "reference": "d7052547a0070cbeadd474e172b527a00d657301",
+                "url": "https://api.github.com/repos/symfony/mime/zipball/abe16ee7790b16aa525877419deb0f113953f0e1",
+                "reference": "abe16ee7790b16aa525877419deb0f113953f0e1",
                 "shasum": ""
             },
             "require": {
-                "php": ">=8.0.2",
+                "php": ">=8.1",
+                "symfony/deprecation-contracts": "^2.5|^3",
                 "symfony/polyfill-intl-idn": "^1.10",
                 "symfony/polyfill-mbstring": "^1.0"
             },
@@ -4036,15 +4037,17 @@
                 "phpdocumentor/reflection-docblock": "<3.2.2",
                 "phpdocumentor/type-resolver": "<1.4.0",
                 "symfony/mailer": "<5.4",
-                "symfony/serializer": "<5.4.14|>=6.0,<6.0.14|>=6.1,<6.1.6"
+                "symfony/serializer": "<6.4.3|>7.0,<7.0.3"
             },
             "require-dev": {
                 "egulias/email-validator": "^2.1.10|^3.1|^4",
+                "league/html-to-markdown": "^5.0",
                 "phpdocumentor/reflection-docblock": "^3.0|^4.0|^5.0",
-                "symfony/dependency-injection": "^5.4|^6.0",
-                "symfony/property-access": "^5.4|^6.0",
-                "symfony/property-info": "^5.4|^6.0",
-                "symfony/serializer": "^5.4.14|~6.0.14|^6.1.6"
+                "symfony/dependency-injection": "^5.4|^6.0|^7.0",
+                "symfony/process": "^5.4|^6.4|^7.0",
+                "symfony/property-access": "^5.4|^6.0|^7.0",
+                "symfony/property-info": "^5.4|^6.0|^7.0",
+                "symfony/serializer": "^6.4.3|^7.0.3"
             },
             "type": "library",
             "autoload": {
@@ -4076,7 +4079,7 @@
                 "mime-type"
             ],
             "support": {
-                "source": "https://github.com/symfony/mime/tree/v6.0.19"
+                "source": "https://github.com/symfony/mime/tree/v6.4.12"
             },
             "funding": [
                 {
@@ -4092,7 +4095,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2023-01-11T11:50:03+00:00"
+            "time": "2024-09-20T08:18:25+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -8209,5 +8212,5 @@
         "php": "^8.0.2"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.6.0"
+    "plugin-api-version": "2.3.0"
 }

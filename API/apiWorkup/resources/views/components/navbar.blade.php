@@ -3,7 +3,7 @@
     <ul>
 
 
-        <a href="/cadastrarVaga">Criar Vaga</a>
+        
     </ul>
     <div class="wrap-user">
         <div>

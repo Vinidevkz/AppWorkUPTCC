@@ -32,11 +32,17 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
         
-       // if($request->expectsJson()){
-            return response()->json($usuario, 201);
-        //}
 
-        //return view('admin.usuario.allUsuarioAdmin', ['usuario'=>$usuario]);
+        return view('admin.usuario.allUsuarioAdmin', ['usuario'=>$usuario]);
+    }
+
+    public function showApp(Request $request, $id)
+    {
+        $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
+        
+
+            return response()->json($usuario, 201);
+
     }
 
     public function store(Request $request)
@@ -116,6 +122,7 @@ class UsuarioController extends Controller
             'usernameUsuario' => 'sometimes|required|string|max:40',
             'contatoUsuario' => 'sometimes|required|string|max:20',
             'sobreUsuario' => 'sometimes|required|string|max:40',
+            
         ]);
 
         // Atualiza os campos que foram passados
