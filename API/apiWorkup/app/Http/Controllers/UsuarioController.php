@@ -32,11 +32,11 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
         
-        if($request->expectsJson()){
+       // if($request->expectsJson()){
             return response()->json($usuario, 201);
-        }
+        //}
 
-        return view('admin.usuario.allUsuarioAdmin', ['usuario'=>$usuario]);
+        //return view('admin.usuario.allUsuarioAdmin', ['usuario'=>$usuario]);
     }
 
     public function store(Request $request)
@@ -103,6 +103,8 @@ class UsuarioController extends Controller
             ], 500);
         }
     }
+
+    
 
     public function update(Request $request, $id)
     {

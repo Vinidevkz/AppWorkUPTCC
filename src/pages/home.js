@@ -54,7 +54,7 @@ export default function Home({ navigation }) {
   const salvarVaga = async () => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
     const idVaga = vagaID;     // Certifique-se de que vagaID esteja definido
-    const url = `http://10.0.2.2:8000/api/vagaUsuario/salvarVaga/${idUsuario}/${idVaga}`;
+    const url = `apiEmuladorUsuarioSalvarVaga${idUsuario}/${idVaga}`;
   
     try {
       const response = await fetch(url, {
@@ -82,7 +82,7 @@ export default function Home({ navigation }) {
   const cancelSalvarVaga = async () => {
     console.log('cancelando salvamento da vaga')
     try{
-      const response = await axios.post(apiEmuladorCancelSalvarVaga, {
+      const response = await axios.post(apiEmuladorUsuarioCancelSalvarVaga, {
         idUsuario: userId,
         idVaga: vagaID,
       });
