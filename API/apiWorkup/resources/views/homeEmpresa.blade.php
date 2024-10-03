@@ -29,7 +29,8 @@
                                 @foreach($vagas as $vaga)
                                     <li>
                                         {{ $vaga->nomeVaga }} - {{ $vaga->salarioVaga }} - {{ $vaga->estadoVaga }}
-                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn btn-primary">Ver Vaga</a>
+                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>Ver candidatos</a>
+                                        <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>Editar Vaga</a>
                                     </li>
                                 @endforeach
                             </ul>
@@ -42,7 +43,9 @@
                          <button class="botao-card botao-vaga"> <a href="/cadastrarVaga" class="text-light"> Criar vaga <i class="fa-solid fa-plus"></i></button></a>
                         <button class="botao-card botao-vaga"> <a href="/logout" class="text-light">Sair</a></i></button>
                         
-                        <button class="botao-card botao-post">Fazer post</button>
+                        <button class="botao-card botao-post">
+                            <a href="{{ route('post.create') }}" class="text-light">Fazer post</a>
+                        </button>
                     </div>
                 </div>
             </div>

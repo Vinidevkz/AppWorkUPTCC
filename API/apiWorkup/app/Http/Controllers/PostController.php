@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SalvarVaga;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Post;
+use App\Http\Controllers\AuthController;
 
-class SalvarVagaController extends Controller
+class PostController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -26,7 +26,7 @@ class SalvarVagaController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -37,42 +37,30 @@ class SalvarVagaController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'idUsuario' => 'required',
-                'idVaga' => 'required',
-            ],
-            [
-                'idUsuario.required' => 'Não está logado',
-                'idVaga.required' => 'Selecione uma vaga',
-            ]
-        );
-    
-        $idUsuario = $request->idUsuario; // Obtenha do corpo da requisição
-        $idVaga = $request->idVaga; // Obtenha do corpo da requisição
-    
-        try {
-            $vagaSalva = new SalvarVaga();
-            $vagaSalva->idUsuario = $idUsuario;
-            $vagaSalva->idVaga = $idVaga;
-    
-            if ($vagaSalva->save()) {
-                return response()->json(['message' => 'Vaga salva com sucesso!'], 201);
-            } else {
-                return response()->json(['message' => 'Erro ao salvar a vaga.'], 500);
-            }
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Erro ao salvar a vaga.',
-                'error' => $e->getMessage(), // Mensagem de erro detalhada
-                'code' => $e->getCode() // Código de erro, se disponível
-            ], 500);
-        }
+            // Validação
+    $request->validate([
+        'detalhePublicacao' => 'required|string',
+        'fotoPublicacao' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Limite de 2MB
+        'idEmpresa' => 'required|exists:tb_empresa,id', // Supondo que você tenha um campo id na tabela
+        'idVaga' => 'required|exists:tb_vaga,idVaga', // Supondo que você tenha um campo id na tabela de vagas
+    ]);
+
+    // Criação da postagem
+    $post = new Post();
+    $post->detalhePublicacao = $request->detalhePublicacao;
+    $post->idEmpresa = $request->idEmpresa;
+    $post->idVaga = $request->idVaga;
+
+    // Verifique se foi enviada uma imagem
+    if ($request->hasFile('fotoPublicacao')) {
+        $path = $request->file('fotoPublicacao')->store('uploads', 'public');
+        $post->fotoPublicacao = $path;
     }
-    
-    
-    
-    
+
+    $post->save();
+
+    return redirect()->route('empresa')->with('success', 'Postagem criada com sucesso!');
+    }
 
     /**
      * Display the specified resource.

@@ -10,6 +10,12 @@ use App\Http\Controllers\AreaEmpresaController;
 use App\Http\Controllers\VagaUsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContatoController;
+use App\http\Controllers\PostController;
+
+
+// mexendo
+Route::get('/postar', [PostController::class, 'create'])->name('post.create');
+Route::post('/postar', [PostController::class, 'store'])->name('post.store');
 
 
 // rotas Dynamo

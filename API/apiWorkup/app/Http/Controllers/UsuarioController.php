@@ -9,6 +9,7 @@ use App\Models\Vaga;
 use App\Models\AreaInteresseUsuario;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class UsuarioController extends Controller
 {
@@ -32,11 +33,17 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
         
-       // if($request->expectsJson()){
-            return response()->json($usuario, 201);
-        //}
 
-        //return view('admin.usuario.allUsuarioAdmin', ['usuario'=>$usuario]);
+        return view('admin.usuario.allUsuarioAdmin', ['usuario'=>$usuario]);
+    }
+
+    public function showApp(Request $request, $id)
+    {
+        $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
+        
+
+            return response()->json($usuario, 201);
+
     }
 
     public function store(Request $request)
@@ -73,7 +80,7 @@ class UsuarioController extends Controller
                 'usernameUsuario' => $request->usernameUsuario,
                 'nascUsuario' => $request->nascUsuario,
                 'emailUsuario' => $request->emailUsuario,
-                'senhaUsuario' => bcrypt($request->senhaUsuario),
+                'senhaUsuario' => $request->senhaUsuario,
                 'contatoUsuario' => $request->contatoUsuario,
                 'areaInteresseUsuario' => $request->areaInteresseUsuario,
                 'fotoUsuario' => $request->fotoUsuario,
@@ -116,6 +123,7 @@ class UsuarioController extends Controller
             'usernameUsuario' => 'sometimes|required|string|max:40',
             'contatoUsuario' => 'sometimes|required|string|max:20',
             'sobreUsuario' => 'sometimes|required|string|max:40',
+            
         ]);
 
         // Atualiza os campos que foram passados
@@ -152,7 +160,7 @@ class UsuarioController extends Controller
             ->orWhere('usernameUsuario', $request->input('emailUsuario'))
             ->first();
 
-        if ($usuario && password_verify($request->input('senhaUsuario'), $usuario->senhaUsuario)) {
+        if ($usuario && Hash::check($request->input('senhaUsuario'), $usuario->senhaUsuario)) {
             return response()->json($usuario);
         }
 
