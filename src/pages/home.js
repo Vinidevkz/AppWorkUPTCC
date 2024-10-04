@@ -8,6 +8,7 @@ import {
   ActivityIndicator,
   Image,
   StatusBar,
+  Alert
 } from "react-native";
 import { useState, useEffect, useContext } from "react";
 import * as Font from "expo-font";
@@ -35,7 +36,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(apiEmuladorVaga);
+      const response = await axios.get(apiNgrokVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -53,25 +54,30 @@ export default function Home({ navigation }) {
 
   const salvarVaga = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const url = `${apiEmuladorSalvarVaga}${idUsuario}/${vagaID}`; // Use vagaID recebido como argumento
-  
-    console.log(url);
+    const url = apiNgrokSalvarVaga; // Use a URL base sem parâmetros na URL
+    
+    const body = {
+      idUsuario: idUsuario,
+      idVaga: vagaID,
+    };
+    
+    console.log(url, body);
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
+        body: JSON.stringify(body), // Envia os dados como JSON
       });
   
       if (response.ok) {
         const data = await response.json();
         console.log('Sucesso', data.message);
-        // Aqui você pode adicionar uma notificação ou mensagem de sucesso na interface
+        Alert.alert('Sucesso', data.message);
       } else {
         const errorData = await response.json();
         console.error('Erro detalhado', errorData.error); // Log detalhado do erro
-        // Exibir a mensagem de erro na interface
         Alert.alert('Erro', errorData.message || errorData.error || 'Erro ao salvar a vaga.');
       }
     } catch (error) {
@@ -82,19 +88,40 @@ export default function Home({ navigation }) {
   
   
   
+  
 
-  const cancelSalvarVaga = async () => {
-    console.log('cancelando salvamento da vaga')
-    try{
-      const response = await axios.post(apiEmuladorCancelSalvarVaga, {
-        idUsuario: userId,
-        idVaga: vagaID,
+  const removerVagaSalva = async (vagaID) => {
+    const idUsuario = userId; // Certifique-se de que userId esteja definido
+    const url = apiNgrokCancelSalvarVaga; // Use a URL sem parâmetros na rota
+  
+    try {
+      const response = await fetch(url, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          idUsuario: idUsuario,
+          idVaga: vagaID, // Passa idUsuario e idVaga pelo body
+        }),
       });
-      Alert.Alert('Salvamento cancelado');      
-    }catch(error){
-      console.log(error)
+  
+      if (response.ok) {
+        const data = await response.json();
+        console.log('Sucesso', data.message);
+        Alert.alert('Sucesso', data.message);
+      } else {
+        const errorData = await response.json();
+        console.error('Erro detalhado', errorData.error); // Log detalhado do erro
+        Alert.alert('Erro', errorData.message || errorData.error || 'Erro ao remover a vaga.');
+      }
+    } catch (error) {
+      console.error('Erro na requisição:', error);
+      Alert.alert('Erro', 'Ocorreu um erro na requisição.');
     }
-  }
+  };
+  
+  
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -197,7 +224,7 @@ export default function Home({ navigation }) {
         onPress={() => {
           toggleSaveIcon(item.idVaga);
           if (savedIcons[item.idVaga]) {
-            cancelSalvarVaga(item.idVaga);
+            removerVagaSalva(item.idVaga);
           } else {
             salvarVaga(item.idVaga); // Passa o idVaga para a função
           }

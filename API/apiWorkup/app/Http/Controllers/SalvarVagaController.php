@@ -114,8 +114,45 @@ class SalvarVagaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $request->validate(
+            [
+                'idUsuario' => 'required',
+                'idVaga' => 'required',
+            ],
+            [
+                'idUsuario.required' => 'Não está logado',
+                'idVaga.required' => 'Selecione uma vaga',
+            ]
+        );
+    
+        $idUsuario = $request->idUsuario;
+        $idVaga = $request->idVaga;
+    
+        try {
+            // Encontre a vaga salva com base no idUsuario e idVaga
+            $vagaSalva = SalvarVaga::where('idUsuario', $idUsuario)
+                ->where('idVaga', $idVaga)
+                ->first();
+    
+            // Verifique se o salvamento foi encontrado
+            if (!$vagaSalva) {
+                return response()->json(['message' => 'Salvamento não encontrado.'], 404);
+            }
+    
+            // Exclua o registro
+            if ($vagaSalva->delete()) {
+                return response()->json(['message' => 'Vaga removida com sucesso!'], 200);
+            } else {
+                return response()->json(['message' => 'Erro ao remover a vaga.'], 500);
+            }
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao tentar remover a vaga.',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+    
 }

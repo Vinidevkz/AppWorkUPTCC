@@ -103,7 +103,17 @@ const styles = StyleSheet.create({
 
   row: {
     flexDirection: 'row'
-  }
+  },
+
+  containerTop: {
+    width: '100%',
+    height: 80,
+    maxHeight: 80,
+    backgroundColor: '#fff',
+    justifyContent: 'center',
+    padding: 20,
+    elevation: 10,
+  },
 });
 
 export default styles;

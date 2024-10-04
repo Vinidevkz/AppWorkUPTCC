@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 use App\http\Controllers\SalvarVagaController;
 
 Route::post('/salvarVaga',[SalvarVagaController::class, 'store']);
+Route::delete('/salvarVaga', [SalvarVagaController::class, 'destroy']);
+
+
+
 
 Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
 
@@ -26,7 +30,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 //Listar todos os usuarios
 Route::get('/usuario', [UsuarioController::class, 'indexApp']);
 //Visualizar usuario por id
-Route::get('/usuario/{idUsuario}', [UsuarioController::class, 'show']);
+Route::get('/usuario/{idUsuario}', [UsuarioController::class, 'showApp']);
 //Cadastrar um usuario
 Route::post('/usuario', [UsuarioController::class, 'store']);
 //Login
