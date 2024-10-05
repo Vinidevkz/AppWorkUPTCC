@@ -168,8 +168,7 @@
                         <div class="card h-100 d-flex align-items-center justify-content-center">
                             <div class="laptop-frame">
                                 <div class="laptop-screen">
-                                    <iframe src="https://www.youtube.com/embed/3JZ_D3ELwOQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                </div>
+                                <iframe width="560" height="315" src="https://www.youtube.com/embed/4ArtpRaYleM?si=fBzTyuWArDvwD7mj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>                                </div>
                             </div>
                         </div>
                     </div>
