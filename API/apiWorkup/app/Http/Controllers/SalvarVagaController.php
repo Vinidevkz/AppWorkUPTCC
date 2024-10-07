@@ -14,10 +14,27 @@ class SalvarVagaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index($idUsuario)
     {
-        //
+        // Validação do parâmetro de rota
+        if (!is_numeric($idUsuario)) {
+            return response()->json([
+                'message' => 'O id do usuario deve ser um número inteiro',
+            ], 400);
+        }
+    
+        try {
+            $vagasSalvas = SalvarVaga::where('idUsuario', $idUsuario)->get();
+    
+            return response()->json($vagasSalvas, 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => 'Erro ao buscar vagas salvas',
+                'error' => $e->getMessage(),
+            ], 500);
+        }
     }
+    
 
     /**
      * Show the form for creating a new resource.

@@ -35,10 +35,10 @@ export default function Search({ navigation }) {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiEmuladorVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiNgrokVagaPesquisa, { search });
+      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\SalvarVagaController;
 
+Route::get('/salvarVaga/{idUsuario}', [SalvarVagaController::class, 'index']);
 Route::post('/salvarVaga',[SalvarVagaController::class, 'store']);
 Route::delete('/salvarVaga', [SalvarVagaController::class, 'destroy']);
 
