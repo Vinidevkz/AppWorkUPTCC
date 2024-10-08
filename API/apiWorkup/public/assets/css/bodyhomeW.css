@@ -1,12 +1,9 @@
-body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background-image: url("../img/home/fundobranco.png");
-      background-repeat: no-repeat;
+/* Cabeçalho */
+.quemsomosf {
+      background-image: url("../img/home/fundocinza.png");
+      width: 100vw;
+      height: 100vh;
       background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
 }
 
 .logoheader {
@@ -24,24 +21,20 @@ body {
       text-align: center;
 }
 
-.depoimento {
-      background-color: #f7f0f0;
-      margin-top: 55px;
-      color: #020502;
+/* Cards (row quem somos) */
+.rowsobrenos {
+      background-image: url("../img/home/f123.png");
+      border-radius: 30px;
+      padding: 55px;
+      margin-top: 5px;
+      margin-bottom: 40px;
 }
-
-.quemsomosf {
-      background-image: url("../img/home/fundocinza.png");
-      width: 100vw;
-      height: 100vh;
-      background-size: cover;
-}
-
 
 .card.mb-3 {
       border-radius: 10px;
-      filter: drop-shadow(0 5px 10px 0 #ffffff);
-      background-color: #ffffff;
+      filter: drop-shadow(0 5px 10px 0 #1bb12f);
+      background-color: #fcfcfc;
+      opacity: 1;
       padding: 20px;
       position: relative;
       z-index: 0;
@@ -61,19 +54,18 @@ body {
       border-radius: 32px;
       transform: scale(1);
       transform-origin: 65% 65%;
-      transition: transform 0.25s ease-out;
-}
-.card.h-60 {
-      padding: -45px -25px -25px -45px;
+      transition: transform 0.80s ease-out;
 }
 
 .card.mb-3:hover::before {
       transition-delay: 0.2s;
-      transform: scale(40);
+      transform: scale(50);
 }
 
 .card.mb-3:hover {
-      color: #0bff40;
+      color: #0b110d;
+      font-weight: 500;
+      font-family: 'Roboto', sans-serif;
 }
 
 .card.mb-3 p {
@@ -96,109 +88,24 @@ body {
       padding: 20px;
       width: 100%;
 }
-
-.rowsobrenos,
-.rowinovacoes,
-.rowdepoimento {
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-      padding: 40px 0;
-      margin-bottom: 40px;
-      margin-top: 5px;
+.cardimage {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f7f7f7;
+      width: 85%;
+      height: 50%;
+      margin: 30px;
 }
 
-.rowsobrenos {
-      background-image: url("../img/home/f123.png");
-      border-radius: 30px;
-      padding: 55px;
+.card.h-100 {
+      display: flex;
+      align-items: top;
+      justify-content: top;
+      width: 85%;
 }
 
-.rowinovacoes {
-      background-image: url("../img/home/f123.png");
-}
-
-.rowdepoimento {
-
-      
-      width: 100%;
-      height: auto;
-      /* Ajusta a altura automaticamente */
-}
-
-.text-container {
-      background-color: #848584e3;
-      border-radius: 8px 0 75px 0;
-      color: #0be903;
-}
-
-.text-title {
-      font-size: 2rem;
-      margin-bottom: 10px;
-}
-
-.text-subtitle {
-      font-size: 1.5rem;
-      margin-bottom: 15px;
-}
-
-.text-content {
-      font-size: 1rem;
-      line-height: 1.6;
-}
-
-@media (max-width: 768px) {
-      .text-title {
-            font-size: 1.75rem;
-      }
-
-      .text-subtitle {
-            font-size: 1.25rem;
-      }
-
-      .text-content {
-            font-size: 0.9rem;
-      }
-}
-
-.article {
-      position: relative;
-      border-radius: 16px;
-      background: #c7c7c7;
-      transition: all 0.4s ease-in-out;
-      overflow: hidden;
-      width: 300px;
-      margin-top: 20px;
-}
-
-article h2 {
-      margin: 0 0 18px;
-      font-family: "Poppins", sans-serif;
-      font-size: 1.9rem;
-      color: black;
-      transition: color 0.3s ease-out;
-}
-
-figure {
-      margin: 0;
-      aspect-ratio: 16 / 15;
-      overflow: hidden;
-}
-
-
-.btn-primary {
-      background-color: #88c486;
-      border-color: #51aa6b;
-}
-
-.btn-primary:hover {
-      background-color: #04974e;
-}
-
-.col-md-6 {
-      margin-top: 20px;
-}
-
+/* Modal */
 .modal-content {
       border-radius: 10px;
       background-color: #f7f7f7;
@@ -209,18 +116,39 @@ figure {
       margin-bottom: 20px;
 }
 
+.modal-content {
+      border: 5px solid black;
+      /* Borda preta */
+      background-color: rgb(235, 250, 220);
+}
+
+.modal-title {
+      position: relative;
+}
+
+.modal-title::after {
+      content: '';
+      display: block;
+      width: 100%;
+      height: 2px;
+      background-color: green;
+      /* Linha verde */
+      margin-top: 10px;
+      /* Espaço entre o título e a linha */
+}
+
+/* Laptop */
 .laptop-frame {
       display: flex;
-      width: 95%;
+      width: 100%;
       background-color: #54e447;
       border-radius: 20px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
       overflow: hidden;
       position: relative;
-      padding-top: 50.25%;
-      /* 9/16 * 100% */
+      padding-top: 50.85%;
+      margin-top: 20px;
       height: 0;
-
 }
 
 .laptop-screen {
@@ -245,24 +173,71 @@ figure {
       padding: 10px;
 }
 
-.card.h-70{
-      opacity: 1;
+/* Cards (row inovações) */
+.rowinovacoes {
+      background-image: url("../img/home/f123.png");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      padding: 40px 0;
+      margin-bottom: 40px;
 }
 
-.modal-content {
-      border: 5px solid black; /* Borda preta */
-      background-color: rgb(235, 250, 220);
-  }
-  
-  .modal-title {
-      position: relative;
-  }
-  
-  .modal-title::after {
-      content: '';
-      display: block;
+/* Depoimento */
+.rowdepoimento {
       width: 100%;
-      height: 2px;
-      background-color: green; /* Linha verde */
-      margin-top: 10px; /* Espaço entre o título e a linha */
-  }
+      height: auto;
+      padding: 40px 0;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      margin-bottom: 40px;
+}
+
+.depoimento {
+      background-color: #f7f0f0;
+      color: #020502;
+}
+
+.text-container {
+      background-color: #848584e3;
+      border-radius: 8px 0 75px 0;
+      color: #0be903;
+}
+
+/* Botões */
+.btn-primary {
+      background-color: #88c486;
+      border-color: #51aa6b;
+}
+
+.btn-primary:hover {
+      background-color: #04974e;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+      .text-title {
+            font-size: 1.75rem;
+      }
+
+      .text-subtitle {
+            font-size: 1.25rem;
+      }
+
+      .text-content {
+            font-size: 0.9rem;
+      }
+}
+
+/* Estilo geral */
+body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url("../img/home/fundobranco.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+}
