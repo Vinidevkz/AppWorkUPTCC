@@ -39,6 +39,10 @@ Route::get('/contato', function () {
 //email
 Route::post('/contato', [ContatoController::class, 'enviar']);
 
+Route::get('/logarAdmin', function () {
+    return view('logarAdmin');
+});
+
 /*
 |--------------------------------------------------------------------------
 | paginas de Empresa
