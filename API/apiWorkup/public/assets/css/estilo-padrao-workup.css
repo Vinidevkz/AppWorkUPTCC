@@ -1,0 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
+
+
+:root {
+    --verde: #20dd77;
+    --fundo: #f4f4f4;
+    --1b: #1b1b1b;
+}
+
+/*--tipografia--*/
+
+p {
+    color: var(--1b);
+    font-family: "DM Sans", serif;
+}
+
+h2 {
+    color: var(--1b);
+    font-weight: 300;
+}

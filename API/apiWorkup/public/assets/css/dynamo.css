@@ -379,55 +379,10 @@
   
   .contato-div-1 {
     height: 100%;
-    background-image: @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@100..900&display=swap');
-
-:root {
-  --navbar: #fff;
-  --fundo: #f8f8f8;
-  --rosa: #FD0051;
-  --branco: #fff;
-  --1b: #1b1b1b;
-  --f4: #f4f4f4;
-  --4d: #4d4d4d;
-  --back-home: url("../img/dynamo/background-home.png");
-  --back-sobre: url("../img/dynamo/background-sobre.png");
-  --back-parceiros: url("../img/dynamo/background-parceiros.png");
-  --back-contato: url("../img/dynamo/background-contato.png");
-  --txt-leve: 300;
-  --fonte-padrao: 0.9rem;
-  --font-1: 1.2rem;
-}
-
-.dark-mode:root {
-  --navbar: #1b1b1b;
-  --fundo: #0c0c0c;
-  --branco: #303030;
-  --1b: #f4f4f4;
-  --f4: #4d4d4d;
-  --4d: #f4f4f4;
-  --back-home: url("../img/dynamo/background-home-dark.png");
-  --back-sobre: url("../img/dynamo/background-sobre-dark.png");
-  --back-parceiros: url("../img/dynamo/background-parceiros-dark.png");
-  --back-contato: url("../img/dynamo/background-contato-dark.png");
-}
-
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  html {
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-  }
-  
-  body {
-    background-color: var(--fundo);
-    font-size: var(--fonte-padrao);
-    font-family: "DM Sans", sans-serif;
-    color: var(--1b);
+    background-image: url("../img/dynamo/fundo-contato.png");
+    background-position: center;
+    background-size: 150%;
+    background-repeat: no-repeat;
   }
 
   /*--tipografia--*/
@@ -498,12 +453,6 @@ p {
     height: 100vh;
     width: 100%;
     margin: 60px 0 60px 0;
-  }
-
-;
-    background-size: 150%;
-    background-repeat: no-repeat;
-    background-position: center;
   }
   
   .contato-div-2 {

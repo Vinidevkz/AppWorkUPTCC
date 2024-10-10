@@ -43,6 +43,10 @@ Route::get('/logarAdmin', function () {
     return view('logarAdmin');
 });
 
+Route::get('/novoEmpresa', function () {
+    return view('novoCadastroEmpresa');
+});
+
 /*
 |--------------------------------------------------------------------------
 | paginas de Empresa
