@@ -6,13 +6,9 @@
       background-size: cover;
 }
 
-.logoheader {
-      max-height: 800px;
-      width: auto;
-      margin-bottom: 20px;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+.Logoheader {
+      width: 100%;
+      height: auto;
 }
 
 .lead {
@@ -96,6 +92,7 @@
       width: 85%;
       height: 50%;
       margin: 30px;
+      margin-top: 75px;
 }
 
 .card.h-100 {
@@ -173,14 +170,15 @@
       padding: 10px;
 }
 
-/* Cards (row inovações) */
-.rowinovacoes {
+
+.rowjovens {
       background-image: url("../img/home/f123.png");
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
       padding: 40px 0;
       margin-bottom: 40px;
+      margin-top: 220px;
 }
 
 /* Depoimento */

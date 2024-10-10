@@ -1,42 +1,44 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
-    <link rel="icon" href="/img/icons/android-chrome-192x192.png" type="image/x-icon">
-    <title>WorkUP</title>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
+        <!-- Favicon -->
+        <link rel="icon" href="/img/icons/android-chrome-192x192.png" type="image/x-icon">
+        <title>WorkUP</title>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.bunny.net">
+        <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
 
-    <!-- jQuery and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
-        crossorigin="anonymous"></script>
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+        <!-- jQuery and Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
 
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="assets/css/bodyhomeW.css">
+        <!-- Font Awesome -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-    <link rel="stylesheet" href="assets/css/cssHomeWup/navbarhomeW.css">
+        <!-- Custom CSS -->
+        <link rel="stylesheet" href="assets/css/bodyhomeW.css">
 
-    <link rel="stylesheet" href="assets/css/cssHomeWup/footerhomeW.css">
+        <link rel="stylesheet" href="assets/css/cssHomeWup/navbarhomeW.css">
 
-    <!-- Custom JS -->
-    <!-- <script src="/resources/js/homew.js" async></script> -->
+        <link rel="stylesheet" href="assets/css/cssHomeWup/footerhomeW.css">
 
-</head>
+        <!-- Custom JS -->
+        <!-- <script src="/resources/js/homew.js" async></script> -->
+
+    </head>
 
 <body>
 
@@ -114,7 +116,7 @@
                 <div class="row gx-5 align-items-center justify-content-center">
                     <div class="col-lg-8 col-xl-7 col-xxl-6">
                         <div class="my-6 text-center text-xl-start">
-                            <img src="{{url('/assets/img/home/workuplogo.png')}}" alt="Logoheader"
+                            <img class="Logoheader" src="{{url('/assets/img/home/workuplogo.png')}}" alt="Logoheader"
                                 class="logoheader mb-3">
                             <p class="lead fw-normal text-white mb-4">Ligando mentes inovadoras a empresas brilhantes
                             </p>
@@ -125,7 +127,7 @@
                         </div>
                     </div>
                     <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                        <img class="img-fluid rounded-4 my-0" src="{{url('/assets/img/home/cell2.png')}}"
+                        <img class="img-fluid rounded-4 my-0" src="{{url('/assets/img/home/smart.png')}}"
                             alt="imgHeader" />
                     </div>
                 </div>
@@ -141,19 +143,17 @@
                 <div class="row" style="margin-top: 20px;">
 
                     <div class="col-md-12">
-                        <h1>Sobre nós</h1>
+                        <h1>Quem Somos</h1>
                     </div>
                     <div class="col-md-6">
                         <!-- Card 1 (Sobre nós) -->
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h6 class="card-subtitle text-muted">Nossa missão e visão</h6>
-                                <p>Somos uma plataforma dedicada a unir jovens talentos e empresas em busca da primeira
-                                    grande oportunidade. Acreditamos que todos merecem uma chance de brilhar, e nossa
-                                    missão é fazer essa conexão acontecer.</p>
+                                <p>No WorkUp, acreditamos que cada jovem merece a chance de iniciar sua trajetória profissional com o pé direito. Somos uma equipe dedicada a criar um ambiente onde estudantes podem encontrar oportunidades de emprego e empresas podem descobrir novos ...</p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalSobreNos">
-                                    Abrir
+                                    Saiba mais
                                 </button>
                             </div>
                         </div>
@@ -191,7 +191,7 @@
                     <div class="col-md-6">
                         <!-- Card maior (apenas imagem) -->
                         <div class="cardimage">
-                            <img src="{{url('/assets/img/home/1.png')}}" alt="" class="card-img-top" alt="Imagem 3">
+                            <img src="{{url('/assets/img/home/3.png')}}" alt="" class="card-img-top" alt="Imagem 3">
                         </div>
                     </div>
                     <div class="col-md-6">
@@ -199,9 +199,7 @@
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h6 class="card-subtitle text-muted">Nossa missão e visão</h6>
-                                <p>Somos uma plataforma dedicada a unir jovens talentos e empresas em busca da primeira
-                                    grande oportunidade. Acreditamos que todos merecem uma chance de brilhar, e nossa
-                                    missão é fazer essa conexão acontecer.</p>
+                                <p>Os jovens são o coração do WorkUp. Entendemos as dificuldades enfrentadas por quem está começando a busca pelo primeiro emprego e estamos aqui para ajudar. Nosso aplicativo permite que estudantes criem perfis detalhados, destacando suas habilidades, experiências e ambições. Além disso, oferecemos orientações e dicas valiosas para preparar nossos jovens para o sucesso profissional. No WorkUp, cada jovem é valorizado e incentivado a alcançar todo o seu potencial.</p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalJovens">
                                     Abrir
@@ -219,16 +217,14 @@
                 <div class="row" style="margin-top: 20px;">
 
                     <div class="col-md-12">
-                        <h1>Sobre nós</h1>
+                        <h1>Nossa Missão</h1>
                     </div>
                     <div class="col-md-6">
                         <!-- Card 1 (Sobre nós) -->
                         <div class="card mb-3">
                             <div class="card-body">
                                 <h6 class="card-subtitle text-muted">Nossa missão e visão</h6>
-                                <p>Somos uma plataforma dedicada a unir jovens talentos e empresas em busca da primeira
-                                    grande oportunidade. Acreditamos que todos merecem uma chance de brilhar, e nossa
-                                    missão é fazer essa conexão acontecer.</p>
+                                <p>Nosso objetivo é proporcionar uma plataforma eficiente e amigável que conecta jovens talentos a empresas em busca de inovação e energia. Com o WorkUp, pretendemos facilitar o encontro entre estudantes e empregadores, oferecendo recursos que vão desde a criação de perfis e candidaturas até a publicação de vagas e oportunidades. Queremos tornar o processo de entrada no mercado de trabalho mais acessível e menos desafiador para todos.</p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                     data-bs-target="#modalSobreNos">
                                     Abrir
@@ -301,15 +297,13 @@
                     <div class="modal-body">
 
                         <p class="mt-3">
-                            Somos uma empresa dedicada a fornecer soluçõe
-                    </div>s inovadoras no campo da tecnologia. Nossa missão é entregar produtos de
-                    alta qualidade que atendam às necessidades de nossos clientes, sempre com foco
-                    em excelência e inovação .
+                        No WorkUp, acreditamos que cada jovem merece a chance de iniciar sua trajetória profissional com o pé direito. Somos uma equipe dedicada a criar um ambiente onde estudantes podem encontrar oportunidades de emprego e empresas podem descobrir novos talentos. Nossa missão é conectar e simplificar a busca pelo primeiro emprego, promovendo um futuro promissor para todos os nossos usuários.
                     </p>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <  /div>
+                    < /div>
                 </div>
             </div>
         </div>
@@ -439,10 +433,10 @@
                     <div class="single_footer">
                         <h4>Paginas parceiras</h4>
                         <ul>
-                            <li><a href="#">ciee</a></li>
-                            <li><a href="#">descomplica</a></li>
-                            <li><a href="#">Fatec</a></li>
-                            <li><a href="#">UNIVESP</a></li>
+                            <li><a href="https://portal.ciee.org.br/" target="_blank">ciee</a></li>
+                            <li><a href="https://descomplica.com.br/" target="_blank">descomplica</a></li>
+                            <li><a href="https://www.fatecsp.br/" target="_blank">Fatec</a></li>
+                            <li><a href="https://univesp.br/" target="_blank">UNIVESP</a></li>
                         </ul>
                     </div>
                 </div>

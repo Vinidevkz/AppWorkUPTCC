@@ -7,6 +7,8 @@
     padding: 0;
 }
 
+
+
 body {
     font-family: "DM Sans", sans-serif;
     background-color: #f4f4f4;
@@ -19,7 +21,7 @@ section .linha-index {
 
 .col-index-1 {
     font-family: "Glacial Indifference", sans-serif;
-    background-image: url("../img/login/fundo-index-1.png");
+    background-image: url("../img/login/formss.png");
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -169,7 +171,7 @@ section .linha-index {
         display: none; /* Esconder a coluna da imagem em telas pequenas */
     }
     .col-index-2 {
-        background-image: url("../img/login/fundo-index-1.png"); /* Usar a mesma imagem de fundo na coluna do formulário */
+        background-image: url("../img/login/formss.png"); /* Usar a mesma imagem de fundo na coluna do formulário */
         background-size: cover;
     }
 }

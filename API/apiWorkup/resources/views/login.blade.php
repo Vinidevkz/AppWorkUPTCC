@@ -19,7 +19,7 @@
                             <p>Seja bem vindo ao nosso site</p>
                         </div>
                         <div class="col-1-2">
-                            <img src="{{url('assets/img/login/col-img-1-2.png')}}" alt="">
+                            <img src="{{url('assets/img/login/pcworkup.png')}}" alt="">
                         </div>
                     </div>
                 </div>
