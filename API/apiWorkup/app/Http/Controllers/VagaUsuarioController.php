@@ -103,8 +103,8 @@ class VagaUsuarioController extends Controller
         $candidatos = VagaUsuario::where('idVaga', $idVaga)
             ->with(['usuario', 'status']) // Inclui a relação status
             ->get();
-    
-        return view('verVagaCadastrada', compact('vaga', 'candidatos'));
+            $empresa = Auth::guard('empresa')->user(); // Obter a empresa autenticada
+        return view('verVagaCadastrada', compact('vaga', 'candidatos', 'empresa'));
     }
 
     public function aprovarCandidatura($id)

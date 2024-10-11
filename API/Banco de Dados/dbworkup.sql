@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Out-2024 às 22:20
--- Versão do servidor: 10.4.28-MariaDB
--- versão do PHP: 8.2.4
+-- Tempo de geração: 11/10/2024 às 06:35
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `failed_jobs`
+-- Estrutura para tabela `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -40,7 +40,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `migrations`
+-- Estrutura para tabela `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -50,7 +50,7 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `migrations`
+-- Despejando dados para a tabela `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
@@ -62,7 +62,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `password_resets`
+-- Estrutura para tabela `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -74,7 +74,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `personal_access_tokens`
+-- Estrutura para tabela `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -93,7 +93,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_admin`
+-- Estrutura para tabela `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -110,7 +110,7 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_admin`
+-- Despejando dados para a tabela `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `contatoAdmin`, `senhaAdmin`, `fotoAdmin`, `idStatus`, `created_at`, `updated_at`) VALUES
@@ -121,7 +121,7 @@ INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_area`
+-- Estrutura para tabela `tb_area`
 --
 
 CREATE TABLE `tb_area` (
@@ -130,7 +130,7 @@ CREATE TABLE `tb_area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_area`
+-- Despejando dados para a tabela `tb_area`
 --
 
 INSERT INTO `tb_area` (`idArea`, `nomeArea`) VALUES
@@ -153,7 +153,7 @@ INSERT INTO `tb_area` (`idArea`, `nomeArea`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_areainteresseusuario`
+-- Estrutura para tabela `tb_areainteresseusuario`
 --
 
 CREATE TABLE `tb_areainteresseusuario` (
@@ -163,7 +163,7 @@ CREATE TABLE `tb_areainteresseusuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_areainteresseusuario`
+-- Despejando dados para a tabela `tb_areainteresseusuario`
 --
 
 INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `idArea`, `idUsuario`) VALUES
@@ -175,7 +175,7 @@ INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `idArea`, `idUs
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_atuacaoempresa`
+-- Estrutura para tabela `tb_atuacaoempresa`
 --
 
 CREATE TABLE `tb_atuacaoempresa` (
@@ -185,7 +185,7 @@ CREATE TABLE `tb_atuacaoempresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_atuacaoempresa`
+-- Despejando dados para a tabela `tb_atuacaoempresa`
 --
 
 INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `idArea`, `idEmpresa`) VALUES
@@ -197,7 +197,7 @@ INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `idArea`, `idEmpresa`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_chat`
+-- Estrutura para tabela `tb_chat`
 --
 
 CREATE TABLE `tb_chat` (
@@ -205,13 +205,21 @@ CREATE TABLE `tb_chat` (
   `idMensagem` int(11) NOT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL,
-  `idAdmin` int(11) DEFAULT NULL
+  `idAdmin` int(11) DEFAULT NULL,
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_chat`
+--
+
+INSERT INTO `tb_chat` (`idChat`, `idMensagem`, `idEmpresa`, `idUsuario`, `idAdmin`, `created_at`) VALUES
+(2, 4, 10, 3, NULL, '2024-10-11 00:44:39');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_empresa`
+-- Estrutura para tabela `tb_empresa`
 --
 
 CREATE TABLE `tb_empresa` (
@@ -235,7 +243,7 @@ CREATE TABLE `tb_empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_empresa`
+-- Despejando dados para a tabela `tb_empresa`
 --
 
 INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailEmpresa`, `fotoEmpresa`, `sobreEmpresa`, `cnpjEmpresa`, `contatoEmpresa`, `senhaEmpresa`, `cidadeEmpresa`, `estadoEmpresa`, `LogradouroEmpresa`, `cepEmpresa`, `numeroLograEmpresa`, `idStatus`, `created_at`, `updated_at`) VALUES
@@ -252,7 +260,7 @@ INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailE
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_mensagem`
+-- Estrutura para tabela `tb_mensagem`
 --
 
 CREATE TABLE `tb_mensagem` (
@@ -260,13 +268,25 @@ CREATE TABLE `tb_mensagem` (
   `idUsuario` int(11) DEFAULT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idAdmin` int(11) DEFAULT NULL,
-  `mensagem` varchar(1000) NOT NULL
+  `mensagem` varchar(1000) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_mensagem`
+--
+
+INSERT INTO `tb_mensagem` (`idMensagem`, `idUsuario`, `idEmpresa`, `idAdmin`, `mensagem`, `created_at`, `updated_at`) VALUES
+(1, 3, 10, NULL, 'teste', '2024-10-11 00:20:19', '2024-10-11 00:20:19'),
+(2, 3, 10, NULL, 'dada', '2024-10-11 00:33:38', '2024-10-11 00:33:38'),
+(3, 3, 10, NULL, 'dada', '2024-10-11 00:34:09', '2024-10-11 00:34:09'),
+(4, 3, 10, NULL, 'teste', '2024-10-11 00:44:39', '2024-10-11 00:44:39');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_modalidadevaga`
+-- Estrutura para tabela `tb_modalidadevaga`
 --
 
 CREATE TABLE `tb_modalidadevaga` (
@@ -275,7 +295,7 @@ CREATE TABLE `tb_modalidadevaga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_modalidadevaga`
+-- Despejando dados para a tabela `tb_modalidadevaga`
 --
 
 INSERT INTO `tb_modalidadevaga` (`idModalidadeVaga`, `descModalidadeVaga`) VALUES
@@ -286,7 +306,7 @@ INSERT INTO `tb_modalidadevaga` (`idModalidadeVaga`, `descModalidadeVaga`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_publicacao`
+-- Estrutura para tabela `tb_publicacao`
 --
 
 CREATE TABLE `tb_publicacao` (
@@ -295,25 +315,48 @@ CREATE TABLE `tb_publicacao` (
   `fotoPublicacao` varchar(300) DEFAULT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idAdmin` int(11) DEFAULT NULL,
-  `idVaga` int(11) DEFAULT NULL
+  `idVaga` int(11) DEFAULT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_publicacao`
+--
+
+INSERT INTO `tb_publicacao` (`idPublicacao`, `detalhePublicacao`, `fotoPublicacao`, `idEmpresa`, `idAdmin`, `idVaga`, `updated_at`, `created_at`) VALUES
+(1, 'dada', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/publicacao%2F5.jpeg?alt=media&token=1d9fe248-6f83-4fcd-a308-30c578367b91', 10, NULL, 1, '2024-10-10 23:29:30', '2024-10-10 23:29:30');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_salvarvaga`
+-- Estrutura para tabela `tb_salvarvaga`
 --
 
 CREATE TABLE `tb_salvarvaga` (
   `idSalvarVaga` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `idVaga` int(11) NOT NULL
+  `idVaga` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_status`
+-- Estrutura para tabela `tb_seguir`
+--
+
+CREATE TABLE `tb_seguir` (
+  `idSeguir` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_status`
 --
 
 CREATE TABLE `tb_status` (
@@ -322,7 +365,7 @@ CREATE TABLE `tb_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_status`
+-- Despejando dados para a tabela `tb_status`
 --
 
 INSERT INTO `tb_status` (`idStatus`, `tipoStatus`) VALUES
@@ -333,7 +376,7 @@ INSERT INTO `tb_status` (`idStatus`, `tipoStatus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_statusvagausuario`
+-- Estrutura para tabela `tb_statusvagausuario`
 --
 
 CREATE TABLE `tb_statusvagausuario` (
@@ -342,7 +385,7 @@ CREATE TABLE `tb_statusvagausuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_statusvagausuario`
+-- Despejando dados para a tabela `tb_statusvagausuario`
 --
 
 INSERT INTO `tb_statusvagausuario` (`idStatusVagaUsuario`, `tipoStatusVaga`) VALUES
@@ -353,7 +396,7 @@ INSERT INTO `tb_statusvagausuario` (`idStatusVagaUsuario`, `tipoStatusVaga`) VAL
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_usuario`
+-- Estrutura para tabela `tb_usuario`
 --
 
 CREATE TABLE `tb_usuario` (
@@ -381,7 +424,7 @@ CREATE TABLE `tb_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_usuario`
+-- Despejando dados para a tabela `tb_usuario`
 --
 
 INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `areaInteresseUsuario`, `fotoUsuario`, `fotoBanner`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
@@ -397,7 +440,7 @@ INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUs
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_vaga`
+-- Estrutura para tabela `tb_vaga`
 --
 
 CREATE TABLE `tb_vaga` (
@@ -418,7 +461,7 @@ CREATE TABLE `tb_vaga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_vaga`
+-- Despejando dados para a tabela `tb_vaga`
 --
 
 INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidadeVaga`, `estadoVaga`, `beneficiosVaga`, `diferencialVaga`, `idEmpresa`, `idArea`, `idStatus`, `idModalidadeVaga`, `created_at`, `updated_at`) VALUES
@@ -434,7 +477,7 @@ INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidade
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_vagausuario`
+-- Estrutura para tabela `tb_vagausuario`
 --
 
 CREATE TABLE `tb_vagausuario` (
@@ -444,10 +487,18 @@ CREATE TABLE `tb_vagausuario` (
   `idStatusVagaUsuario` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Despejando dados para a tabela `tb_vagausuario`
+--
+
+INSERT INTO `tb_vagausuario` (`idVagaUsuario`, `idUsuario`, `idVaga`, `idStatusVagaUsuario`) VALUES
+(1, 1, 8, 1),
+(2, 3, 8, 2);
+
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -466,26 +517,26 @@ CREATE TABLE `users` (
 --
 
 --
--- Índices para tabela `failed_jobs`
+-- Índices de tabela `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Índices para tabela `migrations`
+-- Índices de tabela `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `password_resets`
+-- Índices de tabela `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Índices para tabela `personal_access_tokens`
+-- Índices de tabela `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -493,20 +544,20 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Índices para tabela `tb_admin`
+-- Índices de tabela `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`idAdmin`),
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_area`
+-- Índices de tabela `tb_area`
 --
 ALTER TABLE `tb_area`
   ADD PRIMARY KEY (`idArea`);
 
 --
--- Índices para tabela `tb_areainteresseusuario`
+-- Índices de tabela `tb_areainteresseusuario`
 --
 ALTER TABLE `tb_areainteresseusuario`
   ADD PRIMARY KEY (`idAreaInteresseUsuario`),
@@ -514,7 +565,7 @@ ALTER TABLE `tb_areainteresseusuario`
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Índices para tabela `tb_atuacaoempresa`
+-- Índices de tabela `tb_atuacaoempresa`
 --
 ALTER TABLE `tb_atuacaoempresa`
   ADD PRIMARY KEY (`idAtuacaoEmpresa`),
@@ -522,7 +573,7 @@ ALTER TABLE `tb_atuacaoempresa`
   ADD KEY `idEmpresa` (`idEmpresa`);
 
 --
--- Índices para tabela `tb_chat`
+-- Índices de tabela `tb_chat`
 --
 ALTER TABLE `tb_chat`
   ADD PRIMARY KEY (`idChat`),
@@ -532,26 +583,26 @@ ALTER TABLE `tb_chat`
   ADD KEY `idMensagem` (`idMensagem`);
 
 --
--- Índices para tabela `tb_empresa`
+-- Índices de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
   ADD PRIMARY KEY (`idEmpresa`),
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_mensagem`
+-- Índices de tabela `tb_mensagem`
 --
 ALTER TABLE `tb_mensagem`
   ADD PRIMARY KEY (`idMensagem`);
 
 --
--- Índices para tabela `tb_modalidadevaga`
+-- Índices de tabela `tb_modalidadevaga`
 --
 ALTER TABLE `tb_modalidadevaga`
   ADD PRIMARY KEY (`idModalidadeVaga`);
 
 --
--- Índices para tabela `tb_publicacao`
+-- Índices de tabela `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
   ADD PRIMARY KEY (`idPublicacao`),
@@ -560,7 +611,7 @@ ALTER TABLE `tb_publicacao`
   ADD KEY `idVaga` (`idVaga`);
 
 --
--- Índices para tabela `tb_salvarvaga`
+-- Índices de tabela `tb_salvarvaga`
 --
 ALTER TABLE `tb_salvarvaga`
   ADD PRIMARY KEY (`idSalvarVaga`),
@@ -568,26 +619,34 @@ ALTER TABLE `tb_salvarvaga`
   ADD KEY `idVaga` (`idVaga`);
 
 --
--- Índices para tabela `tb_status`
+-- Índices de tabela `tb_seguir`
+--
+ALTER TABLE `tb_seguir`
+  ADD PRIMARY KEY (`idSeguir`),
+  ADD KEY `idEmpresa` (`idEmpresa`),
+  ADD KEY `idUsuario` (`idUsuario`);
+
+--
+-- Índices de tabela `tb_status`
 --
 ALTER TABLE `tb_status`
   ADD PRIMARY KEY (`idStatus`);
 
 --
--- Índices para tabela `tb_statusvagausuario`
+-- Índices de tabela `tb_statusvagausuario`
 --
 ALTER TABLE `tb_statusvagausuario`
   ADD PRIMARY KEY (`idStatusVagaUsuario`);
 
 --
--- Índices para tabela `tb_usuario`
+-- Índices de tabela `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
   ADD PRIMARY KEY (`idUsuario`),
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_vaga`
+-- Índices de tabela `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
   ADD PRIMARY KEY (`idVaga`),
@@ -597,7 +656,7 @@ ALTER TABLE `tb_vaga`
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_vagausuario`
+-- Índices de tabela `tb_vagausuario`
 --
 ALTER TABLE `tb_vagausuario`
   ADD PRIMARY KEY (`idVagaUsuario`),
@@ -606,14 +665,14 @@ ALTER TABLE `tb_vagausuario`
   ADD KEY `idStatusVagaUsuario` (`idStatusVagaUsuario`);
 
 --
--- Índices para tabela `users`
+-- Índices de tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -662,7 +721,7 @@ ALTER TABLE `tb_atuacaoempresa`
 -- AUTO_INCREMENT de tabela `tb_chat`
 --
 ALTER TABLE `tb_chat`
-  MODIFY `idChat` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idChat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `tb_empresa`
@@ -674,7 +733,7 @@ ALTER TABLE `tb_empresa`
 -- AUTO_INCREMENT de tabela `tb_mensagem`
 --
 ALTER TABLE `tb_mensagem`
-  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tb_modalidadevaga`
@@ -686,13 +745,19 @@ ALTER TABLE `tb_modalidadevaga`
 -- AUTO_INCREMENT de tabela `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT de tabela `tb_salvarvaga`
 --
 ALTER TABLE `tb_salvarvaga`
   MODIFY `idSalvarVaga` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de tabela `tb_seguir`
+--
+ALTER TABLE `tb_seguir`
+  MODIFY `idSeguir` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_status`
@@ -722,7 +787,7 @@ ALTER TABLE `tb_vaga`
 -- AUTO_INCREMENT de tabela `tb_vagausuario`
 --
 ALTER TABLE `tb_vagausuario`
-  MODIFY `idVagaUsuario` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idVagaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de tabela `users`
@@ -731,31 +796,31 @@ ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `tb_admin`
+-- Restrições para tabelas `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD CONSTRAINT `tb_admin_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_areainteresseusuario`
+-- Restrições para tabelas `tb_areainteresseusuario`
 --
 ALTER TABLE `tb_areainteresseusuario`
   ADD CONSTRAINT `tb_areainteresseusuario_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
   ADD CONSTRAINT `tb_areainteresseusuario_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`);
 
 --
--- Limitadores para a tabela `tb_atuacaoempresa`
+-- Restrições para tabelas `tb_atuacaoempresa`
 --
 ALTER TABLE `tb_atuacaoempresa`
   ADD CONSTRAINT `tb_atuacaoempresa_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
   ADD CONSTRAINT `tb_atuacaoempresa_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
 
 --
--- Limitadores para a tabela `tb_chat`
+-- Restrições para tabelas `tb_chat`
 --
 ALTER TABLE `tb_chat`
   ADD CONSTRAINT `tb_chat_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
@@ -764,13 +829,13 @@ ALTER TABLE `tb_chat`
   ADD CONSTRAINT `tb_chat_ibfk_4` FOREIGN KEY (`idMensagem`) REFERENCES `tb_mensagem` (`idMensagem`);
 
 --
--- Limitadores para a tabela `tb_empresa`
+-- Restrições para tabelas `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
   ADD CONSTRAINT `tb_empresa_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_publicacao`
+-- Restrições para tabelas `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
   ADD CONSTRAINT `tb_publicacao_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
@@ -778,20 +843,27 @@ ALTER TABLE `tb_publicacao`
   ADD CONSTRAINT `tb_publicacao_ibfk_3` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
 
 --
--- Limitadores para a tabela `tb_salvarvaga`
+-- Restrições para tabelas `tb_salvarvaga`
 --
 ALTER TABLE `tb_salvarvaga`
   ADD CONSTRAINT `tb_salvarvaga_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
   ADD CONSTRAINT `tb_salvarvaga_ibfk_2` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
 
 --
--- Limitadores para a tabela `tb_usuario`
+-- Restrições para tabelas `tb_seguir`
+--
+ALTER TABLE `tb_seguir`
+  ADD CONSTRAINT `tb_seguir_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
+  ADD CONSTRAINT `tb_seguir_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`);
+
+--
+-- Restrições para tabelas `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
   ADD CONSTRAINT `tb_usuario_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_vaga`
+-- Restrições para tabelas `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
   ADD CONSTRAINT `tb_vaga_ibfk_3` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
@@ -800,7 +872,7 @@ ALTER TABLE `tb_vaga`
   ADD CONSTRAINT `tb_vaga_ibfk_6` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_vagausuario`
+-- Restrições para tabelas `tb_vagausuario`
 --
 ALTER TABLE `tb_vagausuario`
   ADD CONSTRAINT `idUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,

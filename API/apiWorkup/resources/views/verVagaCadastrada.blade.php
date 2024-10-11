@@ -17,6 +17,16 @@
                     @csrf
                     <button type="submit" class="btn btn-danger">Negar</button>
                 </form>
+                
+                <form action="{{ route('mensagem.create', ['idUsuario' => $candidato->idUsuario, 'idEmpresa' => $empresa->idEmpresa]) }}" method="GET" style="display:inline;">
+    <button type="submit" class="btn btn-danger">Mandar Mensagem</button>
+</form>
+
+     
+
+
+
+
             </li>
         @endforeach
     </ul>

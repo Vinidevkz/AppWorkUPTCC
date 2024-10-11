@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\SalvarVaga;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\Seguir;
 
-class SalvarVagaController extends Controller
+class SeguirController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,25 +15,24 @@ class SalvarVagaController extends Controller
      */
     public function index($idUsuario)
     {
-        // Validação do parâmetro de rota
-        if (!is_numeric($idUsuario)) {
-            return response()->json([
-                'message' => 'O id do usuario deve ser um número inteiro',
-            ], 400);
-        }
-    
-        try {
-            $vagasSalvas = SalvarVaga::where('idUsuario', $idUsuario)->get();
-    
-            return response()->json($vagasSalvas, 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'message' => 'Erro ao buscar vagas salvas',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+                // Validação do parâmetro de rota
+                if (!is_numeric($idUsuario)) {
+                    return response()->json([
+                        'message' => 'O id do usuario deve ser um número inteiro',
+                    ], 400);
+                }
+            
+                try {
+                    $seguindo = Seguir::where('idUsuario', $idUsuario)->get();
+            
+                    return response()->json($seguindo, 200);
+                } catch (\Exception $e) {
+                    return response()->json([
+                        'message' => 'Erro ao buscar vagas salvas',
+                        'error' => $e->getMessage(),
+                    ], 500);
+                }
     }
-    
 
     /**
      * Show the form for creating a new resource.
@@ -57,40 +55,37 @@ class SalvarVagaController extends Controller
         $request->validate(
             [
                 'idUsuario' => 'required',
-                'idVaga' => 'required',
+                'idEmpresa' => 'required',
             ],
             [
                 'idUsuario.required' => 'Não está logado',
-                'idVaga.required' => 'Selecione uma vaga',
+                'idEmpresa.required' => 'Selecione uma Empresa',
             ]
         );
     
         $idUsuario = $request->idUsuario; // Obtenha do corpo da requisição
-        $idVaga = $request->idVaga; // Obtenha do corpo da requisição
+        $idEmpresa = $request->idEmpresa; // Obtenha do corpo da requisição
+        
     
         try {
-            $vagaSalva = new SalvarVaga();
-            $vagaSalva->idUsuario = $idUsuario;
-            $vagaSalva->idVaga = $idVaga;
-            $vagaSalva-> created_at = now();
+            $seguindo = new Seguir();
+            $seguindo->idUsuario = $idUsuario;
+            $seguindo->idEmpresa = $idEmpresa;
+            $seguindo->created_at = now();
     
-            if ($vagaSalva->save()) {
-                return response()->json(['message' => 'Vaga salva com sucesso!'], 201);
+            if ($seguindo->save()) {
+                return response()->json(['message' => 'seguindo Empresa com sucesso!'], 201);
             } else {
-                return response()->json(['message' => 'Erro ao salvar a vaga.'], 500);
+                return response()->json(['message' => 'Erro ao seguir a empresa.'], 500);
             }
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Erro ao salvar a vaga.',
+                'message' => 'Erro ao seguir a empresa.',
                 'error' => $e->getMessage(), // Mensagem de erro detalhada
                 'code' => $e->getCode() // Código de erro, se disponível
             ], 500);
         }
     }
-    
-    
-    
-    
 
     /**
      * Display the specified resource.
@@ -137,40 +132,39 @@ class SalvarVagaController extends Controller
         $request->validate(
             [
                 'idUsuario' => 'required',
-                'idVaga' => 'required',
+                'idEmpresa' => 'required',
             ],
             [
                 'idUsuario.required' => 'Não está logado',
-                'idVaga.required' => 'Selecione uma vaga',
+                'idEmpresa.required' => 'Selecione uma empresa',
             ]
         );
     
         $idUsuario = $request->idUsuario;
-        $idVaga = $request->idVaga;
+        $idEmpresa = $request->idEmpresa;
     
         try {
-            // Encontre a vaga salva com base no idUsuario e idVaga
-            $vagaSalva = SalvarVaga::where('idUsuario', $idUsuario)
-                ->where('idVaga', $idVaga)
+            // Encontre a empresa seguindo com base no idUsuario e idEmpresa
+            $seguindo = Seguir::where('idUsuario', $idUsuario)
+                ->where('idEmpresa', $idEmpresa)
                 ->first();
     
             // Verifique se o salvamento foi encontrado
-            if (!$vagaSalva) {
-                return response()->json(['message' => 'Salvamento não encontrado.'], 404);
+            if (!$seguindo) {
+                return response()->json(['message' => 'Seguindo não encontrado.'], 404);
             }
     
             // Exclua o registro
-            if ($vagaSalva->delete()) {
-                return response()->json(['message' => 'Vaga removida com sucesso!'], 200);
+            if ($seguindo->delete()) {
+                return response()->json(['message' => 'Seguindo removida com sucesso!'], 200);
             } else {
-                return response()->json(['message' => 'Erro ao remover a vaga.'], 500);
+                return response()->json(['message' => 'Erro ao parar de seguir.'], 500);
             }
         } catch (\Exception $e) {
             return response()->json([
-                'message' => 'Erro ao tentar remover a vaga.',
+                'message' => 'Erro ao tentar parar de seguir a empresa.',
                 'error' => $e->getMessage(),
             ], 500);
         }
     }
-    
 }

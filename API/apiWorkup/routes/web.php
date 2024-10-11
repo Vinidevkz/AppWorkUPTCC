@@ -11,10 +11,17 @@ use App\Http\Controllers\VagaUsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContatoController;
 use App\http\Controllers\PostController;
-
+use App\http\Controllers\MensagemController;
 
 // mexendo
-Route::get('/postar', [PostController::class, 'create'])->name('post.create');
+//ver mensagens
+Route::get('/mensagens', [MensagemController::class, 'index'])->name('mensagens.index');
+//mandar mensagens
+Route::get('/mensagem/{idUsuario}/{idEmpresa}', [MensagemController::class, 'create'])->name('mensagem.create');
+Route::post('/mensagem', [MensagemController::class, 'store'])->name('mensagem.store');
+// Post
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth:empresa');
+Route::get('/postar/{id}', [PostController::class, 'create'])->name('post.create');
 Route::post('/postar', [PostController::class, 'store'])->name('post.store');
 
 
