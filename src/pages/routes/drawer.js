@@ -3,10 +3,13 @@ import { NavigationContainer } from "@react-navigation/native";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
+import TabBar from "./tabbar.js";
 import MinhasVagas from "../minhasvagas.js";
 import VagasSalvas from "../vagassalvas.js";
 import Vagas from "../vagas.js";
 import Home from "../home.js";
+import Conversas from "../conversas.js";
+import Chat from "../chat.js";
 
 import styles from "../../styles/home";
 
@@ -43,8 +46,8 @@ export default function AppDrawer() {
         }}
       >
         <Drawer.Screen
-          name="Home"
-          component={Home}
+          name="TabBar"
+          component={TabBar}
           options={{
             headerShown: false,
             drawerItemStyle: { display: "none" }, // Oculta a tela Home no drawer
@@ -108,6 +111,48 @@ export default function AppDrawer() {
             ),
           }}
         />
+               
+        {/* <Drawer.Screen
+          name="Conversas"
+          component={Conversas}
+          options={{
+            drawerItemStyle: { display: "none" },
+            drawerLabelStyle: {
+              color: theme.textColor,
+              fontFamily: "DMSansRegular",
+              fontSize: 15,
+            },
+            headerShown: false,
+            drawerIcon: ({ color }) => (
+              <Ionicons
+                name="bookmark" // Usa savedIcons
+                size={24}
+                color={theme.iconColorGreen || color}
+              /> // Ícone aqui
+            ),
+          }}
+        />
+
+ <Drawer.Screen
+          name="Chat"
+          component={Chat}
+          options={{
+            drawerItemStyle: { display: "none" },
+            drawerLabelStyle: {
+              color: theme.textColor,
+              fontFamily: "DMSansRegular",
+              fontSize: 15,
+            },
+            headerShown: false,
+            drawerIcon: ({ color }) => (
+              <Ionicons
+                name="bookmark" // Usa savedIcons
+                size={24}
+                color={theme.iconColorGreen || color}
+              /> // Ícone aqui
+            ),
+          }}
+        />  */}
       </Drawer.Navigator>
     </NavigationContainer>
   );

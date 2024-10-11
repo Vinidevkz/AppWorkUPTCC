@@ -28,7 +28,8 @@ import Vaga from "../vagas.js";
 import Configurações from "../configuracoes.js";
 import ProfileChange from "../profilechange.js";
 import Search from "../search.js";
-
+import Conversas from "../conversas.js";
+import Chat from "../chat.js";
 
 function Welcome({ navigation }) {
   //Carregador de fontes
@@ -101,7 +102,7 @@ function Welcome({ navigation }) {
           </TouchableOpacity>
         </View>
       </View>
-      <View style={styles.Footer}>                              
+      <View style={styles.Footer}>
         <Text style={[styles.DMSansRegular, styles.footerText]}>
           Ao se cadastrar ou logar, você concorda com nossos{" "}
           <TouchableOpacity>
@@ -175,10 +176,20 @@ export default function App() {
               component={ProfileChange}
               options={{ headerShown: false }}
             />
-                        <Stack.Screen
+            <Stack.Screen
               name="Search"
               component={Search}
               options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Conversas"
+              component={Conversas}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="Chat"
+              component={Chat}
+              options={{headerShown: false}}
             />
           </Stack.Navigator>
         </NavigationContainer>

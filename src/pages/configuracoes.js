@@ -12,6 +12,8 @@ import styles from "../styles/configuracoes";
 
 import Feather from "@expo/vector-icons/Feather";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function Configurações({ navigation }) {
   const { theme, toggleTheme } = useTheme();
@@ -59,6 +61,21 @@ export default function Configurações({ navigation }) {
                 size={24}
                 color={theme.iconColorWhite}
               />
+            </TouchableOpacity>
+          </View>
+        </View>
+
+        <View style={{padding: 20, borderRadius: 15, backgroundColor: theme.backgroundColorNavBar}}>
+          <View style={[styles.infosCont, {flexDirection: 'column', alignItems: 'flex-start', gap: 25}]}>
+            <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Opções:</Text>
+            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+             <MaterialCommunityIcons name="bookmark" size={24} color="#20dd77" />
+             <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Minhas Vagas</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+              <MaterialIcons name="work" size={24} color="#20dd77" />
+             <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Minhas Vagas</Text>
             </TouchableOpacity>
           </View>
         </View>

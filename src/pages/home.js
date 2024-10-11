@@ -36,7 +36,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(apiEmuladorVaga);
+      const response = await axios.get(apiNgrokVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -54,7 +54,7 @@ export default function Home({ navigation }) {
 
   const salvarVaga = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const url = apiEmuladorSalvarVaga; // Use a URL base sem parâmetros na URL
+    const url = apiNgrokSalvarVaga; // Use a URL base sem parâmetros na URL
     
     const body = {
       idUsuario: idUsuario,
@@ -92,7 +92,7 @@ export default function Home({ navigation }) {
 
   const removerVagaSalva = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const url = apiEmuladorCancelSalvarVaga; // Use a URL sem parâmetros na rota
+    const url = apiNgrokCancelSalvarVaga; // Use a URL sem parâmetros na rota
   
     try {
       const response = await fetch(url, {
@@ -158,10 +158,7 @@ export default function Home({ navigation }) {
         <Image source={theme.WUPLogo} style={styles.WUPstyle} />
         <View style={styles.iconBox}>
           <TouchableOpacity>
-            <Ionicons name="chatbubbles" size={30} color={theme.iconColorWhite} />
-          </TouchableOpacity>
-          <TouchableOpacity onPress={() => navigation.openDrawer()}>
-            <Entypo name="menu" size={35} color={theme.iconColorWhite} />
+            <Ionicons name="chatbubbles" size={35} color={theme.iconColorWhite} onPress={() => navigation.navigate("Conversas")}/>
           </TouchableOpacity>
         </View>
       </View>

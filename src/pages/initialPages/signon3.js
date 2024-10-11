@@ -126,7 +126,7 @@ export default function SignON3({ navigation }) {
       dataToSend.formacaoCompetenciaUsuario = "formacao";
       dataToSend.dataFormacaoCompetenciaUsuario = "2012-12-12";
 
-      const response = await fetch(apiEmuladorCad, {
+      const response = await fetch(apiNgrokCad, {
         method: "POST",
         headers: {
           Accept: "application/json",
