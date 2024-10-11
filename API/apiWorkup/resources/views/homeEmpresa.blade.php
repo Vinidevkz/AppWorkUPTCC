@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
@@ -37,14 +38,24 @@
                         @endif
 
                 </div>
+
+                
                 
                 <div class="col">
                     <div class="row row-card flex flex-column justify-content-around align-items-center">
                          <button class="botao-card botao-vaga"> <a href="/cadastrarVaga" class="text-light"> Criar vaga <i class="fa-solid fa-plus"></i></button></a>
                         <button class="botao-card botao-vaga"> <a href="/logout" class="text-light">Sair</a></i></button>
-                        
+                        <button class="botao-card botao-vaga"> <a href="/mensagens" class="text-light"> Ver mensagens<i class="fa-solid fa-plus"></i></button></a>
+                        <button class="botao-card botao-vaga"> <a href="/posts" class="text-light"> Ver Posts<i class="fa-solid fa-plus"></i></button></a>
                         <button class="botao-card botao-post">
-                            <a href="{{ route('post.create') }}" class="text-light">Fazer post</a>
+                        @if (Auth::guard('empresa')->check())
+                        @php
+        $empresa = Auth::guard('empresa')->user();
+    @endphp
+    <a href="{{ route('post.create', $empresa->idEmpresa) }}" class="text-light">Fazer post</a>
+@endif
+
+
                         </button>
                     </div>
                 </div>

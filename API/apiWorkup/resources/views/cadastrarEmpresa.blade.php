@@ -137,7 +137,7 @@
                             </div>
 
                             <div class="form__group field">
-                                <input type="file" id="fileInput" class="form-control custom-input" name="fotoEmpresa" placeholder="Foto da Empresa" value="getImageUrl">
+                                <input type="file" id="fileInput" class="form-control custom-input" name="fotoEmpresa" placeholder="Foto da Empresa" value="url">
                                 <label for="fotoEmpresa" class="form__label">Foto da Empresa</label>
                                 <div id="preview">
                                         <img id="imagePreview" src="" alt="" style="display:none; max-width: 300px; max-height: 300px;">
@@ -233,14 +233,32 @@
 
                 reader.readAsDataURL(selectedFile); // Lê o conteúdo do arquivo como uma URL de dados
             }
-        });
-
-        document.getElementById('foto').addEventListener('click', function() {
             if (selectedFile) {
-                const storageRef = ref(storage, `images/${selectedFile.name}`); // Cria uma referência no Storage
+                const storageRef = ref(storage, `publicacao/${selectedFile.name}`); // Cria uma referência no Storage
 
                 uploadBytes(storageRef, selectedFile).then(() => {
                     console.log('Arquivo enviado com sucesso!');
+
+                    
+                    getDownloadURL(storageRef)
+                .then((url) => {
+                    console.log('URL da imagem:', url);
+                    const img = document.getElementById('imagePreview');
+                    img.src = url; // Define a URL da imagem como src do elemento img
+                    img.style.display = 'block'; // Exibe a imagem
+
+
+                    const fotoEmpresaInput = document.createElement('input');
+                    fotoEmpresaInput.type = 'hidden';
+                    fotoEmpresaInput.name = 'fotoEmpresa';
+                    fotoEmpresaInput.value = url;
+                    document.querySelector('form').appendChild(fotoEmpresaInput);
+                    document.getElementById('foto').disabled = false;
+                })
+                .catch((error) => {
+                    console.error('Erro ao obter a URL da imagem:', error);
+                });
+
                 }).catch((error) => {
                     console.error('Erro ao enviar o arquivo:', error);
                 });
@@ -249,21 +267,10 @@
             }
         });
 
-        document.getElementById('getImageUrl').addEventListener('click', function() {
-            const imageName = 'images/WhatsApp Image 2018-09-19 at 15.50.21.jpeg'; // Nome do arquivo no Storage
-            const imageRef = ref(storage, imageName);
-
-            getDownloadURL(imageRef)
-                .then((url) => {
-                    console.log('URL da imagem:', url);
-                    const img = document.getElementById('imagePreview');
-                    img.src = url; // Define a URL da imagem como src do elemento img
-                    img.style.display = 'block'; // Exibe a imagem
-                })
-                .catch((error) => {
-                    console.error('Erro ao obter a URL da imagem:', error);
-                });
-            });
+        document.getElementById('foto').addEventListener('click', function() {
+          
+        });
+       
     </script>
 </body>
 

@@ -16,8 +16,18 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        // Obtendo o ID da empresa autenticada
+        $empresaId = auth()->guard('empresa')->user()->idEmpresa;
+    
+        // Buscando as postagens da empresa
+        $posts = Post::where('idEmpresa', $empresaId)
+            ->orderBy('created_at', 'desc') // Ordenando por data de criação
+            ->get();
+    
+        // Retorna a view com as postagens
+        return view('posts.index', compact('posts'));
     }
+    
 
     /**
      * Show the form for creating a new resource.
@@ -26,6 +36,7 @@ class PostController extends Controller
      */
     public function create()
     {
+        
         return view('posts.create');
     }
 
@@ -38,28 +49,18 @@ class PostController extends Controller
     public function store(Request $request)
     {
             // Validação
-    $request->validate([
-        'detalhePublicacao' => 'required|string',
-        'fotoPublicacao' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', // Limite de 2MB
-        'idEmpresa' => 'required|exists:tb_empresa,id', // Supondo que você tenha um campo id na tabela
-        'idVaga' => 'required|exists:tb_vaga,idVaga', // Supondo que você tenha um campo id na tabela de vagas
-    ]);
+
 
     // Criação da postagem
     $post = new Post();
     $post->detalhePublicacao = $request->detalhePublicacao;
     $post->idEmpresa = $request->idEmpresa;
     $post->idVaga = $request->idVaga;
-
-    // Verifique se foi enviada uma imagem
-    if ($request->hasFile('fotoPublicacao')) {
-        $path = $request->file('fotoPublicacao')->store('uploads', 'public');
-        $post->fotoPublicacao = $path;
-    }
+    $post->fotoPublicacao = $request->foto;
 
     $post->save();
 
-    return redirect()->route('empresa')->with('success', 'Postagem criada com sucesso!');
+    return redirect('/empresa')->with('success', 'Postagem criada com sucesso!');
     }
 
     /**
