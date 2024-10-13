@@ -15,7 +15,7 @@ import { useTheme } from "../pages/initialPages/context/themecontext";
 export default function MinhasVagas({ navigation }) {
   const { theme } = useTheme({ MinhasVagas });
   const {userId} = useContext(Context);
-  const { apiEmuladorPegarVagasSalvas } = ApisUrls;
+  const { apiEmuladorPegarVagasSalvas, apiNgrokPegarVagasSalvas } = ApisUrls;
 
   const [dadosUser, setDadosUser] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function MinhasVagas({ navigation }) {
     setError(null);
   
     // Alterar a URL para usar o idUsuario na rota
-    const apiUrl = `${apiEmuladorPegarVagasSalvas}/${userId}`; // Alterado para incluir o idUsuario na URL
+    const apiUrl = `${apiNgrokPegarVagasSalvas}/${userId}`; // Alterado para incluir o idUsuario na URL
     console.log("Fetching URL:", apiUrl);
   
     try {
@@ -82,7 +82,7 @@ export default function MinhasVagas({ navigation }) {
         {dadosUser.length > 0 && (
           <View>
             {dadosUser.map(vaga => (
-              <Text key={vaga.id}>
+              <Text key={vaga.id} style={{color: '#fff'}}>
                 Vaga ID: {vaga.id}, Vaga: {vaga.idVaga}
               </Text>
             ))}
