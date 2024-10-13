@@ -1,5 +1,5 @@
 // SignIN Component
-import React from "react";
+import React, { useState, useEffect, useContext } from "react";
 import {
   StatusBar,
   View,
@@ -12,21 +12,19 @@ import {
   Alert,
 } from "react-native";
 import * as Font from "expo-font";
-import { useState, useEffect, useContext } from "react";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "../initialPages/styles/signin.js";
 import { Context } from "./context/provider.js";
+import ApisUrls from '../../ApisUrls/apisurls.js';
 
-import ApisUrls from '../../ApisUrls/apisurls.js'
-const { apiNgrok, apiEmulador } = ApisUrls;
+const { apiNgrok } = ApisUrls;
 
 export default function SignIN({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const { setUserId, setNome, setUserName } = useContext(Context);
-
 
   async function verificarUsuario() {
     if (!email || !senha) {
@@ -47,8 +45,8 @@ export default function SignIN({ navigation }) {
         }),
       });
 
-      console.log(email, senha)
       const resp = await response.json();
+      console.log("Resposta da API:", resp); // Verificar a resposta recebida
 
       if (response.ok) {
         // Atualize o contexto com os dados do usuário
@@ -56,22 +54,18 @@ export default function SignIN({ navigation }) {
         setNome(resp.nomeUsuario);
         setUserName(resp.usernameUsuario);
         setEmail(resp.emailUsuario); // Atualize o email no contexto
-        // setSenha(resp.senhaUsuario); // Se desejar armazenar a senha (não recomendado por segurança)
         navigation.navigate("TabBar");
       } else {
-        Alert.alert(
-          "Erro",
-          `Erro ao logar: ${resp.message || "Erro desconhecido."}`
-        );
+        const errorMessage = resp.message || "Erro desconhecido.";
+        Alert.alert("Erro", `Erro ao logar: ${errorMessage}`);
         console.error("Erro de login:", resp);
       }
     } catch (error) {
+      console.error("Erro na tentativa de login:", error);
       Alert.alert(
         "Erro",
         "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente."
       );
-      console.error("Erro na tentativa de login:", error);
-      console.log(apiNgrok)
     }
   }
 
@@ -149,7 +143,7 @@ export default function SignIN({ navigation }) {
               name={passwordVisible ? "eye-slash" : "eye"}
               size={25}
               color={"#1b1b1b"}
-              style={{paddingHorizontal: 10}}
+              style={{ paddingHorizontal: 10 }}
             />
           </TouchableOpacity>
         </View>
@@ -159,10 +153,13 @@ export default function SignIN({ navigation }) {
             Fazer Login
           </Text>
         </TouchableOpacity>
-        
-        <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('TabBar')}>
+
+        <TouchableOpacity
+          style={styles.button}
+          onPress={() => navigation.navigate("TabBar")}
+        >
           <Text style={[styles.DMSansBold, styles.buttonText]}>
-            ir para home
+            Ir para Home
           </Text>
         </TouchableOpacity>
 

@@ -30,6 +30,7 @@ import ProfileChange from "../profilechange.js";
 import Search from "../search.js";
 import Conversas from "../conversas.js";
 import Chat from "../chat.js";
+import VagasSalvas from "../vagassalvas.js"
 
 function Welcome({ navigation }) {
   //Carregador de fontes
@@ -145,7 +146,6 @@ export default function App() {
               component={TabBar}
               options={{ headerShown: false }}
             />
-
             <Stack.Screen
               name="SignON1"
               component={SignON1}
@@ -189,6 +189,11 @@ export default function App() {
             <Stack.Screen
               name="Chat"
               component={Chat}
+              options={{headerShown: false}}
+            />
+            <Stack.Screen
+              name="VagasSalvas"
+              component={VagasSalvas}
               options={{headerShown: false}}
             />
           </Stack.Navigator>

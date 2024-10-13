@@ -67,10 +67,10 @@ export default function Configurações({ navigation }) {
 
         <View style={{padding: 20, borderRadius: 15, backgroundColor: theme.backgroundColorNavBar}}>
           <View style={[styles.infosCont, {flexDirection: 'column', alignItems: 'flex-start', gap: 25}]}>
-            <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Opções:</Text>
-            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+            <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Opções de vagas:</Text>
+            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', gap: 10}} onPress={() => navigation.navigate('VagasSalvas')}>
              <MaterialCommunityIcons name="bookmark" size={24} color="#20dd77" />
-             <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Minhas Vagas</Text>
+             <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Vagas Salvas</Text>
             </TouchableOpacity>
 
             <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
