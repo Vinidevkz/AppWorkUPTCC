@@ -158,4 +158,29 @@ public function negarCandidatura($id)
         return response()->json(['message' => 'Candidatura cancelada com sucesso']);
     }
     
+
+    public function verificarCandidatura($userId, $vagaId)
+{
+    // Consultar a tabela de candidaturas para verificar se o usuário já se candidatou à vaga
+    $candidatura = VagaUsuario::where('idUsuario', $userId)
+                              ->where('idVaga', $vagaId)
+                              ->first();
+
+    if ($candidatura) {
+        return response()->json(['isCandidated' => true, 'message' => 'Usuário já se candidatou'], 200);
+    } else {
+        return response()->json(['isCandidated' => false, 'message' => 'Usuário não se candidatou'], 200);
+    }
 }
+
+}
+
+
+
+
+
+
+
+
+
+

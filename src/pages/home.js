@@ -40,6 +40,8 @@ export default function Home({ navigation }) {
   const [savedIcons, setSavedIcons] = useState({});
   const { theme } = useTheme({ Home });
 
+  const [heartIcon, setHeartIcon] = useState(true)
+
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { userId, vagaID, setVagaID } = useContext(Context);
@@ -531,9 +533,9 @@ export default function Home({ navigation }) {
 
               <View style={styles.optionsCont}>
                 <View style={styles.threeIconsCont}>
-                   <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
+                    <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
                     <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color={theme.iconColorGreen} />
-                  </TouchableOpacity> 
+                  </TouchableOpacity>  
                   <TouchableOpacity>
                     <Ionicons
                       name="chatbubble-ellipses-outline"

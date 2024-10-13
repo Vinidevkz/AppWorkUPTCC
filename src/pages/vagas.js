@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { View, Text, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { Context } from "../pages/initialPages/context/provider";
@@ -12,17 +12,17 @@ export default function Vaga({ navigation }) {
   const { theme } = useTheme({ Vaga });
   const [loading, setLoading] = useState(true);
   const [infosVaga, setInfosVaga] = useState([]);
-  const [isCandidated, setIsCandidated] = useState(false); // Estado para controlar a candidatura
+  const [candidatureStatus, setCandidatureStatus] = useState({}); // Mapeia o status de candidatura para cada vaga
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiEmuladorVaga, apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiEmuladorUsuarioVagaCancelar, apiEmuladorUsuarioVaga } = ApisUrls;
+  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura } = ApisUrls;
 
   const seCandidatar = async () => {
     console.log("User ID:", userId);
 
     try {
-      const response = await fetch(apiEmuladorUsuarioVaga, {
+      const response = await fetch(apiNgrokUsuarioVaga, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -39,7 +39,7 @@ export default function Vaga({ navigation }) {
 
       if (response.ok) {
         Alert.alert("Parabéns!", resp.message);
-        setIsCandidated(true); // Atualiza para indicar que o usuário já se candidatou
+        setCandidatureStatus((prev) => ({ ...prev, [vagaID]: true })); // Atualiza o estado apenas para essa vaga
       } else {
         alert("Erro ao se candidatar: " + resp.message);
       }
@@ -51,19 +51,18 @@ export default function Vaga({ navigation }) {
 
   const cancelarCandidatura = async () => {
     try {
-      // Monta a URL com o ID da candidatura
-      const response = await fetch(`${apiEmuladorUsuarioVagaCancelar}/${userId}/${vagaID}`, {
+      const response = await fetch(`${apiNgrokUsuarioVaga}/${userId}/${vagaID}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
         },
       });
-  
+
       if (response.ok) {
         const data = await response.json();
         Alert.alert("Sucesso", data.message); // Exibe a mensagem de sucesso do backend
-        setIsCandidated(false); // Atualiza o estado para indicar que a candidatura foi cancelada
+        setCandidatureStatus((prev) => ({ ...prev, [vagaID]: false })); // Atualiza o estado para indicar que a candidatura foi cancelada
       } else {
         const errorData = await response.json();
         Alert.alert("Erro", errorData.message || "Erro ao cancelar a candidatura.");
@@ -73,12 +72,10 @@ export default function Vaga({ navigation }) {
       Alert.alert("Erro", "Erro ao cancelar a candidatura: " + error.message);
     }
   };
-  
-  
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
+    const apiUrl = `${apiNgrokVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -92,17 +89,32 @@ export default function Vaga({ navigation }) {
     }
   };
 
+  const verificarCandidatura = async () => {
+    try {
+      const response = await fetch(`${apiNgrokVerificarCandidatura}${userId}/${vagaID}`);
+      const resp = await response.json();
+  
+      if (response.ok) {
+        setCandidatureStatus((prev) => ({ ...prev, [vagaID]: resp.isCandidated })); // Atualiza o estado de candidatura
+      }
+    } catch (error) {
+      console.log("Erro ao verificar candidatura:", error);
+    }
+  };
+  
+
   useFocusEffect(
     React.useCallback(() => {
       if (vagaID) {
         buscaVaga();
+        verificarCandidatura(); // Verifica se o usuário já se candidatou a essa vaga
       }
     }, [vagaID])
   );
 
   if (loading) {
     return (
-      <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+      <View style={{ flex: 1, alignItems: "center", justifyContent: "center", backgroundColor: theme.backgroundColor }}>
         <ActivityIndicator size="large" color="#20dd77" />
       </View>
     );
@@ -157,13 +169,16 @@ export default function Vaga({ navigation }) {
           </View>
         ))}
         <View style={[styles.infosCont, styles.row]}>
-          {isCandidated ? (
-            <TouchableOpacity style={[styles.button, {backgroundColor: '', borderWidth: 2, borderColor: '#20dd77'}]} onPress={() => cancelarCandidatura()}>
-              <Text style={[styles.DMSansBold, styles.buttonText, {color: theme.textColor}]}>Cancelar Candidatura</Text>
+          {candidatureStatus[vagaID] ? (
+            <TouchableOpacity
+              style={[styles.button, { backgroundColor: "", borderWidth: 2, borderColor: "#20dd77" }]}
+              onPress={() => cancelarCandidatura()}
+            >
+              <Text style={[styles.DMSansBold, styles.buttonText, { color: theme.textColor }]}>Cancelar Candidatura</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity style={styles.button} onPress={() => seCandidatar()}>
-              <Text style={[styles.DMSansBold, styles.buttonText]}>Candidatar-se</Text>
+              <Text style={[styles.DMSansBold, styles.buttonText, { color: "#fff" }]}>Candidatar-se</Text>
             </TouchableOpacity>
           )}
         </View>
