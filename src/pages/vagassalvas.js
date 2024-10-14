@@ -82,7 +82,7 @@ export default function MinhasVagas({ navigation }) {
         {dadosUser.length > 0 && (
           <View>
             {dadosUser.map(vaga => (
-              <Text key={vaga.id} style={{color: '#fff'}}>
+              <Text key={vaga.id} style={{color: theme.textColor}}>
                 Vaga ID: {vaga.id}, Vaga: {vaga.idVaga}
               </Text>
             ))}

@@ -27,11 +27,13 @@ const {
   apiNgrokSalvarVaga,
   apiEmuladorCancelSalvarVaga,
   apiNgrokCancelSalvarVaga,
+  apiNgrokVerificarSalvarVaga,
 } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
 
 import NotificationModal from "./modals/notification.js";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Home({ navigation }) {
   const [data, setData] = useState(null);
@@ -40,7 +42,7 @@ export default function Home({ navigation }) {
   const [savedIcons, setSavedIcons] = useState({});
   const { theme } = useTheme({ Home });
 
-  const [heartIcon, setHeartIcon] = useState(true)
+  const [heartIcon, setHeartIcon] = useState(true);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -105,7 +107,6 @@ export default function Home({ navigation }) {
     }
   };
 
-
   const removerVagaSalva = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
     const url = apiNgrokCancelSalvarVaga; // Use a URL sem parâmetros na rota
@@ -138,6 +139,37 @@ export default function Home({ navigation }) {
       Alert.alert("Erro", "Ocorreu um erro na requisição.");
     }
   };
+
+  const verificarSalvamentoVaga = async (vagaID) => {
+    try {
+      const request = await fetch(
+        `${apiNgrokVerificarSalvarVaga}/${userId}/${vagaID}`
+      );
+      const response = await request.json();
+      if (response.isSaved) {
+        setSavedIcons((prevState) => ({
+          ...prevState,
+          [vagaID]: true, // Marca a vaga como salva
+        }));
+      } else {
+        setSavedIcons((prevState) => ({
+          ...prevState,
+          [vagaID]: false, // Deixa a vaga como não salva
+        }));
+      }
+    } catch (error) {
+      console.error("Erro ao verificar salvamento da vaga:", error);
+    }
+  };
+  
+  useEffect(() => {
+    const verificarTodasVagas = async () => {
+      for (let vaga of data) {
+        await verificarSalvamentoVaga(vaga.idVaga); // Verifica o status de cada vaga
+      }
+    };
+    verificarTodasVagas();
+  }, [data]);
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -318,26 +350,22 @@ export default function Home({ navigation }) {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    style={styles.addFavButton}
-                    onPress={() => {
-                      toggleSaveIcon(item.idVaga);
-                      if (savedIcons[item.idVaga]) {
-                        removerVagaSalva(item.idVaga);
-                      } else {
-                        salvarVaga(item.idVaga); // Passa o idVaga para a função
-                      }
-                    }}
-                  >
-                    <Ionicons
-                      name={
-                        savedIcons[item.idVaga]
-                          ? "bookmark"
-                          : "bookmark-outline"
-                      } // Usa savedIcons
-                      size={35}
-                      color="#20dd77"
-                    />
-                  </TouchableOpacity>
+  style={styles.addFavButton}
+  onPress={() => {
+    toggleSaveIcon(item.idVaga); // Alterna o ícone
+    if (savedIcons[item.idVaga]) {
+      removerVagaSalva(item.idVaga); // Remove a vaga salva
+    } else {
+      salvarVaga(item.idVaga); // Salva a vaga, passando o idVaga
+    }
+  }}
+>
+  <Ionicons
+    name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Altera o ícone
+    size={35}
+    color="#20dd77"
+  />
+</TouchableOpacity>
                 </View>
               </View>
             )}
@@ -533,9 +561,13 @@ export default function Home({ navigation }) {
 
               <View style={styles.optionsCont}>
                 <View style={styles.threeIconsCont}>
-                    <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
-                    <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color={theme.iconColorGreen} />
-                  </TouchableOpacity>  
+                  <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
+                    <AntDesign
+                      name={heartIcon ? "hearto" : "heart"}
+                      size={35}
+                      color={theme.iconColorGreen}
+                    />
+                  </TouchableOpacity>
                   <TouchableOpacity>
                     <Ionicons
                       name="chatbubble-ellipses-outline"
@@ -613,12 +645,11 @@ export default function Home({ navigation }) {
       </ScrollView>
 
       {isModalVisible && (
-  <NotificationModal 
-    message="Vaga salva com sucesso!" 
-    onClose={() => setIsModalVisible(false)}
-  />
-)}
-
+        <NotificationModal
+          message="Vaga salva com sucesso!"
+          onClose={() => setIsModalVisible(false)}
+        />
+      )}
     </SafeAreaView>
   );
 }

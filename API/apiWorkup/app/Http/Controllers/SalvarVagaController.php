@@ -173,4 +173,24 @@ class SalvarVagaController extends Controller
         }
     }
     
+    public function verificarSalvarVaga($idUsuario, $idVaga)
+{
+    try {
+        // Verifica se o usuário já salvou a vaga
+        $vagaSalva = SalvarVaga::where('idUsuario', $idUsuario)
+                                ->where('idVaga', $idVaga)
+                                ->exists();
+
+        return response()->json([
+            'isSaved' => $vagaSalva
+        ], 200);
+
+    } catch (\Exception $e) {
+        return response()->json([
+            'message' => 'Erro ao verificar vaga salva',
+            'error' => $e->getMessage(),
+        ], 500);
+    }
+}
+
 }
