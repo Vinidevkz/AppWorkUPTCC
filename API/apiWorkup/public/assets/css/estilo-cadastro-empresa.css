@@ -17,7 +17,7 @@ body {
 
 .box-cadastro {
     width: 55%;
-    height: 500px;
+    padding: 4rem 0;
     background-color: var(--fundo);
     display: flex;
     justify-content: center;
@@ -26,18 +26,14 @@ body {
 }
 
 .wrap-cadastro {
-    width: 500px;
+    width: 550px;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    max-height: 150%;
 }
 
 .col {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
 }
 
 .wrap-header {
@@ -48,10 +44,11 @@ body {
     margin-bottom: 1rem;
 }
 
-.inputs-txt input {
+.inputs-txt input, #sobreEmpresa {
     background-color: #e0e0e0;
     border-style: none;
     height: 2rem;
+    resize: none;
 }
 
 .botoes-cadastro {
@@ -73,4 +70,9 @@ body {
     color: white;
     background-color: #20dd77;
     padding: 0.5rem 2rem;
+}
+
+.error-message {
+    font-size: 0.8rem;
+    color: rgb(255, 69, 69);
 }

@@ -14,7 +14,7 @@
 <body>
 
 
-        <!--
+    <!--
     <div class="box-cadastro">
         @csrf
         <form class="wrap-cadastro" action="">
@@ -53,8 +53,8 @@
 
         </form>
     </div>
--->    
-        
+-->
+
     <div class="box-cadastro">
         <form class="" method="POST" action="/formEmpresa" id="registerForm">
             @csrf
@@ -68,16 +68,16 @@
                 <div class="row d-flex flex-column align-items-center justify-content-between inputs-txt" style="height: 10rem">
 
                     <div class="col col-12 h-50">
-                        <label for="nome-empresa">Nome da empresa:</label>
-                        <input type="text" class="form-control custom-input" name="nomeEmpresa" placeholder="Nome da Empresa" value="{{ old('nomeEmpresa')}}">
+                        <label for="nomeEmpresa">Nome da empresa:</label>
+                        <input type="text" class="form-control custom-input" name="nomeEmpresa" value="{{old('nomeEmpresa')}}">
                         @error('nomeEmpresa')
                             <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
                     <div class="col col-12 h-50">
-                        <label for="nome-empresa">Representante da empresa:</label>
-                        <input type="text" class="form-control custom-input" name="usernameEmpresa" placeholder="Nome de Usuário da Empresa" value="{{old('usernameEmpresa')}}">
+                        <label for="usernameEmpresa">Nome de representante:</label>
+                        <input type="text" class="form-control custom-input" name="usernameEmpresa" value="{{old('usernameEmpresa')}}">
                         @error('usernameEmpresa')
                             <div class="error-message">{{$message}}</div>
                         @enderror
@@ -88,16 +88,16 @@
                 <div class="row d-flex flex-row h-50 inputs-txt">
 
                     <div class="col d-flex col-6 h-100">
-                        <label for="nome-empresa">Email:</label>
-                        <input type="email" class="form-control custom-input" name="emailEmpresa" placeholder="E-mail da Empresa" value="{{ old('emailEmpresa')}}">
+                        <label for="emailEmpresa">Email:</label>
+                        <input type="email" class="form-control custom-input" name="emailEmpresa" placeholder="exemplo@gmail.com" value="{{old('emailEmpresa')}}">
                         @error('emailEmpresa')
-                            <div class="error-message">{{$message}}</div>
+                            <div class="error-message">{{ $message }}</div>
                         @enderror
                     </div>
 
                     <div class="col d-flex col-6 h-100">
-                        <label for="nome-empresa">Senha:</label>
-                        <input type="password" class="form-control custom-input" name="senhaEmpresa" placeholder="Senha da Empresa" value="{{ old('senhaEmpresa')}}">
+                        <label for="senhaEmpresa">Senha:</label>
+                        <input type="password" class="form-control custom-input" name="senhaEmpresa" value="{{old('senhaEmpresa')}}">
                         @error('senhaEmpresa')
                             <div class="error-message">{{$message}}</div>
                         @enderror
@@ -119,23 +119,32 @@
                     <p>Mostre um pouco mais sobre sua empresa</p>
                 </div>
 
-                <div class="row d-flex flex-column align-items-center justify-content-between inputs-txt" style="height: 10rem">
+                <div class="row d-flex flex-column align-items-center justify-content-between inputs-txt" style="height: 21rem">
 
                     <div class="col col-12 h-50">
-                        <label for="sobreempresa">Sobre:</label>
-                        <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="Número do Logradouro da Empresa" value="{{ old('numeroLograEmpresa')}}">
-                        @error('nomeEmpresa')
+                        <label for="sobreEmpresa">Sobre:</label>
+                        <textarea class="form-control custom-input" id="sobreEmpresa" name="sobreEmpresa" placeholder="Escreva um pouco sobre vocês!" style="min-height: 70%;" value="{{old('sobreEmpresa')}}"></textarea>
+                        @error('sobreEmpresa')
                             <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
-                    <div class="col col-12 h-50">
-                        <label for="nome-empresa">Foto de perfil:</label>
+                    <div class="col col-12">
+                        <label for="fotoEmpresa">Foto de perfil:</label>
                         <input type="file" id="fileInput" class="form-control custom-input" name="fotoEmpresa" placeholder="Foto da Empresa" value="url">
-                        @error('usernameEmpresa')
+                        @error('fotoEmpresa')
                             <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
+
+                    <div class="col col-12">
+                        <label for="contatoempresa">Contato:</label>
+                        <input type="text" class="form-control custom-input" name="contatoEmpresa" placeholder="telefone comercial, email, etc." value="{{old('contatoEmpresa')}}">
+                        @error('contatoEmpresa')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
+                    </div>
+
 
                 </div>
 
@@ -146,116 +155,80 @@
 
             </div>
 
-                <div class="form-step" style="display: none;">
-                    @error('nomeEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="nomeEmpresa"
-                            placeholder="Nome da Empresa" value="{{ old('nomeEmpresa') }}">
-                        <label for="nomeEmpresa" class="form__label">Nome da Empresa</label>
-                    </div>
+            <div class="form-step wrap-cadastro">
 
-                    @error('sobreEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="sobreEmpresa"
-                            placeholder="Sobre a Empresa" value="{{ old('sobreEmpresa') }}">
-                        <label for="sobreEmpresa" class="form__label">Sobre a Empresa</label>
-                    </div>
-
-                    <button type="button" class="btn btn-secondary-custom btn-custom"
-                        onclick="prevStep()">Anterior</button>
-                    <button type="button" class="btn btn-primary-custom btn-custom"
-                        onclick="nextStep()">Próximo</button>
+                <div class="wrap-header">
+                    <h2>Cadastro de empresa</h2>
+                    <p>Por último, nos mostre de onde estão nos apoiando</p>
                 </div>
 
-                <div class="form-step" style="display: none;">
-                    @error('cnpjEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="cnpjEmpresa"
-                            placeholder="CNPJ da Empresa" value="{{ old('cnpjEmpresa') }}">
-                        <label for="cnpjEmpresa" class="form__label">CNPJ da Empresa</label>
+                <div class="row d-flex flex-row inputs-txt mb-2">
+
+                    <div class="col d-flex col-6">
+                        <label for="cepEmpresa">CEP:</label>
+                        <input type="text" class="form-control custom-input" name="cepEmpresa" placeholder="12345-000" value="{{old('cepEmpresa')}}">
+                        @error('cepEmpresa')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
                     </div>
 
-                    @error('contatoEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="contatoEmpresa"
-                            placeholder="Contato da Empresa" value="{{ old('contatoEmpresa') }}">
-                        <label for="contatoEmpresa" class="form__label">Contato da Empresa</label>
+                    <div class="col d-flex col-6">
+                        <label for="cnpjEmpresa">CNPJ:</label>
+                        <input type="text" class="form-control custom-input" name="cnpjEmpresa" placeholder="XXX/0001-XX" value="{{old('cnpjEmpresa')}}">
+                        @error('cnpjEmpresa')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
                     </div>
 
-                    @error('cidadeEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="cidadeEmpresa"
-                            placeholder="Cidade da Empresa" value="{{ old('cidadeEmpresa') }}">
-                        <label for="cidadeEmpresa" class="form__label">Cidade da Empresa</label>
-                    </div>
-                    <button type="button" class="btn btn-secondary-custom btn-custom"
-                        onclick="prevStep()">Anterior</button>
-                    <button type="button" class="btn btn-primary-custom btn-custom"
-                        onclick="nextStep()">Próximo</button>
                 </div>
 
-                <div class="form-step" style="display: none;">
-                    @error('estadoEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="estadoEmpresa"
-                            placeholder="Estado da Empresa" value="{{ old('estadoEmpresa') }}">
-                        <label for="estadoEmpresa" class="form__label">Estado da Empresa</label>
+                <div class="row d-flex flex-column align-items-center justify-content-between inputs-txt my-2" style="min-height: 7.5rem; max-height: 10rem">
+
+                    <div class="col col-12">
+                        <label for="cidadeEmpresa">Cidade:</label>
+                        <input type="text" class="form-control custom-input" name="cidadeEmpresa" value="{{old('cidadeEmpresa')}}">
+                        @error('cidadeEmpresa')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
                     </div>
 
-                    @error('LogradouroEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="LogradouroEmpresa"
-                            placeholder="Logradouro da Empresa" value="{{ old('LogradouroEmpresa') }}">
-                        <label for="LogradouroEmpresa" class="form__label">Logradouro da Empresa</label>
+                    <div class="col col-12">
+                        <label for="estadoEmpresa">Estado:</label>
+                        <input type="text" class="form-control custom-input" name="estadoEmpresa" placeholder="Ex: São Paulo - SP" value="{{old('estadoEmpresa')}}">
+                        @error('estadoEmpresa')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
                     </div>
 
-                    @error('cepEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="cepEmpresa"
-                            placeholder="CEP da Empresa" value="{{ old('cepEmpresa') }}">
-                        <label for="cepEmpresa" class="form__label">CEP da Empresa</label>
-                    </div>
-
-                    @error('numeroLograEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                    @enderror
-                    <div class="form__group field">
-                        <input type="text" class="form-control custom-input" name="numeroLograEmpresa"
-                            placeholder="Número do Logradouro da Empresa" value="{{ old('numeroLograEmpresa') }}">
-                        <label for="numeroLograEmpresa" class="form__label">Número do Logradouro da Empresa</label>
-                    </div>
-
-                    <div class="form__group field">
-                        <input type="file" id="fileInput" class="form-control custom-input" name="fotoEmpresa"
-                            placeholder="Foto da Empresa" value="url">
-                        <label for="fotoEmpresa" class="form__label">Foto da Empresa</label>
-                        <div id="preview">
-                            <img id="imagePreview" src="" alt=""
-                                style="display:none; max-width: 300px; max-height: 300px;">
-                        </div>
-                    </div>
-
-                    <button type="button" class="btn btn-secondary-custom btn-custom"
-                        onclick="prevStep()">Anterior</button>
-                    <input type="submit" id="foto" class="btn btn-success-custom btn-custom" value="Enviar">
                 </div>
-        </form>
+
+                <div class="row d-flex flex-row h-50 inputs-txt">
+
+                    <div class="col d-flex col-8 h-100">
+                        <label for="LogradouroEmpresa">Logradouro:</label>
+                        <input type="text" class="form-control custom-input" name="LogradouroEmpresa" placeholder="Logradouro da Empresa" value="{{old('LogradouroEmpresa')}}">
+                        @error('LogradouroEmpresa')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                    <div class="col d-flex col-4 h-100">
+                        <label for="numeroLograEmpresa">N° do logradouro:</label>
+                        <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="Número do Logradouro da Empresa" value="{{old('numeroLograEmpresa')}}">
+                        @error('numeroLograEmpresa')
+                            <div class="error-message">{{$message}}</div>
+                        @enderror
+                    </div>
+
+                </div>
+
+                <div class="botoes-cadastro mt-4">
+                    <button type="button" class="voltar" onclick="prevStep()">Voltar</button>
+                    <input type="submit" class="avancar" value="Enviar">
+                </div>
+
+            </div>
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
