@@ -19,9 +19,11 @@ export const Provider = ({ children }) => {
 
   const [vagaID, setVagaID] = useState('')
 
+  const [empresaId, setEmpresaId] = useState('')
+
 
   return (
-    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, areaInt, setAreaInt, tel, setTel, nasc, setNasc, cep, setCep, bio, setBio, formacaoUsuario, setFormacaoUsuario, userId, setUserId, vagaID, setVagaID }}>
+    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, areaInt, setAreaInt, tel, setTel, nasc, setNasc, cep, setCep, bio, setBio, formacaoUsuario, setFormacaoUsuario, userId, setUserId, vagaID, setVagaID, empresaId, setEmpresaId }}>
       {children}
     </Context.Provider>
   );

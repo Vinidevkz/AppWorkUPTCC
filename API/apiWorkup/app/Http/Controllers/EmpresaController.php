@@ -218,5 +218,13 @@ Validação
         // Redireciona para a lista de empresas com mensagem de sucesso
         return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
     }
+
+
+    public function showEmpresaApp($id){
+
+        $empresa = Empresa::where('idEmpresa', $id);
+
+        return response()->json($empresa, 201);
+    }
 }
 

@@ -21,7 +21,7 @@ import { Context } from "../pages/initialPages/context/provider";
 const { apiNgrokVagaPesquisa, apiEmuladorVagaPesquisa } = ApisUrls;
 
 export default function Search({ navigation }) {
-  const { vagaID, setVagaID } = useContext(Context);
+  const { vagaID, setVagaID, setEmpresaId } = useContext(Context);
 
   const { theme } = useTheme({ Search });
   const [data, setData] = useState([]); // Para vagas
@@ -35,10 +35,10 @@ export default function Search({ navigation }) {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log(`URL da requisição: ${apiEmuladorVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
+      const response = await axios.post(apiNgrokVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -376,10 +376,10 @@ export default function Search({ navigation }) {
                         width: 130
                       },
                     ]}
-                    // onPress={() => {
-                    //   setVagaID(item.id_empresa);
-                    //   navigation.navigate("Empresas");
-                    // }}
+                     onPress={() => {
+                       setEmpresaId(item.idEmpresa);
+                       navigation.navigate("EmpresasProfile");
+                     }}
                   >
                     <Text
                       style={[

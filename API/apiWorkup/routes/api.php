@@ -87,5 +87,7 @@ Route::get('/areavaga/{idAreaInteresseVaga}', [AreaController::class, 'show']);
 Route::get('/empresa', [EmpresaController::class, 'index']);
 //Visualizar empresa por id
 Route::get('/empresa/{idEmpresa}', [EmpresaController::class, 'show']);
+//Visualizar empresa por id no app
+Route::get('/showempresa/{idEmpresa}', [EmpresaController::class, 'showEmpresaApp']);
 //Atualizar dado de uma empresa...
 //Route::put('/empresa/{idEmpresa}', [EmpresaController::class, 'update'])
