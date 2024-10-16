@@ -65,7 +65,10 @@ public function status()
 {
     return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
 }
-
+public function usuarios()
+{
+    return $this->hasMany(Usuario::class, 'idEmpresa', 'idEmpresa');
+}
 
 }
 

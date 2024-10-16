@@ -17,4 +17,9 @@ class SalvarVaga extends Model
     ];
 
     public $timestamps = false;
+
+    public function vaga()
+{
+    return $this->belongsTo(Vaga::class, 'idVaga', 'id');
+}
 }

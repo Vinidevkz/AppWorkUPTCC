@@ -14,74 +14,84 @@
 </head>
 
 <body>
-<header class="">
-  <div class="d-flex ms-5">
-    <p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
-  </div>
-  <div class="dropdown">
-    <div class="section-adm dropdown-toggle d-flex flex-row align-items-center text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <div class="img-adm">VA</div>  
-      <p class="m-0 text-white">Colaborador</p>
-    </div>    
-    <ul class="dropdown-menu p-0 m-0 list-section">
-      <div class="d-flex flex-column">
-        <li class="titulo-section-adm"><span>Usuário:</span> vitor.souza</li>
-        <div class="d-flex align-items-center justify-content-start">
-          <span class="material-symbols-outlined">key</span>
-          <li class="corpo-section-adm p-0 m-0"><a href="">Alterar senha</a></li>
-        </div>
-      </div>
-      <div class="d-flex flex-column justify-content-center">
-        <li class="titulo-section-adm">Papéis</li>
-        <div class="d-flex flex-column justify-content-start">
-          <div class="d-flex flex-row">
-            <span class="material-symbols-outlined">check</span>
-            <li class="corpo-section-adm m-0 p-0">Colaborador</li>
-          </div>
-          <div class="d-flex flex-row">
-            <span class="material-symbols-outlined">check</span>
-            <li class="corpo-section-adm m-0 p-0">Gestor</li>
-          </div>
-        </div>
-      </div>
-    </ul>
-  </div>
-</header>
+
 
 <div class="row">
-  <aside class="col-2 p-4" id="sidebar">
-    <div class="col-2 h-auto col-aside">
-      <div class="aside-container">
-        <div class="aside-sidebar d-flex flex-column h-auto text-white p-2">
-          <div class="d-flex mb-4">
-            <a href="/admin" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">grid_view</span> Dashboard
-            </a>
-          </div>
-          <div class="d-flex mb-4">
-            <a href="/verUsuario" class="asisde-sidebar-active d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">person</span> Usuários
-            </a>
-          </div>
-          <div class="d-flex mb-4">
-            <a href="/verVaga" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">work</span> Vagas
-            </a>
-          </div>
-          <div class="d-flex mb-4">
-            <a href="/verEmpresa" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">apartment</span> Empresas
-            </a>
-          </div>
-          <div class="mb-4">
-            <a href="/infoAdmin" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">info</span> Info
-            </a>
-          </div>
-        </div>
+<aside class="col-2 p-4">
+                <div class="aside-section">
+        
+                                <!-- CABEÇALHO DO ASIDE -->
+                                <div class="header-aside d-flex flex-column align-items-center justify-content-center">
+                        <div class="img-header d-flex align-items-center justify-content-center">
+    <img src="{{url('assets/img/adminImages/vr7Perfil.jpeg')}}" class="img-header" alt="Imagem de perfil" data-bs-toggle="modal" data-bs-target="#imagemModal" style="cursor:pointer;">
+</div>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade defocar-img-fundo" id="imagemModal" tabindex="" aria-labelledby="imagemModalLabel" aria-hidden="true">
+  
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content modal-fundo-cor">
+      <div class="modal-body d-flex justify-content-center">
+        <img src="{{url('assets/img/adminImages/vr7Perfil.jpeg')}}" class="img-fluid" alt="Imagem ampliada">
+      </div>
+       <div class="btn-group d-flex flex-row justify-content-around">
+      <div class="box-btn-alter">
+      <button type="button" class="btn btn-outline-light">
+      <i class="bi bi-pencil"></i>  
+      Alterar</button>
+      </div>
+
+      <div class="box-btn-del">
+      <button type="button" class="btn btn-outline-danger">
+      <i class="bi bi-x-lg"></i>  
+      Excluir</button>
+      </div>
       </div>
     </div>
-  </aside>
+  </div>
+</div>
+
+
+                        <div class="nav-links-adm d-flex flex-row p-1 align-items-center">
+                            <a href="#" class="p-1">vitor.souza</a>
+                            <a href="#" class="p-1">Gestor</a>
+                        </div>
+                    </div>
+        
+                    <div class="aside-body">
+                        <div class="d-flex  flex-row item-nav" >
+                           
+                            <a href="/admin" class="p-0 h6">
+                                <i class="bi bi-grid " ></i>
+
+                                Dashboard</a>
+                        </div>
+        
+                        <div class="d-flex link-aside-active item-nav">
+                            
+                            <a href="/verUsuario" class="p-1 h6">
+                                <i class="bi bi-people p-1"></i>
+                                Usuários</a>
+                        </div>
+        
+                        <div class="d-flex item-nav">
+                            
+                            <a href="/verVaga" class="p-1 h6">
+                                <i class="bi bi-person-vcard p-1"></i>
+                                Vagas</a>
+                        </div>
+        
+                        <div class="d-flex item-nav">
+                            
+                            <a href="/verEmpresa" class="p-1v h6">
+                                <i class="bi bi-buildings p-1"></i>
+                                Empresas</a>
+                        </div>
+                    </div>
+        
+        
+                </div>
+            </aside>
 
   <div class="col-9 mt-4">
     <div class="container md-4 mt-3">
@@ -131,7 +141,7 @@
               <tr>
                 <td>{{ $u->idUsuario }}</td>
                 <td class="d-flex flex-row">
-                  <div class="user-initials">
+                  <div class="user-initials  rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width: 45px; height: 45px;">
                     {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
                   </div>  
                   <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link">
@@ -139,7 +149,28 @@
                   </a>
                 </td>
                 <td>{{ $u->usernameUsuario }}</td>
-                <td>{{ $u->status->tipoStatus }}</td>
+                <td>
+  <span class="badge rounded-pill d-inline 
+    @switch($u->status->tipoStatus)
+      @case('Ativo')
+        badge-ativo
+        @break
+      @case('Pendente')
+        badge-pendente
+        @break
+      @case('Bloqueado')
+        badge-bloqueado
+        @break
+      @default
+        badge-default
+    @endswitch">
+    {{ $u->status->tipoStatus }}
+  </span>
+</td>
+
+
+
+
                 <td>
           
                   <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
@@ -171,15 +202,18 @@
 </div>
 
 <script>
-  const sidebarlinks = document.querySelectorAll('.h6');
+const sidebarlinks = document.querySelectorAll('.item-nav');
 
-  // Adicionando eventos
-  sidebarlinks.forEach(link => {
-    link.addEventListener('click', function() {
-      sidebarlinks.forEach(item => item.classList.remove('asisde-sidebar-active'));
-      this.classList.add('asisde-sidebar-active');
-    });
-  });
+// Adicionando eventos
+sidebarlinks.forEach(link => {
+  link.addEventListener('click', function() {
+    // Removendo classe
+    sidebarlinks.forEach(item => item.classList.remove('link-aside-active'));
+
+
+    this.classList.add('link-aside-active')
+  })
+})
 
   // Adiciona um evento de entrada ao campo de busca
   document.getElementById('searchInput').addEventListener('input', function() {

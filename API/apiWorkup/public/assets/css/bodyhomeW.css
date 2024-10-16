@@ -1,9 +1,31 @@
+/* Estilo geral */
+body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background-image: url("../img/home/fundobranco.png");
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+}
+
 /* Cabeçalho */
 .quemsomosf {
       background-image: url("../img/home/fundocinza.png");
-      width: 100vw;
+      width: 100%;
       height: 100vh;
       background-size: cover;
+}
+
+.carousel-item .top img {
+    width: 100%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 2s ease-in-out; /* Animação de surgimento */
+}
+.carousel-item .top .active img {
+    opacity: 1;
 }
 
 .Logoheader {
@@ -27,15 +49,17 @@
 }
 
 .card.mb-3 {
-      border-radius: 10px;
-      filter: drop-shadow(0 5px 10px 0 #1bb12f);
-      background-color: #fcfcfc;
+      border-radius: 5px;
+      filter: drop-shadow(0 5px 10px 0 #90da9a);
+      background-color: #eee5e5;
       opacity: 1;
-      padding: 20px;
-      position: relative;
+      padding: 10px;
+      position: sticky;
       z-index: 0;
       overflow: hidden;
-      transition: 0.6s ease-in;
+      transition: 0.6s ease-out;
+      background-image: url("../../assets/img/home/fundofooter.png");
+      box-shadow: 0 25px 80px rgba(15, 0, 0, 0.5);
 }
 
 .card.mb-3::before {
@@ -44,13 +68,13 @@
       z-index: -1;
       top: -15px;
       right: -15px;
-      background: #e9f5e9;
-      height: 320px;
-      width: 25px;
-      border-radius: 32px;
+      background: #a4e4a4;
+      height: 420px;
+      width: 15px;
+      border-radius: 2px;
       transform: scale(1);
-      transform-origin: 65% 65%;
-      transition: transform 0.80s ease-out;
+      transform-origin: 95% 95%;
+      transition: transform 0.4s ease-in;
 }
 
 .card.mb-3:hover::before {
@@ -58,10 +82,12 @@
       transform: scale(50);
 }
 
-.card.mb-3:hover {
-      color: #0b110d;
+.textcard {
+      color: #000;
+      font-size: 1rem;
       font-weight: 500;
-      font-family: 'Roboto', sans-serif;
+      text-align: start;
+      margin-right: 90px;
 }
 
 .card.mb-3 p {
@@ -84,6 +110,7 @@
       padding: 20px;
       width: 100%;
 }
+
 .cardimage {
       display: flex;
       align-items: center;
@@ -106,6 +133,7 @@
 .modal-content {
       border-radius: 10px;
       background-color: #f7f7f7;
+      margin-top: 55px;
 }
 
 .modal-body img {
@@ -124,7 +152,7 @@
 }
 
 .modal-title::after {
-      content: '';
+      content: "";
       display: block;
       width: 100%;
       height: 2px;
@@ -134,12 +162,55 @@
       /* Espaço entre o título e a linha */
 }
 
+#modalJovens .modal-content {
+      margin-top: 200px;
+}
+
+#modalNossamissao .modal-content {
+      margin-top: 200px;
+}
+
+/* Imagens flutuantes */
+.floating-images {
+      position: relative;
+}
+
+.floating-image {
+      width: 200px;
+      /* Ajuste o tamanho conforme necessário */
+      position: absolute;
+      transition: all 0.3s ease-in-out;
+}
+
+.right {
+      right: -150px;
+}
+
+.left {
+      left: -205px;
+      bottom: 0;
+      top: -250px;
+}
+
+.right-0 {
+      right: -250px;
+      top: -350px;
+      bottom: 0;
+}
+
+.modal.show .floating-image {
+      transform: translateY(-100px);
+}
+
+.modal-body {
+      padding: 30px;
+      align-items: center;
+}
+
 /* Laptop */
 .laptop-frame {
       display: flex;
       width: 100%;
-      background-color: #54e447;
-      border-radius: 20px;
       box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
       overflow: hidden;
       position: relative;
@@ -154,7 +225,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgb(18, 218, 11);
+      background-color: rgb(229, 243, 228);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -170,7 +241,7 @@
       padding: 10px;
 }
 
-
+/* Janelas */
 .rowjovens {
       background-image: url("../img/home/f123.png");
       background-size: cover;
@@ -181,7 +252,6 @@
       margin-top: 220px;
 }
 
-/* Depoimento */
 .rowdepoimento {
       width: 100%;
       height: auto;
@@ -213,8 +283,27 @@
       background-color: #04974e;
 }
 
-/* Responsividade */
+/* Responsividade para telas pequenas */
 @media (max-width: 768px) {
+      /* Ajusta o texto do modal */
+      .modal-title {
+            font-size: 1.25rem;
+      }
+
+      .modal-body p {
+            font-size: 0.9rem;
+      }
+
+      /* Oculta as imagens flutuantes */
+      .floating-images {
+            display: none;
+      }
+
+      /* Ajusta o layout do modal para telas menores */
+      .modal-content {
+            padding: 10px;
+      }
+
       .text-title {
             font-size: 1.75rem;
       }
@@ -228,14 +317,12 @@
       }
 }
 
-/* Estilo geral */
-body {
-      margin: 0;
-      padding: 0;
-      min-height: 100vh;
-      background-image: url("../img/home/fundobranco.png");
-      background-repeat: no-repeat;
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
+.partner-container {
+      text-align: start;
+}
+
+.partner-container img {
+      width: 150px;
+      margin: 0 50px;
+      vertical-align: middle;
 }
