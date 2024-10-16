@@ -122,6 +122,13 @@ check
               </a>
             </div>
 
+            <div class="d-flex mb-4">
+              <a href="/denuncias" class=" d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">apartment</span>
+                Denuncias
+              </a>
+            </div>
+
            
 
             <div class="d-flex">
@@ -261,7 +268,16 @@ location_city
   </div>
   </div>
 
-
+  <div class="d-flex flex-row">
+        <div class="blue d-flex align-items-center justify-content-center">
+          <p class="m-0 fw-bold text-center">Ação</p>
+        </div>
+        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
+          <form action="{{ route('cadastrarArea') }}" method="GET" style="display:inline;">
+                        <button type="submit" class="btn btn-info"><p class="m-0 p-0 m-1">Adicionar nova Área</p></button>
+                    </form>
+        </div>
+      </div>
 
 
         

@@ -15,4 +15,9 @@ class Status extends Model
     {
         return $this->hasMany(Vaga::class, 'idStatus');
     }
+
+    public function denuncias()
+    {
+        return $this->hasMany(DenunciaUsuario::class, 'idStatus', 'idStatus');
+    }
 }

@@ -73,12 +73,6 @@
               <span class="material-symbols-outlined p-2">apartment</span> Empresas
             </a>
           </div>
-          <div class="d-flex mb-4">
-              <a href="/denuncias" class=" d-flex flex-row align-items-center h6">
-                <span class="material-symbols-outlined p-2">apartment</span>
-                Denuncias
-              </a>
-            </div>
           <div class="mb-4">
             <a href="/infoAdmin" class="d-flex flex-row align-items-center h6">
               <span class="material-symbols-outlined p-2">info</span> Info
@@ -93,11 +87,6 @@
     <div class="container md-4 mt-3">
 
 
-      <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
-        <div class="search-container mt-3">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input type="text" id="searchInput" placeholder="Buscar...">
-        </div>
 
         <table class="table table-striped m-0 table-user" id="myTable">
           <thead>
@@ -106,8 +95,8 @@
               <th class="fw-bold">Usuário</th>
               <th>
                 <div class="d-flex align-items-center">
-                  <span class="material-symbols-outlined">alternate_email</span>
-                  <p class="m-0 fw-bold">E-mail</p>
+
+                  <p class="m-0 fw-bold">Empresa</p>
                 </div>
               </th>
               <th>
@@ -125,31 +114,35 @@
             </tr>
           </thead>
           <tbody>
-            @forelse($usuarios as $u) 
-              <tr>
-                <td>{{ $u->idUsuario }}</td>
-                <td class="d-flex flex-row">
-                  <div class="user-initials">
-                    {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
-                  </div>  
-                  <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link">
-                    {{ $u->nomeUsuario }}
-                  </a>
-                </td>
-                <td>{{ $u->usernameUsuario }}</td>
-                <td>{{ $u->status->tipoStatus }}</td>
-                <td>
+           
           
-                  <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
+    @forelse($denuncias as $denuncia)
+        <tr>
+            <td>{{ $denuncia->idDenunciaUsuario }}</td> <!-- Adicione o ID aqui, se necessário -->
+            <td>
+            <a href="{{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }}" class="visualizar-link">
+            {{ $denuncia->usuario->nomeUsuario }}
+                  </a>
+            </td>
+            <td>{{ $denuncia->empresa->nomeEmpresa ?? 'Não Associado' }}</td> <!-- Atualizado para exibir o nome -->
+            <td>{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
+            <td>
+            <form action="{{ route('usuarios.delete', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
                     <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Bloquear</button>
                   </form>
-                  <form action="{{ route('usuarios.aprovar', $u->idUsuario) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('POST')
-                    <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;Ativar</button>
-                  </form>
+            </td>
+        </tr>
+
+
+
+
+
+
+          
+
+
                 </td>
               </tr>
             @empty
@@ -209,3 +202,4 @@
 
 </body>
 </html>
+

@@ -12,17 +12,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContatoController;
 use App\http\Controllers\PostController;
 use App\http\Controllers\MensagemController;
+use App\http\Controllers\DenunciaUsuarioController;
 
 // mexendo
-//ver mensagens
-Route::get('/mensagens', [MensagemController::class, 'index'])->name('mensagens.index');
-//mandar mensagens
-Route::get('/mensagem/{idUsuario}/{idEmpresa}', [MensagemController::class, 'create'])->name('mensagem.create');
-Route::post('/mensagem', [MensagemController::class, 'store'])->name('mensagem.store');
-// Post
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth:empresa');
-Route::get('/postar/{id}', [PostController::class, 'create'])->name('post.create');
-Route::post('/postar', [PostController::class, 'store'])->name('post.store');
 
 
 // rotas Dynamo
@@ -76,6 +68,20 @@ Route::get('/verVagaCadastrada/{idVaga}', [VagaUsuarioController::class, 'verVag
 Route::post('/candidaturas/aprovar/{idVaga}', [VagaUsuarioController::class, 'aprovarCandidatura'])->name('candidaturas.aprovar');
 //Reporvar Usuario que tentou
 Route::post('/candidaturas/negar/{idVaga}', [VagaUsuarioController::class, 'negarCandidatura'])->name('candidaturas.negar');
+//Denunciar usuario
+Route::post('/denunciar-usuario', [DenunciaUsuarioController::class, 'store'])->name('denunciar.usuario');
+//Mensagem
+//ver mensagens
+Route::get('/mensagens', [MensagemController::class, 'index'])->name('mensagens.index');
+//ver mensagens de um unico usuario
+Route::get('/Unico/{idUsuario}', [MensagemController::class, 'indexUsuarioUnico'])->name('mensagem.indexUsuarioUnico');
+//mandar mensagens
+Route::get('/mensagem/{idUsuario}/{idEmpresa}', [MensagemController::class, 'create'])->name('mensagem.create');
+Route::post('/mensagem', [MensagemController::class, 'store'])->name('mensagem.store');
+// Post
+Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth:empresa');
+Route::get('/postar/{id}', [PostController::class, 'create'])->name('post.create');
+Route::post('/postar', [PostController::class, 'store'])->name('post.store');
 
 
 
@@ -158,6 +164,9 @@ Route::post('/formVaga', [VagaController::class, 'store']);
 
 // Admin
 
+// Rota para visualizar as denúncias
+Route::get('/denuncias', [DenunciaUsuarioController::class, 'index'])->name('denuncias.Usuario');
+Route::get('/denuncia/{id}', [DenunciaUsuarioController::class, 'show'])->name('denuncia.show');
 //Cadastrar Admin
 Route::get('/cadastrarAdmin', [AdminController::class, 'create'])->middleware('auth:admin')->name('cadastrarAdmin');
 //Cadastrar Area
