@@ -173,7 +173,24 @@ devices
   
                     </td>
                     <td>{{  $v->modalidade->descModalidadeVaga}}</td>
-                    <td>{{ $v->status->tipoStatus }}</td>
+                    <td>
+  <span class="badge rounded-pill d-inline 
+    @switch($v->status->tipoStatus)
+      @case('Ativo')
+        badge-ativo
+        @break
+      @case('Pendente')
+        badge-pendente
+        @break
+      @case('Bloqueado')
+        badge-bloqueado
+        @break
+      @default
+        badge-default
+    @endswitch">
+    {{ $v->status->tipoStatus }}
+  </span>
+</td>
                     <td>
                  
                         <form action="{{ route('vagas.delete', $v->idVaga) }}" method="POST" class="d-inline">

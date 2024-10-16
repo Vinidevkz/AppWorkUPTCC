@@ -34,7 +34,7 @@
       <div class="modal-body d-flex justify-content-center">
         <img src="{{url('assets/img/adminImages/vr7Perfil.jpeg')}}" class="img-fluid" alt="Imagem ampliada">
       </div>
-      <div class="btn-group d-flex flex-row justify-content-around">
+       <div class="btn-group d-flex flex-row justify-content-around">
       <div class="box-btn-alter">
       <button type="button" class="btn btn-outline-light">
       <i class="bi bi-pencil"></i>  
@@ -141,7 +141,7 @@
               <tr>
                 <td>{{ $u->idUsuario }}</td>
                 <td class="d-flex flex-row">
-                  <div class="user-initials">
+                  <div class="user-initials  rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width: 45px; height: 45px;">
                     {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
                   </div>  
                   <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link">
@@ -149,7 +149,28 @@
                   </a>
                 </td>
                 <td>{{ $u->usernameUsuario }}</td>
-                <td>{{ $u->status->tipoStatus }}</td>
+                <td>
+  <span class="badge rounded-pill d-inline 
+    @switch($u->status->tipoStatus)
+      @case('Ativo')
+        badge-ativo
+        @break
+      @case('Pendente')
+        badge-pendente
+        @break
+      @case('Bloqueado')
+        badge-bloqueado
+        @break
+      @default
+        badge-default
+    @endswitch">
+    {{ $u->status->tipoStatus }}
+  </span>
+</td>
+
+
+
+
                 <td>
           
                   <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">

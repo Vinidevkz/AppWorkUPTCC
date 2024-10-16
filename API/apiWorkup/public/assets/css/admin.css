@@ -454,3 +454,27 @@ aside .aside-body a{
   backdrop-filter: blur(10px); /* Aplique o desfoque */
   background-color: rgba(0, 0, 0, 0.5); /* Escurece o fundo ao mesmo tempo */
 }
+
+.badge-ativo {
+  color: #218838;
+  outline: 1px solid #218838;
+  font-style: italic;
+}
+
+.badge-pendente {
+  color: #007bff;
+  outline: 1px solid #007bff;
+  font-style: italic;
+}
+
+.badge-bloqueado {
+  font-style: italic;
+  color: #c82333;
+  outline: 1px solid #c82333;
+}
+
+.badge-default {
+  background-color: #ffc107; /* Amarelo */
+  color: black;
+  border: 2px solid #e0a800; /* Bordas do amarelo */
+}

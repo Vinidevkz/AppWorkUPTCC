@@ -167,7 +167,24 @@ person
 
                     </td>
                     <td>{{ $em->usernameEmpresa }}</td>
-                    <td>{{ $em->status->tipoStatus}}</td>
+                    <td>
+  <span class="badge rounded-pill d-inline 
+    @switch($em->status->tipoStatus)
+      @case('Ativo')
+        badge-ativo
+        @break
+      @case('Pendente')
+        badge-pendente
+        @break
+      @case('Bloqueado')
+        badge-bloqueado
+        @break
+      @default
+        badge-default
+    @endswitch">
+    {{ $em->status->tipoStatus }}
+  </span>
+</td>
                     <td>
                       <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
 
