@@ -124,14 +124,14 @@ aside{
   text-decoration: none;
   width: 100%;
 }
-.aside-sidebar a:hover{
+.aside-sidebar i:hover{
   /* background-color: #11bf6b; */
-  margin-left: 5px;
+  margin-left: 1px;
   transition: 0.2s;
-  border-left: 5px solid #11bf6b;
+  border-left: 3px solid #11bf6b;
 }
 .asisde-sidebar-active{
-  margin-left: 5px;
+  margin-left: 1px;
   border-left: 5px solid #11bf6b;
 }
 .aside-sidebar #btn-exit:hover{
@@ -406,4 +406,51 @@ table{
 }
 .visualizar-link{
   color: #111e88;
+}
+
+
+/* NOVO ASIDE */
+/* ESTILIZAÇÃO DO ASIDE */
+aside{
+  background-color: #303030;
+  min-height: 100vh;
+  color: white;
+}
+aside .img-header{
+  width: 70px;
+  height: 70px;
+  border-radius: 5%;
+}
+aside .img-header div{
+  font-weight: bold;
+  font-size: 2rem;
+}
+aside .link-aside-active {
+  border-left: #20DD77 4px solid;
+  padding-left: 5px;
+  /* background: linear-gradient(135deg, rgba(2, 221, 119, 0.8) 0%, rgba(32, 221, 119, 0) 90%); */
+
+}
+aside .aside-body .d-flex:hover {
+  border-left: #20DD77 4px solid;
+  padding-left: 5px;
+  /* background: linear-gradient(135deg, rgba(2, 221, 119, 0.8) 0%, rgba(32, 221, 119, 0) 90%); */
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+aside .aside-body .d-flex{
+  margin: 10px;
+  padding: 15px;
+}
+
+aside .aside-body a{
+  text-decoration: none;
+}
+.modal-fundo-cor{
+  background-color: #303030;
+}
+.defocar-img-fundo{
+  backdrop-filter: blur(10px); /* Aplique o desfoque */
+  background-color: rgba(0, 0, 0, 0.5); /* Escurece o fundo ao mesmo tempo */
 }
