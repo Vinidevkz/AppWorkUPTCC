@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11/10/2024 às 06:35
+-- Tempo de geração: 16/10/2024 às 03:59
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -214,7 +214,31 @@ CREATE TABLE `tb_chat` (
 --
 
 INSERT INTO `tb_chat` (`idChat`, `idMensagem`, `idEmpresa`, `idUsuario`, `idAdmin`, `created_at`) VALUES
-(2, 4, 10, 3, NULL, '2024-10-11 00:44:39');
+(2, 4, 10, 3, NULL, '2024-10-11 00:44:39'),
+(3, 5, 10, 1, NULL, '2024-10-15 20:33:36');
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_denunciausuario`
+--
+
+CREATE TABLE `tb_denunciausuario` (
+  `idDenunciaUsuario` int(11) NOT NULL,
+  `idUsuario` int(11) NOT NULL,
+  `idEmpresa` int(11) NOT NULL,
+  `motivo` varchar(300) NOT NULL,
+  `idStatus` int(11) NOT NULL,
+  `created_at` datetime NOT NULL,
+  `updated_at` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_denunciausuario`
+--
+
+INSERT INTO `tb_denunciausuario` (`idDenunciaUsuario`, `idUsuario`, `idEmpresa`, `motivo`, `idStatus`, `created_at`, `updated_at`) VALUES
+(4, 1, 10, 'da', 3, '2024-10-15 22:11:51', '2024-10-15 22:11:51');
 
 -- --------------------------------------------------------
 
@@ -281,7 +305,8 @@ INSERT INTO `tb_mensagem` (`idMensagem`, `idUsuario`, `idEmpresa`, `idAdmin`, `m
 (1, 3, 10, NULL, 'teste', '2024-10-11 00:20:19', '2024-10-11 00:20:19'),
 (2, 3, 10, NULL, 'dada', '2024-10-11 00:33:38', '2024-10-11 00:33:38'),
 (3, 3, 10, NULL, 'dada', '2024-10-11 00:34:09', '2024-10-11 00:34:09'),
-(4, 3, 10, NULL, 'teste', '2024-10-11 00:44:39', '2024-10-11 00:44:39');
+(4, 3, 10, NULL, 'teste', '2024-10-11 00:44:39', '2024-10-11 00:44:39'),
+(5, 1, 10, NULL, 'venha conversa conosco', '2024-10-15 20:33:36', '2024-10-15 20:33:36');
 
 -- --------------------------------------------------------
 
@@ -428,7 +453,7 @@ CREATE TABLE `tb_usuario` (
 --
 
 INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `areaInteresseUsuario`, `fotoUsuario`, `fotoBanner`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
-(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', '', 'eu.jpg', '', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', 1, NULL, NULL),
+(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', '', 'eu.jpg', '', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', 1, NULL, '2024-10-15 22:56:48'),
 (2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', '', 'foto1', '', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', 2, NULL, '2024-09-24 02:26:31'),
 (3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', '(56) 95959-5959', '', 'foto1', '', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12', 2, NULL, NULL),
 (4, 'vinizadaxesquedele', 'dalevini', '2012-12-12', 'gmail111222@gmail.com', '$2y$10$3TUE1fXPJi2g4JrPZii5A.FuP4ZZ4nBcqq1oWZUPUaUmIQb.uV6j2', '(11) 32132-3213', 'Marketing', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727813856478.jpg?alt=media&token=4dd235c0-4a59-49f2-a35a-e2159e9d9ae2', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727813860409.jpg?alt=media&token=49f09ac9-b1fd-43e3-b01b-7fe04b89b537', 'sp', 'sp', 'logradouro', '24352-523', '515', 'HUEHUEHUEHUEHEUHUE BR', 'formacao', '2012-12-12', 3, '2024-10-01 17:17:44', '2024-10-01 17:17:44'),
@@ -583,6 +608,14 @@ ALTER TABLE `tb_chat`
   ADD KEY `idMensagem` (`idMensagem`);
 
 --
+-- Índices de tabela `tb_denunciausuario`
+--
+ALTER TABLE `tb_denunciausuario`
+  ADD PRIMARY KEY (`idDenunciaUsuario`),
+  ADD KEY `idstatus` (`idStatus`),
+  ADD KEY `idEmpresa` (`idEmpresa`);
+
+--
 -- Índices de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
@@ -721,7 +754,13 @@ ALTER TABLE `tb_atuacaoempresa`
 -- AUTO_INCREMENT de tabela `tb_chat`
 --
 ALTER TABLE `tb_chat`
-  MODIFY `idChat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idChat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de tabela `tb_denunciausuario`
+--
+ALTER TABLE `tb_denunciausuario`
+  MODIFY `idDenunciaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de tabela `tb_empresa`
@@ -733,7 +772,7 @@ ALTER TABLE `tb_empresa`
 -- AUTO_INCREMENT de tabela `tb_mensagem`
 --
 ALTER TABLE `tb_mensagem`
-  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tb_modalidadevaga`
@@ -827,6 +866,13 @@ ALTER TABLE `tb_chat`
   ADD CONSTRAINT `tb_chat_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
   ADD CONSTRAINT `tb_chat_ibfk_3` FOREIGN KEY (`idAdmin`) REFERENCES `tb_admin` (`idAdmin`),
   ADD CONSTRAINT `tb_chat_ibfk_4` FOREIGN KEY (`idMensagem`) REFERENCES `tb_mensagem` (`idMensagem`);
+
+--
+-- Restrições para tabelas `tb_denunciausuario`
+--
+ALTER TABLE `tb_denunciausuario`
+  ADD CONSTRAINT `tb_denunciausuario_ibfk_1` FOREIGN KEY (`idstatus`) REFERENCES `tb_status` (`idStatus`),
+  ADD CONSTRAINT `tb_denunciausuario_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
 
 --
 -- Restrições para tabelas `tb_empresa`

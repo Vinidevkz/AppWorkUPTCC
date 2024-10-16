@@ -14,21 +14,79 @@
 </head>
 
 <body>
-
+<header class="">
+  <div class="d-flex ms-5">
+    <p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
+  </div>
+  <div class="dropdown">
+    <div class="section-adm dropdown-toggle d-flex flex-row align-items-center text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      <div class="img-adm">VA</div>  
+      <p class="m-0 text-white">Colaborador</p>
+    </div>    
+    <ul class="dropdown-menu p-0 m-0 list-section">
+      <div class="d-flex flex-column">
+        <li class="titulo-section-adm"><span>Usuário:</span> vitor.souza</li>
+        <div class="d-flex align-items-center justify-content-start">
+          <span class="material-symbols-outlined">key</span>
+          <li class="corpo-section-adm p-0 m-0"><a href="">Alterar senha</a></li>
+        </div>
+      </div>
+      <div class="d-flex flex-column justify-content-center">
+        <li class="titulo-section-adm">Papéis</li>
+        <div class="d-flex flex-column justify-content-start">
+          <div class="d-flex flex-row">
+            <span class="material-symbols-outlined">check</span>
+            <li class="corpo-section-adm m-0 p-0">Colaborador</li>
+          </div>
+          <div class="d-flex flex-row">
+            <span class="material-symbols-outlined">check</span>
+            <li class="corpo-section-adm m-0 p-0">Gestor</li>
+          </div>
+        </div>
+      </div>
+    </ul>
+  </div>
+</header>
 
 <div class="row">
-
-
+  <aside class="col-2 p-4" id="sidebar">
+    <div class="col-2 h-auto col-aside">
+      <div class="aside-container">
+        <div class="aside-sidebar d-flex flex-column h-auto text-white p-2">
+          <div class="d-flex mb-4">
+            <a href="/admin" class="d-flex flex-row align-items-center h6">
+              <span class="material-symbols-outlined p-2">grid_view</span> Dashboard
+            </a>
+          </div>
+          <div class="d-flex mb-4">
+            <a href="/verUsuario" class="asisde-sidebar-active d-flex flex-row align-items-center h6">
+              <span class="material-symbols-outlined p-2">person</span> Usuários
+            </a>
+          </div>
+          <div class="d-flex mb-4">
+            <a href="/verVaga" class="d-flex flex-row align-items-center h6">
+              <span class="material-symbols-outlined p-2">work</span> Vagas
+            </a>
+          </div>
+          <div class="d-flex mb-4">
+            <a href="/verEmpresa" class="d-flex flex-row align-items-center h6">
+              <span class="material-symbols-outlined p-2">apartment</span> Empresas
+            </a>
+          </div>
+          <div class="mb-4">
+            <a href="/infoAdmin" class="d-flex flex-row align-items-center h6">
+              <span class="material-symbols-outlined p-2">info</span> Info
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </aside>
 
   <div class="col-9 mt-4">
     <div class="container md-4 mt-3">
 
 
-      <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
-        <div class="search-container mt-3">
-          <span class="material-symbols-outlined search-icon">search</span>
-          <input type="text" id="searchInput" placeholder="Buscar...">
-        </div>
 
         <table class="table table-striped m-0 table-user" id="myTable">
           <thead>
@@ -37,8 +95,8 @@
               <th class="fw-bold">Usuário</th>
               <th>
                 <div class="d-flex align-items-center">
-                  <span class="material-symbols-outlined">alternate_email</span>
-                  <p class="m-0 fw-bold">E-mail</p>
+
+                  <p class="m-0 fw-bold">Empresa</p>
                 </div>
               </th>
               <th>
@@ -56,52 +114,35 @@
             </tr>
           </thead>
           <tbody>
-            @forelse($usuarios as $u) 
-              <tr>
-                <td>{{ $u->idUsuario }}</td>
-                <td class="d-flex flex-row">
-                  <div class="user-initials  rounded-circle bg-primary text-white d-flex justify-content-center align-items-center" style="width: 45px; height: 45px;">
-                    {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
-                  </div>  
-                  <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link">
-                    {{ $u->nomeUsuario }}
-                  </a>
-                </td>
-                <td>{{ $u->usernameUsuario }}</td>
-                <td>
-  <span class="badge rounded-pill d-inline 
-    @switch($u->status->tipoStatus)
-      @case('Ativo')
-        badge-ativo
-        @break
-      @case('Pendente')
-        badge-pendente
-        @break
-      @case('Bloqueado')
-        badge-bloqueado
-        @break
-      @default
-        badge-default
-    @endswitch">
-    {{ $u->status->tipoStatus }}
-  </span>
-</td>
-
-
-
-
-                <td>
+           
           
-                  <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
+    @forelse($denuncias as $denuncia)
+        <tr>
+            <td>{{ $denuncia->idDenunciaUsuario }}</td> <!-- Adicione o ID aqui, se necessário -->
+            <td>
+            <a href="{{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }}" class="visualizar-link">
+            {{ $denuncia->usuario->nomeUsuario }}
+                  </a>
+            </td>
+            <td>{{ $denuncia->empresa->nomeEmpresa ?? 'Não Associado' }}</td> <!-- Atualizado para exibir o nome -->
+            <td>{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
+            <td>
+            <form action="{{ route('usuarios.delete', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
                     <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Bloquear</button>
                   </form>
-                  <form action="{{ route('usuarios.aprovar', $u->idUsuario) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('POST')
-                    <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;Ativar</button>
-                  </form>
+            </td>
+        </tr>
+
+
+
+
+
+
+          
+
+
                 </td>
               </tr>
             @empty
@@ -121,18 +162,15 @@
 </div>
 
 <script>
-const sidebarlinks = document.querySelectorAll('.item-nav');
+  const sidebarlinks = document.querySelectorAll('.h6');
 
-// Adicionando eventos
-sidebarlinks.forEach(link => {
-  link.addEventListener('click', function() {
-    // Removendo classe
-    sidebarlinks.forEach(item => item.classList.remove('link-aside-active'));
-
-
-    this.classList.add('link-aside-active')
-  })
-})
+  // Adicionando eventos
+  sidebarlinks.forEach(link => {
+    link.addEventListener('click', function() {
+      sidebarlinks.forEach(item => item.classList.remove('asisde-sidebar-active'));
+      this.classList.add('asisde-sidebar-active');
+    });
+  });
 
   // Adiciona um evento de entrada ao campo de busca
   document.getElementById('searchInput').addEventListener('input', function() {
@@ -164,3 +202,4 @@ sidebarlinks.forEach(link => {
 
 </body>
 </html>
+

@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Mensagem;
 use App\models\Chat;
-use Illuminate\Support\Facades\DB;;
+use Illuminate\Support\Facades\DB;
 
 class MensagemController extends Controller
 {
@@ -44,6 +44,32 @@ class MensagemController extends Controller
         ->get();
 
         return response()->json($mensagens);
+}
+
+public function indexUsuarioUnico($idUsuario)
+{
+   // Obtendo o nome do usuário
+   $usuario = DB::table('tb_Usuario')->where('idUsuario', $idUsuario)->first();
+
+   // Verifique se o usuário foi encontrado
+   if (!$usuario) {
+       return redirect()->back()->with('error', 'Usuário não encontrado.');
+   }
+
+   // Buscando as mensagens que o usuário específico enviou ou recebeu
+   $mensagens = DB::table('tb_chat')
+       ->join('tb_Mensagem', 'tb_chat.idMensagem', '=', 'tb_Mensagem.idMensagem')
+       ->join('tb_Empresa', 'tb_chat.idEmpresa', '=', 'tb_Empresa.idEmpresa')
+       ->where('tb_chat.idUsuario', $idUsuario)
+       ->select('tb_Mensagem.mensagem', 'tb_Empresa.nomeEmpresa as empresaNome', 'tb_chat.created_at')
+       ->orderBy('tb_chat.created_at', 'desc')
+       ->get();
+
+   // Passando o nome do usuário para a view
+   return view('mensagem.Unico', [
+       'mensagens' => $mensagens,
+       'usuarioNome' => $usuario->nomeUsuario // Adicione aqui o nome do usuário
+   ]);
 }
 
     
