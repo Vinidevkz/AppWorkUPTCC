@@ -34,6 +34,7 @@
 
 
   <div class="row">
+  <aside class="col-2 p-4">
                 <div class="aside-section">
         
                     <!-- CABEÇALHO DO ASIDE -->
@@ -64,12 +65,51 @@
       </div>
       </div>
     </div>
+  
+  </div>
 
+  
+</div>
+                        <div class="nav-links-adm d-flex flex-row p-1 align-items-center">
+                            <a href="#" class="p-1">vitor.souza</a>
+                            <a href="#" class="p-1">Gestor</a>
+                        </div>
+                    </div>
+        
+                    <div class="aside-body">
+                        <div class="d-flex link-aside-active flex-row item-nav" >
+                           
+                            <a href="/admin" class="p-0 h6">
+                                <i class="bi bi-grid " ></i>
 
-  </header>
-
-  <div class="row">
- 
+                                Dashboard</a>
+                        </div>
+        
+                        <div class="d-flex item-nav">
+                            
+                            <a href="/verUsuario" class="p-1 h6">
+                                <i class="bi bi-people p-1"></i>
+                                Usuários</a>
+                        </div>
+        
+                        <div class="d-flex item-nav">
+                            
+                            <a href="/verVaga" class="p-1 h6">
+                                <i class="bi bi-person-vcard p-1"></i>
+                                Vagas</a>
+                        </div>
+        
+                        <div class="d-flex item-nav">
+                            
+                            <a href="/verEmpresa" class="p-1 h6">
+                                <i class="bi bi-buildings p-1"></i>
+                                Empresas</a>
+                        </div>
+                    </div>
+        
+        
+                </div>
+            </aside>
 
     <div class="col-9">
       <div class="p-0">
@@ -188,16 +228,7 @@ location_city
   </div>
   </div>
 
-  <div class="d-flex flex-row">
-        <div class="blue d-flex align-items-center justify-content-center">
-          <p class="m-0 fw-bold text-center">Ação</p>
-        </div>
-        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
-          <form action="{{ route('cadastrarArea') }}" method="GET" style="display:inline;">
-                        <button type="submit" class="btn btn-info"><p class="m-0 p-0 m-1">Adicionar nova Área</p></button>
-                    </form>
-        </div>
-      </div>
+
 
 
         

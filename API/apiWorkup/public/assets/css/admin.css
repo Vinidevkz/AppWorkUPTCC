@@ -104,6 +104,7 @@ header .nav-text{
 /* ESTILIZAÇÃO DO ASIDE */
 .col-aside{
   min-height: 100vh;
+  
 }
 aside{
   width: 100%;
@@ -111,9 +112,12 @@ aside{
   min-height: 100vh;
   padding: 20px;
   background-color: #303030;
+  
+ 
 }
 .aside-container{
   height: 100%;
+  
 
 }
 .aside-sidebar{
@@ -123,6 +127,7 @@ aside{
   padding-bottom: 22px;
   text-decoration: none;
   width: 100%;
+  
 }
 .aside-sidebar i:hover{
   /* background-color: #11bf6b; */
