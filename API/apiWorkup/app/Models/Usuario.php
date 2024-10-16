@@ -66,6 +66,16 @@ class Usuario extends Model
         return $this->hasMany(VagaUsuario::class, 'idUsuario');
     }
 
+    public function empresa()
+    {
+        return $this->belongsTo(Empresa::class, 'idEmpresa', 'idEmpresa'); // Certifique-se de que as chaves estão corretas
+    }
+
+    public function denuncias()
+    {
+        return $this->hasMany(DenunciaUsuario::class, 'idUsuario', 'idUsuario');
+    }
+
     // Se a relação entre Usuario e Vaga for muitos-para-muitos, descomente a função abaixo
     // public function vagas() : BelongsToMany
     // {

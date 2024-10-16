@@ -10,13 +10,13 @@ use Illuminate\Support\Facades\DB;
 class SalvarVagaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+
      *
      * @return \Illuminate\Http\Response
      */
     public function index($idUsuario)
     {
-        // Validação do parâmetro de rota
+
         if (!is_numeric($idUsuario)) {
             return response()->json([
                 'message' => 'O id do usuario deve ser um número inteiro',
@@ -24,9 +24,19 @@ class SalvarVagaController extends Controller
         }
     
         try {
-            $vagasSalvas = SalvarVaga::where('idUsuario', $idUsuario)->get();
+            $vagasSalvas = SalvarVaga::with(['vaga']) 
+            ->where('idUsuario', $idUsuario)
+            ->get();
+        $result = $vagasSalvas->map(function ($vagaSalva) {
+            return [
+                'nomeVaga' => $vagaSalva->vaga->nomeVaga,
+                'prazoVaga' => $vagaSalva->vaga->prazoVaga,
+                'salarioVaga' => $vagaSalva->vaga->salarioVaga,
+                'cidadeVaga' => $vagaSalva->vaga->cidadeVaga,
+            ];
+        });
     
-            return response()->json($vagasSalvas, 200);
+            return response()->json($result, 200);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => 'Erro ao buscar vagas salvas',

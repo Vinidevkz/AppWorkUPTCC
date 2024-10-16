@@ -108,6 +108,13 @@ check
               </a>
             </div>
 
+            <div class="d-flex mb-4">
+              <a href="/denuncias" class=" d-flex flex-row align-items-center h6">
+                <span class="material-symbols-outlined p-2">apartment</span>
+                Denuncias
+              </a>
+            </div>
+
 
             <div class="d-flex mb-4">
               <a href="" class=" d-flex flex-row align-items-center h6" id="btn-exit">
