@@ -78,8 +78,8 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#Work">Nosso Trabalho</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#Metas">Metas</a></li>
+                
+                
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
@@ -93,9 +93,7 @@
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-search"></i></a>
-                    </li>
+                   
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fas fa-lightbulb"></i></a>
                     </li>

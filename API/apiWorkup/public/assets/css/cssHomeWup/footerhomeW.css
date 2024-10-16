@@ -1,65 +1,34 @@
-@keyframes scroll {
-      0% {
-            transform: translateX(0);
-      }
-
-      90% {
-            transform: translateX(calc(-150px * 7))
-      }
-}
-
-.partners-logo-slider {
-      height: 150px;
-      margin: auto;
-      overflow: hidden;
-      position: relative;
-      width: auto;
-      background-color: #F1F1F1;
-      padding: 16px 0px;
-
-      .slide-track {
-            animation: scroll 40s linear infinite;
-            display: flex;
-            width: calc(150px * 14);
-      }
-
-      .sliderTitle {
-            font-size: 14px;
-            font-weight: 400;
-            line-height: normal;
-            text-align: center;
-      }
-
-      .slide {
-            height: 100px;
-            width: 250px;
-            filter: grayscale(100%);
-      }
-
-      .slide:hover {
-            filter: grayscale(0%);
-      }
-}
-
-
-
-
-
 
 .footer {
       background-color: #1d1d1d;
-      padding: 25px 0 10px;
       margin-top: 20px;
-}
+      position: relative;
 
+  }
+  .footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0; /* Alinha à direita */
+      width: 55%; /* 25% da largura */
+      height: 100%; /* 100% da altura */
+      background-image: url("../../img/home/fundofooter.png");
+      background-size: cover;
+      opacity: 0.2;
+  }
 #logo-footer {
-      width: 15%;
+      width: 25%;
       height: auto;
-      padding-left: 10px;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
 }
+      
 
 .single_footer {
       margin-bottom: 30px;
+      margin-top: 25px;
 }
 
 .single_footer h4 {
@@ -115,7 +84,7 @@
 
 .subscribe__btn {
 
-
+      
       color: #09ff00;
       cursor: pointer;
       display: block;
@@ -192,53 +161,10 @@
       text-align: center;
 }
 
-
-
-
-
-
-.footer {
-      background-color: #1d1d1d;
-      margin-top: 20px;
-      position: relative;
-}
-
-.footer::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      right: 0;
-      /* Alinha à direita */
-      width: 65%;
-      /* 25% da largura */
-      height: 100%;
-      /* 100% da altura */
-      background-image: url("../../img/home/fundofooter.png");
-      background-size: cover;
-      opacity: 0.1;
-}
-
-.single_footer {
-      margin-top: 50px;
-}
-
-
-
 .partner-title {
-      font-size: 58px;
-      margin-bottom: 50px;
-      color: rgb(251, 255, 250);
-      box-shadow: #00f57a;
-      text-align: start;
+      color: #fff;
+      font-size: 35px;
+      font-weight: 400;
+      margin-bottom: 30px;
 }
 
-.partner-title::after {
-      content: "";
-      display: block;
-      height: 4px;
-      width: 500px;
-
-      background: #05f105;
-      margin-top: 20px;
-      align-items: center;
-}
