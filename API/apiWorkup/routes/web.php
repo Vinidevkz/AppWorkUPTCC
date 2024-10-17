@@ -10,6 +10,7 @@ use App\Http\Controllers\AreaEmpresaController;
 use App\Http\Controllers\VagaUsuarioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContatoController;
+use App\Http\Controllers\DenunciaUsuarioController;
 use App\http\Controllers\PostController;
 use App\http\Controllers\MensagemController;
 
@@ -146,6 +147,23 @@ Route::middleware('auth:empresa')->group(function(){
     
             });
 
+            //Mensagem
+            Route::prefix('mensagens')->group(function(){
+            //ver mensagens
+            Route::get('/', [MensagemController::class, 'index'])->name('mensagens.index');
+            //ver mensagens de um unico usuario
+            Route::get('/Unico/{idUsuario}', [MensagemController::class, 'indexUsuarioUnico'])->name('mensagem.indexUsuarioUnico');
+            //mandar mensagens
+            Route::get('/mensagem/{idUsuario}/{idEmpresa}', [MensagemController::class, 'create'])->name('mensagem.create');
+            Route::post('/mensagem', [MensagemController::class, 'store'])->name('mensagem.store');
+            // Post
+            Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth:empresa');
+            Route::get('/postar/{id}', [PostController::class, 'create'])->name('post.create');
+            Route::post('/postar', [PostController::class, 'store'])->name('post.store');
+
+            });
+
+
 });
 
 //Rotas que somente o Admin pode acessar
@@ -216,9 +234,10 @@ Route::middleware('auth:admin')->group(function(){
                 // Aprovar Vaga
                 Route::post('/{id}', [VagaController::class, 'aprovar'])->name('vagas.aprovar');
             });
-            Route::prefix('/denuncia')->group(function(){   
+            Route::prefix('/denuncias')->group(function(){   
                 // Ver todas Vaga
-                Route::get('/', [VagaController::class, 'index'])->name('vagas.index');
+                Route::get('/', [DenunciaUsuarioController::class, 'index'])->name('denunciar.usuario');
+                Route::get('/{id}', [DenunciaUsuarioController::class, 'show'])->name('denuncia.show');
             });
             });
             
