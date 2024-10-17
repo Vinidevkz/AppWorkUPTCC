@@ -76,7 +76,7 @@
                     </div>
 
                     <div class="col col-12 h-50">
-                        <label for="usernameEmpresa">Nome de representante:</label>
+                        <label for="usernameEmpresa">Nome de usuário:</label>
                         <input type="text" class="form-control custom-input" name="usernameEmpresa" value="{{old('usernameEmpresa')}}">
                         @error('usernameEmpresa')
                             <div class="error-message">{{$message}}</div>
@@ -186,7 +186,7 @@
 
                     <div class="col col-12">
                         <label for="cidadeEmpresa">Cidade:</label>
-                        <input type="text" class="form-control custom-input" name="cidadeEmpresa" value="{{old('cidadeEmpresa')}}">
+                        <input type="text" class="form-control custom-input" name="cidadeEmpresa" placeholder="Ex: São Paulo" value="{{old('cidadeEmpresa')}}">
                         @error('cidadeEmpresa')
                             <div class="error-message">{{$message}}</div>
                         @enderror
@@ -205,7 +205,7 @@
                 <div class="row d-flex flex-row h-50 inputs-txt">
 
                     <div class="col d-flex col-8 h-100">
-                        <label for="LogradouroEmpresa">Logradouro:</label>
+                        <label for="LogradouroEmpresa">Endere:</label>
                         <input type="text" class="form-control custom-input" name="LogradouroEmpresa" placeholder="Logradouro da Empresa" value="{{old('LogradouroEmpresa')}}">
                         @error('LogradouroEmpresa')
                             <div class="error-message">{{$message}}</div>
@@ -214,7 +214,7 @@
 
                     <div class="col d-flex col-4 h-100">
                         <label for="numeroLograEmpresa">N° do logradouro:</label>
-                        <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="Número do Logradouro da Empresa" value="{{old('numeroLograEmpresa')}}">
+                        <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="N° do Logradouro" value="{{old('numeroLograEmpresa')}}">
                         @error('numeroLograEmpresa')
                             <div class="error-message">{{$message}}</div>
                         @enderror

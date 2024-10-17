@@ -53,43 +53,54 @@
 
 
                         <div class="nav-links-adm d-flex flex-row p-1 align-items-center">
+
                             <a href="#" class="p-1">vitor.souza</a>
                             <a href="#" class="p-1 ">Gestor</a>
+
+                
+
                         </div>
 
                     </div>
         
                     <div class="aside-body">
-                        <div class="d-flex  flex-row item-nav" >
+                    <div class="d-flex link-aside-active flex-row item-nav" >
                            
-                            <a href="/admin" class="p-0 h6">
-                                <i class="bi bi-grid " ></i>
-
-                                Dashboard</a>
-                        </div>
-        
-                        <div class="d-flex link-aside-active item-nav">
-                            
-                            <a href="/verUsuario" class="p-1 h6">
-                                <i class="bi bi-people p-1"></i>
-                                Usuários</a>
-                        </div>
-        
-                        <div class="d-flex item-nav">
-                            
-                            <a href="/verVaga" class="p-1 h6">
-                                <i class="bi bi-person-vcard p-1"></i>
-                                Vagas</a>
-                        </div>
-        
-                        <div class="d-flex item-nav">
-                            
-                            <a href="/verEmpresa" class="p-1v h6">
-                                <i class="bi bi-buildings p-1"></i>
-                                Empresas</a>
-                        </div>
-                    </div>
-        
+                           <a href="/admin" class="p-0 h6">
+                               <i class="bi bi-grid " ></i>
+                               Dashboard</a>
+                       </div>
+       
+                       <div class="d-flex item-nav">
+                           
+                           <a href="/admin/usuario/listar" class="p-1 h6">
+                               <i class="bi bi-people p-1"></i>
+                               Usuários</a>
+                       </div>
+       
+                       <div class="d-flex item-nav">
+                           
+                           <a href="/admin/vaga/listar" class="p-1 h6">
+                               <i class="bi bi-person-vcard p-1"></i>
+                               Vagas</a>
+                       </div>
+       
+                       <div class="d-flex item-nav">
+                           
+                           <a href="/admin/empresa/listar" class="p-1 h6">
+                               <i class="bi bi-buildings p-1"></i>
+                               Empresas</a>
+                       </div>
+                       <div class="d-flex item-nav">
+                       
+                     <form action="/logout" method="POST">
+                       @csrf
+                       <button type="submit" class="p-1 h6" style="background-color: transparent; border:none">
+                       <i class="bi bi-door-open"></i>Sair
+                     </button>
+                     </form>
+               
+                       </div>
         
                 </div>
             </aside>
@@ -124,7 +135,7 @@ person
         </div>
 
         <table class="table align-middle  mb-0  table-striped m-0 table-user bg-white table-hover" id="myTable">
-          <thead class="bg-light">
+        <thead class="bg-light">
             <tr>
               <th class="fw-bold">Id</th>
               <th class="fw-bold">Usuário</th>
@@ -153,7 +164,7 @@ person
               <tr>
                 <td>{{ $u->idUsuario }}</td>
                 <td class="d-flex flex-row">
-                  <div class="user-initials  rounded-circle text-white d-flex justify-content-center align-items-center ms-3" style="width: 45px; height: 45px;">
+                <div class="user-initials  rounded-circle text-white d-flex justify-content-center align-items-center ms-3" style="width: 45px; height: 45px;">
                     {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
                   </div>  
                   <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link mb-3">

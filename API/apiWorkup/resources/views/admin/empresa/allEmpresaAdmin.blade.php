@@ -69,7 +69,7 @@
                 </ul>
 
                 <div class="text-center mt-4">
-                    <a href="/verEmpresa" class="btn btn-primary">Voltar</a>
+                    <a href="/empresa/listar" class="btn btn-primary">Voltar</a>
                 </div>
             </div>
         </div>

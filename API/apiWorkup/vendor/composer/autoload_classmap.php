@@ -25,6 +25,7 @@ return array(
     'App\\Http\\Controllers\\VagaController' => $baseDir . '/app/Http/Controllers/VagaController.php',
     'App\\Http\\Controllers\\VagaUsuarioController' => $baseDir . '/app/Http/Controllers/VagaUsuarioController.php',
     'App\\Http\\Kernel' => $baseDir . '/app/Http/Kernel.php',
+    'App\\Http\\Middleware\\AuthAdminEmpresa' => $baseDir . '/app/Http/Middleware/AuthAdminEmpresa.php',
     'App\\Http\\Middleware\\Authenticate' => $baseDir . '/app/Http/Middleware/Authenticate.php',
     'App\\Http\\Middleware\\EncryptCookies' => $baseDir . '/app/Http/Middleware/EncryptCookies.php',
     'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => $baseDir . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

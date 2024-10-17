@@ -14,6 +14,9 @@ class Admin extends Authenticatable
     protected $table = 'tb_admin';
 
     public $timestamps = true;
+
+    protected $primaryKey = 'idAdmin';
+
     
     protected $fillable = [
         'nomeAdmin',
