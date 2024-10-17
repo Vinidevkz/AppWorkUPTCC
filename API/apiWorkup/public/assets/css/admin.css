@@ -328,7 +328,7 @@ table{
   font-weight: bold;
   text-transform: uppercase;
   margin-right: 10px;
-  background-color: var(--clr-primary);
+  background-color: #11bf6b;
 }
 .img-adm{
   width: 35px;
@@ -390,15 +390,26 @@ table{
 .search-container {
   position: relative;
   margin-bottom: 10px;
+
 }
 #searchInput {
-  width: 15%;
+  width: 17%;
   padding: 1px 40px 1px 30px; /* Espaço para o ícone */
   box-sizing: border-box; /* Para incluir o padding na largura total */
+  border: none;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: transparent;
 }
+#searchInput:hover{
+
+  border: 2px solid green;
+  
+}
+
 .search-icon {
   position: absolute;
-  left: 7px;
+  left: 4px;
   top: 50%;
   transform: translateY(-50%); /* Centraliza verticalmente */
   pointer-events: none; /* Para que o clique passe através do ícone */
@@ -410,7 +421,7 @@ table{
   color: #999;
 }
 .visualizar-link{
-  color: #111e88;
+  color: #5567f1;
 }
 
 
@@ -421,11 +432,13 @@ aside{
   min-height: 100vh;
   color: white;
 }
+
 aside .img-header{
-  width: 70px;
-  height: 70px;
+  width: 100px;
+  height: 100px;
   border-radius: 5%;
 }
+
 aside .img-header div{
   font-weight: bold;
   font-size: 2rem;
@@ -461,14 +474,15 @@ aside .aside-body a{
 }
 
 .badge-ativo {
-  color: #218838;
-  outline: 1px solid #218838;
+  color: #81c784;
+
+  background-color: #04210f;
   font-style: italic;
 }
 
 .badge-pendente {
-  color: #007bff;
-  outline: 1px solid #007bff;
+  color: #628dd5;
+background-color: #0c1728;
   font-style: italic;
 }
 
@@ -482,4 +496,7 @@ aside .aside-body a{
   background-color: #ffc107; /* Amarelo */
   color: black;
   border: 2px solid #e0a800; /* Bordas do amarelo */
+}
+table td  a{
+  margin-bottom: 10px;
 }
