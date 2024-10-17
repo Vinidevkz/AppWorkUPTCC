@@ -54,8 +54,9 @@
 
                         <div class="nav-links-adm d-flex flex-row p-1 align-items-center">
                             <a href="#" class="p-1">vitor.souza</a>
-                            <a href="#" class="p-1">Gestor</a>
+                            <a href="#" class="p-1 ">Gestor</a>
                         </div>
+
                     </div>
         
                     <div class="aside-body">
@@ -93,7 +94,18 @@
                 </div>
             </aside>
 
-  <div class="col-9 mt-4">
+  <div class="col-9 mt-1">
+  <ul class="nav-list list-group list-group-horizontal list-none p-2">
+          <li class="p-1 d-flex flex-row justify-content-center"><span class="material-symbols-outlined p-1">
+grid_view
+</span><a href="#" class="text-dark p-1">Dashboard</a></li>
+          <li class="p-2">/</li>
+          <li class="p-1 d-flex flex-row justify-content-center"><span class="material-symbols-outlined p-1">
+person
+</span><a href="#" class="text-dark p-1">Usuários</a></li>
+
+
+        </ul>
     <div class="container md-4 mt-3">
       <div class="d-flex flex-row">
         <div class="blue d-flex align-items-center justify-content-center">

@@ -88,9 +88,7 @@ header .nav-text{
   justify-content: space-around;
 }
 
-.navbar{
 
-}
 .lo{
   display: flex;
   align-items: center;
@@ -431,12 +429,14 @@ aside{
   background-color: #303030;
   min-height: 100vh;
   color: white;
+
 }
 
 aside .img-header{
   width: 100px;
   height: 100px;
   border-radius: 5%;
+
 }
 
 aside .img-header div{
@@ -460,6 +460,7 @@ aside .aside-body .d-flex:hover {
 aside .aside-body .d-flex{
   margin: 10px;
   padding: 15px;
+  margin-bottom: 45px;
 }
 
 aside .aside-body a{
@@ -471,6 +472,12 @@ aside .aside-body a{
 .defocar-img-fundo{
   backdrop-filter: blur(10px); /* Aplique o desfoque */
   background-color: rgba(0, 0, 0, 0.5); /* Escurece o fundo ao mesmo tempo */
+}
+.nav-links-adm {
+  font-size: 1.1em; /* Tamanho maior */
+  font-weight: bold; /* Negrito */
+  text-transform: capitalize; /* Primeira letra maiúscula */
+  text-decoration: none;
 }
 
 .badge-ativo {
