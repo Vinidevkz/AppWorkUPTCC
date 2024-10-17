@@ -130,7 +130,7 @@ person
           <input type="text" id="searchInput" placeholder="Buscar...">
         </div>
 
-            <table class="table table-striped" id="myTable">
+            <table class="table table-striped  mb-0  table-striped m-0 table-user bg-white table-hover" id="myTable">
               <thead>
                 <tr>
                   <th>ID</th>
@@ -153,13 +153,15 @@ person
 <th>Ações</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody >
+                
+
                 @forelse($empresas as $em) <!-- Usando um alias diferente -->
-                  <tr>
+                  <tr class="mb-3">
                     <td>{{ $em->idEmpresa }}</td>
                     <td>
                       
-                    <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="visualizar-link"> 
+                    <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="visualizar-link mb-3"> 
                     {{ $em->nomeEmpresa }}
                   
                   </a>

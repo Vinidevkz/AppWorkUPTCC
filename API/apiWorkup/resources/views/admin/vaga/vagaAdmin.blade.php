@@ -121,7 +121,7 @@ person
         </div>
 
 
-        <table class="table table-striped m-0 table-user" id="myTable">
+        <table class="table align-middle  mb-0  table-striped m-0 table-user bg-white table-hover" id="myTable">
             <thead>
                 <tr>
                     <th class="fw-bold">ID</th>
@@ -169,7 +169,7 @@ devices
                 <tr>
                     <td>{{ $v->idVaga }}</td>
                     <td> 
-                    <a href="{{ route('vagas.show', $v->idVaga) }}" class="visualizar-link">{{ $v->nomeVaga }}</a>
+                    <a href="{{ route('vagas.show', $v->idVaga) }}" class="visualizar-link mb-3">{{ $v->nomeVaga }}</a>
   
                     </td>
                     <td>{{  $v->modalidade->descModalidadeVaga}}</td>
