@@ -44,14 +44,15 @@
                 <div class="col">
                     <div class="row row-card flex flex-column justify-content-around align-items-center">
                         <button class="botao-card botao-vaga"> <a href="/vaga/cadastrar" class="text-light"> Criar vaga <i class="fa-solid fa-plus"></i></a></button>
+
+                        <button class="botao-card botao-vaga"> <a href="/mensagens" class="text-light"> Ver mensagens<i class="fa-solid fa-plus"></i></a></button>
+                        <button class="botao-card botao-vaga"> <a href="/posts" class="text-light"> Ver Posts<i class="fa-solid fa-plus"></i></a></button>
                         <button class="botao-card botao-vaga">
                         <form action="/logout" method="POST">
                             @csrf
                             <input type="submit" class="botao-card botao-vaga" value="Sair">
                         </form>
                         </button>
-                        <button class="botao-card botao-vaga"> <a href="/mensagens" class="text-light"> Ver mensagens<i class="fa-solid fa-plus"></i></a></button>
-                        <button class="botao-card botao-vaga"> <a href="/posts" class="text-light"> Ver Posts<i class="fa-solid fa-plus"></i></a></button>
                         <button class="botao-card botao-post">
                         @if (Auth::guard('empresa')->check())
                         @php
