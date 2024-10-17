@@ -119,7 +119,7 @@
         </div>
 
         <table class="table align-middle  mb-0  table-striped m-0 table-user bg-white table-hover" id="myTable">
-          <thead class="bg-light">
+        <thead class="bg-light">
             <tr>
               <th class="fw-bold">Id</th>
               <th class="fw-bold">Usuário</th>
@@ -148,7 +148,7 @@
               <tr>
                 <td>{{ $u->idUsuario }}</td>
                 <td class="d-flex flex-row">
-                  <div class="user-initials  rounded-circle text-white d-flex justify-content-center align-items-center ms-3" style="width: 45px; height: 45px;">
+                <div class="user-initials  rounded-circle text-white d-flex justify-content-center align-items-center ms-3" style="width: 45px; height: 45px;">
                     {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
                   </div>  
                   <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link mb-3">
