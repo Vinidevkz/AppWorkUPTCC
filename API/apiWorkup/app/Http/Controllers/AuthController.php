@@ -28,7 +28,7 @@ class AuthController extends Controller
             // Se a senha estiver correta, faça o login
             if (Hash::check($password, $empresa->senhaEmpresa)) {
                 Auth::guard('empresa')->login($empresa);
-                return redirect('/empresa');
+                return redirect('/empresa/dashboard');
             } else {
                 // Senha incorreta para empresa
                 return redirect()->back()->with('error', 'Senha incorreta para empresa.');
@@ -42,7 +42,7 @@ class AuthController extends Controller
             if (Hash::check($password, $admin->senhaAdmin)) {
                 Auth::guard('admin')->login($admin);
                 Log::info('Admin logged in:', ['email' => $email]);
-                    return redirect('/cadastrarAdmin');  // Adicionado redirecionamento correto
+                    return redirect('/admin');  // Adicionado redirecionamento correto
             } else {
                 // Senha incorreta para admin
                 return redirect()->back()->with('error', 'Senha incorreta para admin.');
@@ -60,13 +60,18 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        if (Auth::guard('empresa')->check()) {
-            Auth::guard('empresa')->logout();
-        } elseif (Auth::guard('admin')->check()) {
-            Auth::guard('admin')->logout();
+
+        if($request){
+            if (Auth::guard('empresa')->check()) {
+                Auth::guard('empresa')->logout();
+            } elseif (Auth::guard('admin')->check()) {
+                Auth::guard('admin')->logout();
+            }
+    
+            return redirect('/login')->with('message', 'Logout realizado com sucesso.');
+
         }
 
-        return redirect('/login')->with('message', 'Logout realizado com sucesso.');
     }
 }
 

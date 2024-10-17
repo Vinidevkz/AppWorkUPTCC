@@ -65,9 +65,10 @@ Route::get('/verificarCandidatura/{idUsuario}/{idVaga}', [VagaUsuarioController:
 
 //Listar todas as vagas
 Route::get('/vaga', [VagaController::class, 'index']);
+Route::get('/vagaApp', [VagaController::class, 'indexApp']);
 //Visualizar vaga por id
 Route::get('/vaga/{idVaga}', [VagaController::class, 'show']);
-
+Route::get('/vagaApp/{idVaga}', [VagaController::class, 'show']);
 Route::post('/vaga/busca', [VagaController::class, 'search']);
 //Atualizar dado de uma vaga...
 //Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])

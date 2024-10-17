@@ -88,9 +88,7 @@ header .nav-text{
   justify-content: space-around;
 }
 
-.navbar{
 
-}
 .lo{
   display: flex;
   align-items: center;
@@ -104,6 +102,7 @@ header .nav-text{
 /* ESTILIZAÇÃO DO ASIDE */
 .col-aside{
   min-height: 100vh;
+  
 }
 aside{
   width: 100%;
@@ -111,9 +110,12 @@ aside{
   min-height: 100vh;
   padding: 20px;
   background-color: #303030;
+  
+ 
 }
 .aside-container{
   height: 100%;
+  
 
 }
 .aside-sidebar{
@@ -123,15 +125,16 @@ aside{
   padding-bottom: 22px;
   text-decoration: none;
   width: 100%;
+  
 }
-.aside-sidebar a:hover{
+.aside-sidebar i:hover{
   /* background-color: #11bf6b; */
-  margin-left: 5px;
+  margin-left: 1px;
   transition: 0.2s;
-  border-left: 5px solid #11bf6b;
+  border-left: 3px solid #11bf6b;
 }
 .asisde-sidebar-active{
-  margin-left: 5px;
+  margin-left: 1px;
   border-left: 5px solid #11bf6b;
 }
 .aside-sidebar #btn-exit:hover{
@@ -323,7 +326,7 @@ table{
   font-weight: bold;
   text-transform: uppercase;
   margin-right: 10px;
-  background-color: var(--clr-primary);
+  background-color: #11bf6b;
 }
 .img-adm{
   width: 35px;
@@ -385,15 +388,26 @@ table{
 .search-container {
   position: relative;
   margin-bottom: 10px;
+
 }
 #searchInput {
-  width: 15%;
+  width: 17%;
   padding: 1px 40px 1px 30px; /* Espaço para o ícone */
   box-sizing: border-box; /* Para incluir o padding na largura total */
+  border: none;
+  border: 1px solid black;
+  border-radius: 20px;
+  background-color: transparent;
 }
+#searchInput:hover{
+
+  border: 2px solid green;
+  
+}
+
 .search-icon {
   position: absolute;
-  left: 7px;
+  left: 4px;
   top: 50%;
   transform: translateY(-50%); /* Centraliza verticalmente */
   pointer-events: none; /* Para que o clique passe através do ícone */
@@ -405,5 +419,91 @@ table{
   color: #999;
 }
 .visualizar-link{
-  color: #111e88;
+  color: #5567f1;
+}
+
+
+/* NOVO ASIDE */
+/* ESTILIZAÇÃO DO ASIDE */
+aside{
+  background-color: #303030;
+  min-height: 100vh;
+  color: white;
+
+}
+
+aside .img-header{
+  width: 100px;
+  height: 100px;
+  border-radius: 5%;
+
+}
+
+aside .img-header div{
+  font-weight: bold;
+  font-size: 2rem;
+}
+aside .link-aside-active {
+  border-left: #20DD77 4px solid;
+  padding-left: 5px;
+  /* background: linear-gradient(135deg, rgba(2, 221, 119, 0.8) 0%, rgba(32, 221, 119, 0) 90%); */
+
+}
+aside .aside-body .d-flex:hover {
+  border-left: #20DD77 4px solid;
+  padding-left: 5px;
+  /* background: linear-gradient(135deg, rgba(2, 221, 119, 0.8) 0%, rgba(32, 221, 119, 0) 90%); */
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+aside .aside-body .d-flex{
+  margin: 10px;
+  padding: 15px;
+  margin-bottom: 45px;
+}
+
+aside .aside-body a{
+  text-decoration: none;
+}
+.modal-fundo-cor{
+  background-color: #303030;
+}
+.defocar-img-fundo{
+  backdrop-filter: blur(10px); /* Aplique o desfoque */
+  background-color: rgba(0, 0, 0, 0.5); /* Escurece o fundo ao mesmo tempo */
+}
+.nav-links-adm {
+  font-size: 1.1em; /* Tamanho maior */
+  font-weight: bold; /* Negrito */
+  text-transform: capitalize; /* Primeira letra maiúscula */
+  text-decoration: none;
+}
+
+.badge-ativo {
+  color: #81c784;
+
+  background-color: #04210f;
+  font-style: italic;
+}
+
+.badge-pendente {
+  color: #628dd5;
+background-color: #0c1728;
+  font-style: italic;
+}
+
+.badge-bloqueado {
+  font-style: italic;
+  color: #c82333;
+  outline: 1px solid #c82333;
+}
+
+.badge-default {
+  background-color: #ffc107; /* Amarelo */
+  color: black;
+  border: 2px solid #e0a800; /* Bordas do amarelo */
+}
+table td  a{
+  margin-bottom: 10px;
 }

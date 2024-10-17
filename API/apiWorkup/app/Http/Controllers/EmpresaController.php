@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Empresa;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 
@@ -28,8 +30,21 @@ class EmpresaController extends Controller
             return response()->json($empresas); // Retorna JSON se for uma requisição AJAX
         }
 
+        if (Auth::guard('admin')->check()) {
+            $idAdmin = Auth::guard('admin')->id();
+            $admin = Admin::select('usernameAdmin', 'emailAdmin', 'nomeAdmin')->where('idAdmin', $idAdmin)->first();
+            
+            $nomeAdmin = $admin->nomeAdmin;
+            $usernameAdmin = $admin->usernameAdmin;
+            $emailAdmin = $admin->emailAdmin;
+            
+        } else {
+            // Redirecionar ou mostrar uma mensagem de erro
+            return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
+        }
+
         // Caso contrário, retorna a view com os usuários
-        return view('admin.empresa.empresaAdmin', compact('empresas'));
+        return view('admin.empresa.empresaAdmin', compact('empresas', 'nomeAdmin', 'usernameAdmin', 'emailAdmin'));
     }
 
     
@@ -43,7 +58,7 @@ class EmpresaController extends Controller
      */
     public function create()
     {
-        return view('cadastrarEmpresa');
+        return view('cadastroEmpresa');
     }
 
     public function area()
@@ -199,7 +214,7 @@ Validação
         }
     
         // Redireciona para a lista de empresas com mensagem de sucesso
-        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
+        return redirect('/admin/empresa/listar')->with('success', 'Empresa atualizada com sucesso.');
     }
 
     public function aprovar(Request $request, $id)
@@ -216,7 +231,7 @@ Validação
         }
     
         // Redireciona para a lista de empresas com mensagem de sucesso
-        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
+        return redirect('/admin/empresa/listar')->with('success', 'Empresa atualizada com sucesso.');
     }
 
 

@@ -40,7 +40,7 @@
         </ul>
 
         <div class="mt-4">
-            <a href="/verUsuario" class="btn btn-primary">Voltar</a>
+            <a href="/usuario/listar" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 </div>

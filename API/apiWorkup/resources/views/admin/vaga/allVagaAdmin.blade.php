@@ -32,7 +32,7 @@
                 
 
                 <div class="mt-4">
-                <a href="/verVaga" class="btn btn-primary">Voltar</a>
+                <a href="/vaga/listar" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 </div>
