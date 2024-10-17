@@ -7,7 +7,7 @@ body {
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-      background-attachment: fixed;
+      background-attachment: scroll;
 }
 
 /* Cabeçalho */
@@ -39,13 +39,14 @@ body {
       text-align: center;
 }
 
-/* Cards (row quem somos) */
+
 .rowsobrenos {
       background-image: url("../img/home/f123.png");
       border-radius: 30px;
-      padding: 55px;
+      padding: 25px;
       margin-top: 5px;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
+      margin-left: 75px;
 }
 
 .card.mb-3 {
@@ -68,7 +69,7 @@ body {
       z-index: -1;
       top: -15px;
       right: -15px;
-      background: #a4e4a4;
+      background: #00ff0059;
       height: 420px;
       width: 15px;
       border-radius: 2px;
@@ -102,8 +103,10 @@ body {
 }
 
 .card img {
-      max-width: 60%;
-      height: auto;
+      max-width: 80%;
+      height: 80px;
+      background-color: #ffffff00;
+      margin-left: 50px;
 }
 
 .card-body {
@@ -115,7 +118,7 @@ body {
       display: flex;
       align-items: center;
       justify-content: center;
-      background-color: #f7f7f7;
+      background-color: #f7f7f700;
       width: 85%;
       height: 50%;
       margin: 30px;
@@ -156,9 +159,9 @@ body {
       display: block;
       width: 100%;
       height: 2px;
-      background-color: green;
+      background-color: rgba(0, 128, 0, 0.466);
       /* Linha verde */
-      margin-top: 10px;
+      margin-top: 15px;
       /* Espaço entre o título e a linha */
 }
 
@@ -208,38 +211,6 @@ body {
 }
 
 /* Laptop */
-.laptop-frame {
-      display: flex;
-      width: 100%;
-      box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
-      position: relative;
-      padding-top: 50.85%;
-      margin-top: 20px;
-      height: 0;
-}
-
-.laptop-screen {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgb(229, 243, 228);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-}
-
-.laptop-screen iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: none;
-      padding: 10px;
-}
 
 /* Janelas */
 .rowjovens {
@@ -247,9 +218,11 @@ body {
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
-      padding: 40px 0;
+      padding: 80px;
       margin-bottom: 40px;
-      margin-top: 220px;
+      margin-top: 20px;
+      border-spacing: 55px;
+      margin-left: 55px;
 }
 
 .rowdepoimento {
@@ -270,7 +243,7 @@ body {
 .text-container {
       background-color: #848584e3;
       border-radius: 8px 0 75px 0;
-      color: #0be903;
+      color: #12fa0a2f;
 }
 
 /* Botões */

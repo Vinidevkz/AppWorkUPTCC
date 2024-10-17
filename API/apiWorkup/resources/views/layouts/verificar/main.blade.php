@@ -34,7 +34,7 @@
                 <ul class="nav-itens">
                     <li><a href="/#home">Início</a></li>
                     <li><a href="/#sobre">Sobre</a></li>
-                    <li><a href="">Projetos</a></li>
+                    <li><a href="">WorkUp</a></li>
                     <li><a href="">Parceiros</a></li>
                     <li><a href="/contato">Contato</a></li>
                     <li><a href="/home">Enquato nao tem a parte projetos</a></li>

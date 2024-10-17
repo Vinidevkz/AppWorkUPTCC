@@ -24,7 +24,7 @@
                     <li><a href="#home">Início</a></li>
                     <li><a href="#sobre">Sobre</a></li>
                     <li><a href="#equipe">Equipe</a></li>
-                    <li><a href="/home">Projetos</a></li>
+                    <li><a href="/home">WorkUp</a></li>
                     <li><a href="#parceiros">Parceiros</a></li>
                     <li><a href="#contato">Contato</a></li>
                 </ul>
@@ -325,13 +325,13 @@
                             <form action="/contato" method="POST">
                                 @csrf
                                 <div class="wrap flex-column">
-                                    <span class="texto">Insira seu nome:</span>
-                                    <input class="input" type="text" name="nome" required>
+                                    <span class="texto-form">Insira seu nome:</span>
+                                    <input class="input-form " type="text" name="nome" required>
                                 </div>
 
                                 <div class="wrap flex-column">
-                                    <span class="texto">Insira seu email:</span>
-                                    <input class="input" type="email" name="email" required>
+                                    <span class="texto-form">Insira seu email:</span>
+                                    <input class="input-form" type="email" name="email" required>
                                 </div>
 
                                 <div class="wrap flex-column w-100">
