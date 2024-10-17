@@ -28,6 +28,7 @@ const {
   apiEmuladorCancelSalvarVaga,
   apiNgrokCancelSalvarVaga,
   apiNgrokVerificarSalvarVaga,
+  apiEmuladorVerificarSalvarVaga,
 } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
@@ -51,7 +52,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(apiNgrokVaga);
+      const response = await axios.get(apiEmuladorVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -67,7 +68,7 @@ export default function Home({ navigation }) {
 
   const salvarVaga = async (idVaga) => {
     const idUsuario = userId;
-    const url = apiNgrokSalvarVaga;
+    const url = apiEmuladorSalvarVaga;
 
     const body = {
       idUsuario: idUsuario,
@@ -109,7 +110,7 @@ export default function Home({ navigation }) {
 
   const removerVagaSalva = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const url = apiNgrokCancelSalvarVaga; // Use a URL sem parâmetros na rota
+    const url = apiEmuladorCancelSalvarVaga; // Use a URL sem parâmetros na rota
 
     try {
       const response = await fetch(url, {
@@ -143,7 +144,7 @@ export default function Home({ navigation }) {
   const verificarSalvamentoVaga = async (vagaID) => {
     try {
       const request = await fetch(
-        `${apiNgrokVerificarSalvarVaga}/${userId}/${vagaID}`
+        `${apiEmuladorVerificarSalvarVaga}/${userId}/${vagaID}`
       );
       const response = await request.json();
       if (response.isSaved) {
