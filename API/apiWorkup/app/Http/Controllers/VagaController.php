@@ -65,6 +65,12 @@ class VagaController extends Controller
             'nomeAdmin'=>$nomeAdmin]);
     }
 
+    public function indexApp(Request $request)
+    {
+        return Vaga::all();
+    }
+    
+
     /**
      * Show the form for creating a new resource.
      *
@@ -158,6 +164,12 @@ class VagaController extends Controller
         }
 
         return view('admin.vaga.allVagaAdmin', ['vaga'=>$vaga]);
+    }
+
+    public function showApp(Request $request, $id){
+        $vaga = Vaga::where('idVaga', $id)->with(['empresa', 'status', 'modalidade', 'area'])->firstOrFail(); 
+
+        return response()->json($vaga, 201);
     }
 
     /**
