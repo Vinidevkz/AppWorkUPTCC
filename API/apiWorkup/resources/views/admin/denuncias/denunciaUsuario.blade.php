@@ -59,22 +59,22 @@
             </a>
           </div>
           <div class="d-flex mb-4">
-            <a href="/verUsuario" class="asisde-sidebar-active d-flex flex-row align-items-center h6">
+            <a href="/admin/usuario/listar" class="asisde-sidebar-active d-flex flex-row align-items-center h6">
               <span class="material-symbols-outlined p-2">person</span> Usuários
             </a>
           </div>
           <div class="d-flex mb-4">
-            <a href="/verVaga" class="d-flex flex-row align-items-center h6">
+            <a href="/admin/vaga/listar" class="d-flex flex-row align-items-center h6">
               <span class="material-symbols-outlined p-2">work</span> Vagas
             </a>
           </div>
           <div class="d-flex mb-4">
-            <a href="/verEmpresa" class="d-flex flex-row align-items-center h6">
+            <a href="/admin/empresa/listar" class="d-flex flex-row align-items-center h6">
               <span class="material-symbols-outlined p-2">apartment</span> Empresas
             </a>
           </div>
           <div class="mb-4">
-            <a href="/infoAdmin" class="d-flex flex-row align-items-center h6">
+            <a href="/admin/info" class="d-flex flex-row align-items-center h6">
               <span class="material-symbols-outlined p-2">info</span> Info
             </a>
           </div>

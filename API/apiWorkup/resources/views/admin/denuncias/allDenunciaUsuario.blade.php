@@ -22,7 +22,7 @@
 
 
         <div class="mt-4">
-            <a href="/denuncias" class="btn btn-primary">Voltar</a>
+            <a href="/admin/denuncia" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 </div>

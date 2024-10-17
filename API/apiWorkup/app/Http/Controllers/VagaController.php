@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\Vaga;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,19 @@ class VagaController extends Controller
         |----------------------------------------------------------------------
         */
 
+        if (Auth::guard('admin')->check()) {
+            $idAdmin = Auth::guard('admin')->id();
+            $admin = Admin::select('usernameAdmin', 'emailAdmin', 'nomeAdmin')->where('idAdmin', $idAdmin)->first();
+            
+            $nomeAdmin = $admin->nomeAdmin;
+            $usernameAdmin = $admin->usernameAdmin;
+            $emailAdmin = $admin->emailAdmin;
+            
+        } else {
+            // Redirecionar ou mostrar uma mensagem de erro
+            return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
+        }
+
         if ($request->has('order') && $request->order == 'status') {
             // Ordena para trazer idStatus = 2 primeiro
             $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
@@ -44,7 +58,11 @@ class VagaController extends Controller
 
 
         // Caso contrário, retorna a view com as vagas
-        return view('admin.vaga.vagaAdmin', ['vagas'=>$vagas]);
+        return view('admin.vaga.vagaAdmin', [
+            'vagas'=>$vagas,
+            'usernameAdmin'=>$usernameAdmin,
+            'emailAdmin'=>$emailAdmin,
+            'nomeAdmin'=>$nomeAdmin]);
     }
 
     /**
@@ -117,7 +135,7 @@ class VagaController extends Controller
 
         $vaga->save();
 
-        return view('/empresa');
+        return redirect('/admin/empresa/dashboard');
     }
 
     /**
@@ -216,7 +234,7 @@ class VagaController extends Controller
         $vaga->update($request->all());
 
         // Redirecionar para a lista de usuários
-        return redirect('/verVaga')->with('success', 'Vaga atualizado com sucesso.');
+        return redirect('/admin/empresa/dashboard')->with('success', 'Vaga atualizado com sucesso.');
     }
 
     /**
@@ -239,7 +257,7 @@ class VagaController extends Controller
         }
 
         // Redireciona para a lista de vagas com mensagem de sucesso
-        return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
+        return redirect('/admin/vaga/listar')->with('success', 'Vaga atualizada com sucesso.');
     }
 
     public function aprovar($id, Request $request)
@@ -256,7 +274,7 @@ class VagaController extends Controller
         }
 
         // Redireciona para a lista de vagas com mensagem de sucesso
-        return redirect('/verVaga')->with('success', 'Vaga atualizada com sucesso.');
+        return redirect('/admin/vaga/listar')->with('success', 'Vaga atualizada com sucesso.');
     }
 
     public function search(Request $request)

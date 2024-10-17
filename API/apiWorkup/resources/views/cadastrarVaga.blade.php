@@ -197,7 +197,7 @@
                         Cadastre uma Vaga
                     </div>
 
-                    <form method="POST" action="/formVaga">
+                    <form method="POST" action="/vaga/form">
                         @csrf
 
                         

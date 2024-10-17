@@ -1,10 +1,8 @@
 <?php
-
 /*
 |--------------------------------------------------------------------------
 | Precisa ajustar css
 |--------------------------------------------------------------------------
-
 */
 ?>
 <!DOCTYPE html>
@@ -36,7 +34,7 @@
   <div class="row">
   <aside class="col-2 p-4">
                 <div class="aside-section">
-        
+
                     <!-- CABEÇALHO DO ASIDE -->
                     <div class="header-aside d-flex flex-column align-items-center justify-content-center">
                         <div class="img-header d-flex align-items-center justify-content-center">
@@ -45,7 +43,7 @@
 
 <!-- Modal Bootstrap -->
 <div class="modal fade defocar-img-fundo" id="imagemModal" tabindex="" aria-labelledby="imagemModalLabel" aria-hidden="true">
-  
+
   <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content modal-fundo-cor">
       <div class="modal-body d-flex justify-content-center">
@@ -68,10 +66,13 @@
   
   </div>
 
+  </header>
+  <div class="row">
+ 
   
 </div>
                         <div class="nav-links-adm d-flex flex-row p-1 align-items-center">
-                            <a href="#" class="p-1">vitor.souza</a>
+                            <a href="#" class="p-1">{{ $usernameAdmin }}</a>
                             <a href="#" class="p-1">Gestor</a>
                         </div>
                     </div>
@@ -81,29 +82,38 @@
                            
                             <a href="/admin" class="p-0 h6">
                                 <i class="bi bi-grid " ></i>
-
                                 Dashboard</a>
                         </div>
         
                         <div class="d-flex item-nav">
                             
-                            <a href="/verUsuario" class="p-1 h6">
+                            <a href="/admin/usuario/listar" class="p-1 h6">
                                 <i class="bi bi-people p-1"></i>
                                 Usuários</a>
                         </div>
         
                         <div class="d-flex item-nav">
                             
-                            <a href="/verVaga" class="p-1 h6">
+                            <a href="/admin/vaga/listar" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
                                 Vagas</a>
                         </div>
         
                         <div class="d-flex item-nav">
                             
-                            <a href="/verEmpresa" class="p-1 h6">
+                            <a href="/admin/empresa/listar" class="p-1 h6">
                                 <i class="bi bi-buildings p-1"></i>
                                 Empresas</a>
+                        </div>
+                        <div class="d-flex item-nav">
+                        
+                      <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="p-1 h6" style="background-color: transparent; border:none">
+                        <i class="bi bi-door-open"></i>Sair
+                      </button>
+                      </form>
+                
                         </div>
                     </div>
         
@@ -114,11 +124,11 @@
     <div class="col-9">
       <div class="p-0">
 
-       
+
         <div class="container">
 
         <div class="mb-2 mt-2 d-flex flex-row align-items-center">
-<h3 class="m-0">Olá, Vitor!</h1>
+<h3 class="m-0">Olá, {{ $nomeAdmin }}!</h1>
 <span class="material-symbols-outlined text-warning">
 hand_gesture
 </span>
@@ -173,30 +183,24 @@ location_city
               <span class="reg-point">:</span>
               <span id="sec">00</span>
             </div>
-
             
           </div> -->
-       
+
         </div>
-        
+
 
   <!-- <div class="">
-
   <table>
     <tbody>
       <tr class="p-3">
-
         <td class="">
      
         </td>
-
         <td id="gambiarra">aa</td>
-
         <td>
    
         </td>
       </tr>
-
       <tr>
         <td>
     
@@ -220,7 +224,7 @@ location_city
             </div>
         </div>
         <div class="row mt-5 pb-5">
-      
+
             <div class="bg-white shadow rounded" >
                 <canvas id="myBarChart" class="col" style="height: 338px;" ></canvas>
             </div>
@@ -228,10 +232,19 @@ location_city
   </div>
   </div>
 
+  <div class="d-flex flex-row">
+        <div class="blue d-flex align-items-center justify-content-center">
+          <p class="m-0 fw-bold text-center">Ação</p>
+        </div>
+        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
+          <form action="{{ route('cadastrarArea') }}" method="GET" style="display:inline;">
+                        <button type="submit" class="btn btn-info"><p class="m-0 p-0 m-1">Adicionar nova Área</p></button>
+                    </form>
+        </div>
+      </div>
 
 
 
-        
 
 
             <!-- <div class="col-1"></div>
@@ -283,18 +296,15 @@ location_city
     //     ]
     //   }]
     // };
-
     // const configPolarArea = {
     //   type: 'polarArea',
     //   data: dataPolarArea,
     //   options: {}
     // };
-
     // var myPolarAreaChart = new Chart(
     //   document.getElementById('myPolarAreaChart'),
     //   configPolarArea
     // );
-
     // // Dados e configuração do gráfico de Linha
     // const labelsLine = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
     // const dataLine = {
@@ -307,22 +317,17 @@ location_city
     //     tension: 0.1
     //   }]
     // };
-
     // const configLine = {
     //   type: 'line',
     //   data: dataLine,
     //   options: {}
     // };
-
     // var myLineChart = new Chart(
     //   document.getElementById('myLineChart'),
     //   configLine
     // );
-
-
     // CONFIGURAÇÕES DO GRÁFICO DE BARRAS
 // CONFIGURAÇÕES DO GRÁFICO DE BARRAS
-
 const labelsBarChart = ['Tecnologia', 'Marketing', 'Gestão', 'Gastronomia', 'Administração', 'Medicina', 'Educação', 'Finança', 'Recursos Humanos', 'Logística', 'Alimentação', 'Serviços Gerais', 'Higienização', 'Enegenharia', 'Meio Ambiente'];
 const totalUsuarioTecnologia = {{$totalUsuariosTecnologia}};
 const totalUsuarioMarketing = {{$totalUsuariosMarketing}};
@@ -375,7 +380,6 @@ backgroundColor: [
   '#20dd77',   // Logística
   '#1b1b1b'    // Design
 ],
-
     // borderColor: [
     //   'rgb(255, 99, 132)',
     //   'rgb(255, 159, 64)',
@@ -388,7 +392,6 @@ backgroundColor: [
     borderWidth: 1
   }]
 };
-
 const configBarChart = {
   type: 'bar',
   data: dataBarChart,
@@ -400,18 +403,11 @@ const configBarChart = {
     }
   },
 };
-
 var myBarChart = new Chart(
   document.getElementById('myBarChart'),
   configBarChart
 );
-
-
-
-
-
 // // GRÁFICO DE PIZAA
-
 // const totalVagaTecnologia = {{ $totalVagaTecnologia }};
 // const totalVagaGatronomia = {{$totalVagaGatronomia}};
 // const totalVagaEngenharia = {{$totalVagaEngenharia}};
@@ -471,7 +467,6 @@ var myBarChart = new Chart(
 //     hoverOffset: 4
 //   }]
 // };
-
 // const configPizza = {
 //   type: 'pie',
 //   data: dataPizza,
@@ -488,18 +483,12 @@ var myBarChart = new Chart(
 //     }
 //   }
 // };
-
 // var pizzaGraph = new Chart(
 //   document.getElementById('pizzaGraph'),
 //   configPizza
 // );
-
-
-
 // // GRÁFICO DE BARRA LATERAL
 // // Dados das vagas
-
-
 // // Labels para o gráfico
 // const labels = [
 //   'Tecnologia',
@@ -515,7 +504,6 @@ var myBarChart = new Chart(
 //   'Logística',
 //   'Alimentação'
 // ];
-
 // // Dados para o gráfico
 // const dataLateral = {
 //   labels: labels,
@@ -568,7 +556,6 @@ var myBarChart = new Chart(
 //     borderWidth: 1
 //   }]
 // };
-
 // // Configuração do gráfico
 // const configLateral = {
 //   type: 'bar',
@@ -577,14 +564,11 @@ var myBarChart = new Chart(
 //     indexAxis: 'y', // Exibe as barras horizontalmente
 //   }
 // };
-
 // // Criação do gráfico
 // var barGraph = new Chart(
 //   document.getElementById('barGraph'), // ID do elemento canvas
 //   configLateral
 // );
-
-
 // GRÁFICO DE ROSCA DO GOOGLE
 const totalVagaTecnologia = {{ $totalVagaTecnologia }};
 const totalVagaGatronomia = {{$totalVagaGatronomia}};
@@ -622,7 +606,6 @@ google.charts.load("current", {packages:["corechart"]});
           ['Engenharia', totalVagaEngenharia],
           ['Meio Ambiente', totalVagaLogistica],
         ]);
-
         var options = {
           title: 'Percentual de vagas por setor',
           // is3D: true,
@@ -634,7 +617,6 @@ google.charts.load("current", {packages:["corechart"]});
         textStyle: {
           fontSize: 11 // Aumenta o tamanho da fonte da legenda
         }},
-
         slices: {
           0: { color: '#1E90FF' }, // Azul
         1: { color: '#32CD32' }, // Verde
@@ -643,52 +625,38 @@ google.charts.load("current", {packages:["corechart"]});
         4: { color: '#FF4500' }  // Vermelho
       }
         };
-
         var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
         chart.draw(data, options);
       }
-
   </script>
 
   <script>
     const hour = document.querySelector('#hour')
     const min = document.querySelector('#min')
     const sec = document.querySelector('#sec')
-
     setInterval(() => {
       let date = new Date()
       let dHour = date.getHours()
       let dMinute = date.getMinutes()
       let dSec = date.getSeconds()
-
       hour.innerHTML = `${formatTime(dHour)}`
       min.innerHTML = `${formatTime(dMinute)}`
       sec.innerHTML = `${formatTime(dSec)}`
-
     }, 1000)
-
     function formatTime(time) {
       return time < 10 ? '0' + time : time
     }
-
-
-
-
     // GRÁFICO DE PIZZA PARA OS STATUS
-
     const ativos = {{$statusAtivo}};
 const bloqueados = {{$statusBloqueado}};
-
 google.charts.load("current", {packages:["corechart"]});
 google.charts.setOnLoadCallback(drawChart);
-
 function drawChart() {
     var data = google.visualization.arrayToDataTable([
         ['Task', 'Hours per Day'],
         ['Ativos',     ativos],
         ['Bloqueados',  bloqueados]
     ]);
-
     var options = {
         title: 'Situação dos usuários',
         pieHole: 0,
@@ -706,26 +674,19 @@ function drawChart() {
       }
       
     };
-
     var donutChart = new google.visualization.PieChart(document.getElementById('donutchart'));
     donutChart.draw(data, options);
 }
-
-
-
 // document.getElementById('toggle-aside').addEventListener('click', function() {
 //   const sidebar = document.getElementById('aside-text');
 //   sidebar.classList.toggle('hidden esconder-texto');
 // }); 
 const sidebarlinks = document.querySelectorAll('.item-nav');
-
 // Adicionando eventos
 sidebarlinks.forEach(link => {
   link.addEventListener('click', function() {
     // Removendo classe
     sidebarlinks.forEach(item => item.classList.remove('link-aside-active'));
-
-
     this.classList.add('link-aside-active')
   })
 })
@@ -738,5 +699,3 @@ sidebarlinks.forEach(link => {
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
-
-</html>

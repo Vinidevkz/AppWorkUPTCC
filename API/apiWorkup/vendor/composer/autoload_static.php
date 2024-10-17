@@ -545,6 +545,7 @@ class ComposerStaticInit3d4469b56e67c06dd5a90295945685f3
         'App\\Http\\Controllers\\VagaController' => __DIR__ . '/../..' . '/app/Http/Controllers/VagaController.php',
         'App\\Http\\Controllers\\VagaUsuarioController' => __DIR__ . '/../..' . '/app/Http/Controllers/VagaUsuarioController.php',
         'App\\Http\\Kernel' => __DIR__ . '/../..' . '/app/Http/Kernel.php',
+        'App\\Http\\Middleware\\AuthAdminEmpresa' => __DIR__ . '/../..' . '/app/Http/Middleware/AuthAdminEmpresa.php',
         'App\\Http\\Middleware\\Authenticate' => __DIR__ . '/../..' . '/app/Http/Middleware/Authenticate.php',
         'App\\Http\\Middleware\\EncryptCookies' => __DIR__ . '/../..' . '/app/Http/Middleware/EncryptCookies.php',
         'App\\Http\\Middleware\\PreventRequestsDuringMaintenance' => __DIR__ . '/../..' . '/app/Http/Middleware/PreventRequestsDuringMaintenance.php',

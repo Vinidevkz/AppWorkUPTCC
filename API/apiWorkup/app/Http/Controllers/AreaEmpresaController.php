@@ -73,7 +73,7 @@ class AreaEmpresaController extends Controller
             }
     
             // Redireciona após o sucesso
-            return redirect('empresa')->with('success', 'Áreas cadastradas com sucesso!');
+            return redirect('/empresa/dashboard ')->with('success', 'Áreas cadastradas com sucesso!');
 
             
         } catch (\Exception $e) {

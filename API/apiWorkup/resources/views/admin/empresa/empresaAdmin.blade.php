@@ -27,7 +27,6 @@
                         <div class="img-header d-flex align-items-center justify-content-center">
     <img src="{{url('assets/img/adminImages/vr7Perfil.jpeg')}}" class="img-header" alt="Imagem de perfil" data-bs-toggle="modal" data-bs-target="#imagemModal" style="cursor:pointer;">
 </div>
-
 <!-- Modal Bootstrap -->
 <div class="modal fade defocar-img-fundo" id="imagemModal" tabindex="" aria-labelledby="imagemModalLabel" aria-hidden="true">
   
@@ -42,7 +41,6 @@
       <i class="bi bi-pencil"></i>  
       Alterar</button>
       </div>
-
       <div class="box-btn-del">
       <button type="button" class="btn btn-outline-danger">
       <i class="bi bi-x-lg"></i>  
@@ -53,43 +51,50 @@
   </div>
 </div>
 
-
                         <div class="nav-links-adm d-flex flex-row p-1 align-items-center">
-                            <a href="#" class="p-1">vitor.souza</a>
+                            <a href="#" class="p-1">{{ $usernameAdmin }}</a>
                             <a href="#" class="p-1">Gestor</a>
                         </div>
                     </div>
         
                     <div class="aside-body">
-                        <div class="d-flex flex-row item-nav" >
+                    <div class="d-flex link-aside-active flex-row item-nav" >
                            
-                            <a href="/admin" class="p-0 h6">
-                                <i class="bi bi-grid " ></i>
-
-                                Dashboard</a>
-                        </div>
-        
-                        <div class="d-flex item-nav">
-                            
-                            <a href="/verUsuario" class="p-1 h6">
-                                <i class="bi bi-people p-1"></i>
-                                Usuários</a>
-                        </div>
-        
-                        <div class="d-flex item-nav">
-                            
-                            <a href="/verVaga" class="p-1 h6">
-                                <i class="bi bi-person-vcard p-1"></i>
-                                Vagas</a>
-                        </div>
-        
-                        <div class="d-flex link-aside-active item-nav">
-                            
-                            <a href="/verEmpresa" class="p-1 h6">
-                                <i class="bi bi-buildings p-1"></i>
-                                Empresas</a>
-                        </div>
-                    </div>
+                           <a href="/admin" class="p-0 h6">
+                               <i class="bi bi-grid " ></i>
+                               Dashboard</a>
+                       </div>
+       
+                       <div class="d-flex item-nav">
+                           
+                           <a href="/admin/usuario/listar" class="p-1 h6">
+                               <i class="bi bi-people p-1"></i>
+                               Usuários</a>
+                       </div>
+       
+                       <div class="d-flex item-nav">
+                           
+                           <a href="/admin/vaga/listar" class="p-1 h6">
+                               <i class="bi bi-person-vcard p-1"></i>
+                               Vagas</a>
+                       </div>
+       
+                       <div class="d-flex item-nav">
+                           
+                           <a href="/admin/empresa/listar" class="p-1 h6">
+                               <i class="bi bi-buildings p-1"></i>
+                               Empresas</a>
+                       </div>
+                       <div class="d-flex item-nav">
+                       
+                     <form action="/logout" method="POST">
+                       @csrf
+                       <button type="submit" class="p-1 h6" style="background-color: transparent; border:none">
+                       <i class="bi bi-door-open"></i>Sair
+                     </button>
+                     </form>
+               
+                       </div>
         
         
                 </div>
@@ -121,7 +126,7 @@ person
       </div>
       <div class="container md-4">
         <div >
-         
+
           <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
 
 
@@ -158,10 +163,10 @@ person
                   <tr>
                     <td>{{ $em->idEmpresa }}</td>
                     <td>
-                      
+
                     <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="visualizar-link"> 
                     {{ $em->nomeEmpresa }}
-                  
+
                   </a>
 
 
@@ -222,28 +227,20 @@ person
 
 <script>
 const sidebarlinks = document.querySelectorAll('.item-nav');
-
 // Adicionando eventos
 sidebarlinks.forEach(link => {
   link.addEventListener('click', function() {
     // Removendo classe
     sidebarlinks.forEach(item => item.classList.remove('link-aside-active'));
-
-
     this.classList.add('link-aside-active')
   })
 })
-
-
-
-
   // Adiciona um evento de entrada ao campo de busca
   document.getElementById('searchInput').addEventListener('input', function() {
     const filter = this.value.toLowerCase(); // Valor digitado na barra de busca
     const rows = document.querySelectorAll('#myTable tbody tr'); // Todas as linhas da tabela
     let visibleRows = 0; // Contador de linhas visíveis
     const noResults = document.getElementById('noResults');
-
     // Itera por todas as linhas da tabela para verificar se devem ser exibidas ou ocultadas
     rows.forEach(row => {
       const textContent = row.textContent.toLowerCase();
@@ -257,9 +254,6 @@ sidebarlinks.forEach(link => {
       }  
       noResults.style.display = (visibleRows > 0) ? 'none' : 'block';
     });
-
-
-
   });
 </script>
 
@@ -267,4 +261,5 @@ sidebarlinks.forEach(link => {
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 </body>
+</html>
 </html>
