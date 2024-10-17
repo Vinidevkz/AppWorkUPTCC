@@ -154,11 +154,34 @@ class UsuarioController extends Controller
             'sobreUsuario'
         ]));
 
-        if ($request->ajax()) {
             return response()->json(['message' => 'Usuário atualizado com sucesso']);
-        }
+        
 
-        return redirect('/admin/usuario/listar')->with('success', 'Usuário atualizado com sucesso.');
+
+    }
+
+    public function updateApp(Request $request, $id){
+        $usuario = Usuario::findOrFail($id);
+
+        // Validação dos dados recebidos
+        $request->validate([
+            'nomeUsuario' => 'sometimes|required|string|max:40',
+            'usernameUsuario' => 'sometimes|required|string|max:40',
+            'contatoUsuario' => 'sometimes|required|string|max:20',
+            'sobreUsuario' => 'sometimes|required|string|max:40',
+            
+        ]);
+
+        // Atualiza os campos que foram passados
+        $usuario->update($request->only([
+            'nomeUsuario', 
+            'usernameUsuario', 
+            'contatoUsuario', 
+            'sobreUsuario'
+        ]));
+
+            return response()->json(['message' => 'Usuário atualizado com sucesso']);
+        
     }
 
     public function destroy($id, Request $request)

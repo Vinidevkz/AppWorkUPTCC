@@ -16,7 +16,7 @@ export default function Vaga({ navigation }) {
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura } = ApisUrls;
+  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga } = ApisUrls;
 
   const seCandidatar = async () => {
     console.log("User ID:", userId);

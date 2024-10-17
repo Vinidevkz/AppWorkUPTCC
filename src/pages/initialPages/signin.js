@@ -154,15 +154,6 @@ export default function SignIN({ navigation }) {
           </Text>
         </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={() => navigation.navigate("TabBar")}
-        >
-          <Text style={[styles.DMSansBold, styles.buttonText]}>
-            Ir para Home
-          </Text>
-        </TouchableOpacity>
-
         <View style={styles.footer}>
           <Text style={styles.DMSansRegular}>Não possui uma conta? </Text>
           <TouchableOpacity style={styles.footerButton}>

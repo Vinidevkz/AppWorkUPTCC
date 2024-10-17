@@ -29,7 +29,8 @@ const ApisUrls = {
   apiNgrokUsuarioVaga:
     "http://16ba-200-53-194-126.ngrok-free.app/api/vagaUsuario",
   apiNgrokVerificarCandidatura: "http://16ba-200-53-194-126.ngrok-free.app/api/verificarCandidatura/",
-
+  apiEmuladorVerificarCandidatura: "http://10.0.2.2:8000/api/verificarCandidatura/",
+  
   apiEmuladorUsuarioVagaCancelar: "http://10.0.2.2:8000/api/vagaUsuario",
   apiNgrokUsuarioVagaCancelar:
     "http://16ba-200-53-194-126.ngrok-free.app/api/vagaUsuario",
