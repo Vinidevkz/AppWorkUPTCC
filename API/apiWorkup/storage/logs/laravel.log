@@ -6442,3 +6442,5 @@
 #56 C:\\Users\\finac\\OneDrive\\Documentos\\GitHub\\AppWorkUPTCCinacio\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\resources\\server.php(16): require_once('C:\\\\Users\\\\finac\\\\...')
 #57 {main}
 "} 
+[2024-10-17 14:01:24] local.INFO: Admin logged in: {"email":"vitor@gmail.com"} 
+[2024-10-17 14:42:48] local.INFO: Admin logged in: {"email":"testeadmin@teste.com"} 

@@ -141,7 +141,7 @@ class VagaController extends Controller
 
         $vaga->save();
 
-        return redirect('/admin/empresa/dashboard');
+        return redirect('/empresa/dashboard');
     }
 
     /**
@@ -246,7 +246,7 @@ class VagaController extends Controller
         $vaga->update($request->all());
 
         // Redirecionar para a lista de usuários
-        return redirect('/admin/empresa/dashboard')->with('success', 'Vaga atualizado com sucesso.');
+        return redirect('/empresa/dashboard')->with('success', 'Vaga atualizado com sucesso.');
     }
 
     /**

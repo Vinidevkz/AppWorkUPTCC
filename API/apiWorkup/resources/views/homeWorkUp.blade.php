@@ -85,10 +85,9 @@
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Principais</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/cadastrarAdmin">cadastrar admin</a></li>
-                            <li><a class="dropdown-item" href="/cadastrarVaga">cadastrar vaga</a></li>
-                            <li><a class="dropdown-item" href="/cadastrarEmpresa">cadastrar empresa</a></li>
-                            <li><a class="dropdown-item" href="/cadastrarAreaEmpresa">cadastrar Area empresa</a></li>
+                            <li><a class="dropdown-item" href="/admin/cadastrar">cadastrar admin</a></li>
+                            <li><a class="dropdown-item" href="/vaga/cadastrar">cadastrar vaga</a></li>
+                            <li><a class="dropdown-item" href="/empresa/cadastrar">cadastrar empresa</a></li>
                             <li><a class="dropdown-item" href="/admin">home Admin</a></li>
                         </ul>
                     </li>
