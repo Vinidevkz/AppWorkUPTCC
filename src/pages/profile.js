@@ -25,7 +25,7 @@ export default function Profile({ navigation }) {
     React.useCallback(() => {
       console.log(userId);
       async function fetchUserData() {
-        const apiUrl = `${apiEmuladorUsuario}${userId}`;
+        const apiUrl = `${apiNgrokUsuario}${userId}`;
         console.log("Fetching URL:", apiUrl);
 
         try {
@@ -81,7 +81,7 @@ export default function Profile({ navigation }) {
           <Octicons name="gear" size={30} color={theme.iconColorWhite} />
         </TouchableOpacity>
       </View>
-      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+      <ScrollView contentContainerStyle={[styles.scrollViewContent, {backgroundColor: theme.backgroundColor}]}>
         <View style={{ width: "100%" }}>
           <View style={styles.profileBackgroundImageCont}>
             <Image

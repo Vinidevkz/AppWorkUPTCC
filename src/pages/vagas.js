@@ -22,7 +22,7 @@ export default function Vaga({ navigation }) {
     console.log("User ID:", userId);
 
     try {
-      const response = await fetch(apiEmuladorUsuarioVaga, {
+      const response = await fetch(apiNgrokUsuarioVaga, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -51,7 +51,7 @@ export default function Vaga({ navigation }) {
 
   const cancelarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiEmuladorUsuarioVaga}/${userId}/${vagaID}`, {
+      const response = await fetch(`${apiNgrokUsuarioVaga}/${userId}/${vagaID}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export default function Vaga({ navigation }) {
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
+    const apiUrl = `${apiNgrokVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -91,7 +91,7 @@ export default function Vaga({ navigation }) {
 
   const verificarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiEmuladorVerificarCandidatura}${userId}/${vagaID}`);
+      const response = await fetch(`${apiNgrokVerificarCandidatura}${userId}/${vagaID}`);
       const resp = await response.json();
   
       if (response.ok) {

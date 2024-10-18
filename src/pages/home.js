@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(apiEmuladorVaga);
+      const response = await axios.get(apiNgrokVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -68,7 +68,7 @@ export default function Home({ navigation }) {
 
   const salvarVaga = async (idVaga) => {
     const idUsuario = userId;
-    const url = apiEmuladorSalvarVaga;
+    const url = apiNgrokSalvarVaga;
 
     const body = {
       idUsuario: idUsuario,
@@ -110,7 +110,7 @@ export default function Home({ navigation }) {
 
   const removerVagaSalva = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const url = apiEmuladorCancelSalvarVaga; // Use a URL sem parâmetros na rota
+    const url = apiNgrokCancelSalvarVaga; // Use a URL sem parâmetros na rota
 
     try {
       const response = await fetch(url, {
@@ -144,7 +144,7 @@ export default function Home({ navigation }) {
   const verificarSalvamentoVaga = async (vagaID) => {
     try {
       const request = await fetch(
-        `${apiEmuladorVerificarSalvarVaga}/${userId}/${vagaID}`
+        `${apiNgrokVerificarSalvarVaga}/${userId}/${vagaID}`
       );
       const response = await request.json();
       if (response.isSaved) {
@@ -162,7 +162,7 @@ export default function Home({ navigation }) {
       console.error("Erro ao verificar salvamento da vaga:", error);
     }
   };
-  
+
   useEffect(() => {
     const verificarTodasVagas = async () => {
       for (let vaga of data) {
@@ -351,22 +351,26 @@ export default function Home({ navigation }) {
                     </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-  style={styles.addFavButton}
-  onPress={() => {
-    toggleSaveIcon(item.idVaga); // Alterna o ícone
-    if (savedIcons[item.idVaga]) {
-      removerVagaSalva(item.idVaga); // Remove a vaga salva
-    } else {
-      salvarVaga(item.idVaga); // Salva a vaga, passando o idVaga
-    }
-  }}
->
-  <Ionicons
-    name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Altera o ícone
-    size={35}
-    color="#20dd77"
-  />
-</TouchableOpacity>
+                    style={styles.addFavButton}
+                    onPress={() => {
+                      toggleSaveIcon(item.idVaga); // Alterna o ícone
+                      if (savedIcons[item.idVaga]) {
+                        removerVagaSalva(item.idVaga); // Remove a vaga salva
+                      } else {
+                        salvarVaga(item.idVaga); // Salva a vaga, passando o idVaga
+                      }
+                    }}
+                  >
+                    <Ionicons
+                      name={
+                        savedIcons[item.idVaga]
+                          ? "bookmark"
+                          : "bookmark-outline"
+                      } // Altera o ícone
+                      size={35}
+                      color="#20dd77"
+                    />
+                  </TouchableOpacity>
                 </View>
               </View>
             )}

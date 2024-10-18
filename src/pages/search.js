@@ -35,10 +35,10 @@ export default function Search({ navigation }) {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log(`URL da requisição: ${apiEmuladorVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
+      const response = await axios.post(apiNgrokVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -79,9 +79,10 @@ export default function Search({ navigation }) {
   const renderPlaceholder = () => (
     <View
       style={{
+        height: '60%',
         alignItems: "center",
         justifyContent: "center",
-        marginBottom: 200,
+        
       }}
     >
       <Image
@@ -113,7 +114,7 @@ export default function Search({ navigation }) {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView >
       <View
         style={[
           styles.containerTop,

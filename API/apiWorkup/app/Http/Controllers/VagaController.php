@@ -67,7 +67,19 @@ class VagaController extends Controller
 
     public function indexApp(Request $request)
     {
-        return Vaga::all();
+
+        if ($request->has('order') && $request->order == 'status') {
+            // Ordena para trazer idStatus = 2 primeiro
+            $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
+                ->orderByRaw("FIELD(idStatus, 2, 1), nomeVaga ASC")
+                ->get();
+        } else {
+            $vagas = Vaga::with('empresa', 'status', 'area', 'modalidade')
+                ->orderBy('idStatus', 'asc')
+                ->get();
+        }
+            return response()->json($vagas); 
+        
     }
     
 

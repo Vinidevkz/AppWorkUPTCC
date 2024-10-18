@@ -31,8 +31,7 @@ const styles = StyleSheet.create({
     gap: 20,
     flexDirection: 'row',   
     zIndex: 1,
-    borderBottomRightRadius: 20,
-    borderBottomLeftRadius: 20,
+
   },
 
   title: {
