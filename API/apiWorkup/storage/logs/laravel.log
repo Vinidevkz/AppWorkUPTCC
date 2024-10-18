@@ -6444,3 +6444,96 @@
 "} 
 [2024-10-17 14:01:24] local.INFO: Admin logged in: {"email":"vitor@gmail.com"} 
 [2024-10-17 14:42:48] local.INFO: Admin logged in: {"email":"testeadmin@teste.com"} 
+[2024-10-18 14:45:46] local.ERROR: Command "migration" is not defined.
+
+Did you mean one of these?
+    make:migration
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"migration\" is not defined.
+
+Did you mean one of these?
+    make:migration
+    migrate
+    migrate:fresh
+    migrate:install
+    migrate:refresh
+    migrate:reset
+    migrate:rollback
+    migrate:status at C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php:694)
+[stacktrace]
+#0 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(259): Symfony\\Component\\Console\\Application->find('migration')
+#1 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\AppWorkUPTCC\\API\\apiWorkup\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2024-10-18 14:48:34] local.ERROR: The "--resouce" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--resouce\" option does not exist. at C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php:220)
+[stacktrace]
+#0 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(149): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('resouce', NULL)
+#1 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--resouce')
+#2 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('--resouce', true)
+#3 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Command\\Command.php(250): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\AppWorkUPTCC\\API\\apiWorkup\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 
+[2024-10-18 14:48:41] local.ERROR: The "-e" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"-e\" option does not exist. at C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php:122)
+[stacktrace]
+#0 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(104): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOptionSet('resouce')
+#1 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(84): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOption('-resouce')
+#2 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('-resouce', true)
+#3 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Command\\Command.php(250): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\AppWorkUPTCC\\API\\apiWorkup\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 
+[2024-10-18 14:49:04] local.ERROR: The "-e" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"-e\" option does not exist. at C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php:122)
+[stacktrace]
+#0 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(104): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOptionSet('resouce')
+#1 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(84): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOption('-resouce')
+#2 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('-resouce', true)
+#3 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Command\\Command.php(250): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\AppWorkUPTCC\\API\\apiWorkup\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 
+[2024-10-18 14:49:14] local.ERROR: The "--resouce" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"--resouce\" option does not exist. at C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php:220)
+[stacktrace]
+#0 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(149): Symfony\\Component\\Console\\Input\\ArgvInput->addLongOption('resouce', NULL)
+#1 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(82): Symfony\\Component\\Console\\Input\\ArgvInput->parseLongOption('--resouce')
+#2 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(71): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('--resouce', true)
+#3 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\Input.php(55): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Command\\Command.php(250): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(1014): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(301): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(171): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\AppWorkUPTCC\\API\\apiWorkup\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 

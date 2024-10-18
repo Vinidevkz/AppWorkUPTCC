@@ -54,7 +54,10 @@ const ApisUrls = {
 
 
     //Urls Empresa
-    apiNgrokEmpresa: "http://98f7-200-53-194-126.ngrok-free.app/api/showempresa/"
+    apiNgrokEmpresa: "http://98f7-200-53-194-126.ngrok-free.app/api/showempresa/",
+
+    apiEmuladorLinguas: "http://10.0.2.2:8000/api/linguas",
+    apiNgrokLingas: "http://-/api/linguas",
 };
 
 export default ApisUrls;

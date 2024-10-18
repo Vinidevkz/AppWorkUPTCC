@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useState, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,25 +7,27 @@ import {
   ActivityIndicator,
   TouchableOpacity,
 } from "react-native";
-import { TextInputMask } from "react-native-masked-text";
 import { Picker } from "@react-native-picker/picker";
 
 import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import FontAwesome from '@expo/vector-icons/FontAwesome';
 
 import useFonts from "../../styles/fontloader/fontloader.js";
-import { useContext, useState, useEffect } from "react";
 import { Context } from "./context/provider.js";
 
 import ApisUrls from '../../ApisUrls/apisurls.js'
 
-export default function SignON2({ navigation }) {
+export default function SignON4({ navigation }) {
   const { areaInt, setAreaInt, setTel, setNasc, setCep } = useContext(Context);
   const [areaVagas, setAreaVagas] = useState([]);
   const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
+
+  const [toggleNo, setToggleNo] = useState(true);
+  const [toggleYes, setToggleYes] = useState(false);
   
-  const { apiNgrokArea, apiEmuladorArea } = ApisUrls;
+  const { apiEmuladorArea } = ApisUrls;
 
   useEffect(() => {
     async function pegarAreaVaga() {
@@ -52,6 +54,16 @@ export default function SignON2({ navigation }) {
     );
   }
 
+  const handleToggleNo = () => {
+    setToggleNo(true);
+    setToggleYes(false);
+  };
+
+  const handleToggleYes = () => {
+    setToggleNo(false);
+    setToggleYes(true);
+  };
+
   return (
     <SafeAreaView>
       <View style={styles.header}>
@@ -64,69 +76,26 @@ export default function SignON2({ navigation }) {
       <View style={styles.mainContainer}>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
-            Área de Interesse:
+            Possui alguma língua estrangeira?:
           </Text>
 
-          <Picker
-            selectedValue={areaInteresseUsuario}
-            style={[styles.inputCont, styles.text, styles.DMSansRegular]}
-            onValueChange={(itemValue) => {
-              setAreaInteresseUsuario(itemValue);
-              setAreaInt(itemValue); // Atualiza o estado areaInt com o valor selecionado
-            }}
-            mode="dropdown"
-          >
-            <Picker.Item label="Selecione uma Área:" value=""/>
-            {areaVagas.map((area, index) => (
-              <Picker.Item
-                key={index}
-                label={area.nomeArea}
-                value={area.nomeArea}
-              />
-            ))}
-          </Picker>
-        </View>
+          <View style={{ marginTop: 15, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+              <TouchableOpacity onPress={handleToggleNo}>
+                <FontAwesome name={toggleNo ? "circle" : "circle-o"} size={35} color="#20dd77" />
+              </TouchableOpacity>
+              <Text style={styles.DMSansRegular}>Não</Text>
+            </View>
 
-        <View style={styles.formCont}>
-          <Text style={[styles.DMSansRegular, styles.formTitle]}>
-            Telefone:
-          </Text>
-          <TextInputMask
-            type={"cel-phone"}
-            options={{
-              maskType: "BRL",
-              withDDD: true,
-              dddMask: "(99) ",
-            }}
-            placeholder="(99) 99999-9999"
-            style={[styles.DMSansRegular, styles.inputCont]}
-            onChangeText={(text) => setTel(text)}
-          />
-        </View>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10 }}>
+              <TouchableOpacity onPress={handleToggleYes}>
+                <FontAwesome name={toggleYes ? "circle" : "circle-o"} size={35} color="#20dd77" />
+              </TouchableOpacity>
+              <Text style={styles.DMSansRegular}>Sim</Text>
+            </View>
+          </View>
 
-        <View style={styles.formCont}>
-          <Text style={[styles.DMSansRegular, styles.formTitle]}>
-            Data de Nascimento:
-          </Text>
-          <TextInputMask
-            type={"datetime"}
-            options={{
-              format: "DD/MM/YYYY",
-            }}
-            placeholder="DD/MM/AAAA"
-            style={[styles.DMSansRegular, styles.inputCont]}
-            onChangeText={(text) => setNasc(text)}
-          />
-        </View>
 
-        <View style={styles.formCont}>
-          <Text style={[styles.DMSansRegular, styles.formTitle]}>CEP:</Text>
-          <TextInputMask
-            type={"zip-code"}
-            placeholder="Digite seu CEP"
-            style={[styles.DMSansRegular, styles.inputCont]}
-            onChangeText={(text) => setCep(text)}
-          />
         </View>
       </View>
 
@@ -140,7 +109,7 @@ export default function SignON2({ navigation }) {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.nextButton}
-          onPress={() => navigation.navigate("SignON4")}
+          onPress={() => navigation.navigate("SignON3")}
         >
           <Text style={[styles.DMSansRegular, styles.nextText]}>Próximo</Text>
           <AntDesign name="right" size={24} color="black" />

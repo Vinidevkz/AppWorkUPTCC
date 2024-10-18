@@ -23,6 +23,9 @@ class Usuario extends Model
         'senhaUsuario',
         'contatoUsuario',
         'areaInteresseUsuario',
+
+        'ensinoUsuario',
+
         'fotoUsuario',
         'fotoBanner', // Adicionando fotoBanner
         'cidadeUsuario',

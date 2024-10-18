@@ -14,7 +14,7 @@ use App\http\Controllers\SalvarVagaController;
 use App\http\Controllers\PostController;
 use App\http\Controllers\MensagemController;
 use App\http\Controllers\SeguirController;
-
+use App\Http\Controllers\LinguasController;
 //Eduardo mexeu
 Route::get('/mensagens', [MensagemController::class, 'indexUsuario']);
 Route::get('/seguirEmpresa/{idUsuario}', [SeguirController::class, 'index']);
@@ -92,3 +92,7 @@ Route::get('/empresa/{idEmpresa}', [EmpresaController::class, 'show']);
 Route::get('/showempresa/{idEmpresa}', [EmpresaController::class, 'showEmpresaApp']);
 //Atualizar dado de uma empresa...
 //Route::put('/empresa/{idEmpresa}', [EmpresaController::class, 'update'])
+
+
+//API LINGUAS ESTRANGEIRAS
+Route::get('/linguas', [LinguasController::class, 'index']);

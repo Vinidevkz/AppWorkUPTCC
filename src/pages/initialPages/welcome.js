@@ -22,6 +22,7 @@ import { ThemeProvider } from "./context/themecontext.js";
 import SignON1 from "../initialPages/signon1.js";
 import SignON2 from "./signon2.js";
 import SignON3 from "./signon3.js";
+import SignON4 from "../initialPages/signon4.js";
 import TabBar from "../routes/tabbar.js";
 import Home from "../home.js";
 import Vaga from "../vagas.js";
@@ -30,7 +31,7 @@ import ProfileChange from "../profilechange.js";
 import Search from "../search.js";
 import Conversas from "../conversas.js";
 import Chat from "../chat.js";
-import VagasSalvas from "../vagassalvas.js"
+import VagasSalvas from "../vagassalvas.js";
 import EmpresasProfile from "../empresaprofile.js";
 
 function Welcome({ navigation }) {
@@ -163,6 +164,11 @@ export default function App() {
               options={{ headerShown: false }}
             />
             <Stack.Screen
+              name="SignON4"
+              component={SignON4}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
               name="Vagas"
               component={Vaga}
               options={{ headerShown: false }}
@@ -190,17 +196,17 @@ export default function App() {
             <Stack.Screen
               name="Chat"
               component={Chat}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
               name="VagasSalvas"
               component={VagasSalvas}
-              options={{headerShown: false}}
+              options={{ headerShown: false }}
             />
             <Stack.Screen
-            name="EmpresasProfile"
-            component={EmpresasProfile}
-            options={{headerShown: false}}
+              name="EmpresasProfile"
+              component={EmpresasProfile}
+              options={{ headerShown: false }}
             />
           </Stack.Navigator>
         </NavigationContainer>

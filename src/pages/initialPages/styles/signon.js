@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 
   header: {
-    backgroundColor: '#20dd77',
+    backgroundColor: '#fff',
     height: 70,
     maxHeight: 70,
     alignItems: 'center',
@@ -31,12 +31,13 @@ const styles = StyleSheet.create({
     gap: 20,
     flexDirection: 'row',   
     zIndex: 1,
-
+    borderBottomWidth: 1,
+    borderColor: '#20dd77'
   },
 
   title: {
     fontSize: 20,
-    color: '#fff'
+    color: '#1b1b1b'
   },
 
   formCont: {

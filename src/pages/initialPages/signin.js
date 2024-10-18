@@ -33,7 +33,7 @@ export default function SignIN({ navigation }) {
     }
 
     try {
-      const response = await fetch(apiNgrok, {
+      const response = await fetch(apiEmulador, {
         method: "POST",
         headers: {
           Accept: "application/json",
