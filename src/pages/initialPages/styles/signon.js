@@ -22,6 +22,13 @@ const styles = StyleSheet.create({
     gap: 35
   },
 
+  mainContainer2: {
+    height: '80%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 50
+  },
+
   header: {
     backgroundColor: '#fff',
     height: 70,
@@ -42,6 +49,13 @@ const styles = StyleSheet.create({
 
   formCont: {
     width: '100%',
+    paddingHorizontal: 50,
+    justifyContent: 'space-between',
+  },
+
+  formCont2: {
+    width: '100%',
+    height: 100,
     paddingHorizontal: 50,
     justifyContent: 'space-between',
   },
@@ -105,6 +119,16 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     elevation: 5,
     height: 200,
+    width: '100%',
+    padding: 20,
+    textAlignVertical: 'top',
+  },
+
+  expCont: {
+    backgroundColor: '#fff',
+    borderRadius: 20,
+    elevation: 5,
+    height: 150,
     width: '100%',
     padding: 20,
     textAlignVertical: 'top',
