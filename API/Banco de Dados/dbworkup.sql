@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 18-Out-2024 às 20:26
+-- Tempo de geração: 19/10/2024 às 21:56
 -- Versão do servidor: 10.4.32-MariaDB
--- versão do PHP: 8.2.12
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `failed_jobs`
+-- Estrutura para tabela `failed_jobs`
 --
 
 CREATE TABLE `failed_jobs` (
@@ -40,7 +40,7 @@ CREATE TABLE `failed_jobs` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `migrations`
+-- Estrutura para tabela `migrations`
 --
 
 CREATE TABLE `migrations` (
@@ -50,20 +50,25 @@ CREATE TABLE `migrations` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `migrations`
+-- Despejando dados para a tabela `migrations`
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
+(1, '2014_10_12_000000_create_users_table', 1),
+(2, '2014_10_12_100000_create_password_resets_table', 1),
+(3, '2019_08_19_000000_create_failed_jobs_table', 1),
+(4, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (5, '2014_10_12_000000_create_users_table', 1),
 (6, '2014_10_12_100000_create_password_resets_table', 1),
 (7, '2019_08_19_000000_create_failed_jobs_table', 1),
 (8, '2019_12_14_000001_create_personal_access_tokens_table', 1),
-(9, '2024_10_18_144338_linguas', 1);
+(9, '2024_10_18_144338_linguas', 1),
+(10, '2024_10_19_134641_escolas', 2);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `password_resets`
+-- Estrutura para tabela `password_resets`
 --
 
 CREATE TABLE `password_resets` (
@@ -75,7 +80,7 @@ CREATE TABLE `password_resets` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `personal_access_tokens`
+-- Estrutura para tabela `personal_access_tokens`
 --
 
 CREATE TABLE `personal_access_tokens` (
@@ -94,7 +99,7 @@ CREATE TABLE `personal_access_tokens` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_admin`
+-- Estrutura para tabela `tb_admin`
 --
 
 CREATE TABLE `tb_admin` (
@@ -111,7 +116,7 @@ CREATE TABLE `tb_admin` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_admin`
+-- Despejando dados para a tabela `tb_admin`
 --
 
 INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `contatoAdmin`, `senhaAdmin`, `fotoAdmin`, `idStatus`, `created_at`, `updated_at`) VALUES
@@ -122,7 +127,7 @@ INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_area`
+-- Estrutura para tabela `tb_area`
 --
 
 CREATE TABLE `tb_area` (
@@ -131,7 +136,7 @@ CREATE TABLE `tb_area` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_area`
+-- Despejando dados para a tabela `tb_area`
 --
 
 INSERT INTO `tb_area` (`idArea`, `nomeArea`) VALUES
@@ -154,7 +159,7 @@ INSERT INTO `tb_area` (`idArea`, `nomeArea`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_areainteresseusuario`
+-- Estrutura para tabela `tb_areainteresseusuario`
 --
 
 CREATE TABLE `tb_areainteresseusuario` (
@@ -164,7 +169,7 @@ CREATE TABLE `tb_areainteresseusuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_areainteresseusuario`
+-- Despejando dados para a tabela `tb_areainteresseusuario`
 --
 
 INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `idArea`, `idUsuario`) VALUES
@@ -176,7 +181,7 @@ INSERT INTO `tb_areainteresseusuario` (`idAreaInteresseUsuario`, `idArea`, `idUs
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_atuacaoempresa`
+-- Estrutura para tabela `tb_atuacaoempresa`
 --
 
 CREATE TABLE `tb_atuacaoempresa` (
@@ -186,7 +191,7 @@ CREATE TABLE `tb_atuacaoempresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_atuacaoempresa`
+-- Despejando dados para a tabela `tb_atuacaoempresa`
 --
 
 INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `idArea`, `idEmpresa`) VALUES
@@ -198,7 +203,7 @@ INSERT INTO `tb_atuacaoempresa` (`idAtuacaoEmpresa`, `idArea`, `idEmpresa`) VALU
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_chat`
+-- Estrutura para tabela `tb_chat`
 --
 
 CREATE TABLE `tb_chat` (
@@ -206,22 +211,13 @@ CREATE TABLE `tb_chat` (
   `idMensagem` int(11) NOT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idUsuario` int(11) DEFAULT NULL,
-  `idAdmin` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL
+  `idAdmin` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Extraindo dados da tabela `tb_chat`
---
-
-INSERT INTO `tb_chat` (`idChat`, `idMensagem`, `idEmpresa`, `idUsuario`, `idAdmin`, `created_at`) VALUES
-(2, 4, 10, 3, NULL, '2024-10-11 00:44:39'),
-(3, 5, 10, 1, NULL, '2024-10-15 20:33:36');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_denunciausuario`
+-- Estrutura para tabela `tb_denunciausuario`
 --
 
 CREATE TABLE `tb_denunciausuario` (
@@ -235,16 +231,17 @@ CREATE TABLE `tb_denunciausuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_denunciausuario`
+-- Despejando dados para a tabela `tb_denunciausuario`
 --
 
 INSERT INTO `tb_denunciausuario` (`idDenunciaUsuario`, `idUsuario`, `idEmpresa`, `motivo`, `idStatus`, `created_at`, `updated_at`) VALUES
+(4, 1, 10, 'da', 3, '2024-10-15 22:11:51', '2024-10-15 22:11:51'),
 (4, 1, 10, 'da', 3, '2024-10-15 22:11:51', '2024-10-15 22:11:51');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_empresa`
+-- Estrutura para tabela `tb_empresa`
 --
 
 CREATE TABLE `tb_empresa` (
@@ -268,7 +265,7 @@ CREATE TABLE `tb_empresa` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_empresa`
+-- Despejando dados para a tabela `tb_empresa`
 --
 
 INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailEmpresa`, `fotoEmpresa`, `sobreEmpresa`, `cnpjEmpresa`, `contatoEmpresa`, `senhaEmpresa`, `cidadeEmpresa`, `estadoEmpresa`, `LogradouroEmpresa`, `cepEmpresa`, `numeroLograEmpresa`, `idStatus`, `created_at`, `updated_at`) VALUES
@@ -285,7 +282,31 @@ INSERT INTO `tb_empresa` (`idEmpresa`, `usernameEmpresa`, `nomeEmpresa`, `emailE
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_linguas`
+-- Estrutura para tabela `tb_escolas`
+--
+
+CREATE TABLE `tb_escolas` (
+  `idEscolas` bigint(20) UNSIGNED NOT NULL,
+  `nomeEscola` varchar(255) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Despejando dados para a tabela `tb_escolas`
+--
+
+INSERT INTO `tb_escolas` (`idEscolas`, `nomeEscola`, `created_at`, `updated_at`) VALUES
+(1, 'Escola Primavera', NULL, NULL),
+(2, 'Colégio Estrela do Saber', NULL, NULL),
+(3, 'Instituto Educacional Futuro', NULL, NULL),
+(4, 'Escola Nova Esperança', NULL, NULL),
+(5, 'Centro de Ensino Horizonte', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `tb_linguas`
 --
 
 CREATE TABLE `tb_linguas` (
@@ -296,7 +317,7 @@ CREATE TABLE `tb_linguas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Extraindo dados da tabela `tb_linguas`
+-- Despejando dados para a tabela `tb_linguas`
 --
 
 INSERT INTO `tb_linguas` (`idLingua`, `nomeLingua`, `created_at`, `updated_at`) VALUES
@@ -314,7 +335,7 @@ INSERT INTO `tb_linguas` (`idLingua`, `nomeLingua`, `created_at`, `updated_at`) 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_mensagem`
+-- Estrutura para tabela `tb_mensagem`
 --
 
 CREATE TABLE `tb_mensagem` (
@@ -322,26 +343,13 @@ CREATE TABLE `tb_mensagem` (
   `idUsuario` int(11) DEFAULT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idAdmin` int(11) DEFAULT NULL,
-  `mensagem` varchar(1000) NOT NULL,
-  `created_at` datetime NOT NULL,
-  `updated_at` datetime NOT NULL
+  `mensagem` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Extraindo dados da tabela `tb_mensagem`
---
-
-INSERT INTO `tb_mensagem` (`idMensagem`, `idUsuario`, `idEmpresa`, `idAdmin`, `mensagem`, `created_at`, `updated_at`) VALUES
-(1, 3, 10, NULL, 'teste', '2024-10-11 00:20:19', '2024-10-11 00:20:19'),
-(2, 3, 10, NULL, 'dada', '2024-10-11 00:33:38', '2024-10-11 00:33:38'),
-(3, 3, 10, NULL, 'dada', '2024-10-11 00:34:09', '2024-10-11 00:34:09'),
-(4, 3, 10, NULL, 'teste', '2024-10-11 00:44:39', '2024-10-11 00:44:39'),
-(5, 1, 10, NULL, 'venha conversa conosco', '2024-10-15 20:33:36', '2024-10-15 20:33:36');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_modalidadevaga`
+-- Estrutura para tabela `tb_modalidadevaga`
 --
 
 CREATE TABLE `tb_modalidadevaga` (
@@ -350,7 +358,7 @@ CREATE TABLE `tb_modalidadevaga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_modalidadevaga`
+-- Despejando dados para a tabela `tb_modalidadevaga`
 --
 
 INSERT INTO `tb_modalidadevaga` (`idModalidadeVaga`, `descModalidadeVaga`) VALUES
@@ -361,7 +369,7 @@ INSERT INTO `tb_modalidadevaga` (`idModalidadeVaga`, `descModalidadeVaga`) VALUE
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_publicacao`
+-- Estrutura para tabela `tb_publicacao`
 --
 
 CREATE TABLE `tb_publicacao` (
@@ -370,35 +378,34 @@ CREATE TABLE `tb_publicacao` (
   `fotoPublicacao` varchar(300) DEFAULT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idAdmin` int(11) DEFAULT NULL,
-  `idVaga` int(11) DEFAULT NULL,
-  `updated_at` datetime NOT NULL,
-  `created_at` datetime NOT NULL
+  `idVaga` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Extraindo dados da tabela `tb_publicacao`
---
-
-INSERT INTO `tb_publicacao` (`idPublicacao`, `detalhePublicacao`, `fotoPublicacao`, `idEmpresa`, `idAdmin`, `idVaga`, `updated_at`, `created_at`) VALUES
-(1, 'dada', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/publicacao%2F5.jpeg?alt=media&token=1d9fe248-6f83-4fcd-a308-30c578367b91', 10, NULL, 1, '2024-10-10 23:29:30', '2024-10-10 23:29:30');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_salvarvaga`
+-- Estrutura para tabela `tb_salvarvaga`
 --
 
 CREATE TABLE `tb_salvarvaga` (
   `idSalvarVaga` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `idVaga` int(11) NOT NULL,
-  `created_at` datetime NOT NULL
+  `created_at` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_salvarvaga`
+--
+
+INSERT INTO `tb_salvarvaga` (`idSalvarVaga`, `idUsuario`, `idVaga`, `created_at`) VALUES
+(8, 18, 1, '2024-10-13 11:21:50'),
+(32, 13, 2, '2024-10-13 15:41:33');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_seguir`
+-- Estrutura para tabela `tb_seguir`
 --
 
 CREATE TABLE `tb_seguir` (
@@ -411,7 +418,7 @@ CREATE TABLE `tb_seguir` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_status`
+-- Estrutura para tabela `tb_status`
 --
 
 CREATE TABLE `tb_status` (
@@ -420,7 +427,7 @@ CREATE TABLE `tb_status` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_status`
+-- Despejando dados para a tabela `tb_status`
 --
 
 INSERT INTO `tb_status` (`idStatus`, `tipoStatus`) VALUES
@@ -431,7 +438,7 @@ INSERT INTO `tb_status` (`idStatus`, `tipoStatus`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_statusvagausuario`
+-- Estrutura para tabela `tb_statusvagausuario`
 --
 
 CREATE TABLE `tb_statusvagausuario` (
@@ -440,7 +447,7 @@ CREATE TABLE `tb_statusvagausuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_statusvagausuario`
+-- Despejando dados para a tabela `tb_statusvagausuario`
 --
 
 INSERT INTO `tb_statusvagausuario` (`idStatusVagaUsuario`, `tipoStatusVaga`) VALUES
@@ -451,7 +458,7 @@ INSERT INTO `tb_statusvagausuario` (`idStatusVagaUsuario`, `tipoStatusVaga`) VAL
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_usuario`
+-- Estrutura para tabela `tb_usuario`
 --
 
 CREATE TABLE `tb_usuario` (
@@ -463,6 +470,9 @@ CREATE TABLE `tb_usuario` (
   `senhaUsuario` varchar(100) NOT NULL,
   `contatoUsuario` varchar(20) NOT NULL,
   `areaInteresseUsuario` varchar(100) NOT NULL,
+  `linguaUsuario` varchar(20) DEFAULT NULL,
+  `ensinoMedio` varchar(50) DEFAULT NULL,
+  `anoFormacao` int(4) DEFAULT NULL,
   `fotoUsuario` varchar(300) DEFAULT NULL,
   `fotoBanner` varchar(300) DEFAULT NULL,
   `cidadeUsuario` varchar(40) NOT NULL,
@@ -479,23 +489,38 @@ CREATE TABLE `tb_usuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_usuario`
+-- Despejando dados para a tabela `tb_usuario`
 --
 
-INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `areaInteresseUsuario`, `fotoUsuario`, `fotoBanner`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
-(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', '', 'eu.jpg', '', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', 1, NULL, '2024-10-15 22:56:48'),
-(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', '', 'foto1', '', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', 2, NULL, '2024-09-24 02:26:31'),
-(3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', '(56) 95959-5959', '', 'foto1', '', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12', 2, NULL, NULL),
-(4, 'vinizadaxesquedele', 'dalevini', '2012-12-12', 'gmail111222@gmail.com', '$2y$10$3TUE1fXPJi2g4JrPZii5A.FuP4ZZ4nBcqq1oWZUPUaUmIQb.uV6j2', '(11) 32132-3213', 'Marketing', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727813856478.jpg?alt=media&token=4dd235c0-4a59-49f2-a35a-e2159e9d9ae2', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727813860409.jpg?alt=media&token=49f09ac9-b1fd-43e3-b01b-7fe04b89b537', 'sp', 'sp', 'logradouro', '24352-523', '515', 'HUEHUEHUEHUEHEUHUE BR', 'formacao', '2012-12-12', 3, '2024-10-01 17:17:44', '2024-10-01 17:17:44'),
-(5, 'vinizadaxesquedele', 'dalevini', '2012-12-12', 'gmail1112222@gmail.com', '$2y$10$ayCB8XQcnH1PGgW6cxU8hOP20xufLNhRy1UfuoUS7XcICTnM9HOAG', '(11) 41241-4214', 'Administração', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727814478879.jpg?alt=media&token=9bc72a7f-cb6a-440f-889a-b3970f4100d0', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727814481999.jpg?alt=media&token=aa64d3b8-04c2-4000-8eb0-b9a02c3db8db', 'sp', 'sp', 'logradouro', '41515-135', '515', 'HUEHUEHUEHUEHEUHUE BR', 'formacao', '2012-12-12', 3, '2024-10-01 17:28:03', '2024-10-01 17:28:03'),
-(6, 'vinizadaxesquedele', 'dalevini', '2006-12-12', 'gmail172@gmail.com', '$2y$10$T9.gTBtGw0lsd7VKV453n.xvQxhmxS1AqxfvpAVGnJyahn1.ZcmhK', '(11) 41241-2412', 'Marketing', NULL, NULL, 'sp', 'sp', 'logradouro', '46363-463', '515', 'HUEHUEHUEHUEHEUHUE BR', 'formacao', '2012-12-12', 3, '2024-10-01 17:38:11', '2024-10-01 17:38:11'),
-(7, 'Vinicius', 'viniciusex', '2005-11-01', 'exp55@gmail.com', '$2y$10$Ry5KBwCZU3CRVYYQkZidluA.KcfSnexrQJEidd63GWJgAAzbfRRsW', '(11) 41242-1414', 'Tecnologia', NULL, NULL, 'sp', 'sp', 'logradouro', '42354-234', '515', 'HUEHEUHEUHEUHE', 'formacao', '2012-12-12', 3, '2024-10-01 17:41:06', '2024-10-01 17:41:06'),
-(8, 'Vinicius', 'viniciusex', '2012-12-12', 'exp5555@gmail.com', '$2y$10$Yl/fbVeyEUG7bDzMF/emf.0mtLDWPbQ.fTfQWZf9T77zVCmjRVryi', '(11) 54123-5323', 'Administração', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727815358498.jpg?alt=media&token=f9a9a9fc-755b-4893-a4d9-b0d33b033594', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727815361093.jpg?alt=media&token=2cdca898-8615-43b8-a724-fb3b516f60a4', 'sp', 'sp', 'logradouro', '42354-235', '515', 'HUEHEUHEUHEUHEBRRRR', 'formacao', '2012-12-12', 3, '2024-10-01 17:42:44', '2024-10-01 17:42:44');
+INSERT INTO `tb_usuario` (`idUsuario`, `nomeUsuario`, `usernameUsuario`, `nascUsuario`, `emailUsuario`, `senhaUsuario`, `contatoUsuario`, `areaInteresseUsuario`, `linguaUsuario`, `ensinoMedio`, `anoFormacao`, `fotoUsuario`, `fotoBanner`, `cidadeUsuario`, `estadoUsuario`, `logradouroUsuario`, `cepUsuario`, `numeroLograUsuario`, `sobreUsuario`, `formacaoCompetenciaUsuario`, `dataFormacaoCompetenciaUsuario`, `idStatus`, `created_at`, `updated_at`) VALUES
+(1, 'Danilo', 'dannte0', '2006-10-30', 'danilo@example.com', 'senhasuperforte', '1234567890', '', NULL, NULL, 0, 'eu.jpg', '', 'São Paulo', 'SP', 'Rua dos Bobos', '40028-922', '0', 'Desenvolvedor de software com 1 ano de experiência', 'Desenvolvimento de Sistemas', '2024-11-28', 1, NULL, NULL),
+(2, 'vinicius', 'vinizin', '2020-12-20', 'vini@gmail.com', '111', '(11) 11111-1111', '', NULL, NULL, 0, 'foto1', '', 'sp', 'sp', 'logradouro', '11111-111', '515', 'pppipipipppi', 'formacao', '2012-12-12', 2, NULL, '2024-09-24 02:26:31'),
+(3, 'Vinicius', 'vinizindale', '2006-12-12', 'cocdqtl@gmail.com', '77777777', '(56) 95959-5959', '', NULL, NULL, 0, 'foto1', '', 'sp', 'sp', 'logradouro', '97979-898', '515', 'bora bill', 'formacao', '2012-12-12', 2, NULL, NULL),
+(4, 'vinizadaxesquedele', 'dalevini', '2012-12-12', 'gmail111222@gmail.com', '$2y$10$3TUE1fXPJi2g4JrPZii5A.FuP4ZZ4nBcqq1oWZUPUaUmIQb.uV6j2', '(11) 32132-3213', 'Marketing', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727813856478.jpg?alt=media&token=4dd235c0-4a59-49f2-a35a-e2159e9d9ae2', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727813860409.jpg?alt=media&token=49f09ac9-b1fd-43e3-b01b-7fe04b89b537', 'sp', 'sp', 'logradouro', '24352-523', '515', 'HUEHUEHUEHUEHEUHUE BR', 'formacao', '2012-12-12', 3, '2024-10-01 17:17:44', '2024-10-01 17:17:44'),
+(5, 'vinizadaxesquedele', 'dalevini', '2012-12-12', 'gmail1112222@gmail.com', '$2y$10$ayCB8XQcnH1PGgW6cxU8hOP20xufLNhRy1UfuoUS7XcICTnM9HOAG', '(11) 41241-4214', 'Administração', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727814478879.jpg?alt=media&token=9bc72a7f-cb6a-440f-889a-b3970f4100d0', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727814481999.jpg?alt=media&token=aa64d3b8-04c2-4000-8eb0-b9a02c3db8db', 'sp', 'sp', 'logradouro', '41515-135', '515', 'HUEHUEHUEHUEHEUHUE BR', 'formacao', '2012-12-12', 3, '2024-10-01 17:28:03', '2024-10-01 17:28:03'),
+(6, 'vinizadaxesquedele', 'dalevini', '2006-12-12', 'gmail172@gmail.com', '$2y$10$T9.gTBtGw0lsd7VKV453n.xvQxhmxS1AqxfvpAVGnJyahn1.ZcmhK', '(11) 41241-2412', 'Marketing', NULL, NULL, 0, NULL, NULL, 'sp', 'sp', 'logradouro', '46363-463', '515', 'HUEHUEHUEHUEHEUHUE BR', 'formacao', '2012-12-12', 3, '2024-10-01 17:38:11', '2024-10-01 17:38:11'),
+(7, 'Vinicius', 'viniciusex', '2005-11-01', 'exp55@gmail.com', '$2y$10$Ry5KBwCZU3CRVYYQkZidluA.KcfSnexrQJEidd63GWJgAAzbfRRsW', '(11) 41242-1414', 'Tecnologia', NULL, NULL, 0, NULL, NULL, 'sp', 'sp', 'logradouro', '42354-234', '515', 'HUEHEUHEUHEUHE', 'formacao', '2012-12-12', 3, '2024-10-01 17:41:06', '2024-10-01 17:41:06'),
+(8, 'Vinicius', 'viniciusex', '2012-12-12', 'exp5555@gmail.com', '$2y$10$Yl/fbVeyEUG7bDzMF/emf.0mtLDWPbQ.fTfQWZf9T77zVCmjRVryi', '(11) 54123-5323', 'Administração', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727815358498.jpg?alt=media&token=f9a9a9fc-755b-4893-a4d9-b0d33b033594', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727815361093.jpg?alt=media&token=2cdca898-8615-43b8-a724-fb3b516f60a4', 'sp', 'sp', 'logradouro', '42354-235', '515', 'HUEHEUHEUHEUHEBRRRR', 'formacao', '2012-12-12', 3, '2024-10-01 17:42:44', '2024-10-01 17:42:44'),
+(9, 'Vinicius', 'Edu', '2000-12-12', 'exp@gmail.com', '$2y$10$mHgw1yb1QPx7nM3IIEH01esQ9U/JdZj2EfK1zk0XEYcfEWq0qLOb.', '(11) 65565-6959', 'Administração', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727907856291.jpg?alt=media&token=8d3d0edd-11df-4fad-80f7-41d2fa107453', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727907858098.jpg?alt=media&token=4f87ab1b-a813-4694-b492-97029551bd05', 'São Paulo', 'sp', 'logradouro', '64646-464', '515', 'HUEHEUEHEUEHEUHE', 'formacao', '2012-12-12', 3, '2024-10-02 19:24:19', '2024-10-02 19:24:19'),
+(10, 'Vinicius', 'viniciusedu', '2000-12-12', 'gmail@gmail.com', '$2y$10$NYkZOaVMwlWKXl5k0BZ0zeiJZUUDG/PNQrgjRWuIGQ2eShMn38gdO', '(11) 57676-5848', 'Tecnologia', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727908394484.jpg?alt=media&token=4edec489-d9f2-406c-833b-69f827867333', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727908396540.jpg?alt=media&token=6e68f790-aba2-48b6-957e-6316e31c42e5', 'São Paulo', 'sp', 'logradouro', '64646-565', '515', 'Amo tecnologia', 'formacao', '2012-12-12', 3, '2024-10-02 19:33:16', '2024-10-02 19:33:16'),
+(11, 'Vinicius', 'Viníciusedu', '2005-12-12', 'exemplo@gmail.com', '$2y$10$Jwf/MC0Ug6Zp9f8eFo8Q8egKrk0mRbzblf3TgYgFnqCT4HFPSUjOG', '(11) 67685-5148', 'Gastronomia', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727908875582.jpg?alt=media&token=31616699-dff8-4635-a89f-72c29fefab93', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727908879400.jpg?alt=media&token=d4a4f4bb-78ee-4853-bd22-314cd958d4dc', 'São Paulo', 'sp', 'logradouro', '49646-494', '515', 'Amo tecnologia ❤️', 'formacao', '2012-12-12', 3, '2024-10-02 19:41:21', '2024-10-02 19:41:21'),
+(12, 'Usuario', 'user', '2000-12-12', 'exemplo55@gmail.com', '$2y$10$ZVRLD5ud.LZ.YKUWBAXvYue2LivdV3//fop7Taz4wmHd1jwOwjsey', '(16) 86865-6464', 'Gestão', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727909095138.jpg?alt=media&token=cb387898-b95d-4018-9877-c5f76fab9d47', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727909098158.jpg?alt=media&token=d75a2fe7-355e-4134-8556-32eeb42c6402', 'São Paulo', 'sp', 'logradouro', '64646-464', '515', 'Amo tecnologia', 'formacao', '2012-12-12', 3, '2024-10-02 19:44:59', '2024-10-02 19:44:59'),
+(13, 'User', 'user', '2000-12-12', 'exemplo33@gmail.com', '$2y$10$v.4kPrdJJ2uGE1/BgjRA5.Tn8CVESA/6halEvn0OYmKUTF5/wr8TG', '(11) 65679-5858', 'Gestão', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727909195980.jpg?alt=media&token=903e75c1-358d-4823-9673-af08c20bb917', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727909199249.jpg?alt=media&token=3d723bb7-d1ce-4111-b427-8c01e5c3ca3d', 'São Paulo', 'sp', 'logradouro', '64689-864', '515', 'Amo tecnologia', 'formacao', '2012-12-12', 3, '2024-10-02 19:46:40', '2024-10-02 19:46:40'),
+(14, 'Vinicius', 'viniciusedu', '2000-12-11', 'gmail22@gmail.com', '$2y$10$0dUv6cdv8.BI3rqPeTX9fO6W9.rZDls21ghhJNKCBn7erU8fF0myG', '(64) 94949-4994', 'Gestão', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727958552081.jpg?alt=media&token=1c8dbb5a-6a60-4649-a75e-3ef2ca5f53fe', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727958553411.jpg?alt=media&token=188e4ff7-707d-425d-9c8b-46a95280cd1d', 'São Paulo', 'sp', 'logradouro', '67686-464', '515', 'Biografia', 'formacao', '2012-12-12', 3, '2024-10-03 09:29:14', '2024-10-03 09:29:14'),
+(15, 'Vinicius', 'viniciusedu', '2000-12-12', 'gmail222@gmail.com', '$2y$10$5jcLSd8sJPsTiNL.dSvC5O4U6pTWziRUGlP0PrCe9ZkwJptplYwry', '(11) 57686-6464', 'Marketing', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727958640593.jpg?alt=media&token=732d1f87-bec1-42d7-a429-10b6e6c6b7e0', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1727958641647.jpg?alt=media&token=8f3a9120-8430-42c1-9557-eea62c91e791', 'São Paulo', 'sp', 'logradouro', '64646-461', '515', 'Biografia', 'formacao', '2012-12-12', 3, '2024-10-03 09:30:42', '2024-10-03 09:30:42'),
+(16, 'Vinicius', 'vini', '2000-12-12', 'expl33@gmail.com', '$2y$10$vHOkCRRTnPAlE0cOL1GJ9u3nIpikITgbJc7WOxE3ufFuwY2ez2i3q', '(15) 45588-5858', 'Tecnologia', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1728052939088.jpg?alt=media&token=94be191a-0e44-40be-bfe2-125efa6f8ee1', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1728052941884.jpg?alt=media&token=01d953b0-f05c-4365-90a0-ebf7fbe706f2', 'São Paulo', 'sp', 'logradouro', '66461-643', '515', 'Biografia', 'formacao', '2012-12-12', 3, '2024-10-04 11:42:28', '2024-10-04 11:42:28'),
+(17, 'Vinicius', 'vini', '2000-12-12', 'vini11@gmail.com', '$2y$10$Y4tWLuACstlKz29MeEi1s.evzwg4EdC/uofCu85soJFuEGAY0yI1C', '(18) 44649-4949', 'Tecnologia', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1728669168235.jpg?alt=media&token=ef7c43fa-da00-4710-acd3-dcf058f07a0c', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1728669170088.jpg?alt=media&token=b5b79da5-8222-4ba6-b5d8-247fd5827205', 'São Paulo', 'sp', 'logradouro', '66764-646', '515', 'Biografia', 'formacao', '2012-12-12', 3, '2024-10-11 14:52:59', '2024-10-11 14:52:59'),
+(18, 'Vinicius', 'vini', '2000-11-11', 'cc2@gmail.com', '$2y$10$Gzp7iwfpLLrq0EZm0vtkAem53ReY9jpSFQradDJiTLNwqlVerNrLe', '(16) 16495-9464', 'Gastronomia', NULL, NULL, 0, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1728829125430.jpg?alt=media&token=56e2a4fb-8bb4-4006-b10c-9a9dc7b38e24', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1728829128187.jpg?alt=media&token=594417fc-d6ec-45bc-acc7-23df9dd6181e', 'São Paulo', 'sp', 'logradouro', '94799-464', '515', 'Heheheuheueh', 'formacao', '2012-12-12', 3, '2024-10-13 11:18:50', '2024-10-13 11:18:50'),
+(19, 'Vinicius', 'viniciusedu', '2000-12-12', 'expl123@gmail.com', '$2y$10$jd.BcGwYUJ8fuIoePajwGOVvpwFqTcOw/YPNSEZNkwJHdS1t1.W36', '(11) 61656-6556', 'Marketing', NULL, NULL, 2015, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1729364457721.jpg?alt=media&token=60670394-1ebf-4c1d-b950-682f906b440b', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1729364459964.jpg?alt=media&token=76ff5f4e-3729-434f-bee6-ab93c8e6425d', 'São Paulo', 'sp', 'logradouro', '76656-556', '515', 'JOAN OF ARC', 'Desenvolvimento de Sistemas', '2012-12-12', 3, '2024-10-19 16:01:04', '2024-10-19 16:01:04'),
+(20, 'Vinicius', 'vinizada', '2000-12-12', 'saas@gmail.com', '$2y$10$eq3xiewq42Y.AhCapZ.M9eg0wCliDyBXIDRSQQTszYfw.D9br/adq', '(59) 55586-6258', 'Marketing', NULL, 'Instituto Educacional Futuro', 2015, NULL, NULL, 'São Paulo', 'sp', 'logradouro', '99563-222', '515', 'Bio', 'Desenvolvimento de Sistemas', '2012-12-12', 3, '2024-10-19 16:35:10', '2024-10-19 16:35:10'),
+(21, 'Vinícius', 'vinizada', '2000-12-12', 'juuj@gmail.com', '$2y$10$XY.kxZSqBrvExE9Kbj0t4.MS/b0iN7L90spF0QC.pxFqBt1EdQhyW', '(46) 46465-8589', 'Administração', NULL, 'Escola Primavera', 2018, NULL, NULL, 'São Paulo', 'sp', 'logradouro', '67664-646', '515', 'Bio', 'Desenvolvimento de Sistemas', '2012-12-12', 3, '2024-10-19 16:48:33', '2024-10-19 16:48:33'),
+(22, 'Vinícius', 'vinizada', '2020-12-12', 'juuj2@gmail.com', '$2y$10$0UBr5ZEvyqXBtsnDi3Ny8uxB5D98ntT/ZaQRJCNgINojbRwN62PSq', '(11) 85986-5686', 'Marketing', NULL, 'Escola Primavera', 2018, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1729367488917.jpg?alt=media&token=90de77c1-fdb6-4ae8-9448-7304732b3232', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1729367492187.jpg?alt=media&token=d0773b9c-626a-4fe8-9605-89ce4478275f', 'São Paulo', 'sp', 'logradouro', '97976-464', '515', 'Bio', 'Desenvolvimento de Sistemas', '2012-12-12', 3, '2024-10-19 16:51:36', '2024-10-19 16:51:36'),
+(23, 'Vinícius', 'vinizada', '2000-12-12', 'juuj22@gmail.com', '$2y$10$KMtsExbPs2X5NOfHajpozO3nLtYXVm4wg9amlsKBsxSmzoipAkVuC', '(11) 28343-4545', 'Tecnologia', NULL, 'Escola Primavera', 2018, 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1729367652365.jpg?alt=media&token=534ae296-6822-44d8-b622-882445f4da2a', 'https://firebasestorage.googleapis.com/v0/b/workup-464af.appspot.com/o/profile_images%2F1729367653440.jpg?alt=media&token=7ceb89b2-31c5-4058-bf4b-4b211d7dd378', 'São Paulo', 'sp', 'logradouro', '67676-464', '515', 'Bio', 'Desenvolvimento de Sistemas', '2012-12-12', 3, '2024-10-19 16:54:17', '2024-10-19 16:54:17');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_vaga`
+-- Estrutura para tabela `tb_vaga`
 --
 
 CREATE TABLE `tb_vaga` (
@@ -516,7 +541,7 @@ CREATE TABLE `tb_vaga` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_vaga`
+-- Despejando dados para a tabela `tb_vaga`
 --
 
 INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidadeVaga`, `estadoVaga`, `beneficiosVaga`, `diferencialVaga`, `idEmpresa`, `idArea`, `idStatus`, `idModalidadeVaga`, `created_at`, `updated_at`) VALUES
@@ -527,12 +552,14 @@ INSERT INTO `tb_vaga` (`idVaga`, `nomeVaga`, `prazoVaga`, `salarioVaga`, `cidade
 (5, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:06:32', '2024-09-23 01:06:32'),
 (6, 'testeBanco', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 2, 1, 1, '2024-09-23 01:08:05', '2024-09-23 01:08:05'),
 (7, 'Vitor Augusto', '2024-09-01', 88888.00, 'São Paulo', 'São Paulo', 'adsa', 'dasd', 1, 7, 1, 1, '2024-09-23 01:08:05', '2024-09-23 01:08:05'),
-(8, 'teste', '2024-09-01', 2000.00, 'sao paulo', 'sp', 'pessimo', 'muito ruim', 10, 3, 3, 1, '2024-10-02 15:04:28', '2024-10-02 15:04:28');
+(8, 'teste', '2024-09-01', 2000.00, 'sao paulo', 'sp', 'pessimo', 'muito ruim', 10, 3, 3, 1, '2024-10-02 15:04:28', '2024-10-02 15:04:28'),
+(9, 'analista jr', '2024-12-12', 8000.00, 'São Paulo', 'SP', 'robux gratis', 'Saber demasiado', 10, 1, 3, 1, '2024-10-16 21:37:00', '2024-10-16 21:37:00'),
+(10, 'analista jr', '2024-12-12', 8000.00, 'São Paulo', 'SP', 'robux gratis', 'Saber demasiado', 10, 1, 3, 2, '2024-10-16 21:42:57', '2024-10-16 21:42:57');
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `tb_vagausuario`
+-- Estrutura para tabela `tb_vagausuario`
 --
 
 CREATE TABLE `tb_vagausuario` (
@@ -543,17 +570,20 @@ CREATE TABLE `tb_vagausuario` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Extraindo dados da tabela `tb_vagausuario`
+-- Despejando dados para a tabela `tb_vagausuario`
 --
 
 INSERT INTO `tb_vagausuario` (`idVagaUsuario`, `idUsuario`, `idVaga`, `idStatusVagaUsuario`) VALUES
 (1, 1, 8, 1),
-(2, 3, 8, 2);
+(2, 3, 8, 2),
+(7, 16, 1, 1),
+(8, 16, 1, 1),
+(9, 16, 10, 1);
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `users`
+-- Estrutura para tabela `users`
 --
 
 CREATE TABLE `users` (
@@ -572,26 +602,26 @@ CREATE TABLE `users` (
 --
 
 --
--- Índices para tabela `failed_jobs`
+-- Índices de tabela `failed_jobs`
 --
 ALTER TABLE `failed_jobs`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
 
 --
--- Índices para tabela `migrations`
+-- Índices de tabela `migrations`
 --
 ALTER TABLE `migrations`
   ADD PRIMARY KEY (`id`);
 
 --
--- Índices para tabela `password_resets`
+-- Índices de tabela `password_resets`
 --
 ALTER TABLE `password_resets`
   ADD KEY `password_resets_email_index` (`email`);
 
 --
--- Índices para tabela `personal_access_tokens`
+-- Índices de tabela `personal_access_tokens`
 --
 ALTER TABLE `personal_access_tokens`
   ADD PRIMARY KEY (`id`),
@@ -599,20 +629,20 @@ ALTER TABLE `personal_access_tokens`
   ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
 
 --
--- Índices para tabela `tb_admin`
+-- Índices de tabela `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD PRIMARY KEY (`idAdmin`),
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_area`
+-- Índices de tabela `tb_area`
 --
 ALTER TABLE `tb_area`
   ADD PRIMARY KEY (`idArea`);
 
 --
--- Índices para tabela `tb_areainteresseusuario`
+-- Índices de tabela `tb_areainteresseusuario`
 --
 ALTER TABLE `tb_areainteresseusuario`
   ADD PRIMARY KEY (`idAreaInteresseUsuario`),
@@ -620,7 +650,7 @@ ALTER TABLE `tb_areainteresseusuario`
   ADD KEY `idUsuario` (`idUsuario`);
 
 --
--- Índices para tabela `tb_atuacaoempresa`
+-- Índices de tabela `tb_atuacaoempresa`
 --
 ALTER TABLE `tb_atuacaoempresa`
   ADD PRIMARY KEY (`idAtuacaoEmpresa`),
@@ -628,7 +658,7 @@ ALTER TABLE `tb_atuacaoempresa`
   ADD KEY `idEmpresa` (`idEmpresa`);
 
 --
--- Índices para tabela `tb_chat`
+-- Índices de tabela `tb_chat`
 --
 ALTER TABLE `tb_chat`
   ADD PRIMARY KEY (`idChat`),
@@ -638,40 +668,32 @@ ALTER TABLE `tb_chat`
   ADD KEY `idMensagem` (`idMensagem`);
 
 --
--- Índices para tabela `tb_denunciausuario`
---
-ALTER TABLE `tb_denunciausuario`
-  ADD PRIMARY KEY (`idDenunciaUsuario`),
-  ADD KEY `idstatus` (`idStatus`),
-  ADD KEY `idEmpresa` (`idEmpresa`);
-
---
--- Índices para tabela `tb_empresa`
+-- Índices de tabela `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
   ADD PRIMARY KEY (`idEmpresa`),
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_linguas`
+-- Índices de tabela `tb_escolas`
 --
-ALTER TABLE `tb_linguas`
-  ADD PRIMARY KEY (`idLingua`);
+ALTER TABLE `tb_escolas`
+  ADD PRIMARY KEY (`idEscolas`);
 
 --
--- Índices para tabela `tb_mensagem`
+-- Índices de tabela `tb_mensagem`
 --
 ALTER TABLE `tb_mensagem`
   ADD PRIMARY KEY (`idMensagem`);
 
 --
--- Índices para tabela `tb_modalidadevaga`
+-- Índices de tabela `tb_modalidadevaga`
 --
 ALTER TABLE `tb_modalidadevaga`
   ADD PRIMARY KEY (`idModalidadeVaga`);
 
 --
--- Índices para tabela `tb_publicacao`
+-- Índices de tabela `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
   ADD PRIMARY KEY (`idPublicacao`),
@@ -680,7 +702,7 @@ ALTER TABLE `tb_publicacao`
   ADD KEY `idVaga` (`idVaga`);
 
 --
--- Índices para tabela `tb_salvarvaga`
+-- Índices de tabela `tb_salvarvaga`
 --
 ALTER TABLE `tb_salvarvaga`
   ADD PRIMARY KEY (`idSalvarVaga`),
@@ -688,34 +710,26 @@ ALTER TABLE `tb_salvarvaga`
   ADD KEY `idVaga` (`idVaga`);
 
 --
--- Índices para tabela `tb_seguir`
---
-ALTER TABLE `tb_seguir`
-  ADD PRIMARY KEY (`idSeguir`),
-  ADD KEY `idEmpresa` (`idEmpresa`),
-  ADD KEY `idUsuario` (`idUsuario`);
-
---
--- Índices para tabela `tb_status`
+-- Índices de tabela `tb_status`
 --
 ALTER TABLE `tb_status`
   ADD PRIMARY KEY (`idStatus`);
 
 --
--- Índices para tabela `tb_statusvagausuario`
+-- Índices de tabela `tb_statusvagausuario`
 --
 ALTER TABLE `tb_statusvagausuario`
   ADD PRIMARY KEY (`idStatusVagaUsuario`);
 
 --
--- Índices para tabela `tb_usuario`
+-- Índices de tabela `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
   ADD PRIMARY KEY (`idUsuario`),
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_vaga`
+-- Índices de tabela `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
   ADD PRIMARY KEY (`idVaga`),
@@ -725,7 +739,7 @@ ALTER TABLE `tb_vaga`
   ADD KEY `idStatus` (`idStatus`);
 
 --
--- Índices para tabela `tb_vagausuario`
+-- Índices de tabela `tb_vagausuario`
 --
 ALTER TABLE `tb_vagausuario`
   ADD PRIMARY KEY (`idVagaUsuario`),
@@ -734,14 +748,14 @@ ALTER TABLE `tb_vagausuario`
   ADD KEY `idStatusVagaUsuario` (`idStatusVagaUsuario`);
 
 --
--- Índices para tabela `users`
+-- Índices de tabela `users`
 --
 ALTER TABLE `users`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `users_email_unique` (`email`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
@@ -754,7 +768,7 @@ ALTER TABLE `failed_jobs`
 -- AUTO_INCREMENT de tabela `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `personal_access_tokens`
@@ -790,13 +804,7 @@ ALTER TABLE `tb_atuacaoempresa`
 -- AUTO_INCREMENT de tabela `tb_chat`
 --
 ALTER TABLE `tb_chat`
-  MODIFY `idChat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `tb_denunciausuario`
---
-ALTER TABLE `tb_denunciausuario`
-  MODIFY `idDenunciaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idChat` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_empresa`
@@ -805,16 +813,16 @@ ALTER TABLE `tb_empresa`
   MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
--- AUTO_INCREMENT de tabela `tb_linguas`
+-- AUTO_INCREMENT de tabela `tb_escolas`
 --
-ALTER TABLE `tb_linguas`
-  MODIFY `idLingua` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+ALTER TABLE `tb_escolas`
+  MODIFY `idEscolas` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de tabela `tb_mensagem`
 --
 ALTER TABLE `tb_mensagem`
-  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_modalidadevaga`
@@ -826,19 +834,13 @@ ALTER TABLE `tb_modalidadevaga`
 -- AUTO_INCREMENT de tabela `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de tabela `tb_salvarvaga`
 --
 ALTER TABLE `tb_salvarvaga`
-  MODIFY `idSalvarVaga` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `tb_seguir`
---
-ALTER TABLE `tb_seguir`
-  MODIFY `idSeguir` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idSalvarVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
 
 --
 -- AUTO_INCREMENT de tabela `tb_status`
@@ -856,19 +858,19 @@ ALTER TABLE `tb_statusvagausuario`
 -- AUTO_INCREMENT de tabela `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT de tabela `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
-  MODIFY `idVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT de tabela `tb_vagausuario`
 --
 ALTER TABLE `tb_vagausuario`
-  MODIFY `idVagaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `idVagaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de tabela `users`
@@ -877,31 +879,31 @@ ALTER TABLE `users`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- Restrições para despejos de tabelas
+-- Restrições para tabelas despejadas
 --
 
 --
--- Limitadores para a tabela `tb_admin`
+-- Restrições para tabelas `tb_admin`
 --
 ALTER TABLE `tb_admin`
   ADD CONSTRAINT `tb_admin_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_areainteresseusuario`
+-- Restrições para tabelas `tb_areainteresseusuario`
 --
 ALTER TABLE `tb_areainteresseusuario`
   ADD CONSTRAINT `tb_areainteresseusuario_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
   ADD CONSTRAINT `tb_areainteresseusuario_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`);
 
 --
--- Limitadores para a tabela `tb_atuacaoempresa`
+-- Restrições para tabelas `tb_atuacaoempresa`
 --
 ALTER TABLE `tb_atuacaoempresa`
   ADD CONSTRAINT `tb_atuacaoempresa_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
   ADD CONSTRAINT `tb_atuacaoempresa_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
 
 --
--- Limitadores para a tabela `tb_chat`
+-- Restrições para tabelas `tb_chat`
 --
 ALTER TABLE `tb_chat`
   ADD CONSTRAINT `tb_chat_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
@@ -910,20 +912,13 @@ ALTER TABLE `tb_chat`
   ADD CONSTRAINT `tb_chat_ibfk_4` FOREIGN KEY (`idMensagem`) REFERENCES `tb_mensagem` (`idMensagem`);
 
 --
--- Limitadores para a tabela `tb_denunciausuario`
---
-ALTER TABLE `tb_denunciausuario`
-  ADD CONSTRAINT `tb_denunciausuario_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`),
-  ADD CONSTRAINT `tb_denunciausuario_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
-
---
--- Limitadores para a tabela `tb_empresa`
+-- Restrições para tabelas `tb_empresa`
 --
 ALTER TABLE `tb_empresa`
   ADD CONSTRAINT `tb_empresa_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_publicacao`
+-- Restrições para tabelas `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
   ADD CONSTRAINT `tb_publicacao_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
@@ -931,27 +926,20 @@ ALTER TABLE `tb_publicacao`
   ADD CONSTRAINT `tb_publicacao_ibfk_3` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
 
 --
--- Limitadores para a tabela `tb_salvarvaga`
+-- Restrições para tabelas `tb_salvarvaga`
 --
 ALTER TABLE `tb_salvarvaga`
   ADD CONSTRAINT `tb_salvarvaga_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
   ADD CONSTRAINT `tb_salvarvaga_ibfk_2` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
 
 --
--- Limitadores para a tabela `tb_seguir`
---
-ALTER TABLE `tb_seguir`
-  ADD CONSTRAINT `tb_seguir_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
-  ADD CONSTRAINT `tb_seguir_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`);
-
---
--- Limitadores para a tabela `tb_usuario`
+-- Restrições para tabelas `tb_usuario`
 --
 ALTER TABLE `tb_usuario`
   ADD CONSTRAINT `tb_usuario_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_vaga`
+-- Restrições para tabelas `tb_vaga`
 --
 ALTER TABLE `tb_vaga`
   ADD CONSTRAINT `tb_vaga_ibfk_3` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
@@ -960,7 +948,7 @@ ALTER TABLE `tb_vaga`
   ADD CONSTRAINT `tb_vaga_ibfk_6` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
 
 --
--- Limitadores para a tabela `tb_vagausuario`
+-- Restrições para tabelas `tb_vagausuario`
 --
 ALTER TABLE `tb_vagausuario`
   ADD CONSTRAINT `idUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,

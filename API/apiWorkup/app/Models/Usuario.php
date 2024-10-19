@@ -23,11 +23,11 @@ class Usuario extends Model
         'senhaUsuario',
         'contatoUsuario',
         'areaInteresseUsuario',
-
-        'ensinoUsuario',
-
+        'linguaUsuario',
+        'ensinoMedio',
+        'anoFormacao',
         'fotoUsuario',
-        'fotoBanner', // Adicionando fotoBanner
+        'fotoBanner',
         'cidadeUsuario',
         'estadoUsuario',
         'logradouroUsuario',

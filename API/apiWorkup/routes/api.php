@@ -8,6 +8,7 @@ use App\Http\Controllers\VagaUsuarioController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\EscolasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\http\Controllers\SalvarVagaController;
@@ -96,3 +97,6 @@ Route::get('/showempresa/{idEmpresa}', [EmpresaController::class, 'showEmpresaAp
 
 //API LINGUAS ESTRANGEIRAS
 Route::get('/linguas', [LinguasController::class, 'index']);
+
+//API ESCOLAS
+Route::get('/escolas', [EscolasController::class, 'index']);

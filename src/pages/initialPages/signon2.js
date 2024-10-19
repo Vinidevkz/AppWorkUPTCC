@@ -30,7 +30,7 @@ export default function SignON2({ navigation }) {
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const request = await fetch(apiEmuladorArea);
+        const request = await fetch(apiNgrokArea);
         const response = await request.json();
         setAreaVagas(response);
       } catch (error) {
@@ -67,6 +67,7 @@ export default function SignON2({ navigation }) {
             Área de Interesse:
           </Text>
 
+          <View style={{ overflow: "hidden", borderRadius: 20, elevation: 3}}>
           <Picker
             selectedValue={areaInteresseUsuario}
             style={[styles.inputCont, styles.text, styles.DMSansRegular]}
@@ -85,6 +86,7 @@ export default function SignON2({ navigation }) {
               />
             ))}
           </Picker>
+          </View>
         </View>
 
         <View style={styles.formCont}>
@@ -147,7 +149,7 @@ export default function SignON2({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <StatusBar backgroundColor="#20dd77" barStyle="dark-content" />
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
     </SafeAreaView>
   );
 }

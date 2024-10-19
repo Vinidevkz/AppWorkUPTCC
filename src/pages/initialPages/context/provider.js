@@ -1,5 +1,5 @@
 // context/provider.js
-import React, { createContext, useState } from 'react';
+import React, { createContext, useState, useSyncExternalStore } from 'react';
 
 export const Context = createContext();
 
@@ -11,14 +11,16 @@ export const Provider = ({ children }) => {
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
   const [areaInt, setAreaInt] = useState('');
+  const [ensinoMedio, setEnsinoMedio] = useState(null);
+  const [anoFormacao, setAnoFormacao] = useState(null);
+  const [linguaEstrangeira, setLinguaEstrangeira] = useState(null);
   const [tel, setTel] = useState('');
   const [cep, setCep] = useState('');
   const [nasc, setNasc] = useState('');
   const [bio, setBio] = useState('');
   const [formacaoUsuario, setFormacaoUsuario] = useState('');
 
-  const [ensinoMédio, setEnsinoMedio] = useState('');
-  const [linguaEstrangeira, setLinguaEstrangeira] = useState('');
+
   const [cursosUsuario, setCursosUsuarios] = useState('');
 
 
@@ -28,7 +30,7 @@ export const Provider = ({ children }) => {
 
 
   return (
-    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, areaInt, setAreaInt, tel, setTel, nasc, setNasc, cep, setCep, bio, setBio, formacaoUsuario, setFormacaoUsuario, userId, setUserId, vagaID, setVagaID, empresaId, setEmpresaId, ensinoMédio, setEnsinoMedio, linguaEstrangeira, setLinguaEstrangeira, cursosUsuario, setCursosUsuarios}}>
+    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, areaInt, setAreaInt, linguaEstrangeira, setLinguaEstrangeira, ensinoMedio, setEnsinoMedio, anoFormacao, setAnoFormacao, tel, setTel, nasc, setNasc, cep, setCep, bio, setBio, formacaoUsuario, setFormacaoUsuario, userId, setUserId, vagaID, setVagaID, empresaId, setEmpresaId, cursosUsuario, setCursosUsuarios}}>
       {children}
     </Context.Provider>
   );

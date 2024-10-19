@@ -21,16 +21,30 @@ import { Context } from "./context/provider.js";
 import ApisUrls from "../../ApisUrls/apisurls.js";
 
 export default function SignON4({ navigation }) {
-  const { areaInt, setAreaInt, setTel, setNasc, setCep } = useContext(Context);
+  const {
+    linguaEstrangeira,
+    setLinguaEstrangeira,
+    ensinoMedio,
+    setEnsinoMedio,
+    anoFormacao,
+    setAnoFormacao,
+    formacaoUsuario,
+    setFormacaoUsuario,
+  } = useContext(Context);
   const [linguas, setLinguas] = useState([]);
-  const [linguaSelecionada, setLinguaSelecionada] = useState("");
+  const [escolas, setEscolas] = useState([]);
 
-  const [toggleNoLang, setToggleNoLang] = useState(true);
-  const [toggleYesLang, setToggleYesLang] = useState(false);
   const [toggleNoEns, setToggleNoEns] = useState(true);
   const [toggleYesEns, setToggleYesEns] = useState(false);
 
-  const { apiEmuladorArea, apiNgrokLinguas } = ApisUrls;
+  const anos = Array.from({ length: 45 }, (_, i) => 2024 - i);
+
+  const {
+    apiEmuladorArea,
+    apiNgrokLinguas,
+    apiEmuladorEscolas,
+    apiNgrokEscolas,
+  } = ApisUrls;
 
   useEffect(() => {
     async function pegarLingua() {
@@ -47,6 +61,21 @@ export default function SignON4({ navigation }) {
     pegarLingua();
   }, []);
 
+  useEffect(() => {
+    async function pegarEscola() {
+      try {
+        const request = await fetch(apiNgrokEscolas);
+        const response = await request.json();
+        setEscolas(response);
+        console.log(response);
+      } catch (error) {
+        console.error("Erro ao buscar escolas:", error);
+      }
+    }
+
+    pegarEscola();
+  }, []);
+
   // Carregador de fontes
   const fontsLoaded = useFonts();
 
@@ -58,24 +87,14 @@ export default function SignON4({ navigation }) {
     );
   }
 
-  const handleToggleNoLang = () => {
-    setToggleNoLang(true);
-    setToggleYesLang(false);
-  };
-
-  const handleToggleYesLang = () => {
-    setToggleNoLang(false);
-    setToggleYesLang(true);
-  };
-
   const handleToggleNoEns = () => {
-    setToggleNoEns(true); 
-    setToggleYesEns(false); 
+    setToggleNoEns(true);
+    setToggleYesEns(false);
   };
-  
+
   const handleToggleYesEns = () => {
-    setToggleNoEns(false); 
-    setToggleYesEns(true);  
+    setToggleNoEns(false);
+    setToggleYesEns(true);
   };
 
   return (
@@ -88,67 +107,38 @@ export default function SignON4({ navigation }) {
       </View>
 
       <View style={styles.mainContainer2}>
-        <View style={[styles.formCont2, {marginBottom: 50}]}>
+        <View style={[styles.formCont2]}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
             Possui alguma língua estrangeira?:
           </Text>
 
-          <View
-            style={{
-              marginVertical: 15,
-              height: 55,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <TouchableOpacity onPress={handleToggleNoLang}>
-                <FontAwesome
-                  name={toggleNoLang ? "circle" : "circle-o"}
-                  size={35}
-                  color="#20dd77"
-                />
-              </TouchableOpacity>
-              <Text style={styles.DMSansRegular}>Não</Text>
-            </View>
+          <View style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}>
+          <Picker
+  style={[styles.inputCont, styles.text, styles.DMSansRegular]}
+  selectedValue={linguaEstrangeira}
+  onValueChange={(itemValue) => {
+    // Atualiza o estado com o valor diretamente selecionado
+    setLinguaEstrangeira(itemValue);
+    console.log("Língua Selecionada:", itemValue); // Para verificar
+  }}
+  mode="dropdown"
+>
+  <Picker.Item label="Nenhuma" value="" />
+  {linguas && linguas.map((lingua, index) => (
+    <Picker.Item
+      key={index}
+      label={lingua.nomeLingua}
+      value={lingua.nomeLingua} // Armazena o nome da língua como valor
+    />
+  ))}
+</Picker>
 
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <TouchableOpacity onPress={handleToggleYesLang}>
-                <FontAwesome
-                  name={toggleYesLang ? "circle" : "circle-o"}
-                  size={35}
-                  color="#20dd77"
-                />
-              </TouchableOpacity>
-              <Text style={styles.DMSansRegular}>Sim</Text>
-            </View>
+
+
           </View>
-          {toggleYesLang && (
-            <View>
-              <Text style={[styles.text, styles.DMSansRegular, {paddingLeft: 5, fontSize: 16}]}>Qual?</Text>
-              <Picker
-                style={[styles.inputCont, styles.text, styles.DMSansRegular]}
-                selectedValue={linguaSelecionada}
-                onValueChange={(itemValue) => setLinguaSelecionada(itemValue)}
-              >
-                {linguas.map((lingua, index) => (
-                  <Picker.Item
-                    key={index}
-                    label={lingua.nomeLingua}
-                    value={lingua.idLingua}
-                  />
-                ))}
-              </Picker>
-            </View>
-          )}
         </View>
 
-        <View style={styles.formCont2}>
+        <View style={[styles.formCont2]}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
             Possui ensino médio completo?:
           </Text>
@@ -156,7 +146,6 @@ export default function SignON4({ navigation }) {
           <View
             style={{
               marginVertical: 15,
-              height: 55,
               flexDirection: "row",
               alignItems: "center",
               justifyContent: "space-between",
@@ -165,7 +154,12 @@ export default function SignON4({ navigation }) {
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
             >
-              <TouchableOpacity onPress={handleToggleNoEns}>
+              <TouchableOpacity
+                onPress={() => {
+                  handleToggleNoEns();
+                  setEscolaSelecionada(null);
+                }}
+              >
                 <FontAwesome
                   name={toggleNoEns ? "circle" : "circle-o"}
                   size={35}
@@ -189,9 +183,82 @@ export default function SignON4({ navigation }) {
             </View>
           </View>
 
+          {toggleYesEns ? (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: 20,
+              }}
+            >
+              <View>
+                <Text style={[styles.text, styles.DMSansRegular]}>
+                  Instituição:
+                </Text>
+                <View
+                  style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}
+                >
+<Picker
+  selectedValue={ensinoMedio} // Deve armazenar o nome da escola
+  style={[styles.inputCont, styles.text, styles.DMSansRegular, { width: 200 }]}
+  onValueChange={(itemValue) => {
+    // Atualiza o estado com o valor diretamente selecionado
+    setEnsinoMedio(itemValue);
+    console.log("Escola Selecionada:", itemValue); // Para verificar
+  }}
+  mode="dropdown"
+>
+  <Picker.Item label="Nenhuma" value="" />
+  {escolas && escolas.map((escola, index) => (
+    <Picker.Item
+      key={index}
+      label={escola.nomeEscola} // Usando o nome da escola como label
+      value={escola.nomeEscola} // Armazena o nome da escola como valor
+    />
+  ))}
+</Picker>
+
+
+
+
+
+                </View>
+              </View>
+              <View>
+                <Text style={[styles.text, styles.DMSansRegular]}>
+                  Ano de Formação:
+                </Text>
+                <View
+                  style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}
+                >
+                  <Picker
+                    style={[
+                      styles.inputCont,
+                      styles.text,
+                      styles.DMSansRegular,
+                      { width: 130 },
+                    ]}
+                    selectedValue={anoFormacao}
+                    onValueChange={(itemValue) => setAnoFormacao(itemValue)}
+                  >
+                    <Picker.Item label="Selecione um ano" value={null} />
+                    {anos.map((ano, index) => (
+                      <Picker.Item
+                        key={index}
+                        label={ano.toString()}
+                        value={ano}
+                      />
+                    ))}
+                  </Picker>
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View style={{ height: 60 }} />
+          )}
         </View>
 
-        <View style={[styles.formCont2, {height: 150}]}>
+        <View style={[styles.formCont2, { height: 150, marginTop: 20 }]}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
             Possui algum curso complementar?:
           </Text>
@@ -205,15 +272,14 @@ export default function SignON4({ navigation }) {
               justifyContent: "space-between",
             }}
           >
-          <TextInput
-            placeholder="Conte para nós sobre seus estudos!"
-            style={styles.expCont}
-            multiline={true}
-            //onChangeText={(text) => setBio(text)}
-            //value={bio}
-          />
+            <TextInput
+              placeholder="Conte para nós sobre seus estudos!"
+              style={styles.expCont}
+              multiline={true}
+              onChangeText={(text) => setFormacaoUsuario(text)}
+              value={formacaoUsuario}
+            />
           </View>
-
         </View>
       </View>
 
@@ -234,7 +300,7 @@ export default function SignON4({ navigation }) {
         </TouchableOpacity>
       </View>
 
-      <StatusBar backgroundColor="#20dd77" barStyle="dark-content" />
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
     </SafeAreaView>
   );
 }

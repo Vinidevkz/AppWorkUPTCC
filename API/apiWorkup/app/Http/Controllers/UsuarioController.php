@@ -62,7 +62,7 @@ class UsuarioController extends Controller
         $usuario = Usuario::where('idUsuario', $id)->with('areas')->firstOrFail(); // Retorna 404 se não encontrar
         
 
-            return response()->json($usuario, 201);
+        return response()->json($usuario, 201);
 
     }
 
@@ -80,6 +80,9 @@ class UsuarioController extends Controller
                 'senhaUsuario' => 'required|min:3',
                 'contatoUsuario' => 'required|string|max:20',
                 'areaInteresseUsuario' => 'required|string|max:100',
+                'linguaUsuario' => 'nullable|string|max:20',
+                'ensinoMedio' => 'nullable|string|max:50',
+                'anoFormacao' => 'nullable|int',
                 'fotoUsuario' => 'nullable|string|max:300',
                 'fotoBanner' => 'nullable|string|max:300',
                 'cidadeUsuario' => 'required|string|max:40',
@@ -103,6 +106,9 @@ class UsuarioController extends Controller
                 'senhaUsuario' => $request->senhaUsuario,
                 'contatoUsuario' => $request->contatoUsuario,
                 'areaInteresseUsuario' => $request->areaInteresseUsuario,
+                'linguaUsuario' => $request->linguaUsuario,
+                'ensinoMedio' => $request->ensinoMedio,
+                'anoFormacao' => $request->anoFormacao,
                 'fotoUsuario' => $request->fotoUsuario,
                 'fotoBanner' => $request->fotoBanner,
                 'cidadeUsuario' => $request->cidadeUsuario,

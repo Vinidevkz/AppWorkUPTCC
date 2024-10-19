@@ -113,7 +113,7 @@ export default function SignON1({navigation}) {
         </TouchableOpacity>
       </View>
 
-      <StatusBar backgroundColor="#20dd77" barStyle="dark-content" />
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
     </SafeAreaView>
   );
 }

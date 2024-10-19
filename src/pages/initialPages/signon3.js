@@ -29,10 +29,14 @@ export default function SignON3({ navigation }) {
     email,
     senha,
     areaInt,
+    linguaEstrangeira,
+    ensinoMedio,
+    anoFormacao,
     nasc,
     cep,
     tel,
     userName,
+    formacaoUsuario,
     setUserId,
   } = useContext(Context);
   const { apiNgrokCad, apiEmuladorCad } = ApisUrls;
@@ -86,28 +90,28 @@ export default function SignON3({ navigation }) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
-
+  
     setLoading(true); // Inicia o loading
-
+  
     const uploadImageToFirebase = async (uri) => {
       const response = await fetch(uri);
       const blob = await response.blob();
       
       const filename = `profile_images/${Date.now()}.jpg`;
       const imageRef = ref(storage, filename);
-    
+  
       await uploadBytes(imageRef, blob);
       const downloadURL = await getDownloadURL(imageRef);
       return downloadURL;
     };
-
+  
     try {
       const formattedDate = formatDateToISO(nasc);
       const dataToSend = {};
   
       const photoURL = selectedImage ? await uploadImageToFirebase(selectedImage) : null;
       const bannerImageURL = selectedBannerImage ? await uploadImageToFirebase(selectedBannerImage) : null;
-
+  
       dataToSend.nomeUsuario = nome;
       dataToSend.usernameUsuario = userName;
       dataToSend.nascUsuario = formattedDate;
@@ -115,6 +119,9 @@ export default function SignON3({ navigation }) {
       dataToSend.senhaUsuario = senha;
       dataToSend.contatoUsuario = tel;
       dataToSend.areaInteresseUsuario = areaInt;
+      dataToSend.linguaEstrangeira = linguaEstrangeira;
+      dataToSend.ensinoMedio = ensinoMedio;
+      dataToSend.anoFormacao = anoFormacao;
       dataToSend.fotoUsuario = photoURL || "";
       dataToSend.fotoBanner = bannerImageURL || "";
       dataToSend.cidadeUsuario = "São Paulo";
@@ -123,10 +130,13 @@ export default function SignON3({ navigation }) {
       dataToSend.cepUsuario = cep;
       dataToSend.numeroLograUsuario = "515";
       dataToSend.sobreUsuario = bio;
-      dataToSend.formacaoCompetenciaUsuario = "formacao";
+      dataToSend.formacaoCompetenciaUsuario = formacaoUsuario;
       dataToSend.dataFormacaoCompetenciaUsuario = "2012-12-12";
-
-      const response = await fetch(apiEmuladorCad, {
+  
+      console.log(ensinoMedio, linguaEstrangeira);
+      console.log("Dados enviados para o backend:", JSON.stringify(dataToSend, null, 2));
+  
+      const response = await fetch(apiNgrokCad, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -134,37 +144,40 @@ export default function SignON3({ navigation }) {
         },
         body: JSON.stringify(dataToSend),
       });
-
+  
       const textResponse = await response.text();
       let resp;
-
+  
       try {
         resp = JSON.parse(textResponse);
       } catch (error) {
         Alert.alert("Erro", "Resposta do servidor não é um JSON válido.");
         return;
       }
-
-      if (response.ok) {
-        setUserId(resp.idUsuario);
-        Alert.alert("Sucesso", "Usuário cadastrado com sucesso!", [
-          {
-            text: "OK",
-            onPress: () => navigation.navigate("TabBar"),
-          },
-        ]);
+  
+      if (!response.ok) {
+        console.log("Resposta do servidor:", textResponse);
+        let errorMessage = 'Erro ao cadastrar usuário.';
+        if (resp.errors) {
+          errorMessage = Object.values(resp.errors).map(errArray => errArray.join(' ')).join('\n');
+        } else if (resp.message) {
+          errorMessage = resp.message;
+        }
+        Alert.alert("Erro", errorMessage);
       } else {
-        Alert.alert(
-          "Erro",
-          `Erro ao cadastrar usuário. ${resp.message}`
-        );
+        // Navegar para a tela "TabBar" se o cadastro for bem-sucedido
+        setUserId(resp.idUsuario);
+        navigation.navigate('TabBar');
       }
+      
     } catch (error) {
       Alert.alert("Erro", "Erro ao cadastrar usuário. Verifique o console para mais detalhes.");
+      console.log(error);
     } finally {
       setLoading(false); // Finaliza o loading
     }
   }
+  
 
   const fontsLoaded = useFonts();
   if (!fontsLoaded) {
@@ -176,7 +189,9 @@ export default function SignON3({ navigation }) {
   }
 
   return (
+    
     <SafeAreaView >
+      <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       {loading && (
         <View style={{ 
           position: "absolute", 
@@ -187,9 +202,9 @@ export default function SignON3({ navigation }) {
           backgroundColor: "rgba(0, 0, 0, 0.5)", 
           justifyContent: "center", 
           alignItems: "center",
-          zIndex: 1000 // Para garantir que o indicador fique em cima dos outros elementos
+          zIndex: 1000,
         }}>
-          <ActivityIndicator size="large" color="#ffffff" />
+          <ActivityIndicator size="large" color="#20dd77" />
         </View>
       )}
 
