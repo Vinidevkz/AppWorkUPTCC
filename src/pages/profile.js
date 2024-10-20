@@ -75,7 +75,7 @@ export default function Profile({ navigation }) {
         <Text
           style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}
         >
-          Meu Perfil
+          Meu Currículo 
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Configurações")}>
           <Octicons name="gear" size={30} color={theme.iconColorWhite} />
@@ -144,16 +144,30 @@ export default function Profile({ navigation }) {
               </View>
             </View>
 
-            <View style={styles.profileBioCont}>
-              <Text
-                style={[
-                  styles.DMSansRegular,
-                  styles.text,
-                  { color: theme.textColor },
-                ]}
-              >
-                {dadosUser.sobreUsuario || "Loading..."}
-              </Text>
+            <View style={[styles.profileBioCont, {flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}]}>
+              <View>
+                <Text
+                  style={[
+                    styles.DMSansRegular,
+                    styles.text,
+                    { color: theme.textColor },
+                  ]}
+                >
+                  {dadosUser.sobreUsuario || "Loading..."}
+                </Text>
+              </View>
+
+              <View style={{borderRadius: 20, borderWidth: 2, borderColor: '#20dd77', padding: 10, marginRight: 10}}>
+                <Text
+                      style={[
+                        styles.DMSansRegular,
+                        styles.text,
+                        { color: theme.textColor },
+                      ]}
+                    >
+                      #{dadosUser.areaInteresseUsuario || "Loading..."}
+                </Text>
+              </View>
             </View>
 
             <View
@@ -162,36 +176,12 @@ export default function Profile({ navigation }) {
 
             <View
               style={{
-                paddingVertical: 20,
-                paddingHorizontal: 15,
+                paddingVertical: 10,
                 gap: 20,
                 borderRadius: 20,
-                backgroundColor: theme.backgroundColorNavBar,
+                backgroundColor: theme.backgroundColor,
               }}
             >
-              <View style={styles.profilePrefsCont}>
-                <Text
-                  style={[
-                    styles.DMSansBold,
-                    styles.title,
-                    { color: theme.textColor },
-                  ]}
-                >
-                  Áreas de Interesse:
-                </Text>
-                <View style={styles.usersPrefBox}>
-                  <Text
-                    style={[
-                      styles.DMSansRegular,
-                      styles.text,
-                      { color: theme.textColor },
-                    ]}
-                  >
-                    {dadosUser.areaInteresseUsuario || "Loading..."}
-                  </Text>
-                </View>
-              </View>
-
               <View style={styles.profileSkillsCont}>
                 <Text
                   style={[
@@ -200,7 +190,7 @@ export default function Profile({ navigation }) {
                     { color: theme.textColor },
                   ]}
                 >
-                  Competências
+                  Formação Acadêmica:
                 </Text>
                 <Text
                   style={[
@@ -209,7 +199,16 @@ export default function Profile({ navigation }) {
                     { color: theme.textColor },
                   ]}
                 >
-                  {dadosUser.formacaoCompetenciaUsuario}
+                  <Text style={styles.DMSansBold}>Ensino Médio:</Text> {dadosUser.ensinoMedio ? <Text>{dadosUser.ensinoMedio}, {dadosUser.anoFormacao}</Text> : <Text>Incompleto</Text>}
+                </Text>
+                <Text
+                  style={[
+                    styles.DMSansRegular,
+                    styles.text,
+                    { color: theme.textColor },
+                  ]}
+                >
+                  <Text style={styles.DMSansBold}>Cursos Complementares:</Text>{"\n"}{dadosUser.formacaoCompetenciaUsuario}
                 </Text>
               </View>
 

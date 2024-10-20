@@ -15,6 +15,7 @@ export const Provider = ({ children }) => {
   const [anoFormacao, setAnoFormacao] = useState(null);
   const [linguaEstrangeira, setLinguaEstrangeira] = useState(null);
   const [tel, setTel] = useState('');
+  const [emailContato, setEmailContato] = useState('');
   const [cep, setCep] = useState('');
   const [nasc, setNasc] = useState('');
   const [bio, setBio] = useState('');
@@ -30,7 +31,7 @@ export const Provider = ({ children }) => {
 
 
   return (
-    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, areaInt, setAreaInt, linguaEstrangeira, setLinguaEstrangeira, ensinoMedio, setEnsinoMedio, anoFormacao, setAnoFormacao, tel, setTel, nasc, setNasc, cep, setCep, bio, setBio, formacaoUsuario, setFormacaoUsuario, userId, setUserId, vagaID, setVagaID, empresaId, setEmpresaId, cursosUsuario, setCursosUsuarios}}>
+    <Context.Provider value={{ nome, setNome, userName, setUserName, idade, setIdade, email, setEmail, senha, setSenha, areaInt, setAreaInt, linguaEstrangeira, setLinguaEstrangeira, ensinoMedio, setEnsinoMedio, anoFormacao, setAnoFormacao, tel, setTel, emailContato, setEmailContato, nasc, setNasc, cep, setCep, bio, setBio, formacaoUsuario, setFormacaoUsuario, userId, setUserId, vagaID, setVagaID, empresaId, setEmpresaId, cursosUsuario, setCursosUsuarios}}>
       {children}
     </Context.Provider>
   );

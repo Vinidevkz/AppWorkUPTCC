@@ -6,6 +6,7 @@ import {
   SafeAreaView,
   ActivityIndicator,
   TouchableOpacity,
+  TextInput
 } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
 import { Picker } from "@react-native-picker/picker";
@@ -21,8 +22,9 @@ import { Context } from "./context/provider.js";
 import ApisUrls from '../../ApisUrls/apisurls.js'
 
 export default function SignON2({ navigation }) {
-  const { areaInt, setAreaInt, setTel, setNasc, setCep } = useContext(Context);
+  const { areaInt, setAreaInt, setTel, emailContato, setEmailContato, setNasc, setCep } = useContext(Context);
   const [areaVagas, setAreaVagas] = useState([]);
+  const [emailError, setEmailError] = useState('');
   const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
   
   const { apiNgrokArea, apiEmuladorArea } = ApisUrls;
@@ -40,6 +42,27 @@ export default function SignON2({ navigation }) {
 
     pegarAreaVaga();
   }, []);
+
+  const handleEmailChange = (text) => {
+    // Verificar se há caracteres inválidos
+    const isValid = /^[a-zA-Z0-9@.]*$/.test(text);
+  
+    if (!isValid) {
+      setEmailError('O email deve conter apenas letras, números, "@" e "."');
+    } else {
+      // Verificar se há mais de um "@"
+      const atSymbolCount = (text.match(/@/g) || []).length;
+  
+      if (atSymbolCount > 1) {
+        setEmailError('O email só pode conter um "@"');
+      } else {
+        setEmailError(''); // Sem erros
+      }
+  
+      setEmailContato(text); // Atualizar o estado do email
+      console.log(emailContato)
+    }
+  };
 
   // Carregador de fontes
   const fontsLoaded = useFonts();
@@ -104,6 +127,12 @@ export default function SignON2({ navigation }) {
             style={[styles.DMSansRegular, styles.inputCont]}
             onChangeText={(text) => setTel(text)}
           />
+        </View>
+
+        <View style={styles.formCont}>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>Email para Contato:</Text>
+          <TextInput placeholder="digite seu melhor email" style={[styles.DMSansRegular, styles.inputCont]} onChangeText={handleEmailChange}/>
+          {emailError ? <Text style={{color: 'red'}}>{emailError}</Text> : null}
         </View>
 
         <View style={styles.formCont}>

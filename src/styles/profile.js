@@ -100,9 +100,7 @@ const styles = StyleSheet.create({
   },
 
   profileBioCont: {
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    gap: 10,
+
 
   },
 

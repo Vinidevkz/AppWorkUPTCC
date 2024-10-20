@@ -22,6 +22,7 @@ class Usuario extends Model
         'emailUsuario',
         'senhaUsuario',
         'contatoUsuario',
+        'emailContato',
         'areaInteresseUsuario',
         'linguaUsuario',
         'ensinoMedio',

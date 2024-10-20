@@ -79,6 +79,7 @@ class UsuarioController extends Controller
                 'emailUsuario' => 'required|email|unique:tb_usuario,emailUsuario',
                 'senhaUsuario' => 'required|min:3',
                 'contatoUsuario' => 'required|string|max:20',
+                'emailContato' => 'required|string|max:50',
                 'areaInteresseUsuario' => 'required|string|max:100',
                 'linguaUsuario' => 'nullable|string|max:20',
                 'ensinoMedio' => 'nullable|string|max:50',
@@ -90,7 +91,7 @@ class UsuarioController extends Controller
                 'logradouroUsuario' => 'required|string|max:40',
                 'cepUsuario' => 'required|string|max:40',
                 'numeroLograUsuario' => 'required|string|max:40',
-                'sobreUsuario' => 'required|string|max:40',
+                'sobreUsuario' => 'required|string|max:200',
                 'formacaoCompetenciaUsuario' => 'required|string|max:40',
                 'dataFormacaoCompetenciaUsuario' => 'required|date',
             ]);
@@ -105,6 +106,7 @@ class UsuarioController extends Controller
                 'emailUsuario' => $request->emailUsuario,
                 'senhaUsuario' => $request->senhaUsuario,
                 'contatoUsuario' => $request->contatoUsuario,
+                'emailContato' => $request->emailContato,
                 'areaInteresseUsuario' => $request->areaInteresseUsuario,
                 'linguaUsuario' => $request->linguaUsuario,
                 'ensinoMedio' => $request->ensinoMedio,
@@ -123,6 +125,7 @@ class UsuarioController extends Controller
             ]);
 
             Log::info("User registered successfully: ", $usuario->toArray());
+            Log::info("Valor de emailContato no request: " . $request->emailContato);
             return response()->json($usuario, 201);
         } catch (\Illuminate\Validation\ValidationException $e) {
             Log::error("Validation error: ", $e->errors());
@@ -148,7 +151,8 @@ class UsuarioController extends Controller
             'nomeUsuario' => 'sometimes|required|string|max:40',
             'usernameUsuario' => 'sometimes|required|string|max:40',
             'contatoUsuario' => 'sometimes|required|string|max:20',
-            'sobreUsuario' => 'sometimes|required|string|max:40',
+            'sobreUsuario' => 'sometimes|required|string|max:200',
+            'areaInteresseUsuario' => 'sometimes|required|string|max:100'
             
         ]);
 
@@ -157,13 +161,11 @@ class UsuarioController extends Controller
             'nomeUsuario', 
             'usernameUsuario', 
             'contatoUsuario', 
-            'sobreUsuario'
+            'sobreUsuario',
+            'areaInteresseUsuario'
         ]));
 
             return response()->json(['message' => 'Usuário atualizado com sucesso']);
-        
-
-
     }
 
     public function updateApp(Request $request, $id){

@@ -35,6 +35,7 @@ export default function SignON3({ navigation }) {
     nasc,
     cep,
     tel,
+    emailContato,
     userName,
     formacaoUsuario,
     setUserId,
@@ -86,7 +87,7 @@ export default function SignON3({ navigation }) {
   };
 
   async function cadastroUser() {
-    if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !bio) {
+    if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !emailContato || !bio) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
@@ -118,6 +119,7 @@ export default function SignON3({ navigation }) {
       dataToSend.emailUsuario = email;
       dataToSend.senhaUsuario = senha;
       dataToSend.contatoUsuario = tel;
+      dataToSend.emailContato = emailContato;
       dataToSend.areaInteresseUsuario = areaInt;
       dataToSend.linguaEstrangeira = linguaEstrangeira;
       dataToSend.ensinoMedio = ensinoMedio;

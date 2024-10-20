@@ -157,7 +157,8 @@ export default function SignON4({ navigation }) {
               <TouchableOpacity
                 onPress={() => {
                   handleToggleNoEns();
-                  setEscolaSelecionada(null);
+                  setEnsinoMedio(null);
+                  console.log(ensinoMedio)
                 }}
               >
                 <FontAwesome
