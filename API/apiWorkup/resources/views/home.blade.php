@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url('assets/css/dynamo.css')}}">
-    
     <link rel="stylesheet" href="{{url('assets/css/dynamoPadrao.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Document</title>
@@ -15,27 +14,26 @@
 
 <body class="dark-mode">
 
+    <header class="fixed-top">
+        <img class="logo" src="{{url('assets/img/dynamo/logo.png')}}">
+        <nav>
+            <ul class="nav-itens">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#equipe">Equipe</a></li>
+                <li><a href="/home">WorkUp</a></li>
+                <li><a href="#parceiros">Parceiros</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+        <nav id="botoes-nav" class="d-flex justify-content-around" style="width: 15%;">
+            <a class="px-2"><i class="bi bi-globe-americas px-2"></i>pt-br</a>
+            <input type="button" id="darkmode">
+        </nav>
+    </header>
+
+
     <section class="secao" id="home">
-
-        <header class="fixed-top">
-            <img class="logo" src="{{url('assets/img/dynamo/logo.png')}}">
-            <nav>
-                <ul class="nav-itens">
-                    <li><a href="#home">Início</a></li>
-                    <li><a href="#sobre">Sobre</a></li>
-                    <li><a href="#equipe">Equipe</a></li>
-                    <li><a href="/home">WorkUp</a></li>
-                    <li><a href="#parceiros">Parceiros</a></li>
-                    <li><a href="#contato">Contato</a></li>
-                </ul>
-            </nav>
-            <nav id="botoes-nav" class="d-flex justify-content-around" style="width: 15%;">
-                <a class="px-2"><i class="bi bi-globe-americas px-2"></i>pt-br</a>
-                <input type="button" id="darkmode">
-            </nav>
-        </header>
-
-
 
         <div class="d-flex flex-column align-items-center">
             <div class="wrap">
@@ -67,18 +65,19 @@
     </section>
 
 
-    <section class="secao d-flex justify-content-center" id="sobre">
+    <section class="secao" id="sobre">
 
-        <div class="container d-flex justify-content-center" id="wrap-sobre">
-            <div class="row" style="width: 100%;">
+        <div class="container h-100 d-flex align-items-center" id="wrap-sobre">
 
-                <div class="col col-5 sobre-content sobre-div-1">
+            <div class="row h-100 w-100">
 
-                    <div class="wrap w-50">
+                <div class="col h-100 col-5 sobre-div-1 d-flex justify-content-center align-items-center">
+
+                    <div class="wrap w-50 h-75">
                         <h1 class="titulo-2 py-3">
                             <span>Sobre</span> a Dynamo
                         </h1>
-                        <p class="texto-1 py-4">
+                        <p class="texto-1">
                             Somos uma empresa focada no desenvolvimento e aplicações web e mobile com o objetivo de
                             ajudar
                             nossos usuários de diversas formas
@@ -87,7 +86,7 @@
 
                 </div>
 
-                <div class="col col-7 sobre-div-2">
+                <div class="col col-7 h-100 sobre-div-2">
 
                     <div class="sobre-cards">
                         <i class="bi bi-pencil-fill fs-2"></i>
@@ -277,7 +276,8 @@
         <div class="container container-parceiros d-flex flex-column">
             <div class="row flex-column flex-lg-row">
                 <div class="col col-12 col-md-12 col-lg-6 parceiros-div-1">
-                    <img id="mainImage" src="{{url('assets/img/dynamo/sevenLogo.png')}}" alt="Imagem Principal" class="main-image bg-white">
+                    <img id="mainImage" src="{{url('assets/img/dynamo/sevenLogo.png')}}" alt="Imagem Principal"
+                        class="main-image bg-white">
                 </div>
                 <div class="col col-12 col-md-12 col-lg-6 parceiros-div-2">
                     <p>Essas são nossos parceiros, empresas que colaboram para que seja possível fazermos
@@ -313,49 +313,49 @@
 
 
     <section class="secao contato" id="contato">
-    <div class="container h-100">
-        <div class="row" style="height: 100%;">
-            <div class="col contato-div-1"></div>
-            <div class="col contato-div-2">
-                <div class="box-wrap">
-                    <h1 class="titulo-2">Fale Conosco!</h1>
+        <div class="container h-100">
+            <div class="row" style="height: 100%;">
+                <div class="col contato-div-1"></div>
+                <div class="col contato-div-2">
+                    <div class="box-wrap">
+                        <h1 class="titulo-2">Fale Conosco!</h1>
 
-                    <div class="box-contato flex-column">
-                        <div class="wrap w-75 align-self-center">
-                            <form action="/contato" method="POST">
-                                @csrf
-                                <div class="wrap flex-column">
-                                    <span class="texto-form">Insira seu nome:</span>
-                                    <input class="input-form " type="text" name="nome" required>
-                                </div>
+                        <div class="box-contato flex-column">
+                            <div class="wrap w-75 align-self-center">
+                                <form action="/contato" method="POST">
+                                    @csrf
+                                    <div class="wrap flex-column">
+                                        <span class="texto-form">Insira seu nome:</span>
+                                        <input class="input-form" type="text" name="nome" required>
+                                    </div>
 
-                                <div class="wrap flex-column">
-                                    <span class="texto-form">Insira seu email:</span>
-                                    <input class="input-form" type="email" name="email" required>
-                                </div>
+                                    <div class="wrap flex-column">
+                                        <span class="texto-form">Insira seu email:</span>
+                                        <input class="input-form" type="email" name="email" required>
+                                    </div>
 
-                                <div class="wrap flex-column w-100">
-                                    <span class="texto">E sua mensagem:</span>
-                                    <textarea class="input msg-box" name="mensagem" required></textarea>
-                                </div>
+                                    <div class="wrap flex-column w-100">
+                                        <span class="texto">E sua mensagem:</span>
+                                        <textarea class="input msg-box" name="mensagem" required></textarea>
+                                    </div>
 
-                                <div class="d-flex justify-content-around py-3">
-                                    <button class="btn-enviar" type="submit">Enviar</button>
-                                </div>
-                            </form>
+                                    <div class="d-flex justify-content-around py-3">
+                                        <button class="btn-enviar" type="submit">Enviar</button>
+                                    </div>
+                                </form>
 
-                            @if(session('sucesso'))
-                                <div class="alert alert-success">
-                                    {{ session('sucesso') }}
-                                </div>
-                            @endif
+                                @if(session('sucesso'))
+                                    <div class="alert alert-success">
+                                        {{ session('sucesso') }}
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
 
 </body>
@@ -363,12 +363,16 @@
 </html>
 
 
-    <script src="{{url('assets/js/dynamo/dark-mode.js')}}"></script>
-    <script src="{{url('assets/js/dynamo/animacao.js')}}"></script>
-    <script src="{{url('assets/js/dynamo/card-equipe.js')}}"></script>
-    <script src="{{url('assets/js/dynamo/carrossel.js')}}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+<script src="{{url('assets/js/dynamo/dark-mode.js')}}"></script>
+<script src="{{url('assets/js/dynamo/animacao.js')}}"></script>
+<script src="{{url('assets/js/dynamo/card-equipe.js')}}"></script>
+<script src="{{url('assets/js/dynamo/carrossel.js')}}"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+    integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+    crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+    integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+    crossorigin="anonymous"></script>
 
 
 </body>
