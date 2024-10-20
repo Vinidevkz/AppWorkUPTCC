@@ -21,7 +21,6 @@ class PostController extends Controller
     
         // Buscando as postagens da empresa
         $posts = Post::where('idEmpresa', $empresaId)
-            ->orderBy('created_at', 'desc') // Ordenando por data de criação
             ->get();
     
         // Retorna a view com as postagens
@@ -36,8 +35,9 @@ class PostController extends Controller
      */
     public function create()
     {
-        
-        return view('posts.create');
+        $empresaId = auth()->guard('empresa')->user()->idEmpresa;
+
+        return view('posts.create', compact('empresaId'));
     }
 
     /**

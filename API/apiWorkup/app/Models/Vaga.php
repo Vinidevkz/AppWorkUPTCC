@@ -47,6 +47,10 @@ class Vaga extends Model
         return $this->belongsTo(Modalidade::class, 'idModalidadeVaga');
     }
 
+    public function candidatos() {
+        return $this->hasMany(VagaUsuario::class, 'idVaga');
+    }
+
 
 
     // public function usuarios() : BelongsToMany

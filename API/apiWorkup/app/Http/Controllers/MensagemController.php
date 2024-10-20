@@ -22,8 +22,6 @@ class MensagemController extends Controller
             ->join('tb_Mensagem', 'tb_chat.idMensagem', '=', 'tb_Mensagem.idMensagem')
             ->join('tb_Usuario', 'tb_chat.idUsuario', '=', 'tb_Usuario.idUsuario') // Substitua por seu modelo de usuário
             ->join('tb_Empresa', 'tb_chat.idEmpresa', '=', 'tb_Empresa.idEmpresa') // Substitua por seu modelo de empresa
-            ->select('tb_Mensagem.mensagem', 'nomeUsuario as usuarioNome', 'nomeEmpresa as empresaNome', 'tb_chat.created_at')
-            ->orderBy('tb_chat.created_at', 'desc')
             ->get();
     
         return view('mensagem.index', compact('mensagens'));

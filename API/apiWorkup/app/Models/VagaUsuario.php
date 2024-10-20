@@ -33,4 +33,8 @@ class VagaUsuario extends Model
         return $this->belongsTo(StatusVaga::class, 'idStatusVagaUsuario');
     }
 
+    public function vaga() {
+        return $this->belongsTo(Vaga::class, 'idVaga');
+    }
+
 }

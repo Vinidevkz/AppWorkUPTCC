@@ -125,8 +125,7 @@ Route::middleware('auth:empresa')->group(function(){
         //Empresa
         Route::prefix('/empresa')->group(function(){
             // Dashboard Empresa
-
-            Route::get('/dashboard', [VagaController::class, 'showVagasPorEmpresa']);
+            Route::get('/dashboard',[EmpresaController::class, 'dashboard']);
 
             // Ver todos os detalhe da empresa
             Route::get('/{id}', [EmpresaController::class, 'show'])->name('empresas.show');
