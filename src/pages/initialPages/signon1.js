@@ -13,6 +13,7 @@ import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState } from "react";
@@ -22,6 +23,9 @@ export default function SignON1({navigation}) {
   const {setNome, setUserName, setEmail, setSenha} = useContext(Context);
   const [emailError, setEmailError] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false)
+
+  const [toggleNoEns, setToggleNoEns] = useState(true);
+  const [toggleYesEns, setToggleYesEns] = useState(false);
   //Carregador de fontes
   const fontsLoaded = useFonts();
 
@@ -57,6 +61,18 @@ export default function SignON1({navigation}) {
     };
     //
 
+    const handleToggleNoEns = () => {
+      setToggleNoEns(true);
+      setToggleYesEns(false);
+    };
+  
+    const handleToggleYesEns = () => {
+      setToggleNoEns(false);
+      setToggleYesEns(true);
+    };
+
+    
+
   return (
     <SafeAreaView>
       <View style={styles.header}>
@@ -66,7 +82,7 @@ export default function SignON1({navigation}) {
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>
 
-      <View style={styles.mainContainer}>
+      <View style={[styles.mainContainer, {paddingBottom: 30}]}>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>Nome:</Text>
           <TextInput placeholder="Digite seu nome" style={[styles.DMSansRegular, styles.inputCont]}
@@ -103,7 +119,83 @@ export default function SignON1({navigation}) {
           </TouchableOpacity>
           </View>
         </View>
+        <View style={[styles.formCont2]}>
+          <Text style={[styles.DMSansRegular, styles.formTitle]}>
+            Possui deficiência?:
+          </Text>
+
+          <View
+            style={{
+              marginVertical: 15,
+              flexDirection: "row",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
+              <TouchableOpacity
+                onPress={() => {
+                  handleToggleNoEns();
+                }}
+              >
+                <FontAwesome
+                  name={toggleNoEns ? "circle" : "circle-o"}
+                  size={35}
+                  color="#20dd77"
+                />
+              </TouchableOpacity>
+              <Text style={styles.DMSansRegular}>Não</Text>
+            </View>
+
+            <View
+              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
+            >
+              <TouchableOpacity onPress={handleToggleYesEns}>
+                <FontAwesome
+                  name={toggleYesEns ? "circle" : "circle-o"}
+                  size={35}
+                  color="#20dd77"
+                />
+              </TouchableOpacity>
+              <Text style={styles.DMSansRegular}>Sim</Text>
+            </View>
+          </View>
+
+          {toggleYesEns ? (
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "center",
+                gap: 20,
+              }}
+            >
+              <View>
+                <Text style={[styles.text, styles.DMSansRegular, {marginBottom: 5}]}>
+                  Qual?:
+                </Text>
+                <View
+                  style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}
+                >
+          <TextInput
+            placeholder="Escreva detalhadamente sobre sua deficiência"
+            style={[styles.bioCont, {height: 60}]}
+            multiline={true}
+            //onChangeText={(text) => setBio(text)}
+            //value={bio}
+          />
+                </View>
+              </View>
+            </View>
+          ) : (
+            <View style={{ height: 60 }} />
+          )}
+        </View>
       </View>
+
+      
+
 
       <View style={styles.footerCont}>
         <View></View>

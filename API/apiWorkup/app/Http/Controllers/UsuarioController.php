@@ -148,9 +148,9 @@ class UsuarioController extends Controller
 
         // Validação dos dados recebidos
         $request->validate([
-            'nomeUsuario' => 'sometimes|required|string|max:40',
-            'usernameUsuario' => 'sometimes|required|string|max:40',
-            'contatoUsuario' => 'sometimes|required|string|max:20',
+            'nomeUsuario' => 'sometimes|required|string|max:50',
+            'usernameUsuario' => 'sometimes|required|string|max:50',
+            'contatoUsuario' => 'sometimes|required|string|max:50',
             'sobreUsuario' => 'sometimes|required|string|max:200',
             'areaInteresseUsuario' => 'sometimes|required|string|max:100'
             
@@ -173,19 +173,25 @@ class UsuarioController extends Controller
 
         // Validação dos dados recebidos
         $request->validate([
-            'nomeUsuario' => 'sometimes|required|string|max:40',
-            'usernameUsuario' => 'sometimes|required|string|max:40',
-            'contatoUsuario' => 'sometimes|required|string|max:20',
+            'nomeUsuario' => 'sometimes|required|string|max:50',
+            'usernameUsuario' => 'sometimes|required|string|max:50',
             'sobreUsuario' => 'sometimes|required|string|max:40',
-            
+            'nascUsuario' => 'sometimes|required|string|max:50',
+            'areaInteresseUsuario' => 'sometimes|required|string|max:40',
+            'formacaoCompetenciaUsuario' => 'sometimes|required|string|max:50',
+            'contatoUsuario' => 'sometimes|required|string|max:50',
+
         ]);
 
         // Atualiza os campos que foram passados
         $usuario->update($request->only([
             'nomeUsuario', 
-            'usernameUsuario', 
+            'usernameUsuario',
+            'sobreUsuario',
+            'nascUsuario',
+            'areaInteresseUsuario',
+            'formacaoCompetenciaUsuario',
             'contatoUsuario', 
-            'sobreUsuario'
         ]));
 
             return response()->json(['message' => 'Usuário atualizado com sucesso']);

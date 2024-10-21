@@ -46,7 +46,7 @@ export default function ProfileChange({ navigation }) {
 
   useEffect(() => {
     async function fetchUserData() {
-      const apiUrl = `${apiNgrokUsuario}${userId}`;
+      const apiUrl = `${apiEmuladorUsuario}${userId}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -75,7 +75,7 @@ export default function ProfileChange({ navigation }) {
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const response = await fetch(apiNgrokArea);
+        const response = await fetch(apiEmuladorArea);
         const data = await response.json();
         setAreaVagas(data);
       } catch (error) {
@@ -124,7 +124,7 @@ export default function ProfileChange({ navigation }) {
       return;
     }
 
-    const apiUrl = `${apiNgrokUsuario}${userId}`;
+    const apiUrl = `${apiEmuladorUsuario}${userId}`;
     try {
       const response = await fetch(apiUrl, {
         method: 'PUT',

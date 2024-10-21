@@ -44,12 +44,13 @@ export default function SignON4({ navigation }) {
     apiNgrokLinguas,
     apiEmuladorEscolas,
     apiNgrokEscolas,
+    apiEmuladorLinguas,
   } = ApisUrls;
 
   useEffect(() => {
     async function pegarLingua() {
       try {
-        const request = await fetch(apiNgrokLinguas);
+        const request = await fetch(apiEmuladorLinguas);
         const response = await request.json();
         setLinguas(response);
         console.log(response);
@@ -64,7 +65,7 @@ export default function SignON4({ navigation }) {
   useEffect(() => {
     async function pegarEscola() {
       try {
-        const request = await fetch(apiNgrokEscolas);
+        const request = await fetch(apiEmuladorEscolas);
         const response = await request.json();
         setEscolas(response);
         console.log(response);
@@ -113,28 +114,26 @@ export default function SignON4({ navigation }) {
           </Text>
 
           <View style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}>
-          <Picker
-  style={[styles.inputCont, styles.text, styles.DMSansRegular]}
-  selectedValue={linguaEstrangeira}
-  onValueChange={(itemValue) => {
-    // Atualiza o estado com o valor diretamente selecionado
-    setLinguaEstrangeira(itemValue);
-    console.log("Língua Selecionada:", itemValue); // Para verificar
-  }}
-  mode="dropdown"
->
-  <Picker.Item label="Nenhuma" value="" />
-  {linguas && linguas.map((lingua, index) => (
-    <Picker.Item
-      key={index}
-      label={lingua.nomeLingua}
-      value={lingua.nomeLingua} // Armazena o nome da língua como valor
-    />
-  ))}
-</Picker>
-
-
-
+            <Picker
+              style={[styles.inputCont, styles.text, styles.DMSansRegular]}
+              selectedValue={linguaEstrangeira}
+              onValueChange={(itemValue) => {
+                // Atualiza o estado com o valor diretamente selecionado
+                setLinguaEstrangeira(itemValue);
+                console.log("Língua Selecionada:", itemValue); // Para verificar
+              }}
+              mode="dropdown"
+            >
+              <Picker.Item label="Nenhuma" value="" />
+              {linguas &&
+                linguas.map((lingua, index) => (
+                  <Picker.Item
+                    key={index}
+                    label={lingua.nomeLingua}
+                    value={lingua.nomeLingua} // Armazena o nome da língua como valor
+                  />
+                ))}
+            </Picker>
           </View>
         </View>
 
@@ -158,7 +157,7 @@ export default function SignON4({ navigation }) {
                 onPress={() => {
                   handleToggleNoEns();
                   setEnsinoMedio(null);
-                  console.log(ensinoMedio)
+                  console.log(ensinoMedio);
                 }}
               >
                 <FontAwesome
@@ -199,30 +198,31 @@ export default function SignON4({ navigation }) {
                 <View
                   style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}
                 >
-<Picker
-  selectedValue={ensinoMedio} // Deve armazenar o nome da escola
-  style={[styles.inputCont, styles.text, styles.DMSansRegular, { width: 200 }]}
-  onValueChange={(itemValue) => {
-    // Atualiza o estado com o valor diretamente selecionado
-    setEnsinoMedio(itemValue);
-    console.log("Escola Selecionada:", itemValue); // Para verificar
-  }}
-  mode="dropdown"
->
-  <Picker.Item label="Nenhuma" value="" />
-  {escolas && escolas.map((escola, index) => (
-    <Picker.Item
-      key={index}
-      label={escola.nomeEscola} // Usando o nome da escola como label
-      value={escola.nomeEscola} // Armazena o nome da escola como valor
-    />
-  ))}
-</Picker>
-
-
-
-
-
+                  <Picker
+                    selectedValue={ensinoMedio} // Deve armazenar o nome da escola
+                    style={[
+                      styles.inputCont,
+                      styles.text,
+                      styles.DMSansRegular,
+                      { width: 200 },
+                    ]}
+                    onValueChange={(itemValue) => {
+                      // Atualiza o estado com o valor diretamente selecionado
+                      setEnsinoMedio(itemValue);
+                      console.log("Escola Selecionada:", itemValue); // Para verificar
+                    }}
+                    mode="dropdown"
+                  >
+                    <Picker.Item label="Nenhuma" value="" />
+                    {escolas &&
+                      escolas.map((escola, index) => (
+                        <Picker.Item
+                          key={index}
+                          label={escola.nomeEscola} // Usando o nome da escola como label
+                          value={escola.nomeEscola} // Armazena o nome da escola como valor
+                        />
+                      ))}
+                  </Picker>
                 </View>
               </View>
               <View>

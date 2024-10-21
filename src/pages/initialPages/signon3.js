@@ -21,6 +21,8 @@ import ApisUrls from "../../ApisUrls/apisurls.js";
 import { storage } from './firebase.js';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+
+
 export default function SignON3({ navigation }) {
   const {
     nome,
@@ -45,6 +47,8 @@ export default function SignON3({ navigation }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   const [loading, setLoading] = useState(false); // Estado para loading
+
+
 
   const pickImage = async () => {
     const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -138,7 +142,7 @@ export default function SignON3({ navigation }) {
       console.log(ensinoMedio, linguaEstrangeira);
       console.log("Dados enviados para o backend:", JSON.stringify(dataToSend, null, 2));
   
-      const response = await fetch(apiNgrokCad, {
+      const response = await fetch(apiEmuladorCad, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -179,6 +183,8 @@ export default function SignON3({ navigation }) {
       setLoading(false); // Finaliza o loading
     }
   }
+
+
   
 
   const fontsLoaded = useFonts();
@@ -253,6 +259,7 @@ export default function SignON3({ navigation }) {
             value={bio}
           />
         </View>
+
       </View>
 
       <View style={styles.footerCont}>
