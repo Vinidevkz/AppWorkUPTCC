@@ -308,7 +308,7 @@ export default function Home({ navigation }) {
                       { color: theme.textColor },
                     ]}
                   >
-                    Modalidade: {item.modalidadeVaga}
+                    Modalidade: {item.modalidade?.descModalidadeVaga}
                   </Text>
                   <Text
                     style={[
@@ -317,7 +317,7 @@ export default function Home({ navigation }) {
                       { color: theme.textColor },
                     ]}
                   >
-                    Salário: {item.salarioVaga}
+                    Salário: R${item.salarioVaga}
                   </Text>
                   <Text
                     style={[
@@ -335,7 +335,7 @@ export default function Home({ navigation }) {
                       { color: theme.textColor },
                     ]}
                   >
-                    Área: {item.areaVaga?.nomeAreaVaga || "Não disponível"}
+                    Área: {item.area?.nomeArea || "Não disponível"}
                   </Text>
                 </View>
                 <View style={styles.vagaFooterCont}>

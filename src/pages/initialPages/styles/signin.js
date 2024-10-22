@@ -11,14 +11,8 @@ const styles = StyleSheet.create({
 
   SafeAreaView: {
     flex: 1,
-    gap: 100,
+    gap: 50,
     backgroundColor: '#f4f4f4'
-  },
-
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    width: '100%'
   },
 
   header: {
@@ -40,28 +34,22 @@ const styles = StyleSheet.create({
   },
 
   loginCont: {
-    padding: 20,
+    paddingHorizontal: 15,
     gap: 20,
     justifyContent: 'center',
     alignItems: 'center',
   },
 
-  workuplogo: {
-    width: 200,
-    height: 40,
-  },
-
   title: {
     fontSize: 25,
-    alignSelf: 'center'
+    alignSelf: 'flex-start'
   },    
 
   inputCont: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 20,
-    width: 350,
-    height: 60,
+    height: 50,
     paddingHorizontal: 10,
     borderRadius: 10,
     elevation: 2,
@@ -74,14 +62,13 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    backgroundColor: '#20dd77',
     alignItems: 'center',
-    alignSelf: 'center',
+    alignSelf: 'flex-end',
     justifyContent: 'center',
-    borderRadius: 50,
-    width: 180,
-    padding: 15,
-    elevation: 5,
+    borderBottomWidth: 2,
+    borderColor: '#20dd77',
+    flexDirection: 'row',
+    padding: 5
   },
 
   buttonText: {
@@ -91,7 +78,8 @@ const styles = StyleSheet.create({
   footer: {
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'center'
+    alignSelf: 'center',
+    marginTop: '100%'
   },
 
   footerButton: {
