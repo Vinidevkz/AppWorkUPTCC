@@ -1,0 +1,101 @@
+<main class="cardsform">
+        <div class="container mt-2 mb-3">
+            <div class="row justify-content-end">
+                <!-- Coluna para Imagem -->
+                <div class="col-md-4 image-container">
+                    <img src="{{url('/assets/img/login/formsssgif.gif')}}" alt="Descrição da imagem" class="img-fluid">
+                </div>
+
+                <!-- Coluna do Formulário -->
+                <div class="col-md-8 form-container">
+                    <div class="panel-heading text-center mb-5">
+                        Cadastre uma Vaga
+                    </div>
+
+                    <form method="POST" action="/vaga/form">
+                        @csrf
+
+                        
+
+                        <div class="form-section active">
+                            	
+                            </div>
+
+                            @error('salarioVaga')
+                                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="salarioVaga" placeholder="Salário da Vaga" value="{{ old('salarioVaga') }}">
+                                <label for="salarioVaga" class="form__label">Salário da Vaga</label>
+                            </div>
+
+                            @error('cidadeVaga')
+                                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="cidadeVaga" placeholder="Cidade da Vaga" value="{{ old('cidadeVaga') }}">
+                                <label for="cidadeVaga" class="form__label">Cidade da Vaga</label>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary-custom btn-custom prev ml-4" style="visibility: hidden;">Anterior</button>
+                                <button type="button" class="btn btn-primary-custom btn-custom next">Próximo</button>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+
+                            @error('estadoVaga')
+                                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="estadoVaga" placeholder="Estado da Vaga" value="{{ old('estadoVaga') }}">
+                                <label for="estadoVaga" class="form__label">Estado da Vaga</label>
+                            </div>
+
+
+                            <div class="form__group field">
+                                @error('idArea')
+                                    <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                                @enderror
+
+                                    <i class="fa-solid fa-lock"></i>
+                                <!-- Esta parte precisa ficar pode tirar o select contato que de o mesmo nome ao campo -->
+                                    <select name="idArea">
+                                        <option value="">Selecione a Area</option>
+
+                                        @foreach($areas as $area)
+                                            <option value="{{ $area->idArea }}" {{ old('idArea') == $area->idArea ? 'selected' : '' }}>
+                                                {{ $area->nomeArea }}
+                                            </option>
+                                        @endforeach
+                                    </select>
+                                <!-- Esta parte precisa ficar -->
+
+                            </div>
+
+                            @error('diferencialVaga')
+                                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="diferencialVaga" placeholder="Diferencial Vaga" value="{{ old('diferencialVaga') }}">
+                                <label for="diferencialVaga" class="form__label">Diferencial Vaga</label>
+                            </div>
+
+                            @error('beneficiosVaga')
+                                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                            @enderror
+                            <div class="form__group field">
+                                <input type="text" class="form-control custom-input" name="beneficiosVaga" placeholder="Benefícios da Vaga" value="{{ old('beneficiosVaga') }}">
+                                <label for="beneficiosVaga" class="form__label">Benefícios da Vaga</label>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button" class="btn btn-secondary-custom btn-custom prev ml-4" style="visibility: hidden;">Anterior</button>
+                                <button type="submit" class="btn btn-success-custom btn-custom">Enviar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
