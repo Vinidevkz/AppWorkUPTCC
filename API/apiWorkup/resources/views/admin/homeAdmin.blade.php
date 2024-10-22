@@ -122,18 +122,18 @@
 
 <div class="li-menu">
 
-<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Administração
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDenuncia" aria-expanded="false" >
+</a> Denuncias<span class="badge text-bg-danger m-1"> {{$totalDenuncias}}</span>
     <i class="bi bi-caret-down"></i>
 </p>
  </p>
- <div class="collapse" id="collapseExample">
+ <div class="collapse" id="collapseDenuncia">
  
      <ul class="dropdown-menu card sub-menu-dropdown">
       <li class="dropdown-item">
-      <a href="/admin/usuario/listar" class="p-1 h6">
+      <a href="/admin/denuncia/usuario" class="p-1 h6">
                                 <i class="bi bi-people p-1"></i>
-                                Usuários</a>
+                                Denuncia de usuários <span class="badge text-bg-danger p-1">{{ $totalUsuariosDenunciados }}</span></a>
       </li>
       <li class="dropdown-item">
       <a href="/admin/vaga/listar" class="p-1 h6">

@@ -88,7 +88,7 @@
 
 
 
-        <table class="table table-striped m-0 table-user" id="myTable">
+        <table class="table table-striped m-0 table-user" id="myTable" >
           <thead>
             <tr>
               <th class="fw-bold">Id</th>
@@ -117,23 +117,24 @@
            
           
     @forelse($denuncias as $denuncia)
-        <tr>
-            <td>{{ $denuncia->idDenunciaUsuario }}</td> <!-- Adicione o ID aqui, se necessário -->
-            <td>
-            <a href="{{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }}" class="visualizar-link">
+    <tr class="table-danger blink" id="denuncia-{{ $denuncia->idDenunciaUsuario }}">
+    <td>{{ $denuncia->idDenunciaUsuario }}</td>
+    <td>
+        <a href="{{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }}" class="visualizar-link">
             {{ $denuncia->usuario->nomeUsuario }}
-                  </a>
-            </td>
-            <td>{{ $denuncia->empresa->nomeEmpresa ?? 'Não Associado' }}</td> <!-- Atualizado para exibir o nome -->
-            <td>{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
-            <td>
-            <form action="{{ route('usuarios.delete', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Bloquear</button>
-                  </form>
-            </td>
-        </tr>
+        </a>
+    </td>
+    <td>{{ $denuncia->empresa->nomeEmpresa ?? 'Não Associado' }}</td>
+    <td>{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
+    <td>
+        <form action="{{ route('usuarios.delete', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
+            @csrf
+            @method('DELETE')
+            <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Bloquear</button>
+        </form>
+    </td>
+</tr>
+
 
 
 
@@ -196,6 +197,19 @@
 
 
   });
+
+
+
+
+    document.addEventListener('DOMContentLoaded', function() {
+            // Todas as linhas com a classe table-danger já têm a classe blink aplicada
+            const rows = document.querySelectorAll('tr.table-danger');
+    rows.forEach(row => {
+        row.classList.add('blink'); 
+        });
+;
+});
+
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
