@@ -38,7 +38,7 @@ export default function Search({ navigation }) {
     console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiNgrokVagaPesquisa, { search });
+      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -237,9 +237,7 @@ export default function Search({ navigation }) {
                               { color: theme.textColor },
                             ]}
                           >
-                            {item.empresas
-                              ? empresa.nomeEmpresa
-                              : "não disponível"}
+                            {item.empresa?.nomeEmpresa || "Não disponível"}
                           </Text>
                           <Text style={{ color: theme.textColor }}>
                             R${item.salarioVaga} - {item.cidadeVaga}

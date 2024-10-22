@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import * as Font from "expo-font";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "../initialPages/styles/signin.js";
@@ -102,11 +103,6 @@ export default function SignIN({ navigation }) {
         <Text style={[styles.DMSansBold, styles.titleHeader]}>Fazer Login</Text>
       </View>
       <View style={styles.loginCont}>
-        <Image
-          source={require("../../../assets/icons/workuplogo.png")}
-          style={styles.workuplogo}
-        />
-        <Text style={[styles.DMSansBold, styles.title]}>Login</Text>
         <View style={styles.inputCont}>
           <Entypo
             name="mail"
@@ -152,6 +148,7 @@ export default function SignIN({ navigation }) {
           <Text style={[styles.DMSansBold, styles.buttonText]}>
             Fazer Login
           </Text>
+          <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
         </TouchableOpacity>
 
         <View style={styles.footer}>
