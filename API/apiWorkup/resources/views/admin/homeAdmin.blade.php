@@ -63,6 +63,8 @@
       </div>
       </div>
     </div>
+
+  
   
   </div>
 
@@ -71,13 +73,15 @@
  
   
 </div>
-                        <div class="nav-links-adm d-flex flex-row p-1 align-items-center">
-                            <a href="#" class="p-1">{{ $usernameAdmin }}</a>
-                            <a href="#" class="p-1">Gestor</a>
-                        </div>
-                    </div>
+
+</div>
         
                     <div class="aside-body">
+
+                    <div class="search-container-2 mt-3">
+          <span class="material-symbols-outlined search-icon2">search</span>
+          <input type="text" id="searchInput2" placeholder="Buscar...">
+        </div>
                         <div class="d-flex link-aside-active flex-row item-nav" >
                            
                             <a href="/admin" class="p-0 h6">
@@ -85,26 +89,101 @@
                                 Dashboard</a>
                         </div>
         
-                        <div class="d-flex item-nav">
-                            
-                            <a href="/admin/usuario/listar" class="p-1 h6">
+                        <div class="li-menu">
+
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Administração
+    <i class="bi bi-caret-down"></i>
+</p>
+ </p>
+ <div class="collapse" id="collapseExample">
+ 
+     <ul class="dropdown-menu card sub-menu-dropdown">
+      <li class="dropdown-item">
+      <a href="/admin/usuario/listar" class="p-1 h6">
                                 <i class="bi bi-people p-1"></i>
                                 Usuários</a>
-                        </div>
-        
-                        <div class="d-flex item-nav">
-                            
-                            <a href="/admin/vaga/listar" class="p-1 h6">
+      </li>
+      <li class="dropdown-item">
+      <a href="/admin/vaga/listar" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
                                 Vagas</a>
-                        </div>
-        
-                        <div class="d-flex item-nav">
-                            
-                            <a href="/admin/empresa/listar" class="p-1 h6">
+      </li>
+         <li class="dropdown-item">
+         <a href="/admin/empresa/listar" class="p-1 h6">
                                 <i class="bi bi-buildings p-1"></i>
                                 Empresas</a>
-                        </div>
+         </li>
+     </ul> 
+ </div>
+
+</div>
+
+
+<div class="li-menu">
+
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Administração
+    <i class="bi bi-caret-down"></i>
+</p>
+ </p>
+ <div class="collapse" id="collapseExample">
+ 
+     <ul class="dropdown-menu card sub-menu-dropdown">
+      <li class="dropdown-item">
+      <a href="/admin/usuario/listar" class="p-1 h6">
+                                <i class="bi bi-people p-1"></i>
+                                Usuários</a>
+      </li>
+      <li class="dropdown-item">
+      <a href="/admin/vaga/listar" class="p-1 h6">
+                                <i class="bi bi-person-vcard p-1"></i>
+                                Vagas</a>
+      </li>
+         <li class="dropdown-item">
+         <a href="/admin/empresa/listar" class="p-1 h6">
+                                <i class="bi bi-buildings p-1"></i>
+                                Empresas</a>
+         </li>
+     </ul> 
+ </div>
+
+</div>
+
+
+
+
+<div class="li-menu">
+
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Administração
+    <i class="bi bi-caret-down"></i>
+</p>
+ </p>
+ <div class="collapse" id="collapseExample">
+ 
+     <ul class="dropdown-menu card sub-menu-dropdown">
+      <li class="dropdown-item">
+      <a href="/admin/usuario/listar" class="p-1 h6">
+                                <i class="bi bi-people p-1"></i>
+                                Usuários</a>
+      </li>
+      <li class="dropdown-item">
+      <a href="/admin/vaga/listar" class="p-1 h6">
+                                <i class="bi bi-person-vcard p-1"></i>
+                                Vagas</a>
+      </li>
+         <li class="dropdown-item">
+         <a href="/admin/empresa/listar" class="p-1 h6">
+                                <i class="bi bi-buildings p-1"></i>
+                                Empresas</a>
+         </li>
+     </ul> 
+ </div>
+
+</div>
+
+
                         <div class="d-flex item-nav">
                         
                       <form action="/logout" method="POST">
@@ -115,6 +194,8 @@
                       </form>
                 
                         </div>
+
+                    
                     </div>
         
         

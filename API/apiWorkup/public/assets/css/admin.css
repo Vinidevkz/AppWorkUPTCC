@@ -412,6 +412,41 @@ table{
   transform: translateY(-50%); /* Centraliza verticalmente */
   pointer-events: none; /* Para que o clique passe através do ícone */
 }
+
+
+
+
+
+
+
+.search-container-2 {
+  position: relative;
+  margin-bottom: 10px;
+
+}
+#searchInput2 {
+  width: 100%;
+  padding: 1px 40px 1px 30px; /* Espaço para o ícone */
+  box-sizing: border-box; /* Para incluir o padding na largura total */
+  color: white;
+  border: 1px solid white;
+  background-color: transparent;
+}
+.search-icon2 {
+  position: absolute;
+  left: 1px;
+  top: 50%;
+  transform: translateY(-50%); /* Centraliza verticalmente */
+  pointer-events: none; /* Para que o clique passe através do ícone */
+
+}
+
+
+
+
+
+
+
 #noResults{
   display: none;
   text-align: center;
@@ -444,14 +479,17 @@ aside .img-header div{
   font-size: 2rem;
 }
 aside .link-aside-active {
-  border-left: #20DD77 4px solid;
-  padding-left: 5px;
+  border-left: #20DD77  solid;
+
   /* background: linear-gradient(135deg, rgba(2, 221, 119, 0.8) 0%, rgba(32, 221, 119, 0) 90%); */
 
 }
+aside .li-menu{
+  border-left:  8px;
+  padding-left: 30px;
+}
 aside .aside-body .d-flex:hover {
-  border-left: #20DD77 4px solid;
-  padding-left: 5px;
+
   /* background: linear-gradient(135deg, rgba(2, 221, 119, 0.8) 0%, rgba(32, 221, 119, 0) 90%); */
   transition: 0.3s;
   cursor: pointer;
@@ -460,7 +498,7 @@ aside .aside-body .d-flex:hover {
 aside .aside-body .d-flex{
   margin: 10px;
   padding: 15px;
-  margin-bottom: 45px;
+  margin-bottom: 10px;
 }
 
 aside .aside-body a{
@@ -506,4 +544,15 @@ background-color: #0c1728;
 }
 table td  a{
   margin-bottom: 10px;
+}
+.sub-menu-dropdown{
+  background-color: transparent;
+  color: white;
+}
+.sub-menu-dropdown li{
+  color: white;
+}
+.sub-menu-dropdown li:hover{
+  background-color: #1b1b1b;
+  color: white;
 }
