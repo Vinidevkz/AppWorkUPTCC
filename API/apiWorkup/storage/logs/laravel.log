@@ -19513,3 +19513,79 @@ Programação Mobile e Web 📳","formacaoCompetenciaUsuario":"Desenvolvimento d
 #20 {main}
 "} 
 [2024-10-21 20:05:50] local.INFO: Admin logged in: {"email":"testeAdmin@teste.com"} 
+[2024-10-22 14:34:23] local.ERROR: Command "make:" is ambiguous.
+Did you mean one of these?
+    make:cast         Create a new custom Eloquent cast class
+    make:channel      Create a new channel class
+    make:component    Create a new view component class
+    make:command      Create a new Artisan command
+    make:controller   Create a new controller class
+    make:event        Create a new event class
+    make:exception    Create a new custom exception class
+    make:factory      Create a new model factory
+    make:job          Create a new job class
+    make:listener     Create a new event listener class
+    make:mail         Create a new email class
+    make:middleware   Create a new middleware class
+    make:model        Create a new Eloquent model class
+    make:notification Create a new notification class
+    make:observer     Create a new observer class
+    make:policy       Create a new policy class
+    make:provider     Create a new service provider class
+    make:request      Create a new form request class
+    make:resource     Create a new resource
+    make:rule         Create a new validation rule
+    make:scope        Create a new scope class
+    make:seeder       Create a new seeder class
+    make:test         Create a new test class
+    make:migration    Create a new migration file. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\CommandNotFoundException(code: 0): Command \"make:\" is ambiguous.
+Did you mean one of these?
+    make:cast         Create a new custom Eloquent cast class
+    make:channel      Create a new channel class
+    make:component    Create a new view component class
+    make:command      Create a new Artisan command
+    make:controller   Create a new controller class
+    make:event        Create a new event class
+    make:exception    Create a new custom exception class
+    make:factory      Create a new model factory
+    make:job          Create a new job class
+    make:listener     Create a new event listener class
+    make:mail         Create a new email class
+    make:middleware   Create a new middleware class
+    make:model        Create a new Eloquent model class
+    make:notification Create a new notification class
+    make:observer     Create a new observer class
+    make:policy       Create a new policy class
+    make:provider     Create a new service provider class
+    make:request      Create a new form request class
+    make:resource     Create a new resource
+    make:rule         Create a new validation rule
+    make:scope        Create a new scope class
+    make:seeder       Create a new seeder class
+    make:test         Create a new test class
+    make:migration    Create a new migration file. at C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php:778)
+[stacktrace]
+#0 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(266): Symfony\\Component\\Console\\Application->find('make:')
+#1 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#2 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#3 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#4 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#5 {main}
+"} 
+[2024-10-22 14:35:44] local.ERROR: The "-e" option does not exist. {"exception":"[object] (Symfony\\Component\\Console\\Exception\\RuntimeException(code: 0): The \"-e\" option does not exist. at C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php:125)
+[stacktrace]
+#0 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(107): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOptionSet('resource')
+#1 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(87): Symfony\\Component\\Console\\Input\\ArgvInput->parseShortOption('-resource')
+#2 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\ArgvInput.php(74): Symfony\\Component\\Console\\Input\\ArgvInput->parseToken('-resource', true)
+#3 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Input\\Input.php(56): Symfony\\Component\\Console\\Input\\ArgvInput->parse()
+#4 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Command\\Command.php(285): Symfony\\Component\\Console\\Input\\Input->bind(Object(Symfony\\Component\\Console\\Input\\InputDefinition))
+#5 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Command.php(152): Symfony\\Component\\Console\\Command\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Illuminate\\Console\\OutputStyle))
+#6 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(1078): Illuminate\\Console\\Command->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#7 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(324): Symfony\\Component\\Console\\Application->doRunCommand(Object(Illuminate\\Routing\\Console\\ControllerMakeCommand), Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#8 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\symfony\\console\\Application.php(175): Symfony\\Component\\Console\\Application->doRun(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#9 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Console\\Application.php(102): Symfony\\Component\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#10 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\vendor\\laravel\\framework\\src\\Illuminate\\Foundation\\Console\\Kernel.php(155): Illuminate\\Console\\Application->run(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#11 C:\\Users\\Admin\\Documents\\GitHub\\AppWorkUPTCC\\API\\apiWorkup\\artisan(35): Illuminate\\Foundation\\Console\\Kernel->handle(Object(Symfony\\Component\\Console\\Input\\ArgvInput), Object(Symfony\\Component\\Console\\Output\\ConsoleOutput))
+#12 {main}
+"} 
+[2024-10-22 15:08:53] local.INFO: Admin logged in: {"email":"testeAdmin@teste.com"} 

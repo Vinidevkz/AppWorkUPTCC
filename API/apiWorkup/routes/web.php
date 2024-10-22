@@ -13,17 +13,15 @@ use App\Http\Controllers\ContatoController;
 use App\Http\Controllers\DenunciaUsuarioController;
 use App\http\Controllers\PostController;
 use App\http\Controllers\MensagemController;
+use App\Http\Controllers\DenunciaEmpresaController;
+use App\Http\Controllers\DenunciaVagaController;
 
 // mexendo
-//ver mensagens
-Route::get('/mensagens', [MensagemController::class, 'index'])->name('mensagens.index');
-//mandar mensagens
-Route::get('/mensagem/{idUsuario}/{idEmpresa}', [MensagemController::class, 'create'])->name('mensagem.create');
-Route::post('/mensagem', [MensagemController::class, 'store'])->name('mensagem.store');
-// Post
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth:empresa');
-Route::get('/postar/{id}', [PostController::class, 'create'])->name('post.create');
-Route::post('/postar', [PostController::class, 'store'])->name('post.store');
+    // Deletar Empresa
+    Route::delete('/{id}', [EmpresaController::class, 'destroy'])->name('empresa.delete');
+    // Deletar Vaga
+    Route::delete('/{id}', [VagaController::class, 'destroy'])->name('vaga.delete');
+
 
 
 //Acessivel para todos
@@ -233,10 +231,29 @@ Route::middleware('auth:admin')->group(function(){
                 // Aprovar Vaga
                 Route::post('/{id}', [VagaController::class, 'aprovar'])->name('vagas.aprovar');
             });
+
+            // Denuncia Usuario
             Route::prefix('/denuncias')->group(function(){   
-                // Ver todas Vaga
+                
                 Route::get('/', [DenunciaUsuarioController::class, 'index'])->name('denunciar.usuario');
                 Route::get('/{id}', [DenunciaUsuarioController::class, 'show'])->name('denuncia.show');
+
+            });
+
+            // Denuncia Empresa
+            Route::prefix('/denunciasEmpresa')->group(function(){   
+
+                
+                Route::get('/', [DenunciaEmpresaController::class, 'index'])->name('denunciar.empresa');
+                Route::get('/{id}', [DenunciaEmpresaController::class, 'show'])->name('denunciaEmpresa.show');
+
+            });
+
+        // Denuncia Vaga
+            Route::prefix('/denunciasVaga')->group(function(){   
+ 
+                Route::get('/', [DenunciaVagaController::class, 'index'])->name('denunciar.vaga');
+                Route::get('/{id}', [DenunciaVagaController::class, 'show'])->name('denunciaVaga.show');
             });
             });
             
