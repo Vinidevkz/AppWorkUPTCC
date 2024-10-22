@@ -4,8 +4,13 @@
             <img src="../assets/img/dashboardEmpresa/logo-reduzida.png" alt="">
         </div>
         <ul>
-            <a href="/vaga/">Vagas</a>
+            <a href="/#vaga">Vagas</a>
             <a href="">Postagens</a>
+
+            <form action="/logout" method="POST">
+                @csrf
+                <input type="submit" class="text-light" value="Sair" style="background-color: transparent; border:none;">
+            </form>
         </ul>
         <div class="wrap-user">
             <div>

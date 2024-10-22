@@ -22,7 +22,7 @@ export default function Vaga({ navigation }) {
     console.log("User ID:", userId);
 
     try {
-      const response = await fetch(apiNgrokUsuarioVaga, {
+      const response = await fetch(apiEmuladorUsuarioVaga, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -51,7 +51,7 @@ export default function Vaga({ navigation }) {
 
   const cancelarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiNgrokUsuarioVaga}/${userId}/${vagaID}`, {
+      const response = await fetch(`${apiEmuladorUsuarioVaga}/${userId}/${vagaID}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -75,7 +75,7 @@ export default function Vaga({ navigation }) {
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiNgrokVaga}${vagaID}`;
+    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -91,7 +91,7 @@ export default function Vaga({ navigation }) {
 
   const verificarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiNgrokVerificarCandidatura}${userId}/${vagaID}`);
+      const response = await fetch(`${apiEmuladorVerificarCandidatura}${userId}/${vagaID}`);
       const resp = await response.json();
   
       if (response.ok) {
@@ -161,8 +161,8 @@ export default function Vaga({ navigation }) {
               </View>
             </View>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Descrição: {vaga.descricaoVaga}</Text>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Modalidade: {vaga.modalidadeVaga}</Text>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Salário: {vaga.salarioVaga}</Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Modalidade: {vaga.modalidade?.descModalidadeVaga}</Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Salário: R${vaga.salarioVaga}</Text>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>
               Cidade: {vaga.cidadeVaga}, {vaga.estadoVaga}
             </Text>
