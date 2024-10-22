@@ -13,7 +13,7 @@ export default function Notifications() {
         <Text style={[styles.DMSansBold, styles.title, {color: theme.textColor}]}>Notificações:</Text>
       </View>
       <View style={{height: '90%', alignItems: 'center', justifyContent: 'center', backgroundColor: theme.backgroundColor}}>
-        <Text style={{color: theme.textColor}}>Nenhuma notificação</Text>
+        <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma notificação</Text>
       </View>
     </SafeAreaView>
   );

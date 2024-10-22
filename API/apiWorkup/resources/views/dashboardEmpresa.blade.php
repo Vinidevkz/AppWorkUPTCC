@@ -23,12 +23,17 @@
                         Nos ajude nessa jornada de transformar a carreira de diversas pessoas
                     </h3>
                     <div class="botoes-card">
-                        <a href="/vaga/cadastrar" class="botao-card botao-vaga">
+                        <a href="{{ route('cadastrarVaga') }}" class="botao-card botao-vaga">
                         <button class="botao-card botao-vaga">Criar vaga <i class="fa-solid fa-plus"></i></button>
                         </a>
                         <a href="{{ route('post.create', $empresa->idEmpresa) }}" class="botao-card botao-post">
                         <button class="botao-card botao-post">Fazer post</button>
                         </a>
+
+                        <form action="/logout" method="post" class="botao-card botao-vaga">
+                            @csrf
+                            <button type="submit" class="botao-card botao-vaga">Sair</button>
+                        </form>
                     </div>
                 </div>
             </div>
@@ -91,7 +96,9 @@
                                 <p class="opt-vaga">Salário: R$ {{ $vaga->salarioVaga }}</p>
                             </div>
                         </div>
+                        <a href="{{ route('vagas.edit', $vaga->idVaga) }}" style="margin: auto;">
                         <button class="btn-vagas">Mais detalhes</button>
+                        </a>
                     </div>
                 </div>
             </div>

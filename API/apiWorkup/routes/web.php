@@ -16,6 +16,25 @@ use App\http\Controllers\MensagemController;
 use App\Http\Controllers\DenunciaEmpresaController;
 use App\Http\Controllers\DenunciaVagaController;
 
+
+/*Rotas que possuem o 'prefix' requerem que digite o nome delas antes de buscar algo
+
+EX: Route::prefix(´/empresa')
+
+e para acessar alguma outra rota, será necessário digitar algum caminho dentro do grupo de rotas
+
+EX: Route::prefix('empresa')->group(function(){
+    Route::get('/dashboard', [EmpresaController::class, 'dashboard']);
+})
+
+para acessar a dashboard será necessário digitar o seguinte caminho:
+
+'http://127.0.0.1:8000/empresa/dashboard'
+
+ */
+
+
+
 // mexendo
     // Deletar Empresa
     Route::delete('/{id}', [EmpresaController::class, 'destroy'])->name('empresa.delete');
@@ -72,9 +91,6 @@ Route::post('/formEmpresa', [EmpresaController::class, 'store']);
 |--------------------------------------------------------------------------
 
 */
-
-
-
 
 
 //Rotas que ambos podem acessar (estando logados)
@@ -145,18 +161,18 @@ Route::middleware('auth:empresa')->group(function(){
             });
 
             //Mensagem
-            Route::prefix('mensagens')->group(function(){
-            //ver mensagens
-            Route::get('/', [MensagemController::class, 'index'])->name('mensagens.index');
-            //ver mensagens de um unico usuario
-            Route::get('/Unico/{idUsuario}', [MensagemController::class, 'indexUsuarioUnico'])->name('mensagem.indexUsuarioUnico');
-            //mandar mensagens
-            Route::get('/mensagem/{idUsuario}/{idEmpresa}', [MensagemController::class, 'create'])->name('mensagem.create');
-            Route::post('/mensagem', [MensagemController::class, 'store'])->name('mensagem.store');
-            // Post
-            Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth:empresa');
-            Route::get('/postar/{id}', [PostController::class, 'create'])->name('post.create');
-            Route::post('/postar', [PostController::class, 'store'])->name('post.store');
+            Route::prefix('/mensagem')->group(function(){
+                //ver mensagens
+                Route::get('/', [MensagemController::class, 'index'])->name('mensagens.index');
+                //ver mensagens de um unico usuario
+                Route::get('/Unico/{idUsuario}', [MensagemController::class, 'indexUsuarioUnico'])->name('mensagem.indexUsuarioUnico');
+                //mandar mensagens
+                Route::get('/mensagem/{idUsuario}/{idEmpresa}', [MensagemController::class, 'create'])->name('mensagem.create');
+                Route::post('/mensagem', [MensagemController::class, 'store'])->name('mensagem.store');
+                // Post
+                Route::get('/posts', [PostController::class, 'index'])->name('posts.index')->middleware('auth:empresa');
+                Route::get('/postar/{id}', [PostController::class, 'create'])->name('post.create');
+                Route::post('/postar', [PostController::class, 'store'])->name('post.store');
 
             });
 
@@ -174,7 +190,7 @@ Route::middleware('auth:admin')->group(function(){
         //Dashboard ADMIN
 
             //Admin
-            Route::prefix('/admin')->group(function () {
+        Route::prefix('/admin')->group(function () {
                 Route::get('/', [AdminController::class, 'dashboard']);
 
                 //Cadastrar Admin
@@ -232,29 +248,23 @@ Route::middleware('auth:admin')->group(function(){
                 Route::post('/{id}', [VagaController::class, 'aprovar'])->name('vagas.aprovar');
             });
 
-            // Denuncia Usuario
-            Route::prefix('/denuncias')->group(function(){   
+            Route::prefix('/denuncia')->group(function(){   
                 
-                Route::get('/', [DenunciaUsuarioController::class, 'index'])->name('denunciar.usuario');
-                Route::get('/{id}', [DenunciaUsuarioController::class, 'show'])->name('denuncia.show');
-
-            });
-
-            // Denuncia Empresa
-            Route::prefix('/denunciasEmpresa')->group(function(){   
+                // Denuncia Usuario
+                Route::get('/usuario', [DenunciaUsuarioController::class, 'index'])->name('denunciar.usuario');
+                Route::get('/usuario/{id}', [DenunciaUsuarioController::class, 'show'])->name('denuncia.show');
 
                 
+                // Denuncia Empresa
                 Route::get('/', [DenunciaEmpresaController::class, 'index'])->name('denunciar.empresa');
                 Route::get('/{id}', [DenunciaEmpresaController::class, 'show'])->name('denunciaEmpresa.show');
 
-            });
-
-        // Denuncia Vaga
-            Route::prefix('/denunciasVaga')->group(function(){   
- 
+                // Denuncia Vaga
                 Route::get('/', [DenunciaVagaController::class, 'index'])->name('denunciar.vaga');
                 Route::get('/{id}', [DenunciaVagaController::class, 'show'])->name('denunciaVaga.show');
+
             });
+            
             });
             
             Route::prefix('/area')->group(function(){

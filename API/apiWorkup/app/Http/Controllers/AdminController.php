@@ -41,7 +41,9 @@ class AdminController extends Controller
             return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
         }
         
-
+// total denuncias usuarios
+$totalUsuariosDenunciados = DB::table('tb_denunciausuario')->count();
+$totalDenuncias = DB::table('tb_denunciausuario', 'tb_denunciaempresa', 'tb_denunciavaga')->count();
 
         $totalUsuariosTecnologia = AreaInteresseUsuario::where('idArea', 1)->count();
         $totalUsuariosAlimentacao = AreaInteresseUsuario::where('idArea', 11)->count();
@@ -127,7 +129,9 @@ class AdminController extends Controller
             'statusBloqueado' => $statusBloqueado,
             'usernameAdmin'=>$usernameAdmin,
             'emailAdmin'=>$emailAdmin,
-            'nomeAdmin'=>$nomeAdmin
+            'nomeAdmin'=>$nomeAdmin,
+            'totalUsuariosDenunciados' => $totalUsuariosDenunciados,
+            'totalDenuncias' => $totalDenuncias
         ]);
     }
 

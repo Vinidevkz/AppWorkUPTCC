@@ -556,3 +556,15 @@ table td  a{
   background-color: #1b1b1b;
   color: white;
 }
+
+@keyframes blink {
+    0% { background-color: transparent; }
+    50% { background-color: red; }
+    100% { background-color: transparent; }
+}
+
+.blink {
+    animation: blink 1s infinite;
+}
+
+
