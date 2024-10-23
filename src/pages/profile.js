@@ -145,7 +145,7 @@ export default function Profile({ navigation }) {
             </View>
 
             <View style={[styles.profileBioCont, {flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}]}>
-              <View>
+              <View style={{width: 250}}>
                 <Text
                   style={[
                     styles.DMSansRegular,

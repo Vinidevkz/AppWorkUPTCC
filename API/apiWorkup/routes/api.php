@@ -16,7 +16,11 @@ use App\http\Controllers\PostController;
 use App\http\Controllers\MensagemController;
 use App\http\Controllers\SeguirController;
 use App\Http\Controllers\LinguasController;
-//Eduardo mexeu
+
+//Eduardo mexeu e precisa testar
+Route::get('/mensagens', [MensagemController::class, 'indexUsuario']);
+//acabou aqui
+//Eduardo mexeu e ta funcionando
 Route::get('/mensagens', [MensagemController::class, 'indexUsuario']);
 Route::get('/seguirEmpresa/{idUsuario}', [SeguirController::class, 'index']);
 Route::post('/seguirEmpresa',[SeguirController::class, 'store']);
