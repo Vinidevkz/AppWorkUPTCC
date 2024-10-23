@@ -142,7 +142,7 @@ export default function SignON3({ navigation }) {
       console.log(ensinoMedio, linguaEstrangeira);
       console.log("Dados enviados para o backend:", JSON.stringify(dataToSend, null, 2));
   
-      const response = await fetch(apiEmuladorCad, {
+      const response = await fetch(apiNgrokCad, {
         method: "POST",
         headers: {
           Accept: "application/json",

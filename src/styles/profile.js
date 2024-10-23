@@ -30,7 +30,8 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     elevation: 10,
     paddingHorizontal: 20,
-    zIndex: 1
+    zIndex: 1,
+    marginTop: 10
   },
 
   profileBackgroundImageCont: {
