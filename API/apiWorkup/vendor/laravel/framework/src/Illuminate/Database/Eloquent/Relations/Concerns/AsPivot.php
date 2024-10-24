@@ -307,11 +307,27 @@ trait AsPivot
         $query = $this->newQueryWithoutScopes();
 
         foreach ($ids as $id) {
-            $segments = explod_Ñ_¬+!¼
-±Ri',{1ac14e77-02e7-4e5d-b744-2eb1ae5198b7}\cmd.exewindows_win32:œý[úÏ½~>Ê]ë
-ÑNi,{1ac14e77-02e7-4e5d-b744-2eb1ae5198b7}\cmd.exepackageid:œý[úÏ½~>Ê]ë
-Ót3,windows.immersivecontrolpanel_cw5n1h2txyewy!microsoft.windows.immersivecontrolpanelpackageid”b 1~ÐuÕ	ñ»Œ-áÄ
-ÀSc/,windows.immersivecontrolpanel_cw5n1h2txyewywindows_universal”b 1~ÐuÕ	ñ»Œ-áÄ
-¿Sc/,wind,hostø»â‘pãGììëÐé·à¶
-ÿ8=,chrome.userdata.profile2packageidø»â‘pãGììëÐé·à¶
-þ9=!,chrome.userdata.profile
+            $segments = explode(':', $id);
+
+            $query->orWhere(function ($query) use ($segments) {
+                return $query->where($segments[0], $segments[1])
+                    ->where($segments[2], $segments[3]);
+            });
+        }
+
+        return $query;
+    }
+
+    /**
+     * Unset all the loaded relations for the instance.
+     *
+     * @return $this
+     */
+    public function unsetRelations()
+    {
+        $this->pivotParent = null;
+        $this->relations = [];
+
+        return $this;
+    }
+}

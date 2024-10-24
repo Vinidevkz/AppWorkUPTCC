@@ -78,7 +78,7 @@
         
                     <div class="aside-body">
 
-                    <div class="search-container-2 mt-3">
+                    <div class="search-container-2 mt-3 mb-3">
           <span class="material-symbols-outlined search-icon2">search</span>
           <input type="text" id="searchInput2" placeholder="Buscar...">
         </div>
@@ -130,18 +130,18 @@
  <div class="collapse" id="collapseDenuncia">
  
      <ul class="dropdown-menu card sub-menu-dropdown">
-      <li class="dropdown-item">
+      <li class="dropdown-item t p-0">
       <a href="/admin/denuncia/usuario" class="p-1 h6">
                                 <i class="bi bi-people p-1"></i>
-                                Denuncia de usuários <span class="badge text-bg-danger p-1">{{ $totalUsuariosDenunciados }}</span></a>
+                                Usuários <span class="badge text-bg-danger p-1">{{ $totalUsuariosDenunciados }}</span></a>
       </li>
-      <li class="dropdown-item">
-      <a href="/admin/vaga/listar" class="p-1 h6">
+      <li class="dropdown-item p-0">
+      <a href="/admin/denuncia/vaga" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
                                 Vagas</a>
       </li>
-         <li class="dropdown-item">
-         <a href="/admin/empresa/listar" class="p-1 h6">
+         <li class="dropdown-item p-0">
+         <a href="/admin/denuncia/empresa" class="p-1 h6">
                                 <i class="bi bi-buildings p-1"></i>
                                 Empresas</a>
          </li>
@@ -155,36 +155,32 @@
 
 <div class="li-menu">
 
-<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Administração
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdm" aria-expanded="false" aria-controls="#collapseAdm">
+    Gerenciar ADM
     <i class="bi bi-caret-down"></i>
 </p>
  </p>
- <div class="collapse" id="collapseExample">
+ <div class="collapse" id="collapseAdm">
  
      <ul class="dropdown-menu card sub-menu-dropdown">
       <li class="dropdown-item">
-      <a href="/admin/usuario/listar" class="p-1 h6">
-                                <i class="bi bi-people p-1"></i>
-                                Usuários</a>
+      <a href="/admin/cadastrar" class="p-0 h6">
+                                <i class="bi bi-people p-0"></i>
+                                Criar Admin.</a>
       </li>
+
       <li class="dropdown-item">
-      <a href="/admin/vaga/listar" class="p-1 h6">
-                                <i class="bi bi-person-vcard p-1"></i>
-                                Vagas</a>
+      <a href="/admin/cadastrar" class="p-0 h6">
+                                <i class="bi bi-people p-0"></i>
+                                listagem</a>
       </li>
-         <li class="dropdown-item">
-         <a href="/admin/empresa/listar" class="p-1 h6">
-                                <i class="bi bi-buildings p-1"></i>
-                                Empresas</a>
-         </li>
      </ul> 
  </div>
 
 </div>
 
 
-                        <div class="d-flex item-nav">
+                        <div class="d-flex item-nav-logout">
                         
                       <form action="/logout" method="POST">
                         @csrf
@@ -199,7 +195,9 @@
                     </div>
         
         
-                </div>
+
+        </div>
+                
             </aside>
 
     <div class="col-9">
