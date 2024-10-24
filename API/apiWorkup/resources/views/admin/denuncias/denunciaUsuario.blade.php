@@ -189,8 +189,8 @@
 
 
 
-        <table class="table table-striped m-0 table-user" id="myTable" >
-          <thead class="table-light">
+        <table class="table table-striped m-0 table-user " id="myTable" >
+          <thead class="thead-dark">
             <tr>
               <th class="fw-bold">Id</th>
               <th class="fw-bold">Usuário</th>
