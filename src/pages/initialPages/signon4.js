@@ -50,7 +50,7 @@ export default function SignON4({ navigation }) {
   useEffect(() => {
     async function pegarLingua() {
       try {
-        const request = await fetch(apiEmuladorLinguas);
+        const request = await fetch(apiNgrokLinguas);
         const response = await request.json();
         setLinguas(response);
         console.log(response);
@@ -65,7 +65,7 @@ export default function SignON4({ navigation }) {
   useEffect(() => {
     async function pegarEscola() {
       try {
-        const request = await fetch(apiEmuladorEscolas);
+        const request = await fetch(apiNgrokEscolas);
         const response = await request.json();
         setEscolas(response);
         console.log(response);

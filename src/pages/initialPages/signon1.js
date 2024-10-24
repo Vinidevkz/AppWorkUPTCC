@@ -119,79 +119,7 @@ export default function SignON1({navigation}) {
           </TouchableOpacity>
           </View>
         </View>
-        <View style={[styles.formCont2]}>
-          <Text style={[styles.DMSansRegular, styles.formTitle]}>
-            Possui deficiência?:
-          </Text>
 
-          <View
-            style={{
-              marginVertical: 15,
-              flexDirection: "row",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <TouchableOpacity
-                onPress={() => {
-                  handleToggleNoEns();
-                }}
-              >
-                <FontAwesome
-                  name={toggleNoEns ? "circle" : "circle-o"}
-                  size={35}
-                  color="#20dd77"
-                />
-              </TouchableOpacity>
-              <Text style={styles.DMSansRegular}>Não</Text>
-            </View>
-
-            <View
-              style={{ flexDirection: "row", alignItems: "center", gap: 10 }}
-            >
-              <TouchableOpacity onPress={handleToggleYesEns}>
-                <FontAwesome
-                  name={toggleYesEns ? "circle" : "circle-o"}
-                  size={35}
-                  color="#20dd77"
-                />
-              </TouchableOpacity>
-              <Text style={styles.DMSansRegular}>Sim</Text>
-            </View>
-          </View>
-
-          {toggleYesEns ? (
-            <View
-              style={{
-                flexDirection: "row",
-                justifyContent: "center",
-                gap: 20,
-              }}
-            >
-              <View>
-                <Text style={[styles.text, styles.DMSansRegular, {marginBottom: 5}]}>
-                  Qual?:
-                </Text>
-                <View
-                  style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}
-                >
-          <TextInput
-            placeholder="Escreva detalhadamente sobre sua deficiência"
-            style={[styles.bioCont, {height: 60}]}
-            multiline={true}
-            //onChangeText={(text) => setBio(text)}
-            //value={bio}
-          />
-                </View>
-              </View>
-            </View>
-          ) : (
-            <View style={{ height: 60 }} />
-          )}
-        </View>
       </View>
 
       
