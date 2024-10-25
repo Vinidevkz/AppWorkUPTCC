@@ -203,8 +203,12 @@ person
           <p class="m-0 fw-bold text-center">Ação</p>
         </div>
         <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
-          <span class="material-symbols-outlined m-1">person_add</span>
-          <p class="m-0 p-0 m-1">Adicionar usuários</p>
+         <form action="{{ route('cadastrarArea') }}" method="GET" style="display:inline;">
+                        <button type="submit" class="btn"><p class="m-0 p-0">Adicionar nova Área</p></button>
+                    </form>
+        </div>
+        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
+         
         </div>
       </div>
 

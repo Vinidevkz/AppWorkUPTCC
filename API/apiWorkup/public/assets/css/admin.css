@@ -315,7 +315,9 @@ table{
  }
  .table-user{
   font-size: 0.8rem;
+  border-radius: 100%;
  }
+
  .user-initials {
   width: 30px;
   height: 30px;
@@ -391,8 +393,8 @@ table{
 
 }
 #searchInput {
-  width: 17%;
-  padding: 1px 40px 1px 30px; /* Espaço para o ícone */
+  width: 18%;
+  padding: 2px 40px 1px 30px; /* Espaço para o ícone */
   box-sizing: border-box; /* Para incluir o padding na largura total */
   border: none;
   border: 1px solid black;
@@ -521,14 +523,15 @@ aside .aside-body a{
 
 .badge-ativo {
   color: #81c784;
-
-  background-color: #04210f;
+outline: 1px solid #81c784;
   font-style: italic;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .badge-pendente {
   color: #628dd5;
-background-color: #0c1728;
+outline: 1px solid #628dd5;
   font-style: italic;
 }
 
@@ -570,6 +573,9 @@ table td  a{
 .item-nav-logout:hover{
   margin-left: 1px;
   border-left: 3px solid red;
+}
+.rounded-tabela{
+  border-radius: 3%;
 }
 
 

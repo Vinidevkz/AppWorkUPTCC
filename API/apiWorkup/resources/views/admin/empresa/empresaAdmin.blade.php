@@ -279,7 +279,7 @@ person
   </span>
 </td>
                     <td>
-                      <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
+                      <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-primary btn-sm m-0"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
 
                       <form action="{{ route('empresas.delete', $em->idEmpresa) }}" method="POST" class="d-inline">
                         @csrf

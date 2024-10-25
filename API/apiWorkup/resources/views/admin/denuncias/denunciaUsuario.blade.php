@@ -186,101 +186,93 @@
             </aside>
   <div class="col-9 mt-4">
     <div class="container md-4 mt-3">
+<h1>Usuários bloqueados</h1>
 
-
-
-        <table class="table table-striped m-0 table-user " id="myTable" >
-          <thead class="thead-dark">
+<div class="">
+<div class="">
+<table class="table table-hover table-bordered text-center align-middle">
+          <thead class="table-light rounded-top">
             <tr>
               <th class="fw-bold">Id</th>
               <th class="fw-bold">Usuário</th>
-           
+              <th>Data da denúncia</th>
               <th>
-                <div class="d-flex flex-row">
+                <div class="d-flex justify-content-center align-items-center">
                   <span class="material-symbols-outlined">autorenew</span>
-                  <p class="m-0 fw-bold">Status</p>
+                  <p class="m-0 fw-bold ms-1">Status</p>
                 </div>
               </th>
               <th>
-                <div class="d-flex btn-acoes align-items-center">
+                <div class="d-flex justify-content-center align-items-center">
                   <span class="material-symbols-outlined">keyboard_double_arrow_down</span>
-                  <p class="m-0 fw-bold">Ações</p>
+                  <p class="m-0 fw-bold ms-1">Ações</p>
                 </div>
               </th>
             </tr>
           </thead>
           <tbody>
-           
+   
+              @forelse($denuncias as $denuncia)
+                <tr class="blink" id="denuncia-{{ $denuncia->idDenunciaUsuario }}">
+                  <td class="align-middle">{{ $denuncia->idDenunciaUsuario }}</td>
+                  <td class="align-middle">
+                    <a href="{{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }}" class="visualizar-link">
+                      {{ $denuncia->usuario->nomeUsuario }}
+                    </a>
+                  </td>
+                  <td class="align-middle">{{ $denuncia->created_at }}</td>
           
-    @forelse($denuncias as $denuncia)
-    <tr class="table-danger blink" id="denuncia-{{ $denuncia->idDenunciaUsuario }}">
-    <td>{{ $denuncia->idDenunciaUsuario }}</td>
-    <td>
-        <a href="{{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }}" class="visualizar-link">
-            {{ $denuncia->usuario->nomeUsuario }}
-        </a>
-    </td>
-
-    <td>{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
-    <td>
-
-
-<i class="bi bi-info-circle fs-6  pe-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
- 
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Sobre denúncias</h5> <i class="bi bi-megaphone-fill text-danger fs-5 ps-1"></i>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-    <h5 class="alert-heading">Atenção!</h5>
-    <p>
-        Esta seção é dedicada ao monitoramento de denúncias de usuários. Aqui, você pode visualizar os relatos de comportamentos inadequados ou abusivos dentro da plataforma. É fundamental que todas as denúncias sejam tratadas com seriedade e imparcialidade.
-    </p>
-  <ul>
-    <li><span class="fw-bold">Denunciado:</span> {{ $denuncia->usuario->nomeUsuario }}</li>
-    <li><span class="fw-bold">Data da denúncia:</span> {{ $denuncia->created_at }}</li>
-  </ul>
-</div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                <button type="button" class="btn btn-primary">Salvar mudanças</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-        <form action="{{ route('usuarios.aprovar', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('POST')
-                    <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;Reativar</button>
-                  </form>
-    </td>
-</tr>
-
-
-
-
-
-
-
+                  <td class="align-middle">{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
           
-
-
-                </td>
-              </tr>
-            @empty
-              <tr>
-                <td colspan="5" class="text-center">Nenhum usuário encontrado.</td>
-              </tr>
-            @endforelse
+                  <td class="p-0 align-middle">
+                    <i class="bi bi-info-circle fs-6 pe-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+          
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sobre denúncias</h5>
+                            <i class="bi bi-megaphone-fill text-danger fs-5 ps-1"></i>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body">
+                            <h5 class="alert-heading">Atenção!</h5>
+                            <p>
+                              Esta seção é dedicada ao monitoramento de denúncias de usuários. Aqui, você pode visualizar os relatos de comportamentos inadequados ou abusivos dentro da plataforma. É fundamental que todas as denúncias sejam tratadas com seriedade e imparcialidade.
+                            </p>
+                            <ul class="d-flex flex-column" >
+                              <li><span class="fw-bold">Denunciado:</span> {{ $denuncia->usuario->nomeUsuario }}</li>
+                             
+                            </ul>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                    <form action="{{ route('usuarios.aprovar', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
+                      @csrf
+                      @method('POST')
+                      <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm">
+                        <span class="bi bi-check2"></span>&nbsp;Reativar
+                      </button>
+                    </form>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="text-center align-middle">Nenhum usuário encontrado.</td>
+                </tr>
+              @endforelse
           </tbody>
         </table>
+
+  </div>
+        </div>
         <div class="no-results" id="noResults">
               <img src="{{url('assets/img/adminImages/not-found.png')}}" alt="">
               <p>Nenhum registro encontrado.</p>
