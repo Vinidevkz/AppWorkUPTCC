@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { View, Text, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollView, Image, Alert } from "react-native";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import Feather from '@expo/vector-icons/Feather';
 import { Context } from "../pages/initialPages/context/provider";
 import ApisUrls from "../ApisUrls/apisurls.js";
 import { useFocusEffect } from "@react-navigation/native";
@@ -8,15 +9,24 @@ import axios from "axios";
 import styles from "../styles/vagas.js";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 
+import Modal from "react-native-modal";
+
 export default function Vaga({ navigation }) {
   const { theme } = useTheme({ Vaga });
   const [loading, setLoading] = useState(true);
   const [infosVaga, setInfosVaga] = useState([]);
   const [candidatureStatus, setCandidatureStatus] = useState({}); // Mapeia o status de candidatura para cada vaga
 
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [motivoDenuncia, setMotivoDenuncia] = useState(null)
+
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
   const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga } = ApisUrls;
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible)
+  }
 
   const seCandidatar = async () => {
     console.log("User ID:", userId);
@@ -75,7 +85,7 @@ export default function Vaga({ navigation }) {
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
+    const apiUrl = `${apiNgrokVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -91,7 +101,7 @@ export default function Vaga({ navigation }) {
 
   const verificarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiEmuladorVerificarCandidatura}${userId}/${vagaID}`);
+      const response = await fetch(`${apiNgrokVerificarCandidatura}${userId}/${vagaID}`);
       const resp = await response.json();
   
       if (response.ok) {
@@ -99,6 +109,16 @@ export default function Vaga({ navigation }) {
       }
     } catch (error) {
       console.log("Erro ao verificar candidatura:", error);
+    }
+  };
+
+  const denunciarVaga = () => {
+    if (motivoDenuncia) {
+      Alert.alert("Denúncia enviada!", `Opção selecionada: ${motivoDenuncia}`);
+      toggleModal(); // Fechar o modal após selecionar a opção
+      console.log(motivoDenuncia)
+    } else {
+      Alert.alert("Por favor, selecione uma opção de denúncia.");
     }
   };
   
@@ -149,10 +169,10 @@ export default function Vaga({ navigation }) {
                 </Text>
                 <View style={{ paddingVertical: 3 }}>
                   <Text style={[styles.DMSansRegular, styles.vagaDateText, { color: theme.textColor }]}>
-                    publicada em {vaga.dataPublicacaoVaga}
+                    publicada em: {vaga.dataPublicacaoVaga}
                   </Text>
                   <Text style={[styles.DMSansRegular, styles.vagaDateText, { color: theme.textColor }]}>
-                    se candidatar até {vaga.prazoVaga}
+                    se candidatar até: {vaga.prazoVaga}
                   </Text>
                 </View>
               </View>
@@ -160,15 +180,15 @@ export default function Vaga({ navigation }) {
                 <Image source={require("../../assets/icons/dynamo.png")} style={styles.icon} />
               </View>
             </View>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Descrição: {vaga.descricaoVaga}</Text>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Modalidade: {vaga.modalidade?.descModalidadeVaga}</Text>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Salário: R${vaga.salarioVaga}</Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Descrição:{'\n'}<Text style={styles.DMSansRegular}>{vaga.descricaoVaga}</Text></Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Modalidade: <Text style={styles.DMSansRegular}>{vaga.modalidade?.descModalidadeVaga}</Text></Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Salário: <Text style={styles.DMSansRegular}>R${vaga.salarioVaga}</Text></Text>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>
-              Cidade: {vaga.cidadeVaga}, {vaga.estadoVaga}
+              Cidade: <Text style={styles.DMSansRegular}>{vaga.cidadeVaga}, {vaga.estadoVaga}</Text>
             </Text>
           </View>
         ))}
-        <View style={[styles.infosCont, styles.row]}>
+        <View style={[styles.infosCont, styles.row, {marginTop: '100%', alignItems: 'center', justifyContent: 'space-between'}]}>
           {candidatureStatus[vagaID] ? (
             <TouchableOpacity
               style={[styles.button, { backgroundColor: "", borderWidth: 2, borderColor: "#20dd77" }]}
@@ -181,6 +201,47 @@ export default function Vaga({ navigation }) {
               <Text style={[styles.DMSansBold, styles.buttonText, { color: "#fff" }]}>Candidatar-se</Text>
             </TouchableOpacity>
           )}
+
+          <TouchableOpacity style={{marginRight: 20}} onPress={toggleModal}>
+           <Feather name="alert-triangle" size={30} color="red" />
+          </TouchableOpacity>
+
+          <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+        <View style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}>
+          <Text style={{ marginBottom: 10 }}>Selecione o motivo da denúncia:</Text>
+
+          {["Conteúdo impróprio", "Spam ou fraude", "Outro"].map((opcao) => (
+            <TouchableOpacity
+              key={opcao}
+              onPress={() => setMotivoDenuncia(opcao)}
+              style={{
+                borderWidth: 2,
+                borderColor: motivoDenuncia === opcao ? '#20dd77' : 'transparent',
+                padding: 10,
+                borderRadius: 5,
+                marginVertical: 5,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={{ color: motivoDenuncia === opcao ? "#1b1b1b" : "#1b1b1b" }}>{opcao}</Text>
+
+              {motivoDenuncia === opcao && (
+                <Feather name="check" size={24} color="black" />
+              )}
+              
+            </TouchableOpacity>
+          ))}
+
+          <TouchableOpacity
+            style={[styles.button, { marginTop: 20 }]}
+            onPress={denunciarVaga}
+          >
+            <Text style={styles.buttonText}>OK</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
         </View>
       </ScrollView>
     </SafeAreaView>
