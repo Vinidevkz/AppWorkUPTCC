@@ -22,7 +22,7 @@ export default function Vaga({ navigation }) {
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga } = ApisUrls;
+  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga, apiNgrokDenunciarVaga } = ApisUrls;
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
@@ -112,15 +112,55 @@ export default function Vaga({ navigation }) {
     }
   };
 
-  const denunciarVaga = () => {
+  const denunciarVaga = async () => {
     if (motivoDenuncia) {
-      Alert.alert("Denúncia enviada!", `Opção selecionada: ${motivoDenuncia}`);
-      toggleModal(); // Fechar o modal após selecionar a opção
-      console.log(motivoDenuncia)
+      try {
+        const response = await axios.post(apiNgrokDenunciarVaga, {
+          idUsuario: userId,
+          idVaga: vagaID,
+          motivo: motivoDenuncia,
+          idStatus: 4,
+        });
+  
+        if (response.status === 200) {
+          Alert.alert("Denúncia enviada com sucesso!", `Opção selecionada: ${motivoDenuncia}`);
+          toggleModal(); // Fechar o modal após a denúncia
+        } else {
+          Alert.alert("Erro", "Erro ao enviar denúncia. Tente novamente.");
+        }
+      } catch (error) {
+        console.error('Erro ao enviar denúncia:', error);
+        
+        // Exibe mensagem específica para o usuário com base no tipo de erro
+        if (error.response) {
+          // Erro no lado do servidor (4xx ou 5xx)
+          console.log('Dados do erro:', error.response.data); // Detalhes do erro no backend
+          console.log('Status do erro:', error.response.status); // Código de status
+          Alert.alert(
+            "Erro no servidor",
+            `Não foi possível enviar a denúncia. Código: ${error.response.status}. Detalhes: ${error.response.data.message || 'Erro desconhecido.'}`
+          );
+        } else if (error.request) {
+          // Sem resposta do servidor
+          console.log('Nenhuma resposta recebida:', error.request);
+          Alert.alert(
+            "Erro de conexão",
+            "Não foi possível se conectar ao servidor. Verifique sua conexão e tente novamente."
+          );
+        } else {
+          // Erro desconhecido ou ao configurar a requisição
+          console.log('Erro inesperado:', error.message);
+          Alert.alert(
+            "Erro desconhecido",
+            "Ocorreu um erro inesperado ao enviar a denúncia. Tente novamente."
+          );
+        }
+      }
     } else {
       Alert.alert("Por favor, selecione uma opção de denúncia.");
     }
   };
+  
   
 
   useFocusEffect(

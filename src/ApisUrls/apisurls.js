@@ -63,6 +63,9 @@ const ApisUrls = {
     //Urls Escolas
     apiEmuladorEscolas: "http://10.0.2.2:8000/api/escolas",
     apiNgrokEscolas: "http://4747-200-53-199-247.ngrok-free.app/api/escolas",
+
+    //Urls Denuncias
+    apiNgrokDenunciarVaga: "http://4747-200-53-199-247.ngrok-free.app/api/denunciarVaga"
 };
 
 export default ApisUrls;

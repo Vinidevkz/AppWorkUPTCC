@@ -16,6 +16,7 @@ use App\http\Controllers\PostController;
 use App\http\Controllers\MensagemController;
 use App\http\Controllers\SeguirController;
 use App\Http\Controllers\LinguasController;
+use App\Http\Controllers\DenunciaVagaController;
 
 //Eduardo mexeu e precisa testar
 Route::get('/mensagens', [MensagemController::class, 'indexUsuario']);
@@ -77,6 +78,7 @@ Route::get('/vagaApp/{idVaga}', [VagaController::class, 'show']);
 Route::post('/vaga/busca', [VagaController::class, 'search']);
 //Atualizar dado de uma vaga...
 //Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])
+Route::post('/denunciarVaga', [DenunciaVagaController::class, 'store']);
 
 //API'S AREAVAGA
 
