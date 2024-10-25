@@ -60,6 +60,7 @@ class Vaga extends Model
 
     public $fillable = [
         'nomeVaga',
+        'descricaoVaga',
         'prazoVaga',
         'salarioVaga',
         'cidadeVaga',

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\DenunciaVaga;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Log;
+
 
 class DenunciaVagaController extends Controller
 {
@@ -40,24 +42,35 @@ class DenunciaVagaController extends Controller
     {
         $request->validate([
             'idUsuario' => 'required|integer',
+            'idVaga' => 'required|integer',
             'motivo' => 'required|string|max:255',
             'idStatus' => 'required|integer',
-            'idVaga' => 'required|integer', // Adicione a validação para o ID da empresa
         ]);
     
         try {
             DenunciaVaga::create([
                 'idUsuario' => $request->idUsuario,
+                'idVaga' => $request->idVaga,
                 'Motivo' => $request->motivo,
                 'idStatus' => $request->idStatus,
-                'idVaga' => $request->idVaga, // Salve o ID da empresa
             ]);
     
-            return redirect()->back()->with('success', 'Denúncia registrada com sucesso.');
+            return response()->json(['success' => true, 'message' => 'Denúncia registrada com sucesso.'], 200);
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Erro ao registrar a denúncia: ' . $e->getMessage());
+            // Log do erro para análise no backend
+            Log::error('Erro ao registrar denúncia:', ['exception' => $e]);
+    
+            // Retorna uma resposta JSON com detalhes do erro
+            return response()->json([
+                'success' => false,
+                'message' => 'Erro ao registrar a denúncia.',
+                'error' => $e->getMessage(),
+                'line' => $e->getLine(),
+                'file' => $e->getFile()
+            ], 500);
         }
     }
+    
 
     /**
      * Display the specified resource.

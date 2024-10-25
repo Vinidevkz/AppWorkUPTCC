@@ -31,7 +31,6 @@ const styles = StyleSheet.create({
     elevation: 10,
     paddingHorizontal: 20,
     zIndex: 1,
-    marginTop: 10
   },
 
   profileBackgroundImageCont: {
