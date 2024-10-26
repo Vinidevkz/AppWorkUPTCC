@@ -173,6 +173,16 @@ public function negarCandidatura($id)
     }
 }
 
+
+public function minhasVagas($userId)
+{
+    // Supondo que o modelo de candidatura seja Candidatura e tenha um relacionamento com Vaga
+    $candidaturas = VagaUsuario::where('idUsuario', $userId)->with('vaga')->with('empresa')->get();
+
+    return response()->json($candidaturas); // Retorna as candidaturas com os dados das vagas em JSON
+}
+
+
 }
 
 

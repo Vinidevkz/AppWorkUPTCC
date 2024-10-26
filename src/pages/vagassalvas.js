@@ -12,8 +12,8 @@ import ApisUrls from "../ApisUrls/apisurls.js";
 import styles from "../styles/vagas.js";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 
-export default function MinhasVagas({ navigation }) {
-  const { theme } = useTheme({ MinhasVagas });
+export default function VagasSalvas({ navigation }) {
+  const { theme } = useTheme({ VagasSalvas });
   const {userId} = useContext(Context);
   const { apiEmuladorPegarVagasSalvas, apiNgrokPegarVagasSalvas } = ApisUrls;
 

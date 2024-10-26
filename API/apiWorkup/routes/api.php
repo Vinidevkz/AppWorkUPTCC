@@ -17,6 +17,7 @@ use App\http\Controllers\MensagemController;
 use App\http\Controllers\SeguirController;
 use App\Http\Controllers\LinguasController;
 use App\Http\Controllers\DenunciaVagaController;
+use App\Models\VagaUsuario;
 
 //Eduardo mexeu e precisa testar
 Route::get('/mensagens', [MensagemController::class, 'indexUsuario']);
@@ -106,3 +107,6 @@ Route::get('/linguas', [LinguasController::class, 'index']);
 
 //API ESCOLAS
 Route::get('/escolas', [EscolasController::class, 'index']);
+
+//API ver minhas vagas (vagas em que o usuario ta se candidatando)
+Route::get('/minhasvagas/{userId}', [VagaUsuarioController::class, 'minhasVagas']);

@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Usuario;
 use App\Models\StatusVaga;
+use App\Models\Empresa;
 
 class VagaUsuario extends Model
 {
@@ -35,6 +36,10 @@ class VagaUsuario extends Model
 
     public function vaga() {
         return $this->belongsTo(Vaga::class, 'idVaga');
+    }
+
+    public function empresa() {
+        return $this->belongsTo(Empresa::class, 'idEmpresa');
     }
 
 }

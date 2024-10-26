@@ -197,7 +197,6 @@ export default function SignON3({ navigation }) {
   }
 
   return (
-    
     <SafeAreaView >
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
       {loading && (

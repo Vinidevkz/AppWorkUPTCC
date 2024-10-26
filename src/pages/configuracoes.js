@@ -73,7 +73,7 @@ export default function Configurações({ navigation }) {
              <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Vagas Salvas</Text>
             </TouchableOpacity>
 
-            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+            <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', gap: 10}} onPress={() => navigation.navigate("MinhasVagas")}>
               <MaterialIcons name="work" size={24} color="#20dd77" />
              <Text style={[styles.DMSansBold, styles.text, {color: theme.textColor}]}>Minhas Vagas</Text>
             </TouchableOpacity>

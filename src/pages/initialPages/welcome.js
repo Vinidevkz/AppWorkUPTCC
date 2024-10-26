@@ -33,6 +33,7 @@ import Conversas from "../conversas.js";
 import Chat from "../chat.js";
 import VagasSalvas from "../vagassalvas.js";
 import EmpresasProfile from "../empresaprofile.js";
+import MinhasVagas from "../minhasvagas.js";
 
 function Welcome({ navigation }) {
   //Carregador de fontes
@@ -207,6 +208,12 @@ export default function App() {
               name="EmpresasProfile"
               component={EmpresasProfile}
               options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+            name="MinhasVagas"
+            component={MinhasVagas}
+            options={{headerShown: false}}
             />
           </Stack.Navigator>
         </NavigationContainer>

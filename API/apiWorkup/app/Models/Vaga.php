@@ -36,7 +36,6 @@ class Vaga extends Model
         return $this->belongsTo(Area::class, 'idArea');
     }
 
-    
     public function status()
     {
         return $this->belongsTo(Status::class, 'idStatus', 'idStatus');
@@ -71,7 +70,6 @@ class Vaga extends Model
         'idArea',
         'idStatus',
         'idModalidadeVaga',
-
     ];
 }
 

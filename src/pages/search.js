@@ -38,7 +38,7 @@ export default function Search({ navigation }) {
     console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
+      const response = await axios.post(apiNgrokVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -218,6 +218,8 @@ export default function Search({ navigation }) {
                           height: 180,
                           marginLeft: 10,
                           justifyContent: "space-between",
+                          borderBottomWidth: 3,
+                          borderColor: '#20dd77'
                         }}
                       >
                         <View>
@@ -302,6 +304,8 @@ export default function Search({ navigation }) {
                     marginLeft: 10,
                     overflow: 'hidden',
                     borderRadius: 10,
+                    borderBottomWidth: 3,
+                    borderColor: '#20dd77'
                   }}
                 >
                   <View

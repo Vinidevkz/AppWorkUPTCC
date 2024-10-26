@@ -32,7 +32,7 @@ export default function Vaga({ navigation }) {
     console.log("User ID:", userId);
 
     try {
-      const response = await fetch(apiEmuladorUsuarioVaga, {
+      const response = await fetch(apiNgrokUsuarioVaga, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -61,7 +61,7 @@ export default function Vaga({ navigation }) {
 
   const cancelarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiEmuladorUsuarioVaga}/${userId}/${vagaID}`, {
+      const response = await fetch(`${apiNgrokUsuarioVaga}/${userId}/${vagaID}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -196,7 +196,7 @@ export default function Vaga({ navigation }) {
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>Sobre esta vaga</Text>
       </View>
-      <ScrollView style={{ flex: 1, padding: 20, gap: 50, backgroundColor: theme.backgroundColor }}>
+      <ScrollView style={{ flex: 1, padding: 20, gap: 50, backgroundColor:  theme.backgroundColor }}>
         {infosVaga.map((vaga, index) => (
           <View key={index} style={styles.infosCont}>
             <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
@@ -234,7 +234,7 @@ export default function Vaga({ navigation }) {
               style={[styles.button, { backgroundColor: "", borderWidth: 2, borderColor: "#20dd77" }]}
               onPress={() => cancelarCandidatura()}
             >
-              <Text style={[styles.DMSansBold, styles.buttonText, { color: theme.textColor }]}>Cancelar Candidatura</Text>
+              <Text style={[styles.DMSansBold, styles.buttonText, { color: '#fff' }]}>Cancelar Candidatura</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity style={styles.button} onPress={() => seCandidatar()}>
@@ -250,7 +250,7 @@ export default function Vaga({ navigation }) {
         <View style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}>
           <Text style={{ marginBottom: 10 }}>Selecione o motivo da denúncia:</Text>
 
-          {["Conteúdo impróprio", "Spam ou fraude", "Outro"].map((opcao) => (
+          {["Conteúdo impróprio", "Spam ou fraude", "Discriminação ou Preconceito", "Exploração de Trabalho", "Salário ou Benefícios Ilegais"].map((opcao) => (
             <TouchableOpacity
               key={opcao}
               onPress={() => setMotivoDenuncia(opcao)}
