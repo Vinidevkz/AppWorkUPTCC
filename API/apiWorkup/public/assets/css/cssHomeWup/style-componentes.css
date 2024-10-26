@@ -1,0 +1,251 @@
+.navbar {
+      background-color: #c5c7c5;
+      border-radius: 25% 0% -25px 25%;
+      border-bottom: 3px solid #10180e5b;
+      box-shadow: -25px 0 35px #030800;
+}
+
+.navbar-brand {
+      font-size: 1.9rem;
+      color: #fdfffd;
+}
+
+.navbar-brand img {
+      max-width: 150px;
+      height: auto;
+}
+
+.navbar-toggler-icon {
+      color: #93eef1;
+}
+
+.nav-link {
+      color: #0f0f0f;
+      text-decoration: none;
+      font-size: 20px;
+      font-weight: 500;
+}
+
+.nav-link:hover {
+      color: #ffffff;
+}
+
+.dropdown-menu {
+      background-color: #102909;
+}
+
+.dropdown-item {
+      color: #fff;
+}
+
+.dropdown-item:hover {
+      background-color: #46f846;
+}
+
+.nav-link i {
+      font-size: 1.2rem;
+}
+
+.logo-mobile {
+      display: none;
+}
+
+.logo-desktop {
+      box-shadow: #c6eed0;
+      margin-left: 20px;
+}
+
+.offcanvas-body {
+      background-color: #09ff09;
+}
+
+.list-group-item {
+      color: #ff0404;
+      background-color: #f2fff2;
+}
+
+.offcanvas-header {
+      background-color: #f2fff2;
+      color: #ec0d0d;
+}
+
+
+.footer {
+      background-color: #1d1d1d;
+      margin-top: 20px;
+      position: relative;
+
+  }
+  .footer::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: 0; /* Alinha à direita */
+      width: 55%; /* 25% da largura */
+      height: 100%; /* 100% da altura */
+      background-image: url("../../img/home/fundofooter.png");
+      background-size: cover;
+      opacity: 0.2;
+  }
+#logo-footer {
+      width: 25%;
+      height: auto;
+      margin-top: 10px;
+      margin-left: auto;
+      margin-right: auto;
+      display: block;
+}
+      
+
+.single_footer {
+      margin-bottom: 30px;
+      margin-top: 25px;
+}
+
+.single_footer h4 {
+      color: #dadada;
+      margin: 0 0 55px;
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 30px;
+}
+
+.single_footer h4::after {
+      content: "";
+      display: block;
+      height: 4px;
+      width: 40px;
+      background: #05f105;
+      margin-top: 20px;
+}
+
+.single_footer ul li a {
+      color: #cfcfcf;
+      transition: color 0.3s ease;
+      line-height: 36px;
+      font-size: 30px;
+      text-transform: capitalize;
+      font-weight: 400;
+}
+
+.single_footer ul li a:hover {
+      color: #57ff09;
+}
+
+.subscribe {
+      display: block;
+      position: relative;
+      margin-top: 15px;
+      width: 100%;
+}
+
+.subscribe__input {
+      background-color: #fff;
+
+      border-radius: 5px;
+      color: #ffffff;
+      font-size: 15px;
+      font-weight: 500;
+      height: 60px;
+      padding: 0 150px 0 20px;
+      text-align: center;
+      text-transform: capitalize;
+      width: 100%;
+}
+
+.subscribe__btn {
+
+      
+      color: #09ff00;
+      cursor: pointer;
+      display: block;
+      font-size: 20px;
+      height: 60px;
+      position: absolute;
+      right: 0;
+      top: 0;
+      width: 60px;
+}
+
+.subscribe__btn:hover i {
+      color: #1cff07;
+}
+
+.social_profile {
+      margin-top: 40px;
+}
+
+.social_profile ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+}
+
+.social_profile ul li {
+      float: left;
+}
+
+.social_profile ul li a {
+      text-align: center;
+      text-transform: uppercase;
+      transition: background 0.3s ease, color 0.3s ease;
+      margin: 0 5px;
+      font-size: 15px;
+      color: #fff;
+      border-radius: 30px;
+      width: 50px;
+      height: 50px;
+      line-height: 50px;
+      display: block;
+      border: 1px solid rgb(253, 255, 254);
+}
+
+@media only screen and (max-width: 768px) {
+      .social_profile ul li a {
+            margin-right: 10px;
+            margin-bottom: 10px;
+      }
+
+      .logo-desktop {
+            display: none;
+      }
+
+      .logo-mobile {
+            display: block;
+            max-width: 150px;
+            height: auto;
+      }
+}
+
+@media only screen and (max-width: 480px) {
+      .social_profile ul li a {
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+      }
+}
+
+.social_profile ul li a:hover {
+      background: #2e2e2e;
+      border: 1px solid #c6eed0;
+      color: #3df705;
+      font-size: 50px;
+}
+
+.copyright {
+      margin-top: 70px;
+      padding-top: 40px;
+      padding-left: 20px;
+      color: #fff;
+      font-size: 25px;
+      border-top: 5px solid rgb(78, 78, 78);
+      text-align: center;
+}
+
+.partner-title {
+      color: #fff;
+      font-size: 35px;
+      font-weight: 400;
+      margin-bottom: 30px;
+}
+

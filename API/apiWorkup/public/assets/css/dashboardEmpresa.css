@@ -90,7 +90,7 @@ header {
 /*--area card--*/
 
 .card {
-    background-image: url(../img/card.png);
+    background-image: url("../img/homeEmpresa/card.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
