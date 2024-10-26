@@ -20,11 +20,6 @@ class VagaController extends Controller
      */
     public function index(Request $request)
     {
-        /*
-        |----------------------------------------------------------------------
-        | Definindo para além de pegar informações de vaga pegar também de empresa
-        |----------------------------------------------------------------------
-        */
 
         if (Auth::guard('admin')->check()) {
             $idAdmin = Auth::guard('admin')->id();
@@ -55,6 +50,16 @@ class VagaController extends Controller
             return response()->json($vagas); // Retorna o JSON esperado
         }
 
+        // Adicione outras contagens necessárias aqui
+        $totalDenuncias = DB::table('tb_denunciausuario')->count();
+        $totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
+        $totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
+        
+        // Calcula o total de denúncias
+        $totalDenunciasGeral = $totalDenuncias +
+                                $totalDenunciasEmpresa +
+                                $totalDenunciasVagas;
+
 
 
         // Caso contrário, retorna a view com as vagas
@@ -62,7 +67,11 @@ class VagaController extends Controller
             'vagas'=>$vagas,
             'usernameAdmin'=>$usernameAdmin,
             'emailAdmin'=>$emailAdmin,
-            'nomeAdmin'=>$nomeAdmin]);
+            'nomeAdmin'=>$nomeAdmin,
+            'totalDenuncias' => $totalDenuncias,
+            'totalDenunciasGeral' => $totalDenunciasGeral,
+            'totalDenunciasVagas' => $totalDenunciasVagas,
+            'totalDenunciasEmpresa' => $totalDenunciasEmpresa,]);
     }
 
     public function indexApp(Request $request)

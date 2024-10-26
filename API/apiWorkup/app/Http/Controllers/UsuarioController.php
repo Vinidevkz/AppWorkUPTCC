@@ -33,12 +33,27 @@ class UsuarioController extends Controller
                 // Redirecionar ou mostrar uma mensagem de erro
                 return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
             }
+
+                    // Adicione outras contagens necessárias aqui
+                $totalDenuncias = DB::table('tb_denunciausuario')->count();
+                $totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
+                $totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
+                
+                // Calcula o total de denúncias
+                $totalDenunciasGeral = $totalDenuncias +
+                                        $totalDenunciasEmpresa +
+                                        $totalDenunciasVagas;
             
             return view('admin.usuario.usuarioAdmin',[
             'usuarios'=>$usuarios,
             'usernameAdmin'=>$usernameAdmin,
             'emailAdmin'=>$emailAdmin,
-            'nomeAdmin'=>$nomeAdmin]); // Retorna em formato JSON
+            'nomeAdmin'=>$nomeAdmin,
+            'totalDenuncias' => $totalDenuncias,
+            'totalDenunciasGeral' => $totalDenunciasGeral,
+            'totalDenunciasVagas' => $totalDenunciasVagas,
+            'totalDenunciasEmpresa' => $totalDenunciasEmpresa,
+        ]);
 
     }
 
