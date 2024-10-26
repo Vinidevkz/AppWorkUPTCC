@@ -16,57 +16,63 @@
     @extends('layouts.homeEmpresa')
 
     @section('content')
-        @include('components.navbar')
+    @include('components.navbar')
 
-        <section class="card">
-            <div class="row">
-                <div class="col txt-card">
-                    <h1>Vagas da Empresa</h1>
+    <section class="card">
+        <div class="row">
+            <div class="col txt-card">
+                <h1>Vagas da Empresa</h1>
 
-                        @if($vagas->isEmpty())
-                            <p>Nenhuma vaga encontrada para sua empresa.</p>
-                        @else
-                            <ul>
-                                @foreach($vagas as $vaga)
-                                    <li>
-                                        {{ $vaga->nomeVaga }} - {{ $vaga->salarioVaga }} - {{ $vaga->estadoVaga }}
-                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>Ver candidatos</a>
-                                        <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>Editar Vaga</a>
-                                    </li>
-                                @endforeach
-                            </ul>
-                        @endif
+                @if($vagas->isEmpty())
+                    <p>Nenhuma vaga encontrada para sua empresa.</p>
+                @else
+                    <ul>
+                        @foreach($vagas as $vaga)
+                            <li>
+                                {{ $vaga->nomeVaga }} - {{ $vaga->salarioVaga }} - {{ $vaga->estadoVaga }}
+                                <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}"
+                                    class="btn btn-outline-primary btn-sm"><span class="bi-pencil-fill"></span>Ver
+                                    candidatos</a>
+                                <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn btn-outline-primary btn-sm"><span
+                                        class="bi-pencil-fill"></span>Editar Vaga</a>
+                            </li>
+                        @endforeach
+                    </ul>
+                @endif
 
-                </div>
+            </div>
 
-                
-                
-                <div class="col">
-                    <div class="row row-card flex flex-column justify-content-around align-items-center">
-                        <button class="botao-card botao-vaga"> <a href="/vaga/cadastrar" class="text-light"> Criar vaga <i class="fa-solid fa-plus"></i></a></button>
 
-                        <button class="botao-card botao-vaga"> <a href="/mensagens" class="text-light"> Ver mensagens<i class="fa-solid fa-plus"></i></a></button>
-                        <button class="botao-card botao-vaga"> <a href="/posts" class="text-light"> Ver Posts<i class="fa-solid fa-plus"></i></a></button>
-                        <button class="botao-card botao-vaga">
+
+            <div class="col">
+                <div class="row row-card flex flex-column justify-content-around align-items-center">
+                    <button class="botao-card botao-vaga"> <a href="/vaga/cadastrar" class="text-light"> Criar vaga <i
+                                class="fa-solid fa-plus"></i></a></button>
+
+                    <button class="botao-card botao-vaga"> <a href="/mensagens" class="text-light"> Ver mensagens<i
+                                class="fa-solid fa-plus"></i></a></button>
+                    <button class="botao-card botao-vaga"> <a href="/posts" class="text-light"> Ver Posts<i
+                                class="fa-solid fa-plus"></i></a></button>
+                    <button class="botao-card botao-vaga">
                         <form action="/logout" method="POST">
                             @csrf
                             <input type="submit" class="botao-card botao-vaga" value="Sair">
                         </form>
-                        </button>
-                        <button class="botao-card botao-post">
+                    </button>
+                    <button class="botao-card botao-post">
                         @if (Auth::guard('empresa')->check())
-                        @php
-        $empresa = Auth::guard('empresa')->user();
-    @endphp
-    <a href="{{ route('post.create', $empresa->idEmpresa) }}" class="text-light">Fazer post</a>
-@endif
+                            @php
+                                $empresa = Auth::guard('empresa')->user();
+                            @endphp
+                            <a href="{{ route('post.create', $empresa->idEmpresa) }}" class="text-light">Fazer post</a>
+                        @endif
 
 
-                        </button>
-                    </div>
+                    </button>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
     @endsection
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"

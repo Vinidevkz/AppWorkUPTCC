@@ -7,12 +7,14 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
-    <link rel="stylesheet" href="../assets/css/dashboardEmpresa.css">
+    <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
     <title>Home</title>
-    @include('components.navbarDashboardEmpresa')
 </head>
 
 <body>
+
+    @include('components.navbarDashboardEmpresa')
+
 
     <section class="card">
         <div class="row">
@@ -23,16 +25,11 @@
                         Nos ajude nessa jornada de transformar a carreira de diversas pessoas
                     </h3>
                     <div class="botoes-card">
-                        <a href="{{ route('cadastrarVaga') }}" class="botao-card botao-vaga">
-                        <button class="botao-card botao-vaga">Criar vaga <i class="fa-solid fa-plus"></i></button>
-                        </a>
-                        <a href="{{ route('post.create', $empresa->idEmpresa) }}" class="botao-card botao-post">
-                        <button class="botao-card botao-post">Fazer post</button>
-                        </a>
-
-                        <form action="/logout" method="post" class="botao-card botao-vaga">
+                        <a href="{{ route('cadastrarVaga') }}" class="botao-card botao-vaga">Publicar vaga</a>
+                        <a href="{{ route('post.create', $empresa->idEmpresa) }}" class="botao-card botao-post">Fazer post</a>
+                        <form action="/logout" method="post" class="botao-card" style="background-color: #eb4034">
                             @csrf
-                            <button type="submit" class="botao-card botao-vaga">Sair</button>
+                            <button type="submit" class="text-light" style="background-color: transparent; border-style: none">Sair</button>
                         </form>
                     </div>
                 </div>
@@ -41,6 +38,7 @@
             </div>
         </div>
     </section>
+
 
     <section class="funcoes">
         <h3 class="titulo-secao">Aqui você pode:</h3>
@@ -53,9 +51,7 @@
                             <h4>Publicar vagas</h4>
                         </div>
                         <div class="body-card-funcoes">
-                            <p>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-                                texto
-                                texto texto texto texto texto texto texto texto </p>
+                            <p>O nosso foco é a publicação de vagas, sendo essa a função principal dessa página. As vagas podem ser editadas e removidas posteriormente</p>
                         </div>
                     </div>
                 </div>
@@ -66,9 +62,7 @@
                             <h4>Fazer publicaçõs</h4>
                         </div>
                         <div class="body-card-funcoes">
-                            <p>texto texto texto texto texto texto texto texto texto texto texto texto texto texto texto
-                                texto
-                                texto texto texto texto texto texto texto texto </p>
+                            <p>O nosso foco é a publicação de vagas, sendo essa a função principal dessa página. As vagas podem ser editadas e removidas posteriormente</p>
                         </div>
                     </div>
                 </div>
@@ -77,37 +71,55 @@
     </section>
 
 
-    <section class="vagas">
-        <h3>Vagas cadastradas:</h3>
-        <div class="row">
-            @foreach($vagas as $vaga)
-            <div class="col">
-                <div class="vaga">
-                    <div class="wrap-vaga">
-                        <h3>{{ $vaga->nomeVaga }}</h3>
-                        <div class="body-vaga">
-                            <div>
-                                <p class="cargo-vaga">Cargo: {{ $vaga->nomeVaga }}</p>
-                                <p class="publ-vaga">Data de publicação: {{ $vaga->created_at }}</p>
-                            </div>
-                            <div>
-                                <p class="opt-vaga">Modalidade: {{ $vaga->descModalidadeVaga }}</p>
-                                <p class="opt-vaga">Quantidade de candidatados: {{ $vaga->total_candidatos }}</p>
-                                <p class="opt-vaga">Salário: R$ {{ $vaga->salarioVaga }}</p>
+    <section id="vagas" class="vagas">
+
+
+        <div class="d-flex justify-content-start mt-5">
+            <p class="titulo-2">Vagas publicadas</p>
+        </div>
+
+
+        <div class="wrap-carrossel">
+
+            <img src="{{url('assets/img/dashboardEmpresa/bckBtn.png')}}" class="btn-carrossel" id="backBtn">
+
+            <div class="carrossel">
+
+                @foreach($vagas as $vaga)
+
+                    <div class="col-vaga col-sm-6 col-md-4 col-lg-3 h-100">
+                        <div class="vaga">
+                            <div class="wrap-vaga">
+                                <div class="header-vaga">
+                                    <h3>{{ $vaga->nomeVaga }}</h3>
+                                    <div>
+                                        <p>Publicada em {{ $vaga->created_at }}</p>
+                                        <p>Aberta até xx/xx/2024</p>
+                                    </div>
+                                </div>
+                                <div class="opt-vaga">
+                                    <p>Salário: R${{ $vaga->salarioVaga }}</p>
+                                    <p>Área: {{ $vaga->nomeVaga }}</p>
+                                    <p>Estado: - - -</p>
+                                    <p>Candidatos: {{ $vaga->total_candidatos }}</p>
+                                </div>
+                                <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn-vagas">Mais detalhes <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
                             </div>
                         </div>
-                        <a href="{{ route('vagas.edit', $vaga->idVaga) }}" style="margin: auto;">
-                        <button class="btn-vagas">Mais detalhes</button>
-                        </a>
                     </div>
-                </div>
+                @endforeach
+
             </div>
-            @endforeach
+
+            <img id="nextBtn" src="{{url('assets/img/dashboardEmpresa/nextBtn.png')}}" class="btn-carrossel"
+                id="nextBtn">
+
         </div>
+
     </section>
 
 
-    <section class="publicacoes">
+    <div class="publicacoes">
         <h3>Publicações</h3>
         <div class="container container-publ">
             <div class="row">
@@ -118,8 +130,8 @@
                             <div class="col">
                                 <div class="empresa-publ">
                                     <div>
-                                        <img src="../assets/img/dashboardEmpresa/user.png" alt="">
-                                        <p> {{ $empresa->nomeEmpresa }}</p>
+                                        <img src="{{url('assets/img/dashboardEmpresa/user.png')}}" alt="">
+                                        <p>Empresa</p>
                                     </div>
                                 </div>
                             </div>
@@ -135,7 +147,7 @@
                                 a, facilisis vel enim.
                             </div>
                             <div class="col img-publ">
-                                <img src="../assets/img/dashboardEmpresa/feteps.jpg" alt="">
+                                <img src="{{url('assets/img/dashboardEmpresa/feteps.jpg')}}" alt="">
                             </div>
                             <div class="col botoes-publ">
                                 <div>
@@ -147,13 +159,53 @@
                         </div>
                     </div>
                 </div>
+                <div class="col col-publ">
+                    <!--Publicação-->
+                    <div class="publ">
+                        <div class="row-publ">
+                            <div class="col">
+                                <div class="empresa-publ">
+                                    <div>
+                                        <img src="{{url('assets/img/dashboardEmpresa/user.png')}}" alt="">
+                                        <p>Empresa</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col conteudo-publ">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                                Aenean
+                                luctus, urna quis varius
+                                consequat, eros justo efficitur ex, nec efficitur dui diam in diam. Mauris laoreet,
+                                risus
+                                sit amet posuere
+                                gravida, neque odio tincidunt lorem, ut suscipit tortor dolor vel enim. Praesent nibh
+                                leo,
+                                rutrum vitae aliquet
+                                a, facilisis vel enim.
+                            </div>
+                            <div class="col img-publ">
+                                <img src="{{url('assets/img/dashboardEmpresa/feteps.jpg')}}" alt="">
+                            </div>
+                            <div class="col botoes-publ">
+                                <div>
+                                    <i class="fa-solid fa-message"></i>
+                                    <i class="fa-regular fa-heart"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </section>
+        </section>
 
+        <script src="../js/card-equipe.js"></script>
 
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"     crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+            integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+            integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+            crossorigin="anonymous"></script>
 
 </body>
 
