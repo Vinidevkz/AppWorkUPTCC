@@ -14,148 +14,259 @@
 </head>
 
 <body>
-<header class="">
-  <div class="d-flex ms-5">
-    <p class="text-light fs-4 fw-bold m-1">Work<span class="verde">Up</span></p>
-  </div>
-  <div class="dropdown">
-    <div class="section-adm dropdown-toggle d-flex flex-row align-items-center text-white" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-      <div class="img-adm">VA</div>  
-      <p class="m-0 text-white">Colaborador</p>
-    </div>    
-    <ul class="dropdown-menu p-0 m-0 list-section">
-      <div class="d-flex flex-column">
-        <li class="titulo-section-adm"><span>Usuário:</span> vitor.souza</li>
-        <div class="d-flex align-items-center justify-content-start">
-          <span class="material-symbols-outlined">key</span>
-          <li class="corpo-section-adm p-0 m-0"><a href="">Alterar senha</a></li>
-        </div>
-      </div>
-      <div class="d-flex flex-column justify-content-center">
-        <li class="titulo-section-adm">Papéis</li>
-        <div class="d-flex flex-column justify-content-start">
-          <div class="d-flex flex-row">
-            <span class="material-symbols-outlined">check</span>
-            <li class="corpo-section-adm m-0 p-0">Colaborador</li>
-          </div>
-          <div class="d-flex flex-row">
-            <span class="material-symbols-outlined">check</span>
-            <li class="corpo-section-adm m-0 p-0">Gestor</li>
-          </div>
-        </div>
-      </div>
-    </ul>
-  </div>
-</header>
+
 
 <div class="row">
-  <aside class="col-2 p-4" id="sidebar">
-    <div class="col-2 h-auto col-aside">
-      <div class="aside-container">
-        <div class="aside-sidebar d-flex flex-column h-auto text-white p-2">
-          <div class="d-flex mb-4">
-            <a href="/admin" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">grid_view</span> Dashboard
-            </a>
-          </div>
-          <div class="d-flex mb-4">
-            <a href="/admin/usuario/listar" class="asisde-sidebar-active d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">person</span> Usuários
-            </a>
-          </div>
-          <div class="d-flex mb-4">
-            <a href="/admin/vaga/listar" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">work</span> Vagas
-            </a>
-          </div>
-          <div class="d-flex mb-4">
-            <a href="/admin/empresa/listar" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">apartment</span> Empresas
-            </a>
-          </div>
-          <div class="mb-4">
-            <a href="/admin/info" class="d-flex flex-row align-items-center h6">
-              <span class="material-symbols-outlined p-2">info</span> Info
-            </a>
-          </div>
-        </div>
+<aside class="col-2 p-4">
+                <div class="aside-section">
+
+                    <!-- CABEÇALHO DO ASIDE -->
+                    <div class="header-aside d-flex flex-column align-items-center justify-content-center">
+                        <div class="img-header d-flex align-items-center justify-content-center">
+    <img src="{{url('assets/img/adminImages/vr7Perfil.jpeg')}}" class="img-header" alt="Imagem de perfil" data-bs-toggle="modal" data-bs-target="#imagemModal" style="cursor:pointer;">
+</div>
+
+<!-- Modal Bootstrap -->
+<div class="modal fade defocar-img-fundo" id="imagemModal" tabindex="" aria-labelledby="imagemModalLabel" aria-hidden="true">
+
+  <div class="modal-dialog modal-dialog-centered ">
+    <div class="modal-content modal-fundo-cor">
+      <div class="modal-body d-flex justify-content-center">
+        <img src="{{url('assets/img/adminImages/vr7Perfil.jpeg')}}" class="img-fluid" alt="Imagem ampliada">
+      </div>
+      <div class="btn-group d-flex flex-row justify-content-around">
+      <div class="box-btn-alter">
+      <button type="button" class="btn btn-outline-light">
+      <i class="bi bi-pencil"></i>  
+      Alterar</button>
+      </div>
+
+      <div class="box-btn-del">
+      <button type="button" class="btn btn-outline-danger">
+      <i class="bi bi-x-lg"></i>  
+      Excluir</button>
+      </div>
       </div>
     </div>
-  </aside>
+
+  
+  
+  </div>
+
+  </header>
+  <div class="row">
+ 
+  
+</div>
+
+</div>
+        
+                    <div class="aside-body">
+
+                    <div class="search-container-2 mt-3 mb-3">
+          <span class="material-symbols-outlined search-icon2">search</span>
+          <input type="text" id="searchInput2" placeholder="Buscar...">
+        </div>
+                        <div class="d-flex  flex-row item-nav" >
+                           
+                            <a href="/admin" class="p-0 h6">
+                                <i class="bi bi-grid " ></i>
+                                Dashboard</a>
+                        </div>
+        
+                        <div class="li-menu">
+
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Administração
+    <i class="bi bi-caret-down"></i>
+</p>
+ </p>
+ <div class="collapse" id="collapseExample">
+ 
+     <ul class="dropdown-menu card sub-menu-dropdown">
+      <li class="dropdown-item">
+      <a href="/admin/denuncia/usuario" class="p-1 h6">
+                                <i class="bi bi-people p-1"></i>
+                                Usuários</a>
+      </li>
+      <li class="dropdown-item">
+      <a href="/admin/denuncia/vaga" class="p-1 h6">
+                                <i class="bi bi-person-vcard p-1"></i>
+                                Vagas</a>
+      </li>
+         <li class="dropdown-item">
+         <a href="/admin/denuncia/empresa" class="p-1 h6">
+                                <i class="bi bi-buildings p-1"></i>
+                                Empresas</a>
+         </li>
+     </ul> 
+ </div>
+
+</div>
+
+
+<div class="li-menu">
+
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDenuncia" aria-expanded="false" >
+</a> Denuncias</span>
+    <i class="bi bi-caret-down"></i>
+</p>
+ </p>
+ <div class="collapse" id="collapseDenuncia">
+ 
+     <ul class="dropdown-menu card sub-menu-dropdown">
+      <li class="dropdown-item t p-0">
+      <a href="/admin/denuncia/usuario" class="p-1 h6">
+                                <i class="bi bi-people p-1"></i>
+                                Usuários</a>
+      </li>
+      <li class="dropdown-item p-0">
+      <a href="/admin/denuncia/vaga" class="p-1 h6">
+                                <i class="bi bi-person-vcard p-1"></i>
+                                Vagas</a>
+      </li>
+         <li class="dropdown-item p-0">
+         <a href="/admin/empresa/listar" class="p-1 h6">
+                                <i class="bi bi-buildings p-1"></i>
+                                Empresas</a>
+         </li>
+     </ul> 
+ </div>
+
+</div>
+
+
+
+
+<div class="li-menu">
+
+<p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseAdm" aria-expanded="false" aria-controls="#collapseAdm">
+    Gerenciar ADM
+    <i class="bi bi-caret-down"></i>
+</p>
+ </p>
+ <div class="collapse" id="collapseAdm">
+ 
+     <ul class="dropdown-menu card sub-menu-dropdown">
+      <li class="dropdown-item">
+      <a href="/admin/cadastrar" class="p-0 h6">
+                                <i class="bi bi-people p-0"></i>
+                                Criar Admin.</a>
+      </li>
+
+      <li class="dropdown-item">
+      <a href="/admin/cadastrar" class="p-0 h6">
+                                <i class="bi bi-people p-0"></i>
+                                listagem</a>
+      </li>
+     </ul> 
+ </div>
+
+</div>
+                     <div class="d-flex item-nav-logout">
+                        
+                      <form action="/logout" method="POST">
+                        @csrf
+                        <button type="submit" class="p-1 h6" style="background-color: transparent; border:none">
+                        <i class="bi bi-door-open"></i>Sair
+                      </button>
+                      </form>
+                
+                        </div>
+
+                    
+                    </div>
+        
+        
+
+        </div>
+                
+            </aside>
 
   <div class="col-9 mt-4">
     <div class="container md-4 mt-3">
 
+    <h1 class="ms-2 fs-3">Empresas denunciadas</h1>
 
 
-        <table class="table table-striped m-0 table-user" id="myTable">
-          <thead>
+    <table class="table table-hover table-bordered text-center align-middle">
+          <thead class="table-light rounded-top">
             <tr>
               <th class="fw-bold">Id</th>
               <th class="fw-bold">Usuário</th>
+              <th>Data da denúncia</th>
               <th>
-                <div class="d-flex align-items-center">
-
-                  <p class="m-0 fw-bold">Empresa</p>
-                </div>
-              </th>
-              <th>
-                <div class="d-flex flex-row">
+                <div class="d-flex justify-content-center align-items-center">
                   <span class="material-symbols-outlined">autorenew</span>
-                  <p class="m-0 fw-bold">Status</p>
+                  <p class="m-0 fw-bold ms-1">Status</p>
                 </div>
               </th>
               <th>
-                <div class="d-flex btn-acoes align-items-center">
+                <div class="d-flex justify-content-center align-items-center">
                   <span class="material-symbols-outlined">keyboard_double_arrow_down</span>
-                  <p class="m-0 fw-bold">Ações</p>
+                  <p class="m-0 fw-bold ms-1">Mais informações</p>
                 </div>
               </th>
             </tr>
           </thead>
           <tbody>
-           
+   
+              @forelse($denuncias as $denuncia)
+                <tr class="blink" id="denuncia-{{ $denuncia->idDenunciaUsuario }}">
+                  <td class="align-middle">{{ $denuncia->idDenunciaEmpresa }}</td>
+                  <td class="align-middle">
+                  <!-- {{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }} -->
+                    <a href="#" class="text-black fw-bold">
+                      {{ $denuncia->empresa->nomeEmpresa }}
+                    </a>
+                  </td>
+                  <td class="align-middle">{{ $denuncia->created_at }}</td>
           
-    @forelse($denuncias as $denuncia)
-        <tr>
-            <td>{{ $denuncia->idDenunciaEmpresa }}</td> <!-- Adicione o ID aqui, se necessário -->
-            <td>
-            <a href="{{ route('denunciaEmpresa.show', $denuncia->idDenunciaEmpresa ) }}" class="visualizar-link">
-            {{ $denuncia->usuario->nomeUsuario }}
-                  </a>
-            </td>
-            <td>{{ $denuncia->empresa->nomeEmpresa ?? 'Não Associado' }}</td> <!-- Atualizado para exibir o nome -->
-            <td>{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
-            <td>
-            <form action="{{ route('empresa.delete', $denuncia->empresa->idEmpresa) }}" method="POST" class="d-inline">
-                    @csrf
-                    @method('DELETE')
-                    <button onclick="return confirm('Realmente deseja excluir essa Empresa?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Bloquear</button>
-                  </form>
-            </td>
-        </tr>
-
-
-
-
-
-
+                  <td class="align-middle">{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
           
-
-
-                </td>
-              </tr>
-            @empty
-              <tr>
-                <td colspan="5" class="text-center">Nenhuma Empresa encontrado.</td>
-              </tr>
-            @endforelse
+                  <td class="p-0">
+                    <i class="bi bi-info-circle fs-6 pe-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
+          
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Sobre denúncias</h5>
+                            <i class="bi bi-megaphone-fill text-danger fs-5 ps-1"></i>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+                          <div class="modal-body d-flex flex-column">
+                            <h5 class="alert-heading">Atenção!</h5>
+                            <p class="">
+                              Esta seção é dedicada ao monitoramento de denúncias de usuários. Aqui, você pode visualizar os relatos de comportamentos inadequados ou abusivos dentro da plataforma. É fundamental que todas as denúncias sejam tratadas com seriedade e imparcialidade.
+                            </p>
+                              <p><span class="fw-bold">Denunciado:</span> {{ $denuncia->usuario->nomeUsuario }}</p>
+                             <p>Motivo da denúncia: {{$denuncia->motivo}}</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                            <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+          
+                    <form action="{{ route('usuarios.aprovar', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
+                      @csrf
+                      @method('POST')
+                   
+                    </form>
+                  </td>
+                </tr>
+              @empty
+                <tr>
+                  <td colspan="5" class="text-center align-middle">Nenhum usuário encontrado.</td>
+                </tr>
+              @endforelse
           </tbody>
         </table>
-        <div class="no-results" id="noResults">
-              <img src="{{url('assets/img/adminImages/not-found.png')}}" alt="">
-              <p>Nenhum registro encontrado.</p>
-            </div>
+
       </div>
     </div>
   </div>

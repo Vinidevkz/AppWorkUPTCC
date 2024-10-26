@@ -256,12 +256,12 @@ Route::middleware('auth:admin')->group(function(){
 
                 
                 // Denuncia Empresa
-                Route::get('/', [DenunciaEmpresaController::class, 'index'])->name('denunciar.empresa');
-                Route::get('/{id}', [DenunciaEmpresaController::class, 'show'])->name('denunciaEmpresa.show');
+                Route::get('/empresa', [DenunciaEmpresaController::class, 'index'])->name('denunciar.empresa');
+                Route::get('/empresa{id}', [DenunciaEmpresaController::class, 'show'])->name('denunciaEmpresa.show');
 
                 // Denuncia Vaga
-                Route::get('/', [DenunciaVagaController::class, 'index'])->name('denunciar.vaga');
-                Route::get('/{id}', [DenunciaVagaController::class, 'show'])->name('denunciaVaga.show');
+                Route::get('/vaga', [DenunciaVagaController::class, 'index'])->name('denunciar.vaga');
+                Route::get('/vaga{id}', [DenunciaVagaController::class, 'show'])->name('denunciaVaga.show');
 
             });
             

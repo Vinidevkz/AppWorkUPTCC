@@ -121,7 +121,7 @@
                                 Usuários <span class="badge text-bg-danger p-1"></span></a>
       </li>
       <li class="dropdown-item p-0">
-      <a href="/admin/vaga/listar" class="p-1 h6">
+      <a href="/admin/denuncia/vaga" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
                                 Vagas</a>
       </li>

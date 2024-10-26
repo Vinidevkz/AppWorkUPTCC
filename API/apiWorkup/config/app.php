@@ -1,5 +1,5 @@
 <?php
-
+App\Providers\AdminServiceProvider::class;
 use Illuminate\Support\Facades\Facade;
 
 return [

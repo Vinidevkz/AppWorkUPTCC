@@ -157,97 +157,113 @@
         .custom-input:invalid {
             box-shadow: none;
         }
+  #preview{
+    border: 1px solid black;
+    width: 200px;
+height: 200px;
+font-size: 12rem;
+
+  }
+
+    /* Classe para remover a borda */
+    .no-border {
+display: none;   
+      
+    }
+    
     </style>
 </head>
 <body id="boo">
-    <main class="cardsform">
-        <div class="container mt-2 mb-3">
-            <div class="row form-wrapper">
-                <!-- Coluna do formulário -->
-                <div class="col-md-8 form-container">
-                    <div class="panel-heading text mb-5">
-                        Cadastre um Administrador
-                    </div>
+<div class="container">
 
-                    <form method="POST" action="/formAdmin">
-                        @csrf
+<div class="row">
+<div class="col-2 p-0 m-0 d-flex align-items-center justify-content-center" id="">
+ <div id="preview">X</div>
+  <img id="imagePreview" src="" alt="" style="display:none; max-width: 200px; max-height: 200px;">
 
-                        <div class="row">
-                            <!-- Primeira Coluna -->
-                            <div class="col-md-6">
-                                @error('nomeAdmin')
+ </div>
+<div class="col-1"></div>
+<div class="col-9">
+<form method="POST" action="/formAdmin">
+@csrf
+
+  <div class="form-row">
+
+  @error('nomeAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="nomeAdmin" placeholder="Nome do Administrador" value="{{ old('nomeAdmin') }}" required>
-                                    <label for="nomeAdmin" class="form__label">Nome do Administrador</label>
-                                </div>
+    <div class="form-group col-md-3 form__group field">
+      <label for="inputEmail4" class="form_label">Nome do administrador</label>
+      <input type="text" class="form-control custom-input" id="inputEmail4" placeholder="Nome do ADM" name="nomeAdmin" value="{{ old('nomeAdmin') }}" required>
+    </div>
 
-                                @error('usernameAdmin')
+    @error('usernameAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="usernameAdmin" placeholder="Username" value="{{ old('usernameAdmin') }}" required>
-                                    <label for="usernameAdmin" class="form__label">Username</label>
-                                </div>
+    <div class="form-group col-md-2 form__group field">
+    <label for="inputAddress" class="form__label">Nome de usuário</label>
+    <input type="text" class="form-control custom-input" id="inputAddress" placeholder="nome.sobrenome" value="{{ old('usernameAdmin') }}"  name="usernameAdmin" required>
+  </div>
 
-                                @error('emailAdmin')
+
+  @error('senhaAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="emailAdmin" placeholder="Email" value="{{ old('emailAdmin') }}" required>
-                                    <label for="emailAdmin" class="form__label">Email</label>
-                                </div>
+  <div class="form-group col-md-3 form__group field">
+      <label for="inputPassword4" class="form__label">Senha</label>
+      <input type="password" class="form-control  custom-input" id="inputPassword4" placeholder="Senha" value="{{ old('senhaAdmin') }}"  name="senhaAdmin" required>
+    </div>
 
-                                @error('contatoAdmin')
+  </div>
+
+
+ <div class="form-row">
+
+ @error('emailAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="contatoAdmin" placeholder="Contato" value="{{ old('contatoAdmin') }}" required>
-                                    <label for="contatoAdmin" class="form__label">Contato</label>
-                                </div>
-                            </div>
+  <div class="form-group col-md-5 form__group field">
+    <label for="inputAddress2" class="form__label">E-mail</label>
+    <input type="email" class="form-control custom-input" id="inputAddress2" name="emailAdmin" placeholder="email" value="{{ old('emailAdmin') }}">
+  </div>
 
-                            <!-- Segunda Coluna -->
-                            <div class="col-md-6">
-                                @error('senhaAdmin')
+ 
+  
+  @error('contatoAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-                                <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="senhaAdmin" placeholder="Senha" value="{{ old('senhaAdmin') }}" required>
-                                    <label for="senhaAdmin" class="form__label">Senha</label>
-                                </div>
+    <div class="form-group col-md-3 form__group field">
+      <label for="inputCity" class="form__label" class="">Contato</label>
+      <input type="number" class="form-control custom-input custom-input" id="inputPhone" name="contatoAdmin" value="{{ old('contatoAdmin') }}" required>
 
-                                <div class="form__group field">
-                                    <input type="file" id="fileInput" class="form-control custom-input" name="fotoAdmin" placeholder="Foto" value="url" >
-                                    <label for="fotoAdmin" class="form__label">Foto</label>
-                                    <div id="preview">
-                                        <img id="imagePreview" src="" alt="" style="display:none; max-width: 300px; max-height: 300px;">
-                                    </div>
-                                </div>
+  </div>
+    </div>
 
-                            </div>
-                        </div>
+    
+  <div class="form-group">
+    <label for="exampleFormControlFile1">Imagem do administrador</label>
+    <input type="file" id="fileInput"  name="fotoAdmin" class="form-control custom-input col-md-4"  value="url">
 
-                        <button class="btn btn-primary-custom btn-block" id="foto">
+  </div>
+
+  <button class="btn btn-primary-custom btn-block" id="foto">
                             Registrar
                         </button>
-                    </form>
+</form>
 
-                </div>
+</div>
+</div>
+</div>
 
-                <!-- Coluna da imagem -->
-                <div class="col-md-4 image-container">
-                    <img src="{{ url('/assets/img/home/workuplogo.png') }}" alt="Descrição da imagem">
+
+
+
+
+   
                 </div>
-                
             </div>
         </div>
-    </main>
-    <form action="/logout" method="POST">
-                            @csrf
-                            <input type="submit" value="Sair">
-                        </form>
+
      <!-- Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
@@ -290,10 +306,15 @@
                     const img = document.getElementById('imagePreview');
                     img.src = e.target.result;
                     img.style.display = 'block'; // Exibe a imagem
+
+                    document.getElementById('preview').classList.add('no-border');
+
                 };
 
                 reader.readAsDataURL(selectedFile); // Lê o conteúdo do arquivo como uma URL de dados
             }
+
+            
             if (selectedFile) {
                 const storageRef = ref(storage, `publicacao/${selectedFile.name}`); // Cria uma referência no Storage
 

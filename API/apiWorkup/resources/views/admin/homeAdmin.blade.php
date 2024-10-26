@@ -123,7 +123,7 @@
 <div class="li-menu">
 
 <p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDenuncia" aria-expanded="false" >
-</a> Denuncias<span class="badge text-bg-danger m-1"> {{$totalDenuncias}}</span>
+</a> Denuncias<span class="badge text-bg-danger m-1"> {{$totalDenunciasGeral}}</span>
     <i class="bi bi-caret-down"></i>
 </p>
  </p>
@@ -138,12 +138,12 @@
       <li class="dropdown-item p-0">
       <a href="/admin/denuncia/vaga" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
-                                Vagas</a>
+                                Vagas <span class="badge text-bg-danger p-1">{{ $totalVagasDenunciados }}</span></a>
       </li>
          <li class="dropdown-item p-0">
          <a href="/admin/denuncia/empresa" class="p-1 h6">
                                 <i class="bi bi-buildings p-1"></i>
-                                Empresas</a>
+                                Empresas <span class="badge text-bg-danger p-1">{{ $totalEmpresasDenunciados }}</span></a>
          </li>
      </ul> 
  </div>

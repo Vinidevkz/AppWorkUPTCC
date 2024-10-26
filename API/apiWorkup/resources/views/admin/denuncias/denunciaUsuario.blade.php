@@ -108,7 +108,7 @@
 <div class="li-menu">
 
 <p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDenuncia" aria-expanded="false" >
-</a> Denuncias<span class="badge text-bg-danger m-1"> </span>
+</a> Denuncias
     <i class="bi bi-caret-down"></i>
 </p>
  </p>
@@ -118,15 +118,15 @@
       <li class="dropdown-item t p-0">
       <a href="/admin/denuncia/usuario" class="p-1 h6">
                                 <i class="bi bi-people p-1"></i>
-                                Usuários <span class="badge text-bg-danger p-1"></span></a>
+                                Usuários</a>
       </li>
       <li class="dropdown-item p-0">
-      <a href="/admin/vaga/listar" class="p-1 h6">
+      <a href="/admin/denuncia/vaga" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
                                 Vagas</a>
       </li>
          <li class="dropdown-item p-0">
-         <a href="/admin/empresa/listar" class="p-1 h6">
+         <a href="/admin/denuncia/empresa" class="p-1 h6">
                                 <i class="bi bi-buildings p-1"></i>
                                 Empresas</a>
          </li>
@@ -186,7 +186,7 @@
             </aside>
   <div class="col-9 mt-4">
     <div class="container md-4 mt-3">
-<h1>Usuários bloqueados</h1>
+<h1 class="ms-2 fs-3">Usuários denunciados</h1>
 
 <div class="">
 <div class="">
@@ -205,7 +205,7 @@
               <th>
                 <div class="d-flex justify-content-center align-items-center">
                   <span class="material-symbols-outlined">keyboard_double_arrow_down</span>
-                  <p class="m-0 fw-bold ms-1">Ações</p>
+                  <p class="m-0 fw-bold ms-1">Mais informações</p>
                 </div>
               </th>
             </tr>
@@ -216,7 +216,8 @@
                 <tr class="blink" id="denuncia-{{ $denuncia->idDenunciaUsuario }}">
                   <td class="align-middle">{{ $denuncia->idDenunciaUsuario }}</td>
                   <td class="align-middle">
-                    <a href="{{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }}" class="visualizar-link">
+                  <!-- {{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }} -->
+                    <a href="#" class="text-black fw-bold">
                       {{ $denuncia->usuario->nomeUsuario }}
                     </a>
                   </td>
@@ -224,7 +225,7 @@
           
                   <td class="align-middle">{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
           
-                  <td class="p-0 align-middle">
+                  <td class="p-0">
                     <i class="bi bi-info-circle fs-6 pe-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
           
                     <!-- Modal -->
@@ -236,15 +237,13 @@
                             <i class="bi bi-megaphone-fill text-danger fs-5 ps-1"></i>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                           </div>
-                          <div class="modal-body">
+                          <div class="modal-body d-flex flex-column">
                             <h5 class="alert-heading">Atenção!</h5>
-                            <p>
+                            <p class="">
                               Esta seção é dedicada ao monitoramento de denúncias de usuários. Aqui, você pode visualizar os relatos de comportamentos inadequados ou abusivos dentro da plataforma. É fundamental que todas as denúncias sejam tratadas com seriedade e imparcialidade.
                             </p>
-                            <ul class="d-flex flex-column" >
-                              <li><span class="fw-bold">Denunciado:</span> {{ $denuncia->usuario->nomeUsuario }}</li>
-                             
-                            </ul>
+                              <p><span class="fw-bold">Denunciado:</span> {{ $denuncia->usuario->nomeUsuario }}</p>
+                             <p>Motivo da denúncia: {{$denuncia->motivo}}</p>
                           </div>
                           <div class="modal-footer">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
@@ -257,9 +256,7 @@
                     <form action="{{ route('usuarios.aprovar', $denuncia->usuario->idUsuario) }}" method="POST" class="d-inline">
                       @csrf
                       @method('POST')
-                      <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm">
-                        <span class="bi bi-check2"></span>&nbsp;Reativar
-                      </button>
+                   
                     </form>
                   </td>
                 </tr>

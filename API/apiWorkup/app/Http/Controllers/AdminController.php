@@ -43,7 +43,14 @@ class AdminController extends Controller
         
 // total denuncias usuarios
 $totalUsuariosDenunciados = DB::table('tb_denunciausuario')->count();
-$totalDenuncias = DB::table('tb_denunciausuario', 'tb_denunciaempresa', 'tb_denunciavaga')->count();
+$totalVagasDenunciados = DB::table('tb_denunciavaga')->count();
+$totalEmpresasDenunciados = DB::table('tb_denunciaempresa')->count();
+
+$totalDenuncias = DB::table('tb_denunciausuario')->count();
+$totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
+$totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
+$totalDenunciasGeral = $totalDenuncias + $totalDenunciasEmpresa + $totalDenunciasVagas;
+
 
         $totalUsuariosTecnologia = AreaInteresseUsuario::where('idArea', 1)->count();
         $totalUsuariosAlimentacao = AreaInteresseUsuario::where('idArea', 11)->count();
@@ -88,7 +95,12 @@ $totalDenuncias = DB::table('tb_denunciausuario', 'tb_denunciaempresa', 'tb_denu
         $totalRegistrosEmpresa = DB::table('tb_empresa')->count();
         $usuarios = Usuario::where('idStatus', 1)->get();
     
-        return view('admin.homeAdmin', [
+        return view('admin.Homeadmin', [
+            'totalDenunciasGeral' => $totalDenunciasGeral,
+            'totalDenunciasVagas' => $totalDenunciasVagas,
+            'totalDenunciasEmpresa' => $totalDenunciasEmpresa,
+            'totalEmpresasDenunciados' => $totalEmpresasDenunciados,
+            'totalVagasDenunciados' => $totalVagasDenunciados,
             'totalUsuariosTecnologia' => $totalUsuariosTecnologia,
             'totalUsuariosAlimentacao' => $totalUsuariosAlimentacao,
             'totalUsuariosGestao' => $totalUsuariosGestao,
