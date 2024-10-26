@@ -191,7 +191,7 @@ Route::middleware('auth:admin')->group(function(){
 
             //Admin
         Route::prefix('/admin')->group(function () {
-                Route::get('/', [AdminController::class, 'dashboard']);
+                Route::get('/', [AdminController::class, 'dashboard'])->name('admin.dashboard');
 
                 //Cadastrar Admin
                 Route::get('/cadastrar', function() {

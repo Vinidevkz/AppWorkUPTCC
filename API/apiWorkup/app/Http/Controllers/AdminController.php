@@ -26,32 +26,20 @@ class AdminController extends Controller
         return $admin;
     }
 
-    public function dashboard()
+    protected function calcularEstatisticas()
     {
-        if (Auth::guard('admin')->check()) {
-            $idAdmin = Auth::guard('admin')->id();
-            $admin = Admin::select('usernameAdmin', 'emailAdmin', 'nomeAdmin')->where('idAdmin', $idAdmin)->first();
-            
-            $nomeAdmin = $admin->nomeAdmin;
-            $usernameAdmin = $admin->usernameAdmin;
-            $emailAdmin = $admin->emailAdmin;
-            
-        } else {
-            // Redirecionar ou mostrar uma mensagem de erro
-            return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
-        }
         
-// total denuncias usuarios
-$totalUsuariosDenunciados = DB::table('tb_denunciausuario')->count();
-$totalVagasDenunciados = DB::table('tb_denunciavaga')->count();
-$totalEmpresasDenunciados = DB::table('tb_denunciaempresa')->count();
+        // Adicione outras contagens necessárias aqui
+        $totalDenuncias = DB::table('tb_denunciausuario')->count();
+        $totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
+        $totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
+        
+        // Calcula o total de denúncias
+        $totalDenunciasGeral = $totalDenuncias +
+                               $totalDenunciasEmpresa +
+                               $totalDenunciasVagas;
 
-$totalDenuncias = DB::table('tb_denunciausuario')->count();
-$totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
-$totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
-$totalDenunciasGeral = $totalDenuncias + $totalDenunciasEmpresa + $totalDenunciasVagas;
-
-
+        // Iteresses de usuarios                       
         $totalUsuariosTecnologia = AreaInteresseUsuario::where('idArea', 1)->count();
         $totalUsuariosAlimentacao = AreaInteresseUsuario::where('idArea', 11)->count();
         $totalUsuariosGestao = AreaInteresseUsuario::where('idArea', 3)->count();
@@ -68,12 +56,9 @@ $totalDenunciasGeral = $totalDenuncias + $totalDenunciasEmpresa + $totalDenuncia
         $totalUsuarioMedicina = AreaInteresseUsuario::where('idArea', 6)->count();
         $totalUsuarioHigienizacao = AreaInteresseUsuario::where('idArea', 13)->count();
 
-        // STATUS
-        $statusAtivo = Usuario::where('idStatus', 1)->count();
-        $statusBloqueado = Usuario::where('idStatus', 2)->count();
         
-
-
+        
+        
         $totalVagaTecnologia = Vaga::where('idArea', 1)->count();
         $totalVagaMarketing = Vaga::where('idArea', 2)->count();
         $totalVagaGestao = Vaga::where('idArea', 3)->count();
@@ -90,35 +75,39 @@ $totalDenunciasGeral = $totalDenuncias + $totalDenunciasEmpresa + $totalDenuncia
         $totalVagaServiçosGerais = Vaga::where('idArea', 12)->count();
         $totalVagaHigienizacao = Vaga::where('idArea', 13)->count();
         $totalRegistrosVaga = DB::table('tb_vaga')->count();
-
+        
         $totalRegistrosUsuario =  Usuario::where('idStatus', 1)->count();
         $totalRegistrosEmpresa = DB::table('tb_empresa')->count();
-        $usuarios = Usuario::where('idStatus', 1)->get();
-    
-        return view('admin.Homeadmin', [
+        
+        // STATUS
+        $statusAtivo = Usuario::where('idStatus', 1)->count();
+        $statusBloqueado = Usuario::where('idStatus', 2)->count();
+        
+        return [
+            'totalDenuncias' => $totalDenuncias,
             'totalDenunciasGeral' => $totalDenunciasGeral,
             'totalDenunciasVagas' => $totalDenunciasVagas,
             'totalDenunciasEmpresa' => $totalDenunciasEmpresa,
-            'totalEmpresasDenunciados' => $totalEmpresasDenunciados,
-            'totalVagasDenunciados' => $totalVagasDenunciados,
             'totalUsuariosTecnologia' => $totalUsuariosTecnologia,
             'totalUsuariosAlimentacao' => $totalUsuariosAlimentacao,
             'totalUsuariosGestao' => $totalUsuariosGestao,
             'totalUsuariosEngenharia' => $totalUsuariosEngenharia,
             'totalUsuariosAdministracao' => $totalUsuariosAdministracao,
             'totalUsuariosMarketing' => $totalUsuariosMarketing,
-            // 'totalUsuariosSaude' => $totalUsuariosSaude,
             'totalUsuariosEducacao' => $totalUsuariosEducacao,
             'totalUsuariosFinancas' => $totalUsuariosFinancas,
             'totalUsuariosRecursosHumanos' => $totalUsuariosRecursosHumanos,
             'totalUsuariosLogistica' => $totalUsuariosLogistica,
-            // 'totalUsuariosDesign' => $totalUsuariosDesign,
+            'totalUsuariosMeioAmbiente' => $totalUsuariosMeioAmbiente,
+            'totalUsuarioGastronomia' => $totalUsuarioGastronomia,
+            'totalUsuariosServicosGerais' => $totalUsuariosServicosGerais,
+            'totalUsuarioMedicina' => $totalUsuarioMedicina,
+            'totalUsuarioHigienizacao' => $totalUsuarioHigienizacao,
             'totalRegistrosVaga' => $totalRegistrosVaga,
-            'usuarios' => $usuarios,
             'totalRegistrosUsuario' => $totalRegistrosUsuario,
             'totalRegistrosEmpresa' => $totalRegistrosEmpresa,
             'totalVagaTecnologia' => $totalVagaTecnologia,
-            'totalVagaGatronomia' => $totalVagaGastronomia,
+            'totalVagaGastronomia' => $totalVagaGastronomia,
             'totalVagaServiçosGerais' => $totalVagaServiçosGerais,
             'totalVagaHigienizacao' => $totalVagaHigienizacao,
             'totalVagaEngenharia' => $totalVagaEngenharia,
@@ -130,28 +119,84 @@ $totalDenunciasGeral = $totalDenuncias + $totalDenunciasEmpresa + $totalDenuncia
             'totalVagaRh' => $totalVagaRh,
             'totalVagaLogistica' => $totalVagaLogistica,
             'totalVagaAlimentacao' => $totalVagaAlimentacao,
-            'totalUsuariosMeioAmbiente' => $totalUsuariosMeioAmbiente,
             'totalVagaGestao' => $totalVagaGestao,
             'totalVagaMeioAmbiente' => $totalVagaMeioAmbiente,
-            'totalUsuarioGastronomia' => $totalUsuarioGastronomia,
-            'totalUsuariosServicosGerais' => $totalUsuariosServicosGerais,
-            'totalUsuarioMedicina' => $totalUsuarioMedicina,
-            'totalUsuarioHigienizacao' => $totalUsuarioHigienizacao,
             'statusAtivo' => $statusAtivo,
             'statusBloqueado' => $statusBloqueado,
+        ];
+    }
+    
+
+
+    public function dashboard()
+    {
+        if (Auth::guard('admin')->check()) {
+            $idAdmin = Auth::guard('admin')->id();
+            $admin = Admin::select('*')->where('idAdmin', $idAdmin)->first();
+            
+            $nomeAdmin = $admin->nomeAdmin;
+            $usernameAdmin = $admin->usernameAdmin;
+            $emailAdmin = $admin->emailAdmin;
+            $fotoAdmin = $admin->fotoAdmin;
+            
+        } else {
+            // Redirecionar ou mostrar uma mensagem de erro
+            return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
+        }
+        
+$estatisticas = $this->calcularEstatisticas();
+
+        $usuarios = Usuario::where('idStatus', 1)->get();
+        
+        return view('admin.Homeadmin', [
+            'totalDenunciasGeral' => $estatisticas['totalDenunciasGeral'],
+            'totalDenunciasVagas' => $estatisticas['totalDenunciasVagas'],
+            'totalDenunciasEmpresa' => $estatisticas['totalDenunciasEmpresa'],
+            'totalDenuncias' => $estatisticas['totalDenuncias'],
+            'totalUsuariosTecnologia' => $estatisticas['totalUsuariosTecnologia'],
+            'totalUsuariosAlimentacao' => $estatisticas['totalUsuariosAlimentacao'],
+            'totalUsuariosGestao' => $estatisticas['totalUsuariosGestao'],
+            'totalUsuariosEngenharia' => $estatisticas['totalUsuariosEngenharia'],
+            'totalUsuariosAdministracao' => $estatisticas['totalUsuariosAdministracao'],
+            'totalUsuariosMarketing' => $estatisticas['totalUsuariosMarketing'],
+            'totalUsuariosEducacao' => $estatisticas['totalUsuariosEducacao'],
+            'totalUsuariosFinancas' => $estatisticas['totalUsuariosFinancas'],
+            'totalUsuariosRecursosHumanos' => $estatisticas['totalUsuariosRecursosHumanos'],
+            'totalUsuariosLogistica' => $estatisticas['totalUsuariosLogistica'],
+            'totalUsuariosMeioAmbiente' => $estatisticas['totalUsuariosMeioAmbiente'],
+            'totalUsuarioGastronomia' => $estatisticas['totalUsuarioGastronomia'],
+            'totalUsuariosServicosGerais' => $estatisticas['totalUsuariosServicosGerais'],
+            'totalUsuarioMedicina' => $estatisticas['totalUsuarioMedicina'],
+            'totalUsuarioHigienizacao' => $estatisticas['totalUsuarioHigienizacao'],
+            'totalRegistrosVaga' => $estatisticas['totalRegistrosVaga'],
+            'totalRegistrosUsuario' => $estatisticas['totalRegistrosUsuario'],
+            'totalRegistrosEmpresa' => $estatisticas['totalRegistrosEmpresa'],
+            'totalVagaTecnologia' => $estatisticas['totalVagaTecnologia'],
+            'totalVagaGastronomia' => $estatisticas['totalVagaGastronomia'],
+            'totalVagaServiçosGerais' => $estatisticas['totalVagaServiçosGerais'],
+            'totalVagaHigienizacao' => $estatisticas['totalVagaHigienizacao'],
+            'totalVagaEngenharia' => $estatisticas['totalVagaEngenharia'],
+            'totalVagaAdministracao' => $estatisticas['totalVagaAdministracao'],
+            'totalVagaMarketing' => $estatisticas['totalVagaMarketing'],
+            'totalVagaMedicina' => $estatisticas['totalVagaMedicina'],
+            'totalVagaEducacao' => $estatisticas['totalVagaEducacao'],
+            'totalVagaFinanca' => $estatisticas['totalVagaFinanca'],
+            'totalVagaRh' => $estatisticas['totalVagaRh'],
+            'totalVagaLogistica' => $estatisticas['totalVagaLogistica'],
+            'totalVagaAlimentacao' => $estatisticas['totalVagaAlimentacao'],
+            'totalVagaGestao' => $estatisticas['totalVagaGestao'],
+            'totalVagaMeioAmbiente' => $estatisticas['totalVagaMeioAmbiente'],
+            'statusAtivo' => $estatisticas['statusAtivo'],
+            'statusBloqueado' => $estatisticas['statusBloqueado'],
             'usernameAdmin'=>$usernameAdmin,
             'emailAdmin'=>$emailAdmin,
+            'usuarios' => $usuarios,
             'nomeAdmin'=>$nomeAdmin,
-            'totalUsuariosDenunciados' => $totalUsuariosDenunciados,
-            'totalDenuncias' => $totalDenuncias
+            'fotoAdmin'=>$fotoAdmin,
         ]);
     }
+    
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         Log::info('Accessing cadastrarAdmin view');
@@ -159,36 +204,27 @@ $totalDenunciasGeral = $totalDenuncias + $totalDenunciasEmpresa + $totalDenuncia
         return view('cadastrarAdmin');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
 
-        /*
-|--------------------------------------------------------------------------
-Validação
-|--------------------------------------------------------------------------
-*/
-
+//Validação
         $request->validate(
             [
                 'nomeAdmin'  => 'required',
-                'usernameAdmin' => 'required|',
-                'emailAdmin' => 'required',
+                'usernameAdmin' => 'required|unique:tb_admin,usernameAdmin',
+                'emailAdmin' => 'required|email|unique:tb_admin,emailAdmin',
                 'contatoAdmin' => 'required',
                 'senhaAdmin' => 'required', 
 
             ],
             [
-                'nomeAdmin.required'  => 'Digite um nome',
-                'usernameAdmin.required' => 'Digite um apelido',
-                'emailAdmin.required' => 'Digite um email',
-                'contatoAdmin.required' => 'Digite um contato',
-                'senhaAdmin.required' => 'Digite uma senha',
+                'nomeAdmin.required'  => 'Digite um nome!',
+                'usernameAdmin.required' => 'Digite um apelido!',
+                'emailAdmin.required' => 'Digite um email!',
+                'emailAdmin.unique' => 'Este apelido ja esta registrado!',
+                'usernameAdmin.unique' => 'Este e-mail ja esta registrado!',
+                'contatoAdmin.required' => 'Digite um contato!',
+                'senhaAdmin.required' => 'Digite uma senha!',
             ]
         );
         $admin = new Admin;
@@ -203,15 +239,9 @@ Validação
 
         $admin->save();
         
-        return view('admin.homeAdmin');
+        return redirect()->route('admin.dashboard')->with('success', 'Admin cadastrado com sucesso!');;
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         $admin = Admin::where('idAdmin', $id)->get();
@@ -219,36 +249,16 @@ Validação
         return $admin;
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
         // 
-        
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
         //
