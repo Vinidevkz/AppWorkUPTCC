@@ -8,6 +8,7 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <style>
         .error-message {
@@ -104,7 +105,7 @@
 
         .custom-input {
             font-family: inherit;
-            width: 100%;
+            width: auto;
             border: none;
             border-bottom: 2px solid #9b9b9b;
             outline: 0;
@@ -115,10 +116,7 @@
             transition: border-color 0.2s;
         }
 
-        .custom-input::placeholder {
-            color: transparent;
-        }
-
+   
         .custom-input:placeholder-shown ~ .form__label {
             font-size: 17px;
             cursor: text;
@@ -136,9 +134,9 @@
 
         .custom-input:focus {
             padding-bottom: 6px;
-            font-weight: 700;
+            font-weight: 500;
             border-width: 3px;
-            border-image: linear-gradient(to right, #116399, #38caef);
+            border-image: linear-gradient(to right, #b30000, #ff4d4d);
             border-image-slice: 1;
         }
 
@@ -158,16 +156,14 @@
             box-shadow: none;
         }
   #preview{
-    border: 1px solid black;
-    width: 200px;
-height: 200px;
+
 font-size: 12rem;
 
   }
 
     /* Classe para remover a borda */
     .no-border {
-display: none;   
+        display: none;   
       
     }
     
@@ -175,16 +171,40 @@ display: none;
 </head>
 <body id="boo">
 <div class="container">
+    
+    
+<a href="/admin" class="d-flex p-1 align-items-center m-0">
+<i class="bi bi-skip-backward p-2"></i>
+<p class="m-0">Voltar</p>
+</a>
 
-<div class="row">
-<div class="col-2 p-0 m-0 d-flex align-items-center justify-content-center" id="">
- <div id="preview">X</div>
+<div class="card m-5">
+    <div class="card-header">
+        <h3 class="">Cadastrar administrador</h3>
+    </div>
+    <div class="card-body">
+    <div class="row d-flex flex-row m-3">
+
+<div class="col-12 fundo-form p-2">
+    <div class="row align-items-center justify-content-center ">
+
+        <div class="col-12 d-flex align-items-center justify-content-center  ">
+
+        <div class="col-2">
+        <div class="col-2 p-0 m-0 d-flex align-items-center justify-content-center" id="">
+ <div  class="d-flex align-items-center justify-content-center">
+
+ <i class="bi bi-person-square" id="preview"></i>
+ </div>
   <img id="imagePreview" src="" alt="" style="display:none; max-width: 200px; max-height: 200px;">
 
  </div>
-<div class="col-1"></div>
-<div class="col-9">
-<form method="POST" action="/formAdmin">
+
+        </div>
+
+
+
+        <form method="POST" action="/formAdmin">
 @csrf
 
   <div class="form-row">
@@ -192,7 +212,7 @@ display: none;
   @error('nomeAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-    <div class="form-group col-md-3 form__group field">
+    <div class="form-group col-md-4 form__group field">
       <label for="inputEmail4" class="form_label">Nome do administrador</label>
       <input type="text" class="form-control custom-input" id="inputEmail4" placeholder="Nome do ADM" name="nomeAdmin" value="{{ old('nomeAdmin') }}" required>
     </div>
@@ -200,8 +220,8 @@ display: none;
     @error('usernameAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-    <div class="form-group col-md-2 form__group field">
-    <label for="inputAddress" class="form__label">Nome de usuário</label>
+    <div class="form-group col-md-4 form__group field ">
+    <label for="inputAddress" class="form_label">Nome de usuário</label>
     <input type="text" class="form-control custom-input" id="inputAddress" placeholder="nome.sobrenome" value="{{ old('usernameAdmin') }}"  name="usernameAdmin" required>
   </div>
 
@@ -209,8 +229,8 @@ display: none;
   @error('senhaAdmin')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
-  <div class="form-group col-md-3 form__group field">
-      <label for="inputPassword4" class="form__label">Senha</label>
+  <div class="form-group col-md-4 form__group field">
+      <label for="inputPassword4" class="form_label">Senha</label>
       <input type="password" class="form-control  custom-input" id="inputPassword4" placeholder="Senha" value="{{ old('senhaAdmin') }}"  name="senhaAdmin" required>
     </div>
 
@@ -234,22 +254,45 @@ display: none;
                                 @enderror
     <div class="form-group col-md-3 form__group field">
       <label for="inputCity" class="form__label" class="">Contato</label>
-      <input type="number" class="form-control custom-input custom-input" id="inputPhone" name="contatoAdmin" value="{{ old('contatoAdmin') }}" required>
+      <input type="number" class="form-control custom-input custom-input" id="inputPhone" name="contatoAdmin" value="{{ old('contatoAdmin') }}" placeholder="(00) 0000-0000" required>
 
   </div>
     </div>
 
-    
-  <div class="form-group">
+    <div class="row d-flex justify-content-around m-0">
+        <div class="col-10 p-0">
+    <div class="form-group mb-3">
     <label for="exampleFormControlFile1">Imagem do administrador</label>
-    <input type="file" id="fileInput"  name="fotoAdmin" class="form-control custom-input col-md-4"  value="url">
+    <input type="file" id="fileInput"  name="fotoAdmin" class="form-control custom-input "  value="url">
 
   </div>
+
+
+
+  </div>
+
+  <div class="col-2 d-flex align-items-center">
 
   <button class="btn btn-primary-custom btn-block" id="foto">
                             Registrar
                         </button>
+                       
+    </div>
+
+
 </form>
+
+        </div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+
+
+
 
 </div>
 </div>
