@@ -4,164 +4,126 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Formulário com Imagem</title>
-
-    <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
-    <style>
-        .error-message {
-            color: red;
-            font-size: 0.875rem;
-        }
-
-        .input-container {
-            margin-bottom: 1rem;
-            display: flex;
-            align-items: center;
-        }
-
-        .form-container {
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            padding: 2rem;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin-left: auto;
-        }
-
-        .form-section {
-            display: none;
-        }
-
-        .form-section.active {
-            display: block;
-        }
-    </style>
-
-
+    <link rel="stylesheet" href="{{url('assets/css/style-vaga.css')}}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <title>Document</title>
 </head>
 
-<body class="d-flex align-items-center justify-content-center" style="background-color: #c4c4c4; height: 100vh;">
+<body>
 
-    <div class="cadastroVaga">
-        <form class="h-100" action="">
-            <div class="form-section container bg-light py-5 px-5" style="width: 80vw;">
-                <h1 class="mb-5">Cadastrar vaga</h1>
-                <div class="row h-100 d-flex flex-column align-items-center mb-5">
-                    <div class="col col-8 py-3 d-flex flex-column">
-                        <label for="salarioVaga" class="form__label">Salário da Vaga</label>
-                        <input type="text" class="p-2" name="salarioVaga" placeholder="Salário da Vaga"
-                            value="{{ old('salarioVaga') }}">
-                        @error('prazoVaga')
-                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col col-8 py-3 d-flex flex-column">
-                        <label for="nomeVaga" class="form__label">Nome da Vaga</label>
-                        <input type="text" class="p-2" name="nomeVaga" placeholder="Nome da Vaga"
-                            value="{{ old('nomeVaga') }}">
-                        @error('nomeVaga')
-                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col col-8 py-3 d-flex flex-column">
-                        <div class="form__group field">
-                            @error('idModalidadeVaga')
-                                <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                            @enderror
-                            <div class="input-container">
-                                <i class="fa-solid fa-lock"></i>
-                                <!-- Esta parte precisa ficar pode tirar o select contato que de o mesmo nome ao campo -->
-                                <select name="idModalidadeVaga">
-                                    <option value="">Selecione a Modalidade</option>
-                                    @foreach($modalidades as $modalidade)
-                                        <option value="{{ $modalidade->idModalidadeVaga }}" {{ old('idModalidadeVaga') == $modalidade->idModalidadeVaga ? 'selected' : '' }}>
-                                            {{ $modalidade->descModalidadeVaga }}
-                                            <!-- Supondo que há um campo nomeModalidade na tabela -->
-                                        </option>
-                                    @endforeach
-                                    <!-- Esta parte precisa ficar -->
-                                </select>
+    <section id="vaga">
+        <div class="row" style="height: 100%">
+            <div class="col-6 col-vaga-1">
+                <div class="box-vaga">
+                    <form action="">
+                        <div class="vaga-wrap">
+                            <div class="wrap-header">
+                                <h3>Cadastro de vaga</h3>
+                            </div>
+                            <div class="wrap-body">
+                                <div class="row">
+                                    <div class="col col-8">
+                                        <label for="nomeVaga" class="form__label">Nome da Vaga</label>
+                                        <input type="text" name="nomeVaga" placeholder="Nome da Vaga"
+                                            value="{{ old('nomeVaga') }}">
+                                        @error('nomeVaga')
+                                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col-4 d-flex align-items-center">
+                                        <div class="form__group field">
+                                            @error('idModalidadeVaga')
+                                                <div style="background-color: #fff;" class="error-message">{{ $message }}
+                                                </div>
+                                            @enderror
+                                            <div class="input-container">
+                                            <label for="estadoVaga" class="form__label">Modalidade:</label>
+                                                <i class="fa-solid fa-lock"></i>
+                                                <!-- Esta parte precisa ficar pode tirar o select contato que de o mesmo nome ao campo -->
+                                                <select name="idModalidadeVaga">
+                                                    <option value="">Selecionar</option>
+                                                    @foreach($modalidades as $modalidade)
+                                                        <option value="{{ $modalidade->idModalidadeVaga }}" {{ old('idModalidadeVaga') == $modalidade->idModalidadeVaga ? 'selected' : '' }}>
+                                                            {{ $modalidade->descModalidadeVaga }}
+                                                            <!-- Supondo que há um campo nomeModalidade na tabela -->
+                                                        </option>
+                                                    @endforeach
+                                                    <!-- Esta parte precisa ficar -->
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-7">
+                                        @error('cidadeVaga')
+                                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                                        @enderror
+                                        <label for="cidadeVaga" class="form__label">Cidade da Vaga</label>
+                                        <input type="text" name="cidadeVaga" placeholder="Cidade da Vaga" value="{{ old('cidadeVaga') }}">
+                                    </div>
+                                    <div class="col col-5">
+                                        @error('estadoVaga')
+                                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                                        @enderror
+                                        <label for="estadoVaga" class="form__label">Estado da Vaga</label>
+                                        <input type="text" name="estadoVaga"
+                                            placeholder="Estado da Vaga" value="{{ old('estadoVaga') }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-12">
+                                        @error('diferencialVaga')
+                                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                                        @enderror
+                                        <label for="diferencialVaga" class="form__label">Diferencial Vaga</label>
+                                        <input type="text" name="diferencialVaga" placeholder="Diferencial Vaga" value="{{ old('diferencialVaga') }}">
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col col-5">
+                                        <label for="salarioVaga" class="form__label">Salário da Vaga</label>
+                                        <input type="text" name="salarioVaga" placeholder="Salário da Vaga"
+                                            value="{{ old('salarioVaga') }}">
+                                        @error('prazoVaga')
+                                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                                        @enderror
+                                    </div>
+                                    <div class="col col-7">
+                                        @error('beneficiosVaga')
+                                            <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
+                                        @enderror
+                                        <label for="">Benefícios:</label>
+                                        <input type="text" name="beneficiosVaga" placeholder="Benefícios da Vaga" value="{{ old('beneficiosVaga') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="wrap-footer">
+                                <input class="enviar" type="submit" value="Enviar">
                             </div>
                         </div>
-                    </div>
-                </div>
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary-custom btn-custom prev ml-4"
-                        style="visibility: hidden;">Anterior</button>
-                    <button type="button" class="btn btn-primary-custom btn-custom next">Próximo</button>
+                    </form>
                 </div>
             </div>
-
-            <div class="form-section container bg-light py-5 px-5" style="width: 80vw;">
-                @error('estadoVaga')
-                    <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <div class="form__group field">
-                    <label for="estadoVaga" class="form__label">Estado da Vaga</label>
-                    <input type="text" class="form-control custom-input" name="estadoVaga" placeholder="Estado da Vaga"
-                        value="{{ old('estadoVaga') }}">
+            <div class="col-6 col-vaga-2">
+                <div class="box-lembrete">
+                    <h4>Lembre-se!</h4>
+                    <p class="w-75" style="font-size: 0.8rem">Todas e quaisquer características da vaga podem ser
+                        editadas posteriormente! Então não se preocupe
+                        caso algum dado seja preenchido incorretamente</p>
                 </div>
-
-                @error('idArea')
-                    <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
-                @enderror
-                <select name="idArea">
-                    <option value="">Selecione a Area</option>
-
-                    @foreach($areas as $area)
-                        <option value="{{ $area->idArea }}" {{ old('idArea') == $area->idArea ? 'selected' : '' }}>
-                            {{ $area->nomeArea }}
-                        </option>
-                    @endforeach
-                </select>
-
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-secondary-custom btn-custom prev ml-4"
-                        style="visibility: hidden;">Anterior</button>
-                    <button type="button" class="btn btn-primary-custom btn-custom next">Próximo</button>
-                </div>
-
             </div>
-        </form>
-    </div>
+        </div>
+    </section>
 
-        <!-- Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-        <script>
-            $(document).ready(function () {
-                let currentSection = 0;
-                const sections = $('.form-section');
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
+        integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
+        crossorigin="anonymous"></script>
 
-                function updateFormSection() {
-                    sections.removeClass('active').eq(currentSection).addClass('active');
-                    $('.prev').css('visibility', currentSection === 0 ? 'hidden' : 'visible');
-                }
-
-                $('.next').click(function () {
-                    if (currentSection < sections.length - 1) {
-                        currentSection++;
-                        updateFormSection();
-                    }
-                });
-
-                $('.prev').click(function () {
-                    if (currentSection > 0) {
-                        currentSection--;
-                        updateFormSection();
-                    }
-                });
-
-                updateFormSection();
-            });
-        </script>
 </body>
 
 </html>

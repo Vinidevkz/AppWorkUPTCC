@@ -1,0 +1,113 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#vaga {
+    margin-top: 10vh;
+    height: 87vh;
+    background-color: #ededed;
+}
+
+.col-vaga-1, .col-vaga-2, form {
+    display: grid;
+    place-items: center;
+}
+
+.box-vaga {
+    width: 85%;
+    height: 90%;
+    background-color: #f6f6f6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    height: 80%;
+}
+
+.vaga-wrap {
+    height: 100%;
+}
+
+.vaga-wrap, .wrap-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+h3 {
+    display: flex;
+    justify-content: left;
+
+}
+
+.wrap-body {
+    height: 65%;
+    
+}
+
+.vaga-wrap .row .col {
+    display: flex;
+    flex-direction: column;
+}
+
+input {
+    background-color: #fff;
+    border-style: none;
+    padding: 0.3rem;
+    border-left: 3px solid #00ff75;
+}
+
+.input-container select {
+    background-color: rgb(255, 255, 255);
+    border-style: none;
+    width: 100%;
+    padding: 0.3rem 1rem;
+    border-left: 3px solid #00ff75;
+}
+
+.input-container select {
+    color: #535353;
+}
+
+.input-container select option {
+    color: #535353;
+    background-color: #ffffff;
+}
+
+.input-container select option:hover {
+    background-color: #ff0000;
+}
+
+.wrap-footer, .enviar {
+    display: flex;
+    justify-content: center;
+}
+
+.enviar {
+    background-color: #20dd77;
+    color: #fff;
+    padding: 0.5rem 0;
+    width: 60%;
+}
+
+.col-vaga-2 {
+    background-image: url("../img/fundo-vaga.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-lembrete {
+    background-color: #fff;
+    width: 15rem;
+    height: 15rem;
+    box-shadow: 0px 0px 20px 3px rgba(0,0,0,0.75);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

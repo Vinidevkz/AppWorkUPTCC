@@ -13,7 +13,7 @@
 
 <body>
 
-    @include('components.navbarDashboardEmpresa')
+@include('components.navbarDashboardEmpresa')
 
 
     <section class="card">

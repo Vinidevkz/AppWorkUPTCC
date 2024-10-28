@@ -1,4 +1,4 @@
-<h1>Candidatos para a vaga: {{ $vaga->nomeVaga }}</h1>
+    <h1>Candidatos para a vaga: {{ $vaga->nomeVaga }}</h1>
 
 @if($candidatos->isEmpty())
     <p>Nenhum candidato encontrado para esta vaga.</p>

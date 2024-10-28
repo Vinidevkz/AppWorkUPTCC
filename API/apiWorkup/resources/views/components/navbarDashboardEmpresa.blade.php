@@ -36,6 +36,10 @@
             <div>
                 <a href="placeholder">{{ $empresa->nomeEmpresa }}</a>
                 <img src="../assets/img/dashboardEmpresa/user.png" alt="">
+                <form action="/logout" method="POST">
+                    @csrf
+                    <input type="submit" class="text-light" value="Sair" style="background-color: transparent; border:none;">
+                </form>
             </div>
         </div>
     </div>
