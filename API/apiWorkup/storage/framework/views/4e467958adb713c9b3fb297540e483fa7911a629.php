@@ -78,22 +78,21 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                
-                
+
+
 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">Principais</a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/cadastrarAdmin">cadastrar admin</a></li>
-                            <li><a class="dropdown-item" href="/cadastrarVaga">cadastrar vaga</a></li>
-                            <li><a class="dropdown-item" href="/cadastrarEmpresa">cadastrar empresa</a></li>
-                            <li><a class="dropdown-item" href="/cadastrarAreaEmpresa">cadastrar Area empresa</a></li>
+                            <li><a class="dropdown-item" href="/admin/cadastrar">cadastrar admin</a></li>
+                            <li><a class="dropdown-item" href="/vaga/cadastrar">cadastrar vaga</a></li>
+                            <li><a class="dropdown-item" href="/empresa/cadastrar">cadastrar empresa</a></li>
                             <li><a class="dropdown-item" href="/admin">home Admin</a></li>
                         </ul>
                     </li>
                     <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-                   
+
                     <li class="nav-item">
                         <a class="nav-link" href="#"><i class="fas fa-lightbulb"></i></a>
                     </li>
@@ -109,83 +108,107 @@
         <!-- cabeçalho -->
 
         <header class="quemsomosf bg-dark py-5">
-    <div class="container px-5">
-        <div class="row gx-5 align-items-center justify-content-center">
-            <div class="col-lg-8 col-xl-7 col-xxl-6">
+            <div class="container px-5">
+            <div class="row gx-5 align-items-center justify-content-center">
+                <div class="col-lg-8 col-xl-7 col-xxl-6">
                 <div class="my-6 text-center text-xl-start">
                     <img class="Logoheader" src="<?php echo e(url('/assets/img/home/workuplogo.png')); ?>" alt="Logoheader" class="logoheader mb-3">
                     <p class="lead fw-normal text-white mb-4">Ligando mentes inovadoras a empresas brilhantes</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center justify-content-xl-start">
-                        <a class="btn btn-success btn-lg px-4 me-sm-3" href="/login">Venha conosco</a>
-                        <a class="btn btn-success btn-lg px-4" href="#!">Saiba mais</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
-                <div id="carouselExampleSlidesOnly" class="carousel" data-bs-ride="carousel" >
-                    <div class="carousel-inner">
-                        <div class="carousel-item top  active">
-                            <img class="img-fluid rounded-4 my-0" src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="imgHeader">
-                        </div>
-                        <div class="carousel-item">
-                            <img class="img-fluid rounded-4 my-0" src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="imgHeader">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+                    <a class="btn btn-success btn-lg px-4 me-sm-3" href="/login">Venha conosco</a>
+                    <button type="button" class="btn btn-success btn-lg px-4" data-bs-toggle="modal" data-bs-target="#videoModal">Saiba mais</button>
 
-        <div class="rowsobrenos">
-             <div class="container">
+                    <!-- Modal -->
+                    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-body">
+                            <div class="embed-responsive embed-responsive-16by9">
+                                <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/y-Kao78Ug8I" allowfullscreen style="width: 100%; height: 500px;"></iframe>
+                            </div>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                </div>
+                <div class="col-xl-5 col-xxl-6 d-none d-xl-block text-center">
+                <div id="carouselExampleSlidesOnly" class="carousel" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                    <div class="carousel-item top  active">
+                        <img class="img-fluid rounded-4 my-0" src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="imgHeader">
+                    </div>
+                    <div class="carousel-item">
+                        <img class="img-fluid rounded-4 my-0" src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="imgHeader">
+                    </div>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </div>
+        </header>
+        <div class="rownossamissao">
+            <div class="container">
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-md-12">
-                        <h1>Quem Somos</h1>
+                        <h1>WorkUp Web</h1>
                     </div>
                     <div class="col-md-6">
-                       
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h6 class="card-subtitle text-muted">Nossa missão e visão</h6>
-                                <p class="textcard">A WorkUp é uma plataforma dedicada a conectar jovens talentos com suas primeiras oportunidades no mercado de trabalho. Entendemos as dificuldades que muitos enfrentam ao buscar seu primeiro emprego, e nossa missão é tornar esse processo mais acessível e eficiente. Combinando tecnologia inovadora e uma abordagem centrada nos usuários, oferecemos um espaço onde estudantes podem encontrar vagas que se alinham com suas habilidades e interesses, e onde as empresas podem descobrir novos talentos.</p>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSobreNos">
-                                    Saiba mais
+                                <h6 class="card-subtitle text-muted"> WorkUp Web para Empresas</h6>
+                                <p class="textcard">Bem-vindo à WorkUp Web, a plataforma desenvolvida especialmente para conectar empresas a jovens talentos promissores. Sabemos que encontrar o candidato ideal pode ser um desafio, e é por isso que criamos um ambiente intuitivo e eficiente para facilitar esse processo.</p>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNossamissao">
+                                    Abrir
                                 </button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-6">
-                      
-                        <div class="laptop-frame">
-                            <div class="laptop-screen">
-                                <iframe width="560" height="315" src="https://www.youtube.com/embed/4ArtpRaYleM?si=fBzTyuWArDvwD7mj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                            </div>
+
+                        <div class="cardimage">
+                            <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="" class="card-img-top" alt="Imagem 3">
                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Nossamissao -->
+        <div class="modal fade" id="modalNossamissao" tabindex="-1" aria-labelledby="modalNossamissao" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalnossamissaoLabel">WorkUp Web</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p> Aqui, você pode cadastrar sua empresa, postar vagas, e gerenciar todo o processo de recrutamento de forma simplificada. A WorkUp Web não só oferece uma ampla base de candidatos qualificados, mas também proporciona ferramentas avançadas de busca e filtragem para encontrar exatamente o que você precisa. Junte-se a nós e descubra como a WorkUp Web pode transformar o seu processo de recrutamento. </p>
+                    </div>
+                    <div class="floating-images">
+                        <img src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="Imagem 1" class="floating-image right">
+                        <img src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="Imagem 2" class="floating-image right right-0">
+                        <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem 3" class="floating-image left">
                     </div>
                 </div>
             </div>
         </div>
 
         <div class="rowjovens">
-           
             <div class="container">
                 <div class="row" style="margin-top: 20px;">
                     <div class="col-md-12">
                         <h1>Nossos Jovens</h1>
                     </div>
                     <div class="col-md-6">
-                        
                         <div class="cardimage">
                             <img src="<?php echo e(url('/assets/img/home/3.png')); ?>" alt="" class="card-img-top" alt="Imagem 3">
                         </div>
                     </div>
                     <div class="col-md-6">
-                       
                         <div class="card mb-3">
                             <div class="card-body">
-                                <h6 class="card-subtitle text-muted">Nossa missão e visão</h6>
-                                <p class="textcard">Os jovens são o coração da WorkUp. Sabemos que iniciar uma carreira pode ser um desafio, e é por isso que estamos aqui para apoiar cada passo do caminho. Nossos usuários têm acesso a uma vasta gama de recursos, desde perfis personalizados que destacam suas habilidades e experiências, até um feed de notícias com dicas de carreira e oportunidades de emprego. Estamos comprometidos em ajudar nossos jovens a alcançar seu potencial máximo e a encontrar a oportunidade perfeita para iniciar suas carreiras.</p>
+                                <p class="textcard">Os jovens são o coração da WorkUp. Sabemos que iniciar uma carreira pode ser um desafio, e é por isso que estamos aqui para apoiar cada passo do caminho. </p>
                                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalJovens">
                                     Abrir
                                 </button>
@@ -195,60 +218,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="rownossamissao">
-       
-            <div class="container">
-                <div class="row" style="margin-top: 20px;">
-                    <div class="col-md-12">
-                        <h1>Nossa Missão</h1>
-                    </div>
-                    <div class="col-md-6">
-                        
-                        <div class="card mb-3">
-                            <div class="card-body">
-                                <h6 class="card-subtitle text-muted">Nossa missão e visão</h6>
-                                <p class="textcard">Nossa missão é facilitar a transição dos jovens do ambiente acadêmico para o mundo profissional. Acreditamos que todos merecem a chance de começar suas carreiras com confiança, e estamos comprometidos em criar um ambiente inclusivo e acolhedor para isso. Através do nosso aplicativo intuitivo e nosso site web responsivo, pretendemos simplificar a busca por empregos, promover o crescimento pessoal e profissional dos nossos usuários, e contribuir para um mercado de trabalho mais justo e acessível.</p>
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalNossamissao">
-                                    Abrir
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-6">
-                        <!-- Card maior (apenas vídeo) -->
-                        <div class="cardimage">
-                            <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="" class="card-img-top" alt="Imagem 3">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-        <!-- Modal Sobre Nós -->
-        <div class="modal fade" id="modalSobreNos" tabindex="-1" aria-labelledby="modalSobreNos" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="modalSobreNosLabel">Sobre Nós</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="textcard">
-                A WorkUp é mais do que apenas um aplicativo; somos uma comunidade dedicada a transformar a busca pelo primeiro emprego em uma experiência empoderadora e acessível. Fundada com o objetivo de reduzir as barreiras enfrentadas pelos jovens ao entrar no mercado de trabalho, nossa plataforma oferece recursos inovadores para conectar talentos emergentes com empresas que valorizam e investem no desenvolvimento de novos profissionais.
-                </p>
-            </div>
-            <!-- Adiciona as imagens flutuantes -->
-            <div class="floating-images">
-                <img src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="Imagem 1" class="floating-image right">
-                <img src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="Imagem 2" class="floating-image right right-0">
-                <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem 3" class="floating-image left">
-            </div>
-        </div>
-    </div>
-</div>
-
         <!-- Modal Nossos Jovens -->
         <div class="modal fade" id="modalJovens" tabindex="-1" aria-labelledby="modalJovens" aria-hidden="true">
             <div class="modal-dialog">
@@ -258,99 +227,135 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        <p> Somos uma empresa dedicada a fornecer soluções inovadoras no campo da tecnologia. Nossa missão é entregar produtos de alta qualidade que atendam às necessidades de nossos clientes, sempre com foco em excelência e inovação. </p>
+                        <p>Nossos usuários têm acesso a uma vasta gama de recursos, desde perfis personalizados que destacam suas habilidades e experiências, até um feed de notícias com dicas de carreira e oportunidades de emprego. Estamos comprometidos em ajudar nossos jovens a alcançar seu potencial máximo e a encontrar a oportunidade perfeita para iniciar suas carreiras. Somos uma empresa dedicada a fornecer soluções inovadoras . </p>
                     </div>
                     <div class="floating-images">
-                <img src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="Imagem 1" class="floating-image right">
-                <img src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="Imagem 2" class="floating-image right right-0">
-                <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem 3" class="floating-image left">
-            </div>
-                    
+                        <img src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="Imagem 1" class="floating-image right">
+                        <img src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="Imagem 2" class="floating-image right right-0">
+                        <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem 3" class="floating-image left">
+                    </div>
+
                 </div>
             </div>
         </div>
 
-       <!-- Modal Nossamissao -->
-        <div class="modal fade" id="modalNossamissao" tabindex="-1" aria-labelledby="modalNossamissao" aria-hidden="true">
-            <div class="modal-dialog">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalnossamissaoLabel">nossa missao</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="rowsobrenos">
+            <div class="container">
+                <div class="row" style="margin-top: 20px;">
+                    <div class="col-md-12">
+                        <h1>Quem Somos</h1>
                     </div>
-                    <div class="modal-body">
-                        <p> Somos uma empresa dedicada a fornecer soluções inovadoras no campo da tecnologia. Nossa missão é entregar produtos de alta qualidade que atendam às necessidades de nossos clientes, sempre com foco em excelência e inovação. </p>
+                    <div class="col-md-5">
+                        <div class="card mb-3">
+                            <div class="card-body">
+
+                                <p class="textcard">
+                                    A WorkUp é uma plataforma dedicada a conectar jovens talentos com suas primeiras oportunidades no mercado de trabalho. Entendemos as dificuldades que muitos enfrentam ao buscar seu primeiro emprego, e nossa missão é tornar esse processo mais acessível e eficiente.
+                                </p>
+                                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modalSobreNos">
+                                    Saiba mais
+                                </button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="floating-images">
-                <img src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="Imagem 1" class="floating-image right">
-                <img src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="Imagem 2" class="floating-image right right-0">
-                <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem 3" class="floating-image left">
-            </div>
-                    
+                    <div class="col-md-6">
+
+
+                        <div class="cardimage">
+                            <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="" class="card-img-top" alt="Imagem 3">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
+        <!-- Modal Sobre Nós -->
+        <div class="modal fade" id="modalSobreNos" tabindex="-1" aria-labelledby="modalSobreNos" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalSobreNosLabel">Sobre Nós</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="textcard">
+                            Combinando tecnologia inovadora e uma abordagem centrada nos usuários, oferecemos um espaço onde estudantes podem encontrar vagas que se alinham com suas habilidades e interesses, e onde as empresas podem descobrir novos talentos. A WorkUp é mais do que apenas um aplicativo; somos uma comunidade dedicada a transformar a busca pelo primeiro emprego em uma experiência empoderadora e acessível. Fundada com o objetivo de reduzir as barreiras enfrentadas pelos jovens ao entrar no mercado de trabalho, nossa plataforma oferece recursos inovadores para conectar talentos emergentes com empresas que valorizam e investem no desenvolvimento de novos profissionais.
+                        </p>
+                    </div>
+                    <!-- Adiciona as imagens flutuantes -->
+                    <div class="floating-images">
+                        <img src="<?php echo e(url('/assets/img/home/mkwup.png')); ?>" alt="Imagem 1" class="floating-image right">
+                        <img src="<?php echo e(url('/assets/img/home/smart.png')); ?>" alt="Imagem 2" class="floating-image right right-0">
+                        <img src="<?php echo e(url('/assets/img/home/1.png')); ?>" alt="Imagem 3" class="floating-image left">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
 
         <div class="rowdepoimento">
             <!-- mais depoimentos -->
             <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
-            <div class="carousel-inner">
-                <div class="carousel-item active">
-                <div class="container">
-                    <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-10 col-xl-7">
-                        <div class="text-center">
-                        <div class="fs-4 mb-4 fst-italic">"Trabalho incrível dos estudantes de DS para a comunidade jovem e desamparada"</div>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                            <div class="fw-bold">
-                            Fernanda Silva
-                            <span class="fw-bold text-primary mx-1">/</span>
-                            Analista, Empregada
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="container">
+                            <div class="row gx-5 justify-content-center">
+                                <div class="col-lg-10 col-xl-7">
+                                    <div class="text-center">
+                                        <div class="fs-4 mb-4 fst-italic">"Trabalho incrível dos estudantes de DS para a comunidade jovem e desamparada"</div>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                            <div class="fw-bold">
+                                                Fernanda Silva
+                                                <span class="fw-bold text-primary mx-1">/</span>
+                                                Analista, Empregada
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        </div>
                     </div>
-                    </div>
-                </div>
-                </div>
-         
-                <div class="carousel-item ">
-                <div class="container">
-                    <div class="row gx-5 justify-content-center">
-                    <div class="col-lg-10 col-xl-7">
-                        <div class="text-center">
-                        <div class="fs-4 mb-4 fst-italic">"Outro depoimento de usuário do app"</div>
-                        <div class="d-flex align-items-center justify-content-center">
-                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
-                            <div class="fw-bold">
-                            João Pereira
-                            <span class="fw-bold text-primary mx-1">/</span>
-                            Desenvolvedor, Freelancer
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
 
-            <!-- Controles -->
-            <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Anterior</span>
-            </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="visually-hidden">Próximo</span>
-            </button>
+                    <div class="carousel-item ">
+                        <div class="container">
+                            <div class="row gx-5 justify-content-center">
+                                <div class="col-lg-10 col-xl-7">
+                                    <div class="text-center">
+                                        <div class="fs-4 mb-4 fst-italic">"Outro depoimento de usuário do app"</div>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <img class="rounded-circle me-3" src="https://dummyimage.com/40x40/ced4da/6c757d" alt="..." />
+                                            <div class="fw-bold">
+                                                João Pereira
+                                                <span class="fw-bold text-primary mx-1">/</span>
+                                                Desenvolvedor, Freelancer
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Controles -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Próximo</span>
+                </button>
             </div>
         </div>
 
-        </main>
+    </main>
 
-   
+
 
     <!-- Rodapé -->
     <div class="footer imgfooter">
@@ -423,6 +428,17 @@
                         </div>
                     </div>
                 </div>
+
+                <div vw class="enabled">
+                    <div vw-access-button class="active"></div>
+                    <div vw-plugin-wrapper>
+                        <div class="vw-plugin-top-wrapper"></div>
+                    </div>
+                </div>
+                <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+                <script>
+                    new window.VLibras.Widget('https://vlibras.gov.br/app');
+                </script>
 
 
                 <script src="<?php echo e(url('/assets/js/home.js')); ?>" async></script>

@@ -16,7 +16,8 @@
         <div class="row" style="height: 100%">
             <div class="col-6 col-vaga-1">
                 <div class="box-vaga">
-                    <form action="">
+                    <form action="/vaga/cadastrar" method="POST">
+                        @csrf
                         <div class="vaga-wrap">
                             <div class="wrap-header">
                                 <h3>Cadastro de vaga</h3>

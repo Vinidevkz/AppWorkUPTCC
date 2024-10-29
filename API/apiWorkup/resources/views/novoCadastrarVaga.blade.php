@@ -16,7 +16,7 @@
         <div class="row" style="height: 100%">
             <div class="col col-vaga-1">
                 <div class="box-vaga">
-                    <form action="">
+                <form action="">
                         <div class="vaga-wrap">
                             <div class="wrap-header">
                                 <h3>Cadastro de vaga</h3>

@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
     <title>Home</title>
 </head>
@@ -27,10 +28,6 @@
                     <div class="botoes-card">
                         <a href="{{ route('cadastrarVaga') }}" class="botao-card botao-vaga">Publicar vaga</a>
                         <a href="{{ route('post.create', $empresa->idEmpresa) }}" class="botao-card botao-post">Fazer post</a>
-                        <form action="/logout" method="post" class="botao-card" style="background-color: #eb4034">
-                            @csrf
-                            <button type="submit" class="text-light" style="background-color: transparent; border-style: none">Sair</button>
-                        </form>
                     </div>
                 </div>
             </div>
@@ -93,14 +90,14 @@
                                 <div class="header-vaga">
                                     <h3>{{ $vaga->nomeVaga }}</h3>
                                     <div>
-                                        <p>Publicada em {{ $vaga->created_at }}</p>
-                                        <p>Aberta até xx/xx/2024</p>
+                                        <p>Publicada em {{ \Carbon\Carbon::parse($vaga->created_at)->format('d/m/Y')}} </p>
+                                        <p>Aberta até {{ \Carbon\Carbon::parse($vaga->prazoVaga)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
                                 <div class="opt-vaga">
                                     <p>Salário: R${{ $vaga->salarioVaga }}</p>
                                     <p>Área: {{ $vaga->nomeVaga }}</p>
-                                    <p>Estado: - - -</p>
+                                    <p>Estado: {{ $vaga->estadoVaga }}</p>
                                     <p>Candidatos: {{ $vaga->total_candidatos }}</p>
                                 </div>
                                 <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn-vagas">Mais detalhes <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>

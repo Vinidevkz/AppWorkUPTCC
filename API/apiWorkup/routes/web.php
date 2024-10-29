@@ -122,7 +122,7 @@ Route::middleware('auth:empresa')->group(function(){
             Route::get('/{id}/edit', [VagaController::class, 'edit'])->name('vagas.edit');
           
             //Formulario Vaga
-            Route::post('/form', [VagaController::class, 'store']);
+            Route::post('/cadastrar', [VagaController::class, 'store']);
             
             //Vagas que a empresa postou
             Route::prefix('/candidaturas')->group(function(){
