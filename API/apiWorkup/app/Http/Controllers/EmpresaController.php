@@ -91,30 +91,36 @@ Validação
 
         $request->validate(
             [
-                'usernameEmpresa'  => 'required',
-                'nomeEmpresa' => 'required|',
+                'usernameEmpresa'  => 'required|unique:tb_empresa,usernameEmpresa',
+                'nomeEmpresa' => 'required',
+                'emailEmpresa' => 'required|unique:tb_empresa,emailEmpresa',
                 'sobreEmpresa' => 'required',
-                'cnpjEmpresa' => 'required',
+                'cnpjEmpresa' => 'required|unique:tb_empresa,cnpjEmpresa',
                 'contatoEmpresa' => 'required',
                 'senhaEmpresa' => 'required',
                 'cidadeEmpresa' => 'required',
                 'estadoEmpresa' => 'required',
                 'LogradouroEmpresa' => 'required',
-                'cepEmpresa' => 'required',
+                'cepEmpresa' => 'required|min:8',
                 'numeroLograEmpresa' => 'required',
             ],
             [
                 'usernameEmpresa.required'  => 'Digite um APELIDO',
-                'nomeEmpresa.required' => 'Digite um nome',
-                'sobreEmpresa.required' => 'Digite sobre a empresa',
-                'cnpjEmpresa.required' => 'Digite um cnpj',
-                'contatoEmpresa.required' => 'Digite um contato',
-                'senhaEmpresa.required' => 'Digite uma senha',
+                'usernameEmpresa.unique'  => 'Este apelido já está existe!',
+                'nomeEmpresa.required' => 'Digite um nome!',
+                'sobreEmpresa.required' => 'Digite uma descrição sobre a empresa!',
+                'cnpjEmpresa.required' => 'Digite um CNPJ!',
+                'cnpjEmpresa.unique' => 'Este CNPJ já está registrado!',
+                'contatoEmpresa.required' => 'Informe um e-mail ou telefone para contato!',
+                'emailEmpresa.required' => 'Digite uma email!',
+                'emailEmpresa.unique' => 'Este e-mail já está registrado!',
+                'senhaEmpresa.required' => 'Digite uma senha!',
                 'cidadeEmpresa.required' => 'Digite uma cidade',
                 'estadoEmpresa.required' => 'Digite um estado',
                 'LogradouroEmpresa.required' => 'Digite um logradouro',
                 'cepEmpresa.required' => 'Digite um cep',
                 'numeroLograEmpresa.required' => 'Digite um numero',
+                
             ]
         );
         $empresa = new Empresa;

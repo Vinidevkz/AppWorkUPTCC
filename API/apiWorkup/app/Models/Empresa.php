@@ -35,9 +35,9 @@ class Empresa extends Authenticatable
     }
 
     protected $fillable = [
-        'usernameEmpresa', 
-        'nomeEmpresa', 
-        'emailEmpresa', 
+        'usernameEmpresa',
+        'nomeEmpresa',
+        'emailEmpresa',
         'fotoEmpresa',
         'sobreEmpresa',
         'cnpjEmpresa',

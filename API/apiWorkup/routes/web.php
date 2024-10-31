@@ -15,7 +15,7 @@ use App\http\Controllers\PostController;
 use App\http\Controllers\MensagemController;
 use App\Http\Controllers\DenunciaEmpresaController;
 use App\Http\Controllers\DenunciaVagaController;
-
+use Illuminate\Support\Facades\Auth;
 
 /*Rotas que possuem o 'prefix' requerem que digite o nome delas antes de buscar algo
 
@@ -76,7 +76,7 @@ Route::get('/novoEmpresa', function () {
 
 //Home WorkUp
 Route::get('/home', function () {
-    return view('/homeWorkUp'); });
+    return view('/homeWorkUp'); })->name('home.workup');
 
 //Cadastrar Empresa
 Route::get('/cadastrarEmpresa', [EmpresaController::class, 'create'])->name('cadastrarEmpresa');
@@ -232,8 +232,8 @@ Route::middleware('auth:admin')->group(function(){
             // Aprovar Empresas
             Route::post('/{id}', [EmpresaController::class, 'aprovar'])->name('empresas.aprovar');
             // Editar perfil Empresas
-            Route::get('/{id}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
-            Route::put('/{id}', [EmpresaController::class, 'update'])->name('empresas.update');
+            // Route::get('/{id}/edit', [EmpresaController::class, 'edit'])->name('empresas.edit');
+            // Route::put('/{id}', [EmpresaController::class, 'update'])->name('empresas.update');
 
             });
 
@@ -268,7 +268,7 @@ Route::middleware('auth:admin')->group(function(){
             });
             
             Route::prefix('/area')->group(function(){
-                Route::get('/', [AreaController::class, 'create'])->name('cadastrarArea');
+                Route::get('/', [AreaController::class, 'index'])->name('areas.index');
                 Route::get('/listar', [AreaController::class, 'listar'])->name('listarAreas');
                 Route::post('/form', [AreaController::class, 'store']);
             });
@@ -286,7 +286,6 @@ Route::get('/login', [AuthController::class, 'showFormLogin'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
 
 
 //---------------------------------------------

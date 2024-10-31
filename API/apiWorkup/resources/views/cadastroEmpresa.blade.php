@@ -9,17 +9,16 @@
     <link rel="stylesheet" href="{{url('assets/css/estilo-padrao-workup.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-        <link
-    rel="stylesheet"
-    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-        <title>WorkUP | Cadastre-se</title>
-        <script>
-                function goBack() {
+    <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <title>WorkUP | Cadastre-se</title>
+    <script>
+        function goBack() {
             window.history.back()
         }
-       
     </script>
-    
+
 </head>
 
 <body>
@@ -65,11 +64,11 @@
         </form>
     </div>
 -->
-    
+
 
     <div class="box-cadastro">
-        
-        
+
+
         <form class="" method="POST" action="/formEmpresa" id="registerForm" enctype="multipart/form-data">
             @csrf
             <div class="form-step wrap-cadastro">
@@ -85,7 +84,7 @@
                         <label for="nomeEmpresa">Nome da empresa:</label>
                         <input type="text" class="form-control custom-input" name="nomeEmpresa" value="{{old('nomeEmpresa')}}">
                         @error('nomeEmpresa')
-                            <div class="error-message">{{$message}}</div>
+                        <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -93,7 +92,7 @@
                         <label for="usernameEmpresa">Nome de usuário:</label>
                         <input type="text" class="form-control custom-input" name="usernameEmpresa" value="{{old('usernameEmpresa')}}">
                         @error('usernameEmpresa')
-                            <div class="error-message">{{$message}}</div>
+                        <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -105,7 +104,7 @@
                         <label for="emailEmpresa">Email:</label>
                         <input type="email" class="form-control custom-input" name="emailEmpresa" placeholder="exemplo@gmail.com" value="{{old('emailEmpresa')}}">
                         @error('emailEmpresa')
-                            <div class="error-message">{{ $message }}</div>
+                        <div class="error-message">{{ $message }}</div>
                         @enderror
                     </div>
 
@@ -113,7 +112,7 @@
                         <label for="senhaEmpresa">Senha:</label>
                         <input type="password" class="form-control custom-input" name="senhaEmpresa" value="{{old('senhaEmpresa')}}">
                         @error('senhaEmpresa')
-                            <div class="error-message">{{$message}}</div>
+                        <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -139,7 +138,7 @@
                         <label for="sobreEmpresa">Sobre:</label>
                         <textarea class="form-control custom-input" id="sobreEmpresa" name="sobreEmpresa" placeholder="Escreva um pouco sobre vocês!" style="min-height: 70%;" value="{{old('sobreEmpresa')}}"></textarea>
                         @error('sobreEmpresa')
-                            <div class="error-message">{{$message}}</div>
+                        <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -147,7 +146,7 @@
                         <label for="fotoEmpresa">Foto de perfil:</label>
                         <input type="file" id="fileInput" class="form-control custom-input" name="fotoEmpresa" placeholder="Foto da Empresa" value="url">
                         @error('fotoEmpresa')
-                            <div class="error-message">{{$message}}</div>
+                        <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -155,7 +154,7 @@
                         <label for="contatoempresa">Contato:</label>
                         <input type="text" class="form-control custom-input" name="contatoEmpresa" placeholder="telefone comercial, email, etc." value="{{old('contatoEmpresa')}}">
                         @error('contatoEmpresa')
-                            <div class="error-message">{{$message}}</div>
+                        <div class="error-message">{{$message}}</div>
                         @enderror
                     </div>
 
@@ -176,98 +175,70 @@
                     <p>Por último, nos mostre de onde estão nos apoiando</p>
                 </div>
                 <div class="row mb-3">
-            <div class="col col-12">
-                <label for="cepEmpresa">CEP:</label>
-                <div class="input-group">
-                    <input type="text" class="form-control custom-input" name="cepEmpresa" id="cepEmpresa" placeholder="12345-000" value="{{ old('cepEmpresa') }}">
-                    <button type="button" class="avancar justify-content-center align-itens-center" onclick="buscarEndereco()"><span class="material-symbols-outlined m-0 p-0">
-search
-</span></button>
+                    <div class="col col-12">
+                        <label for="cepEmpresa">CEP:</label>
+                        <div class="input-group">
+                            <input type="text" class="form-control custom-input" data-mask="00000-000" name="cepEmpresa" id="cepEmpresa" placeholder="12345-000" value="{{ old('cepEmpresa') }}">
+                        </div>
+                        @error('cepEmpresa')
+                        <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
-                @error('cepEmpresa')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
 
-        <div class="row mb-3">
-            <div class="col col-12">
-                <label for="logradouroEmpresa">Endereço:</label>
-                <input type="text" class="form-control custom-input" name="LogradouroEmpresa" id="logradouroEmpresa" placeholder="Logradouro da Empresa" value="{{ old('LogradouroEmpresa') }}">
-                @error('LogradouroEmpresa')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
+                <div class="row mb-3">
+                    <div class="col col-12">
+                        <label for="logradouroEmpresa">Endereço:</label>
+                        <input type="text" class="form-control custom-input " name="LogradouroEmpresa" id="logradouroEmpresa" placeholder="Logradouro da Empresa" value="{{ old('LogradouroEmpresa') }}" >
+                        @error('LogradouroEmpresa')
+                        <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
 
-        <div class="row mb-3">
-            <div class="col col-12">
-                <label for="cidadeEmpresa">Cidade:</label>
-                <input type="text" class="form-control custom-input" name="cidadeEmpresa" id="cidadeEmpresa" placeholder="Ex: São Paulo" value="{{ old('cidadeEmpresa') }}">
-                @error('cidadeEmpresa')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
+                <div class="row mb-3">
+                    <div class="col col-12">
+                        <label for="cidadeEmpresa">Cidade:</label>
+                        <input type="text" class="form-control custom-input " name="cidadeEmpresa" id="cidadeEmpresa" placeholder="Ex: São Paulo" value="{{ old('cidadeEmpresa') }}" >
+                        @error('cidadeEmpresa')
+                        <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
 
-        <div class="row mb-3">
-            <div class="col col-9">
-                <label for="estadoEmpresa">Estado:</label>
-                <input type="text" class="form-control custom-input" name="estadoEmpresa" id="estadoEmpresa" placeholder="Ex: São Paulo - SP" value="{{ old('estadoEmpresa') }}">
-                @error('estadoEmpresa')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
+                <div class="row mb-3">
+                    <div class="col col-9">
+                        <label for="estadoEmpresa">Estado:</label>
+                        <input type="text" class="form-control custom-input " name="estadoEmpresa" id="estadoEmpresa" placeholder="Ex: São Paulo - SP" value="{{ old('estadoEmpresa') }}"   >
+                        @error('estadoEmpresa')
+                        <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
 
-            <div class="col col-3">
-                <label for="numeroLograEmpresa">Número:</label>
-                <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="Número" value="{{ old('numeroLograEmpresa') }}">
-                @error('numeroLograEmpresa')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
-        <div class="row mb-3">
-            <div class="col col-12">
-                <label for="estadoEmpresa">CNPJ:</label>
-                <input type="text" class="form-control custom-input" name="cnpjEmpresa" placeholder="XXX/0001-XX" value="{{old('cnpjEmpresa')}}">
-                @error('cnpjEmpresa')
-                    <div class="error-message">{{ $message }}</div>
-                @enderror
-            </div>
-        </div>
+                    <div class="col col-3">
+                        <label for="numeroLograEmpresa">Número:</label>
+                        <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="Número" value="{{ old('numeroLograEmpresa') }}">
+                        @error('numeroLograEmpresa')
+                        <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col col-12">
+                        <label for="estadoEmpresa">CNPJ:</label>
+                        <input type="text" class="form-control custom-input" data-mask="00.000.000/0000-00" name="cnpjEmpresa" placeholder="XX.XXX.XXX/0001-XX" value="{{old('cnpjEmpresa')}}">
+                        @error('cnpjEmpresa')
+                        <div class="error-message">{{ $message }}</div>
+                        @enderror
+                    </div>
+                </div>
 
-        <div class="botoes-cadastro mt-4">
-            <button type="button" class="voltar" onclick="prevStep()">Voltar</button>
-            <input type="submit" class="avancar" value="Enviar">
-        </div>
-    </div>
-</form>
-
-<script>
-function buscarEndereco() {
-    const cep = document.getElementById('cepEmpresa').value.replace(/\D/g, ''); // Remove caracteres não numéricos
-    if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
-        fetch(`https://viacep.com.br/ws/${cep}/json/`)
-            .then(response => response.json())
-            .then(data => {
-                if (!data.erro) {
-                    // Preenche os campos com os dados retornados
-                    document.getElementById('logradouroEmpresa').value = data.logradouro;
-                    document.getElementById('cidadeEmpresa').value = data.localidade;
-                    document.getElementById('estadoEmpresa').value = data.uf;
-                } else {
-                    alert('CEP não encontrado.');
-                }
-            })
-            .catch(error => {
-                console.error('Erro ao buscar o endereço:', error);
-            });
-    } else {
-        alert('CEP inválido. Por favor, insira um CEP válido.');
-    }
-}
-</script>
+                <div class="botoes-cadastro mt-4">
+                    <button type="button" class="voltar" onclick="prevStep()">Voltar</button>
+                    <input type="submit" class="avancar" value="Enviar">
+                </div>
+            </div>
+        </form>
 
     </div>
 
@@ -314,9 +285,18 @@ function buscarEndereco() {
     <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js"></script>
     <script type="module">
         // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+        import {
+            initializeApp
+        } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+        import {
+            getStorage,
+            ref,
+            uploadBytes,
+            getDownloadURL
+        } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+        import {
+            getAnalytics
+        } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -336,12 +316,12 @@ function buscarEndereco() {
 
         let selectedFile = null; // Variável para armazenar o arquivo selecionado
 
-        document.getElementById('fileInput').addEventListener('change', function (event) {
+        document.getElementById('fileInput').addEventListener('change', function(event) {
             selectedFile = event.target.files[0]; // Armazena o arquivo selecionado
             if (selectedFile) {
                 const reader = new FileReader();
 
-                reader.onload = function (e) {
+                reader.onload = function(e) {
                     const img = document.getElementById('imagePreview');
                     img.src = e.target.result;
                     img.style.display = 'block'; // Exibe a imagem
@@ -383,11 +363,19 @@ function buscarEndereco() {
             }
         });
 
-        document.getElementById('foto').addEventListener('click', function () {
+        document.getElementById('foto').addEventListener('click', function() {
 
         });
-
     </script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <!-- jQuery Mask Plugin -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+
+    <script src="{{url('assets/js/script.js')}}"></script>
+
 
 </body>
 

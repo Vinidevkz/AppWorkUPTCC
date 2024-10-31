@@ -36,6 +36,8 @@
 
         <link rel="stylesheet" href="assets/css/cssHomeWup/footerhomeW.css">
 
+        <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
+
         <!-- Custom JS -->
         <!-- <script src="/resources/js/homew.js" async></script> -->
 
@@ -67,40 +69,7 @@
     </div>
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg ">
-        <div class="container-fluid navbarcf">
-            <a class="navbar-brand" href="#">
-                <img src="{{url('/assets/img/home/workuplogo.png')}}" alt="Logo Desktop" class="logo-desktop">
-                <img src="{{url('/assets/img/home/WUPlogo.png')}}" alt="Logo Mobile" class="logo-mobile">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasSidebar"
-                aria-controls="offcanvasSidebar">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-
-
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-                            data-bs-toggle="dropdown" aria-expanded="false">Principais</a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="/admin/cadastrar">cadastrar admin</a></li>
-                            <li><a class="dropdown-item" href="/vaga/cadastrar">cadastrar vaga</a></li>
-                            <li><a class="dropdown-item" href="/empresa/cadastrar">cadastrar empresa</a></li>
-                            <li><a class="dropdown-item" href="/admin">home Admin</a></li>
-                        </ul>
-                    </li>
-                    <li class="nav-item"><a class="nav-link" href="/login">Login</a></li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" href="#"><i class="fas fa-lightbulb"></i></a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    @include('components.navbarDashboardEmpresa')
 
     <main class="conteudo">
 

@@ -168,18 +168,12 @@ font-size: 12rem;
     }
     
     </style>
-        <script>
-                function goBack() {
-            window.history.back()
-        }
-       
-    </script>
 </head>
 <body id="boo">
 <div class="container">
 
     
-<button onclick="goBack()" class="d-flex p-1 align-items-center m-0" style="background-color: transparent; border:none">
+<button onclick="window.history.back()" class="d-flex p-1 align-items-center m-0" style="background-color: transparent; border:none">
 <i class="bi bi-skip-backward p-2"></i>
 <p class="m-0">Voltar</p>
 </button>

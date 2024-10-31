@@ -25,37 +25,35 @@ class AppServiceProvider extends ServiceProvider
      * @return void
      */
     public function boot()
-    {
-        View::composer('*', function ($view) {
-            // Obter o objeto completo da empresa autenticada
-            $empresa = Auth::guard('empresa')->user();
-            $admin = Auth::guard('admin')->user();
+{
+    View::composer('*', function ($view) {
+        // Obter o objeto completo da empresa autenticada, se existir
+        $empresa = Auth::guard('empresa')->user();
+        $admin = Auth::guard('admin')->user();
 
-            // Compartilhar o objeto completo se a empresa ou admin estiver autenticado
-            if ($empresa) {
-                $view->with('empresa', $empresa);
-            }
+        // Compartilhar a variável `$empresa`, mesmo que seja null
+        $view->with('empresa', $empresa);
+        
 
-            if ($admin) {
-                // Adicione outras contagens necessárias aqui
-                $totalDenuncias = DB::table('tb_denunciausuario')->count();
-                $totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
-                $totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
-                
-                // Calcula o total de denúncias
-                $totalDenunciasGeral = $totalDenuncias +
-                                        $totalDenunciasEmpresa +
-                                        $totalDenunciasVagas;
+        if ($admin) {
+            // Obter contagens para o admin, se autenticado
+            $totalDenuncias = DB::table('tb_denunciausuario')->count();
+            $totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
+            $totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
 
-                $dadosDenuncias = [
-                    'totalDenuncias' => $totalDenuncias,
-                    'totalDenunciasEmpresa' => $totalDenunciasEmpresa,
-                    'totalDenunciasVagas' => $totalDenunciasVagas,
-                    'totalDenunciasGeral' => $totalDenunciasGeral,
-                ];
+            // Calcular o total de denúncias
+            $totalDenunciasGeral = $totalDenuncias + $totalDenunciasEmpresa + $totalDenunciasVagas;
 
-                $view->with('admin', $admin)->with('dadosDenuncias', $dadosDenuncias);
-            }
-        });
-    }
+            $dadosDenuncias = [
+                'totalDenuncias' => $totalDenuncias,
+                'totalDenunciasEmpresa' => $totalDenunciasEmpresa,
+                'totalDenunciasVagas' => $totalDenunciasVagas,
+                'totalDenunciasGeral' => $totalDenunciasGeral,
+            ];
+
+            $view->with('admin', $admin)->with('dadosDenuncias', $dadosDenuncias);
+        }
+    });
+}
+
 }

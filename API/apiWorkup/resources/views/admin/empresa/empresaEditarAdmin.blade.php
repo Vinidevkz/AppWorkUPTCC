@@ -166,7 +166,7 @@
                 <!-- Coluna do formulário -->
                 <div class="col-md-8 form-container">
                     <div class="panel-heading text mb-5">
-                        Editar vaga
+                        Editar dados
                     </div>
 
                     <form method="POST" action="{{ route('empresas.update', $empresa->idEmpresa) }}">

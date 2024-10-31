@@ -21,7 +21,7 @@
         <div class="row">
             <div class="col">
                 <div class="txt-card-wrap">
-                    <p>Seja bem vinda Empresa</p>
+                    <p>Seja bem-vindo(a) {{ $empresa->nomeEmpresa }}!</p>
                     <h3>
                         Nos ajude nessa jornada de transformar a carreira de diversas pessoas
                     </h3>

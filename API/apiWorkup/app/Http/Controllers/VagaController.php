@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Modalidade;
 use App\Models\Area;
+use Carbon\Carbon;
 use Exception;
 
 class VagaController extends Controller
@@ -102,18 +103,21 @@ class VagaController extends Controller
      */
     public function store(Request $request)
     {
-
-        /*
-|--------------------------------------------------------------------------
-|Validação
-|--------------------------------------------------------------------------
-*/
-
+        // Verificar se a data está no formato 'd/m/Y' e convertê-la para 'Y-m-d'
+        try {
+            $request->merge([
+                'prazoVaga' => Carbon::createFromFormat('d/m/Y', $request->prazoVaga)->format('Y-m-d'),
+            ]);
+        } catch (\Exception $e) {
+            return back()->withErrors(['prazoVaga' => 'Formato de data inválido.']);
+        }
+    
+        // Validação
         $request->validate(
             [
-                'nomeVaga'  => 'required',
-                'prazoVaga' => 'required',
-                'salarioVaga' => 'required',
+                'nomeVaga' => 'required',
+                'prazoVaga' => 'required|date_format:Y-m-d|date',
+                'salarioVaga' => 'required|numeric', // Certifique-se de que o salário seja um número
                 'cidadeVaga' => 'required',
                 'estadoVaga' => 'required',
                 'beneficiosVaga' => 'required',
@@ -122,35 +126,40 @@ class VagaController extends Controller
                 'idModalidadeVaga' => 'required',
             ],
             [
-                'nomeVaga.required'  => 'Digite um nome para continuar',
+                'nomeVaga.required' => 'Digite um nome para continuar',
                 'prazoVaga.required' => 'Digite um prazo',
-                'salarioVaga.required' => 'Digite um salario',
+                'prazoVaga.date_format' => 'Formato de data errado',
+                'prazoVaga.date' => 'Data inválida',
+                'salarioVaga.required' => 'Digite um salário',
+                'salarioVaga.numeric' => 'O salário deve ser um número', // Mensagem para caso não seja numérico
                 'cidadeVaga.required' => 'Digite uma cidade',
                 'estadoVaga.required' => 'Digite um estado',
-                'beneficiosVaga.required' => 'Digite um beneficio',
-                'diferencialVaga.required' => 'Digite um diferencal',
-                'idArea.required' => 'Digite um id vaga',
+                'beneficiosVaga.required' => 'Digite um benefício',
+                'diferencialVaga.required' => 'Digite um diferencial',
+                'idArea.required' => 'Digite um id área',
                 'idModalidadeVaga.required' => 'Digite uma modalidade',
             ]
         );
-
+    
+        // Criar uma nova vaga
         $vaga = new Vaga;
-
         $vaga->nomeVaga = $request->nomeVaga;
         $vaga->prazoVaga = $request->prazoVaga;
         $vaga->salarioVaga = $request->salarioVaga;
         $vaga->cidadeVaga = $request->cidadeVaga;
+        $vaga->descricaoVaga = 'adicionar campo de descricao de vaga';
         $vaga->estadoVaga = $request->estadoVaga;
         $vaga->beneficiosVaga = $request->beneficiosVaga;
         $vaga->diferencialVaga = $request->diferencialVaga;
         $vaga->idEmpresa = Auth::guard('empresa')->id();
         $vaga->idArea = $request->idArea;
-        $vaga->idStatus = 3;
+        $vaga->idStatus = 3; // Certifique-se de que este status está correto para sua lógica
         $vaga->idModalidadeVaga = $request->idModalidadeVaga;
-
+    
+        // Salvar a vaga no banco de dados
         $vaga->save();
-
-        return redirect('/empresa/dashboard');
+    
+        return redirect('/empresa/dashboard')->with('success', 'Vaga cadastrada com sucesso!');
     }
 
     /**
