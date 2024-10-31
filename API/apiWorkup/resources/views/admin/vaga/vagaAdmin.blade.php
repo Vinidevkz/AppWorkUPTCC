@@ -43,7 +43,7 @@ person
           <p class="m-0 fw-bold text-center">Ação</p>
         </div>
         <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
-         <form action="{{ route('cadastrarArea') }}" method="GET" style="display:inline;">
+         <form action="{{ route('areas.create') }}" method="GET" style="display:inline;">
                         <button type="submit" class="btn"><p class="m-0 p-0">Adicionar nova Área</p></button>
                     </form>
         </div>
