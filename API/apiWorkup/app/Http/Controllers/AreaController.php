@@ -26,7 +26,7 @@ class AreaController extends Controller
     }
     public function create()
     {
-        return view('cadastrarArea  ');
+        return view('cadastrarArea');
     }
 
     /**

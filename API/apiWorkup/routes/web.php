@@ -270,7 +270,8 @@ Route::middleware('auth:admin')->group(function(){
             Route::prefix('/area')->group(function(){
                 Route::get('/', [AreaController::class, 'index'])->name('areas.index');
                 Route::get('/listar', [AreaController::class, 'listar'])->name('listarAreas');
-                Route::post('/form', [AreaController::class, 'store']);
+                Route::get('/cadastrar', [AreaController::class, 'create'])->name('areas.create');
+                Route::post('/form', [AreaController::class, 'store'])->name('areas.store');
             });
 });
 
