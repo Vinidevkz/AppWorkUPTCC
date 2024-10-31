@@ -6,14 +6,17 @@ import {
   SafeAreaView,
   ActivityIndicator,
   TouchableOpacity,
-  TextInput
+  TextInput,
+  Alert
 } from "react-native";
 import { TextInputMask } from "react-native-masked-text";
 import { Picker } from "@react-native-picker/picker";
+import Modal from "react-native-modal";
 
 import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
+import Octicons from '@expo/vector-icons/Octicons';
 
 import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState, useEffect } from "react";
@@ -26,6 +29,9 @@ export default function SignON2({ navigation }) {
   const [areaVagas, setAreaVagas] = useState([]);
   const [emailError, setEmailError] = useState('');
   const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
+  const [dadosCep, setDadosCep] = useState(null)
+
+  const [isModalVisible, setModalVisible] = useState(false);
   
   const { apiNgrokArea, apiEmuladorArea } = ApisUrls;
 
@@ -42,6 +48,10 @@ export default function SignON2({ navigation }) {
 
     pegarAreaVaga();
   }, []);
+
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible)
+  }
 
   const handleEmailChange = (text) => {
     // Verificar se há caracteres inválidos
@@ -64,6 +74,31 @@ export default function SignON2({ navigation }) {
     }
   };
 
+  async function pegarCEP() {
+    console.log('Buscando CEP')
+    try {
+      const request = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const response = await request.json();
+      
+      if (response.erro) {
+        throw new Error("CEP não encontrado.");
+      }
+      
+      setDadosCep(response);
+      return response; // Retorna a resposta para verificar na função cadastroUser
+    } catch (erro) {
+      console.log("Erro ao buscar CEP:", erro);
+      Alert.alert("Erro", "CEP não encontrado. Verifique o valor do CEP.");
+    }
+  }
+
+  useEffect(() => {
+    // Verificar se o CEP tem 8 dígitos e buscar dados
+    if (cep.length === 9) {
+      pegarCEP();
+    }
+  }, [cep]);
+
   // Carregador de fontes
   const fontsLoaded = useFonts();
 
@@ -83,8 +118,7 @@ export default function SignON2({ navigation }) {
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>
-
-      <Text>{cep}</Text>      
+   
       <View style={styles.mainContainer}>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
@@ -154,12 +188,18 @@ export default function SignON2({ navigation }) {
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>CEP:</Text>
           <Text style={[styles.DMSansRegular, {color: '#909090', fontSize: 13}]}>Os dados de localização serão preenchidos automaticamente.</Text>
+          <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
           <TextInputMask
             type={"zip-code"}
             placeholder="Digite seu CEP"
-            style={[styles.DMSansRegular, styles.inputCont]}
+            style={[styles.DMSansRegular, styles.inputCont, {width: 280}]}
             onChangeText={(text) => setCep(text)}
           />
+
+          <TouchableOpacity onPress={toggleModal}>
+           <Octicons name="checklist" size={30} color="#20dd77" style={{paddingTop: 10}}/>
+          </TouchableOpacity>
+          </View>
         </View>
       </View>
 
@@ -179,6 +219,26 @@ export default function SignON2({ navigation }) {
           <AntDesign name="right" size={24} color="black" />
         </TouchableOpacity>
       </View>
+
+      <Modal isVisible={isModalVisible} onBackdropPress={toggleModal} >
+
+        <View style={{backgroundColor: '#fff', borderRadius: 20, padding: 20, gap: 10}}>
+            <Text style={[styles.title, styles.DMSansBold]}>Dados do CEP:</Text>
+            <Text style={[styles.text, styles.DMSansRegular]}>Verifique se todas as informações estão corretas:</Text>
+
+            <View style={{gap: 10, paddingVertical: 20}}>
+            <Text style={[styles.DMSansBold, styles.text]}>Cidade: {dadosCep ? dadosCep.localidade : "Não Encontrado"}</Text>
+            <Text style={[styles.DMSansBold, styles.text]}>UF: {dadosCep ? dadosCep.uf : "Não Encontrado"}</Text>
+            <Text style={[styles.DMSansBold, styles.text]}>Logradouro: {dadosCep ? dadosCep.logradouro : "Não Encontrado"}</Text>
+            <Text style={[styles.DMSansBold, styles.text]}>DDD: {dadosCep ? dadosCep.ddd : "Não Encontrado"}</Text>
+            </View>
+
+            <TouchableOpacity style={{backgroundColor: '#20dd77', borderRadius: 20, width: 100, alignItems: 'center', justifyContent: 'center', padding: 10}} onPress={toggleModal}>
+              <Text style={[styles.DMSansRegular, styles.text, {color: '#fff'}]}>Fechar</Text>
+            </TouchableOpacity>
+        </View>
+
+      </Modal>
 
       <StatusBar backgroundColor="#fff" barStyle="dark-content" />
     </SafeAreaView>
