@@ -83,12 +83,11 @@ person
               <tbody>
                 @forelse($empresas as $em) <!-- Usando um alias diferente -->
                   <tr>
-                    <td>{{ $em->idEmpresa }}</td>
+                    <td>{{ $em-> idEmpresa }}</td>
                     <td>
 
-                    <a href="{{ route('empresas.show', $em->idEmpresa) }}" class="visualizar-link"> 
-                    {{ $em->nomeEmpresa }}
-
+                    <a href="{{ route('empresas.show', $em-> idEmpresa) }}" class="visualizar-link"> 
+                    {{ $em->nomeEmpresa }}  
                   </a>
 
 

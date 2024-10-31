@@ -67,60 +67,73 @@ person
             </tr>
           </thead>
           <tbody>
-            @forelse($usuarios as $u) 
-              <tr>
-                <td>{{ $u->idUsuario }}</td>
-                <td class="d-flex flex-row">
-                <div class="user-initials  rounded-circle text-white d-flex justify-content-center align-items-center ms-3" style="width: 45px; height: 45px;">
+    @forelse($usuarios as $u) 
+        <tr>
+            <td>{{ $u->idUsuario }}</td>
+            <td class="d-flex flex-row">
+                <div class="user-initials rounded-circle text-white d-flex justify-content-center align-items-center ms-3" style="width: 45px; height: 45px;">
                     {{ strtoupper(substr($u->nomeUsuario, 0, 1)) }}{{ strtoupper(substr(explode(' ', $u->nomeUsuario)[1] ?? '', 0, 1)) }}
-                  </div>  
-                  <a href="{{ route('usuarios.show', $u->idUsuario) }}" class="visualizar-link mb-3">
-                    {{ $u->nomeUsuario }}
-                  </a>
-                </td>
-                <td>{{ $u->emailUsuario }}</td>
-                <td>
-  <span class="badge rounded-pill d-inline 
-    @switch($u->status->tipoStatus)
-      @case('Ativo')
-        badge-ativo
-        @break
-      @case('Pendente')
-        badge-pendente
-        @break
-      @case('Bloqueado')
-        badge-bloqueado
-        @break
-      @default
-        badge-default
-    @endswitch">
-    {{ $u->status->tipoStatus }}
-  </span>
-</td>
-
-
-
-
-                <td>
-          
-                  <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
+                </div>  
+                <a href="#" class="visualizar-link mb-3" data-bs-toggle="modal" data-bs-target="#visualizarModal"
+       data-id="{{ $u->idUsuario }}"
+       data-nome="{{ $u->nomeUsuario }}"
+       data-username="{{ $u->usernameUsuario }}"
+       data-nasc="{{ $u->nascUsuario }}"
+       data-email="{{ $u->emailUsuario }}"
+       data-contato="{{ $u->contatoUsuario }}"
+       data-cidade="{{ $u->cidadeUsuario }}"
+       data-estado="{{ $u->estadoUsuario }}"
+       data-logradouro="{{ $u->logradouroUsuario }}"
+       data-cep="{{ $u->cepUsuario }}"
+       data-numero="{{ $u->numeroLograUsuario }}"
+       data-sobre="{{ $u->sobreUsuario }}"
+       data-formacao="{{ $u->formacaoCompetenciaUsuario }}"
+       data-dataFormacao="{{ $u->dataFormacaoCompetenciaUsuario }}"
+       data-createdAt="{{ $u->created_at }}">
+        {{ $u->nomeUsuario }}
+    </a>
+  
+                </a>
+            </td>
+            <td>{{ $u->emailUsuario }}</td>
+            <td>
+                <span class="badge rounded-pill d-inline 
+                    @switch($u->status->tipoStatus)
+                        @case('Ativo')
+                            badge-ativo
+                            @break
+                        @case('Pendente')
+                            badge-pendente
+                            @break
+                        @case('Bloqueado')
+                            badge-bloqueado
+                            @break
+                        @default
+                            badge-default
+                    @endswitch">
+                    {{ $u->status->tipoStatus }}
+                </span>
+            </td>
+            <td>
+                <form action="{{ route('usuarios.delete', $u->idUsuario) }}" method="POST" class="d-inline">
                     @csrf
                     @method('DELETE')
-                    <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span>&nbsp;Bloquear</button>
-                  </form>
-                  <form action="{{ route('usuarios.aprovar', $u->idUsuario) }}" method="POST" class="d-inline">
+                    <button onclick="return confirm('Realmente deseja excluir esse usuário?')" type="submit" class="btn btn-outline-danger btn-sm"><span class="bi-trash-fill"></span> Bloquear</button>
+                </form>
+                <form action="{{ route('usuarios.aprovar', $u->idUsuario) }}" method="POST" class="d-inline">
                     @csrf
                     @method('POST')
-                    <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span>&nbsp;Ativar</button>
-                  </form>
-                </td>
-              </tr>
-            @empty
-              <tr>
-                <td colspan="5" class="text-center">Nenhum usuário encontrado.</td>
-              </tr>
-            @endforelse
-          </tbody>
+                    <button onclick="return confirm('Realmente deseja aprovar esse usuário?')" type="submit" class="btn btn-outline-success btn-sm"><span class="bi bi-check2"></span> Ativar</button>
+                </form>
+            </td>
+        </tr>
+    @empty
+        <tr>
+            <td colspan="5" class="text-center">Nenhum usuário encontrado.</td>
+        </tr>
+    @endforelse
+</tbody>
+
         </table>
         <div class="no-results" id="noResults">
               <img src="{{url('assets/img/adminImages/not-found.png')}}" alt="">
@@ -130,6 +143,118 @@ person
     </div>
   </div>
 </div>
+
+
+<!-- Modal -->
+<div class="modal " id="visualizarModal" tabindex="-1" aria-labelledby="visualizarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content modal-width-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="visualizarModalLabel">Detalhes do Usuário</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>ID:</strong> <span id="idUsuario"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Nome:</strong> <span id="nomeUsuario"></span></p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>Username:</strong> <span id="usernameUsuario"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Data de Nascimento:</strong> <span id="nascUsuario"></span></p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>Email:</strong> <span id="emailUsuario"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Contato:</strong> <span id="contatoUsuario"></span></p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>Cidade:</strong> <span id="cidadeUsuario"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Estado:</strong> <span id="estadoUsuario"></span></p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>Logradouro:</strong> <span id="logradouroUsuario"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>CEP:</strong> <span id="cepUsuario"></span></p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>Número:</strong> <span id="numeroLograUsuario"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Sobre:</strong> <span id="sobreUsuario"></span></p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>Formação:</strong> <span id="formacaoCompetenciaUsuario"></span></p>
+        </div>
+        <div class="col-md-6">
+            <p><strong>Data da Formação:</strong> <span id="dataFormacaoCompetenciaUsuario"></span></p>
+        </div>
+    </div>
+    <div class="row mb-3">
+        <div class="col-md-6">
+            <p><strong>Data Criação Perfil:</strong> <span id="created_at"></span></p>
+        </div>
+    </div>
+</div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('.visualizar-link');
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        const nome = link.getAttribute('data-nome');
+        const email = link.getAttribute('data-email');
+        
+        document.getElementById('nomeUsuario').textContent = nome;
+        document.getElementById('emailUsuario').textContent = email;
+      });
+    });
+  });
+</script>
+
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('.visualizar-link');
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        const nome = link.getAttribute('data-nome');
+        const email = link.getAttribute('data-email');
+        
+        document.getElementById('nomeUsuario').textContent = nome;
+        document.getElementById('emailUsuario').textContent = email;
+      });
+    });
+  });
+</script>
 
 <script>
 const sidebarlinks = document.querySelectorAll('.item-nav');
@@ -170,6 +295,48 @@ sidebarlinks.forEach(link => {
 
   });
 </script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('.visualizar-link');
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        const id = link.getAttribute('data-id');
+        const nome = link.getAttribute('data-nome');
+        const username = link.getAttribute('data-username');
+        const nasc = link.getAttribute('data-nasc');
+        const email = link.getAttribute('data-email');
+        const contato = link.getAttribute('data-contato');
+        const foto = link.getAttribute('data-foto');
+        const cidade = link.getAttribute('data-cidade');
+        const estado = link.getAttribute('data-estado');
+        const logradouro = link.getAttribute('data-logradouro');
+        const cep = link.getAttribute('data-cep');
+        const numero = link.getAttribute('data-numero');
+        const sobre = link.getAttribute('data-sobre');
+        const formacao = link.getAttribute('data-formacao');
+        const dataFormacao = link.getAttribute('data-dataFormacao');
+        const createdAt = link.getAttribute('data-createdAt');
+        
+        document.getElementById('idUsuario').textContent = id;
+        document.getElementById('nomeUsuario').textContent = nome;
+        document.getElementById('usernameUsuario').textContent = username;
+        document.getElementById('nascUsuario').textContent = nasc;
+        document.getElementById('emailUsuario').textContent = email;
+        document.getElementById('contatoUsuario').textContent = contato;
+        document.getElementById('cidadeUsuario').textContent = cidade;
+        document.getElementById('estadoUsuario').textContent = estado;
+        document.getElementById('logradouroUsuario').textContent = logradouro;
+        document.getElementById('cepUsuario').textContent = cep;
+        document.getElementById('numeroLograUsuario').textContent = numero;
+        document.getElementById('sobreUsuario').textContent = sobre;
+        document.getElementById('formacaoCompetenciaUsuario').textContent = formacao;
+        document.getElementById('dataFormacaoCompetenciaUsuario').textContent = dataFormacao;
+        document.getElementById('created_at').textContent = createdAt;
+      });
+    });
+  });
+</script>
+
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
 
