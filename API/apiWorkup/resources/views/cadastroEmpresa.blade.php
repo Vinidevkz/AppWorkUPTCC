@@ -4,11 +4,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
     <link rel="stylesheet" href="{{url('assets/css/estilo-cadastro-empresa.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/estilo-padrao-workup.css')}}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <title>Cadastrar Empresa</title>
+        <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+        <title>WorkUP | Cadastre-se</title>
+        <script>
+                function goBack() {
+            window.history.back()
+        }
+       
+    </script>
+    
 </head>
 
 <body>
@@ -54,9 +65,12 @@
         </form>
     </div>
 -->
+    
 
     <div class="box-cadastro">
-        <form class="" method="POST" action="/formEmpresa" id="registerForm">
+        
+        
+        <form class="" method="POST" action="/formEmpresa" id="registerForm" enctype="multipart/form-data">
             @csrf
             <div class="form-step wrap-cadastro">
 
@@ -106,7 +120,7 @@
                 </div>
 
                 <div class="botoes-cadastro mt-4">
-                    <button type="button" class="voltar" onclick="prevStep()">Voltar</button>
+                    <button type="button" class="voltar" onclick="goBack()">Voltar</button>
                     <button type="button" class="avancar" onclick="nextStep()">Avançar</button>
                 </div>
 
@@ -161,73 +175,99 @@
                     <h2>Cadastro de empresa</h2>
                     <p>Por último, nos mostre de onde estão nos apoiando</p>
                 </div>
-
-                <div class="row d-flex flex-row inputs-txt mb-2">
-
-                    <div class="col d-flex col-6">
-                        <label for="cepEmpresa">CEP:</label>
-                        <input type="text" class="form-control custom-input" name="cepEmpresa" placeholder="12345-000" value="{{old('cepEmpresa')}}">
-                        @error('cepEmpresa')
-                            <div class="error-message">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col d-flex col-6">
-                        <label for="cnpjEmpresa">CNPJ:</label>
-                        <input type="text" class="form-control custom-input" name="cnpjEmpresa" placeholder="XXX/0001-XX" value="{{old('cnpjEmpresa')}}">
-                        @error('cnpjEmpresa')
-                            <div class="error-message">{{$message}}</div>
-                        @enderror
-                    </div>
-
+                <div class="row mb-3">
+            <div class="col col-12">
+                <label for="cepEmpresa">CEP:</label>
+                <div class="input-group">
+                    <input type="text" class="form-control custom-input" name="cepEmpresa" id="cepEmpresa" placeholder="12345-000" value="{{ old('cepEmpresa') }}">
+                    <button type="button" class="avancar justify-content-center align-itens-center" onclick="buscarEndereco()"><span class="material-symbols-outlined m-0 p-0">
+search
+</span></button>
                 </div>
-
-                <div class="row d-flex flex-column align-items-center justify-content-between inputs-txt my-2" style="min-height: 7.5rem; max-height: 10rem">
-
-                    <div class="col col-12">
-                        <label for="cidadeEmpresa">Cidade:</label>
-                        <input type="text" class="form-control custom-input" name="cidadeEmpresa" placeholder="Ex: São Paulo" value="{{old('cidadeEmpresa')}}">
-                        @error('cidadeEmpresa')
-                            <div class="error-message">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col col-12">
-                        <label for="estadoEmpresa">Estado:</label>
-                        <input type="text" class="form-control custom-input" name="estadoEmpresa" placeholder="Ex: São Paulo - SP" value="{{old('estadoEmpresa')}}">
-                        @error('estadoEmpresa')
-                            <div class="error-message">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                </div>
-
-                <div class="row d-flex flex-row h-50 inputs-txt">
-
-                    <div class="col d-flex col-8 h-100">
-                        <label for="LogradouroEmpresa">Endere:</label>
-                        <input type="text" class="form-control custom-input" name="LogradouroEmpresa" placeholder="Logradouro da Empresa" value="{{old('LogradouroEmpresa')}}">
-                        @error('LogradouroEmpresa')
-                            <div class="error-message">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                    <div class="col d-flex col-4 h-100">
-                        <label for="numeroLograEmpresa">N° do logradouro:</label>
-                        <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="N° do Logradouro" value="{{old('numeroLograEmpresa')}}">
-                        @error('numeroLograEmpresa')
-                            <div class="error-message">{{$message}}</div>
-                        @enderror
-                    </div>
-
-                </div>
-
-                <div class="botoes-cadastro mt-4">
-                    <button type="button" class="voltar" onclick="prevStep()">Voltar</button>
-                    <input type="submit" class="avancar" value="Enviar">
-                </div>
-
+                @error('cepEmpresa')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
             </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-12">
+                <label for="logradouroEmpresa">Endereço:</label>
+                <input type="text" class="form-control custom-input" name="LogradouroEmpresa" id="logradouroEmpresa" placeholder="Logradouro da Empresa" value="{{ old('LogradouroEmpresa') }}">
+                @error('LogradouroEmpresa')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-12">
+                <label for="cidadeEmpresa">Cidade:</label>
+                <input type="text" class="form-control custom-input" name="cidadeEmpresa" id="cidadeEmpresa" placeholder="Ex: São Paulo" value="{{ old('cidadeEmpresa') }}">
+                @error('cidadeEmpresa')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col col-9">
+                <label for="estadoEmpresa">Estado:</label>
+                <input type="text" class="form-control custom-input" name="estadoEmpresa" id="estadoEmpresa" placeholder="Ex: São Paulo - SP" value="{{ old('estadoEmpresa') }}">
+                @error('estadoEmpresa')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <div class="col col-3">
+                <label for="numeroLograEmpresa">Número:</label>
+                <input type="text" class="form-control custom-input" name="numeroLograEmpresa" placeholder="Número" value="{{ old('numeroLograEmpresa') }}">
+                @error('numeroLograEmpresa')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+        <div class="row mb-3">
+            <div class="col col-12">
+                <label for="estadoEmpresa">CNPJ:</label>
+                <input type="text" class="form-control custom-input" name="cnpjEmpresa" placeholder="XXX/0001-XX" value="{{old('cnpjEmpresa')}}">
+                @error('cnpjEmpresa')
+                    <div class="error-message">{{ $message }}</div>
+                @enderror
+            </div>
+        </div>
+
+        <div class="botoes-cadastro mt-4">
+            <button type="button" class="voltar" onclick="prevStep()">Voltar</button>
+            <input type="submit" class="avancar" value="Enviar">
+        </div>
+    </div>
+</form>
+
+<script>
+function buscarEndereco() {
+    const cep = document.getElementById('cepEmpresa').value.replace(/\D/g, ''); // Remove caracteres não numéricos
+    if (cep.length === 8) { // Verifica se o CEP tem 8 dígitos
+        fetch(`https://viacep.com.br/ws/${cep}/json/`)
+            .then(response => response.json())
+            .then(data => {
+                if (!data.erro) {
+                    // Preenche os campos com os dados retornados
+                    document.getElementById('logradouroEmpresa').value = data.logradouro;
+                    document.getElementById('cidadeEmpresa').value = data.localidade;
+                    document.getElementById('estadoEmpresa').value = data.uf;
+                } else {
+                    alert('CEP não encontrado.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro ao buscar o endereço:', error);
+            });
+    } else {
+        alert('CEP inválido. Por favor, insira um CEP válido.');
+    }
+}
+</script>
 
     </div>
 

@@ -41,7 +41,8 @@
         <div class="container">
 
         <div class="mb-2 mt-2 d-flex flex-row align-items-center">
-<h3 class="m-0">Olá, {{ $nomeAdmin }}!</h1>
+<h3 class="m-0">Olá, {{ $nomeAdmin }}! </h3>
+
 <span class="material-symbols-outlined text-warning">
 hand_gesture
 </span>

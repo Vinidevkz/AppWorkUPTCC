@@ -102,21 +102,21 @@ check
             </div>
 
             <div class="d-flex mb-4">
-              <a href="/admin/usuario/listar" class=" d-flex flex-row align-items-center h6">
+              <a href="{{ route('usuarios.index') }}" class=" d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">person</span>
                 Usuários
               </a>
             </div>
 
             <div class="d-flex mb-4">
-              <a href="/admin/vaga/listar" class=" d-flex flex-row align-items-center h6">
+              <a href="{{ route('vagas.index') }}" class=" d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">work</span>
                 Vagas
               </a>
             </div>
 
             <div class="d-flex mb-4">
-              <a href="/admin/empresa" class="d-flex flex-row align-items-center h6">
+              <a href="{{ route('empresas.index') }}" class="d-flex flex-row align-items-center h6">
                 <span class="material-symbols-outlined p-2">apartment</span>
                 Empresas
               </a>

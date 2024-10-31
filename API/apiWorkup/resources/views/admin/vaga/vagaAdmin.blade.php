@@ -38,6 +38,21 @@ person
         </ul>
       </div>
       <div class="container md-4">
+      <div class="d-flex flex-row">
+        <div class="blue d-flex align-items-center justify-content-center">
+          <p class="m-0 fw-bold text-center">Ação</p>
+        </div>
+        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
+         <form action="{{ route('cadastrarArea') }}" method="GET" style="display:inline;">
+                        <button type="submit" class="btn"><p class="m-0 p-0">Adicionar nova Área</p></button>
+                    </form>
+        </div>
+        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
+        <form action="{{ route('listarAreas') }}" method="GET" style="display:inline;">
+               <button type="submit" class="btn"><p class="m-0 p-0">Ver áreas cadastradas</p></button>
+        </form>
+        </div>
+      </div>
       <div>
 
     <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
@@ -56,6 +71,14 @@ person
                     <th>
                         <div class="d-flex align-items-center">
                         <span class="material-symbols-outlined">
+import_contacts
+</span>
+                            <p class="m-0 fw-bold">Área</p>
+                        </div>
+                    </th>
+                    <th>
+                        <div class="d-flex align-items-center">
+                        <span class="material-symbols-outlined">
 devices
 </span>
                             <p class="m-0 fw-bold">MODALIDADE</p>
@@ -63,18 +86,18 @@ devices
                     </th>
                     @if(request()->has('order') && request()->order == 'status')
                     <th>
-                    <div class="d-flex flex-row align-items-center justify-content-center p-0 ">
+                    <div class="d-flex flex-row align-items-center justify-content-start p-0 ">
                         <a href="{{ route('vagas.index') }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;" >
 
-<p class="p-0 m-0 ">Status
-</p>                     
-</a>
-</div>
+                      <p class="p-0 m-0 ">Status
+                      </p>                     
+                      </a>
+                      </div>
                         
                     </th>
                     @else
                     <th>
-                      <div class="d-flex flex-row align-items-center justify-content-center p-0 ">
+                      <div class="d-flex flex-row align-items-center justify-content-start p-0 ">
                         <a href="{{ route('vagas.index', ['order' => 'status']) }}" class="btn btn-outline-secondary d-flex flex-row p-1" style="border-radius: 0;" >
  
 <p class="p-0 m-0 ">Status
@@ -97,8 +120,8 @@ devices
                     <td>{{ $v->idVaga }}</td>
                     <td> 
                     <a href="{{ route('vagas.show', $v->idVaga) }}" class="visualizar-link mb-3">{{ $v->nomeVaga }}</a>
-  
                     </td>
+                    <td>{{  $v->area->nomeArea}}</td>
                     <td>{{  $v->modalidade->descModalidadeVaga}}</td>
                     <td>
   <span class="badge rounded-pill d-inline 

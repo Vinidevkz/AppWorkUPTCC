@@ -45,15 +45,7 @@ class EmpresaController extends Controller
             return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
         }
 
-              // Adicione outras contagens necessárias aqui
-              $totalDenuncias = DB::table('tb_denunciausuario')->count();
-              $totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
-              $totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
-              
-              // Calcula o total de denúncias
-              $totalDenunciasGeral = $totalDenuncias +
-                                      $totalDenunciasEmpresa +
-                                      $totalDenunciasVagas;
+      
       
 
         // Caso contrário, retorna a view com os usuários
@@ -61,11 +53,7 @@ class EmpresaController extends Controller
             'empresas'=>$empresas,
             'nomeAdmin'=>$nomeAdmin,
             'usernameAdmin'=>$usernameAdmin,
-            'emailAdmin'=>$emailAdmin,
-            'totalDenuncias' => $totalDenuncias,
-            'totalDenunciasGeral' => $totalDenunciasGeral,
-            'totalDenunciasVagas' => $totalDenunciasVagas,
-            'totalDenunciasEmpresa' => $totalDenunciasEmpresa,]);
+            'emailAdmin'=>$emailAdmin]);
     }
 
     
@@ -147,7 +135,7 @@ Validação
         $empresa->idStatus = 3;
 
         $empresa->save();
-        return redirect()->route('cadastrarAreaEmpresa', ['id' => $empresa->idEmpresa]);
+        return redirect()->route('login', ['id' => $empresa->idEmpresa]);
     }
 
     /**

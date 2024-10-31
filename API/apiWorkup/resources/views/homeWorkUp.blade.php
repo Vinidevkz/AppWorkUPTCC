@@ -6,10 +6,11 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
 
         <!-- Favicon -->
         <link rel="icon" href="/img/icons/android-chrome-192x192.png" type="image/x-icon">
-        <title>WorkUP</title>
+        <title>WorkUP | Home</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">

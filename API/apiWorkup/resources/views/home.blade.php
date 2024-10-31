@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="{{url('assets/css/dynamo.css')}}">
     <link rel="stylesheet" href="{{url('assets/css/dynamoPadrao.css')}}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <title>Document</title>
+    <title>Dynamo</title>
 </head>
 
 <body class="dark-mode">

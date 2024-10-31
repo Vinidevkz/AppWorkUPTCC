@@ -40,7 +40,7 @@
         </ul>
 
         <div class="mt-4">
-            <a href="/usuario/listar" class="btn btn-primary">Voltar</a>
+            <a href="{{ route('usuarios.index')}}" class="btn btn-primary">Voltar</a>
         </div>
     </div>
 </div>

@@ -69,7 +69,7 @@
                 </ul>
 
                 <div class="text-center mt-4">
-                    <a href="/empresa/listar" class="btn btn-primary">Voltar</a>
+                    <a href="{{ route ('empresas.index') }}" class="btn btn-primary">Voltar</a>
                 </div>
             </div>
         </div>

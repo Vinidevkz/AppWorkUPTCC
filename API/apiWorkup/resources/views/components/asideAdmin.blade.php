@@ -66,17 +66,17 @@
  
      <ul class="dropdown-menu card sub-menu-dropdown">
       <li class="dropdown-item">
-      <a href="/admin/usuario/listar" class="p-1 h6">
+      <a href="{{ route('usuarios.index') }}" class="p-1 h6">
                                 <i class="bi bi-people p-1"></i>
                                 Usuários</a>
       </li>
       <li class="dropdown-item">
-      <a href="/admin/vaga/listar" class="p-1 h6">
+      <a href="{{ route('vagas.index') }}" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
                                 Vagas</a>
       </li>
          <li class="dropdown-item">
-         <a href="/admin/empresa/listar" class="p-1 h6">
+         <a href="{{ route('empresas.index') }}" class="p-1 h6">
                                 <i class="bi bi-buildings p-1"></i>
                                 Empresas</a>
          </li>
@@ -89,7 +89,7 @@
 <div class="li-menu">
 
 <p class="" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDenuncia" aria-expanded="false" >
-</a> Denuncias<span class="badge text-bg-danger m-1"> {{$totalDenunciasGeral}}</span>
+</a> Denuncias<span class="badge text-bg-danger m-1">{{ $dadosDenuncias['totalDenunciasGeral'] }}</span>
     <i class="bi bi-caret-down"></i>
 </p>
  </p>
@@ -97,19 +97,19 @@
  
      <ul class="dropdown-menu card sub-menu-dropdown">
       <li class="dropdown-item t p-0">
-      <a href="/admin/denuncia/usuario" class="p-1 h6">
+      <a href="{{ route('denunciar.usuario') }}" class="p-1 h6">
                                 <i class="bi bi-people p-1"></i>
-                                Usuários <span class="badge text-bg-danger p-1">{{ $totalDenuncias }}</span></a>
+                                Usuários <span class="badge text-bg-danger p-1">{{ $dadosDenuncias['totalDenuncias'] }}</span></a>
       </li>
       <li class="dropdown-item p-0">
-      <a href="/admin/denuncia/vaga" class="p-1 h6">
+      <a href="{{ route('denunciar.vaga') }}" class="p-1 h6">
                                 <i class="bi bi-person-vcard p-1"></i>
-                                Vagas <span class="badge text-bg-danger p-1">{{ $totalDenunciasVagas }}</span></a>
+                                Vagas <span class="badge text-bg-danger p-1">{{ $dadosDenuncias['totalDenunciasVagas'] }}</span></a>
       </li>
          <li class="dropdown-item p-0">
-         <a href="/admin/denuncia/empresa" class="p-1 h6">
+         <a href="{{ route('denunciar.empresa') }}" class="p-1 h6">
                                 <i class="bi bi-buildings p-1"></i>
-                                Empresas <span class="badge text-bg-danger p-1">{{ $totalDenunciasEmpresa }}</span></a>
+                                Empresas <span class="badge text-bg-danger p-1">{{ $dadosDenuncias['totalDenunciasEmpresa'] }}</span></a>
          </li>
      </ul> 
  </div>

@@ -33,19 +33,7 @@ person
 
         </ul>
     <div class="container md-4 mt-3">
-      <div class="d-flex flex-row">
-        <div class="blue d-flex align-items-center justify-content-center">
-          <p class="m-0 fw-bold text-center">Ação</p>
-        </div>
-        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
-         <form action="{{ route('cadastrarArea') }}" method="GET" style="display:inline;">
-                        <button type="submit" class="btn"><p class="m-0 p-0">Adicionar nova Área</p></button>
-                    </form>
-        </div>
-        <div class="btn btn-acoes-add p-0 m-0 d-flex flex-row">
-         
-        </div>
-      </div>
+
 
       <div class="tabela-container" style="max-height: 700px; overflow-y: auto; overflow-x: hidden;">
         <div class="search-container mt-3">
@@ -90,7 +78,7 @@ person
                     {{ $u->nomeUsuario }}
                   </a>
                 </td>
-                <td>{{ $u->usernameUsuario }}</td>
+                <td>{{ $u->emailUsuario }}</td>
                 <td>
   <span class="badge rounded-pill d-inline 
     @switch($u->status->tipoStatus)

@@ -50,15 +50,6 @@ class VagaController extends Controller
             return response()->json($vagas); // Retorna o JSON esperado
         }
 
-        // Adicione outras contagens necessárias aqui
-        $totalDenuncias = DB::table('tb_denunciausuario')->count();
-        $totalDenunciasEmpresa = DB::table('tb_denunciaempresa')->count();
-        $totalDenunciasVagas = DB::table('tb_denunciavaga')->count();
-        
-        // Calcula o total de denúncias
-        $totalDenunciasGeral = $totalDenuncias +
-                                $totalDenunciasEmpresa +
-                                $totalDenunciasVagas;
 
 
 
@@ -68,10 +59,7 @@ class VagaController extends Controller
             'usernameAdmin'=>$usernameAdmin,
             'emailAdmin'=>$emailAdmin,
             'nomeAdmin'=>$nomeAdmin,
-            'totalDenuncias' => $totalDenuncias,
-            'totalDenunciasGeral' => $totalDenunciasGeral,
-            'totalDenunciasVagas' => $totalDenunciasVagas,
-            'totalDenunciasEmpresa' => $totalDenunciasEmpresa,]);
+        ]);
     }
 
     public function indexApp(Request $request)

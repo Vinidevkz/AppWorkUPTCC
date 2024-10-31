@@ -19,11 +19,11 @@ class AreaController extends Controller
         return response()->json($areas);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function listar(){
+        $areas = Area::all();
+
+        return response()->view('listarAreas',[$areas]);
+    }
     public function create()
     {
         return view('cadastrarArea  ');
@@ -39,11 +39,12 @@ class AreaController extends Controller
     {
         $request->validate(
             [
-                'nomeArea'  => 'required',
+                'nomeArea'  => 'required|unique:tb_area,nomeArea',
 
             ],
             [
                 'nomeArea.required'  => 'Digite nome',
+                'nomeArea.unique' => 'Esta área ja está registrada!',
 
             ]
         );
@@ -53,7 +54,7 @@ class AreaController extends Controller
 
 
         $area->save();
-        return redirect('/verEmpresa')->with('success', 'Empresa atualizada com sucesso.');
+        return route('admin.dashboard');
 
     }
     

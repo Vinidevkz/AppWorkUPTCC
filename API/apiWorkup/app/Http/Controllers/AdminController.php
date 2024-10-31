@@ -221,8 +221,8 @@ $estatisticas = $this->calcularEstatisticas();
                 'nomeAdmin.required'  => 'Digite um nome!',
                 'usernameAdmin.required' => 'Digite um apelido!',
                 'emailAdmin.required' => 'Digite um email!',
-                'emailAdmin.unique' => 'Este apelido ja esta registrado!',
-                'usernameAdmin.unique' => 'Este e-mail ja esta registrado!',
+                'emailAdmin.unique' => 'Este apelido já está registrado!',
+                'usernameAdmin.unique' => 'Este e-mail já está registrado!',
                 'contatoAdmin.required' => 'Digite um contato!',
                 'senhaAdmin.required' => 'Digite uma senha!',
             ]

@@ -168,15 +168,21 @@ font-size: 12rem;
     }
     
     </style>
+        <script>
+                function goBack() {
+            window.history.back()
+        }
+       
+    </script>
 </head>
 <body id="boo">
 <div class="container">
+
     
-    
-<a href="/admin" class="d-flex p-1 align-items-center m-0">
+<button onclick="goBack()" class="d-flex p-1 align-items-center m-0" style="background-color: transparent; border:none">
 <i class="bi bi-skip-backward p-2"></i>
 <p class="m-0">Voltar</p>
-</a>
+</button>
 
 <div class="card m-5">
     <div class="card-header">
@@ -395,7 +401,8 @@ font-size: 12rem;
         document.getElementById('foto').addEventListener('click', function() {
           
         });
-       
+
+
     </script>
 
 </body>

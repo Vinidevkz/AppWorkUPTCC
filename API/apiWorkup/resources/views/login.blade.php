@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="{{url('assets/css/login.css')}}">
     <title>Bem-Vindo(a) a WorkUp</title>
@@ -34,10 +35,10 @@
                         <div class="wrap-login">
                             <div class="inputs-login">
                                 <div>
-                                    <p>Email:<input type="email" name="email" required placeholder="teste@teste.com"></p>
+                                    <p>Email:<input type="email" name="email" required placeholder="Digite seu e-mail"></p>
                                 </div>
                                 <div>
-                                    <p>Senha:<input type="password" name="password" required placeholder="123"></p>
+                                    <p>Senha:<input type="password" name="password" required placeholder="Digite sua senha"></p>
                                 </div>
                             </div>
                             <div class="botoes-login">

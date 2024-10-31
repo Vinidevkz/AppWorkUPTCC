@@ -252,7 +252,7 @@ Route::middleware('auth:admin')->group(function(){
                 
                 // Denuncia Usuario
                 Route::get('/usuario', [DenunciaUsuarioController::class, 'index'])->name('denunciar.usuario');
-                Route::get('/usuario/{id}', [DenunciaUsuarioController::class, 'show'])->name('denuncia.show');
+                Route::get('/usuario/{id}', [DenunciaUsuarioController::class, 'show'])->name('denunciaUsuario.show');
 
                 
                 // Denuncia Empresa
@@ -269,6 +269,7 @@ Route::middleware('auth:admin')->group(function(){
             
             Route::prefix('/area')->group(function(){
                 Route::get('/', [AreaController::class, 'create'])->name('cadastrarArea');
+                Route::get('/listar', [AreaController::class, 'listar'])->name('listarAreas');
                 Route::post('/form', [AreaController::class, 'store']);
             });
 });

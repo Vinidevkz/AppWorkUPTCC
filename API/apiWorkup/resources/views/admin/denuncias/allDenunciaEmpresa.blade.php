@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <title>Detalhes da Empresa</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script>
+        function goBack() {
+            window.history.back()
+        }
+    </script>
 </head>
 <body>
     <div class="container">
@@ -22,7 +27,10 @@
 
 
         <div class="mt-4">
-            <a href="/admin/denuncia" class="btn btn-primary">Voltar</a>
+        <button onclick="goBack()" class="d-flex p-1 align-items-center m-0" style="background-color: transparent; border:none">
+            <p class="m-0">Voltar</p>
+        </button>
+
         </div>
     </div>
 </div>
