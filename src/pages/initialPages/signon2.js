@@ -22,7 +22,7 @@ import { Context } from "./context/provider.js";
 import ApisUrls from '../../ApisUrls/apisurls.js'
 
 export default function SignON2({ navigation }) {
-  const { areaInt, setAreaInt, setTel, emailContato, setEmailContato, setNasc, setCep } = useContext(Context);
+  const { areaInt, setAreaInt, setTel, emailContato, setEmailContato, setNasc, setCep, cep } = useContext(Context);
   const [areaVagas, setAreaVagas] = useState([]);
   const [emailError, setEmailError] = useState('');
   const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
@@ -84,6 +84,7 @@ export default function SignON2({ navigation }) {
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>
 
+      <Text>{cep}</Text>      
       <View style={styles.mainContainer}>
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>
@@ -152,6 +153,7 @@ export default function SignON2({ navigation }) {
 
         <View style={styles.formCont}>
           <Text style={[styles.DMSansRegular, styles.formTitle]}>CEP:</Text>
+          <Text style={[styles.DMSansRegular, {color: '#909090', fontSize: 13}]}>Os dados de localização serão preenchidos automaticamente.</Text>
           <TextInputMask
             type={"zip-code"}
             placeholder="Digite seu CEP"

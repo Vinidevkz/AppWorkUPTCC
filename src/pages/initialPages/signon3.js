@@ -47,6 +47,7 @@ export default function SignON3({ navigation }) {
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   const [loading, setLoading] = useState(false); // Estado para loading
+  const [dadosCep, setDadosCep] = useState(null)
 
 
 
@@ -90,33 +91,57 @@ export default function SignON3({ navigation }) {
     }
   };
 
+  async function pegarCEP() {
+    try {
+      const request = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      const response = await request.json();
+      
+      if (response.erro) {
+        throw new Error("CEP não encontrado.");
+      }
+      
+      setDadosCep(response);
+      return response; // Retorna a resposta para verificar na função cadastroUser
+    } catch (erro) {
+      console.log("Erro ao buscar CEP:", erro);
+      Alert.alert("Erro", "CEP não encontrado. Verifique o valor do CEP.");
+    }
+  }
+  
   async function cadastroUser() {
     if (!nome || !userName || !email || !senha || !nasc || !cep || !tel || !emailContato || !bio) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
   
-    setLoading(true); // Inicia o loading
+    setLoading(true);
   
     const uploadImageToFirebase = async (uri) => {
       const response = await fetch(uri);
       const blob = await response.blob();
-      
       const filename = `profile_images/${Date.now()}.jpg`;
       const imageRef = ref(storage, filename);
-  
       await uploadBytes(imageRef, blob);
       const downloadURL = await getDownloadURL(imageRef);
       return downloadURL;
     };
   
     try {
+      // Chama pegarCEP e espera o retorno para verificar os dados do CEP
+      const cepData = await pegarCEP();
+      
+      if (!cepData) {
+        setLoading(false);
+        return; // Sai da função se o CEP for inválido ou não encontrado
+      }
+  
       const formattedDate = formatDateToISO(nasc);
       const dataToSend = {};
   
       const photoURL = selectedImage ? await uploadImageToFirebase(selectedImage) : null;
       const bannerImageURL = selectedBannerImage ? await uploadImageToFirebase(selectedBannerImage) : null;
   
+      // Utiliza o cepData para garantir que os valores existem
       dataToSend.nomeUsuario = nome;
       dataToSend.usernameUsuario = userName;
       dataToSend.nascUsuario = formattedDate;
@@ -130,16 +155,15 @@ export default function SignON3({ navigation }) {
       dataToSend.anoFormacao = anoFormacao;
       dataToSend.fotoUsuario = photoURL || "";
       dataToSend.fotoBanner = bannerImageURL || "";
-      dataToSend.cidadeUsuario = "São Paulo";
-      dataToSend.estadoUsuario = "sp";
-      dataToSend.logradouroUsuario = "logradouro";
+      dataToSend.cidadeUsuario = cepData.localidade || "";
+      dataToSend.estadoUsuario = cepData.uf || "";
+      dataToSend.logradouroUsuario = cepData.logradouro || "Não encontrado";
       dataToSend.cepUsuario = cep;
-      dataToSend.numeroLograUsuario = "515";
+      dataToSend.numeroLograUsuario = cepData.ddd || "";
       dataToSend.sobreUsuario = bio;
       dataToSend.formacaoCompetenciaUsuario = formacaoUsuario;
       dataToSend.dataFormacaoCompetenciaUsuario = "2012-12-12";
   
-      console.log(ensinoMedio, linguaEstrangeira);
       console.log("Dados enviados para o backend:", JSON.stringify(dataToSend, null, 2));
   
       const response = await fetch(apiNgrokCad, {
@@ -171,7 +195,6 @@ export default function SignON3({ navigation }) {
         }
         Alert.alert("Erro", errorMessage);
       } else {
-        // Navegar para a tela "TabBar" se o cadastro for bem-sucedido
         setUserId(resp.idUsuario);
         navigation.navigate('TabBar');
       }
@@ -180,7 +203,7 @@ export default function SignON3({ navigation }) {
       Alert.alert("Erro", "Erro ao cadastrar usuário. Verifique o console para mais detalhes.");
       console.log(error);
     } finally {
-      setLoading(false); // Finaliza o loading
+      setLoading(false);
     }
   }
 
