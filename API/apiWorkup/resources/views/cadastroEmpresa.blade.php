@@ -175,15 +175,15 @@
                     <p>Por último, nos mostre de onde estão nos apoiando</p>
                 </div>
                 <div class="row mb-3">
-                    <div class="col col-12">
-                        <label for="cepEmpresa">CEP:</label>
-                        <div class="input-group">
-                            <input type="text" class="form-control custom-input" data-mask="00000-000" name="cepEmpresa" id="cepEmpresa" placeholder="12345-000" value="{{ old('cepEmpresa') }}">
-                        </div>
-                        @error('cepEmpresa')
-                        <div class="error-message">{{ $message }}</div>
-                        @enderror
-                    </div>
+                <div class="col col-12">
+        <label for="cepEmpresa">CEP:</label>
+        <div class="input-group">
+        <input type="text" class="form-control custom-input" name="cepEmpresa" data-mask="00000-000" id="cepEmpresa" placeholder="12345-000" value="{{ old('cepEmpresa') }}" oninput="verificarCEP()">
+        </div>
+        @error('cepEmpresa')
+        <div class="error-message">{{ $message }}</div>
+        @enderror
+    </div>
                 </div>
 
                 <div class="row mb-3">
@@ -375,6 +375,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
 
     <script src="{{url('assets/js/script.js')}}"></script>
+    <script src="{{url('assets/js/buscacep.js')}}"></script>
 
 
 </body>

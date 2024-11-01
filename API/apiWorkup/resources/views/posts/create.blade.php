@@ -31,7 +31,7 @@
 
             <div class="form__group field">
             <label for="fotoEmpresa" class="form__label">Foto da Publicação</label>
-                                <input type="file" id="fileInput" class="form-control custom-input"  value="url">
+                                <input type="file" id="fileInput" class="form-control custom-input"  value="url" name="fotoPublicacao">
 
                                 <div id="preview">
                                         <img id="imagePreview" src="" alt="" style="display:none; max-width: 300px; max-height: 300px;">
@@ -48,7 +48,7 @@
             <input type="hidden" name="idVaga" value="1"> <!-- Altere conforme necessário -->
 
          
-            <button disabled type="submit" id="foto" class="btn btn-success-custom btn-custom" >Enviar</button>
+            <button type="submit" id="foto" class="btn btn-success-custom btn-custom" >Enviar</button>
         </form>
     </div>
 

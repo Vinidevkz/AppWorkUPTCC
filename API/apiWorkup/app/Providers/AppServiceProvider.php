@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Post;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\View;
@@ -33,7 +34,13 @@ class AppServiceProvider extends ServiceProvider
 
         // Compartilhar a variável `$empresa`, mesmo que seja null
         $view->with('empresa', $empresa);
-        
+
+        if ($empresa) {
+            // Obter apenas os posts da empresa autenticada
+            $posts = Post::where('idEmpresa', $empresa->idEmpresa)->get();
+            $view->with('posts', $posts);
+        }
+
 
         if ($admin) {
             // Obter contagens para o admin, se autenticado
@@ -50,6 +57,9 @@ class AppServiceProvider extends ServiceProvider
                 'totalDenunciasVagas' => $totalDenunciasVagas,
                 'totalDenunciasGeral' => $totalDenunciasGeral,
             ];
+
+            $posts = Post::all(); // Obtenha todos os posts, ou adicione filtros conforme necessário
+            $view->with('posts', $posts);
 
             $view->with('admin', $admin)->with('dadosDenuncias', $dadosDenuncias);
         }

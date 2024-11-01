@@ -1,10 +1,12 @@
-
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
 
 <header class="fixed-top">
     <div class="header-wrap">
     @if (Request::url() != url('/empresa/dashboard') && Request::url() != url('/home')) <!-- Verifica se não está em '/empresa/dashboard' e '/home' -->
     <button onclick="window.history.back()" class="d-flex p-1 align-items-center m-0" style="background-color: transparent; border:none">
-        <i class="bi bi-skip-backward p-2 text-light"></i>
+    <span class="material-symbols-outlined text-light">
+arrow_back
+</span>
         <p class="m-0 text-light">Voltar</p>
     </button>
 @endif
@@ -15,7 +17,7 @@
         @auth
         <ul>
             <a href="#vagas">Vagas</a>
-            <a href="">Postagens</a>
+            <a href="#publicacoes">Postagens</a>
         </ul>
         @endauth
 
@@ -27,8 +29,14 @@
                     <img src="{{ $empresa->fotoEmpresa   }}" alt="">
                     <form action="/logout" method="POST">
                         @csrf
-                        <i class="bi bi-door-open text-light"></i>
+                        <div>
                         <input type="submit" class="text-light" value="Sair" style="background-color: transparent; border:none;">
+                        <span class="material-symbols-outlined text-light">
+                        logout
+                        </span>
+                        </div>
+
+                     
                     </form>
                 @else
                     <!-- Mostrar para visitantes (usuários não logados) -->
