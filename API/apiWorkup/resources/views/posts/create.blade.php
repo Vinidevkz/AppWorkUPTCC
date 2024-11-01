@@ -6,11 +6,15 @@
     <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
     <title>Empresa | Criar postagem</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
+    <link rel="stylesheet" href="{{url('../assets/css/areapost.css')}}">
 </head>
 <body>
+    <div class="d-flex justify-content-center align-items-center vh-100">
+        <div class="card w-50">
+            <div class="card-body">
 @include('components.navbarDashboardEmpresa')
-    <div class="container mt-5">
+    <div class="container mt-5 p-5">
+
         <h2>Criar Postagem</h2>
 
         @if ($errors->any())
@@ -21,6 +25,7 @@
                     @endforeach
                 </ul>
             </div>
+            
         @endif
 
         <form action="{{ route('post.store') }}" method="POST" enctype="multipart/form-data">
@@ -55,9 +60,7 @@
     </div>
 
 
-   </script>
-
-        <!-- Firebase App (SDK) -->
+<!-- Firebase App (SDK) -->
     <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
     <!-- Firebase Storage -->
     <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js"></script>
