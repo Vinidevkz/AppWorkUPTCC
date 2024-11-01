@@ -9,6 +9,8 @@
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
+    
     <style>
         .error-message {
             color: red;
@@ -160,6 +162,7 @@
     </style>
 </head>
 <body id="boo">
+@include('components.navbarDashboardEmpresa')
     <main class="cardsform">
         <div class="container mt-2 mb-3">
             <div class="row form-wrapper">

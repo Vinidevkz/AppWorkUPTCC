@@ -49,6 +49,10 @@ class PostController extends Controller
     public function store(Request $request)
     {
             // Validação
+            $request->validate([
+                'detalhePublicacao' => 'required|max:120',
+                'fotoPublicacao' => 'required'
+            ]);
 
 
     // Criação da postagem
@@ -56,11 +60,11 @@ class PostController extends Controller
     $post->detalhePublicacao = $request->detalhePublicacao;
     $post->idEmpresa = $request->idEmpresa;
     $post->idVaga = $request->idVaga;
-    $post->fotoPublicacao = $request->foto;
+    $post->fotoPublicacao = $request->fotoPublicacap;
 
     $post->save();
 
-    return redirect('/empresa')->with('success', 'Postagem criada com sucesso!');
+    return redirect()->route('empresa.dashboard')->with('success', 'Postagem criada com sucesso!');
     }
 
     /**
