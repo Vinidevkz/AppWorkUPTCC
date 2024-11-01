@@ -17,8 +17,9 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import styles from "../styles/profilechange.js";
 import ApisUrls from "../ApisUrls/apisurls.js";
-import storage from '@react-native-firebase/storage';
+import { storage } from '../pages/initialPages/firebase.js';
 import * as ImagePicker from 'expo-image-picker'; 
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 
 export default function ProfileChange({ navigation }) {
@@ -34,6 +35,7 @@ export default function ProfileChange({ navigation }) {
     nasc,
     setFormacaoUsuario,
     setTel,
+    
   } = useContext(Context);
 
   const [areaVagas, setAreaVagas] = useState([]);
@@ -169,12 +171,16 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
     }
   };
   
-  const uploadImage = async (uri, name) => {
-    const reference = storage().ref(`images/${name}`);
-    await reference.putFile(uri);
-    return await reference.getDownloadURL();
-  };
   
+  const uploadImageToFirebase = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const filename = `profile_images/${Date.now()}.jpg`;
+    const imageRef = ref(storage, filename);
+    await uploadBytes(imageRef, blob);
+    const downloadURL = await getDownloadURL(imageRef);
+    return downloadURL;
+  };
 
   const alterarUsuario = async () => {
     if (
@@ -189,28 +195,40 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
-
+  
     const formattedDate = formatDateToISO(nascUsuarioAlterado);
-
-    console.log("Data formatada:", formattedDate); // Adicione um log para verificar a data formatada
-
+  
     if (!formattedDate) {
       Alert.alert("Erro", "Data de nascimento é obrigatória.");
       return;
     }
-
-    let fotoUsuarioUrl, fotoBannerUrl;
-
-    // Faça o upload da foto de perfil se houver uma selecionada
+  
+    let fotoUsuarioUrl = null;
+    let fotoBannerUrl = null;
+  
     if (selectedImage) {
-      fotoUsuarioUrl = await uploadImage(selectedImage, `profile_${userId}.jpg`);
+      fotoUsuarioUrl = await uploadImageToFirebase(selectedImage, `profile_${userId}.jpg`);
     }
   
-    // Faça o upload da foto de banner se houver uma selecionada
     if (selectedBannerImage) {
-      fotoBannerUrl = await uploadImage(selectedBannerImage, `banner_${userId}.jpg`);
+      fotoBannerUrl = await uploadImageToFirebase(selectedBannerImage, `banner_${userId}.jpg`);
     }
-
+  
+    const dadosParaEnviar = {
+      nomeUsuario: nomeUsuarioAlterado,
+      usernameUsuario: userNameAlterado,
+      sobreUsuario: sobreUsuarioAlterado,
+      nascUsuario: formattedDate,
+      areaInteresseUsuario: areaIntUsuarioAlterado,
+      formacaoCompetenciaUsuario: formacaoCompetenciaUsuarioAlterado,
+      contatoUsuario: telAlterado,
+      fotoUsuario: fotoUsuarioUrl, // Enviar a URL da foto de perfil
+      fotoBanner: fotoBannerUrl, // Enviar a URL da foto de banner
+    };
+  
+    // Log para visualizar os dados
+    console.log("Dados que serão enviados:", JSON.stringify(dadosParaEnviar, null, 2));
+  
     const apiUrl = `${apiEmuladorUsuario}${userId}`;
     try {
       const response = await fetch(apiUrl, {
@@ -219,19 +237,11 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({
-          nomeUsuario: nomeUsuarioAlterado,
-          usernameUsuario: userNameAlterado,
-          sobreUsuario: sobreUsuarioAlterado,
-          nascUsuario: formattedDate, // Enviando a data no formato correto
-          areaInteresseUsuario: areaIntUsuarioAlterado,
-          formacaoCompetenciaUsuario: formacaoCompetenciaUsuarioAlterado,
-          contatoUsuario: telAlterado,
-        }),
+        body: JSON.stringify(dadosParaEnviar),
       });
-
+  
       const jsonResponse = await response.json();
-
+  
       if (response.ok) {
         Alert.alert("Sucesso", "Dados atualizados com sucesso");
         // Atualize os valores do contexto após a atualização
@@ -251,6 +261,8 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
       console.error(error);
     }
   };
+  
+  
 
   return (
     <SafeAreaView
@@ -311,44 +323,42 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
         >
           <TouchableOpacity
             style={{ width: "100%", height: "100%" }}
-            onPress={() => console.log("Banner clicked!")}
+            onPress={pickBannerImage}
           >
             <Image
               source={
-                dadosUser.fotoBanner
-                  ? { uri: dadosUser.fotoBanner }
-                  : require("../../assets/icons/profilebgempty.png")
+                selectedBannerImage ? { uri : selectedBannerImage} : dadosUser.fotoBanner ? {uri: dadosUser.fotoBanner} : require("../../assets/icons/profilebgempty.png")
               }
               style={styles.profileBackgroundImg}
             />
           </TouchableOpacity>
 
           <View
-            style={{
-              position: "absolute",
-              bottom: -50,
-              left: "50%",
-              transform: [{ translateX: -50 }],
-            }}
-          >
-            <TouchableOpacity onPress={() => console.log("User icon clicked!")}>
-              <View
-                style={[
-                  styles.profileIconBox,
-                  { borderColor: theme.borderColor },
-                ]}
-              >
-                <Image
-                  source={
-                    dadosUser.fotoUsuario
-                      ? { uri: dadosUser.fotoUsuario }
-                      : require("../../assets/icons/manicon.jpg")
-                  }
-                  style={styles.icon}
-                />
-              </View>
-            </TouchableOpacity>
-          </View>
+  style={{
+    position: "absolute",
+    bottom: -50,
+    left: "50%",
+    transform: [{ translateX: -50 }],
+  }}
+>
+  <TouchableOpacity onPress={pickImage}>
+    <View
+      style={[styles.profileIconBox, { borderColor: theme.borderColor }]}
+    >
+      <Image
+        source={
+          selectedImage
+            ? { uri: selectedImage } 
+            : dadosUser.fotoUsuario
+              ? { uri: dadosUser.fotoUsuario } 
+              : require("../../assets/icons/manicon.jpg") 
+        }
+        style={styles.icon}
+      />
+    </View>
+  </TouchableOpacity>
+</View>
+
         </View>
 
         <View style={styles.changeCont}>

@@ -183,8 +183,8 @@ class UsuarioController extends Controller
             'areaInteresseUsuario' => 'sometimes|required|string|max:40',
             'formacaoCompetenciaUsuario' => 'sometimes|required|string|max:50',
             'contatoUsuario' => 'sometimes|required|string|max:50',
-            'fotoUsuario' => 'sometimes|require|string|max:300',
-            'fotoBanner' => 'sometimes|require|string|max:300',
+            'fotoUsuario' => 'sometimes|required|string|max:300',
+            'fotoBanner' => 'sometimes|required|string|max:300',
         ]);
 
         // Atualiza os campos que foram passados
