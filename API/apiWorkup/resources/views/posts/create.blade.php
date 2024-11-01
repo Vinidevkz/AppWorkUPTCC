@@ -6,8 +6,10 @@
     <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
     <title>Empresa | Criar postagem</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
 </head>
 <body>
+@include('components.navbarDashboardEmpresa')
     <div class="container mt-5">
         <h2>Criar Postagem</h2>
 
