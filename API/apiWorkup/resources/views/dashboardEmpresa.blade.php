@@ -102,6 +102,7 @@
                                     <p>Candidatos: {{ $vaga->total_candidatos }}</p>
                                 </div>
                                 <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn-vagas">Mais detalhes <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                                <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas">Caditatos <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
                             </div>
                         </div>
                     </div>

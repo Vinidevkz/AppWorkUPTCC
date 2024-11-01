@@ -16,6 +16,7 @@ arrow_back
         </div>
         @auth
         <ul>
+        <a href="{{ route('empresas.edit', $empresa->idEmpresa) }}" class="btn btn-outline-primary btn-sm m-0"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
             <a href="#vagas">Vagas</a>
             <a href="#publicacoes">Postagens</a>
         </ul>

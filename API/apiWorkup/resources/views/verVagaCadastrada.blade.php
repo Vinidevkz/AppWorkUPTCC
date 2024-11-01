@@ -1,4 +1,8 @@
-    <h1>Candidatos para a vaga: {{ $vaga->nomeVaga }}</h1>
+<link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
+@include('components.navbarDashboardEmpresa')
+
+
+<h1>Candidatos para a vaga: {{ $vaga->nomeVaga }}</h1>
 
 @if($candidatos->isEmpty())
     <p>Nenhum candidato encontrado para esta vaga.</p>
