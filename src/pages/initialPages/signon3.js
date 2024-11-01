@@ -21,8 +21,6 @@ import ApisUrls from "../../ApisUrls/apisurls.js";
 import { storage } from './firebase.js';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-
-
 export default function SignON3({ navigation }) {
   const {
     nome,

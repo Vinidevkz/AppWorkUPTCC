@@ -22,7 +22,7 @@ export default function Vaga({ navigation }) {
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga, apiNgrokDenunciarVaga } = ApisUrls;
+  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga, apiNgrokDenunciarVaga, apiEmuladorDenunciarVaga } = ApisUrls;
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
@@ -32,7 +32,7 @@ export default function Vaga({ navigation }) {
     console.log("User ID:", userId);
 
     try {
-      const response = await fetch(apiNgrokUsuarioVaga, {
+      const response = await fetch(apiEmuladorUsuarioVaga, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -61,7 +61,7 @@ export default function Vaga({ navigation }) {
 
   const cancelarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiNgrokUsuarioVaga}/${userId}/${vagaID}`, {
+      const response = await fetch(`${apiEmuladorUsuarioVaga}/${userId}/${vagaID}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -85,7 +85,7 @@ export default function Vaga({ navigation }) {
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiNgrokVaga}${vagaID}`;
+    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -101,7 +101,7 @@ export default function Vaga({ navigation }) {
 
   const verificarCandidatura = async () => {
     try {
-      const response = await fetch(`${apiNgrokVerificarCandidatura}${userId}/${vagaID}`);
+      const response = await fetch(`${apiEmuladorVerificarCandidatura}${userId}/${vagaID}`);
       const resp = await response.json();
   
       if (response.ok) {
@@ -115,7 +115,7 @@ export default function Vaga({ navigation }) {
   const denunciarVaga = async () => {
     if (motivoDenuncia) {
       try {
-        const response = await axios.post(apiNgrokDenunciarVaga, {
+        const response = await axios.post(apiEmuladorDenunciarVaga, {
           idUsuario: userId,
           idVaga: vagaID,
           motivo: motivoDenuncia,

@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 50,
-    borderWidth: 5,
+    borderWidth: 2,
     backgroundColor: '#fff',
     zIndex: 1,
   },

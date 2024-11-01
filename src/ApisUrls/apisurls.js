@@ -68,7 +68,8 @@ const ApisUrls = {
     apiNgrokDenunciarVaga: "http://3775-200-53-197-92.ngrok-free.app/api/denunciarVaga",
 
     //Urls ver candidaturas do usuario
-    apiNgrokMinhasVagas: "http://3775-200-53-197-92.ngrok-free.app/api/minhasvagas"
+    apiNgrokMinhasVagas: "http://3775-200-53-197-92.ngrok-free.app/api/minhasvagas",
+    apiEmuladorMinhasVagas: "http://10.0.2.2:8000/api/minhasvagas"
 };
 
 export default ApisUrls;

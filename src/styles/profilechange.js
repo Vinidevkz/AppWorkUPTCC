@@ -81,7 +81,48 @@ const styles = StyleSheet.create({
 
   saveText: {
     color: '#20dd77'
-  }
+  },
+
+  profileBackgroundImageCont: {
+    width: '100%',
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#ccc',
+    position: 'relative',
+    zIndex: 1,
+    
+  },
+  
+  profileBackgroundImg: {
+    width: '100%',
+    height: '100%',
+    resizeMode: 'cover',
+    zIndex: 1,
+    borderRadius: 10,
+  },
+
+  profileIconBox: {
+    width: 100,
+    height: 100,
+    position: 'absolute',
+    bottom: 5, // Posiciona a metade do ícone abaixo da imagem de fundo
+    left: '50%',
+    transform: [{ translateX: 120 }], // Centraliza horizontalmente
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: 50,
+    borderWidth: 2,
+    backgroundColor: '#fff',
+    zIndex: 1,
+  },
+
+  icon: {
+    width: '100%',
+    height: 100,
+    resizeMode: 'cover',
+  },
 
 });
 
