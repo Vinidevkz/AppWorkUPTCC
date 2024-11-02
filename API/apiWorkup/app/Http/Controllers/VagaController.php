@@ -213,9 +213,16 @@ class VagaController extends Controller
         return view('homeEmpresa', compact('vagas')); // Passa a variável $vagas para a view
     }
 
+    public function showVagasEmpresa($idEmpresa)
+    {
+        $vagaempresa = Vaga::where('idEmpresa', $idEmpresa)
+            ->select('idVaga', 'nomeVaga', 'cidadeVaga', 'estadoVaga', 'salarioVaga')
+            ->firstOrFail();
+    
+        return response()->json($vagaempresa, 200);
+    }
+    
 
-
-     
 
 
     public function edit($id)
@@ -322,7 +329,7 @@ class VagaController extends Controller
                     ->get();
 
                 $empresas = DB::table('tb_empresa')
-                    ->select('tb_empresa.nomeEmpresa', 'tb_empresa.usernameEmpresa', 'tb_empresa.estadoEmpresa')
+                    ->select('tb_empresa.idEmpresa', 'tb_empresa.nomeEmpresa', 'tb_empresa.usernameEmpresa', 'tb_empresa.estadoEmpresa')
                     ->where('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
                     ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
                     ->get();

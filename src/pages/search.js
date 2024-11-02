@@ -21,7 +21,7 @@ import { Context } from "../pages/initialPages/context/provider";
 const { apiNgrokVagaPesquisa, apiEmuladorVagaPesquisa } = ApisUrls;
 
 export default function Search({ navigation }) {
-  const { vagaID, setVagaID, setEmpresaId } = useContext(Context);
+  const { vagaID, setVagaID, empresaId, setEmpresaId } = useContext(Context);
 
   const { theme } = useTheme({ Search });
   const [data, setData] = useState([]); // Para vagas
@@ -381,6 +381,7 @@ export default function Search({ navigation }) {
                     ]}
                      onPress={() => {
                        setEmpresaId(item.idEmpresa);
+                       console.log("ID da empresa setado:", item.idEmpresa);
                        navigation.navigate("EmpresasProfile");
                      }}
                   >

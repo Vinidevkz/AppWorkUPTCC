@@ -39,8 +39,6 @@ Route::get('verificarSalvarVaga/{idUsuario}/{idVaga}', [SalvarVagaController::cl
 
 
 
-
-
 Route::post('/areaUsuario', [AreaInteresseUsuarioController::class,'store']);
 
 
@@ -80,6 +78,8 @@ Route::post('/vaga/busca', [VagaController::class, 'search']);
 //Atualizar dado de uma vaga...
 //Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])
 Route::post('/denunciarVaga', [DenunciaVagaController::class, 'store']);
+//Mostrar vagas baseado em um id de empresa
+Route::get('/showvagaempresa/{idEmpresa}', [VagaController::class, 'showVagasEmpresa']);
 
 //API'S AREAVAGA
 

@@ -250,12 +250,17 @@ Validação
     }
 
 
-    public function showEmpresaApp($id){
-
-        $empresa = Empresa::where('idEmpresa', $id);
-
-        return response()->json($empresa, 201);
+    public function showEmpresaApp($id)
+    {
+        $empresa = Empresa::where('idEmpresa', $id)->first();
+    
+        if ($empresa) {
+            return response()->json($empresa, 200);
+        } else {
+            return response()->json(['message' => 'Empresa não encontrada'], 404);
+        }
     }
+    
 
     public function dashboard(){
 
