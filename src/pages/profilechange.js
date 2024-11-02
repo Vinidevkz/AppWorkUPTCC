@@ -8,6 +8,7 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  ActivityIndicator,
 } from "react-native";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import { Context } from "../pages/initialPages/context/provider.js";
@@ -47,6 +48,7 @@ export default function ProfileChange({ navigation }) {
   const [areaIntUsuarioAlterado, setAreaIntUsuarioAlterado] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
 const [selectedBannerImage, setSelectedBannerImage] = useState(null);
+const [loading, setLoading] = useState(false)
 
   const [
     formacaoCompetenciaUsuarioAlterado,
@@ -64,7 +66,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
 
   useEffect(() => {
     async function fetchUserData() {
-      const apiUrl = `${apiEmuladorUsuario}${userId}`;
+      const apiUrl = `${apiNgrokUsuario}${userId}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -95,7 +97,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const response = await fetch(apiEmuladorArea);
+        const response = await fetch(apiNgrokArea);
         const data = await response.json();
         setAreaVagas(data);
       } catch (error) {
@@ -183,6 +185,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   };
 
   const alterarUsuario = async () => {
+    setLoading(true)
     if (
       !nomeUsuarioAlterado.trim() ||
       !userNameAlterado.trim() ||
@@ -229,7 +232,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
     // Log para visualizar os dados
     console.log("Dados que serão enviados:", JSON.stringify(dadosParaEnviar, null, 2));
   
-    const apiUrl = `${apiEmuladorUsuario}${userId}`;
+    const apiUrl = `${apiNgrokUsuario}${userId}`;
     try {
       const response = await fetch(apiUrl, {
         method: "PUT",
@@ -260,8 +263,11 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
       Alert.alert("Erro", "Erro ao se comunicar com o servidor");
       console.error(error);
     }
+    setLoading(false)
   };
+
   
+
   
 
   return (
@@ -298,6 +304,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
           <AntDesign name="plus" size={15} color="#20dd77" />
         </TouchableOpacity>
       </View>
+      
       <ScrollView
         style={{
           height: "100%",
@@ -310,6 +317,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
             color: theme.textColor,
             fontFamily: "DMSans-Regular",
             fontSize: 18,
+            paddingBottom: 10
           }}
         >
           Fotos de perfil:

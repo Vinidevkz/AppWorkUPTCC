@@ -171,38 +171,50 @@ class UsuarioController extends Controller
             return response()->json(['message' => 'Usuário atualizado com sucesso']);
     }
 
-    public function updateApp(Request $request, $id){
+    public function updateApp(Request $request, $id) {
         $usuario = Usuario::findOrFail($id);
-
+    
         // Validação dos dados recebidos
         $request->validate([
             'nomeUsuario' => 'sometimes|required|string|max:50',
             'usernameUsuario' => 'sometimes|required|string|max:50',
-            'sobreUsuario' => 'sometimes|required|string|max:40',
+            'sobreUsuario' => 'sometimes|required|string|max:300',
             'nascUsuario' => 'sometimes|required|string|max:50',
             'areaInteresseUsuario' => 'sometimes|required|string|max:40',
             'formacaoCompetenciaUsuario' => 'sometimes|required|string|max:50',
             'contatoUsuario' => 'sometimes|required|string|max:50',
-            'fotoUsuario' => 'sometimes|required|string|max:300',
-            'fotoBanner' => 'sometimes|required|string|max:300',
+            'fotoUsuario' => 'sometimes|nullable|string|max:300',
+            'fotoBanner' => 'sometimes|nullable|string|max:300',
         ]);
-
-        // Atualiza os campos que foram passados
-        $usuario->update($request->only([
+    
+        // Coletar os dados para atualização, excluindo fotoUsuario e fotoBanner se forem null
+        $data = $request->only([
             'nomeUsuario', 
             'usernameUsuario',
             'sobreUsuario',
             'nascUsuario',
             'areaInteresseUsuario',
             'formacaoCompetenciaUsuario',
-            'contatoUsuario',
-            'fotoUsuario',
-            'fotoBanner', 
-        ]));
-
-            return response()->json(['message' => 'Usuário atualizado com sucesso']);
-        
+            'contatoUsuario'
+        ]);
+    
+        // Verifica se 'fotoUsuario' foi enviado e não é null
+        if ($request->has('fotoUsuario') && $request->fotoUsuario !== null) {
+            $data['fotoUsuario'] = $request->fotoUsuario;
+        }
+    
+        // Verifica se 'fotoBanner' foi enviado e não é null
+        if ($request->has('fotoBanner') && $request->fotoBanner !== null) {
+            $data['fotoBanner'] = $request->fotoBanner;
+        }
+    
+        // Atualiza os campos que foram passados
+        $usuario->update($data);
+    
+        return response()->json(['message' => 'Usuário atualizado com sucesso']);
     }
+    
+    
 
     public function destroy($id, Request $request)
     {

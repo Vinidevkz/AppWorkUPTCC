@@ -39,7 +39,7 @@ export default function Configurações({ navigation }) {
         <Text
           style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}
         >
-          Configurações
+          Configurações e Opções
         </Text>
       </View>
 

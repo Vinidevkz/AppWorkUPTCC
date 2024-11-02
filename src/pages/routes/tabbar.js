@@ -5,6 +5,7 @@ const Tab = createBottomTabNavigator();
 
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome6 from '@expo/vector-icons/FontAwesome6';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 import Home from "../home";
@@ -19,29 +20,29 @@ export default function TabBar() {
     <Tab.Navigator
       initialRouteName="Home"
       screenOptions={({ route }) => ({
-        tabBarIcon: ({ color, size }) => {
+        tabBarIcon: ({ color, size, focused }) => {
           if (route.name === "Home") {
-            return <MaterialCommunityIcons name={'home-variant'} size={size + 4} color={color} />;
+            return <MaterialCommunityIcons name={focused ? 'home-variant' : 'home-variant-outline'} size={size + 4} color={color} />;
           } else if (route.name === "Search") {
-            return <Ionicons name={'search'} size={size + 4} color={color} />;
+            return <Ionicons name={focused ? 'search' : 'search-outline'} size={size + 4} color={color} />;
           } else if (route.name === "Notifications") {
-            return <MaterialCommunityIcons name={'bell'} size={size + 4} color={color} />;
+            return <MaterialCommunityIcons name={focused ? 'bell' : 'bell-outline'} size={size + 4} color={color} />;
           } else if (route.name === "Profile") {
-            return <FontAwesome6 name={'user-large'} size={size + 2} color={color} />;
+            return <FontAwesome5 name={focused ? 'user-alt' : 'user'} size={size + 2} color={color} />;
           }
         },
-        tabBarActiveTintColor: "#20dd77", // Cor do ícone ativo
-        tabBarInactiveTintColor: theme.tabBarIconColor, // Cor do ícone inativo
+        tabBarActiveTintColor: "#20dd77", 
+        tabBarInactiveTintColor: theme.tabBarIconColor, 
         tabBarShowLabel: false,
         tabBarStyle: {
-          backgroundColor: theme.backgroundColorNavBar, // Cor de fundo da TabBar
-          paddingBottom: 5, // Ajusta o espaçamento
+          backgroundColor: theme.backgroundColorNavBar, 
+          paddingBottom: 5,
           zIndex: 1,
           height: 60,
           elevation: 20,
           borderTopWidth: 0,
         },
-        headerShown: false, // Remove o cabeçalho
+        headerShown: false,
       })}
     >
       <Tab.Screen
