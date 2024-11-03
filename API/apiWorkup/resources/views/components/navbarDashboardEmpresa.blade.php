@@ -27,7 +27,7 @@ arrow_back
                 <!-- Verifique se $empresa não é null antes de exibir os dados -->
                 @if($empresa !== null)
                     <a href="{{ route('empresas.edit', $empresa->idEmpresa) }}">{{ $empresa->usernameEmpresa }}</a>
-                    <img src="{{ $empresa->fotoEmpresa   }}" alt="">
+                    <img src="{{$empresa->fotoEmpresa}}" alt="">
                     <form action="/logout" method="POST">
                         @csrf
                         <div>

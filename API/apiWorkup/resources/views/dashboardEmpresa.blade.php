@@ -5,8 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
@@ -83,31 +82,38 @@
 
             <div class="carrossel">
 
+                @if($vagas->isEmpty())
+                <div class="alert alert-warning" role="alert">
+                    Nenhuma vaga publicada.
+                </div>
+                @else
                 @foreach($vagas as $vaga)
 
                     <div class="col-vaga col-sm-6 col-md-4 col-lg-3 h-100">
                         <div class="vaga">
                             <div class="wrap-vaga">
                                 <div class="header-vaga">
-                                    <h3>{{ $vaga->nomeVaga }}</h3>
+                                    <h4 class="text-truncate">{{$vaga->nomeVaga}}</h4>
                                     <div>
                                         <p>Publicada em {{ \Carbon\Carbon::parse($vaga->created_at)->format('d/m/Y')}} </p>
                                         <p>Aberta até {{ \Carbon\Carbon::parse($vaga->prazoVaga)->format('d/m/Y') }}</p>
                                     </div>
                                 </div>
                                 <div class="opt-vaga">
-                                    <p>Salário: R${{ $vaga->salarioVaga }}</p>
-                                    <p>Área: {{ $vaga->nomeVaga }}</p>
-                                    <p>Estado: {{ $vaga->estadoVaga }}</p>
-                                    <p>Candidatos: {{ $vaga->total_candidatos }}</p>
+                                    <p class="text-truncate my-1">Salário: R${{ $vaga->salarioVaga }}</p>
+                                    <p class="text-truncate mb-1">Área: {{ $vaga->nomeVaga }}</p>
+                                    <p class="text-truncate mb-1">Estado: {{ $vaga->estadoVaga }}</p>
+                                    <p class="text-truncate mb-1">Candidatos: {{ $vaga->total_candidatos }}</p>
                                 </div>
-                                <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn-vagas">Mais detalhes <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
-                                <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas">Caditatos <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                                <div class="footer-vaga">
+                                    <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn-vagas">Detalhes <i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                                    <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas">Caditatos <i class="fa-solid fa-user" style="color: #ffffff;"></i></a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 @endforeach
-
+            @endif
             </div>
 
             <img id="nextBtn" src="{{url('assets/img/dashboardEmpresa/nextBtn.png')}}" class="btn-carrossel"
