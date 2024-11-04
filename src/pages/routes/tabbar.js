@@ -90,7 +90,7 @@ export default function TabBar() {
           }
         },
         tabBarActiveTintColor: "#20dd77",
-        tabBarInactiveTintColor: theme.tabBarIconColor,
+        tabBarInactiveTintColor: '#808080',
         tabBarShowLabel: false,
         tabBarStyle: {
           backgroundColor: theme.backgroundColorNavBar,

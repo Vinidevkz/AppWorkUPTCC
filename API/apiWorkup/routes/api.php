@@ -29,8 +29,6 @@ Route::post('/seguirEmpresa',[SeguirController::class, 'store']);
 Route::delete('/seguirEmpresa', [SeguirController::class, 'destroy']);
 //acabou aqui
 
-
-
 //Salvar Vaga
 Route::get('/salvarVaga/{idUsuario}', [SalvarVagaController::class, 'index']);
 Route::post('/salvarVaga',[SalvarVagaController::class, 'store']);

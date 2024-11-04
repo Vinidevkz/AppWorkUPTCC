@@ -217,7 +217,7 @@ class VagaController extends Controller
     {
         $vagaempresa = Vaga::where('idEmpresa', $idEmpresa)
             ->select('idVaga', 'nomeVaga', 'cidadeVaga', 'estadoVaga', 'salarioVaga')
-            ->firstOrFail();
+            ->get();
     
         return response()->json($vagaempresa, 200);
     }

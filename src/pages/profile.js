@@ -26,7 +26,7 @@ export default function Profile({ navigation }) {
     React.useCallback(() => {
       console.log(userId);
       async function fetchUserData() {
-        const apiUrl = `${apiNgrokUsuario}${userId}`;
+        const apiUrl = `${apiEmuladorUsuario}${userId}`;
         console.log("Fetching URL:", apiUrl);
 
         try {
@@ -180,7 +180,6 @@ export default function Profile({ navigation }) {
                 paddingVertical: 10,
                 gap: 20,
                 borderRadius: 20,
-                backgroundColor: theme.backgroundColor,
               }}
             >
               <View style={styles.profileSkillsCont}>

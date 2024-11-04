@@ -52,7 +52,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(apiNgrokVaga);
+      const response = await axios.get(apiEmuladorVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -159,7 +159,7 @@ export default function Home({ navigation }) {
         }));
       }
     } catch (error) {
-      console.error("Erro ao verificar salvamento da vaga:", error);
+      //console.error("Erro ao verificar salvamento da vaga:", error);
     }
   };
 
@@ -278,6 +278,7 @@ export default function Home({ navigation }) {
                       styles.DMSansBold,
                       { color: theme.textColor },
                     ]}
+                    numberOfLines={1}
                   >
                     {item.nomeVaga}
                   </Text>
@@ -300,11 +301,11 @@ export default function Home({ navigation }) {
                     publicada em: {item.prazoVaga}
                   </Text>
                 </View>
-                <View style={styles.vagaBody}>
+                <View style={[styles.vagaBody, {gap: 5}]}>
                   <Text
                     style={[
                       styles.descVaga,
-                      styles.DMSansBold,
+                      styles.DMSansRegular,
                       { color: theme.textColor },
                     ]}
                   >
@@ -313,7 +314,7 @@ export default function Home({ navigation }) {
                   <Text
                     style={[
                       styles.descVaga,
-                      styles.DMSansBold,
+                      styles.DMSansRegular,
                       { color: theme.textColor },
                     ]}
                   >
@@ -322,7 +323,7 @@ export default function Home({ navigation }) {
                   <Text
                     style={[
                       styles.descVaga,
-                      styles.DMSansBold,
+                      styles.DMSansRegular,
                       { color: theme.textColor },
                     ]}
                   >
@@ -331,7 +332,7 @@ export default function Home({ navigation }) {
                   <Text
                     style={[
                       styles.descVaga,
-                      styles.DMSansBold,
+                      styles.DMSansRegular,
                       { color: theme.textColor },
                     ]}
                   >
