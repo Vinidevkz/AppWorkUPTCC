@@ -85,7 +85,7 @@ export default function Vaga({ navigation }) {
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
+    const apiUrl = `${apiNgrokVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -115,7 +115,7 @@ export default function Vaga({ navigation }) {
   const denunciarVaga = async () => {
     if (motivoDenuncia) {
       try {
-        const response = await axios.post(apiEmuladorDenunciarVaga, {
+        const response = await axios.post(apiNgrokDenunciarVaga, {
           idUsuario: userId,
           idVaga: vagaID,
           motivo: motivoDenuncia,

@@ -519,7 +519,7 @@ const [loading, setLoading] = useState(false)
               fontSize: 18,
             }}
           >
-            Competência:
+            Competências:
           </Text>
           <TextInput
             style={[

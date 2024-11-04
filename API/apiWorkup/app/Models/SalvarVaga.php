@@ -20,6 +20,6 @@ class SalvarVaga extends Model
 
     public function vaga()
 {
-    return $this->belongsTo(Vaga::class, 'idVaga', 'id');
+    return $this->belongsTo(Vaga::class, 'idVaga');
 }
 }

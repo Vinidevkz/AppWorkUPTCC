@@ -26,7 +26,7 @@ export default function Profile({ navigation }) {
     React.useCallback(() => {
       console.log(userId);
       async function fetchUserData() {
-        const apiUrl = `${apiEmuladorUsuario}${userId}`;
+        const apiUrl = `${apiNgrokUsuario}${userId}`;
         console.log("Fetching URL:", apiUrl);
 
         try {

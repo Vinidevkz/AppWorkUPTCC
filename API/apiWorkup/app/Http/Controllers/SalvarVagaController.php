@@ -29,6 +29,7 @@ class SalvarVagaController extends Controller
             ->get();
         $result = $vagasSalvas->map(function ($vagaSalva) {
             return [
+                'idVaga' => $vagaSalva->vaga->idVaga,
                 'nomeVaga' => $vagaSalva->vaga->nomeVaga,
                 'prazoVaga' => $vagaSalva->vaga->prazoVaga,
                 'salarioVaga' => $vagaSalva->vaga->salarioVaga,
