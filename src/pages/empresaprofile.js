@@ -7,18 +7,20 @@ import ApisUrls from "../ApisUrls/apisurls.js";
 import { useFocusEffect } from "@react-navigation/native";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 
+import AntDesign from '@expo/vector-icons/AntDesign';
+
 export default function EmpresaProfile({ navigation }) {
   const { theme } = useTheme({ EmpresaProfile });
   const { empresaId } = useContext(Context);
   const [dadosEmpresa, setDadosEmpresa] = useState([]);
   const [dadosVaga, setDadosVaga] = useState([]);
 
-  const { apiNgrokEmpresa, apiNgrokVagaEmpresa, apiEmuladorEmpresa, apiEmuladorVagaEmpresa } = ApisUrls;
+  const { apiEmuladorEmpresa, apiEmuladorVagaEmpresa} = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
       async function fetchUserData() {
-        const apiUrl = `${apiNgrokEmpresa}${empresaId}`;
+        const apiUrl = `${apiEmuladorEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -39,7 +41,7 @@ export default function EmpresaProfile({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       async function fetchVagaEmpresa() {
-        const apiUrl = `${apiNgrokVagaEmpresa}${empresaId}`;
+        const apiUrl = `${apiEmuladorVagaEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -90,7 +92,7 @@ export default function EmpresaProfile({ navigation }) {
   };
 
   return (
-    <GestureHandlerRootView style={{ flex: 1 }}>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.backgroundColor }}>
       <SafeAreaView>
         <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
           <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Perfil da Empresa</Text>
@@ -121,7 +123,10 @@ export default function EmpresaProfile({ navigation }) {
 
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }} /* Avaliações */>
                 <Text style={[styles.DMSansBold, {color: theme.textColor}]}>Avaliações da Empresa:</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 5}}>
                 <Text style={[styles.DMSansRegular, { color: getColorBasedOnAvalicao(dadosEmpresa.avaliacaoEmpresa) }]}>{dadosEmpresa.avaliacaoEmpresa}</Text>
+                {dadosEmpresa.avaliacaoEmpresa === 'Muito Positivas' ? <AntDesign name="checkcircle" size={20} color="#20dd77" /> : ''} 
+                </View>
               </View>
 
               <View style={[styles.line, { borderColor: theme.lineColor }]}></View>
@@ -171,6 +176,7 @@ export default function EmpresaProfile({ navigation }) {
                         </View>
                       </View>
                     )}
+                    ListEmptyComponent={<Text style={[styles.DMSansRegular]}>Nenhuma vaga publicada.</Text>}
                   />
                 </View>
               </View>
