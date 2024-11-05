@@ -17,9 +17,10 @@
             </div>
             <div class="card-body">
                 <h2 class="mb-4">Detalhes das Empresas</h2>
+              
                 <div class="row">
                     <div class="col-md-6 mb-3">
-                        <strong>ID:</strong> {{ $empresa->idEmpresa }}
+                        <strong>ID:</strong> {{ $empresa->idEmpresa }} {{-- Essa linha aqui --}}
                     </div>
                     <div class="col-md-6 mb-3">
                         <strong>Username:</strong> {{ $empresa->usernameEmpresa }}
@@ -61,7 +62,8 @@
                         <strong>Número:</strong> {{ $empresa->numeroLograEmpresa }}
                     </div>
                 </div>
-                
+ 
+
                 <h3 class="mt-4">Áreas de Atuação:</h3>
                 <ul>
                     @foreach($empresa->areas as $area)

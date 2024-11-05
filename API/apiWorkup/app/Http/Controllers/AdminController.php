@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Admin;
 use App\Models\AreaInteresseUsuario;
+use App\Models\Empresa;
 use App\Models\Usuario;
 use App\Models\Vaga;
 use Illuminate\Http\Request;
@@ -248,6 +249,16 @@ $estatisticas = $this->calcularEstatisticas();
 
         return $admin;
     }
+
+
+    // AdminController
+    public function showEmpresa($id)
+    {
+        $empresa = Empresa::with('areas')->findOrFail($id);
+    return view('admin.empresa.allempresaAdmin', compact('empresa'));
+    }
+    
+
 
     public function edit($id)
     {
