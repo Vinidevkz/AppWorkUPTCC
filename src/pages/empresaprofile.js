@@ -18,12 +18,13 @@ export default function EmpresaProfile({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       async function fetchUserData() {
-        const apiUrl = `${apiEmuladorEmpresa}${empresaId}`;
+        const apiUrl = `${apiNgrokEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
           const data = await response.json();
           setDadosEmpresa(data);
+          console.log("Dados Empresa", dadosEmpresa);
         } catch (error) {
           console.error("Error fetching user data:", error);
         }
@@ -38,7 +39,7 @@ export default function EmpresaProfile({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       async function fetchVagaEmpresa() {
-        const apiUrl = `${apiEmuladorVagaEmpresa}${empresaId}`;
+        const apiUrl = `${apiNgrokVagaEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -68,6 +69,25 @@ export default function EmpresaProfile({ navigation }) {
       <Text>{item.salarioVaga}</Text>
     </View>
   );
+
+  const getColorBasedOnAvalicao = (avaliacao) => {
+    if (!avaliacao) return "red";
+
+    switch (avaliacao) {
+      case "Muito Positivas":
+        return "#20dd77";
+      case "Positivas":
+        return "blue";
+      case "Neutras":
+        return "#ff9a36";
+      case "Ruins":
+        return "#d4552f";
+      case "Muito Ruins":
+        return "#d4552f";
+      default:
+        return "black";
+    }
+  };
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
@@ -99,6 +119,11 @@ export default function EmpresaProfile({ navigation }) {
                 <Text style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>{dadosEmpresa.sobreEmpresa || "Loading..."}</Text>
               </View>
 
+              <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }} /* Avaliações */>
+                <Text style={[styles.DMSansBold, {color: theme.textColor}]}>Avaliações da Empresa:</Text>
+                <Text style={[styles.DMSansRegular, { color: getColorBasedOnAvalicao(dadosEmpresa.avaliacaoEmpresa) }]}>{dadosEmpresa.avaliacaoEmpresa}</Text>
+              </View>
+
               <View style={[styles.line, { borderColor: theme.lineColor }]}></View>
 
               <View
@@ -121,11 +146,13 @@ export default function EmpresaProfile({ navigation }) {
                     renderItem={({ item }) => (
                       <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
                         <View style={styles.vagaHead}>
-                          <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>{item.nomeVaga}</Text>
+                          <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>
+                            {item.nomeVaga}
+                          </Text>
                           <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>oferecido por: {item.empresa?.nomeEmpresa}</Text>
                           <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>publicada em: {item.prazoVaga}</Text>
                         </View>
-                        <View style={[styles.vagaBody, {gap: 5}]}>
+                        <View style={[styles.vagaBody, { gap: 5 }]}>
                           <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Modalidade: {item.modalidade?.descModalidadeVaga}</Text>
                           <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Salário: R${item.salarioVaga}</Text>
                           <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Cidade: {item.cidadeVaga}</Text>

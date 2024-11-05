@@ -35,10 +35,10 @@ export default function Search({ navigation }) {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log(`URL da requisição: ${apiEmuladorVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
+      const response = await axios.post(apiNgrokVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -140,14 +140,13 @@ export default function Search({ navigation }) {
           />
         </View>
       </View>
-      <View style={{ height: "100%", backgroundColor: theme.backgroundColor }}>
+      <View style={{ height: "90%", backgroundColor: theme.backgroundColor }}>
         {loading ? (
           <View
             style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: [{ translateX: -25 }, { translateY: -25 }],
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
             <ActivityIndicator size="large" color="#20dd77" />
@@ -190,9 +189,7 @@ export default function Search({ navigation }) {
                   Vagas:
                 </Text>
                 {data.length === 0 ? (
-                  <Text style={{ color: theme.textColor, fontSize: 16 }}>
-                    Nada encontrado, tente novamente mais tarde.
-                  </Text>
+                  <ActivityIndicator size="large" color="#20dd77" />
                 ) : (
                   <FlatList
                     data={data} // Exibindo vagas
@@ -281,7 +278,10 @@ export default function Search({ navigation }) {
             >
               Empresas:
             </Text>
-            <FlatList
+            {data.lenght === 0 ? (
+              <ActivityIndicator size={'large'}/>
+            ) : (
+              <FlatList
               data={companies} // Usando o estado para empresas
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -291,7 +291,7 @@ export default function Search({ navigation }) {
               }}
               keyExtractor={(item) =>
                 item.id_empresa
-                  ? item.id_empresa.toString()
+                  ? item.idEmpresa.toString()
                   : Math.random().toString()
               } // Assumindo que id_empresa é único
               renderItem={({ item }) => (
@@ -398,6 +398,8 @@ export default function Search({ navigation }) {
                 </View>
               )}
             />
+            )}
+
           </View>
         )}
       </View>
