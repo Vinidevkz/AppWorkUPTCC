@@ -151,7 +151,6 @@
                                             </div>
                                         </div>
 
-
                                         <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas btn-vazado">Candidatos<i class="fa-solid fa-user"></i></a>
                                     </div>
                                 </div>

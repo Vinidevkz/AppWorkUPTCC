@@ -2,14 +2,6 @@
 
 <header class="fixed-top">
     <div class="header-wrap">
-        @if (Request::url() != url('/empresa/dashboard') && Request::url() != url('/home')) <!-- Verifica se não está em '/empresa/dashboard' e '/home' -->
-        <button onclick="window.history.back()" class="d-flex p-1 align-items-center m-0" style="background-color: transparent; border:none">
-            <span class="material-symbols-outlined text-light">
-                arrow_back
-            </span>
-            <p class="m-0 text-light">Voltar</p>
-        </button>
-        @endif
 
         <div class="wrap-logo">
             <a href="{{ route('home.workup') }}">
