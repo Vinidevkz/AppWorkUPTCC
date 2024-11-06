@@ -38,21 +38,21 @@
 </section>
 
     <section class="funcoes py-4">
-    <div class="container">
+    <div class="row w-100">
         <h3 class="titulo-secao text-center mb-4">Aqui você pode:</h3>
-        <div class="row">
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+        <div class="row w-100">
+            <div class="col-lg-4 col-md-3 col-sm-12 mb-4">
                 <div class="card-funcoes p-3 h-100">
                     <div class="header-card-funcoes d-flex align-items-center mb-3">
                         <i class="fa-solid fa-note-sticky me-2" style="color: #20dd77;"></i>
                         <h4>Publicar vagas</h4>
                     </div>
                     <div class="body-card-funcoes">
-                        <p>O nosso foco é a publicação de vagas, sendo essa a função principal dessa página. As vagas podem ser editadas e removidas posteriormente.</p>
+                        <p>O nosso foco é a publicação de vagas, podendo ser editadas e removidas posteriormente.</p>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+            <div class="col-lg-4 col-md-3 col-sm-12 mb-4">
                 <div class="card-funcoes p-3 h-100">
                     <div class="header-card-funcoes d-flex align-items-center mb-3">
                         <i class="fa-solid fa-paper-plane me-2" style="color: #20dd77;"></i>
@@ -63,28 +63,17 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
+            <div class="col-lg-4 col-md-3 col-sm-12 mb-4">
                 <div class="card-funcoes p-3 h-100">
                     <div class="header-card-funcoes d-flex align-items-center mb-3">
                         <i class="fa-solid fa-users me-2" style="color: #20dd77;"></i>
                         <h4>Conhecer os jovens talentos</h4>
                     </div>
                     <div class="body-card-funcoes">
-                        <p>Aqui você pode conectar estudantes de diferentes áreas, promovendo a troca de conhecimento e networking.</p>
+                        <p>Aqui você pode se conectar estudantes de diferentes áreas, promovendo a troca de conhecimento e networking.</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-6 col-md-6 col-sm-12 mb-4">
-                <div class="card-funcoes p-3 h-100">
-                    <div class="header-card-funcoes d-flex align-items-center mb-3">
-                        <i class="fa-solid fa-briefcase me-2" style="color: #20dd77;"></i>
-                        <h4>Encontrar oportunidades</h4>
-                    </div>
-                    <div class="body-card-funcoes">
-                        <p>Além de publicar vagas, você também pode encontrar oportunidades de estágio e emprego na nossa plataforma.</p>
-                    </div>
-                </div>
-            </div>
+            </div>  
         </div>
     </div>
 </section>
@@ -98,14 +87,14 @@
     <div class="wrap-carrossel position-relative">
         <img src="{{url('assets/img/dashboardEmpresa/bckBtn.png')}}" class="btn-carrossel position-absolute start-0" id="backBtn">
 
-        <div class="carrossel d-flex justify-content-center">
+        <div class="carrossel">
             @if($vagas->isEmpty())
                 <div class="alert alert-warning" role="alert">
                     Nenhuma vaga publicada.
                 </div>
             @else
                 @foreach($vagas as $vaga)
-                    <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center mb-4">
+                    <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
                         <div class="vaga">
                             <div class="wrap-vaga">
                                 <div class="header-vaga">

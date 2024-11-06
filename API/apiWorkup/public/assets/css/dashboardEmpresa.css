@@ -231,7 +231,7 @@ header {
 
 
 .vagas {
-    background-color: transparent;
+    background-color: #f8f8f8;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -270,14 +270,15 @@ header {
 .vaga {
     width: 100%;
     max-width: 300px; /* Limita a largura máxima dos cards */
+    height: 24rem;
     background-color: #fff;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
     border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0px 40px 45px -40px rgba(0, 0, 0, 0.3);
+    padding: 2rem;
+    box-shadow: 0px 25px 45px -40px rgba(0, 0, 0, 0.3);
 }
 
 .wrap-vaga {
@@ -316,11 +317,16 @@ header {
     border-style: none;
     background-color: #00ff75;
     color: #fff;
-    padding: 0.5rem;
-    text-align: center;
+    padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     text-decoration: none;
-    width: 48%;
+    font-size: 0.9rem;
+    width: 49%;
+    height: 2.5rem;
     border-radius: 5px;
+    gap: 0.3rem;
 }
 
 
