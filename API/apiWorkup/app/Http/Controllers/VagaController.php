@@ -379,5 +379,14 @@ class VagaController extends Controller
     }
     
 
+    /*
+    public function verVagaPorArea(Request $request){
+        // try {
+
+        // }catch{
+            
+        // }
+    }
+    */
 
 }
