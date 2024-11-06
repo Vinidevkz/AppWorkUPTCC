@@ -53,7 +53,7 @@ export default function Home({ navigation }) {
     setLoading(true);
     try {
       console.log(`${apiEmuladorOutrasVagas}/${areaInt}`);
-      const response = await axios.get(`${apiEmuladorVagaPorArea}/${areaInt}`);
+      const response = await axios.get(`${apiEmuladorOutrasVagas}/${areaInt}`);
       setOutrasVagas(response.data);
       console.log(data);
     } catch (error) {
@@ -209,7 +209,7 @@ export default function Home({ navigation }) {
       <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.titleCont2}>
           <Text style={[styles.title, styles.row, styles.DMSansBold, { color: theme.textColor }]}>Vagas para você:</Text>
-          <TouchableOpacity onPress={() => buscaVaga()}>
+          <TouchableOpacity onPress={() => {buscaVaga(); buscaOutrasVaga()}}>
             <FontAwesome name="refresh" size={30} color="#20dd77" />
           </TouchableOpacity>
         </View>
