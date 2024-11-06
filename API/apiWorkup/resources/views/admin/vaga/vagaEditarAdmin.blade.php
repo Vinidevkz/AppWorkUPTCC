@@ -153,7 +153,7 @@
                 </div>
                 <div class="d-flex justify-content-between" style="width: 65%">
                     <input class="botoes voltar" type="button" value="Voltar" style="width: 40%">
-                    <button class="botoes voltar" style="width: 40%">Registrar</button>
+                    <button class="botoes registrar" style="width: 40%">Registrar</button>
                 </div>
             </form>
         </div>

@@ -51,7 +51,7 @@ header {
 }
 
 .header-wrap ul {
-    width: 15%;
+    width: 30%;
     display: flex;
     justify-content: space-around;
     flex-direction: row;
@@ -60,8 +60,7 @@ header {
     margin: 0;
 }
 
-.header-wrap ul a,
-.wrap-user div a {
+.header-wrap ul a, .wrap-user div a {
     text-decoration: none;
     color: #fff;
     font-size: 0.9rem;
@@ -151,9 +150,7 @@ header {
     background-color: #20dd77;
 }
 
-.botao-vaga,
-.botao-vaga i,
-.botao-post {
+.botao-vaga, .botao-vaga i, .botao-post {
     color: #f4f4f4;
 }
 
@@ -172,6 +169,12 @@ header {
     margin: 0 0 2rem 4.5rem;
 }
 
+.funcoes {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
 .fundo-funcoes {
     width: 100%;
     height: 200px;
@@ -180,19 +183,18 @@ header {
     background-color: #ededed;
 }
 
-.funcoes .row {
-    width: 85vw;
+.linha-funcoes {
     height: 100%;
 }
 
-.funcoes .row .col {
-    display: grid;
-    place-items: center;
+.col-funcoes {
+    display: flex;
+    justify-content: center;
 }
 
 .card-funcoes {
     width: 100%;
-    height: 75%;
+    height: 90%;
     padding: 1rem;
     background-color: #fff;
     border-left: 6px solid #20dd77;
@@ -313,10 +315,8 @@ header {
     margin-top: 1rem;
 }
 
-.footer-vaga a {
+.btn-vagas {
     border-style: none;
-    background-color: #00ff75;
-    color: #fff;
     padding: 0.3rem;
     display: flex;
     justify-content: center;
@@ -325,8 +325,17 @@ header {
     font-size: 0.9rem;
     width: 49%;
     height: 2.5rem;
-    border-radius: 5px;
     gap: 0.3rem;
+}
+
+.btn-verde {
+    background-color: #00ff75;
+    color: #fff;
+}
+
+.btn-vazado {
+    border: 1px solid #20dd77;
+    color: #20dd77;
 }
 
 
