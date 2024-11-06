@@ -8,6 +8,7 @@ use App\Http\Controllers\VagaUsuarioController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\DenunciaEmpresaController;
 use App\Http\Controllers\EscolasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -108,3 +109,6 @@ Route::get('/escolas', [EscolasController::class, 'index']);
 
 //API ver minhas vagas (vagas em que o usuario ta se candidatando)
 Route::get('/minhasvagas/{userId}', [VagaUsuarioController::class, 'minhasVagas']);
+
+//API denuncia de empresa
+Route::get('/denunciaempresa', [DenunciaEmpresaController::class, 'store']);

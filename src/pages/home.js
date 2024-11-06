@@ -21,10 +21,10 @@ import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from "../ApisUrls/apisurls.js";
 const {
-  apiEmuladorVaga,
-  apiEmuladorSalvarVaga,
-  apiEmuladorCancelSalvarVaga,
-  apiEmuladorVerificarSalvarVaga,
+  apiNgrokVaga,
+  apiNgrokSalvarVaga,
+  apiNgrokCancelSalvarVaga,
+  apiNgrokVerificarSalvarVaga,
 } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
@@ -48,7 +48,7 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      const response = await axios.get(apiEmuladorVaga);
+      const response = await axios.get(apiNgrokVaga);
       setData(response.data);
     } catch (error) {
       console.error("Error fetching data:", error);
@@ -64,7 +64,7 @@ export default function Home({ navigation }) {
 
   const salvarVaga = async (idVaga) => {
     const idUsuario = userId;
-    const url = apiEmuladorSalvarVaga;
+    const url = apiNgrokSalvarVaga;
 
     const body = {
       idUsuario: idUsuario,
@@ -106,7 +106,7 @@ export default function Home({ navigation }) {
 
   const removerVagaSalva = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const url = apiEmuladorCancelSalvarVaga; // Use a URL sem parâmetros na rota
+    const url = apiNgrokCancelSalvarVaga; // Use a URL sem parâmetros na rota
 
     try {
       const response = await fetch(url, {
@@ -140,7 +140,7 @@ export default function Home({ navigation }) {
   const verificarSalvamentoVaga = async (vagaID) => {
     try {
       const request = await fetch(
-        `${apiEmuladorVerificarSalvarVaga}/${userId}/${vagaID}`
+        `${apiNgrokVerificarSalvarVaga}/${userId}/${vagaID}`
       );
       const response = await request.json();
       if (response.isSaved) {
