@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{{url('../assets/css/dashboardEmpresa.css')}}">
-    <title>Empresa | Dashboard</title>
+    <title>Empresa | Home</title>
 </head>
 
 <body>
@@ -118,10 +118,11 @@
 
                                     <div class="footer-vaga">
 
-                                        <button type="button" class="btn-vagas btn-verde" data-bs-toggle="modal" data-bs-target="#exampleModal">Detalhes<i class="fa-solid fa-clipboard-list"></i></button>
+                                        <button type="button" class="btn-vagas btn-verde" data-bs-toggle="modal" data-bs-target="#{{$vaga->idVaga}}">Detalhes<i class="fa-solid fa-clipboard-list"></i></button>
 
+                                        @foreach($vagas as $vaga)
                                         <!-- Modal -->
-                                        <div class="modal fade" id="exampleModal" tabindex="-1"
+                                        <div class="modal fade" id="{{ $vaga->idVaga}}" tabindex="-1"
                                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
@@ -150,6 +151,8 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        @endforeach
 
 
                                         <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas btn-vazado">Candidatos<i class="fa-solid fa-user"></i></a>

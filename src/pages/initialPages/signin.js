@@ -1,33 +1,25 @@
 // SignIN Component
 import React, { useState, useEffect, useContext } from "react";
-import {
-  StatusBar,
-  View,
-  Text,
-  TextInput,
-  SafeAreaView,
-  Image,
-  TouchableOpacity,
-  ActivityIndicator,
-  Alert,
-} from "react-native";
+import { StatusBar, View, Text, TextInput, SafeAreaView, Image, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import * as Font from "expo-font";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "../initialPages/styles/signin.js";
 import { Context } from "./context/provider.js";
-import ApisUrls from '../../ApisUrls/apisurls.js';
+import ApisUrls from "../../ApisUrls/apisurls.js";
 
 const { apiNgrok, apiEmulador } = ApisUrls;
 
 export default function SignIN({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { setUserId, setNome, setUserName } = useContext(Context);
+  const { setUserId, setNome, setUserName, setAreaInt } = useContext(Context);
+  const [loading, setLoading] = useState(false);
 
   async function verificarUsuario() {
+    setLoading(true);
     if (!email || !senha) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
@@ -55,6 +47,7 @@ export default function SignIN({ navigation }) {
         setNome(resp.nomeUsuario);
         setUserName(resp.usernameUsuario);
         setEmail(resp.emailUsuario); // Atualize o email no contexto
+        setAreaInt(resp.areaInteresseUsuario);
         navigation.navigate("TabBar");
       } else {
         const errorMessage = resp.message || "Erro desconhecido.";
@@ -63,11 +56,9 @@ export default function SignIN({ navigation }) {
       }
     } catch (error) {
       console.error("Erro na tentativa de login:", error);
-      Alert.alert(
-        "Erro",
-        "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente."
-      );
+      Alert.alert("Erro", "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente.");
     }
+    setLoading(false);
   }
 
   // Carregador de fontes
@@ -96,6 +87,23 @@ export default function SignIN({ navigation }) {
 
   return (
     <SafeAreaView style={styles.SafeAreaView}>
+      {loading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+        >
+          <ActivityIndicator size="large" color="#20dd77" />
+        </View>
+      )}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
@@ -104,50 +112,20 @@ export default function SignIN({ navigation }) {
       </View>
       <View style={styles.loginCont}>
         <View style={styles.inputCont}>
-          <Entypo
-            name="mail"
-            size={25}
-            color="black"
-            style={{ borderRightWidth: 2, paddingRight: 8 }}
-          />
-          <TextInput
-            placeholder="Digite seu email ou usuario"
-            style={[styles.DMSansRegular, styles.input]}
-            onChangeText={(text) => setEmail(text)}
-            value={email}
-          />
+          <Entypo name="mail" size={25} color="black" style={{ borderRightWidth: 2, paddingRight: 8 }} />
+          <TextInput placeholder="Digite seu email ou usuario" style={[styles.DMSansRegular, styles.input]} onChangeText={(text) => setEmail(text)} value={email} />
         </View>
 
         <View style={styles.inputCont}>
-          <FontAwesome6
-            name={"unlock"}
-            size={25}
-            color={"#1b1b1b"}
-            style={{ borderRightWidth: 2, paddingRight: 10 }}
-          />
-          <TextInput
-            placeholder="Digite sua senha"
-            style={[styles.DMSansRegular, styles.input]}
-            secureTextEntry={!passwordVisible}
-            onChangeText={(text) => setSenha(text)}
-            value={senha}
-          />
-          <TouchableOpacity
-            onPress={() => setPasswordVisible(!passwordVisible)}
-          >
-            <FontAwesome6
-              name={passwordVisible ? "eye-slash" : "eye"}
-              size={25}
-              color={"#1b1b1b"}
-              style={{ paddingHorizontal: 10 }}
-            />
+          <FontAwesome6 name={"unlock"} size={25} color={"#1b1b1b"} style={{ borderRightWidth: 2, paddingRight: 10 }} />
+          <TextInput placeholder="Digite sua senha" style={[styles.DMSansRegular, styles.input]} secureTextEntry={!passwordVisible} onChangeText={(text) => setSenha(text)} value={senha} />
+          <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
+            <FontAwesome6 name={passwordVisible ? "eye-slash" : "eye"} size={25} color={"#1b1b1b"} style={{ paddingHorizontal: 10 }} />
           </TouchableOpacity>
         </View>
 
         <TouchableOpacity style={styles.button} onPress={verificarUsuario}>
-          <Text style={[styles.DMSansBold, styles.buttonText]}>
-            Fazer Login
-          </Text>
+          <Text style={[styles.DMSansBold, styles.buttonText]}>Fazer Login</Text>
           <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
         </TouchableOpacity>
 

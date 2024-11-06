@@ -79,7 +79,13 @@ const ApisUrls = {
     apiNgrokVagaEmpresa: 'http://cff4-200-53-195-156.ngrok-free.app/api/showvagaempresa/',
     apiEmuladorVagaEmpresa: 'http://10.0.2.2:8000/api/showvagaempresa/',
 
-    //Urls ver vaga baseado na área de interess
+    //Urls ver vaga baseado na área de interesse
+    apiEmuladorVagaPorArea: 'http://10.0.2.2:8000/api/vagaporarea',
+    apiNgrokVagaPorArea: 'http://cff4-200-53-195-156.ngrok-free.app/api/vagaporarea',
+
+    //Urls ver vaga baseado na área de interesse
+    apiEmuladorOutrasVagas: 'http://10.0.2.2:8000/api/outrasvagas',
+    apiNgrokOutrasVagas: 'http://cff4-200-53-195-156.ngrok-free.app/api/outrasvagas'
 };
 
 export default ApisUrls;

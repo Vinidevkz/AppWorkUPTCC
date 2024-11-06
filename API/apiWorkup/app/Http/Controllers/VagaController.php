@@ -223,8 +223,6 @@ class VagaController extends Controller
     }
     
 
-
-
     public function edit($id)
     {
 
@@ -352,13 +350,34 @@ class VagaController extends Controller
         }
     }
 
-    public function verVagaPorArea(Request $request){
-        try {
+    public function verVagaPorArea($nomeArea){
+        // Debugging para verificar o valor de nomeArea
 
-        }catch{
-            
-        }
+        
+        $areaVaga = Vaga::join('tb_area', 'tb_vaga.idArea', '=', 'tb_area.idArea')
+            ->where('tb_area.nomeArea', $nomeArea)
+            ->select('tb_vaga.idVaga', 'tb_vaga.nomeVaga', 'tb_vaga.cidadeVaga', 'tb_vaga.salarioVaga', 'tb_vaga.idEmpresa', 'tb_vaga.prazoVaga', 'tb_vaga.idModalidadeVaga', 'tb_vaga.idArea')
+            ->with('empresa', 'status', 'modalidade', 'area')
+            ->get();
+    
+    
+        return response()->json($areaVaga, 200);
     }
+
+    public function verOutrasVagas($nomeArea){
+        // Debugging para verificar o valor de nomeArea
+
+        
+        $areaVaga = Vaga::join('tb_area', 'tb_vaga.idArea', '=', 'tb_area.idArea')
+            ->where('tb_area.nomeArea', '!=', $nomeArea)
+            ->select('tb_vaga.idVaga', 'tb_vaga.nomeVaga', 'tb_vaga.cidadeVaga', 'tb_vaga.salarioVaga', 'tb_vaga.idEmpresa', 'tb_vaga.prazoVaga', 'tb_vaga.idModalidadeVaga', 'tb_vaga.idArea')
+            ->with('empresa', 'status', 'modalidade', 'area')
+            ->get();
+    
+    
+        return response()->json($areaVaga, 200);
+    }
+    
 
 
 }

@@ -205,9 +205,6 @@ export default function SignON3({ navigation }) {
     }
   }
 
-
-  
-
   const fontsLoaded = useFonts();
   if (!fontsLoaded) {
     return (

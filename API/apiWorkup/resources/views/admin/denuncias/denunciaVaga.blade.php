@@ -24,7 +24,6 @@
     <div class="container md-4 mt-3">
       <h1 class="ms-2 fs-3">Vagas denunciadas</h1>
 
-    @forelse($denuncias as $denuncia)
 
     <table class="table table-hover table-bordered text-center align-middle">
           <thead class="table-light rounded-top">
@@ -103,8 +102,6 @@
               @endforelse
           </tbody>
         </table>
-    @empty
-    @endforelse
 
         <div class="no-results" id="noResults">
               <img src="{{url('assets/img/adminImages/not-found.png')}}" alt="">

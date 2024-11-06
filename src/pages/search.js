@@ -141,6 +141,9 @@ export default function Search({ navigation }) {
         </View>
       </View>
       <View style={{ height: "90%", backgroundColor: theme.backgroundColor }}>
+
+
+        {searchText === '' ? handleSearch : ''}
         {loading ? (
           <View
             style={{
@@ -157,15 +160,7 @@ export default function Search({ navigation }) {
           <View style={[{ alignItems: "flex-start", padding: 10 }]}>
             {errorMessage ? (
               <View>
-                <Text
-                  style={[
-                    styles.DMSansBold,
-                    styles.title,
-                    { color: theme.textColor },
-                  ]}
-                >
-                  Vagas:
-                </Text>
+
                 <Text
                   style={{
                     color: theme.textColor,
@@ -179,18 +174,18 @@ export default function Search({ navigation }) {
               </View>
             ) : (
               <>
-                <Text
-                  style={[
-                    styles.DMSansBold,
-                    styles.title,
-                    { color: theme.textColor },
-                  ]}
-                >
-                  Vagas:
-                </Text>
-                {data.length === 0 ? (
-                  <ActivityIndicator size="large" color="#20dd77" />
-                ) : (
+{!loading && (
+  <Text
+    style={[
+      styles.DMSansBold,
+      styles.title,
+      { color: theme.textColor },
+    ]}
+  >
+    Vagas:
+  </Text>
+)}
+
                   <FlatList
                     data={data} // Exibindo vagas
                     showsHorizontalScrollIndicator={false}
@@ -263,7 +258,7 @@ export default function Search({ navigation }) {
                       </View>
                     )}
                   />
-                )}
+                
               </>
             )}
             <Text
@@ -399,6 +394,9 @@ export default function Search({ navigation }) {
 
           </View>
         )}
+
+
+
       </View>
     </SafeAreaView>
   );
