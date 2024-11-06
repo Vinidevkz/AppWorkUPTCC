@@ -44,9 +44,10 @@ main.conteudo {
       width: 100%;
       height: auto;
 }
+
 .container {
       max-width: 100%;
-    
+
 }
 
 
@@ -59,10 +60,10 @@ main.conteudo {
       margin-left: 10%;
 
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-     
-     
+
+
       overflow: hidden;
-    
+
 }
 
 .header-card-funcoes i {
@@ -87,7 +88,7 @@ main.conteudo {
 
 /* Rodapé */
 .footer {
-      
+
       background-color: #f8f9fa;
 }
 
