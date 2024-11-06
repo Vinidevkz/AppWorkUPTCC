@@ -97,7 +97,6 @@ Validação
         $empresa->usernameEmpresa = $request->usernameEmpresa;
         $empresa->nomeEmpresa = $request->nomeEmpresa;
         $empresa->emailEmpresa = $request->emailEmpresa;
-        $empresa->fotoEmpresa = $request->fotoEmpresa;
         $empresa->sobreEmpresa = $request->sobreEmpresa;
         $empresa->cnpjEmpresa = $request->cnpjEmpresa;
         $empresa->contatoEmpresa = $request->contatoEmpresa;
@@ -108,6 +107,22 @@ Validação
         $empresa->cepEmpresa = $request->cepEmpresa;
         $empresa->numeroLograEmpresa = $request->numeroLograEmpresa;
         $empresa->idStatus = 3;
+
+
+        if ($request->hasFile('fotoEmpresa') && $request->file('fotoEmpresa')->isValid()) {
+            // Trata a imagem se estiver presente
+            $requestImage = $request->fotoEmpresa;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $requestImage->move(public_path('assets/img/perfil/empresa'), $imageName);
+    
+            // Salva o nome da imagem no campo fotoAdmin
+            $empresa->fotoEmpresa = $imageName;
+        } else {
+            // Se não houver imagem, define uma imagem padrão ou deixa como null
+            $empresa->fotoEmpresa = null;  // Ou defina um valor padrão, como 'default.png'
+        }
+    
 
         $empresa->save();
         return redirect()->route('login', ['id' => $empresa->idEmpresa]);

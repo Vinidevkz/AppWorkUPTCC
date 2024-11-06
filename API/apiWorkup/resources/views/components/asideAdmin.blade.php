@@ -4,7 +4,7 @@
                     <!-- CABEÇALHO DO ASIDE -->
                     <div class="header-aside d-flex flex-column align-items-center justify-content-center">
                         <div class="img-header d-flex align-items-center justify-content-center">
-    <img src="{{ $fotoAdmin }}" class="img-header" alt="Imagem de perfil" data-bs-toggle="modal" data-bs-target="#imagemModal" style="cursor:pointer;">
+    <img src="/assets/img/perfil/admin/{{ $admin->fotoAdmin }}" class="img-header" alt="Imagem de perfil" data-bs-toggle="modal" data-bs-target="#imagemModal" style="cursor:pointer;">
 </div>
 
 <!-- Modal Bootstrap -->
@@ -13,7 +13,7 @@
   <div class="modal-dialog modal-dialog-centered ">
     <div class="modal-content modal-fundo-cor">
       <div class="modal-body d-flex justify-content-center">
-        <img src="{{ $fotoAdmin }}" class="img-fluid" alt="Imagem ampliada">
+        <img src="/assets/img/perfil/admin/{{ $admin->fotoAdmin }}" class="img-fluid" alt="Imagem ampliada">
       </div>
       <div class="btn-group d-flex flex-row justify-content-around">
       <div class="box-btn-alter">

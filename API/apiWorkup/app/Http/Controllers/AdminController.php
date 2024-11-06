@@ -206,42 +206,58 @@ $estatisticas = $this->calcularEstatisticas();
     }
 
     public function store(Request $request)
-    {
+{
+    // Validação
+    $request->validate(
+        [
+            'nomeAdmin' => 'required',
+            'usernameAdmin' => 'required|unique:tb_admin,usernameAdmin',
+            'emailAdmin' => 'required|email|unique:tb_admin,emailAdmin',
+            'contatoAdmin' => 'required',
+            'senhaAdmin' => 'required',
+        ],
+        [
+            'nomeAdmin.required' => 'Digite um nome!',
+            'usernameAdmin.required' => 'Digite um apelido!',
+            'emailAdmin.required' => 'Digite um email!',
+            'emailAdmin.unique' => 'Este apelido já está registrado!',
+            'usernameAdmin.unique' => 'Este e-mail já está registrado!',
+            'contatoAdmin.required' => 'Digite um contato!',
+            'senhaAdmin.required' => 'Digite uma senha!',
+        ]
+    );
 
-//Validação
-        $request->validate(
-            [
-                'nomeAdmin'  => 'required',
-                'usernameAdmin' => 'required|unique:tb_admin,usernameAdmin',
-                'emailAdmin' => 'required|email|unique:tb_admin,emailAdmin',
-                'contatoAdmin' => 'required',
-                'senhaAdmin' => 'required', 
+    // Criação do administrador
+    $admin = new Admin;
+    $admin->nomeAdmin = $request->nomeAdmin;
+    $admin->usernameAdmin = $request->usernameAdmin;
+    $admin->emailAdmin = $request->emailAdmin;
+    $admin->contatoAdmin = $request->contatoAdmin;
+    $admin->senhaAdmin = Hash::make($request->senhaAdmin);
+    $admin->idStatus = 1;
 
-            ],
-            [
-                'nomeAdmin.required'  => 'Digite um nome!',
-                'usernameAdmin.required' => 'Digite um apelido!',
-                'emailAdmin.required' => 'Digite um email!',
-                'emailAdmin.unique' => 'Este apelido já está registrado!',
-                'usernameAdmin.unique' => 'Este e-mail já está registrado!',
-                'contatoAdmin.required' => 'Digite um contato!',
-                'senhaAdmin.required' => 'Digite uma senha!',
-            ]
-        );
-        $admin = new Admin;
+    // Verifica se há um arquivo de imagem
+    if ($request->hasFile('fotoAdmin') && $request->file('fotoAdmin')->isValid()) {
+        // Trata a imagem se estiver presente
+        $requestImage = $request->fotoAdmin;
+        $extension = $requestImage->extension();
+        $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+        $requestImage->move(public_path('assets/img/perfil/admin'), $imageName);
 
-        $admin->nomeAdmin = $request->nomeAdmin;
-        $admin->usernameAdmin = $request->usernameAdmin;
-        $admin->emailAdmin = $request->emailAdmin;
-        $admin->contatoAdmin = $request->contatoAdmin;
-        $admin->senhaAdmin = Hash::make($request->senhaAdmin);
-        $admin->fotoAdmin = $request->fotoAdmin;
-        $admin->idStatus = 1;
-
-        $admin->save();
-        
-        return redirect()->route('admin.dashboard')->with('success', 'Admin cadastrado com sucesso!');;
+        // Salva o nome da imagem no campo fotoAdmin
+        $admin->fotoAdmin = $imageName;
+    } else {
+        // Se não houver imagem, define uma imagem padrão ou deixa como null
+        $admin->fotoAdmin = null;  // Ou defina um valor padrão, como 'default.png'
     }
+
+    // Salva os dados no banco
+    $admin->save();
+
+    // Retorna com uma mensagem de sucesso
+    return redirect()->route('admin.dashboard')->with('success', 'Admin cadastrado com sucesso!');
+}
+
 
     public function show($id)
     {

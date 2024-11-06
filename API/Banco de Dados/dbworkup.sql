@@ -416,7 +416,7 @@ CREATE TABLE `tb_modalidadevaga` (
 --
 
 INSERT INTO `tb_modalidadevaga` (`idModalidadeVaga`, `descModalidadeVaga`) VALUES
-(1, 'Presecial'),
+(1, 'Presencial'),
 (2, 'Hibrido'),
 (3, 'Remoto');
 
