@@ -22,7 +22,7 @@ export default function Vaga({ navigation }) {
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga, apiNgrokDenunciarVaga, apiEmuladorDenunciarVaga } = ApisUrls;
+  const { apiEmuladorVaga,  apiEmuladorUsuarioVagaCancelar, apiEmuladorVerificarCandidatura, apiEmuladorUsuarioVaga } = ApisUrls;
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
@@ -85,7 +85,7 @@ export default function Vaga({ navigation }) {
 
   const buscaVaga = async () => {
     setLoading(true);
-    const apiUrl = `${apiNgrokVaga}${vagaID}`;
+    const apiUrl = `${apiEmuladorVaga}${vagaID}`;
     console.log("URL da API:", apiUrl);
     try {
       const response = await axios.get(apiUrl);
@@ -115,7 +115,7 @@ export default function Vaga({ navigation }) {
   const denunciarVaga = async () => {
     if (motivoDenuncia) {
       try {
-        const response = await axios.post(apiNgrokDenunciarVaga, {
+        const response = await axios.post(apiEmuladorDenunciarVaga, {
           idUsuario: userId,
           idVaga: vagaID,
           motivo: motivoDenuncia,

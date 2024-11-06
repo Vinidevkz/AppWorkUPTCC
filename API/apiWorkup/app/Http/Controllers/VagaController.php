@@ -351,4 +351,14 @@ class VagaController extends Controller
             return response()->json(['message' => 'Erro ao realizar a busca', 'error' => $exception->getMessage()], 500);
         }
     }
+
+    public function verVagaPorArea(Request $request){
+        try {
+
+        }catch{
+            
+        }
+    }
+
+
 }

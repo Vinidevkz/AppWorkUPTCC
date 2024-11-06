@@ -78,6 +78,8 @@ const ApisUrls = {
     //Urls ver vaga pro id da empresa
     apiNgrokVagaEmpresa: 'http://cff4-200-53-195-156.ngrok-free.app/api/showvagaempresa/',
     apiEmuladorVagaEmpresa: 'http://10.0.2.2:8000/api/showvagaempresa/',
+
+    //Urls ver vaga baseado na área de interess
 };
 
 export default ApisUrls;
