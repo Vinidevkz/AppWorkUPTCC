@@ -24,12 +24,12 @@ export default function EmpresaProfile({ navigation }) {
   const [motivoDenuncia, setMotivoDenuncia] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const { apiNgrokEmpresa, apiNgrokVagaEmpresa, apiNgrokDenunciarEmpresa } = ApisUrls;
+  const { apiEmuladorEmpresa, apiEmuladorVagaEmpresa, apiEmuladorDenunciarEmpresa } = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
       async function fetchUserData() {
-        const apiUrl = `${apiNgrokEmpresa}${empresaId}`;
+        const apiUrl = `${apiEmuladorEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +50,7 @@ export default function EmpresaProfile({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       async function fetchVagaEmpresa() {
-        const apiUrl = `${apiNgrokVagaEmpresa}${empresaId}`;
+        const apiUrl = `${apiEmuladorVagaEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -74,7 +74,7 @@ export default function EmpresaProfile({ navigation }) {
   const denunciarEmpresa = async () => {
     if (motivoDenuncia) {
       try {
-        const response = await axios.post(apiNgrokDenunciarEmpresa, {
+        const response = await axios.post(apiEmuladorDenunciarEmpresa, {
           idUsuario: userId,
           idEmpresa: empresaID, // Atualize para idEmpresa
           motivo: motivoDenuncia,

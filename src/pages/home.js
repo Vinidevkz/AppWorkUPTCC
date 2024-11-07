@@ -9,7 +9,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from "../ApisUrls/apisurls.js";
-const { apiNgrokVaga, apiNgrokSalvarVaga, apiNgrokCancelSalvarVaga, apiNgrokVerificarSalvarVaga, apiNgrokVagaPorArea, apiNgrokOutrasVagas } = ApisUrls;
+const { apiEmuladorVaga, apiEmuladorSalvarVaga, apiEmuladorCancelSalvarVaga, apiEmuladorVerificarSalvarVaga, apiEmuladorVagaPorArea, apiEmuladorOutrasVagas } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
 
@@ -33,8 +33,8 @@ export default function Home({ navigation }) {
   const buscaVaga = async () => {
     setLoading(true);
     try {
-      console.log(`${apiNgrokVagaPorArea}/${areaInt}`);
-      const response = await axios.get(`${apiNgrokVagaPorArea}/${areaInt}`);
+      console.log(`${apiEmuladorVagaPorArea}/${areaInt}`);
+      const response = await axios.get(`${apiEmuladorVagaPorArea}/${areaInt}`);
       setData(response.data);
       console.log(data);
     } catch (error) {
@@ -52,8 +52,8 @@ export default function Home({ navigation }) {
   const buscaOutrasVaga = async () => {
     setLoading(true);
     try {
-      console.log(`${apiNgrokOutrasVagas}/${areaInt}`);
-      const response = await axios.get(`${apiNgrokOutrasVagas}/${areaInt}`);
+      console.log(`${apiEmuladorOutrasVagas}/${areaInt}`);
+      const response = await axios.get(`${apiEmuladorOutrasVagas}/${areaInt}`);
       setOutrasVagas(response.data);
       console.log(data);
     } catch (error) {
@@ -70,7 +70,7 @@ export default function Home({ navigation }) {
 
   const salvarVaga = async (idVaga) => {
     const idUsuario = userId;
-    const url = apiNgrokSalvarVaga;
+    const url = apiEmuladorSalvarVaga;
 
     const body = {
       idUsuario: idUsuario,
@@ -109,7 +109,7 @@ export default function Home({ navigation }) {
 
   const removerVagaSalva = async (vagaID) => {
     const idUsuario = userId; // Certifique-se de que userId esteja definido
-    const url = apiNgrokCancelSalvarVaga; // Use a URL sem parâmetros na rota
+    const url = apiEmuladorCancelSalvarVaga; // Use a URL sem parâmetros na rota
 
     try {
       const response = await fetch(url, {
@@ -139,7 +139,7 @@ export default function Home({ navigation }) {
 
   const verificarSalvamentoVaga = async (vagaID) => {
     try {
-      const request = await fetch(`${apiNgrokVerificarSalvarVaga}/${userId}/${vagaID}`);
+      const request = await fetch(`${apiEmuladorVerificarSalvarVaga}/${userId}/${vagaID}`);
       const response = await request.json();
       if (response.isSaved) {
         setSavedIcons((prevState) => ({
