@@ -18,7 +18,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import styles from "../styles/search.js";
 import { Context } from "../pages/initialPages/context/provider";
 
-const { apiEmuladorVagaPesquisa } = ApisUrls;
+const { apiNgrokVagaPesquisa } = ApisUrls;
 
 export default function Search({ navigation }) {
   const { vagaID, setVagaID, empresaId, setEmpresaId } = useContext(Context);
@@ -35,10 +35,10 @@ export default function Search({ navigation }) {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log(`URL da requisição: ${apiEmuladorVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
+      const response = await axios.post(apiNgrokVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -114,7 +114,7 @@ export default function Search({ navigation }) {
   };
 
   return (
-    <SafeAreaView >
+    <SafeAreaView style={{backgroundColor: theme.backgroundColor}}>
       <View
         style={[
           styles.containerTop,
@@ -140,7 +140,7 @@ export default function Search({ navigation }) {
           />
         </View>
       </View>
-      <View style={{ height: "90%", backgroundColor: theme.backgroundColor }}>
+      <View style={{ height: "100%", backgroundColor: theme.backgroundColor }}>
 
 
       {searchText === '' && ''}

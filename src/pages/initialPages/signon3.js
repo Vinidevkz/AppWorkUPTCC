@@ -40,7 +40,7 @@ export default function SignON3({ navigation }) {
     formacaoUsuario,
     setUserId,
   } = useContext(Context);
-  const { apiNgrokCad, apiEmuladorCad } = ApisUrls;
+  const { apiNgrokCad } = ApisUrls;
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedBannerImage, setSelectedBannerImage] = useState(null);
@@ -164,7 +164,7 @@ export default function SignON3({ navigation }) {
   
       console.log("Dados enviados para o backend:", JSON.stringify(dataToSend, null, 2));
   
-      const response = await fetch(apiEmuladorCad, {
+      const response = await fetch(apiNgrokCad, {
         method: "POST",
         headers: {
           Accept: "application/json",

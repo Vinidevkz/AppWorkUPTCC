@@ -16,8 +16,8 @@ const styles = StyleSheet.create({
   },
 
   scrollViewContent: {
-    flexGrow: 1,
-    paddingBottom: 60, // Ajuste conforme a altura da TabBar
+    flex: 1,
+    paddingBottom: 100, // Ajuste conforme a altura da TabBar
   },
 
   containerTop: {
