@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 05/11/2024 às 03:29
+-- Tempo de geração: 07/11/2024 às 03:51
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -122,7 +122,8 @@ CREATE TABLE `tb_admin` (
 INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `contatoAdmin`, `senhaAdmin`, `fotoAdmin`, `idStatus`, `created_at`, `updated_at`) VALUES
 (2, 'teste', 'teste', 'testeAdmin@teste.com', '123', '$2y$10$nxOfpiyxmq1Qz6ahhDc3r.pwGseoIYaVyXKsVy.IEOuXdOH3kS2TC', 'a', 1, NULL, NULL),
 (4, 'testeBanco', 'teste', 'teste@tt.com', '12211', '$2y$10$41ttpIgP9VlUZbrOMAH3hutQ0FxQW2W.78CnYwbBFfCH0x2ahZFsG', 'a', 2, '2024-09-23 00:47:11', '2024-09-23 00:47:11'),
-(5, 'testeFoto', 'foto', 'fotoadmin@gmail.com', '122112', '$2y$10$AbkExP0M1o5/DI5/Ac79AOlhMy44STW2eKd2f3VMck9zGHq8B5xVe', 'WhatsApp Image 2018-09-19 at 15.50.21.jpeg', 1, '2024-09-27 00:05:53', '2024-09-27 00:05:53');
+(5, 'testeFoto', 'foto', 'fotoadmin@gmail.com', '122112', '$2y$10$AbkExP0M1o5/DI5/Ac79AOlhMy44STW2eKd2f3VMck9zGHq8B5xVe', 'WhatsApp Image 2018-09-19 at 15.50.21.jpeg', 1, '2024-09-27 00:05:53', '2024-09-27 00:05:53'),
+(6, 'Leland Stottlemeyer', 'leland.stottlemeyer', 'leland@gmail.com', '11954196792', '$2y$10$w/xkCyZd8N2OPsiX0Topxul3IDj2jWIfmHTlTbBLh41qmtwctYicK', '772a40e5631f66f7f0421f985836886b.jpg', 1, '2024-11-06 23:49:54', '2024-11-06 23:49:54');
 
 -- --------------------------------------------------------
 
@@ -856,7 +857,7 @@ ALTER TABLE `personal_access_tokens`
 -- AUTO_INCREMENT de tabela `tb_admin`
 --
 ALTER TABLE `tb_admin`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de tabela `tb_area`
