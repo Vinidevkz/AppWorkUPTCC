@@ -23,20 +23,17 @@
 
     <section id="vaga">
         <div class="row" style="height: 100%">
-            <div class="col-6 col-vaga-1">
+            <div class="col-7 col-vaga-1">
                 <div class="box-vaga">
                     <form action="/vaga/cadastrar" method="POST">
                         @csrf
                         <div class="vaga-wrap">
-                            <div class="wrap-header">
-                                <h3>Cadastro de vaga</h3>
-                            </div>
+                            <h3 style="font-weight: 400; margin-top: 2rem;">Cadastro de vaga</h3>
                             <div class="wrap-body">
-                                <div class="row">
+                                <div class="row" style="height: 103%">
                                     <div class="col col-8">
                                         <label for="nomeVaga" class="form__label">Nome da Vaga</label>
-                                        <input type="text" name="nomeVaga" placeholder="Nome da Vaga"
-                                            value="{{ old('nomeVaga') }}">
+                                        <input type="text" name="nomeVaga" value="{{ old('nomeVaga') }}">
                                         @error('nomeVaga')
                                             <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                                         @enderror
@@ -71,15 +68,14 @@
                                             <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                                         @enderror
                                         <label for="cidadeVaga" class="form__label">Cidade da Vaga</label>
-                                        <input type="text" name="cidadeVaga" placeholder="Cidade da Vaga" value="{{ old('cidadeVaga') }}">
+                                        <input type="text" name="cidadeVaga" value="{{ old('cidadeVaga') }}">
                                     </div>
                                     <div class="col col-5">
                                         @error('estadoVaga')
                                             <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                                         @enderror
                                         <label for="estadoVaga" class="form__label">Estado da Vaga</label>
-                                        <input type="text" name="estadoVaga"
-                                            placeholder="Estado da Vaga" value="{{ old('estadoVaga') }}">
+                                        <input type="text" name="estadoVaga" value="{{ old('estadoVaga') }}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -88,7 +84,7 @@
                                             <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                                         @enderror
                                         <label for="diferencialVaga" class="form__label">Diferencial Vaga</label>
-                                        <input type="text" name="diferencialVaga" placeholder="Diferencial Vaga" value="{{ old('diferencialVaga') }}">
+                                        <input type="text" name="diferencialVaga" placeholder="Ex: curso técnico" value="{{ old('diferencialVaga') }}">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -97,14 +93,13 @@
                                             <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                                         @enderror
                                         <label for="">Benefícios:</label>
-                                        <input type="text" name="beneficiosVaga" placeholder="Benefícios da Vaga" value="{{ old('beneficiosVaga') }}">
+                                        <input type="text" name="beneficiosVaga" placeholder="Como VR, Vale transporte e etc" value="{{ old('beneficiosVaga') }}">
                                     </div>
                                 </div>
                                 <div class="row">
                                     <div class="col col-5">
                                         <label for="salarioVaga" class="form__label">Salário da Vaga</label>
-                                        <input type="text" name="salarioVaga" placeholder="Salário da Vaga"
-                                            value="{{ old('salarioVaga') }}">
+                                        <input type="text" name="salarioVaga" value="{{ old('salarioVaga') }}">
                                     </div>
                                     <div class="col col-7">
                                         @error('prazoVaga')
@@ -150,7 +145,7 @@
                     </form>
                 </div>
             </div>
-            <div class="col-6 col-vaga-2">
+            <div class="col-5 col-vaga-2">
                 <div class="box-lembrete">
                     <h4>Lembre-se!</h4>
                     <p class="w-75" style="font-size: 0.8rem">Todas e quaisquer características da vaga podem ser

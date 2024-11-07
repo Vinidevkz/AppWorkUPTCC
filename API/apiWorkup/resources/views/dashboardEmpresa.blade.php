@@ -85,7 +85,7 @@
 
     <section id="vagas" class="vagas">
         <div class="d-flex justify-content-start mt-5">
-            <p class="titulo-2">Vagas publicadas</p>
+            <h3 class="fw-light mb-5">Vagas publicadas</h3>
         </div>
 
         <div class="wrap-carrossel position-relative">
@@ -118,44 +118,51 @@
 
                                     <div class="footer-vaga">
 
-                                        <button type="button" class="btn-vagas btn-verde" data-bs-toggle="modal" data-bs-target="#{{$vaga->idVaga}}">Detalhes<i class="fa-solid fa-clipboard-list"></i></button>
+                                        <button type="button" class="btn-vagas btn-verde" data-bs-toggle="modal"
+                                            data-bs-target="#{{$vaga->idVaga}}">Detalhes<i
+                                                class="fa-solid fa-clipboard-list"></i></button>
 
                                         @foreach($vagas as $vaga)
-                                        <!-- Modal -->
-                                        <div class="modal fade" id="{{ $vaga->idVaga}}" tabindex="-1"
-                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h1 class="modal-title fs-5 px-3" id="exampleModalLabel"
-                                                            style="color: #2c2c2c">{{$vaga->nomeVaga}}</h1>
-                                                        <button type="button" class="btn-close px-4" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body px-5">
-                                                        <div class="opt-vaga">
-                                                            <p class="text mb-3" style="font-weight: 400">Candidatos:
-                                                                {{ $vaga->total_candidatos }}</p>
-                                                            <p class="text my-1">Salário: R${{ $vaga->salarioVaga }}</p>
-                                                            <p class="text mb-1">Área: {{ $vaga->nomeVaga }}</p>
-                                                            <p class="text mb-1">Modalidade:{{ $vaga->idModalidadeVaga }}</p>
-                                                            <p class="text mb-1">Cidade: {{ $vaga->cidadeVaga }}</p>
-                                                            <p class="text mb-1">Estado: {{ $vaga->estadoVaga }}</p>
-                                                            <p class="text mb-1">Diferencial: {{ $vaga->diferencialVaga }}</p>
+                                            <!-- Modal -->
+                                            <div class="modal fade" id="{{ $vaga->idVaga}}" tabindex="-1"
+                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h1 class="modal-title fs-5 px-3" id="exampleModalLabel"
+                                                                style="color: #2c2c2c">{{$vaga->nomeVaga}}</h1>
+                                                            <button type="button" class="btn-close px-4" data-bs-dismiss="modal"
+                                                                aria-label="Close"></button>
                                                         </div>
-                                                    </div>
-                                                    <div class="modal-footer d-flex justify-content-between w-75 align-self-center">
-                                                        <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn-vagas btn-verde w-100">Editar<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
-                                                        <button type="button" class="btn-vagas w-100" data-bs-dismiss="modal" style="background-color: #ededed; color: black">Voltar</button>
+                                                        <div class="modal-body px-5">
+                                                            <div class="opt-vaga">
+                                                                <p class="text mb-3" style="font-weight: 400">Candidatos:{{ $vaga->total_candidatos }}</p>
+                                                                <p class="text my-1">Salário: R${{ $vaga->salarioVaga }}</p>
+                                                                <p class="text mb-1">Área: {{ $vaga->nomeVaga }}</p>
+                                                                <p class="text mb-1">Modalidade:{{ $vaga->idModalidadeVaga }}</p>
+                                                                <p class="text mb-1">Cidade: {{ $vaga->cidadeVaga }}</p>
+                                                                <p class="text mb-1">Estado: {{ $vaga->estadoVaga }}</p>
+                                                                <p class="text mb-1">Diferencial: {{ $vaga->diferencialVaga }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div
+                                                            class="modal-footer d-flex justify-content-between w-75 align-self-center">
+                                                            <a href="{{ route('vagas.edit', $vaga->idVaga) }}"
+                                                                class="btn-vagas btn-verde w-100">Editar<i
+                                                                    class="fa-solid fa-pen-to-square"
+                                                                    style="color: #ffffff;"></i></a>
+                                                            <button type="button" class="btn-vagas w-100" data-bs-dismiss="modal"
+                                                                style="background-color: #ededed; color: black">Voltar</button>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
                                         @endforeach
 
 
-                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas btn-vazado">Candidatos<i class="fa-solid fa-user"></i></a>
+                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}"
+                                            class="btn-vagas btn-vazado">Candidatos<i class="fa-solid fa-user"></i></a>
                                     </div>
                                 </div>
                             </div>
@@ -229,6 +236,17 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
             integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy"
             crossorigin="anonymous"></script>
+
+        <script>
+            function toggleDenunciaForm(userId) {
+                var form = document.getElementById('denunciaForm' + userId);
+                if (form.style.display === "none") {
+                    form.style.display = "block";
+                } else {
+                    form.style.display = "none";
+                }
+            }
+        </script>
 
 </body>
 
