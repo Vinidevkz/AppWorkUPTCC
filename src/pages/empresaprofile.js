@@ -6,6 +6,8 @@ import styles from "../styles/profile";
 import ApisUrls from "../ApisUrls/apisurls.js";
 import { useFocusEffect } from "@react-navigation/native";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
+import axios from "axios";
+
 
 import Modal from "react-native-modal";
 
@@ -16,7 +18,7 @@ import Feather from "@expo/vector-icons/Feather";
 
 export default function EmpresaProfile({ navigation }) {
   const { theme } = useTheme({ EmpresaProfile });
-  const { empresaId } = useContext(Context);
+  const { userId, empresaId } = useContext(Context);
   const [dadosEmpresa, setDadosEmpresa] = useState([]);
   const [dadosVaga, setDadosVaga] = useState([]);
 
@@ -24,12 +26,12 @@ export default function EmpresaProfile({ navigation }) {
   const [motivoDenuncia, setMotivoDenuncia] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const { apiEmuladorEmpresa, apiEmuladorVagaEmpresa, apiEmuladorDenunciarEmpresa } = ApisUrls;
+  const { apiNgrokEmpresa, apiNgrokVagaEmpresa, apiNgrokDenunciarEmpresa } = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
       async function fetchUserData() {
-        const apiUrl = `${apiEmuladorEmpresa}${empresaId}`;
+        const apiUrl = `${apiNgrokEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +52,7 @@ export default function EmpresaProfile({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       async function fetchVagaEmpresa() {
-        const apiUrl = `${apiEmuladorVagaEmpresa}${empresaId}`;
+        const apiUrl = `${apiNgrokVagaEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -71,12 +73,12 @@ export default function EmpresaProfile({ navigation }) {
     }, [empresaId])
   );
 
-  const denunciarEmpresa = async () => {
+  /*const denunciarEmpresa = async () => {
     if (motivoDenuncia) {
       try {
-        const response = await axios.post(apiEmuladorDenunciarEmpresa, {
+        const response = await axios.post(apiNgrokDenunciarEmpresa, {
           idUsuario: userId,
-          idEmpresa: empresaID, // Atualize para idEmpresa
+          idEmpresa: empresaId, // Atualize para idEmpresa
           motivo: motivoDenuncia,
           idStatus: 4,
         });
@@ -107,8 +109,9 @@ export default function EmpresaProfile({ navigation }) {
       Alert.alert("Por favor, selecione uma opção de denúncia.");
     }
   };
-
-  const toggleModal = () => {
+*/
+ 
+const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
@@ -237,7 +240,8 @@ export default function EmpresaProfile({ navigation }) {
               <View style={[styles.line, { borderColor: theme.lineColor }]}></View>
             </View>
 
-            <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+            
+            {/* <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
               <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
                 <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Avaliar Empresa:</Text>
 
@@ -272,26 +276,27 @@ export default function EmpresaProfile({ navigation }) {
 
                 <View style={{backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
                 {["Conteúdo impróprio", "Spam ou fraude", "Discriminação ou Preconceito", "Exploração de Trabalho", "Empresa falsa"].map((opcao) => (
-                  <TouchableOpacity
-                    key={opcao}
-                    onPress={() => setMotivoDenuncia(opcao)}
-                    style={{
-                      borderWidth: 2,
-                      borderColor: motivoDenuncia === opcao ? "#20dd77" : "transparent",
-                      paddingHorizontal: 10,
-                      paddingVertical: 5,
-                      borderRadius: 5,
-                      marginVertical: 5,
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
-                    }}
-                  >
-                    <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
+  <TouchableOpacity
+    key={opcao}
+    onPress={() => setMotivoDenuncia(opcao)}
+    style={{
+      borderWidth: 2,
+      borderColor: motivoDenuncia === opcao ? "#d4552f" : "transparent",
+      paddingHorizontal: 10,
+      paddingVertical: 5,
+      borderRadius: 5,
+      marginVertical: 5,
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "space-between",
+    }}
+  >
+    <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
+    {motivoDenuncia === opcao && <Feather name="check" size={24} color={theme.textColor} />}
+  </TouchableOpacity>
+))}
 
-                    {motivoDenuncia === opcao && <Feather name="check" size={24} color={theme.textColor} />}
-                  </TouchableOpacity>
-                ))}
+
         </View>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 10}}>
                 <TouchableOpacity style={[styles.button, { width: 200, marginTop: 20, backgroundColor: "#20dd77", alignItems: "center", justifyContent: "center", padding: 10, borderRadius: 20 }]} onPress={(toggleModal(), Alert.alert(''))}>
@@ -303,7 +308,8 @@ export default function EmpresaProfile({ navigation }) {
                 </TouchableOpacity>
                 </View>
               </View>
-            </Modal>
+            </Modal> */}
+
           </View>
         </ScrollView>
       </SafeAreaView>
