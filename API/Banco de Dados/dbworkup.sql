@@ -124,7 +124,7 @@ INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `
 (4, 'testeBanco', 'teste', 'teste@tt.com', '12211', '$2y$10$41ttpIgP9VlUZbrOMAH3hutQ0FxQW2W.78CnYwbBFfCH0x2ahZFsG', 'a', 2, '2024-09-23 00:47:11', '2024-09-23 00:47:11'),
 (5, 'testeFoto', 'foto', 'fotoadmin@gmail.com', '122112', '$2y$10$AbkExP0M1o5/DI5/Ac79AOlhMy44STW2eKd2f3VMck9zGHq8B5xVe', 'WhatsApp Image 2018-09-19 at 15.50.21.jpeg', 1, '2024-09-27 00:05:53', '2024-09-27 00:05:53'),
 (6, 'Leland Stottlemeyer', 'leland.stottlemeyer', 'leland@gmail.com', '11954196792', '$2y$10$w/xkCyZd8N2OPsiX0Topxul3IDj2jWIfmHTlTbBLh41qmtwctYicK', '772a40e5631f66f7f0421f985836886b.jpg', 1, '2024-11-06 23:49:54', '2024-11-06 23:49:54');
-
+(7, 'Danilo', 'dan', 'dan@email.com', '11111111111111', '$2y$10$Fs2dwCDtbHigyoxU6Ek6MOhd2lwPKR.d4Oli0/TNkrCQMvRzqAv1u', 'fc29c16347cac127de9ef3d04cd20f68.png', 1, '2024-11-07 00:07:52', '2024-11-07 00:07:52');
 -- --------------------------------------------------------
 
 --
