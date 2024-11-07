@@ -17,7 +17,7 @@ import { useTheme } from "../pages/initialPages/context/themecontext";
 export default function MinhasVagas({ navigation }) {
   const { theme } = useTheme({ MinhasVagas });
   const { userId, setVagaID } = useContext(Context);
-  const { apiNgrokMinhasVagas, apiEmuladorMinhasVagas } = ApisUrls;
+  const { apiEmuladorMinhasVagas } = ApisUrls;
 
   const [dadosUser, setDadosUser] = useState([]);
   const [loading, setLoading] = useState(false);
