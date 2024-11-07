@@ -95,7 +95,7 @@ export default function VagasSalvas({ navigation }) {
           )}
           keyExtractor={(item, index) => index.toString()} // Use index como chave se não houver ID único
           ListEmptyComponent={
-            <View>
+            <View style={{flex: 1, alignItems: 'center', justifyContent: 'center', marginVertical: 20}}>
               <Text style={[styles.DMSansRegular, [{ color: theme.textColor }]]}>Você não possuí vagas salvas.</Text>
             </View>
           }

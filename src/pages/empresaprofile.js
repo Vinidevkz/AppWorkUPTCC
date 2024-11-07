@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, Image, ScrollView, SafeAreaView, TouchableOpacity } from "react-native";
+import { View, Text, Image, ScrollView, SafeAreaView, TouchableOpacity, Alert } from "react-native";
 import { Context } from "../pages/initialPages/context/provider";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import styles from "../styles/profile";
@@ -24,12 +24,12 @@ export default function EmpresaProfile({ navigation }) {
   const [motivoDenuncia, setMotivoDenuncia] = useState(null);
   const [isModalVisible, setModalVisible] = useState(false);
 
-  const { apiEmuladorEmpresa, apiEmuladorVagaEmpresa, apiEmuladorDenunciarEmpresa } = ApisUrls;
+  const { apiNgrokEmpresa, apiNgrokVagaEmpresa, apiNgrokDenunciarEmpresa } = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
       async function fetchUserData() {
-        const apiUrl = `${apiEmuladorEmpresa}${empresaId}`;
+        const apiUrl = `${apiNgrokEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -50,7 +50,7 @@ export default function EmpresaProfile({ navigation }) {
   useFocusEffect(
     React.useCallback(() => {
       async function fetchVagaEmpresa() {
-        const apiUrl = `${apiEmuladorVagaEmpresa}${empresaId}`;
+        const apiUrl = `${apiNgrokVagaEmpresa}${empresaId}`;
         try {
           const response = await fetch(apiUrl);
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -74,7 +74,7 @@ export default function EmpresaProfile({ navigation }) {
   const denunciarEmpresa = async () => {
     if (motivoDenuncia) {
       try {
-        const response = await axios.post(apiEmuladorDenunciarEmpresa, {
+        const response = await axios.post(apiNgrokDenunciarEmpresa, {
           idUsuario: userId,
           idEmpresa: empresaID, // Atualize para idEmpresa
           motivo: motivoDenuncia,
@@ -207,14 +207,11 @@ export default function EmpresaProfile({ navigation }) {
                           <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>
                             {item.nomeVaga}
                           </Text>
-                          <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>oferecido por: {item.empresa?.nomeEmpresa}</Text>
                           <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>publicada em: {item.prazoVaga}</Text>
                         </View>
                         <View style={[styles.vagaBody, { gap: 5 }]}>
-                          <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Modalidade: {item.modalidade?.descModalidadeVaga}</Text>
                           <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Salário: R${item.salarioVaga}</Text>
                           <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Cidade: {item.cidadeVaga}</Text>
-                          <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Área: {item.area?.nomeArea || "Não disponível"}</Text>
                         </View>
                         <View style={styles.vagaFooterCont}>
                           <TouchableOpacity
@@ -297,7 +294,7 @@ export default function EmpresaProfile({ navigation }) {
                 ))}
         </View>
                 <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 10}}>
-                <TouchableOpacity style={[styles.button, { width: 200, marginTop: 20, backgroundColor: "#20dd77", alignItems: "center", justifyContent: "center", padding: 10, borderRadius: 20 }]} onPress={denunciarEmpresa}>
+                <TouchableOpacity style={[styles.button, { width: 200, marginTop: 20, backgroundColor: "#20dd77", alignItems: "center", justifyContent: "center", padding: 10, borderRadius: 20 }]} onPress={(toggleModal(), Alert.alert(''))}>
                   <Text style={styles.buttonText}>Confirmar</Text>
                 </TouchableOpacity>
 

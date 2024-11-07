@@ -26,7 +26,7 @@ export default function SignIN({ navigation }) {
     }
 
     try {
-      const response = await fetch(apiEmulador, {
+      const response = await fetch(apiNgrok, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -49,16 +49,18 @@ export default function SignIN({ navigation }) {
         setEmail(resp.emailUsuario); // Atualize o email no contexto
         setAreaInt(resp.areaInteresseUsuario);
         navigation.navigate("TabBar");
+        setLoading(false);
       } else {
         const errorMessage = resp.message || "Erro desconhecido.";
         Alert.alert("Erro", `Erro ao logar: ${errorMessage}`);
         console.error("Erro de login:", resp);
+        setLoading(false);
       }
     } catch (error) {
       console.error("Erro na tentativa de login:", error);
       Alert.alert("Erro", "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente.");
     }
-    setLoading(false);
+    
   }
 
   // Carregador de fontes
