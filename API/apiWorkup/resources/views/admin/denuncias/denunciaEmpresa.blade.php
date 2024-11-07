@@ -23,7 +23,10 @@
   <div class="col-9 mt-4">
     <div class="container md-4 mt-3">
 
-    <h1 class="ms-2 fs-3">Empresas denunciadas</h1>
+    <div class="d-flex  align-items-center">
+<h1 class="p-0 m-0 fs-3">Empresas denunciados</h1>
+<i class="bi bi-ban ms-2 text-danger fs-4"></i>
+</div>
 
 
     <table class="table table-hover table-bordered text-center align-middle">
@@ -32,12 +35,7 @@
               <th class="fw-bold">Id</th>
               <th class="fw-bold">Usuário</th>
               <th>Data da denúncia</th>
-              <th>
-                <div class="d-flex justify-content-center align-items-center">
-                  <span class="material-symbols-outlined">autorenew</span>
-                  <p class="m-0 fw-bold ms-1">Status</p>
-                </div>
-              </th>
+          
               <th>
                 <div class="d-flex justify-content-center align-items-center">
                   <span class="material-symbols-outlined">keyboard_double_arrow_down</span>
@@ -50,7 +48,7 @@
    
               @forelse($denuncias as $denuncia)
                 <tr class="blink" id="denuncia-{{ $denuncia->idDenunciaUsuario }}">
-                  <td class="align-middle">{{ $denuncia->idDenunciaEmpresa }}</td>
+                  <td class="blink align-middle">{{ $denuncia->idDenunciaEmpresa }}</td>
                   <td class="align-middle">
                   <!-- {{ route('denuncia.show', $denuncia->idDenunciaUsuario ) }} -->
                     <a href="#" class="text-black fw-bold">
@@ -59,7 +57,6 @@
                   </td>
                   <td class="align-middle">{{ $denuncia->created_at }}</td>
           
-                  <td class="align-middle">{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
           
                   <td class="p-0">
                     <i class="bi bi-info-circle fs-6 pe-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>

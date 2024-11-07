@@ -202,7 +202,7 @@ aside{
 }
 
 .reg-point {
-  color: #ff0000;
+  color: #db6666;
   animation: blink 1s step-start infinite;
 }
 
@@ -563,12 +563,12 @@ table td  a{
 
 @keyframes blink {
     0% { background-color: transparent; }
-    50% { background-color: red; }
+    50% { background-color: rgb(255, 171, 171); }
     100% { background-color: transparent; }
 }
 
 .blink {
-    animation: blink 1s infinite;
+    animation: blink 1.2s infinite;
 }
 .item-nav-logout:hover{
   margin-left: 1px;
@@ -589,4 +589,6 @@ table td  a{
 #visualizarModal p{
   margin: 2px;
 }
-
+.line-denuncia{
+  width: 100vw;
+}
