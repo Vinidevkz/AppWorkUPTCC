@@ -44,7 +44,6 @@
                             <div class="botoes-login">
 
                                 <input type="submit" href="/home" class="logar" value="Entrar">
-
                                 <hr style="width: 100%; height: 0; border-width: 3px; color:#ccc; opacity: 1">
                     <a href="/cadastrarEmpresa" class="cadastrar">Cadastrar-se</a>
 

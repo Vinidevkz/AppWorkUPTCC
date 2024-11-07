@@ -10,7 +10,7 @@
         </div>
         @auth
         <ul>
-            <a href="route('empresa.dashboard') }}" >Home</a>
+            <a href="{{route('empresa.dashboard')}}" >Home</a>
             <a href="#vagas">Vagas</a>
             <a href="#publicacoes">Postagens</a>
         </ul>
@@ -35,14 +35,6 @@
 
                 </form>
                 @endauth
-                @guest
-                <!-- Mostrar para visitantes (usuários não logados) -->
-
-                <ul     >
-                    <a href="{{ route('login') }}" class="text-light">Login</a>
-                    <a href="{{ route('cadastrarEmpresa') }}" class="text-light">Cadastro</a>
-                </ul>
-                @endguest
 
             </div>
         </div>
