@@ -22,21 +22,19 @@
 
   <div class="col-9 mt-4">
     <div class="container md-4 mt-3">
-      <h1 class="ms-2 fs-3">Vagas denunciadas</h1>
+    <div class="d-flex  align-items-center">
+<h1 class="p-0 m-0 fs-3">Vagas denunciados</h1>
+<i class="bi bi-ban ms-2 text-danger fs-4"></i>
+</div>
 
 
-    <table class="table table-hover table-bordered text-center align-middle">
+    <table class="table table-hover blink text-center align-middle">
           <thead class="table-light rounded-top">
-            <tr>
+            <tr class="">
               <th class="fw-bold">Id</th>
               <th class="fw-bold">Usuário</th>
               <th>Data da denúncia</th>
-              <th>
-                <div class="d-flex justify-content-center align-items-center">
-                  <span class="material-symbols-outlined">autorenew</span>
-                  <p class="m-0 fw-bold ms-1">Status</p>
-                </div>
-              </th>
+          
               <th>
                 <div class="d-flex justify-content-center align-items-center">
                   <span class="material-symbols-outlined">keyboard_double_arrow_down</span>
@@ -49,7 +47,7 @@
    
               @forelse($denuncias as $denuncia)
                 <tr class="blink" id="denuncia-{{ $denuncia->idDenunciaUsuario }}">
-                  <td class="align-middle">{{ $denuncia->idDenunciaVaga }}</td>
+                  <td class="blink align-middle">{{ $denuncia->idDenunciaVaga }}</td>
                   <td class="align-middle">
                
                     <a href="#" class="text-black fw-bold">
@@ -58,7 +56,6 @@
                   </td>
                   <td class="align-middle">{{ $denuncia->created_at }}</td>
           
-                  <td class="align-middle">{{ $denuncia->status->tipoStatus ?? 'Não Associado' }}</td>
           
                   <td class="p-0">
                     <i class="bi bi-info-circle fs-6 pe-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"></i>
@@ -81,8 +78,8 @@
                              <p>Motivo da denúncia: {{$denuncia->motivo}}</p>
                           </div>
                           <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
-                            <button type="button" class="btn btn-primary">Salvar mudanças</button>
+                          <button type="button" class="btn btn-outline-primary">Conferir postagem</button>
+
                           </div>
                         </div>
                       </div>
