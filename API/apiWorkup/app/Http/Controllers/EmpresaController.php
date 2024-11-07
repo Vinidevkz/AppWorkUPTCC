@@ -20,45 +20,14 @@ class EmpresaController extends Controller
      */
     public function index(Request $request)
     {
-        if ($request->has('order') && $request->order == 'status') {
-            // Ordena para trazer idStatus = 2 primeiro
-            $empresas = Empresa::with('status')->orderByRaw("FIELD(idStatus, 2, 1), nomeEmpresa ASC")->get();
-        } else {
-            // Caso contrário, traz as empresas normalmente (com idStatus = 1 primeiro)
-            $empresas = Empresa::with('status')->orderBy('idStatus', 'asc')->get();
-        }
-
-        if ($request->ajax()) {
-            return response()->json($empresas); // Retorna JSON se for uma requisição AJAX
-        }
-
-        if (Auth::guard('admin')->check()) {
-            $idAdmin = Auth::guard('admin')->id();
-            $admin = Admin::select('usernameAdmin', 'emailAdmin', 'nomeAdmin')->where('idAdmin', $idAdmin)->first();
-            
-            $nomeAdmin = $admin->nomeAdmin;
-            $usernameAdmin = $admin->usernameAdmin;
-            $emailAdmin = $admin->emailAdmin;
-            
-        } else {
-            // Redirecionar ou mostrar uma mensagem de erro
-            return redirect()->route('login')->withErrors('Você precisa estar logado como admin.');
-        }
-
-      
-      
+        $empresas = Empresa::with(['status', 'areas'])->get(); // Carrega as relações necessárias
 
         // Caso contrário, retorna a view com os usuários
         return view('admin.empresa.empresaAdmin', [
-            'empresas'=>$empresas,
-            'nomeAdmin'=>$nomeAdmin,
-            'usernameAdmin'=>$usernameAdmin,
-            'emailAdmin'=>$emailAdmin]);
+            'empresas'=>$empresas,]);
     }
 
-    
 
-    
 
     /**
      * Show the form for creating a new resource.
@@ -128,7 +97,6 @@ Validação
         $empresa->usernameEmpresa = $request->usernameEmpresa;
         $empresa->nomeEmpresa = $request->nomeEmpresa;
         $empresa->emailEmpresa = $request->emailEmpresa;
-        $empresa->fotoEmpresa = $request->fotoEmpresa;
         $empresa->sobreEmpresa = $request->sobreEmpresa;
         $empresa->cnpjEmpresa = $request->cnpjEmpresa;
         $empresa->contatoEmpresa = $request->contatoEmpresa;
@@ -139,6 +107,22 @@ Validação
         $empresa->cepEmpresa = $request->cepEmpresa;
         $empresa->numeroLograEmpresa = $request->numeroLograEmpresa;
         $empresa->idStatus = 3;
+
+
+        if ($request->hasFile('fotoEmpresa') && $request->file('fotoEmpresa')->isValid()) {
+            // Trata a imagem se estiver presente
+            $requestImage = $request->fotoEmpresa;
+            $extension = $requestImage->extension();
+            $imageName = md5($requestImage->getClientOriginalName() . strtotime("now")) . "." . $extension;
+            $requestImage->move(public_path('assets/img/perfil/empresa'), $imageName);
+    
+            // Salva o nome da imagem no campo fotoAdmin
+            $empresa->fotoEmpresa = $imageName;
+        } else {
+            // Se não houver imagem, define uma imagem padrão ou deixa como null
+            $empresa->fotoEmpresa = null;  // Ou defina um valor padrão, como 'default.png'
+        }
+    
 
         $empresa->save();
         return redirect()->route('login', ['id' => $empresa->idEmpresa]);
@@ -152,9 +136,17 @@ Validação
      */
     public function show($id)
     {
-        $empresa = Empresa::where('idEmpresa', $id)->with('areas')->firstOrFail(); // Carrega a empresa com suas áreas
+        // Busca a empresa pelo ID passado na URL
+        $empresa = Empresa::where('idEmpresa', $id)->with('areas')->first();
+    
+        if (!$empresa) {
+            return redirect()->route('empresas.index')->with('error', 'Empresa não encontrada');
+        }
+    
+        // Retorna a view com os dados da empresa
         return view('admin.empresa.allempresaAdmin', compact('empresa'));
     }
+    
 
     /**
      * Show the form for editing the specified resource.
@@ -250,12 +242,17 @@ Validação
     }
 
 
-    public function showEmpresaApp($id){
-
-        $empresa = Empresa::where('idEmpresa', $id);
-
-        return response()->json($empresa, 201);
+    public function showEmpresaApp($id)
+    {
+        $empresa = Empresa::where('idEmpresa', $id)->first();
+    
+        if ($empresa) {
+            return response()->json($empresa, 200);
+        } else {
+            return response()->json(['message' => 'Empresa não encontrada'], 404);
+        }
     }
+    
 
     public function dashboard(){
 

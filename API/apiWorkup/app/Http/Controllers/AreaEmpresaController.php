@@ -90,7 +90,9 @@ class AreaEmpresaController extends Controller
      */
     public function show($id)
     {
-        //
+        $areasempresa = AreaEmpresa::where('idEmpresa', $id)->all();
+
+        return $areasempresa;
     }
 
     /**

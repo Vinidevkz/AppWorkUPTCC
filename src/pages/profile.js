@@ -10,6 +10,7 @@ import {
 import { Context } from "../pages/initialPages/context/provider";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import Octicons from "@expo/vector-icons/Octicons";
+import Entypo from '@expo/vector-icons/Entypo';
 import styles from "../styles/profile";
 import ApisUrls from "../ApisUrls/apisurls.js";
 import { useFocusEffect } from "@react-navigation/native";
@@ -19,7 +20,7 @@ export default function Profile({ navigation }) {
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
 
-  const { apiEmuladorUsuario, apiNgrokUsuario } = ApisUrls;
+  const { apiEmuladorUsuario } = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
@@ -78,7 +79,7 @@ export default function Profile({ navigation }) {
           Meu Currículo 
         </Text>
         <TouchableOpacity onPress={() => navigation.navigate("Configurações")}>
-          <Octicons name="gear" size={30} color={theme.iconColorWhite} />
+         <Entypo name="menu" size={40} color={theme.textColor} />
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={[styles.scrollViewContent, {backgroundColor: theme.backgroundColor}]}>
@@ -179,7 +180,6 @@ export default function Profile({ navigation }) {
                 paddingVertical: 10,
                 gap: 20,
                 borderRadius: 20,
-                backgroundColor: theme.backgroundColor,
               }}
             >
               <View style={styles.profileSkillsCont}>

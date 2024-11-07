@@ -1,14 +1,5 @@
 import React, { useEffect, useState, useContext } from "react";
-import {
-  View,
-  Text,
-  SafeAreaView,
-  ScrollView,
-  TextInput,
-  TouchableOpacity,
-  Alert,
-  Image,
-} from "react-native";
+import { View, Text, SafeAreaView, ScrollView, TextInput, TouchableOpacity, Alert, Image, ActivityIndicator } from "react-native";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import { Context } from "../pages/initialPages/context/provider.js";
 import { Picker } from "@react-native-picker/picker";
@@ -17,26 +8,13 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import styles from "../styles/profilechange.js";
 import ApisUrls from "../ApisUrls/apisurls.js";
-import { storage } from '../pages/initialPages/firebase.js';
-import * as ImagePicker from 'expo-image-picker'; 
+import { storage } from "../pages/initialPages/firebase.js";
+import * as ImagePicker from "expo-image-picker";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
-
 
 export default function ProfileChange({ navigation }) {
   const { theme } = useTheme();
-  const {
-    userId,
-    setNome,
-    setUserName,
-    setBio,
-    setAreaInt,
-    areaInt,
-    setNasc,
-    nasc,
-    setFormacaoUsuario,
-    setTel,
-    
-  } = useContext(Context);
+  const { userId, setNome, setUserName, setBio, setAreaInt, areaInt, setNasc, nasc, setFormacaoUsuario, setTel } = useContext(Context);
 
   const [areaVagas, setAreaVagas] = useState([]);
   const [dadosUser, setDadosUser] = useState({});
@@ -46,21 +24,13 @@ export default function ProfileChange({ navigation }) {
   const [nascUsuarioAlterado, setNascUsuarioAlterado] = useState("");
   const [areaIntUsuarioAlterado, setAreaIntUsuarioAlterado] = useState("");
   const [selectedImage, setSelectedImage] = useState(null);
-const [selectedBannerImage, setSelectedBannerImage] = useState(null);
+  const [selectedBannerImage, setSelectedBannerImage] = useState(null);
+  const [loading, setLoading] = useState(false);
 
-  const [
-    formacaoCompetenciaUsuarioAlterado,
-    setFormacaoCompetenciaUsuarioAlterado,
-  ] = useState("");
+  const [formacaoCompetenciaUsuarioAlterado, setFormacaoCompetenciaUsuarioAlterado] = useState("");
   const [telAlterado, setTelAlterado] = useState("");
 
-  const {
-    apiNgrokArea,
-    apiNgrokUsuario,
-    apiNgrokAlterar,
-    apiEmuladorUsuario,
-    apiEmuladorArea,
-  } = ApisUrls;
+  const { apiEmuladorArea, apiEmuladorUsuario, apiEmuladorAlterar } = ApisUrls;
 
   useEffect(() => {
     async function fetchUserData() {
@@ -78,9 +48,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
         setSobreUsuarioAlterado(data.sobreUsuario || "");
         setNascUsuarioAlterado(formattedDate || ""); // Usando a data formatada
         setAreaIntUsuarioAlterado(data.areaInt || ""); // Definindo a área de interesse atual
-        setFormacaoCompetenciaUsuarioAlterado(
-          data.formacaoCompetenciaUsuario || ""
-        );
+        setFormacaoCompetenciaUsuarioAlterado(data.formacaoCompetenciaUsuario || "");
         setTelAlterado(data.contatoUsuario || "");
       } catch (error) {
         console.error("Error fetching user data:", error);
@@ -130,8 +98,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   }
 
   const pickImage = async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (!permissionResult.granted) {
       Alert.alert("Erro", "Permissão para acessar as imagens foi negada!");
@@ -151,8 +118,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   };
 
   const pickBannerImage = async () => {
-    const permissionResult =
-      await ImagePicker.requestMediaLibraryPermissionsAsync();
+    const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
 
     if (!permissionResult.granted) {
       Alert.alert("Erro", "Permissão para acessar as imagens foi negada!");
@@ -170,8 +136,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
       setSelectedBannerImage(result.assets[0].uri);
     }
   };
-  
-  
+
   const uploadImageToFirebase = async (uri) => {
     const response = await fetch(uri);
     const blob = await response.blob();
@@ -183,37 +148,30 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   };
 
   const alterarUsuario = async () => {
-    if (
-      !nomeUsuarioAlterado.trim() ||
-      !userNameAlterado.trim() ||
-      !sobreUsuarioAlterado.trim() ||
-      !areaIntUsuarioAlterado.trim() ||
-      !nascUsuarioAlterado.trim() ||
-      !formacaoCompetenciaUsuarioAlterado.trim() ||
-      !telAlterado.trim()
-    ) {
+    setLoading(true);
+    if (!nomeUsuarioAlterado.trim() || !userNameAlterado.trim() || !sobreUsuarioAlterado.trim() || !areaIntUsuarioAlterado.trim() || !nascUsuarioAlterado.trim() || !formacaoCompetenciaUsuarioAlterado.trim() || !telAlterado.trim()) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
       return;
     }
-  
+
     const formattedDate = formatDateToISO(nascUsuarioAlterado);
-  
+
     if (!formattedDate) {
       Alert.alert("Erro", "Data de nascimento é obrigatória.");
       return;
     }
-  
+
     let fotoUsuarioUrl = null;
     let fotoBannerUrl = null;
-  
+
     if (selectedImage) {
       fotoUsuarioUrl = await uploadImageToFirebase(selectedImage, `profile_${userId}.jpg`);
     }
-  
+
     if (selectedBannerImage) {
       fotoBannerUrl = await uploadImageToFirebase(selectedBannerImage, `banner_${userId}.jpg`);
     }
-  
+
     const dadosParaEnviar = {
       nomeUsuario: nomeUsuarioAlterado,
       usernameUsuario: userNameAlterado,
@@ -225,10 +183,10 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
       fotoUsuario: fotoUsuarioUrl, // Enviar a URL da foto de perfil
       fotoBanner: fotoBannerUrl, // Enviar a URL da foto de banner
     };
-  
+
     // Log para visualizar os dados
     console.log("Dados que serão enviados:", JSON.stringify(dadosParaEnviar, null, 2));
-  
+
     const apiUrl = `${apiEmuladorUsuario}${userId}`;
     try {
       const response = await fetch(apiUrl, {
@@ -239,9 +197,9 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
         },
         body: JSON.stringify(dadosParaEnviar),
       });
-  
+
       const jsonResponse = await response.json();
-  
+
       if (response.ok) {
         Alert.alert("Sucesso", "Dados atualizados com sucesso");
         // Atualize os valores do contexto após a atualização
@@ -260,37 +218,34 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
       Alert.alert("Erro", "Erro ao se comunicar com o servidor");
       console.error(error);
     }
+    setLoading(false);
   };
-  
-  
 
   return (
-    <SafeAreaView
-      style={{ height: "100%", backgroundColor: theme.backgroundColor }}
-    >
-      <View
-        style={[
-          styles.containerTop,
-          { backgroundColor: theme.backgroundColorNavBar },
-        ]}
-      >
+    <SafeAreaView style={{ height: "100%", backgroundColor: theme.backgroundColor }}>
+      {loading && (
+        <View
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            justifyContent: "center",
+            alignItems: "center",
+            zIndex: 1000,
+          }}
+        >
+          <ActivityIndicator size="large" color="#20dd77" />
+        </View>
+      )}
+      <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
         <View style={{ alignItems: "center", flexDirection: "row", gap: 20 }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons
-              name="caret-back-circle-sharp"
-              size={35}
-              color={theme.iconColorWhite}
-            />
+            <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
           </TouchableOpacity>
-          <Text
-            style={[
-              styles.DMSansBold,
-              styles.title,
-              { color: theme.textColor },
-            ]}
-          >
-            Alterar Perfil
-          </Text>
+          <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Alterar Perfil</Text>
         </View>
 
         <TouchableOpacity style={styles.button} onPress={alterarUsuario}>
@@ -298,6 +253,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
           <AntDesign name="plus" size={15} color="#20dd77" />
         </TouchableOpacity>
       </View>
+
       <ScrollView
         style={{
           height: "100%",
@@ -310,55 +266,31 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
             color: theme.textColor,
             fontFamily: "DMSans-Regular",
             fontSize: 18,
+            paddingBottom: 10,
           }}
         >
           Fotos de perfil:
         </Text>
 
-        <View
-          style={[
-            styles.profileBackgroundImageCont,
-            { backgroundColor: theme.backgroundColor, marginBottom: 20 },
-          ]}
-        >
-          <TouchableOpacity
-            style={{ width: "100%", height: "100%" }}
-            onPress={pickBannerImage}
-          >
-            <Image
-              source={
-                selectedBannerImage ? { uri : selectedBannerImage} : dadosUser.fotoBanner ? {uri: dadosUser.fotoBanner} : require("../../assets/icons/profilebgempty.png")
-              }
-              style={styles.profileBackgroundImg}
-            />
+        <View style={[styles.profileBackgroundImageCont, { backgroundColor: theme.backgroundColor, marginBottom: 20 }]}>
+          <TouchableOpacity style={{ width: "100%", height: "100%" }} onPress={pickBannerImage}>
+            <Image source={selectedBannerImage ? { uri: selectedBannerImage } : dadosUser.fotoBanner ? { uri: dadosUser.fotoBanner } : require("../../assets/icons/profilebgempty.png")} style={styles.profileBackgroundImg} />
           </TouchableOpacity>
 
           <View
-  style={{
-    position: "absolute",
-    bottom: -50,
-    left: "50%",
-    transform: [{ translateX: -50 }],
-  }}
->
-  <TouchableOpacity onPress={pickImage}>
-    <View
-      style={[styles.profileIconBox, { borderColor: theme.borderColor }]}
-    >
-      <Image
-        source={
-          selectedImage
-            ? { uri: selectedImage } 
-            : dadosUser.fotoUsuario
-              ? { uri: dadosUser.fotoUsuario } 
-              : require("../../assets/icons/manicon.jpg") 
-        }
-        style={styles.icon}
-      />
-    </View>
-  </TouchableOpacity>
-</View>
-
+            style={{
+              position: "absolute",
+              bottom: -50,
+              left: "50%",
+              transform: [{ translateX: -50 }],
+            }}
+          >
+            <TouchableOpacity onPress={pickImage}>
+              <View style={[styles.profileIconBox, { borderColor: theme.borderColor }]}>
+                <Image source={selectedImage ? { uri: selectedImage } : dadosUser.fotoUsuario ? { uri: dadosUser.fotoUsuario } : require("../../assets/icons/manicon.jpg")} style={styles.icon} />
+              </View>
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.changeCont}>
@@ -371,15 +303,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
           >
             Nome:
           </Text>
-          <TextInput
-            style={[
-              styles.textInput,
-              styles.DMSansRegular,
-              { color: theme.textColor },
-            ]}
-            value={nomeUsuarioAlterado}
-            onChangeText={(text) => setNomeUsuarioAlterado(text)}
-          />
+          <TextInput style={[styles.textInput, styles.DMSansRegular, { color: theme.textColor }]} value={nomeUsuarioAlterado} onChangeText={(text) => setNomeUsuarioAlterado(text)} />
         </View>
         <View style={styles.changeCont}>
           <Text
@@ -413,11 +337,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
             >
               @
             </Text>
-            <TextInput
-              style={{ flex: 1, color: theme.textColor }}
-              value={userNameAlterado}
-              onChangeText={(text) => setUsernameAlterado(text)}
-            />
+            <TextInput style={{ flex: 1, color: theme.textColor }} value={userNameAlterado} onChangeText={(text) => setUsernameAlterado(text)} />
           </View>
         </View>
         <View style={styles.changeCont}>
@@ -430,17 +350,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
           >
             Biografia:
           </Text>
-          <TextInput
-            style={[
-              styles.textInput,
-              styles.DMSansRegular,
-              { color: theme.textColor },
-            ]}
-            value={sobreUsuarioAlterado}
-            onChangeText={(text) => setSobreUsuarioAlterado(text)}
-            multiline={true}
-            textAlignVertical="top"
-          />
+          <TextInput style={[styles.textInput, styles.DMSansRegular, { color: theme.textColor }]} value={sobreUsuarioAlterado} onChangeText={(text) => setSobreUsuarioAlterado(text)} multiline={true} textAlignVertical="top" />
         </View>
         <View style={styles.changeCont}>
           <Text
@@ -460,11 +370,7 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
             }}
             placeholder="DD/MM/YYYY"
             placeholderTextColor={"#909090"}
-            style={[
-              styles.DMSansRegular,
-              styles.textInput,
-              { color: theme.textColor },
-            ]}
+            style={[styles.DMSansRegular, styles.textInput, { color: theme.textColor }]}
             onChangeText={(text) => {
               console.log("Valor da data:", text); // Adicione um log para verificar o valor da data
               setNascUsuarioAlterado(text);
@@ -481,26 +387,9 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
           >
             Área de Interesse:
           </Text>
-          <Picker
-            selectedValue={areaIntUsuarioAlterado}
-            style={[
-              styles.inputCont,
-              styles.text,
-              styles.DMSansRegular,
-              { color: theme.textColor },
-            ]}
-            onValueChange={(itemValue) => setAreaIntUsuarioAlterado(itemValue)}
-            mode="dropdown"
-          >
+          <Picker selectedValue={areaIntUsuarioAlterado} style={[styles.inputCont, styles.text, styles.DMSansRegular, { color: theme.textColor }]} onValueChange={(itemValue) => setAreaIntUsuarioAlterado(itemValue)} mode="dropdown">
             <Picker.Item label="Selecione uma área" value="" />
-            {Array.isArray(areaVagas) &&
-              areaVagas.map((area, index) => (
-                <Picker.Item
-                  key={index}
-                  label={area.nomeArea}
-                  value={area.nomeArea}
-                />
-              ))}
+            {Array.isArray(areaVagas) && areaVagas.map((area, index) => <Picker.Item key={index} label={area.nomeArea} value={area.nomeArea} />)}
           </Picker>
         </View>
         <View style={styles.changeCont}>
@@ -511,17 +400,9 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
               fontSize: 18,
             }}
           >
-            Competência:
+            Competências:
           </Text>
-          <TextInput
-            style={[
-              styles.textInput,
-              styles.DMSansRegular,
-              { color: theme.textColor },
-            ]}
-            value={formacaoCompetenciaUsuarioAlterado}
-            onChangeText={(text) => setFormacaoCompetenciaUsuarioAlterado(text)}
-          />
+          <TextInput style={[styles.textInput, styles.DMSansRegular, { color: theme.textColor }]} value={formacaoCompetenciaUsuarioAlterado} onChangeText={(text) => setFormacaoCompetenciaUsuarioAlterado(text)} />
         </View>
         <View style={styles.changeCont}>
           <Text
@@ -534,23 +415,8 @@ const [selectedBannerImage, setSelectedBannerImage] = useState(null);
             Contatos:
           </Text>
           <View style={styles.contactCont}>
-            <Text
-              style={[
-                styles.DMSansRegular,
-                { color: theme.textColor, fontSize: 16 },
-              ]}
-            >
-              Telefone:
-            </Text>
-            <TextInput
-              style={[
-                styles.contactInput,
-                styles.DMSansRegular,
-                { color: theme.textColor },
-              ]}
-              value={telAlterado}
-              onChangeText={(text) => setTelAlterado(text)}
-            />
+            <Text style={[styles.DMSansRegular, { color: theme.textColor, fontSize: 16 }]}>Telefone:</Text>
+            <TextInput style={[styles.contactInput, styles.DMSansRegular, { color: theme.textColor }]} value={telAlterado} onChangeText={(text) => setTelAlterado(text)} />
           </View>
         </View>
       </ScrollView>

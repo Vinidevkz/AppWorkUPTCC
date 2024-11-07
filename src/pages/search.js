@@ -18,10 +18,10 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import styles from "../styles/search.js";
 import { Context } from "../pages/initialPages/context/provider";
 
-const { apiNgrokVagaPesquisa, apiEmuladorVagaPesquisa } = ApisUrls;
+const { apiEmuladorVagaPesquisa } = ApisUrls;
 
 export default function Search({ navigation }) {
-  const { vagaID, setVagaID, setEmpresaId } = useContext(Context);
+  const { vagaID, setVagaID, empresaId, setEmpresaId } = useContext(Context);
 
   const { theme } = useTheme({ Search });
   const [data, setData] = useState([]); // Para vagas
@@ -35,10 +35,10 @@ export default function Search({ navigation }) {
   const buscaVaga = async (search) => {
     setLoading(true);
     setErrorMessage("");
-    console.log(`URL da requisição: ${apiNgrokVagaPesquisa}`);
+    console.log(`URL da requisição: ${apiEmuladorVagaPesquisa}`);
     try {
       console.log(`Buscando vagas com o termo: ${search}`);
-      const response = await axios.post(apiNgrokVagaPesquisa, { search });
+      const response = await axios.post(apiEmuladorVagaPesquisa, { search });
       console.log("Resposta da API:", response.data);
 
       if (response.data.message) {
@@ -140,14 +140,16 @@ export default function Search({ navigation }) {
           />
         </View>
       </View>
-      <View style={{ height: "100%", backgroundColor: theme.backgroundColor }}>
+      <View style={{ height: "90%", backgroundColor: theme.backgroundColor }}>
+
+
+        {searchText === '' ? handleSearch : ''}
         {loading ? (
           <View
             style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: [{ translateX: -25 }, { translateY: -25 }],
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center'
             }}
           >
             <ActivityIndicator size="large" color="#20dd77" />
@@ -158,15 +160,7 @@ export default function Search({ navigation }) {
           <View style={[{ alignItems: "flex-start", padding: 10 }]}>
             {errorMessage ? (
               <View>
-                <Text
-                  style={[
-                    styles.DMSansBold,
-                    styles.title,
-                    { color: theme.textColor },
-                  ]}
-                >
-                  Vagas:
-                </Text>
+
                 <Text
                   style={{
                     color: theme.textColor,
@@ -180,20 +174,18 @@ export default function Search({ navigation }) {
               </View>
             ) : (
               <>
-                <Text
-                  style={[
-                    styles.DMSansBold,
-                    styles.title,
-                    { color: theme.textColor },
-                  ]}
-                >
-                  Vagas:
-                </Text>
-                {data.length === 0 ? (
-                  <Text style={{ color: theme.textColor, fontSize: 16 }}>
-                    Nada encontrado, tente novamente mais tarde.
-                  </Text>
-                ) : (
+{!loading && (
+  <Text
+    style={[
+      styles.DMSansBold,
+      styles.title,
+      { color: theme.textColor },
+    ]}
+  >
+    Vagas:
+  </Text>
+)}
+
                   <FlatList
                     data={data} // Exibindo vagas
                     showsHorizontalScrollIndicator={false}
@@ -247,10 +239,10 @@ export default function Search({ navigation }) {
                         </View>
                         <TouchableOpacity
                           style={[styles.button, styles.buttonVaga]}
-                          // onPress={() => {
-                          //   setVagaID(item.idVaga);
-                          //   navigation.navigate("Vagas");
-                          // }}
+                          onPress={() => {
+                            setVagaID(item.idVaga);
+                            navigation.navigate("Vagas");
+                          }}
                         >
                           <Text
                             style={[
@@ -258,10 +250,7 @@ export default function Search({ navigation }) {
                               styles.DMSansBold,
                               { color: "#fff" },
                             ]}
-                            onPress={() => {
-                              setVagaID(item.idVaga);
-                              navigation.navigate("Vagas");
-                            }}
+ 
                           >
                             Ver Vaga
                           </Text>
@@ -269,7 +258,7 @@ export default function Search({ navigation }) {
                       </View>
                     )}
                   />
-                )}
+                
               </>
             )}
             <Text
@@ -281,7 +270,10 @@ export default function Search({ navigation }) {
             >
               Empresas:
             </Text>
-            <FlatList
+            {data.lenght === 0 ? (
+              <ActivityIndicator size={'large'}/>
+            ) : (
+              <FlatList
               data={companies} // Usando o estado para empresas
               horizontal={true}
               showsHorizontalScrollIndicator={false}
@@ -291,7 +283,7 @@ export default function Search({ navigation }) {
               }}
               keyExtractor={(item) =>
                 item.id_empresa
-                  ? item.id_empresa.toString()
+                  ? item.idEmpresa.toString()
                   : Math.random().toString()
               } // Assumindo que id_empresa é único
               renderItem={({ item }) => (
@@ -381,6 +373,7 @@ export default function Search({ navigation }) {
                     ]}
                      onPress={() => {
                        setEmpresaId(item.idEmpresa);
+                       console.log("ID da empresa setado:", item.idEmpresa);
                        navigation.navigate("EmpresasProfile");
                      }}
                   >
@@ -397,8 +390,13 @@ export default function Search({ navigation }) {
                 </View>
               )}
             />
+            )}
+
           </View>
         )}
+
+
+
       </View>
     </SafeAreaView>
   );

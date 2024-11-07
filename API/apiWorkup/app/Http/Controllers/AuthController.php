@@ -42,6 +42,7 @@ class AuthController extends Controller
             if (Hash::check($password, $admin->senhaAdmin)) {
                 Auth::guard('admin')->login($admin);
                 Log::info('Admin logged in:', ['email' => $email]);
+                
                     return redirect('/admin');  // Adicionado redirecionamento correto
             } else {
                 // Senha incorreta para admin

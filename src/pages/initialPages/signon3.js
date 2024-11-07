@@ -164,7 +164,7 @@ export default function SignON3({ navigation }) {
   
       console.log("Dados enviados para o backend:", JSON.stringify(dataToSend, null, 2));
   
-      const response = await fetch(apiNgrokCad, {
+      const response = await fetch(apiEmuladorCad, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -204,9 +204,6 @@ export default function SignON3({ navigation }) {
       setLoading(false);
     }
   }
-
-
-  
 
   const fontsLoaded = useFonts();
   if (!fontsLoaded) {

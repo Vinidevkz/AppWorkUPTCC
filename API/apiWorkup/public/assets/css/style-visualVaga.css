@@ -1,0 +1,100 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    
+}
+
+body {
+    display: grid;
+    place-items: center;
+    height: 100vh;
+    background-image: url("../img/homeEmpresa/fundo-visualVaga.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.box-vaga {
+    width: 50rem;
+    height: 32rem;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+}
+
+.wrap-vaga {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.body-vaga {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.box-vaga .row .col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.box-vaga .row .col div {
+    width: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.box-vaga .row .col input {
+    border-style: none;
+    color: #2c2c2c;
+    padding: 0 0.6rem;
+    height: 2rem;
+    width: 100%;
+    border-radius: 0.3rem;
+    background-color: #fafafa;
+    border: 1px solid #dfdfdf;
+}
+
+.box-vaga .row .col input:focus {
+    border: 1px solid #20dd77;
+    outline: none;
+}
+
+select {
+    background-color: rgb(255, 255, 255);
+    border-style: none;
+    height: 2rem;
+    padding: 0 1rem;
+    border: 1px solid #d0d0d0;
+    color: #2c2c2c;
+}
+
+option {
+    border-style: none;
+    height: 1.7rem;
+    padding: 0 1rem;
+    color: #2c2c2c;
+}
+
+option:hover {
+    background-color: aqua;
+}
+
+.botoes {
+    height: 3rem;
+    border-style: none;
+}
+
+.registrar {
+    background-color: #20dd77;
+    color: #fff;
+}

@@ -48,6 +48,7 @@ class Empresa extends Authenticatable
         'LogradouroEmpresa',
         'cepEmpresa',
         'numeroLograEmpresa',
+        'avaliacaoEmpresa',
         'idStatus',
     ];
 

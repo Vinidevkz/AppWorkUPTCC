@@ -38,7 +38,7 @@ export default function SignON2({ navigation }) {
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const request = await fetch(apiNgrokArea);
+        const request = await fetch(apiEmuladorArea);
         const response = await request.json();
         setAreaVagas(response);
       } catch (error) {

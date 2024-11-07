@@ -213,10 +213,15 @@ class VagaController extends Controller
         return view('homeEmpresa', compact('vagas')); // Passa a variável $vagas para a view
     }
 
-
-
-     
-
+    public function showVagasEmpresa($idEmpresa)
+    {
+        $vagaempresa = Vaga::where('idEmpresa', $idEmpresa)
+            ->select('idVaga', 'nomeVaga', 'cidadeVaga', 'estadoVaga', 'salarioVaga')
+            ->get();
+    
+        return response()->json($vagaempresa, 200);
+    }
+    
 
     public function edit($id)
     {
@@ -322,7 +327,7 @@ class VagaController extends Controller
                     ->get();
 
                 $empresas = DB::table('tb_empresa')
-                    ->select('tb_empresa.nomeEmpresa', 'tb_empresa.usernameEmpresa', 'tb_empresa.estadoEmpresa')
+                    ->select('tb_empresa.idEmpresa', 'tb_empresa.nomeEmpresa', 'tb_empresa.usernameEmpresa', 'tb_empresa.estadoEmpresa')
                     ->where('tb_empresa.nomeEmpresa', 'LIKE', "%{$query}%")
                     ->orWhere('tb_empresa.usernameEmpresa', 'LIKE', "%{$query}%")
                     ->get();
@@ -344,4 +349,44 @@ class VagaController extends Controller
             return response()->json(['message' => 'Erro ao realizar a busca', 'error' => $exception->getMessage()], 500);
         }
     }
+
+    public function verVagaPorArea($nomeArea){
+        // Debugging para verificar o valor de nomeArea
+
+        
+        $areaVaga = Vaga::join('tb_area', 'tb_vaga.idArea', '=', 'tb_area.idArea')
+            ->where('tb_area.nomeArea', $nomeArea)
+            ->select('tb_vaga.idVaga', 'tb_vaga.nomeVaga', 'tb_vaga.cidadeVaga', 'tb_vaga.salarioVaga', 'tb_vaga.idEmpresa', 'tb_vaga.prazoVaga', 'tb_vaga.idModalidadeVaga', 'tb_vaga.idArea')
+            ->with('empresa', 'status', 'modalidade', 'area')
+            ->get();
+    
+    
+        return response()->json($areaVaga, 200);
+    }
+
+    public function verOutrasVagas($nomeArea){
+        // Debugging para verificar o valor de nomeArea
+
+        
+        $areaVaga = Vaga::join('tb_area', 'tb_vaga.idArea', '=', 'tb_area.idArea')
+            ->where('tb_area.nomeArea', '!=', $nomeArea)
+            ->select('tb_vaga.idVaga', 'tb_vaga.nomeVaga', 'tb_vaga.cidadeVaga', 'tb_vaga.salarioVaga', 'tb_vaga.idEmpresa', 'tb_vaga.prazoVaga', 'tb_vaga.idModalidadeVaga', 'tb_vaga.idArea')
+            ->with('empresa', 'status', 'modalidade', 'area')
+            ->get();
+    
+    
+        return response()->json($areaVaga, 200);
+    }
+    
+
+    /*
+    public function verVagaPorArea(Request $request){
+        // try {
+
+        // }catch{
+            
+        // }
+    }
+    */
+
 }

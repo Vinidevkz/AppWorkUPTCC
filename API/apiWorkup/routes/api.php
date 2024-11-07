@@ -8,6 +8,7 @@ use App\Http\Controllers\VagaUsuarioController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\VagaController;
 use App\Http\Controllers\AreaController;
+use App\Http\Controllers\DenunciaEmpresaController;
 use App\Http\Controllers\EscolasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -29,15 +30,11 @@ Route::post('/seguirEmpresa',[SeguirController::class, 'store']);
 Route::delete('/seguirEmpresa', [SeguirController::class, 'destroy']);
 //acabou aqui
 
-
-
 //Salvar Vaga
 Route::get('/salvarVaga/{idUsuario}', [SalvarVagaController::class, 'index']);
 Route::post('/salvarVaga',[SalvarVagaController::class, 'store']);
 Route::delete('/salvarVaga', [SalvarVagaController::class, 'destroy']);
 Route::get('verificarSalvarVaga/{idUsuario}/{idVaga}', [SalvarVagaController::class, 'verificarSalvarVaga']);
-
-
 
 
 
@@ -59,7 +56,7 @@ Route::post('/usuario', [UsuarioController::class, 'store']);
 //Login
 Route::post('/usuario/login', [UsuarioController::class, 'login']);
 //Atualizar dado de um usuario...
-Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'update']);
+Route::put('/usuario/{idUsuario}', [UsuarioController::class, 'updateApp']);
 // Se candidatar a vaga
 Route::post('/vagaUsuario', [VagaUsuarioController::class,'store']);
 // Cancelar candidatura de uma vaga
@@ -75,11 +72,13 @@ Route::get('/vaga', [VagaController::class, 'index']);
 Route::get('/vagaApp', [VagaController::class, 'indexApp']);
 //Visualizar vaga por id
 Route::get('/vaga/{idVaga}', [VagaController::class, 'show']);
-Route::get('/vagaApp/{idVaga}', [VagaController::class, 'show']);
+Route::get('/vagaApp/{idVaga}', [VagaController::class, 'showApp']);
 Route::post('/vaga/busca', [VagaController::class, 'search']);
 //Atualizar dado de uma vaga...
 //Route::put('/vaga/{idVaga}', [VagaController::class, 'update'])
 Route::post('/denunciarVaga', [DenunciaVagaController::class, 'store']);
+//Mostrar vagas baseado em um id de empresa
+Route::get('/showvagaempresa/{idEmpresa}', [VagaController::class, 'showVagasEmpresa']);
 
 //API'S AREAVAGA
 
@@ -110,3 +109,10 @@ Route::get('/escolas', [EscolasController::class, 'index']);
 
 //API ver minhas vagas (vagas em que o usuario ta se candidatando)
 Route::get('/minhasvagas/{userId}', [VagaUsuarioController::class, 'minhasVagas']);
+
+//API denuncia de empresa
+Route::get('/denunciaempresa', [DenunciaEmpresaController::class, 'store']);
+
+//API pegar vaga por area
+Route::get('/vagaporarea/{areaVaga}', [VagaController::class, 'verVagaPorArea']);
+Route::get('/outrasvagas/{areaVaga}', [VagaController::class, 'verOutrasVagas']);

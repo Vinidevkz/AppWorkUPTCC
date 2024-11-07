@@ -22,7 +22,7 @@ export default function Vaga({ navigation }) {
 
   const { vagaID } = useContext(Context);
   const { userId } = useContext(Context);
-  const { apiNgrokVaga, apiNgrokUsuarioVaga, apiNgrokUsuarioVagaCancelar, apiNgrokVerificarCandidatura, apiEmuladorUsuarioVaga, apiEmuladorVerificarCandidatura, apiEmuladorVaga, apiNgrokDenunciarVaga, apiEmuladorDenunciarVaga } = ApisUrls;
+  const { apiEmuladorVaga,  apiEmuladorUsuarioVagaCancelar, apiEmuladorVerificarCandidatura, apiEmuladorUsuarioVaga } = ApisUrls;
 
   const toggleModal = () => {
     setModalVisible(!isModalVisible)
@@ -161,8 +161,6 @@ export default function Vaga({ navigation }) {
     }
   };
   
-  
-
   useFocusEffect(
     React.useCallback(() => {
       if (vagaID) {
@@ -247,9 +245,10 @@ export default function Vaga({ navigation }) {
           </TouchableOpacity>
 
           <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
-        <View style={{ backgroundColor: "white", padding: 20, borderRadius: 10 }}>
-          <Text style={{ marginBottom: 10 }}>Selecione o motivo da denúncia:</Text>
+        <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
+          <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Selecione o motivo da denúncia:</Text>
 
+          <View style={{backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
           {["Conteúdo impróprio", "Spam ou fraude", "Discriminação ou Preconceito", "Exploração de Trabalho", "Salário ou Benefícios Ilegais"].map((opcao) => (
             <TouchableOpacity
               key={opcao}
@@ -265,7 +264,7 @@ export default function Vaga({ navigation }) {
                 justifyContent: 'space-between'
               }}
             >
-              <Text style={{ color: motivoDenuncia === opcao ? "#1b1b1b" : "#1b1b1b" }}>{opcao}</Text>
+              <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
 
               {motivoDenuncia === opcao && (
                 <Feather name="check" size={24} color="black" />
@@ -273,12 +272,12 @@ export default function Vaga({ navigation }) {
               
             </TouchableOpacity>
           ))}
-
+          </View>
           <TouchableOpacity
             style={[styles.button, { marginTop: 20 }]}
             onPress={denunciarVaga}
           >
-            <Text style={styles.buttonText}>OK</Text>
+            <Text style={styles.buttonText}>Confirmar</Text>
           </TouchableOpacity>
         </View>
       </Modal>

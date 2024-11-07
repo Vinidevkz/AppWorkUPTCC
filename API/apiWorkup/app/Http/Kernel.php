@@ -39,6 +39,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\ShareAreas::class,
             \App\Http\Middleware\ShareAdminPhoto::class,
+            \App\Http\Middleware\ShareEmpresa::class,
          
         ],
 

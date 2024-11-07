@@ -75,8 +75,13 @@ Route::get('/novoEmpresa', function () {
 });
 
 //Home WorkUp
+// Home WorkUp
 Route::get('/home', function () {
-    return view('/homeWorkUp'); })->name('home.workup');
+    $empresa = auth()->check() ? auth()->user()->empresa : null; // Ajuste isso conforme necessário
+    return view('homeWorkUp', compact('empresa')); 
+})->name('home.workup');
+
+
 
 //Cadastrar Empresa
 Route::get('/cadastrarEmpresa', [EmpresaController::class, 'create'])->name('cadastrarEmpresa');
@@ -142,7 +147,7 @@ Route::middleware('auth:empresa')->group(function(){
             Route::get('/dashboard',[EmpresaController::class, 'dashboard'])->name('empresa.dashboard');
 
             // Ver todos os detalhe da empresa
-            Route::get('/{id}', [EmpresaController::class, 'show'])->name('empresas.show');
+            // Route::get('/{id}', [EmpresaController::class, 'show'])->name('empresas.show');
             // Deletar Empresas
             Route::delete('/{id}', [EmpresaController::class, 'destroy'])->name('empresas.delete');
             // Editar perfil Empresas

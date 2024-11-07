@@ -84,7 +84,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: '100%'
+    width: '100%',
   },
 
   profileName: {
@@ -108,7 +108,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-
   },
 
   usersPrefBox: {
@@ -126,7 +125,6 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     gap: 10,
-
   },
 
   linkLine: {
@@ -170,6 +168,70 @@ const styles = StyleSheet.create({
 
   text: {
     fontSize: 14,
+  },
+
+  vagaCont: {
+    backgroundColor: '#fff',
+    borderRadius: 25,
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    width: 250,
+    height: 250,
+    paddingHorizontal: 25,
+    elevation: 5,
+    margin: 10,
+    borderBottomWidth: 3,
+    borderColor: '#20dd77'
+  },
+
+  vagaHead: {
+    width: '100%',
+    alignItems: 'flex-start',
+  },
+
+  vagaBody: {
+    width: '100%',
+    alignItems: 'flex-start',
+  },
+
+  titleVaga: {
+    fontSize: 18,
+  },
+
+  corpText: {
+    // Estilo vazio
+  },
+
+  dateText: {
+    // Estilo vazio
+  },
+
+  descVaga: {
+    // Estilo vazio
+  },
+
+  vagaFooterCont: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center'
+  },
+
+  buttonVaga: {
+    width: '50%',
+    paddingVertical: 10,
+    borderRadius: 20,
+  },
+
+  button: {
+    backgroundColor: '#20dd77',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  buttonText: {
+    color: '#fff',
+    fontSize: 15,
   },
 });
 
