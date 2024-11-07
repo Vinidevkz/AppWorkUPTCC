@@ -4,7 +4,7 @@
     <div class="header-wrap">
 
         <div class="wrap-logo">
-            <a href="{{ route('home.workup') }}">
+            <a href="{{ route('empresa.dashboard') }}">
             <img src="{{ url('assets/img/dashboardEmpresa/logo-reduzida.png') }}" alt="">
             </a>
         </div>

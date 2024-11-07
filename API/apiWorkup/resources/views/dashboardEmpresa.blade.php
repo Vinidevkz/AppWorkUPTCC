@@ -98,76 +98,71 @@
                         Nenhuma vaga publicada.
                     </div>
                 @else
-                    @foreach($vagas as $vaga)
-                        <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
-                            <div class="vaga">
-                                <div class="wrap-vaga">
-                                    <div class="header-vaga">
-                                        <h4 class="text-truncate">{{$vaga->nomeVaga}}</h4>
-                                        <div>
-                                            <p>Publicada em {{ \Carbon\Carbon::parse($vaga->created_at)->format('d/m/Y')}} </p>
-                                            <p>Aberta até {{ \Carbon\Carbon::parse($vaga->prazoVaga)->format('d/m/Y') }}</p>
-                                        </div>
-                                    </div>
-                                    <div class="opt-vaga">
-                                        <p class="text-truncate my-1">Salário: R${{ $vaga->salarioVaga }}</p>
-                                        <p class="text-truncate mb-1">Área: {{ $vaga->nomeVaga }}</p>
-                                        <p class="text-truncate mb-1">Estado: {{ $vaga->estadoVaga }}</p>
-                                        <p class="text-truncate mb-1">Candidatos: {{ $vaga->total_candidatos }}</p>
-                                    </div>
+                @foreach($vagas as $vaga)
+    <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
+        <div class="vaga">
+            <div class="wrap-vaga">
+                <div class="header-vaga">
+                    <h4 class="text-truncate">{{$vaga->nomeVaga}}</h4>
+                    <div>
+                        <p>Publicada em {{ \Carbon\Carbon::parse($vaga->created_at)->format('d/m/Y')}}</p>
+                        <p>Aberta até {{ \Carbon\Carbon::parse($vaga->prazoVaga)->format('d/m/Y') }}</p>
+                    </div>
+                </div>
+                <div class="opt-vaga">
+                    <p class="text-truncate my-1">Salário: R${{ $vaga->salarioVaga }}</p>
+                    <p class="text-truncate mb-1">Área: {{ $vaga->nomeVaga }}</p>
+                    <p class="text-truncate mb-1">Estado: {{ $vaga->estadoVaga }}</p>
+                    <p class="text-truncate mb-1">Candidatos: {{ $vaga->total_candidatos }}</p>
+                </div>
 
-                                    <div class="footer-vaga">
+                <div class="footer-vaga">
+                    <button type="button" class="btn-vagas btn-verde" data-bs-toggle="modal"
+                        data-bs-target="#modalVaga{{$vaga->idVaga}}">Detalhes<i class="fa-solid fa-clipboard-list"></i></button>
 
-                                        <button type="button" class="btn-vagas btn-verde" data-bs-toggle="modal"
-                                            data-bs-target="#{{$vaga->idVaga}}">Detalhes<i
-                                                class="fa-solid fa-clipboard-list"></i></button>
-
-                                        @foreach($vagas as $vaga)
-                                            <!-- Modal -->
-                                            <div class="modal fade" id="{{ $vaga->idVaga}}" tabindex="-1"
-                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h1 class="modal-title fs-5 px-3" id="exampleModalLabel"
-                                                                style="color: #2c2c2c">{{$vaga->nomeVaga}}</h1>
-                                                            <button type="button" class="btn-close px-4" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body px-5">
-                                                            <div class="opt-vaga">
-                                                                <p class="text mb-3" style="font-weight: 400">Candidatos:{{ $vaga->total_candidatos }}</p>
-                                                                <p class="text my-1">Salário: R${{ $vaga->salarioVaga }}</p>
-                                                                <p class="text mb-1">Área: {{ $vaga->nomeVaga }}</p>
-                                                                <p class="text mb-1">Modalidade:{{ $vaga->idModalidadeVaga }}</p>
-                                                                <p class="text mb-1">Cidade: {{ $vaga->cidadeVaga }}</p>
-                                                                <p class="text mb-1">Estado: {{ $vaga->estadoVaga }}</p>
-                                                                <p class="text mb-1">Diferencial: {{ $vaga->diferencialVaga }}</p>
-                                                            </div>
-                                                        </div>
-                                                        <div
-                                                            class="modal-footer d-flex justify-content-between w-75 align-self-center">
-                                                            <a href="{{ route('vagas.edit', $vaga->idVaga) }}"
-                                                                class="btn-vagas btn-verde w-100">Editar<i
-                                                                    class="fa-solid fa-pen-to-square"
-                                                                    style="color: #ffffff;"></i></a>
-                                                            <button type="button" class="btn-vagas w-100" data-bs-dismiss="modal"
-                                                                style="background-color: #ededed; color: black">Voltar</button>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                        @endforeach
+                    <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas btn-vazado">
+                        Candidatos<i class="fa-solid fa-user"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
 
 
-                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}"
-                                            class="btn-vagas btn-vazado">Candidatos<i class="fa-solid fa-user"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
+@foreach($vagas as $vaga)
+    <!-- Modal para cada vaga -->
+    <div class="modal fade" id="modalVaga{{ $vaga->idVaga }}" tabindex="-1" aria-labelledby="modalVagaLabel{{ $vaga->idVaga }}" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5 px-3" id="modalVagaLabel{{ $vaga->idVaga }}" style="color: #2c2c2c">{{ $vaga->nomeVaga }}</h1>
+                    <button type="button" class="btn-close px-4" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body px-5">
+                    <div class="opt-vaga">
+                        <p class="text mb-3" style="font-weight: 400">Candidatos: {{ $vaga->total_candidatos }}</p>
+                        <p class="text my-1">Salário: R${{ $vaga->salarioVaga }}</p>
+                        <p class="text mb-1">Área: {{ $vaga->nomeVaga }}</p>
+                        <p class="text mb-1">Modalidade: {{ $vaga->idModalidadeVaga }}</p>
+                        <p class="text mb-1">Cidade: {{ $vaga->cidadeVaga }}</p>
+                        <p class="text mb-1">Estado: {{ $vaga->estadoVaga }}</p>
+                        <p class="text mb-1">Diferencial: {{ $vaga->diferencialVaga }}</p>
+                    </div>
+                </div>
+                <div class="modal-footer d-flex justify-content-between w-75 align-self-center">
+                    <a href="{{ route('vagas.edit', $vaga->idVaga) }}" class="btn-vagas btn-verde w-100">Editar<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
+                    <button type="button" class="btn-vagas w-100" data-bs-dismiss="modal" style="background-color: #ededed; color: black">Voltar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+@endforeach
+
+
+
+
+
                 @endif
             </div>
 
