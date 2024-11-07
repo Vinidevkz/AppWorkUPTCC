@@ -30,6 +30,7 @@ class AppServiceProvider extends ServiceProvider
 {
     View::composer('*', function ($view) {
         $admin = Auth::guard('admin')->user();
+        $empresa = Auth::guard('empresa')->user();
     
         if ($admin) {
             $totalDenuncias = DB::table('tb_denunciausuario')->count();
@@ -47,9 +48,10 @@ class AppServiceProvider extends ServiceProvider
             $view->with('admin', $admin)->with('dadosDenuncias', $dadosDenuncias);
         }
 
-        if(Auth::guard('empresa')->user()){
+        if($empresa){
             $posts = Post::where('idEmpresa', Auth::guard('empresa')->user())->get();
-            $view->with('posts', $posts);
+            
+            $view->with('posts', $posts)->with('empresa', $empresa);
         }
     });
     

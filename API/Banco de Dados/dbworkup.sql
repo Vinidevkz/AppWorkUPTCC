@@ -123,6 +123,7 @@ INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `
 (2, 'teste', 'teste', 'testeAdmin@teste.com', '123', '$2y$10$nxOfpiyxmq1Qz6ahhDc3r.pwGseoIYaVyXKsVy.IEOuXdOH3kS2TC', 'a', 1, NULL, NULL),
 (4, 'testeBanco', 'teste', 'teste@tt.com', '12211', '$2y$10$41ttpIgP9VlUZbrOMAH3hutQ0FxQW2W.78CnYwbBFfCH0x2ahZFsG', 'a', 2, '2024-09-23 00:47:11', '2024-09-23 00:47:11'),
 (5, 'testeFoto', 'foto', 'fotoadmin@gmail.com', '122112', '$2y$10$AbkExP0M1o5/DI5/Ac79AOlhMy44STW2eKd2f3VMck9zGHq8B5xVe', 'WhatsApp Image 2018-09-19 at 15.50.21.jpeg', 1, '2024-09-27 00:05:53', '2024-09-27 00:05:53');
+(6, 'Danilo', 'dan', 'dan@email.com', '11111111111111', '$2y$10$Fs2dwCDtbHigyoxU6Ek6MOhd2lwPKR.d4Oli0/TNkrCQMvRzqAv1u', 'fc29c16347cac127de9ef3d04cd20f68.png', 1, '2024-11-07 00:07:52', '2024-11-07 00:07:52');
 
 -- --------------------------------------------------------
 

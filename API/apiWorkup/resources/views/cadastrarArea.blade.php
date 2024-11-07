@@ -1,4 +1,4 @@
-                <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -7,8 +7,17 @@
     <title>Formulário com Imagem</title>
 
     <!-- Bootstrap CSS -->
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="shortcut icon" href="{{url('assets/img/adminImages/WU-icon.png')}}" type="image/x-icon">
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{url('assets/css/admin.css')}}">
     <style>
         .error-message {
             color: red;
@@ -57,7 +66,7 @@
         }
 
         .btn-primary-custom {
-            background-color: #00eb00;
+            background-color: #00ff75;
             color: rgb(14, 14, 14);
             border: none;
         }
@@ -104,7 +113,7 @@
 
         .custom-input {
             font-family: inherit;
-            width: 100%;
+            width: auto;
             border: none;
             border-bottom: 2px solid #9b9b9b;
             outline: 0;
@@ -115,10 +124,7 @@
             transition: border-color 0.2s;
         }
 
-        .custom-input::placeholder {
-            color: transparent;
-        }
-
+   
         .custom-input:placeholder-shown ~ .form__label {
             font-size: 17px;
             cursor: text;
@@ -136,9 +142,9 @@
 
         .custom-input:focus {
             padding-bottom: 6px;
-            font-weight: 700;
+            font-weight: 500;
             border-width: 3px;
-            border-image: linear-gradient(to right, #116399, #38caef);
+            border-image: linear-gradient(to right, #b30000, #ff4d4d);
             border-image-slice: 1;
         }
 
@@ -157,60 +163,106 @@
         .custom-input:invalid {
             box-shadow: none;
         }
+  #preview{
+
+font-size: 12rem;
+
+  }
+
+    /* Classe para remover a borda */
+    .no-border {
+        display: none;   
+      
+    }
+    
     </style>
 </head>
 <body id="boo">
-    <main class="cardsform">
-        <div class="container mt-2 mb-3">
-            <div class="row form-wrapper">
-                <!-- Coluna do formulário -->
-                <div class="col-md-8 form-container">
-                    <div class="panel-heading text mb-5">
-                        Cadastre uma Area
-                    </div>
 
-                    <form method="POST" action="/formArea">
-                        @csrf
+<div class="row">
+@include('components.asideAdmin')
+<div class="col-9">
+<div class="p-0">
 
-                        <div class="row">
+<div class="container">
+
+    
+<button onclick="window.history.back()" class="d-flex p-1 align-items-center m-0" style="background-color: transparent; border:none">
+<i class="bi bi-skip-backward p-2"></i>
+<p class="m-0">Voltar</p>
+</button>
+
+<div class="card m-5">
+    <div class="card-header">
+        <h3 class="text-light">Cadastrar área</h3>
+    </div>
+    <div class="card-body">
+    <div class="row d-flex flex-row m-3">
+
+    <div class="row align-items-center justify-content-center ">
+
+
+
+ </div>
+
+        </div>
+
+
+
+        <form method="POST" action="/formArea">
+@csrf
+
                             <!-- Primeira Coluna -->
-                            <div class="col-md-6">
                                 @error('nomeArea')
                                 <div class="error-message">{{ $message }}</div>
                                 @enderror
                                 <div class="form__group field">
-                                    <input type="text" class="form-control custom-input" name="nomeArea" placeholder="Nome do Administrador" value="{{ old('nomeArea') }}" required>
-                                    <label for="nomeArea" class="form__label">Nome da Area</label>
+                                    <label for="nomeArea" class="form__label text-dark">Nome da Area</label>
+                                    <input type="text" class="form-control mt-3" name="nomeArea" placeholder="Digite uma area..." value="{{ old('nomeArea') }}" required>
                                 </div>
-                            </div>
 
                             <!-- Segunda Coluna -->
 
-                        </div>
 
-                        <button class="btn btn-primary-custom btn-block">
+  <div class="col-2 d-flex align-items-center">
+
+  <button class="btn btn-primary-custom btn-block" id="foto">
                             Registrar
                         </button>
-                    </form>
+                       
+    </div>
 
+
+</form>
+
+
+    </div>
+</div>
+
+
+
+
+
+
+</div>
+</div>
+
+
+
+
+
+   
                 </div>
-
-
-                
             </div>
         </div>
-    </main>
+
      <!-- Bootstrap JS -->
-     <script>
-function goBack() {
-    window.history.back()
-}
-</script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-   
-
+    </div>
+    </div>
+    </div>
 </body>
 
 </html>
