@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07/11/2024 às 03:51
+-- Tempo de geração: 07/11/2024 às 16:02
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.2.12
 
@@ -124,7 +124,7 @@ INSERT INTO `tb_admin` (`idAdmin`, `nomeAdmin`, `usernameAdmin`, `emailAdmin`, `
 (4, 'testeBanco', 'teste', 'teste@tt.com', '12211', '$2y$10$41ttpIgP9VlUZbrOMAH3hutQ0FxQW2W.78CnYwbBFfCH0x2ahZFsG', 'a', 2, '2024-09-23 00:47:11', '2024-09-23 00:47:11'),
 (5, 'testeFoto', 'foto', 'fotoadmin@gmail.com', '122112', '$2y$10$AbkExP0M1o5/DI5/Ac79AOlhMy44STW2eKd2f3VMck9zGHq8B5xVe', 'WhatsApp Image 2018-09-19 at 15.50.21.jpeg', 1, '2024-09-27 00:05:53', '2024-09-27 00:05:53'),
 (6, 'Leland Stottlemeyer', 'leland.stottlemeyer', 'leland@gmail.com', '11954196792', '$2y$10$w/xkCyZd8N2OPsiX0Topxul3IDj2jWIfmHTlTbBLh41qmtwctYicK', '772a40e5631f66f7f0421f985836886b.jpg', 1, '2024-11-06 23:49:54', '2024-11-06 23:49:54');
-(7, 'Danilo', 'dan', 'dan@email.com', '11111111111111', '$2y$10$Fs2dwCDtbHigyoxU6Ek6MOhd2lwPKR.d4Oli0/TNkrCQMvRzqAv1u', 'fc29c16347cac127de9ef3d04cd20f68.png', 1, '2024-11-07 00:07:52', '2024-11-07 00:07:52');
+
 -- --------------------------------------------------------
 
 --
@@ -433,8 +433,17 @@ CREATE TABLE `tb_publicacao` (
   `fotoPublicacao` varchar(300) DEFAULT NULL,
   `idEmpresa` int(11) DEFAULT NULL,
   `idAdmin` int(11) DEFAULT NULL,
-  `idVaga` int(11) DEFAULT NULL
+  `idVaga` int(11) NOT NULL,
+  `updated_at` datetime NOT NULL,
+  `created_at` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Despejando dados para a tabela `tb_publicacao`
+--
+
+INSERT INTO `tb_publicacao` (`idPublicacao`, `detalhePublicacao`, `fotoPublicacao`, `idEmpresa`, `idAdmin`, `idVaga`, `updated_at`, `created_at`) VALUES
+(1, 'teste', NULL, 10, NULL, 1, '2024-11-07 12:01:13', '2024-11-07 12:01:13');
 
 -- --------------------------------------------------------
 
@@ -643,13 +652,7 @@ CREATE TABLE `tb_vagausuario` (
 --
 
 INSERT INTO `tb_vagausuario` (`idVagaUsuario`, `idUsuario`, `idVaga`, `idStatusVagaUsuario`) VALUES
-(1, 1, 8, 1),
-(2, 3, 8, 2),
-(7, 16, 1, 1),
-(8, 16, 1, 1),
-(9, 16, 10, 1),
-(11, 25, 2, 1),
-(12, 25, 7, 1);
+(1, 25, 8, 3);
 
 -- --------------------------------------------------------
 
@@ -673,370 +676,20 @@ CREATE TABLE `users` (
 --
 
 --
--- Índices de tabela `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `failed_jobs_uuid_unique` (`uuid`);
-
---
--- Índices de tabela `migrations`
---
-ALTER TABLE `migrations`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `password_resets`
---
-ALTER TABLE `password_resets`
-  ADD KEY `password_resets_email_index` (`email`);
-
---
--- Índices de tabela `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `personal_access_tokens_token_unique` (`token`),
-  ADD KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`);
-
---
--- Índices de tabela `tb_admin`
---
-ALTER TABLE `tb_admin`
-  ADD PRIMARY KEY (`idAdmin`),
-  ADD KEY `idStatus` (`idStatus`);
-
---
--- Índices de tabela `tb_area`
---
-ALTER TABLE `tb_area`
-  ADD PRIMARY KEY (`idArea`);
-
---
--- Índices de tabela `tb_areainteresseusuario`
---
-ALTER TABLE `tb_areainteresseusuario`
-  ADD PRIMARY KEY (`idAreaInteresseUsuario`),
-  ADD KEY `idArea` (`idArea`),
-  ADD KEY `idUsuario` (`idUsuario`);
-
---
--- Índices de tabela `tb_atuacaoempresa`
---
-ALTER TABLE `tb_atuacaoempresa`
-  ADD PRIMARY KEY (`idAtuacaoEmpresa`),
-  ADD KEY `idArea` (`idArea`),
-  ADD KEY `idEmpresa` (`idEmpresa`);
-
---
--- Índices de tabela `tb_chat`
---
-ALTER TABLE `tb_chat`
-  ADD PRIMARY KEY (`idChat`),
-  ADD KEY `idEmpresa` (`idEmpresa`),
-  ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idAdmin` (`idAdmin`),
-  ADD KEY `idMensagem` (`idMensagem`);
-
---
--- Índices de tabela `tb_denunciavaga`
---
-ALTER TABLE `tb_denunciavaga`
-  ADD PRIMARY KEY (`idDenunciaVaga`);
-
---
--- Índices de tabela `tb_empresa`
---
-ALTER TABLE `tb_empresa`
-  ADD PRIMARY KEY (`idEmpresa`),
-  ADD KEY `idStatus` (`idStatus`);
-
---
--- Índices de tabela `tb_escolas`
---
-ALTER TABLE `tb_escolas`
-  ADD PRIMARY KEY (`idEscolas`);
-
---
--- Índices de tabela `tb_mensagem`
---
-ALTER TABLE `tb_mensagem`
-  ADD PRIMARY KEY (`idMensagem`);
-
---
--- Índices de tabela `tb_modalidadevaga`
---
-ALTER TABLE `tb_modalidadevaga`
-  ADD PRIMARY KEY (`idModalidadeVaga`);
-
---
 -- Índices de tabela `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
-  ADD PRIMARY KEY (`idPublicacao`),
-  ADD KEY `idEmpresa` (`idEmpresa`),
-  ADD KEY `idAdmin` (`idAdmin`),
-  ADD KEY `idVaga` (`idVaga`);
-
---
--- Índices de tabela `tb_salvarvaga`
---
-ALTER TABLE `tb_salvarvaga`
-  ADD PRIMARY KEY (`idSalvarVaga`),
-  ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idVaga` (`idVaga`);
-
---
--- Índices de tabela `tb_status`
---
-ALTER TABLE `tb_status`
-  ADD PRIMARY KEY (`idStatus`);
-
---
--- Índices de tabela `tb_statusvagausuario`
---
-ALTER TABLE `tb_statusvagausuario`
-  ADD PRIMARY KEY (`idStatusVagaUsuario`);
-
---
--- Índices de tabela `tb_usuario`
---
-ALTER TABLE `tb_usuario`
-  ADD PRIMARY KEY (`idUsuario`),
-  ADD KEY `idStatus` (`idStatus`);
-
---
--- Índices de tabela `tb_vaga`
---
-ALTER TABLE `tb_vaga`
-  ADD PRIMARY KEY (`idVaga`),
-  ADD KEY `idEmpresa` (`idEmpresa`),
-  ADD KEY `idArea` (`idArea`),
-  ADD KEY `idModalidadeVaga` (`idModalidadeVaga`),
-  ADD KEY `idStatus` (`idStatus`);
-
---
--- Índices de tabela `tb_vagausuario`
---
-ALTER TABLE `tb_vagausuario`
-  ADD PRIMARY KEY (`idVagaUsuario`),
-  ADD KEY `idUsuario` (`idUsuario`),
-  ADD KEY `idVaga` (`idVaga`),
-  ADD KEY `idStatusVagaUsuario` (`idStatusVagaUsuario`);
-
---
--- Índices de tabela `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
+  ADD PRIMARY KEY (`idPublicacao`);
 
 --
 -- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `failed_jobs`
---
-ALTER TABLE `failed_jobs`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `migrations`
---
-ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de tabela `personal_access_tokens`
---
-ALTER TABLE `personal_access_tokens`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `tb_admin`
---
-ALTER TABLE `tb_admin`
-  MODIFY `idAdmin` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
---
--- AUTO_INCREMENT de tabela `tb_area`
---
-ALTER TABLE `tb_area`
-  MODIFY `idArea` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de tabela `tb_areainteresseusuario`
---
-ALTER TABLE `tb_areainteresseusuario`
-  MODIFY `idAreaInteresseUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
-
---
--- AUTO_INCREMENT de tabela `tb_atuacaoempresa`
---
-ALTER TABLE `tb_atuacaoempresa`
-  MODIFY `idAtuacaoEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `tb_chat`
---
-ALTER TABLE `tb_chat`
-  MODIFY `idChat` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `tb_denunciavaga`
---
-ALTER TABLE `tb_denunciavaga`
-  MODIFY `idDenunciaVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `tb_empresa`
---
-ALTER TABLE `tb_empresa`
-  MODIFY `idEmpresa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
-
---
--- AUTO_INCREMENT de tabela `tb_escolas`
---
-ALTER TABLE `tb_escolas`
-  MODIFY `idEscolas` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de tabela `tb_mensagem`
---
-ALTER TABLE `tb_mensagem`
-  MODIFY `idMensagem` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `tb_modalidadevaga`
---
-ALTER TABLE `tb_modalidadevaga`
-  MODIFY `idModalidadeVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
 -- AUTO_INCREMENT de tabela `tb_publicacao`
 --
 ALTER TABLE `tb_publicacao`
-  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `tb_salvarvaga`
---
-ALTER TABLE `tb_salvarvaga`
-  MODIFY `idSalvarVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
-
---
--- AUTO_INCREMENT de tabela `tb_status`
---
-ALTER TABLE `tb_status`
-  MODIFY `idStatus` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- AUTO_INCREMENT de tabela `tb_statusvagausuario`
---
-ALTER TABLE `tb_statusvagausuario`
-  MODIFY `idStatusVagaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
---
--- AUTO_INCREMENT de tabela `tb_usuario`
---
-ALTER TABLE `tb_usuario`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
-
---
--- AUTO_INCREMENT de tabela `tb_vaga`
---
-ALTER TABLE `tb_vaga`
-  MODIFY `idVaga` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
-
---
--- AUTO_INCREMENT de tabela `tb_vagausuario`
---
-ALTER TABLE `tb_vagausuario`
-  MODIFY `idVagaUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
-
---
--- AUTO_INCREMENT de tabela `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
-
---
--- Restrições para tabelas despejadas
---
-
---
--- Restrições para tabelas `tb_admin`
---
-ALTER TABLE `tb_admin`
-  ADD CONSTRAINT `tb_admin_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
-
---
--- Restrições para tabelas `tb_areainteresseusuario`
---
-ALTER TABLE `tb_areainteresseusuario`
-  ADD CONSTRAINT `tb_areainteresseusuario_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
-  ADD CONSTRAINT `tb_areainteresseusuario_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`);
-
---
--- Restrições para tabelas `tb_atuacaoempresa`
---
-ALTER TABLE `tb_atuacaoempresa`
-  ADD CONSTRAINT `tb_atuacaoempresa_ibfk_1` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
-  ADD CONSTRAINT `tb_atuacaoempresa_ibfk_2` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`);
-
---
--- Restrições para tabelas `tb_chat`
---
-ALTER TABLE `tb_chat`
-  ADD CONSTRAINT `tb_chat_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
-  ADD CONSTRAINT `tb_chat_ibfk_2` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
-  ADD CONSTRAINT `tb_chat_ibfk_3` FOREIGN KEY (`idAdmin`) REFERENCES `tb_admin` (`idAdmin`),
-  ADD CONSTRAINT `tb_chat_ibfk_4` FOREIGN KEY (`idMensagem`) REFERENCES `tb_mensagem` (`idMensagem`);
-
---
--- Restrições para tabelas `tb_empresa`
---
-ALTER TABLE `tb_empresa`
-  ADD CONSTRAINT `tb_empresa_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
-
---
--- Restrições para tabelas `tb_publicacao`
---
-ALTER TABLE `tb_publicacao`
-  ADD CONSTRAINT `tb_publicacao_ibfk_1` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
-  ADD CONSTRAINT `tb_publicacao_ibfk_2` FOREIGN KEY (`idAdmin`) REFERENCES `tb_admin` (`idAdmin`),
-  ADD CONSTRAINT `tb_publicacao_ibfk_3` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
-
---
--- Restrições para tabelas `tb_salvarvaga`
---
-ALTER TABLE `tb_salvarvaga`
-  ADD CONSTRAINT `tb_salvarvaga_ibfk_1` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`),
-  ADD CONSTRAINT `tb_salvarvaga_ibfk_2` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`);
-
---
--- Restrições para tabelas `tb_usuario`
---
-ALTER TABLE `tb_usuario`
-  ADD CONSTRAINT `tb_usuario_ibfk_1` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
-
---
--- Restrições para tabelas `tb_vaga`
---
-ALTER TABLE `tb_vaga`
-  ADD CONSTRAINT `tb_vaga_ibfk_3` FOREIGN KEY (`idEmpresa`) REFERENCES `tb_empresa` (`idEmpresa`),
-  ADD CONSTRAINT `tb_vaga_ibfk_4` FOREIGN KEY (`idArea`) REFERENCES `tb_area` (`idArea`),
-  ADD CONSTRAINT `tb_vaga_ibfk_5` FOREIGN KEY (`idModalidadeVaga`) REFERENCES `tb_modalidadevaga` (`idModalidadeVaga`),
-  ADD CONSTRAINT `tb_vaga_ibfk_6` FOREIGN KEY (`idStatus`) REFERENCES `tb_status` (`idStatus`);
-
---
--- Restrições para tabelas `tb_vagausuario`
---
-ALTER TABLE `tb_vagausuario`
-  ADD CONSTRAINT `idUsuario` FOREIGN KEY (`idUsuario`) REFERENCES `tb_usuario` (`idUsuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `idVaga` FOREIGN KEY (`idVaga`) REFERENCES `tb_vaga` (`idVaga`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `tb_vagausuario_ibfk_1` FOREIGN KEY (`idStatusVagaUsuario`) REFERENCES `tb_statusvagausuario` (`idStatusVagaUsuario`);
+  MODIFY `idPublicacao` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
