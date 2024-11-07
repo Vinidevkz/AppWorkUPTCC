@@ -86,9 +86,22 @@ person
                     <td>{{ $em-> idEmpresa }}</td>
                     <td>
 
-                    <a href="{{ route('empresas.show', $em-> idEmpresa) }}" class="visualizar-link"> 
-                    {{ $em->nomeEmpresa }}  
-                  </a>
+                    <a href="#" class="visualizar-link mb-3" data-bs-toggle="modal" data-bs-target="#visualizarModal"
+       data-id="{{ $em->idEmpresa }}"
+       data-nome="{{$em->nomeEmpresa }}"
+       data-username="{{ $em->usernameEmpresa  }}"
+       data-email="{{ $em->emailEmpresa }}"
+       data-sobre="{{ $em->sobreEmpresa  }}"
+       data-cnpj="{{ $em->cnpjEmpresa }}"
+       data-contato="{{  $em->contatoEmpresa }}"
+       data-cidade="{{ $em->cidadeEmpresa  }}"
+       data-estado="{{ $em->estadoEmpresa }}"
+       data-logradouro="{{ $em->logradouroEmpresa }}"
+       data-cep="{{ $em->cepEmpresa }}"
+       data-numLogr="{{ $em->numeroLograEmpresa }}"
+    >
+        {{ $em->nomeEmpresa }}
+    </a>
 
 
                     </td>
@@ -112,7 +125,6 @@ person
   </span>
 </td>
                     <td>
-                      <a href="{{ route('empresas.edit', $em->idEmpresa) }}" class="btn btn-outline-primary btn-sm m-0"><span class="bi-pencil-fill"></span>&nbsp;Editar</a>
 
                       <form action="{{ route('empresas.delete', $em->idEmpresa) }}" method="POST" class="d-inline">
                         @csrf
@@ -144,8 +156,137 @@ person
       </div>
     </div>
   </div>
+
+<!-- Modal -->
+<div class="modal" id="visualizarModal" tabindex="-1" aria-labelledby="visualizarModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content modal-width-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="visualizarModalLabel">Detalhes da Empresa</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Seção de Identificação -->
+                <div class="row mb-3">
+                  <div class="d-flex">
+                  <h6 class="me-2">Identificação </h6>
+
+                  <i class="bi bi-file-person-fill"></i>
+                  </div>
+                    <div class="col-md-6">
+                        <p><strong>ID:</strong> <span id="idEmpresa"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Nome:</strong> <span id="nomeEmpresa"></span></p>
+                    </div>
+                </div>
+                <!-- Seção de Contato -->
+                <div class="row mb-3">
+                  <div class="d-flex">
+                <h6 class="me-2">Contato</h6>
+
+                <i class="bi bi-telephone-fill"></i>
+                </div>
+
+                    <div class="col-md-6">
+                        <p><strong>Username:</strong> <span id="usernameEmpresa"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>E-mail:</strong> <span id="emailEmpresa"></span></p>
+                    </div>
+                </div>
+                <!-- Seção de Informações Adicionais -->
+                <div class="row mb-3">
+                <div class="d-flex">
+                <h6 class="me-2">INFO. ADICIONAIS</h6>
+
+                <i class="bi bi-info-square-fill"></i>
+                </div>
+                    <div class="col-md-6">
+                        <p><strong>Sobre:</strong> <span id="sobreEmpresa"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>CNPJ:</strong> <span id="cnpjEmpresa"></span></p>
+                    </div>
+                </div>
+                <!-- Seção de Localização -->
+                <div class="row mb-3">
+                <div class="d-flex">
+                <h6 class="me-2">LOCALIZAÇÕAO</h6>
+
+                <i class="bi bi-geo-alt-fill"></i>
+                </div>
+                    <div class="col-md-6">
+                        <p><strong>Contato:</strong> <span id="contatoEmpresa"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Cidade:</strong> <span id="cidadeEmpresa"></span></p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Estado:</strong> <span id="estadoEmpresa"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Logradouro:</strong> <span id="logradouroEmpresa"></span></p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>CEP:</strong> <span id="cepEmpresa"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Número logradouro:</strong> <span id="numeroLograEmpresa"></span></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
 </div>
 
+
+
+
+
+</div>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const links = document.querySelectorAll('.visualizar-link');
+    links.forEach(link => {
+      link.addEventListener('click', function(event) {
+        const id = link.getAttribute('data-id');
+        const nome = link.getAttribute('data-nome');
+        const username = link.getAttribute('data-username');
+        const email = link.getAttribute('data-email');
+        const sobre = link.getAttribute('data-sobre');
+        const cnpj = link.getAttribute('data-cnpj');
+        const contato = link.getAttribute('data-contato');
+        const cidade = link.getAttribute('data-cidade');
+        const estado = link.getAttribute('data-estado');
+        const logradouro = link.getAttribute('data-logradouro');
+        const cep = link.getAttribute('data-cep');
+        const numLogr = link.getAttribute('data-numLogr');
+     ;
+        
+        document.getElementById('idEmpresa').textContent = id;
+        document.getElementById('nomeEmpresa').textContent = nome;
+        document.getElementById('usernameEmpresa').textContent = username;
+        document.getElementById('emailEmpresa').textContent = email;
+        document.getElementById('sobreEmpresa').textContent = sobre;
+        document.getElementById('cnpjEmpresa').textContent = cnpj;
+        document.getElementById('contatoEmpresa').textContent = contato;
+        document.getElementById('cidadeEmpresa').textContent = cidade;
+        document.getElementById('estadoEmpresa').textContent = estado;
+        document.getElementById('logradouroEmpresa').textContent = logradouro;
+        document.getElementById('cepEmpresa').textContent = cep;
+        document.getElementById('numeroLograEmpresa').textContent = numLogr;
+      });
+    });
+  });
+</script>
 <script>
 const sidebarlinks = document.querySelectorAll('.item-nav');
 // Adicionando eventos

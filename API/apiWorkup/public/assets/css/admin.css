@@ -586,5 +586,7 @@ table td  a{
   width: 90%;
   color: #fff;
 }
-
+#visualizarModal p{
+  margin: 2px;
+}
 

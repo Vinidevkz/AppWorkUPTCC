@@ -146,12 +146,7 @@ location_city
   </div>
   </div>
 
-  <div class="d-flex flex-row">
-        <div class="blue d-flex align-items-center justify-content-center">
-          <p class="m-0 fw-bold text-center">Ação</p>
-        </div>
-       
-      </div>
+
 
 
 

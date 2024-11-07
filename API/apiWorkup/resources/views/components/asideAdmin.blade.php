@@ -15,19 +15,7 @@
       <div class="modal-body d-flex justify-content-center">
         <img src="{{ $fotoAdmin }}" class="img-fluid" alt="Imagem ampliada">
       </div>
-      <div class="btn-group d-flex flex-row justify-content-around">
-      <div class="box-btn-alter">
-      <button type="button" class="btn btn-outline-light">
-      <i class="bi bi-pencil"></i>  
-      Alterar</button>
-      </div>
-
-      <div class="box-btn-del">
-      <button type="button" class="btn btn-outline-danger">
-      <i class="bi bi-x-lg"></i>  
-      Excluir</button>
-      </div>
-      </div>
+ 
     </div>
 
   

@@ -146,7 +146,7 @@ person
 
 
 <!-- Modal -->
-<div class="modal " id="visualizarModal" tabindex="-1" aria-labelledby="visualizarModalLabel" aria-hidden="true">
+<div class="modal" id="visualizarModal" tabindex="-1" aria-labelledby="visualizarModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content modal-width-content">
             <div class="modal-header">
@@ -154,75 +154,91 @@ person
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>ID:</strong> <span id="idUsuario"></span></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Nome:</strong> <span id="nomeUsuario"></span></p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>Username:</strong> <span id="usernameUsuario"></span></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Data de Nascimento:</strong> <span id="nascUsuario"></span></p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>Email:</strong> <span id="emailUsuario"></span></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Contato:</strong> <span id="contatoUsuario"></span></p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>Cidade:</strong> <span id="cidadeUsuario"></span></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Estado:</strong> <span id="estadoUsuario"></span></p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>Logradouro:</strong> <span id="logradouroUsuario"></span></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>CEP:</strong> <span id="cepUsuario"></span></p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>Número:</strong> <span id="numeroLograUsuario"></span></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Sobre:</strong> <span id="sobreUsuario"></span></p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>Formação:</strong> <span id="formacaoCompetenciaUsuario"></span></p>
-        </div>
-        <div class="col-md-6">
-            <p><strong>Data da Formação:</strong> <span id="dataFormacaoCompetenciaUsuario"></span></p>
-        </div>
-    </div>
-    <div class="row mb-3">
-        <div class="col-md-6">
-            <p><strong>Data Criação Perfil:</strong> <span id="created_at"></span></p>
-        </div>
-    </div>
-</div>
-
+                <!-- Seção de Identificação -->
+                <div class="row mb-3">
+                    <div class="d-flex">
+                        <h6 class="me-2">Identificação</h6>
+                        <i class="bi bi-file-person-fill"></i>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>ID:</strong> <span id="idUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Nome:</strong> <span id="nomeUsuario"></span></p>
+                    </div>
+                </div>
+                <!-- Seção de Contato -->
+                <div class="row mb-3">
+                    <div class="d-flex">
+                        <h6 class="me-2">Contato</h6>
+                        <i class="bi bi-telephone-fill"></i>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Username:</strong> <span id="usernameUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Data de Nascimento:</strong> <span id="nascUsuario"></span></p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Email:</strong> <span id="emailUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Contato:</strong> <span id="contatoUsuario"></span></p>
+                    </div>
+                </div>
+                <!-- Seção de Informações Adicionais -->
+                <div class="row mb-3">
+                    <div class="d-flex">
+                        <h6 class="me-2">INFO. ADICIONAIS</h6>
+                        <i class="bi bi-info-square-fill"></i>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Sobre:</strong> <span id="sobreUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Formação:</strong> <span id="formacaoCompetenciaUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Data da Formação:</strong> <span id="dataFormacaoCompetenciaUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Data Criação Perfil:</strong> <span id="created_at"></span></p>
+                    </div>
+                </div>
+                <!-- Seção de Localização -->
+                <div class="row mb-3">
+                    <div class="d-flex">
+                        <h6 class="me-2">LOCALIZAÇÃO</h6>
+                        <i class="bi bi-geo-alt-fill"></i>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Cidade:</strong> <span id="cidadeUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Estado:</strong> <span id="estadoUsuario"></span></p>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-6">
+                        <p><strong>Logradouro:</strong> <span id="logradouroUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>CEP:</strong> <span id="cepUsuario"></span></p>
+                    </div>
+                    <div class="col-md-6">
+                        <p><strong>Número:</strong> <span id="numeroLograUsuario"></span></p>
+                    </div>
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
             </div>
         </div>
     </div>
 </div>
+
 
 
 <script>
