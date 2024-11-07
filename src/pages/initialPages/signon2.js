@@ -33,12 +33,12 @@ export default function SignON2({ navigation }) {
 
   const [isModalVisible, setModalVisible] = useState(false);
   
-  const { apiNgrokArea, apiEmuladorArea } = ApisUrls;
+  const { apiNgrokArea } = ApisUrls;
 
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const request = await fetch(apiEmuladorArea);
+        const request = await fetch(apiNgrokArea);
         const response = await request.json();
         setAreaVagas(response);
       } catch (error) {

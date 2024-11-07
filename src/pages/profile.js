@@ -20,13 +20,13 @@ export default function Profile({ navigation }) {
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
 
-  const { apiEmuladorUsuario } = ApisUrls;
+  const { apiNgrokUsuario } = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
       console.log(userId);
       async function fetchUserData() {
-        const apiUrl = `${apiEmuladorUsuario}${userId}`;
+        const apiUrl = `${apiNgrokUsuario}${userId}`;
         console.log("Fetching URL:", apiUrl);
 
         try {
@@ -66,7 +66,7 @@ export default function Profile({ navigation }) {
   const skills = dadosUser?.formacaoCompetenciaUsuario || [];
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{backgroundColor: theme.backgroundColor}}>
       <View
         style={[
           styles.containerTop,
@@ -83,7 +83,7 @@ export default function Profile({ navigation }) {
         </TouchableOpacity>
       </View>
       <ScrollView contentContainerStyle={[styles.scrollViewContent, {backgroundColor: theme.backgroundColor}]}>
-        <View style={{ width: "100%" }}>
+        <View style={{ width: "100%", backgroundColor: theme.backgroundColor }}>
           <View style={styles.profileBackgroundImageCont}>
             <Image
               source={

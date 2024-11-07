@@ -18,7 +18,7 @@ import Feather from "@expo/vector-icons/Feather";
 
 export default function EmpresaProfile({ navigation }) {
   const { theme } = useTheme({ EmpresaProfile });
-  const { userId, empresaId } = useContext(Context);
+  const { userId, empresaId, setVagaID } = useContext(Context);
   const [dadosEmpresa, setDadosEmpresa] = useState([]);
   const [dadosVaga, setDadosVaga] = useState([]);
 

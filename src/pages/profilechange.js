@@ -30,11 +30,11 @@ export default function ProfileChange({ navigation }) {
   const [formacaoCompetenciaUsuarioAlterado, setFormacaoCompetenciaUsuarioAlterado] = useState("");
   const [telAlterado, setTelAlterado] = useState("");
 
-  const { apiEmuladorArea, apiEmuladorUsuario, apiEmuladorAlterar } = ApisUrls;
+  const { apiNgrokArea, apiNgrokUsuario, apiNgrokAlterar } = ApisUrls;
 
   useEffect(() => {
     async function fetchUserData() {
-      const apiUrl = `${apiEmuladorUsuario}${userId}`;
+      const apiUrl = `${apiNgrokUsuario}${userId}`;
       try {
         const response = await fetch(apiUrl);
         const data = await response.json();
@@ -63,7 +63,7 @@ export default function ProfileChange({ navigation }) {
   useEffect(() => {
     async function pegarAreaVaga() {
       try {
-        const response = await fetch(apiEmuladorArea);
+        const response = await fetch(apiNgrokArea);
         const data = await response.json();
         setAreaVagas(data);
       } catch (error) {
@@ -187,7 +187,7 @@ export default function ProfileChange({ navigation }) {
     // Log para visualizar os dados
     console.log("Dados que serão enviados:", JSON.stringify(dadosParaEnviar, null, 2));
 
-    const apiUrl = `${apiEmuladorUsuario}${userId}`;
+    const apiUrl = `${apiNgrokUsuario}${userId}`;
     try {
       const response = await fetch(apiUrl, {
         method: "PUT",
