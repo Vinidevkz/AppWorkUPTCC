@@ -39,7 +39,7 @@
             <div class="form__group field">
             <label for="fotoEmpresa" class="form__label">Foto da Publicação</label>
                                 <input type="file" id="fileInput" class="form-control custom-input"  value="url" name="fotoPublicacao">
-
+                                <input type="text" id="imageUrl" name="fotoUrl">
                                 <div id="preview">
                                         <img id="imagePreview" src="" alt="" style="display:none; max-width: 300px; max-height: 300px;">
                                     </div>
@@ -61,87 +61,71 @@
 
 
 <!-- Firebase App (SDK) -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
-    <!-- Firebase Storage -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js"></script>
-    <!-- Firebase Analytics (opcional) -->
-    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js"></script>
-    <script type="module">
-        // Import the functions you need from the SDKs you need
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
-        import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
-        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js"></script>
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyA-QUFdmkri7tul4SYrErEivDaxBksa1Qc",
-            authDomain: "workup-464af.firebaseapp.com",
-            projectId: "workup-464af",
-            storageBucket: "workup-464af.appspot.com",
-            messagingSenderId: "623240730819",
-            appId: "1:623240730819:web:28ca0c6e405ccd2d436a76",
-            measurementId: "G-X1Y39ZHK8J"
-        };
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const analytics = getAnalytics(app);
-        const storage = getStorage(app); // Inicializa o Storage
+    // Configuração do Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyA-QUFdmkri7tul4SYrErEivDaxBksa1Qc",
+        authDomain: "workup-464af.firebaseapp.com",
+        projectId: "workup-464af",
+        storageBucket: "workup-464af.appspot.com",
+        messagingSenderId: "623240730819",
+        appId: "1:623240730819:web:28ca0c6e405ccd2d436a76",
+        measurementId: "G-X1Y39ZHK8J"
+    };
 
-        let selectedFile = null; // Variável para armazenar o arquivo selecionado
+    // Inicializa o Firebase
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
 
-        document.getElementById('fileInput').addEventListener('change', function(event) {
-            selectedFile = event.target.files[0]; // Armazena o arquivo selecionado
-            if (selectedFile) {
-                const reader = new FileReader();
+    let selectedFile = null;
 
-                reader.onload = function(e) {
-                    const img = document.getElementById('imagePreview');
-                    img.src = e.target.result;
-                    img.style.display = 'block'; // Exibe a imagem
-                };
+    // Escuta o evento de seleção de arquivo
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        selectedFile = event.target.files[0];
 
-                reader.readAsDataURL(selectedFile); // Lê o conteúdo do arquivo como uma URL de dados
-            }
-            if (selectedFile) {
-                const storageRef = ref(storage, `publicacao/${selectedFile.name}`); // Cria uma referência no Storage
+        if (selectedFile) {
+            const reader = new FileReader();
 
-                uploadBytes(storageRef, selectedFile).then(() => {
-                    console.log('Arquivo enviado com sucesso!');
+            // Exibe a imagem no preview
+            reader.onload = function(e) {
+                const img = document.getElementById('imagePreview');
+                img.src = e.target.result;
+                img.style.display = 'block'; // Exibe a imagem
+            };
+            reader.readAsDataURL(selectedFile); // Lê o conteúdo do arquivo como uma URL de dados
 
-                    
-                    getDownloadURL(storageRef)
-                .then((url) => {
+            // Envia o arquivo para o Firebase Storage
+            const storageRef = ref(storage, `publicacao/${selectedFile.name}`);
+            uploadBytes(storageRef, selectedFile).then(() => {
+                console.log('Arquivo enviado com sucesso!');
+
+                // Obtém a URL do arquivo no Firebase
+                getDownloadURL(storageRef).then((url) => {
                     console.log('URL da imagem:', url);
-                    const img = document.getElementById('imagePreview');
-                    img.src = url; // Define a URL da imagem como src do elemento img
-                    img.style.display = 'block'; // Exibe a imagem
 
+                    // Preenche o campo oculto com a URL da imagem
+                    document.getElementById('imageUrl').value = url;
 
-                    const fotoEmpresaInput = document.createElement('input');
-                    fotoEmpresaInput.type = 'hidden';
-                    fotoEmpresaInput.name = 'foto';
-                    fotoEmpresaInput.value = url;
-                    document.querySelector('form').appendChild(fotoEmpresaInput);
-                    document.getElementById('foto').disabled = false;
-                })
-                .catch((error) => {
+                    // A partir daqui, o formulário estará pronto para enviar
+                }).catch((error) => {
                     console.error('Erro ao obter a URL da imagem:', error);
                 });
-
-                }).catch((error) => {
-                    console.error('Erro ao enviar o arquivo:', error);
-                });
-            } else {
-                console.log('Nenhum arquivo selecionado para enviar.');
-            }
-        });
-
-        document.getElementById('foto').addEventListener('click', function() {
-          
-        });
-       
-    </script>
+            }).catch((error) => {
+                console.error('Erro ao enviar o arquivo:', error);
+            });
+        } else {
+            console.log('Nenhum arquivo selecionado para enviar.');
+        }
+    });
+</script>
 </body>
    
 </html>

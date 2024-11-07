@@ -51,7 +51,7 @@ class PostController extends Controller
             // Validação
             $request->validate([
                 'detalhePublicacao' => 'required|max:120',
-                'fotoPublicacao' => 'required'
+             
             ]);
 
 
@@ -60,7 +60,7 @@ class PostController extends Controller
     $post->detalhePublicacao = $request->detalhePublicacao;
     $post->idEmpresa = $request->idEmpresa;
     $post->idVaga = $request->idVaga;
-    $post->fotoPublicacao = $request->fotoPublicacap;
+    $post->fotoPublicacao = $request->fotoUrl;
 
     $post->save();
 

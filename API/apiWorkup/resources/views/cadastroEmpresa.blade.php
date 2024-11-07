@@ -143,12 +143,31 @@
                     </div>
 
                     <div class="col col-12">
-                        <label for="fotoEmpresa">Foto de perfil:</label>
-                        <input type="file" id="fileInput" class="form-control custom-input" name="fotoEmpresa" id="fotoEmpresa" placeholder="Foto da Empresa" value="url">
+                    <label for="fotoEmpresa" class="form__label">Foto da Empresa de perfil</label>
+                                <input type="file" id="fileInput" class="form-control custom-input"  value="url" name="fotoPerfil">
+                                <input type="text" id="imageUrl" name="fotoUrl">
+                                <div id="preview">
+                                        <img id="imagePreview" src="" alt="" style="display:none; max-width: 300px; max-height: 300px;">
+                                    </div>
+                        @error('fotoEmpresa')
+                        <div class="error-message">{{$message}}</div>
+                        @enderror  
+                    </div>
+                    <div>   
+                    <div class="col col-12">
+                    <label for="fotoEmpresa" class="form__label">Foto da Empresa de perfil</label>
+                                <input type="file" id="fileInput" class="form-control custom-input"  value="url" name="fotoPerfil">
+                                <input type="text" id="imageUrl" name="fotoUrl">
+                                <div id="preview">
+                                        <img id="imagePreview" src="" alt="" style="display:none; max-width: 300px; max-height: 300px;">
+                                    </div>
                         @error('fotoEmpresa')
                         <div class="error-message">{{$message}}</div>
                         @enderror
-                    </div>
+
+                        
+                    </div></div>
+                    
 
                     <div class="col col-12">
                         <label for="contatoempresa">Contato:</label>
@@ -287,6 +306,110 @@
 
     <script src="{{url('assets/js/script.js')}}"></script>
     <script src="{{url('assets/js/buscacep.js')}}"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js"></script>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+    import { getStorage, ref, uploadBytes, getDownloadURL } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-storage.js";
+    import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-analytics.js";
+
+    // Configuração do Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyA-QUFdmkri7tul4SYrErEivDaxBksa1Qc",
+        authDomain: "workup-464af.firebaseapp.com",
+        projectId: "workup-464af",
+        storageBucket: "workup-464af.appspot.com",
+        messagingSenderId: "623240730819",
+        appId: "1:623240730819:web:28ca0c6e405ccd2d436a76",
+        measurementId: "G-X1Y39ZHK8J"
+    };
+
+    // Inicializa o Firebase
+    const app = initializeApp(firebaseConfig);
+    const storage = getStorage(app);
+
+    let selectedFile = null;
+
+    // Escuta o evento de seleção de arquivo
+    document.getElementById('fileInput').addEventListener('change', function(event) {
+        selectedFile = event.target.files[0];
+
+        if (selectedFile) {
+            const reader = new FileReader();
+
+            // Exibe a imagem no preview
+            reader.onload = function(e) {
+                const img = document.getElementById('imagePreview');
+                img.src = e.target.result;
+                img.style.display = 'block'; // Exibe a imagem
+            };
+            reader.readAsDataURL(selectedFile); // Lê o conteúdo do arquivo como uma URL de dados
+
+            // Envia o arquivo para o Firebase Storage
+            const storageRef = ref(storage, `empresa_foto/${selectedFile.name}`);
+            uploadBytes(storageRef, selectedFile).then(() => {
+                console.log('Arquivo enviado com sucesso!');
+
+                // Obtém a URL do arquivo no Firebase
+                getDownloadURL(storageRef).then((url) => {
+                    console.log('URL da imagem:', url);
+
+                    // Preenche o campo oculto com a URL da imagem
+                    document.getElementById('imageUrl').value = url;
+
+                    // A partir daqui, o formulário estará pronto para enviar
+                }).catch((error) => {
+                    console.error('Erro ao obter a URL da imagem:', error);
+                });
+            }).catch((error) => {
+                console.error('Erro ao enviar o arquivo:', error);
+            });
+        } else {
+            console.log('Nenhum arquivo selecionado para enviar.');
+        }
+    });
+
+    document.getElementById('fileInputBanner').addEventListener('change', function(event) {
+        selectedFile = event.target.files[0];
+
+        if (selectedFile) {
+            const reader = new FileReader();
+
+            // Exibe a imagem no preview
+            reader.onload = function(e) {
+                const img = document.getElementById('imagePreview2');
+                img.src = e.target.result;
+                img.style.display = 'block'; // Exibe a imagem
+            };
+            reader.readAsDataURL(selectedFile); // Lê o conteúdo do arquivo como uma URL de dados
+
+            // Envia o arquivo para o Firebase Storage
+            const storageRef = ref(storage, `empresa_banner/${selectedFile.name}`);
+            uploadBytes(storageRef, selectedFile).then(() => {
+                console.log('Arquivo enviado com sucesso!');
+
+                // Obtém a URL do arquivo no Firebase
+                getDownloadURL(storageRef).then((urlBanner) => {
+                    console.log('URL da imagem:', urlBanner);
+
+                    // Preenche o campo oculto com a URL da imagem
+                    document.getElementById('imageUrl2').value = urlBanner;
+
+                    // A partir daqui, o formulário estará pronto para enviar
+                }).catch((error) => {
+                    console.error('Erro ao obter a URL da imagem:', error);
+                });
+            }).catch((error) => {
+                console.error('Erro ao enviar o arquivo:', error);
+            });
+        } else {
+            console.log('Nenhum arquivo selecionado para enviar.');
+        }
+    });
+</script>
 
 
 </body>
