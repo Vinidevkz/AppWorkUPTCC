@@ -20,13 +20,13 @@ export default function Profile({ navigation }) {
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
 
-  const { apiNgrokUsuario } = ApisUrls;
+  const { apiEmuladorUsuario } = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
       console.log(userId);
       async function fetchUserData() {
-        const apiUrl = `${apiNgrokUsuario}${userId}`;
+        const apiUrl = `${apiEmuladorUsuario}${userId}`;
         console.log("Fetching URL:", apiUrl);
 
         try {

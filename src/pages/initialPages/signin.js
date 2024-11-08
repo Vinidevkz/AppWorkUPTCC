@@ -10,7 +10,7 @@ import styles from "../initialPages/styles/signin.js";
 import { Context } from "./context/provider.js";
 import ApisUrls from "../../ApisUrls/apisurls.js";
 
-const { apiNgrok } = ApisUrls;
+const { apiEmulador } = ApisUrls;
 
 export default function SignIN({ navigation }) {
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ export default function SignIN({ navigation }) {
     }
 
     try {
-      const response = await fetch(apiNgrok, {
+      const response = await fetch(apiEmulador, {
         method: "POST",
         headers: {
           Accept: "application/json",
