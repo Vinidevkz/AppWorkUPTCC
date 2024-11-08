@@ -9,6 +9,31 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="{{ url('assets/css/navbarAdmin.css') }}">
   <link rel="stylesheet" href="{{ url('assets/css/admin.css') }}">
+  <style>
+    /* Esconde a parte padrão do input de arquivo */
+input[type="file"] {
+  display: none;
+}
+
+/* Estiliza a etiqueta (label) associada ao input */
+.custom-file-label {
+  display: inline-block;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #e9ecef;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.custom-file-label::after {
+  content: 'Escolher arquivo...';
+}
+
+  </style>
   
   <title>Administrador | Usuários</title>
 </head>
@@ -108,7 +133,105 @@
     </div>
   </div>
 </div>
+     <!-- Modal -->
+     <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="staticBackdropLabel">Criar administrador</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+      <form method="POST" action="/formAdmin" enctype="multipart/form-data" class="">
+@csrf
 
+  <div class="row mb-3">
+
+  @error('nomeAdmin')
+                                <div class="error-message">{{ $message }}</div>
+                                @enderror
+    <div class="form-group col-md-4 form__group field">
+      <label for="inputEmail4" class="form_label">Nome do administrador</label>
+      <input type="text" class="form-control custom-input" id="inputEmail4" placeholder="Nome do ADM" name="nomeAdmin" value="{{ old('nomeAdmin') }}" required>
+    </div>
+
+    @error('usernameAdmin')
+                                <div class="error-message">{{ $message }}</div>
+                                @enderror
+    <div class="form-group col-md-4 form__group field ">
+    <label for="inputAddress" class="form_label">Nome de usuário</label>
+    <input type="text" class="form-control custom-input" id="inputAddress" placeholder="nome.sobrenome" value="{{ old('usernameAdmin') }}"  name="usernameAdmin" required>
+  </div>
+
+
+  @error('senhaAdmin')
+                                <div class="error-message">{{ $message }}</div>
+                                @enderror
+  <div class="form-group col-md-4 form__group field">
+      <label for="inputPassword4" class="form_label">Senha</label>
+      <input type="password" class="form-control  custom-input" id="inputPassword4" placeholder="Senha" value="{{ old('senhaAdmin') }}"  name="senhaAdmin" required>
+    </div>
+
+  </div>
+
+
+ <div class="row mb-3">
+
+ @error('emailAdmin')
+                                <div class="error-message">{{ $message }}</div>
+                                @enderror
+  <div class="form-group col-md-5 form__group field">
+    <label for="inputAddress2" class="form__label">E-mail</label>
+    <input type="email" class="form-control custom-input" id="inputAddress2" name="emailAdmin" placeholder="email" value="{{ old('emailAdmin') }}">
+  </div>
+
+ 
+  
+  @error('contatoAdmin')
+                                <div class="error-message">{{ $message }}</div>
+                                @enderror
+    <div class="form-group col-md-3 form__group field">
+      <label for="inputCity" class="form__label" class="">Contato</label>
+      <input type="number" class="form-control custom-input custom-input" id="inputPhone" name="contatoAdmin" value="{{ old('contatoAdmin') }}" placeholder="(00) 0000-0000" required>
+
+  </div>
+
+<div class="form-group col-md-4 mb-3">
+  <label for="fotoAdmin">Imagem do administrador</label>
+  <input type="file" name="fotoAdmin" id="fotoAdmin" class="form-control custom-input" accept="image/*" />
+  <label for="fotoAdmin" class="custom-file-label"></label>
+</div>
+
+    </div>
+
+    <div class="row d-flexmb-3">
+        <div class="col-1 p-0">
+
+
+
+
+  </div>
+
+  <div class="col-2 d-flex align-items-center">
+
+ 
+                       
+    </div>
+    <div class="modal-footer d-flex justify-content-between">
+    <p class="p-0 m-0 text-danger">*ATENÇÃO: apenas gestores com perfil MASTER podem ter acesso a essa tela.</p>
+
+        <button class="btn btn-outline-secondary btn-block col-2" id="foto">
+        <i class="bi bi-card-checklist">&nbsp;Registrar</i>
+
+                        </button>
+      </div>
+</form>
+
+      </div>
+
+    </div>
+  </div>
+</div> 
 <script>
   const sidebarlinks = document.querySelectorAll('.h6');
 

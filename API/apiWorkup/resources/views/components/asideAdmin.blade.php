@@ -118,16 +118,15 @@
  
      <ul class="dropdown-menu card sub-menu-dropdown">
       <li class="dropdown-item">
-      <a href="/admin/cadastrar" class="p-0 h6">
+      <a href="#" class="p-0 h6" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                 <i class="bi bi-people p-0"></i>
                                 Criar Admin.</a>
       </li>
 
-      <li class="dropdown-item">
-      <a href="/admin/cadastrar" class="p-0 h6">
-                                <i class="bi bi-people p-0"></i>
-                                listagem</a>
-      </li>
+     
+
+
+
      </ul> 
  </div>
 
@@ -153,3 +152,5 @@
         </div>
                 
             </aside>
+
+            
