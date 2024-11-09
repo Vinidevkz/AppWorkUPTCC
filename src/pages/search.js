@@ -24,8 +24,8 @@ export default function Search({ navigation }) {
   const { vagaID, setVagaID, empresaId, setEmpresaId } = useContext(Context);
 
   const { theme } = useTheme({ Search });
-  const [data, setData] = useState([]); // Para vagas
-  const [companies, setCompanies] = useState([]); // Para empresas
+  const [data, setData] = useState([]);
+  const [companies, setCompanies] = useState([]);
   const [searchText, setSearchText] = useState("");
   const [loading, setLoading] = useState(false);
   const [fontsLoaded, setFontsLoaded] = useState(false);
@@ -141,7 +141,6 @@ export default function Search({ navigation }) {
         </View>
       </View>
       <View style={{ height: "100%", backgroundColor: theme.backgroundColor }}>
-
 
       {searchText === '' && ''}
 

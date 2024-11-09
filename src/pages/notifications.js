@@ -11,50 +11,49 @@ export default function Notifications() {
   const { userId } = useContext(Context);
   const [notifications, setNotifications] = useState([]);
 
-  const { apiEmuladorNotificacoes } = ApisUrls;
+  const { apiNgrokNotificacoes } = ApisUrls;
 
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
-        const response = await axios.get(`${apiEmuladorNotificacoes}/${userId}`);
-        
-        // Verificar se a resposta contém notificações e garantir que novas notificações não sejam duplicadas
-        setNotifications(prevNotifications => {
-          const newNotifications = response.data;
-
-          // Garantir que não adicionaremos notificações duplicadas
+        const response = await axios.get(`${apiNgrokNotificacoes}/${userId}`);
+        const newNotifications = response.data;
+  
+        setNotifications((prevNotifications) => {
+          // Filtra notificações duplicadas
           const updatedNotifications = newNotifications.filter(
-            newItem => !prevNotifications.some(existingItem => existingItem.idNotificacao === newItem.idNotificacao)
+            (newItem) => !prevNotifications.some(
+              (existingItem) => existingItem.idVagaUsuario === newItem.idVagaUsuario
+            )
           );
-
-          // Se houverem novas notificações, concatene-as com o estado anterior
+  
+          // Atualiza o estado, concatenando notificações novas no início da lista
           if (updatedNotifications.length > 0) {
-            return [...prevNotifications, ...updatedNotifications];
+            return [...updatedNotifications, ...prevNotifications]; // Concatenando no início
           }
-
-          return prevNotifications; // Caso não haja novas notificações, apenas retorne o estado anterior
+          
+          return prevNotifications; // Caso não haja notificações novas, apenas retorna o estado anterior
         });
-
-        console.log('Notificações:', response.data);
-        console.log(`${apiEmuladorNotificacoes}/${userId}`);
+  
       } catch (erro) {
         console.log(erro);
       }
     };
-
-    fetchNotifications(); // Primeira requisição imediata
-
+  
+    fetchNotifications(); // Requisição imediata
+  
     const intervaloId = setInterval(fetchNotifications, 2000); // Requisições a cada 2 segundos
-
-    return () => clearInterval(intervaloId); // Limpa o intervalo ao desmontar o componente
-  }, [userId, apiEmuladorNotificacoes]);
+  
+    return () => clearInterval(intervaloId); // Limpa o intervalo quando o componente desmonta
+  }, [userId, apiNgrokNotificacoes]);
+  
 
   // Função de renderização de cada item
   const renderItem = ({ item }) => (
     <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 10, borderRadius: 5, marginVertical: 10 }}>
-      <Text style={[styles.DMSansBold, { color: theme.textColor, fontSize: 18 }]}>{item.empresa?.nomeEmpresa}</Text>
+      <Text style={[styles.DMSansBold, { color: theme.textColor, fontSize: 18 }]}>Titulo</Text>
       <Text style={[styles.DMSansRegular, { color: theme.textColor, fontSize: 13 }]}>
-        A empresa aprovou sua candidatura na vaga: {item.vagas?.nomeVaga}.
+        A empresa aprovou sua candidatura na vaga: {item.vaga?.nomeVaga}
       </Text>
     </View>
   );
@@ -71,12 +70,15 @@ export default function Notifications() {
             Nenhuma notificação
           </Text>
         ) : (
-          <FlatList
-            data={notifications} // Dados a serem exibidos
-            keyExtractor={(item) => item.idNotificacao.toString()} // Chave única para cada item
-            renderItem={renderItem} // Função para renderizar cada item
-            contentContainerStyle={{ paddingHorizontal: 20 }} // Estilo do conteúdo da lista
-          />
+<FlatList
+  data={notifications}
+  keyExtractor={(item) => item.idVagaUsuario.toString()}  // Certifique-se de usar uma chave única aqui
+  renderItem={renderItem}
+  contentContainerStyle={{ paddingHorizontal: 20 }}
+  showsVerticalScrollIndicator={false}
+  extraData={notifications}
+/>
+
         )}
       </View>
     </SafeAreaView>
