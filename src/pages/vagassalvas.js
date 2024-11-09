@@ -51,15 +51,9 @@ export default function VagasSalvas({ navigation }) {
   }, [userId]); // Dependência em userId para recarregar se o ID do usuário mudar
 
   return (
-    <SafeAreaView style={styles.SafeAreaView}>
+    <SafeAreaView style={[styles.SafeAreaView, {backgroundColor: theme.backgroundColor}]}>
       <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
-      <ScrollView
-        style={{
-          flex: 1,
-          gap: 50,
-          backgroundColor: theme.backgroundColor,
-        }}
-      >
+
         <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
           <Text style={[styles.DMSansBold, styles.title, [{ color: theme.textColor }]]}>Vagas Salvas:</Text>
         </View>
@@ -69,7 +63,7 @@ export default function VagasSalvas({ navigation }) {
           renderItem={({ item }) => (
             <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 10, margin: 10, borderRadius: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
               <View>
-                <Text style={[styles.title, styles.DMSansRegular, { color: theme.textColor }]}>{item.nomeVaga}</Text>
+                <Text style={[styles.title, styles.DMSansBold, { color: theme.textColor }]}>{item.nomeVaga}</Text>
                 <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Cidade: {item.cidadeVaga}</Text>
                 <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Prazo: {item.prazoVaga}</Text>
                 <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Salário: R$ {item.salarioVaga}</Text>
@@ -100,7 +94,7 @@ export default function VagasSalvas({ navigation }) {
             </View>
           }
         />
-      </ScrollView>
+
     </SafeAreaView>
   );
 }

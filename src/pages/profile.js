@@ -242,6 +242,26 @@ export default function Profile({ navigation }) {
                     {dadosUser?.contatoUsuario || "Loading..."}
                   </Text>
                 </View>
+                <View style={styles.linkLine}>
+                  <Text
+                    style={[
+                      styles.DMSansBold,
+                      styles.linkTitle,
+                      { color: theme.textColor },
+                    ]}
+                  >
+                    Email:{" "}
+                  </Text>
+                  <Text
+                    style={[
+                      styles.DMSansRegular,
+                      styles.linkText,
+                      { color: theme.textColor },
+                    ]}
+                  >
+                    {dadosUser?.emailContato || "Loading..."}
+                  </Text>
+                </View>
               </View>
             </View>
             <View

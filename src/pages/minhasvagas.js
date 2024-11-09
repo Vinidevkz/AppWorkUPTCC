@@ -64,7 +64,8 @@ export default function MinhasVagas({ navigation }) {
       style={{
         backgroundColor: theme.backgroundColorNavBar,
         marginVertical: 10,
-        padding: 20,
+        paddingHorizontal: 10,
+        paddingVertical: 15,
         borderRadius: 15,
         elevation: 3,
         flexDirection: "row",
@@ -92,6 +93,7 @@ export default function MinhasVagas({ navigation }) {
           {item.vaga.cidadeVaga} • {item.vaga.estadoVaga}
         </Text>
         <Text style={{ color: theme.textColor }}>{item.vaga.nomeEmpresa}</Text>
+        <Text style={{ color: item.status?.tipoStatusVaga === "Chamado" ? '#20dd77' : '#ff5447' }}>{item.status?.tipoStatusVaga}</Text>
       </View>
 
       <TouchableOpacity

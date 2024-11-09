@@ -68,8 +68,9 @@ export default function Home({ navigation }) {
     buscaOutrasVaga();
   }, []);
 
-  const salvarVaga = async (idVaga) => {
+  const salvarVaga = async (vagaID) => {
     const idUsuario = userId;
+    const idVaga = vagaID;
     const url = apiNgrokSalvarVaga;
 
     const body = {
@@ -159,12 +160,15 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     const verificarTodasVagas = async () => {
-      for (let vaga of data) {
-        await verificarSalvamentoVaga(vaga.idVaga); // Verifica o status de cada vaga
+      if (data) {
+        for (let vaga of data) {
+          await verificarSalvamentoVaga(vaga.idVaga); // Verifica o status de cada vaga
+        }
       }
     };
     verificarTodasVagas();
   }, [data]);
+  
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -187,12 +191,16 @@ export default function Home({ navigation }) {
     );
   }
 
-  const toggleSaveIcon = (id) => {
-    setSavedIcons((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
+  const toggleSaveIcon = async (id) => {
+    if (savedIcons[id]) {
+      await removerVagaSalva(id);
+      setSavedIcons((prev) => ({ ...prev, [id]: false }));
+    } else {
+      await salvarVaga(id);
+      setSavedIcons((prev) => ({ ...prev, [id]: true }));
+    }
   };
+  
 
   return (
     <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
@@ -208,7 +216,10 @@ export default function Home({ navigation }) {
 
       <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.titleCont2}>
-          <Text style={[styles.title, styles.row, styles.DMSansBold, { color: theme.textColor }]}>Vagas para você:</Text>
+          <View>
+           <Text style={[styles.title, styles.row, styles.DMSansBold, { color: theme.textColor }]}>Vagas para você:</Text>
+           <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>Filtando de sua preferência: {areaInt}</Text>
+          </View>
           <TouchableOpacity onPress={() => {buscaVaga(); buscaOutrasVaga()}}>
             <FontAwesome name="refresh" size={30} color="#20dd77" />
           </TouchableOpacity>
@@ -281,7 +292,7 @@ export default function Home({ navigation }) {
 
         <View style={styles.titleCont}>
           <Text style={[styles.title, styles.DMSansBold, { color: theme.textColor }]}>Outras Vagas:</Text>
-          <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>Veja vagas relacionadas ao que você busca</Text>
+          <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>Veja as outras vagas do app.</Text>
         </View>
 
         {loading ? (
