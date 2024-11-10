@@ -23,7 +23,7 @@
             <div class="col-12 col-md-6 d-flex align-items-center justify-content-center">
                 <div class="txt-card-wrap text-center text-md-start p-3">
                     <p>Seja bem-vindo(a) {{ $empresa->nomeEmpresa }}!</p>
-                    <img src="{{ $empresa->fotoEmpresa }}" alt="Foto da Empresa" style="max-width: 200px; max-height: 200px;">
+                    <img src="{{ $empresa->fotoEmpresa }}" style="max-width: 200px; max-height: 200px;">
                     
                     
                     <h3>

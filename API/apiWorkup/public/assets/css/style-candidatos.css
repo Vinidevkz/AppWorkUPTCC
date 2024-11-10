@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
 
 *, *::before, *::after {
     margin: 0;
@@ -18,20 +16,55 @@ body, .candidatos {
     flex-direction: column;
 }
 
+.nav-footer {
+    height: 80px;
+    background-color: #fff;
+    width: 100%;
+    margin: 4rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.nav-footer button {
+    width: 100px;
+    height: 35px;
+    background-color: transparent;
+    border: 2px solid #505050;
+    color: #242424;
+    border-radius: 4rem;
+}
+
+.nav-footer i {
+    padding-right: 0.5rem;
+}
+
+.nav-footer ul {
+    display: flex;
+    flex-direction: row;
+    list-style: none;
+    gap: 2rem;
+    color: #1b1b1b;
+    align-items: center;
+    margin-bottom: 0;
+    justify-self: center;
+}
+
+.nav-footer button, .nav-footer ul, .nav-footer button i {
+    font-size: 0.8rem;
+    color: #505050;
+}
+
+/*-------------------------------------------------------------*/
+
 .candidatos {
-    margin-top: 8rem;
-    width: 90vw;
+    min-height: 100vh;
+    width: 100%;
     overflow-y: scroll;
     overflow: auto;
     -ms-overflow-style: none; /* IE 11 */
     scrollbar-width: none; /* Firefox 64 */
-}
-
-.candidatos h4 {
-    font-family: "Poppins", sans-serif;
-    font-weight: 300;
-    font-size: 2rem;
-    margin-bottom: 3rem;
 }
 
 .candidatos::-webkit-scrollbar {
@@ -39,8 +72,8 @@ body, .candidatos {
 }
 
 .box-candidatos {
-    background-color: #f4f4f4;
-    width: 55rem;
+    background-color: transparent;
+    width: 90%;
     height: auto;
     display: flex !important;
     flex-direction: column !important;
@@ -51,16 +84,17 @@ body, .candidatos {
 .card-candidato {
     background-color: #fff;
     width: 100%;
-    height: 6rem;
+    height: 5.5rem;
     padding: 0 2rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    box-shadow: 0px 5px 20px -10px rgba(0,0,0,0.25);
+    transition: all 0.1s ease;
+    margin: 0.5rem 0;
 }
 
 .card-candidato:hover {
-    border: 2px solid #20dd77;
+    border: 1px solid #20dd77;
 }
 
 .dados-candidato {
@@ -70,6 +104,16 @@ body, .candidatos {
     justify-content: left;
     align-items: center;
     gap: 1rem;
+}
+
+.dados-candidato h5 {
+    font-size: 1.1rem;
+    color: #787878;
+}
+
+.dados-candidato p {
+    font-size: 0.8rem;
+    color: #868686;
 }
 
 .img-candidato {
@@ -91,9 +135,10 @@ body, .candidatos {
 
 .perfil {
     background-color: #fff;
-    border: 1px solid #20dd77;
+    border: 2px solid #20dd77;
     color: #20dd77;
     width: 8rem;
+    font-weight: 500;
 }
 
 .dados-candidato h5, .dados-candidato p {
@@ -112,12 +157,18 @@ body, .candidatos {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    width: 325px;
+    padding: 0 2rem;
     height: 100%;
+    gap: 1rem;
 }
 
-.opcoes-candidato i {
-    font-size: 1.8rem;
+.denunciar {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+    color: #727272;
+    background-color: #ededed;
+    border-radius: 3rem;
 }
 
 .botoes-candidato {
@@ -130,15 +181,18 @@ body, .candidatos {
     align-items: center;
 }
 
-.opcoes-candidato button, .perfil {
-    height: 2rem;
-    display: grid;
-    place-items: center;
-    font-size: 0.8rem;
+.aprovar, .negar, .perfil {
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    border-radius: 5rem;
+    width: 10rem;
+    gap: 0.3rem;
 }
 
 .opcoes-candidato button {
-    width: 8rem;
     border-style: none;
 }
 
@@ -147,12 +201,21 @@ body, .candidatos {
 }
 
 .aprovar {
-    background-color: #00bf63;
+    background-color: #20dd77;
+    transition: all 0.3s ease;
+}
+
+.aprovar:hover {
+    background-color: #1cc56b;
 }
 
 .negar {
-    background-color: #ff3b3b;
+    background-color: #ff6565;
+    transition: all 0.3s ease;
+}
 
+.negar:hover {
+    background-color: #f15555;
 }
 
 /*----------------------------------*/

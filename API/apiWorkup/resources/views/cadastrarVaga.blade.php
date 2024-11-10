@@ -102,6 +102,7 @@
                                         <input type="text" name="salarioVaga" value="{{ old('salarioVaga') }}">
                                     </div>
                                     <div class="col col-7">
+                                        */
                                         @error('prazoVaga')
                                             <div style="background-color: #fff;" class="error-message">{{ $message }}</div>
                                         @enderror
@@ -124,7 +125,7 @@
                                                         <option value="{{ $area->idArea }}" {{ old('idArea') == $area->idArea ? 'selected' : '' }}>
                                                             {{ $area->nomeArea }}
                                                             <!-- Supondo que há um campo nomeModalidade na tabela -->
-                                                        </option>
+                                                        </option>                                         
                                                     @endforeach
                                                     <!-- Esta parte precisa ficar -->
                                                 </select>
