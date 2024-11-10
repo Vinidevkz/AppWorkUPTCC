@@ -26,6 +26,7 @@ export const Provider = ({ children }) => {
   const [vagaID, setVagaID] = useState("");
 
   const [empresaId, setEmpresaId] = useState("");
+  const [nomeEmpresa, setNomeEmpresa] = useState("")
 
   return (
     <Context.Provider
@@ -71,7 +72,10 @@ export const Provider = ({ children }) => {
 
         //Ids Empresa
         empresaId,
-        setEmpresaId
+        setEmpresaId,
+        //Nome empresa
+        nomeEmpresa,
+        setNomeEmpresa 
       }}
     >
       {children}

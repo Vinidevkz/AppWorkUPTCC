@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-import { View, Text, SafeAreaView, FlatList } from "react-native";
+import React, { useState, useEffect, useContext, useRef } from "react";
+import { View, Text, SafeAreaView, FlatList, Platform } from "react-native";
+import * as Notifications from 'expo-notifications';
+import Constants from 'expo-constants';
 import { Context } from "../pages/initialPages/context/provider";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import axios from "axios";
@@ -7,12 +9,39 @@ import ApisUrls from "../ApisUrls/apisurls.js";
 import styles from "../styles/notifications.js";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
-export default function Notifications() {
-  const { theme } = useTheme({ Notifications });
-  const { userId } = useContext(Context);
-  const [notifications, setNotifications] = useState([]);
+Notifications.setNotificationHandler({
+  handleNotification: async () => ({
+    shouldShowAlert: true,
+    shouldPlaySound: false,
+    shouldSetBadge: false,
+  }),
+});
 
+export default function NotificationsScreen() {
+  const { theme } = useTheme();
+  const { userId } = useContext(Context);
+  const [expoPushToken, setExpoPushToken] = useState('');
+  const [notifications, setNotifications] = useState([]);
+  const notificationListener = useRef();
+  const responseListener = useRef();
   const { apiNgrokNotificacoes } = ApisUrls;
+
+  useEffect(() => {
+    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+
+    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+      setNotifications(prev => [notification, ...prev]);
+    });
+
+    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+      console.log(response);
+    });
+
+    return () => {
+      notificationListener.current && Notifications.removeNotificationSubscription(notificationListener.current);
+      responseListener.current && Notifications.removeNotificationSubscription(responseListener.current);
+    };
+  }, []);
 
   useEffect(() => {
     const fetchNotifications = async () => {
@@ -21,39 +50,29 @@ export default function Notifications() {
         const newNotifications = response.data;
 
         setNotifications((prevNotifications) => {
-          // Filtra notificações duplicadas
-          const updatedNotifications = newNotifications.filter((newItem) => !prevNotifications.some((existingItem) => existingItem.idVagaUsuario === newItem.idVagaUsuario));
-
-          // Atualiza o estado, concatenando notificações novas no início da lista
-          if (updatedNotifications.length > 0) {
-            return [...updatedNotifications, ...prevNotifications]; // Concatenando no início
-          }
-
-          return prevNotifications; // Caso não haja notificações novas, apenas retorna o estado anterior
+          const updatedNotifications = newNotifications.filter((newItem) => 
+            !prevNotifications.some((existingItem) => existingItem.idVagaUsuario === newItem.idVagaUsuario)
+          );
+          return [...updatedNotifications, ...prevNotifications];
         });
-      } catch (erro) {
-        console.log(erro);
+      } catch (error) {
+        console.log(error);
       }
     };
 
-    fetchNotifications(); // Requisição imediata
+    fetchNotifications();
+    const intervaloId = setInterval(fetchNotifications, 2000);
 
-    const intervaloId = setInterval(fetchNotifications, 2000); // Requisições a cada 2 segundos
-
-    return () => clearInterval(intervaloId); // Limpa o intervalo quando o componente desmonta
+    return () => clearInterval(intervaloId);
   }, [userId, apiNgrokNotificacoes]);
 
-  // Função de renderização de cada item
   const renderItem = ({ item }) => (
-    <View style={{  borderRadius: 5, marginVertical: 10 }}>
-      <View style={{backgroundColor: theme.backgroundColorNavBar, paddingVertical: 5, paddingHorizontal: 10, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2}}>
-        <Text style={[styles.DMSansBold, { color: theme.textColor, fontSize: 18 }]}>
-          Notificação
-          
-        </Text>
+    <View style={{ borderRadius: 5, marginVertical: 10 }}>
+      <View style={{ backgroundColor: theme.backgroundColorNavBar, paddingVertical: 5, paddingHorizontal: 10, alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', borderTopLeftRadius: 10, borderTopRightRadius: 10, borderLeftWidth: 2, borderRightWidth: 2, borderTopWidth: 2 }}>
+        <Text style={[styles.DMSansBold, { color: theme.textColor, fontSize: 18 }]}>Notificação</Text>
         <MaterialCommunityIcons name={"bell"} size={25} color={"#20dd77"} />
       </View>
-      <View style={{borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, padding: 10}}>
+      <View style={{ borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, padding: 10 }}>
         <Text style={[styles.DMSansRegular, { color: theme.textColor, fontSize: 13 }]}>
           A empresa {item.vaga?.empresa?.nomeEmpresa} aprovou sua candidatura na vaga: {item.vaga?.nomeVaga}
         </Text>
@@ -66,21 +85,59 @@ export default function Notifications() {
       <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
         <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Notificações:</Text>
       </View>
-
       <View style={{ height: "100%", paddingBottom: 150, backgroundColor: theme.backgroundColor }}>
         {notifications.length === 0 ? (
           <Text style={[styles.DMSansRegular, { color: theme.textColor, textAlign: "center" }]}>Nenhuma notificação</Text>
         ) : (
           <FlatList
             data={notifications}
-            keyExtractor={(item) => item.idVagaUsuario.toString()} // Certifique-se de usar uma chave única aqui
+            keyExtractor={(item) => item.idVagaUsuario.toString()}
             renderItem={renderItem}
             contentContainerStyle={{ paddingHorizontal: 20 }}
             showsVerticalScrollIndicator={false}
-            extraData={notifications}
           />
         )}
       </View>
     </SafeAreaView>
   );
+}
+
+async function registerForPushNotificationsAsync() {
+  let token;
+  if (Platform.OS === 'android') {
+    await Notifications.setNotificationChannelAsync('default', {
+      name: 'default',
+      importance: Notifications.AndroidImportance.MAX,
+      vibrationPattern: [0, 250, 250, 250],
+      lightColor: '#FF231F7C',
+    });
+  }
+  
+  if (Constants.isDevice) {
+    const { status: existingStatus } = await Notifications.getPermissionsAsync();
+    let finalStatus = existingStatus;
+    if (existingStatus !== 'granted') {
+      const { status } = await Notifications.requestPermissionsAsync();
+      finalStatus = status;
+    }
+    if (finalStatus !== 'granted') {
+      alert('Failed to get push token for push notification!');
+      return;
+    }
+    
+    try {
+      const projectId = Constants?.expoConfig?.extra?.eas?.projectId ?? Constants?.easConfig?.projectId;
+      if (!projectId) {
+        throw new Error('Project ID not found');
+      }
+      token = (await Notifications.getExpoPushTokenAsync({ projectId })).data;
+      console.log(token);
+    } catch (e) {
+      token = `${e}`;
+    }
+  } else {
+    alert('Must use physical device for Push Notifications');
+  }
+  
+  return token;
 }

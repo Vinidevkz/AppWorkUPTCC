@@ -1,16 +1,19 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { SafeAreaView, ScrollView, StyleSheet, Text, View, StatusBar, TouchableOpacity, FlatList, Button } from "react-native";
+import { useEffect, useState, useContext, useCallback } from "react";
+import { SafeAreaView, Text, View, StatusBar, TouchableOpacity, FlatList, Image } from "react-native";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import { Context } from "../pages/initialPages/context/provider";
+import ApisUrls from "../ApisUrls/apisurls.js";
+const { apiNgrokChats } = ApisUrls;
 
 import * as Font from "expo-font";
 import styles from "../styles/conversas.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function Conversas({ navigation }) {
-
   const { theme } = useTheme({ Conversas });
+  const [chat, setChat] = useState([]);
+  const { userId, setNomeEmpresa } = useContext(Context);
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -25,22 +28,46 @@ export default function Conversas({ navigation }) {
     loadFonts();
   }, []);
 
+  const buscaChat = useCallback(async () => {
+    try {
+      const request = await fetch(`${apiNgrokChats}/${userId}`);
+      const response = await request.json();
+      setChat(response);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }, [apiNgrokChats, userId]);
+
+  useEffect(() => {
+    const unsubscribe = navigation.addListener("focus", buscaChat);
+    return unsubscribe;
+  }, [navigation, buscaChat]);
 
   /////////////
   const data = [
-    { id: '1', fotoempresa: 'foto empresa', nomeempresa: 'Dynamo', lastmsg: 'Ultima Mensagem: 2 horas' },
-    { id: '2', fotoempresa: 'foto empresa', nomeempresa: 'Green Solutions', lastmsg: 'Ultima Mensagem: 2 horas' },
+    { id: "1", fotoempresa: "foto empresa", nomeempresa: "Dynamo", lastmsg: "Ultima Mensagem: 2 horas" },
+    { id: "2", fotoempresa: "foto empresa", nomeempresa: "Green Solutions", lastmsg: "Ultima Mensagem: 2 horas" },
   ];
 
   const renderItem = ({ item }) => (
-    <TouchableOpacity onPress={() => navigation.navigate("Chat")}>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate("Chat");
+        setNomeEmpresa(item.empresa?.nomeEmpresa);
+      }}
+    >
       <View style={styles.item}>
-        <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
-          <View style={styles.profileIconBox}><Text>{item.fotoempresa}</Text></View>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <View style={[styles.profileIconBox]}>
+            <Image 
+            source={item.empresa?.fotoEmpresa ? {uri: item.empresa?.fotoEmpresa} : require('../../assets/img/img1.png')}
+            style={styles.icon}/>
+          </View>
 
           <View>
-              <Text style={[styles.DMSansBold, {color: theme.textColor}]}>{item.nomeempresa}</Text>
-              <Text style={[styles.DMSansBold, {color: theme.textColor}]}>{item.lastmsg}</Text>
+            <Text style={[styles.DMSansBold, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
+            <Text style={[styles.DMSansBold, { color: theme.textColor }]}>{item.lastmsg}</Text>
           </View>
         </View>
       </View>
@@ -49,9 +76,9 @@ export default function Conversas({ navigation }) {
   /////////////
 
   return (
-    <SafeAreaView style={[styles.SafeAreaView, {backgroundColor: theme.backgroundColor}]}>
-      <StatusBar barStyle="dark-content" />
-      
+    <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
+      <StatusBar barStyle={theme.textColor} />
+
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
@@ -59,13 +86,16 @@ export default function Conversas({ navigation }) {
         <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>Suas Conversas</Text>
       </View>
 
-        <FlatList
-        data={data}
+      <FlatList
+        data={chat}
         renderItem={renderItem}
-        key={item => item.id}
-        />
-
-
+        key={(item) => item.idChat}
+        ListEmptyComponent={
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", height: 700 }}>
+            <Text style={[styles.DMSansRegular]}>Nenhuma conversa iniciada.</Text>
+          </View>
+        }
+      />
     </SafeAreaView>
   );
 }

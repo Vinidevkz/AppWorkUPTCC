@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { SafeAreaView, ScrollView, StyleSheet, Text, TextInput, View, StatusBar, TouchableOpacity, FlatList } from "react-native";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import { Context } from "../pages/initialPages/context/provider";
@@ -11,6 +11,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 export default function Chat({ navigation }) {
 
   const { theme } = useTheme({ Chat });
+  const { userId, nomeEmpresa } = useContext(Context);
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -27,21 +28,21 @@ export default function Chat({ navigation }) {
 
   return (
     <SafeAreaView style={[styles.SafeAreaView, {backgroundColor: theme.backgroundColor}]}>
-      <StatusBar barStyle="dark-content" />
+      <StatusBar barStyle={theme.textColor} />
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
         </TouchableOpacity>
-        <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>Dynamo</Text>
+        <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>{nomeEmpresa}</Text>
       </View>
 
       <FlatList/>
 
       <View style={[styles.msgBox, {backgroundColor: theme.backgroundColorNavBar}]}>
-        <TextInput style={[styles.input, {backgroundColor: theme.backgroundColor, color: theme.textColor}]} placeholder="Escreva uma mensagem" placeholderTextColor={theme.backgroundColorNavBar}/>
+        <TextInput style={[styles.input, {backgroundColor: theme.backgroundColor, color: theme.textColor}]} placeholder="Escreva uma mensagem..." placeholderTextColor={theme.textColor}/>
 
         <TouchableOpacity style={styles.sendBox}>
-         <Ionicons name="send" size={24} color="black" />
+         <Ionicons name="send" size={24} color={theme.textColor} />
         </TouchableOpacity>
       </View>
 
