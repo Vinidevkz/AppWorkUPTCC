@@ -26,22 +26,22 @@ export default function NotificationsScreen() {
   const responseListener = useRef();
   const { apiNgrokNotificacoes } = ApisUrls;
 
-  useEffect(() => {
-    registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
+  // useEffect(() => {
+  //   registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
 
-    notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-      setNotifications(prev => [notification, ...prev]);
-    });
+  //   notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
+  //     setNotifications(prev => [notification, ...prev]);
+  //   });
 
-    responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-      console.log(response);
-    });
+  //   responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
+  //     console.log(response);
+  //   });
 
-    return () => {
-      notificationListener.current && Notifications.removeNotificationSubscription(notificationListener.current);
-      responseListener.current && Notifications.removeNotificationSubscription(responseListener.current);
-    };
-  }, []);
+  //   return () => {
+  //     notificationListener.current && Notifications.removeNotificationSubscription(notificationListener.current);
+  //     responseListener.current && Notifications.removeNotificationSubscription(responseListener.current);
+  //   };
+  // }, []);
 
   useEffect(() => {
     const fetchNotifications = async () => {

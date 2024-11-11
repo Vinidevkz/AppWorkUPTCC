@@ -13,7 +13,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 export default function Conversas({ navigation }) {
   const { theme } = useTheme({ Conversas });
   const [chat, setChat] = useState([]);
-  const { userId, setNomeEmpresa } = useContext(Context);
+  const { userId, setNomeEmpresa, setEmpresaId, setIdChat } = useContext(Context);
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -55,6 +55,8 @@ export default function Conversas({ navigation }) {
       onPress={() => {
         navigation.navigate("Chat");
         setNomeEmpresa(item.empresa?.nomeEmpresa);
+        setEmpresaId(item.empresa?.idEmpresa);
+        setIdChat(item.idChat)
       }}
     >
       <View style={styles.item}>

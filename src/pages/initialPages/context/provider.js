@@ -28,6 +28,8 @@ export const Provider = ({ children }) => {
   const [empresaId, setEmpresaId] = useState("");
   const [nomeEmpresa, setNomeEmpresa] = useState("")
 
+  const [idChat, setIdChat] = useState("");
+
   return (
     <Context.Provider
       value={{
@@ -65,8 +67,6 @@ export const Provider = ({ children }) => {
         setUserId,
         vagaID,
         setVagaID,
-        empresaId,
-        setEmpresaId,
         cursosUsuario,
         setCursosUsuarios,
 
@@ -75,7 +75,10 @@ export const Provider = ({ children }) => {
         setEmpresaId,
         //Nome empresa
         nomeEmpresa,
-        setNomeEmpresa 
+        setNomeEmpresa,
+        //Ids Chat
+        idChat,
+        setIdChat
       }}
     >
       {children}

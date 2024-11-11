@@ -80,8 +80,8 @@ useEffect(() => {
     }
   };
 
-  const intervalId = setInterval(fetchNotifications, 2000);
-  return () => clearInterval(intervalId);
+  // const intervalId = setInterval(fetchNotifications, 2000);
+  // return () => clearInterval(intervalId);
 }, []);
 
 

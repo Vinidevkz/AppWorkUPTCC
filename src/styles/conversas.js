@@ -87,6 +87,31 @@ icon: {
   height: 100,
   resizeMode: 'cover',
 },
+
+//Estilos Chat
+msgboxUser: {
+  backgroundColor: '#73f5b0',
+  padding: 5,
+
+  alignSelf: 'flex-end',
+  justifyContent: 'center',
+  borderRadius: 10,
+  minWidth: 150,
+  maxWidth: 300,
+  flexWrap: 'wrap',
+  gap: 5
+},
+
+msgboxEmpresa: {
+  padding: 5,
+  backgroundColor: '#fff',
+  alignSelf: 'flex-start',
+  borderRadius: 10,
+  width: 200,
+  maxWidth: 400,
+  flexWrap: 'wrap',
+  gap: 5
+},
 });
 
 export default styles;
