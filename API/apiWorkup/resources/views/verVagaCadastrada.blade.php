@@ -16,7 +16,7 @@
 @include('components.navbarDashboardEmpresa') 
 
     <div class="nav-footer">
-        <button><i class="fa-solid fa-arrow-left"></i>Voltar</button>
+        <a href="/empresa/dashboard"><i class="fa-solid fa-arrow-left"></i>Voltar</a>
         <ul>
             <li>Pendentes</li>
             <li>Aprovados</li>
@@ -118,10 +118,31 @@
                                 <button class="aprovar" value="aprovar">Aprovar <i class="fa-solid fa-check"></i></button>
                                 <button class="negar" value="negar">Negar <i class="fa-solid fa-xmark"></i></button>
                             </div>
-                            <button class="denunciar" data-bs-toggle="tooltip" data-bs-placement="top"
-                                data-bs-title="Denunciar">
+                            <button class="denunciar" data-bs-toggle="modal" data-bs-placement="top" data-bs-target="#staticBackdrop">
                                 <i class="fa-solid fa-flag"></i>
                             </button>
+
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content p-5" style="height:20rem">
+                                        <div class="modal-denuncia">
+                                            <h5>Denunciar candidato</h5>
+                                            <form action="" class="denuncia-body">
+                                                <div class="denuncia-input">
+                                                    <label for="">Motivo:</label>
+                                                    <textarea name="" id="" placeholder="Detalhe o motivo da denúncia"></textarea>
+                                                </div>
+                                                <div class="denuncia-footer">
+                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                    <input type="submit" value="Denunciar">
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>

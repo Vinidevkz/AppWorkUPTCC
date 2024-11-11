@@ -27,13 +27,18 @@ body, .candidatos {
     gap: 2rem;
 }
 
-.nav-footer button {
+.nav-footer a {
     width: 100px;
     height: 35px;
     background-color: transparent;
     border: 2px solid #505050;
     color: #242424;
     border-radius: 4rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    text-decoration: none;
 }
 
 .nav-footer i {
@@ -139,6 +144,7 @@ body, .candidatos {
     color: #20dd77;
     width: 8rem;
     font-weight: 500;
+    width: 10rem;
 }
 
 .dados-candidato h5, .dados-candidato p {
@@ -160,6 +166,7 @@ body, .candidatos {
     padding: 0 2rem;
     height: 100%;
     gap: 1rem;
+    width: 50%;
 }
 
 .denunciar {
@@ -173,6 +180,7 @@ body, .candidatos {
 
 .botoes-candidato {
     gap: 0.5rem;
+    width: 80%;
 }
 
 .opcoes-candidato, .botoes-candidato {
@@ -188,7 +196,6 @@ body, .candidatos {
     justify-content: center;
     font-size: 0.9rem;
     border-radius: 5rem;
-    width: 10rem;
     gap: 0.3rem;
 }
 
@@ -198,6 +205,7 @@ body, .candidatos {
 
 .aprovar, .negar {
     color: #fff;
+    width: 100%;
 }
 
 .aprovar {
@@ -283,4 +291,55 @@ body, .candidatos {
 
 .info-adicional .row .col h6 {
     font-size: 0.9rem;
+}
+
+/*-------------------------------------*/
+
+.modal-denuncia {
+    height: 20rem;
+    width: 80%;
+}
+
+.modal-denuncia h5 {
+    font-weight: 300;
+}
+
+.denuncia-body {
+    height: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.denuncia-input {
+    display: flex;
+    flex-direction: column;
+}
+
+.denuncia-input textarea {
+    border-style: none;
+    background-color: #d5d5d5;
+    padding: 1rem 1.5rem;
+    resize: none;
+    border-radius: 10px;
+}
+
+.denuncia-footer {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    justify-content: space-between;
+    margin-top: 2rem;
+}
+
+.denuncia-footer input {
+    background-color: #ff6565;
+    color: #fff;
+    border-style: none
+}
+
+.denuncia-footer button, .denuncia-footer input {
+    width: 45%;
+    border-radius: 10px;
 }
