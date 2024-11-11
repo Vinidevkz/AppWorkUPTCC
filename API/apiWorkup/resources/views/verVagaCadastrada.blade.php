@@ -38,10 +38,10 @@
                     <div class="card-candidato">
                         <div style="display: flex; flex-direction: row; width: 60%; align-items: center;">
                             <div class="dados-candidato">
-                                <img class="img-candidato" src="{{$candidato->usuario->fotoUsuario}}" alt="">
+                                <img src="{{$candidato->usuario->fotoUsuario}}" class="img-candidato">
                                 <div>
-                                    <h5 class="text-truncate">{{ $candidato->usuario->nomeUsuario }}</h5>
-                                    <p>@carolsantos@gmail.com</p>
+                                    <h5 class="text-truncate">{{$candidato->usuario->nomeUsuario}}</h5>
+                                    <p>{{ $candidato->usuario->emailUsuario }}</p>
                                 </div>
                             </div>
                             <button class="perfil" data-bs-toggle="modal" data-bs-target="#exampleModal">

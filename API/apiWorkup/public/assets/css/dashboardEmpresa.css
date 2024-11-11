@@ -8,14 +8,17 @@
     margin: 0;
 }
 
-body {
-    font-family: "DM Sans", sans-serif;
-    background-color: #f4f4f4;
-    overflow: auto;
+html {
     -ms-overflow-style: none;
     /* IE 11 */
     scrollbar-width: none;
     /* Firefox 64 */
+}
+
+body {
+    font-family: "DM Sans", sans-serif;
+    background-color: #f8f8f8;
+    overflow: auto;
 }
 
 h3 {
@@ -102,7 +105,6 @@ header {
     height: auto; /* Ajusta a altura automaticamente no modo responsivo */
     border-radius: 0;
     margin-top: 4rem;
-    margin-bottom: 4rem;
     padding: 2rem 0; /* Adiciona espaçamento interno */
 }
 
@@ -165,13 +167,15 @@ header {
 }
 .titulo-secao {
     font-weight: 300;
-    margin: 0 0 2rem 4.5rem;
+    margin: 0 0 2rem 0;
 }
 
 .funcoes {
     display: flex;
     justify-content: center;
     flex-direction: column;
+    background-color: #f4f4f4;
+    padding: 5rem 0 0 0;
 }
 
 .fundo-funcoes {
@@ -187,20 +191,19 @@ header {
 }
 
 .col-funcoes {
-    display: flex;
-    justify-content: center;
+    display: grid;
+    place-items: center;
 }
 
 .card-funcoes {
     width: 100%;
     height: 90%;
-    padding: 1rem;
+    padding: 2rem 1rem;
     background-color: #fff;
     border-left: 6px solid #20dd77;
     display: grid;
     place-items: center;
     gap: 0;
-    margin-left: 10%;
 }
 
 .header-card-funcoes {
@@ -210,7 +213,7 @@ header {
     gap: 10px;
 }
 
-.header-card-funcoes h4 {
+.header-card-funcoes h5 {
     margin-bottom: 0;
     font-weight: 300;
     font-size: 1.2rem;
@@ -219,12 +222,13 @@ header {
 }
 
 .header-card-funcoes i {
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .body-card-funcoes {
     width: 80%;
     font-size: 0.8rem;
+    font-weight: 300;
 }
 
 
@@ -242,7 +246,7 @@ header {
 }
 
 .wrap-carrossel {
-    width: 100%;
+    width: 95%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -250,18 +254,23 @@ header {
 }
 
 .carrossel {
-    width: 100%;
+    width: 90%;
+    height: 24rem;
     display: flex;
     flex-wrap: nowrap;
-    justify-content: center;
+    justify-content: start;
+    align-items: center;
     overflow-x: auto;
     scroll-behavior: smooth;
     padding: 0 20px;
-    gap: 1rem; /* Espaço entre os cards */
+    gap: 0.5rem; /* Espaço entre os cards */
+    -ms-overflow-style: none;
+    /* IE 11 */
+    scrollbar-width: none;
+    /* Firefox 64 */
 }
 
 .btn-carrossel {
-    width: 50px;
     height: 50px;
     top: 50%;
     transform: translateY(-50%);
@@ -272,7 +281,7 @@ header {
 .vaga {
     width: 100%;
     max-width: 300px; /* Limita a largura máxima dos cards */
-    height: 24rem;
+    height: 22rem;
     background-color: #fff;
     display: flex;
     flex-direction: column;
@@ -280,6 +289,12 @@ header {
     align-items: center;
     border-radius: 10px;
     padding: 2rem;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.vaga:hover {
+    transform: translateY(-3px);
     box-shadow: 0px 25px 45px -40px rgba(0, 0, 0, 0.3);
 }
 
@@ -291,7 +306,7 @@ header {
     justify-content: space-between;
 }
 
-.header-vaga h4 {
+.header-vaga h5 {
     font-family: "Poppins", sans-serif;
     color: #303030;
     font-weight: 300;
@@ -299,13 +314,14 @@ header {
 }
 
 .header-vaga div p {
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     color: #505050;
     margin-bottom: 0;
 }
 
 .opt-vaga p {
     margin-bottom: 0.2rem;
+    font-size: 0.8rem;
 }
 
 .footer-vaga {
@@ -322,9 +338,9 @@ header {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     width: 49%;
-    height: 2.5rem;
+    height: 2rem;
     gap: 0.3rem;
 }
 
@@ -433,5 +449,10 @@ header {
 
 .botoes-publ div i,
 .botoes-publ i {
+    font-size: 1.5rem;
+}
+
+footer ul li a i {
+    color: white;
     font-size: 1.5rem;
 }
