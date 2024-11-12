@@ -291,6 +291,23 @@ const styles = StyleSheet.create({
   comentDesc: {
     fontSize: 15
   },
+
+  profileIconBox: {
+    width: 50,
+    height: 50,
+    alignItems: 'center',
+    justifyContent: 'center',
+    overflow: 'hidden',
+    borderRadius: 50,
+    backgroundColor: '#fff',
+    zIndex: 1,
+  },
+
+  icon: {
+    width: '100%',
+    height: 50,
+    resizeMode: 'cover',
+  },
 });
 
 export default styles;

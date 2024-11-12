@@ -24,11 +24,13 @@ export default function Home({ navigation }) {
   const [savedIcons, setSavedIcons] = useState({});
   const { theme } = useTheme({ Home });
 
+  const [isProcessing, setIsProcessing] = useState(false);
+
   const [heartIcon, setHeartIcon] = useState(true);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { userId, vagaID, setVagaID, areaInt } = useContext(Context);
+  const { userId, vagaID, setVagaID, areaInt, nome, userName, fotoUsuario } = useContext(Context);
 
   const buscaVaga = async () => {
     setLoading(true);
@@ -192,24 +194,57 @@ export default function Home({ navigation }) {
   }
 
   const toggleSaveIcon = async (id) => {
-    if (savedIcons[id]) {
-      await removerVagaSalva(id);
-      setSavedIcons((prev) => ({ ...prev, [id]: false }));
-    } else {
-      await salvarVaga(id);
-      setSavedIcons((prev) => ({ ...prev, [id]: true }));
+    if (isProcessing) return;  // Se já está em processamento, não faz nada
+    
+    setIsProcessing(true);  // Marca o início do processamento
+  
+    try {
+      if (savedIcons[id]) {
+        // Se a vaga já foi salva, remove
+        await removerVagaSalva(id);
+        setSavedIcons((prev) => ({ ...prev, [id]: false }));
+      } else {
+        // Caso contrário, salva a vaga
+        await salvarVaga(id);
+        setSavedIcons((prev) => ({ ...prev, [id]: true }));
+      }
+    } catch (error) {
+      console.error('Erro ao salvar/remover vaga:', error);
+    } finally {
+      setIsProcessing(false);  // Libera o bloqueio para permitir próximos cliques
     }
   };
+  
+  
   
 
   return (
     <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
       <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
-        <Image source={theme.WUPLogo} style={styles.WUPstyle} />
+
+      <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+      <View
+              style={[
+                styles.profileIconBox,
+                { borderColor: theme.borderColor },
+              ]}
+            >
+              <Image
+                source={fotoUsuario ? { uri: fotoUsuario } : require("../../assets/icons/manicon.jpg")}
+                style={styles.icon}
+              />
+            </View>
+
+            <View>
+            <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>@{userName}</Text>
+            <Text style={[styles.DMSansBold, {fontSize: 20, color: theme.textColor}]}>{nome}</Text>
+            </View>
+      </View>
+
         <View style={styles.iconBox}>
-          <TouchableOpacity>
-            <Ionicons name="chatbubbles" size={35} color={theme.iconColorWhite} onPress={() => navigation.navigate("Conversas")} />
+          <TouchableOpacity onPress={() => navigation.navigate("Conversas")}>
+            <Ionicons name="chatbubbles-outline" size={35} color={theme.iconColorWhite}  />
           </TouchableOpacity>
         </View>
       </View>
@@ -268,22 +303,17 @@ export default function Home({ navigation }) {
                     <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    style={styles.addFavButton}
-                    onPress={() => {
-                      toggleSaveIcon(item.idVaga); // Alterna o ícone
-                      if (savedIcons[item.idVaga]) {
-                        removerVagaSalva(item.idVaga); // Remove a vaga salva
-                      } else {
-                        salvarVaga(item.idVaga); // Salva a vaga, passando o idVaga
-                      }
-                    }}
-                  >
-                    <Ionicons
-                      name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Altera o ícone
-                      size={35}
-                      color="#20dd77"
-                    />
-                  </TouchableOpacity>
+  style={styles.addFavButton}
+  onPress={() => toggleSaveIcon(item.idVaga)}  // Chama a função que alterna o ícone
+>
+  <Ionicons
+    name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
+    size={35}
+    color="#20dd77"
+  />
+</TouchableOpacity>
+
+
                 </View>
               </View>
             )}
@@ -338,22 +368,18 @@ export default function Home({ navigation }) {
                     <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-                    style={styles.addFavButton}
-                    onPress={() => {
-                      toggleSaveIcon(item.idVaga); // Alterna o ícone
-                      if (savedIcons[item.idVaga]) {
-                        removerVagaSalva(item.idVaga); // Remove a vaga salva
-                      } else {
-                        salvarVaga(item.idVaga); // Salva a vaga, passando o idVaga
-                      }
-                    }}
-                  >
-                    <Ionicons
-                      name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Altera o ícone
-                      size={35}
-                      color="#20dd77"
-                    />
-                  </TouchableOpacity>
+  style={styles.addFavButton}
+  onPress={() => {
+    toggleSaveIcon(item.idVaga);  // Chama a função que alterna o ícone
+  }}
+>
+  <Ionicons
+    name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
+    size={35}
+    color="#20dd77"
+  />
+</TouchableOpacity>
+
                 </View>
               </View>
             )}

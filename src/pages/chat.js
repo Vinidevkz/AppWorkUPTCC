@@ -5,6 +5,8 @@ import { Context } from "../pages/initialPages/context/provider";
 import ApisUrls from "../ApisUrls/apisurls.js";
 const { apiNgrokMensagens, apiNgrokMandarMensagem } = ApisUrls;
 
+import Modal from "react-native-modal";
+
 import * as Font from "expo-font";
 import styles from "../styles/conversas.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -15,6 +17,8 @@ export default function Chat({ navigation }) {
   const { userId, nomeEmpresa, empresaId, idChat, nome, userName } = useContext(Context);
   const [conversa, setConversa] = useState([]);
   const [fontsLoaded, setFontsLoaded] = useState(false);
+
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const [mensagemEnviar, setMensagemEnviar] = useState('')
 
@@ -28,6 +32,8 @@ export default function Chat({ navigation }) {
     };
     loadFonts();
   }, []);
+
+
 
   const mandarMensagem = async () => {
     try {
@@ -52,7 +58,6 @@ export default function Chat({ navigation }) {
       if (response.ok) {
         const resultado = await response.json();
         console.log("Mensagem enviada:", resultado);
-        setConversa(resultado); // Atualizando a conversa
         buscaConversa(); // Recarregar a conversa
       } else {
         console.log("Erro ao enviar mensagem:", response.status);
@@ -78,7 +83,9 @@ export default function Chat({ navigation }) {
     return unsubscribe;
   }, [navigation, buscaConversa]);
 
-
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
   
   return (
     <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
@@ -104,25 +111,28 @@ export default function Chat({ navigation }) {
     </View>
   )}
   renderItem={({ item }) => (
-    <View style={[item.tipoEmissor === "Usuario" ? styles.msgboxUser : styles.msgboxEmpresa, { marginVertical: 8, marginHorizontal: 15 }]}>
-      <View style={[{borderBottomWidth: 1}, item.tipoEmissor === "Usuario" ? {borderColor: "#fff"} : {}]}>
-        <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? {color: '#fff'} : {color: '#242424'}]}>{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
+    <TouchableOpacity>
+      <View style={[item.tipoEmissor === "Usuario" ? styles.msgboxUser : styles.msgboxEmpresa, { marginVertical: 8, marginHorizontal: 15 }]}>
+        <View style={[{borderBottomWidth: 1}, item.tipoEmissor === "Usuario" ? {borderColor: "#fff"} : {}]}>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? {color: '#fff'} : {color: '#242424'}]}>{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
+        </View>
+        <View style={{ alignSelf: "flex-start", marginVertical: 5 }}>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? {color: '#fff'} : {color: '#242424'}, {fontSize: 12}]}>{item.mensagem}</Text>
+        </View>
+        <View>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? {color: '#fff'} : {color: '#242424'}, {fontSize: 11}]}>
+            {new Date(item.mensagemData).toLocaleString("pt-BR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+          </Text>
+        </View>
       </View>
-      <View style={{ alignSelf: "flex-start" }}>
-        <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? {color: '#fff'} : {color: '#242424'}, {fontSize: 12}]}>{item.mensagem}</Text>
-      </View>
-      <View>
-        <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? {color: '#fff'} : {color: '#242424'}, {fontSize: 11}]}>
-          {new Date(item.mensagemData).toLocaleString("pt-BR", {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-          })}
-        </Text>
-      </View>
-    </View>
+    </TouchableOpacity>
+
   )}
 />
 
@@ -140,6 +150,10 @@ export default function Chat({ navigation }) {
           <Ionicons name="send" size={24} color={"#fff"} />
         </TouchableOpacity>
       </View>
+
+      <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+        
+      </Modal>
     </SafeAreaView>
   );
 }

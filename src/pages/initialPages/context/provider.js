@@ -20,6 +20,7 @@ export const Provider = ({ children }) => {
   const [nasc, setNasc] = useState("");
   const [bio, setBio] = useState("");
   const [formacaoUsuario, setFormacaoUsuario] = useState("");
+  const [fotoUsuario, setFotoUsuario] = useState("");
 
   const [cursosUsuario, setCursosUsuarios] = useState("");
 
@@ -69,6 +70,8 @@ export const Provider = ({ children }) => {
         setVagaID,
         cursosUsuario,
         setCursosUsuarios,
+        fotoUsuario,
+        setFotoUsuario,
 
         //Ids Empresa
         empresaId,

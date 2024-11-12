@@ -115,16 +115,6 @@ const toggleModal = () => {
     setModalVisible(!isModalVisible);
   };
 
-  const renderItem = ({ item }) => (
-    <View style={{ backgroundColor: "#f4f4f4", padding: 10, margin: 5 }}>
-      <Text style={styles.title}>{item.nomeVaga}</Text>
-      <Text>
-        {item.cidadeVaga} - {item.estadoVaga}
-      </Text>
-      <Text>{item.salarioVaga}</Text>
-    </View>
-  );
-
   const getColorBasedOnAvalicao = (avaliacao) => {
     if (!avaliacao) return "red";
 
@@ -158,7 +148,7 @@ const toggleModal = () => {
             <View style={styles.profileBackgroundImageCont}>
               <Image source={dadosEmpresa.fotoBanner ? { uri: dadosEmpresa.fotoBanner } : require("../../assets/icons/profilebgempty.png")} style={styles.profileBackgroundImg} />
               <View style={[styles.profileIconBox, { borderColor: theme.borderColor }]}>
-                <Image source={dadosEmpresa.fotoUsuario ? { uri: dadosEmpresa.fotoUsuario } : require("../../assets/icons/manicon.jpg")} style={styles.icon} />
+                <Image source={dadosEmpresa.fotoEmpresa ? { uri: dadosEmpresa.fotoEmpresa } : require("../../assets/icons/manicon.jpg")} style={styles.icon} />
               </View>
             </View>
 

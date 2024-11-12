@@ -130,6 +130,7 @@ export default function Search({ navigation }) {
           <FontAwesome name="search" size={23} color={theme.iconColorWhite} />
           <TextInput
             placeholder="Pesquise por vagas e empresas..."
+            placeholderTextColor={'#242424'}
             style={[
               styles.DMSansRegular,
               styles.searchFontSize,
@@ -282,7 +283,7 @@ export default function Search({ navigation }) {
                 marginVertical: 10,
               }}
               keyExtractor={(item) =>
-                item.id_empresa
+                item.idEmpresa
                   ? item.idEmpresa.toString()
                   : Math.random().toString()
               } // Assumindo que id_empresa é único
@@ -327,8 +328,8 @@ export default function Search({ navigation }) {
                       >
                         <Image
                           source={
-                            item.fotoUsuario
-                              ? { uri: dadosUser.fotoUsuario }
+                            item.fotoEmpresa
+                              ? { uri: item.fotoEmpresa }
                               : require("../../assets/icons/manicon.jpg")
                           }
                           style={styles.icon}

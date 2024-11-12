@@ -85,7 +85,7 @@ export default function NotificationsScreen() {
       <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
         <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Notificações:</Text>
       </View>
-      <View style={{ height: "100%", paddingBottom: 150, backgroundColor: theme.backgroundColor }}>
+      <View style={{ height: "100%", alignItems: 'center', justifyContent: 'center', paddingBottom: 150, backgroundColor: theme.backgroundColor }}>
         {notifications.length === 0 ? (
           <Text style={[styles.DMSansRegular, { color: theme.textColor, textAlign: "center" }]}>Nenhuma notificação</Text>
         ) : (

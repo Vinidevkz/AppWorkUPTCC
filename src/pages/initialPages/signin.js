@@ -15,7 +15,7 @@ const { apiNgrok } = ApisUrls;
 export default function SignIN({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const { setUserId, setNome, setUserName, setAreaInt } = useContext(Context);
+  const { setUserId, setNome, setUserName, setFotoUsuario, setAreaInt } = useContext(Context);
   const [loading, setLoading] = useState(false);
 
   async function verificarUsuario() {
@@ -48,6 +48,7 @@ export default function SignIN({ navigation }) {
         setUserName(resp.usernameUsuario);
         setEmail(resp.emailUsuario); // Atualize o email no contexto
         setAreaInt(resp.areaInteresseUsuario);
+        setFotoUsuario(resp.fotoUsuario)
         navigation.navigate("TabBar");
         setLoading(false);
       } else {

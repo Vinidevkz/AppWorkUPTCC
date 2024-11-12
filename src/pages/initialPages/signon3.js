@@ -24,6 +24,7 @@ import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 export default function SignON3({ navigation }) {
   const {
     nome,
+    setNome,
     setBio,
     bio,
     email,
@@ -37,8 +38,10 @@ export default function SignON3({ navigation }) {
     tel,
     emailContato,
     userName,
+    setUsername,
     formacaoUsuario,
     setUserId,
+    setFotoUsuario,
   } = useContext(Context);
   const { apiNgrokCad } = ApisUrls;
 
@@ -194,6 +197,9 @@ export default function SignON3({ navigation }) {
         Alert.alert("Erro", errorMessage);
       } else {
         setUserId(resp.idUsuario);
+        setFotoUsuario(resp.fotoUsuario)
+        setNome(resp.nomeUsuario)
+        setUsername(resp.usernameUsuario)
         navigation.navigate('TabBar');
       }
       

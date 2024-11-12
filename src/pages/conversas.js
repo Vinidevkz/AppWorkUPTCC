@@ -94,7 +94,7 @@ export default function Conversas({ navigation }) {
         key={(item) => item.idChat}
         ListEmptyComponent={
           <View style={{ flex: 1, alignItems: "center", justifyContent: "center", height: 700 }}>
-            <Text style={[styles.DMSansRegular]}>Nenhuma conversa iniciada.</Text>
+            <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma conversa iniciada.</Text>
           </View>
         }
       />

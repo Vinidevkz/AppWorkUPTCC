@@ -97,7 +97,7 @@ msgboxUser: {
   borderTopRightRadius: 10,
   borderBottomLeftRadius: 10,
   minWidth: 150,
-  maxWidth: 300,
+  maxWidth: 350,
   flexWrap: 'wrap',
   gap: 5,
   backgroundColor: '#0db862'
@@ -109,8 +109,8 @@ msgboxEmpresa: {
   borderTopLeftRadius: 10,
   borderTopRightRadius: 10,
   borderBottomRightRadius: 10,
-  width: 150,
-  maxWidth: 300,
+  minWidth: 150,
+  maxWidth: 250,
   flexWrap: 'wrap',
   gap: 5,
   backgroundColor: '#fff'
