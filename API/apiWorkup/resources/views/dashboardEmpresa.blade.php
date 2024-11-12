@@ -101,7 +101,7 @@
                     </div>
                 @else
                     @foreach($vagas as $vaga)
-                        <div class="col-12 col-md-4 col-lg-3 d-flex justify-content-center mb-4">
+                        <div class="col-12 col-sm-4 col-md-4 col-lg-3 d-flex justify-content-center mb-4 col-vaga">
                             <div class="vaga">
                                 <div class="wrap-vaga">
                                     <div class="header-vaga">
@@ -119,11 +119,11 @@
                                     </div>
 
                                     <div class="footer-vaga">
-                                        <button type="button" class="btn-vagas btn-verde" data-bs-toggle="modal"
+                                        <button type="button" class="btn-vagas btn-verde text-truncate" data-bs-toggle="modal"
                                             data-bs-target="#modalVaga{{$vaga->idVaga}}">Detalhes<i
                                                 class="fa-solid fa-clipboard-list"></i></button>
 
-                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas btn-vazado">
+                                        <a href="{{ route('verVagaCadastrada', $vaga->idVaga) }}" class="btn-vagas btn-vazado w-50 text-truncate">
                                             Candidatos<i class="fa-solid fa-user"></i>
                                         </a>
                                     </div>
@@ -139,29 +139,23 @@
                             aria-labelledby="modalVagaLabel{{ $vaga->idVaga }}" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h1 class="modal-title fs-5 px-3" id="modalVagaLabel{{ $vaga->idVaga }}"
-                                            style="color: #2c2c2c">{{ $vaga->nomeVaga }}</h1>
-                                        <button type="button" class="btn-close px-4" data-bs-dismiss="modal"
-                                            aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body px-5">
-                                        <div class="opt-vaga">
-                                            <p class="text mb-3" style="font-weight: 400">Candidatos:
-                                                {{ $vaga->total_candidatos }}
-                                            </p>
-                                            <p class="text my-1">Salário: R${{ $vaga->salarioVaga }}</p>
-                                            <p class="text mb-1">Área: {{ $vaga->nomeVaga }}</p>
-                                            <p class="text mb-1">Modalidade: {{ $vaga->idModalidadeVaga }}</p>
-                                            <p class="text mb-1">Cidade: {{ $vaga->cidadeVaga }}</p>
-                                            <p class="text mb-1">Estado: {{ $vaga->estadoVaga }}</p>
-                                            <p class="text mb-1">Diferencial: {{ $vaga->diferencialVaga }}</p>
+                                    <div class="header-modal-vaga">
+                                        <div>
+                                            <h5>{{ $vaga->nomeVaga }}</h5>
+                                            <p class="text mb-3" style="font-weight: 400">Candidatos:{{ $vaga->total_candidatos }}</p>
                                         </div>
+                                    </div>
+                                    <div class="opt-vaga">
+                                        <p class="text my-1">Salário: R${{ $vaga->salarioVaga }}</p>
+                                        <p class="text mb-1">Área: {{ $vaga->nomeVaga }}</p>
+                                        <p class="text mb-1">Modalidade: {{ $vaga->idModalidadeVaga }}</p>
+                                        <p class="text mb-1">Cidade: {{ $vaga->cidadeVaga }}</p>
+                                        <p class="text mb-1">Estado: {{ $vaga->estadoVaga }}</p>
+                                        <p class="text mb-1">Diferencial: {{ $vaga->diferencialVaga }}</p>
                                     </div>
                                     <div class="modal-footer d-flex justify-content-between w-75 align-self-center">
                                         <a href="{{ route('vagas.edit', $vaga->idVaga) }}"
-                                            class="btn-vagas btn-verde w-100">Editar<i class="fa-solid fa-pen-to-square"
-                                                style="color: #ffffff;"></i></a>
+                                            class="btn-vagas btn-verde w-100">Editar<i class="fa-solid fa-pen-to-square" style="color: #ffffff;"></i></a>
                                         <button type="button" class="btn-vagas w-100" data-bs-dismiss="modal"
                                             style="background-color: #ededed; color: black">Voltar</button>
                                     </div>
@@ -242,7 +236,7 @@
         </p>
     </footer>
 
-    <script src="../js/carrossel-vagas.js"></script>
+    <script src="{{url('assets/js/carrossel-vagas.js')}}"></script>
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"
         integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r"

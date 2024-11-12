@@ -1,0 +1,78 @@
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+#editar-vaga {
+    margin-top: 4rem;
+    width: 100vw;
+    height:90vh;
+    background-color: #f4f4f4;
+    display: grid;
+    place-items: center;
+}
+
+.box-editar-vaga {
+    background-color: #fff;
+    height: 32rem;
+    width: 75%;
+    display: grid;
+    place-items: center;
+}
+
+.box-editar-vaga h5 {
+    font-weight: 400;
+    font-size: 1.5rem;
+    color: #242424;
+}
+
+.wrap-editar-empresa {
+    width: 80%;
+}
+
+.body-editar-empresa {
+    margin-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    height: 80%;
+}
+
+.col-edit {
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
+.col-edit label {
+    font-weight: 350;
+}
+
+.col-edit input {
+    background-color: #f7f7f7;
+    border-style: none;
+    color: #242424;
+    border: 1px solid #e2e2e2;
+    padding: 0.2rem 1rem;
+}
+
+.footer-editar-empresa {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer-editar-empresa button, .footer-editar-empresa input {
+    border-style: none;
+    width: 45%;
+    height: 2rem;
+}
+
+.footer-editar-empresa input {
+    color: #fff;
+    background-color: #20dd77;
+    text-decoration: none;
+    display: grid;
+    place-items: center;
+}

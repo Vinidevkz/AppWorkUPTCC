@@ -62,7 +62,7 @@ header {
     margin: 0;
 }
 
-.header-wrap ul a, .wrap-user div a {
+.header-wrap ul a, .wrap-user div a, .wrap-user form input {
     text-decoration: none;
     color: #fff;
     font-size: 0.8rem;
@@ -89,9 +89,8 @@ header {
     border-radius: 5rem;
 }
 
-.wrap-user select {
-    background-color: transparent;
-    border-style: none;
+.wrap-user form span {
+    font-size: 1rem;
 }
 
 
@@ -246,7 +245,7 @@ header {
 }
 
 .wrap-carrossel {
-    width: 95%;
+    width: 100%;
     position: relative;
     display: flex;
     justify-content: center;
@@ -254,7 +253,7 @@ header {
 }
 
 .carrossel {
-    width: 90%;
+    width: 85%;
     height: 24rem;
     display: flex;
     flex-wrap: nowrap;
@@ -306,6 +305,14 @@ header {
     justify-content: space-between;
 }
 
+.header-vaga {
+    width: 80%;
+    align-self: start;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+
 .header-vaga h5 {
     font-family: "Poppins", sans-serif;
     color: #303030;
@@ -313,10 +320,44 @@ header {
     margin-bottom: 0.5rem;
 }
 
+.header.vaga div {
+    display: flex;
+    justify-content: start;
+}
+
 .header-vaga div p {
     font-size: 0.7rem;
     color: #505050;
     margin-bottom: 0;
+}
+
+.modal-content {
+    align-self: center;
+    width: 20rem;
+    height: 30rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+.header-modal-vaga {
+    width: 80%;
+    display: flex;
+    justify-content: start;
+}
+
+.header-modal-vaga h5 {
+    font-weight: 400;
+}
+
+.header-modal-vaga p {
+    color: #3d3d3d;
+    font-size: 0.8rem;
+}
+
+.opt-vaga {
+    width: 80%;
 }
 
 .opt-vaga p {
