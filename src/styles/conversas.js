@@ -90,27 +90,30 @@ icon: {
 
 //Estilos Chat
 msgboxUser: {
-  backgroundColor: '#73f5b0',
   padding: 5,
-
   alignSelf: 'flex-end',
   justifyContent: 'center',
-  borderRadius: 10,
+  borderTopLeftRadius: 10,
+  borderTopRightRadius: 10,
+  borderBottomLeftRadius: 10,
   minWidth: 150,
   maxWidth: 300,
   flexWrap: 'wrap',
-  gap: 5
+  gap: 5,
+  backgroundColor: '#0db862'
 },
 
 msgboxEmpresa: {
   padding: 5,
-  backgroundColor: '#fff',
   alignSelf: 'flex-start',
-  borderRadius: 10,
-  width: 200,
-  maxWidth: 400,
+  borderTopLeftRadius: 10,
+  borderTopRightRadius: 10,
+  borderBottomRightRadius: 10,
+  width: 150,
+  maxWidth: 300,
   flexWrap: 'wrap',
-  gap: 5
+  gap: 5,
+  backgroundColor: '#fff'
 },
 });
 

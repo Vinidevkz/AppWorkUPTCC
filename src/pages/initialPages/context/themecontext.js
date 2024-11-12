@@ -31,6 +31,9 @@ export function ThemeProvider({ children }) {
     lineColor: darkMode ? '#fff' : '#1b1b1b',
 
     tabBarIconColor: darkMode ? '#fff' : '#1b1b1b',
+
+    msgUser: darkMode ? '#1b1b1b' : '#0db862',
+    msgEmpresa: darkMode ? '#808080' : '#fff'
   };
 
   return (
