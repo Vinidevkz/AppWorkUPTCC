@@ -79,7 +79,7 @@ export default function Conversas({ navigation }) {
 
   return (
     <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
-      <StatusBar barStyle={theme.textColor} />
+      <StatusBar barStyle={theme.textColor}/>
 
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>

@@ -38,7 +38,7 @@ export default function SignON3({ navigation }) {
     tel,
     emailContato,
     userName,
-    setUsername,
+    setUserName,
     formacaoUsuario,
     setUserId,
     setFotoUsuario,
@@ -199,7 +199,7 @@ export default function SignON3({ navigation }) {
         setUserId(resp.idUsuario);
         setFotoUsuario(resp.fotoUsuario)
         setNome(resp.nomeUsuario)
-        setUsername(resp.usernameUsuario)
+        setUserName(resp.usernameUsuario)
         navigation.navigate('TabBar');
       }
       
