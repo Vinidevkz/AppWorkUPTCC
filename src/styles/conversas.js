@@ -30,20 +30,18 @@ const styles = StyleSheet.create({
   },
 
   profileIconBox: {
-    width: 70,
-    height: 70,
+    width: 50,
+    height: 50,
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 50,
-    borderWidth: 3,
-    borderColor: '#1b1b1b',
     backgroundColor: '#fff',
   },
 
   icon: {
-    width: '100%',
-    height: '100%',
+    width: '50%',
+    height: '50%',
     resizeMode: 'cover',
   },
 
@@ -114,6 +112,16 @@ msgboxEmpresa: {
   flexWrap: 'wrap',
   gap: 5,
   backgroundColor: '#fff'
+},
+
+button: {
+  backgroundColor: '#20dd77',
+  alignSelf: 'flex-end',
+  alignItems: 'center',
+  justifyContent: 'center',
+  padding: 10,
+  borderRadius: 20,
+  width: 150
 },
 });
 

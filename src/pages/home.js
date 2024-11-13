@@ -238,7 +238,7 @@ export default function Home({ navigation }) {
 
             <View>
             <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>@{userName}</Text>
-            <Text style={[styles.DMSansBold, {fontSize: 20, color: theme.textColor}]}>{nome}</Text>
+            <Text style={[styles.DMSansBold, {fontSize: 18, color: theme.textColor}]}>{nome}</Text>
             </View>
       </View>
 

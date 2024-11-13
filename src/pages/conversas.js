@@ -63,8 +63,8 @@ export default function Conversas({ navigation }) {
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
           <View style={[styles.profileIconBox]}>
             <Image 
-            source={item.empresa?.fotoEmpresa ? {uri: item.empresa?.fotoEmpresa} : require('../../assets/img/img1.png')}
-            style={styles.icon}/>
+            source={item.empresa?.fotoEmpresa ? {uri: item.empresa?.fotoEmpresa} : require('../../assets/icons/manicon.jpg')}
+            style={[styles.icon, {width: 80, height: 80}]}/>
           </View>
 
           <View>
