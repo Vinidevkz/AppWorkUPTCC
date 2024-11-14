@@ -104,6 +104,7 @@ msgboxUser: {
 msgboxEmpresa: {
 
   alignSelf: 'flex-start',
+  justifyContent: 'center',
   borderTopLeftRadius: 10,
   borderTopRightRadius: 10,
   borderBottomRightRadius: 10,

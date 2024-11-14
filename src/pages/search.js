@@ -313,8 +313,8 @@ export default function Search({ navigation }) {
                     <View style={styles.profileBackgroundImageCont}>
                       <Image
                         source={
-                          item.fotoBanner
-                            ? { uri: dadosUser.fotoBanner }
+                          item.bannerEmpresa
+                            ? { uri: item.bannerEmpresa }
                             : require("../../assets/icons/profilebgempty.png")
                         }
                         style={styles.profileBackgroundImg}

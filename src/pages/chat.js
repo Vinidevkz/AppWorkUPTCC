@@ -25,7 +25,7 @@ export default function Chat({ navigation }) {
   const [isModalMenuVisible, setModalMenuVisible] = useState(false);
   const [isModalDenunciaVisible, setModalDenunciaVisible] = useState(false);
   const [isModalAlterarVisible, setModalAlterarVisible] = useState(false);
-  const [isModalDeletarVisible, setModalDeletarVisible] = useState(false);
+  const [isModalDeletarVisible, setModalDeletarVisible] = useState(false); 
 
   const [motivoDenuncia, setMotivoDenuncia] = useState();
   const [mudancaMsg, setMudancaMsg] = useState();
@@ -39,6 +39,7 @@ export default function Chat({ navigation }) {
       }, 100); // Ajuste o tempo de delay se necessário
     }
   };
+  
 
   useEffect(() => {
     const loadFonts = async () => {
@@ -127,7 +128,7 @@ export default function Chat({ navigation }) {
 
       <FlatList
   ref={flatListRef} 
-  data={Array.isArray(conversa) ? conversa.slice().reverse() : []}
+  data={conversa.slice().reverse()} 
   keyExtractor={(item, index) => index.toString()}
   style={{ flex: 1 }}
   onContentSizeChange={scrollToEnd} 
@@ -140,11 +141,13 @@ export default function Chat({ navigation }) {
     </View>
   )}
   renderItem={({ item }) => (
-    <TouchableOpacity onPress={() => { toggleModalMenu(); setMudancaMsg(item.mensagem); setTipoEmissor(item.tipoEmissor); }}>
-      <View style={[item.tipoEmissor === "Usuario" ? styles.msgboxUser : styles.msgboxEmpresa, { marginVertical: 8, marginHorizontal: 15 }]}>
-        <View style={[{ borderBottomWidth: 1 }, item.tipoEmissor === "Usuario" ? { borderColor: "#fff" } : {}]}>
-          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff" } : { color: "#242424" }]}>{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
+    <TouchableOpacity onPress={() => { toggleModalMenu(); setMudancaMsg(item.mensagem); setTipoEmissor(item.tipoEmissor); }} style={{overflow: 'hidden'}}>
+      <View style={[item.tipoEmissor === "Usuario" ? styles.msgboxUser : styles.msgboxEmpresa, { marginVertical: 8, marginHorizontal: 15, overflow: 'hidden' }]}>
+        <View style={[ item.tipoEmissor === "Usuario" ? { backgroundColor: '#0fd471', padding: 10 } : {backgroundColor: '#e8e8e8', padding: 10}]}>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff", width: 150 } : { color: "#242424", width: 150 }]}>{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
         </View>
+
+        <View style={{paddingHorizontal: 10, paddingBottom: 10}}>
         <View style={{ alignSelf: "flex-start", marginVertical: 5 }}>
           <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff" } : { color: "#242424" }, { fontSize: 12 }]}>{item.mensagem}</Text>
         </View>
@@ -159,14 +162,10 @@ export default function Chat({ navigation }) {
             })}
           </Text>
         </View>
+        </View>
       </View>
     </TouchableOpacity>
   )}
-          ListEmptyComponent={() => (
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-            <Text>Este chat não possuí mensagens.</Text>
-          </View>
-        )}
 />
 
 
@@ -188,38 +187,34 @@ export default function Chat({ navigation }) {
           <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Mensagem:</Text>
 
           {tipoEmissor === "Usuario" ? (
-            <>
-              <TouchableOpacity
-                style={{ borderRadius: 10, backgroundColor: theme.backgroundColorNavBar, justifyContent: "center", padding: 10, marginVertical: 5 }}
-                onPress={() => {
-                  toggleModalMenu();
-                  toggleModalAlterar();
-                }}
-              >
-                <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Editar Mensagem</Text>
-              </TouchableOpacity>
+    <>
+        <TouchableOpacity 
+            style={{ borderRadius: 10, backgroundColor: theme.backgroundColorNavBar, justifyContent: 'center', padding: 10, marginVertical: 5 }} 
+            onPress={() => { toggleModalMenu(); toggleModalAlterar(); }}
+        >
+            <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Editar Mensagem</Text>
+        </TouchableOpacity>
 
-              <TouchableOpacity
-                style={{ borderRadius: 10, backgroundColor: theme.backgroundColorNavBar, justifyContent: "center", padding: 10, marginVertical: 5 }}
-                onPress={() => {
-                  toggleModalMenu();
-                  toggleModalDeletar();
-                }}
-              >
-                <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Deletar Mensagem</Text>
-              </TouchableOpacity>
-            </>
-          ) : (
-            <TouchableOpacity
-              style={{ borderRadius: 10, backgroundColor: theme.backgroundColorNavBar, justifyContent: "center", padding: 10, marginVertical: 5 }}
-              onPress={() => {
-                toggleModalMenu();
-                toggleModalDenuncias();
-              }}
-            >
-              <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Denunciar Mensagem</Text>
-            </TouchableOpacity>
-          )}
+        <TouchableOpacity 
+            style={{ borderRadius: 10, backgroundColor: theme.backgroundColorNavBar, justifyContent: 'center', padding: 10, marginVertical: 5 }} 
+            onPress={() => { toggleModalMenu(); toggleModalDeletar(); }}
+        >
+            <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Deletar Mensagem</Text>
+        </TouchableOpacity>
+    </>
+) : (
+    <TouchableOpacity 
+        style={{ borderRadius: 10, backgroundColor: theme.backgroundColorNavBar, justifyContent: 'center', padding: 10, marginVertical: 5 }} 
+        onPress={() => { toggleModalMenu(); toggleModalDenuncias(); }}
+    >
+        <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Denunciar Mensagem</Text>
+    </TouchableOpacity>
+)}
+
+
+
+
+
         </View>
       </Modal>
 
@@ -227,33 +222,37 @@ export default function Chat({ navigation }) {
         <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
           <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Denuncia</Text>
 
-          <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
-            {["Conteúdo ofensivo", "Injuria", "Calúnia", "Difamação", "Suborno"].map((opcao) => (
-              <TouchableOpacity
-                key={opcao}
-                onPress={() => setMotivoDenuncia(opcao)}
-                style={{
-                  borderWidth: 2,
-                  borderColor: motivoDenuncia === opcao ? "#20dd77" : "transparent",
-                  padding: 10,
-                  borderRadius: 5,
-                  marginVertical: 5,
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
+          <View style={{backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
+          {["Conteúdo ofensivo", "Injuria", "Calúnia", "Difamação", "Suborno"].map((opcao) => (
+            <TouchableOpacity
+              key={opcao}
+              onPress={() => setMotivoDenuncia(opcao)}
+              style={{
+                borderWidth: 2,
+                borderColor: motivoDenuncia === opcao ? '#20dd77' : 'transparent',
+                padding: 10,
+                borderRadius: 5,
+                marginVertical: 5,
+                flexDirection: 'row',
+                alignItems: 'center',
+                justifyContent: 'space-between'
+              }}
+            >
+              <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
 
-                {motivoDenuncia === opcao && <Feather name="check" size={24} color={theme.textColor} />}
-              </TouchableOpacity>
-            ))}
+              {motivoDenuncia === opcao && (
+                <Feather name="check" size={24} color={theme.textColor} />
+              )}
+              
+            </TouchableOpacity>
+          ))}
+
           </View>
           <TouchableOpacity
             style={[styles.button, { marginTop: 20 }]}
             //onPress={denunciarVaga}
           >
-            <Text style={[styles.buttonText, { color: "#fff" }]}>Confirmar</Text>
+            <Text style={[styles.buttonText, {color: '#fff'}]}>Confirmar</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -262,15 +261,19 @@ export default function Chat({ navigation }) {
         <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
           <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Editar Mensagem</Text>
 
-          <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
-            <TextInput value={mudancaMsg} onChange={(text) => setMudancaMsg(text)} style={{ color: theme.textColor }} />
+          <View style={{backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
+            <TextInput
+            value={mudancaMsg}
+            onChange={(text) => setMudancaMsg(text)}
+            style={{color: theme.textColor}}
+            />
           </View>
 
           <TouchableOpacity
             style={[styles.button, { marginTop: 20 }]}
             //onPress={denunciarVaga}
           >
-            <Text style={[styles.buttonText, { color: "#fff" }]}>Confirmar</Text>
+            <Text style={[styles.buttonText, {color: '#fff'}]}>Confirmar</Text>
           </TouchableOpacity>
         </View>
       </Modal>
@@ -279,25 +282,28 @@ export default function Chat({ navigation }) {
         <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
           <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Deletar Mensagem</Text>
 
-          <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Deseja deletar essa mensagem?</Text>
+          <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Deseja deletar essa mensagem?</Text>
 
-          <View style={{ flexDirection: "row", alignItems: "flex-end", alignSelf: "flex-end", gap: 20 }}>
-            <TouchableOpacity
-              style={[{ marginTop: 20, padding: 10 }]}
-              //onPress={denunciarVaga}
-            >
-              <Text style={[styles.buttonText, { color: "#ff5447" }]}>Cancelar</Text>
-            </TouchableOpacity>
+          <View style={{flexDirection: 'row', alignItems: 'flex-end', alignSelf: 'flex-end', gap: 20}}>
 
-            <TouchableOpacity
-              style={[{ marginTop: 20, padding: 10 }]}
-              //onPress={denunciarVaga}
-            >
-              <Text style={[styles.buttonText, { color: theme.textColor, borderBottomWidth: 1, borderColor: "#20dd77" }]}>Confirmar</Text>
-            </TouchableOpacity>
+          <TouchableOpacity
+            style={[{ marginTop: 20, padding: 10 }]}
+            //onPress={denunciarVaga}
+          >
+            <Text style={[styles.buttonText, {color: '#ff5447'}]}>Cancelar</Text>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[ { marginTop: 20, padding: 10 }]}
+            //onPress={denunciarVaga}
+          >
+            <Text style={[styles.buttonText, {color: theme.textColor, borderBottomWidth: 1, borderColor: '#20dd77'}]}>Confirmar</Text>
+          </TouchableOpacity>
+
           </View>
         </View>
       </Modal>
+
     </SafeAreaView>
   );
 }

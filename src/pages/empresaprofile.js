@@ -146,7 +146,7 @@ const toggleModal = () => {
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={{ width: "100%" }}>
             <View style={styles.profileBackgroundImageCont}>
-              <Image source={dadosEmpresa.fotoBanner ? { uri: dadosEmpresa.fotoBanner } : require("../../assets/icons/profilebgempty.png")} style={styles.profileBackgroundImg} />
+              <Image source={dadosEmpresa.bannerEmpresa ? { uri: dadosEmpresa.bannerEmpresa } : require("../../assets/icons/profilebgempty.png")} style={styles.profileBackgroundImg} />
               <View style={[styles.profileIconBox, { borderColor: theme.borderColor }]}>
                 <Image source={dadosEmpresa.fotoEmpresa ? { uri: dadosEmpresa.fotoEmpresa } : require("../../assets/icons/manicon.jpg")} style={styles.icon} />
               </View>
@@ -171,7 +171,7 @@ const toggleModal = () => {
                 <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Avaliações da Empresa:</Text>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 5 }}>
                   <Text style={[styles.DMSansRegular, { color: getColorBasedOnAvalicao(dadosEmpresa.avaliacaoEmpresa) }]}>{dadosEmpresa.avaliacaoEmpresa}</Text>
-                  {dadosEmpresa.avaliacaoEmpresa === "Muito Positivas" ? <AntDesign name="checkcircle" size={20} color="#20dd77" /> : ""}
+                  {dadosEmpresa.avaliacaoEmpresa === "Muito Positivas" ? <AntDesign name="checkcircle" size={20} color="#20dd77" /> : <Text>Sem Avaliações</Text>}
                 </View>
               </View>
 

@@ -214,7 +214,7 @@ export default function Vaga({ navigation }) {
                 </View>
               </View>
               <View style={[styles.profileIconBox, { borderColor: theme.textColor }]}>
-                <Image source={require("../../assets/icons/dynamo.png")} style={styles.icon} />
+                <Image source={vaga.empresa.fotoEmpresa ? {uri:vaga.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.icon} />
               </View>
             </View>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Descrição:{'\n'}<Text style={styles.DMSansRegular}>{vaga.descricaoVaga}</Text></Text>
