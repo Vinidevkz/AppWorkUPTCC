@@ -81,7 +81,7 @@ hand_gesture
               </span>
               <p class="text-black m-0">Vagas no sistema</p>
               </div>
-              <div class="card-body d-flex justify-content-center">
+              <div class="card-body d-flex justify-content-center p-0">
               <h2 class="text-black">{{ $totalRegistrosVaga }}</h2>
               </div>
             </div>
@@ -95,7 +95,7 @@ bar_chart
 </span>
                 <p class="text-black m-0">Usuários no sistema</p>
               </div>
-              <div class="card-body d-flex justify-content-center">
+              <div class="card-body d-flex justify-content-center p-0">
               <h2 class="text-black">{{ $totalRegistrosUsuario }}</h2>
               </div>
             </div>
@@ -108,7 +108,7 @@ location_city
 </span>
                 <p class="text-black m-0">Empresas no sistema</p>
               </div>
-              <div class="card-body d-flex justify-content-center">
+              <div class="card-body d-flex justify-content-center p-0">
               <h2 class="text-black">{{ $totalRegistrosEmpresa }}</h2>
               </div>
             </div>

@@ -88,21 +88,21 @@ icon: {
 
 //Estilos Chat
 msgboxUser: {
-  padding: 5,
   alignSelf: 'flex-end',
   justifyContent: 'center',
   borderTopLeftRadius: 10,
   borderTopRightRadius: 10,
   borderBottomLeftRadius: 10,
   minWidth: 150,
-  maxWidth: 350,
+  maxWidth: 250,
   flexWrap: 'wrap',
   gap: 5,
-  backgroundColor: '#0db862'
-},
+  backgroundColor: '#0db862',
+  elevation: 3
+},  
 
 msgboxEmpresa: {
-  padding: 5,
+
   alignSelf: 'flex-start',
   borderTopLeftRadius: 10,
   borderTopRightRadius: 10,
@@ -111,7 +111,8 @@ msgboxEmpresa: {
   maxWidth: 250,
   flexWrap: 'wrap',
   gap: 5,
-  backgroundColor: '#fff'
+  backgroundColor: '#fff',
+  elevation: 3
 },
 
 button: {

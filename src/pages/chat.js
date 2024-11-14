@@ -77,7 +77,7 @@ export default function Chat({ navigation }) {
         console.log("Mensagem enviada:", resultado);
         buscaConversa(); // Recarregar a conversa
       } else {
-        console.log("Erro ao enviar mensagem:", response.status);
+        console.log("Erro ao enviar mensagem:", response.message);
       }
     } catch (error) {
       console.log("Erro ao enviar mensagem:", error);
@@ -141,11 +141,13 @@ export default function Chat({ navigation }) {
     </View>
   )}
   renderItem={({ item }) => (
-    <TouchableOpacity onPress={() => { toggleModalMenu(); setMudancaMsg(item.mensagem); setTipoEmissor(item.tipoEmissor); }}>
-      <View style={[item.tipoEmissor === "Usuario" ? styles.msgboxUser : styles.msgboxEmpresa, { marginVertical: 8, marginHorizontal: 15 }]}>
-        <View style={[{ borderBottomWidth: 1 }, item.tipoEmissor === "Usuario" ? { borderColor: "#fff" } : {}]}>
-          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff" } : { color: "#242424" }]}>{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
+    <TouchableOpacity onPress={() => { toggleModalMenu(); setMudancaMsg(item.mensagem); setTipoEmissor(item.tipoEmissor); }} style={{overflow: 'hidden'}}>
+      <View style={[item.tipoEmissor === "Usuario" ? styles.msgboxUser : styles.msgboxEmpresa, { marginVertical: 8, marginHorizontal: 15, overflow: 'hidden' }]}>
+        <View style={[ item.tipoEmissor === "Usuario" ? { backgroundColor: '#0fd471', padding: 10 } : {backgroundColor: '#e8e8e8', padding: 10}]}>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff", width: 150 } : { color: "#242424" }]}>{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
         </View>
+
+        <View style={{paddingHorizontal: 10, paddingBottom: 10}}>
         <View style={{ alignSelf: "flex-start", marginVertical: 5 }}>
           <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff" } : { color: "#242424" }, { fontSize: 12 }]}>{item.mensagem}</Text>
         </View>
@@ -159,6 +161,7 @@ export default function Chat({ navigation }) {
               minute: "2-digit",
             })}
           </Text>
+        </View>
         </View>
       </View>
     </TouchableOpacity>
