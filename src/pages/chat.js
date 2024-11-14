@@ -127,7 +127,7 @@ export default function Chat({ navigation }) {
 
       <FlatList
   ref={flatListRef} 
-  data={conversa.slice().reverse()} 
+  data={Array.isArray(conversa) ? conversa.slice().reverse() : []}
   keyExtractor={(item, index) => index.toString()}
   style={{ flex: 1 }}
   onContentSizeChange={scrollToEnd} 
@@ -162,6 +162,11 @@ export default function Chat({ navigation }) {
       </View>
     </TouchableOpacity>
   )}
+          ListEmptyComponent={() => (
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+            <Text>Este chat não possuí mensagens.</Text>
+          </View>
+        )}
 />
 
 

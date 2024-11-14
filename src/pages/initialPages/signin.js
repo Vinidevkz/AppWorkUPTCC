@@ -107,7 +107,6 @@ export default function SignIN({ navigation }) {
           <ActivityIndicator size="large" color="#20dd77" />
         </View>
       )}
-      <TextInput>{apiNgrok}</TextInput>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
