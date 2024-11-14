@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 50,
-    borderWidth: 2,
+    borderWidth: 1,
     borderColor: '#1b1b1b',
     backgroundColor: '#fff',
   },

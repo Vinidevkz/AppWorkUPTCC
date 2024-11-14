@@ -210,6 +210,15 @@ export default function Profile({ navigation }) {
                 >
                   <Text style={styles.DMSansBold}>Cursos Complementares:</Text>{"\n"}{dadosUser.formacaoCompetenciaUsuario}
                 </Text>
+                <Text
+                  style={[
+                    styles.DMSansRegular,
+                    styles.text,
+                    { color: theme.textColor },
+                  ]}
+                >
+                  <Text style={styles.DMSansBold}>Lingua estrangeira:</Text>{"\n"}{dadosUser.linguaUsuario ? <Text>{dadosUser.linguaUsuario}</Text> : <Text>Nenhuma</Text>}
+                </Text>
               </View>
 
               <View style={styles.profileLinksCont}>
@@ -262,11 +271,10 @@ export default function Profile({ navigation }) {
                     {dadosUser?.emailContato || "Loading..."}
                   </Text>
                 </View>
+                
               </View>
             </View>
-            <View
-              style={[styles.line, { borderColor: theme.lineColor }]}
-            ></View>
+
           </View>
         </View>
       </ScrollView>

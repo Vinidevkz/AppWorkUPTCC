@@ -151,7 +151,7 @@ export default function SignON3({ navigation }) {
       dataToSend.contatoUsuario = tel;
       dataToSend.emailContato = emailContato;
       dataToSend.areaInteresseUsuario = areaInt;
-      dataToSend.linguaEstrangeira = linguaEstrangeira;
+      dataToSend.linguaUsuario = linguaEstrangeira;
       dataToSend.ensinoMedio = ensinoMedio;
       dataToSend.anoFormacao = anoFormacao;
       dataToSend.fotoUsuario = photoURL || "";

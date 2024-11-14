@@ -61,7 +61,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     overflow: 'hidden',
     borderRadius: 50,
-    borderWidth: 2,
     backgroundColor: '#fff',
     zIndex: 1,
   },
@@ -96,7 +95,7 @@ const styles = StyleSheet.create({
   },
 
   profileUserLocation: {
-    fontSize: 16,
+    fontSize: 14,
   },
 
   profileBioCont: {
