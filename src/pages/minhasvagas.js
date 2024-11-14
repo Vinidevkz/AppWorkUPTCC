@@ -142,7 +142,7 @@ export default function MinhasVagas({ navigation }) {
                 marginTop: 20,
               }}
             >
-              Nenhuma vaga encontrada
+              Você não se candidatou a nenhuma vaga.
             </Text>
           )
         }

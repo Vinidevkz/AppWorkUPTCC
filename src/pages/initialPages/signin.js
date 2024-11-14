@@ -134,7 +134,7 @@ export default function SignIN({ navigation }) {
 
         <View style={styles.footer}>
           <Text style={styles.DMSansRegular}>Não possui uma conta? </Text>
-          <TouchableOpacity style={styles.footerButton}>
+          <TouchableOpacity style={styles.footerButton} onPress={() => navigation.navigate("SignON1")}>
             <Text style={styles.DMSansBold}>Faça seu Cadastro</Text>
           </TouchableOpacity>
         </View>

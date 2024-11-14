@@ -38,7 +38,7 @@ export default function SignON3({ navigation }) {
     tel,
     emailContato,
     userName,
-    setUsername,
+    setUserName,
     formacaoUsuario,
     setUserId,
     setFotoUsuario,
@@ -151,7 +151,7 @@ export default function SignON3({ navigation }) {
       dataToSend.contatoUsuario = tel;
       dataToSend.emailContato = emailContato;
       dataToSend.areaInteresseUsuario = areaInt;
-      dataToSend.linguaEstrangeira = linguaEstrangeira;
+      dataToSend.linguaUsuario = linguaEstrangeira;
       dataToSend.ensinoMedio = ensinoMedio;
       dataToSend.anoFormacao = anoFormacao;
       dataToSend.fotoUsuario = photoURL || "";
@@ -199,7 +199,7 @@ export default function SignON3({ navigation }) {
         setUserId(resp.idUsuario);
         setFotoUsuario(resp.fotoUsuario)
         setNome(resp.nomeUsuario)
-        setUsername(resp.usernameUsuario)
+        setUserName(resp.usernameUsuario)
         navigation.navigate('TabBar');
       }
       

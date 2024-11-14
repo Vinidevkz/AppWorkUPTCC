@@ -9,7 +9,6 @@ const stylesProfile = StyleSheet.create({
         justifyContent: 'center',
         overflow: 'hidden',
         borderRadius: 50,
-        borderWidth: 5,
         backgroundColor: '#fff',
       },
     

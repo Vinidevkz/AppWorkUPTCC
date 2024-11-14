@@ -29,7 +29,6 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 10,
     paddingHorizontal: 25,
-    elevation: 10,
     zIndex: 1
   },
 
