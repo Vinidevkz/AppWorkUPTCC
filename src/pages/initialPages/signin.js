@@ -10,7 +10,7 @@ import styles from "../initialPages/styles/signin.js";
 import { Context } from "./context/provider.js";
 import ApisUrls from "../../ApisUrls/apisurls.js";
 
-const { apiEmulador } = ApisUrls;
+const { apiNgrok } = ApisUrls;
 
 export default function SignIN({ navigation }) {
   const [email, setEmail] = useState("");
@@ -26,7 +26,7 @@ export default function SignIN({ navigation }) {
     }
 
     try {
-      const response = await fetch(apiEmulador, {
+      const response = await fetch(apiNgrok, {
         method: "POST",
         headers: {
           Accept: "application/json",
@@ -107,6 +107,7 @@ export default function SignIN({ navigation }) {
           <ActivityIndicator size="large" color="#20dd77" />
         </View>
       )}
+      <TextInput>{apiNgrok}</TextInput>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
