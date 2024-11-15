@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
     zIndex: 1,
     position: 'absolute',
     bottom: -50, // Posiciona a metade do ícone abaixo da imagem de fundo
-    left: '40%',
+    left: '36%',
     transform: [{ translateX: 80 }], // Centraliza horizontalmente
   },
 

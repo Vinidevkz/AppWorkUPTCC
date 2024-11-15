@@ -253,7 +253,7 @@ export default function Home({ navigation }) {
         <View style={styles.titleCont2}>
           <View>
            <Text style={[styles.title, styles.row, styles.DMSansBold, { color: theme.textColor }]}>Vagas para você:</Text>
-           <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>Filtando de sua preferência: {areaInt}</Text>
+           <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>Filtrando de sua preferência: {areaInt}</Text>
           </View>
           <TouchableOpacity onPress={() => {buscaVaga(); buscaOutrasVaga()}}>
             <FontAwesome name="refresh" size={30} color="#20dd77" />

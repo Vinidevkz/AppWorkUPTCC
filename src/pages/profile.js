@@ -6,6 +6,7 @@ import {
   ScrollView,
   SafeAreaView,
   TouchableOpacity,
+  ActivityIndicator,
 } from "react-native";
 import { Context } from "../pages/initialPages/context/provider";
 import { useTheme } from "../pages/initialPages/context/themecontext";
@@ -122,7 +123,7 @@ export default function Profile({ navigation }) {
                     { color: theme.textColor },
                   ]}
                 >
-                  {dadosUser.nomeUsuario || "Loading..."}
+                  {dadosUser.nomeUsuario || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                 </Text>
                 <Text
                   style={[
@@ -131,7 +132,7 @@ export default function Profile({ navigation }) {
                     { color: theme.textColor },
                   ]}
                 >
-                  @{dadosUser.usernameUsuario || "Loading..."}
+                  @{dadosUser.usernameUsuario || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                 </Text>
                 <Text
                   style={[
@@ -140,7 +141,7 @@ export default function Profile({ navigation }) {
                     { color: theme.textColor },
                   ]}
                 >
-                  {dadosUser.cidadeUsuario  || "Loading..."} - {dadosUser.estadoUsuario || "Loading..."}
+                  {dadosUser.cidadeUsuario  || <ActivityIndicator size={'small'} color={"#20dd77"}/>} - {dadosUser.estadoUsuario || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                 </Text>
               </View>
             </View>
@@ -154,7 +155,7 @@ export default function Profile({ navigation }) {
                     { color: theme.textColor },
                   ]}
                 >
-                  {dadosUser.sobreUsuario || "Loading..."}
+                  {dadosUser.sobreUsuario || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                 </Text>
               </View>
 
@@ -166,7 +167,7 @@ export default function Profile({ navigation }) {
                         { color: theme.textColor },
                       ]}
                     >
-                      #{dadosUser.areaInteresseUsuario || "Loading..."}
+                      #{dadosUser.areaInteresseUsuario || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                 </Text>
               </View>
             </View>
@@ -248,7 +249,7 @@ export default function Profile({ navigation }) {
                       { color: theme.textColor },
                     ]}
                   >
-                    {dadosUser?.contatoUsuario || "Loading..."}
+                    {dadosUser?.contatoUsuario || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                   </Text>
                 </View>
                 <View style={styles.linkLine}>
@@ -268,7 +269,7 @@ export default function Profile({ navigation }) {
                       { color: theme.textColor },
                     ]}
                   >
-                    {dadosUser?.emailContato || "Loading..."}
+                    {dadosUser?.emailContato || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                   </Text>
                 </View>
                 

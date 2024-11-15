@@ -144,15 +144,17 @@ export default function Chat({ navigation }) {
     <TouchableOpacity onPress={() => { toggleModalMenu(); setMudancaMsg(item.mensagem); setTipoEmissor(item.tipoEmissor); }} style={{overflow: 'hidden'}}>
       <View style={[item.tipoEmissor === "Usuario" ? styles.msgboxUser : styles.msgboxEmpresa, { marginVertical: 8, marginHorizontal: 15, overflow: 'hidden' }]}>
         <View style={[ item.tipoEmissor === "Usuario" ? { backgroundColor: '#0fd471', padding: 10 } : {backgroundColor: '#e8e8e8', padding: 10}]}>
-          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff", width: 150 } : { color: "#242424", width: 150 }]}>{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff", width: 150 } : { color: "#242424", width: 150 }]} numberOfLines={1} ellipsizeMode="tail">{item.tipoEmissor === "Empresa" ? nomeEmpresa : nome}</Text>
         </View>
 
         <View style={{paddingHorizontal: 10, paddingBottom: 10}}>
         <View style={{ alignSelf: "flex-start", marginVertical: 5 }}>
-          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff" } : { color: "#242424" }, { fontSize: 12 }]}>{item.mensagem}</Text>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff" } : { color: "#242424" }, { fontSize: 14 }]}>{item.mensagem}</Text>
         </View>
-        <View style={{ width: '100%' }}>
-          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff" } : { color: "#242424" }, { fontSize: 11 }]}>
+
+        </View>
+        <View style={{ width: '100%', alignSelf: 'flex-end', padding: 5 }}>
+          <Text style={[styles.DMSansRegular, item.tipoEmissor === "Usuario" ? { color: "#fff", alignSelf: 'flex-end' } : { color: "#242424" }, { fontSize: 11 }]}>
             {new Date(item.mensagemData).toLocaleString("pt-BR", {
               day: "2-digit",
               month: "2-digit",
@@ -161,7 +163,6 @@ export default function Chat({ navigation }) {
               minute: "2-digit",
             })}
           </Text>
-        </View>
         </View>
       </View>
     </TouchableOpacity>

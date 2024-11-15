@@ -1,18 +1,11 @@
 import React, { useState, useContext, useEffect } from "react";
-import {
-  View,
-  Text,
-  ActivityIndicator,
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, SafeAreaView, StatusBar, FlatList, TouchableOpacity } from "react-native";
 import { Context } from "../pages/initialPages/context/provider";
 import ApisUrls from "../ApisUrls/apisurls.js";
 import styles from "../styles/vagas.js";
 import { useTheme } from "../pages/initialPages/context/themecontext";
+
+import Modal from "react-native-modal";
 
 export default function MinhasVagas({ navigation }) {
   const { theme } = useTheme({ MinhasVagas });
@@ -22,6 +15,11 @@ export default function MinhasVagas({ navigation }) {
   const [dadosUser, setDadosUser] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+
+  const [isModalVisible, setModalVisible] = useState(false);
+
+  const [statusVaga, setStatusVaga] = useState("");
+  const [feedback, setFeedback] = useState("")
 
   // Função para buscar as vagas do usuário
   const fetchUserData = async () => {
@@ -59,6 +57,10 @@ export default function MinhasVagas({ navigation }) {
     fetchUserData();
   }, [userId]); // Dependência em userId para recarregar se o ID do usuário mudar
 
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
   const renderItem = ({ item }) => (
     <View
       style={{
@@ -87,13 +89,24 @@ export default function MinhasVagas({ navigation }) {
           style={{
             color: theme.textColor,
             fontFamily: "DMSans-Bold",
-            fontSize: 15,
+            fontSize: 15, paddingVertical: 5
+          }}
+          numberOfLines={1}
+          ellipsizeMode="tail"
+        >
+          {item.vaga?.empresa?.nomeEmpresa} • {item.vaga.cidadeVaga} • {item.vaga.estadoVaga} 
+        </Text>
+
+
+        <TouchableOpacity
+          style={{ borderWidth: 2, borderColor: "#20dd77", borderRadius: 10, padding: 10, minWidth: 50, maxWidth: 100 }}
+          onPress={() => {
+            toggleModal(), setStatusVaga(item.status?.tipoStatusVaga); setFeedback(item.motivoFeedback)
           }}
         >
-          {item.vaga.cidadeVaga} • {item.vaga.estadoVaga}
-        </Text>
-        <Text style={{ color: theme.textColor }}>{item.vaga.nomeEmpresa}</Text>
-        <Text style={{ color: item.status?.tipoStatusVaga === "Chamado" ? '#20dd77' : '#ff5447' }}>{item.status?.tipoStatusVaga}</Text>
+          <Text style={[styles.DMSansRegular]}>Status:</Text>
+          <Text style={[styles.DMSansRegular, { color: item.status?.tipoStatusVaga === "Chamado" ? "#20dd77" : item.status?.tipoStatusVaga === "Pendente" ? "#898989" : "#ff5447" }]}>{item.status?.tipoStatusVaga}</Text>
+        </TouchableOpacity>
       </View>
 
       <TouchableOpacity
@@ -109,24 +122,10 @@ export default function MinhasVagas({ navigation }) {
   );
 
   return (
-    <SafeAreaView
-      style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}
-    >
-      <StatusBar
-        backgroundColor={theme.statusBarBackground}
-        barStyle={theme.statusBarColor}
-      />
-      <View
-        style={[
-          styles.containerTop,
-          { backgroundColor: theme.backgroundColorNavBar },
-        ]}
-      >
-        <Text
-          style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}
-        >
-          Minhas Vagas:
-        </Text>
+    <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
+      <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
+      <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
+        <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Minhas Vagas:</Text>
       </View>
       <FlatList
         data={dadosUser}
@@ -147,6 +146,44 @@ export default function MinhasVagas({ navigation }) {
           )
         }
       />
+
+      <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
+        <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
+          <View style={{ gap: 10 }}>
+            <Text style={[styles.DMSansBold, { fontSize: 18 }]}>Status de sua candidatura:</Text>
+            <Text style={[styles.DMSansRegular, { color: statusVaga === "Chamado" ? "#20dd77" : statusVaga === "Pendente" ? "#898989" : "#ff5447", fontSize: 17 }]}>{statusVaga}</Text>
+
+            {statusVaga === "Pendente" ? (
+              <View>
+                <Text style={[styles.DMSansRegular]}>A vaga ainda está em análise. Por favor, aguarde até o término do processo seletivo para receber um retorno da empresa.</Text>
+              </View>
+            ) : statusVaga == "Chamado" ? (
+              <View>
+                <Text style={[styles.DMSansRegular]}>Parabéns! Sua candidatura foi aprovada pela empresa 'Nome da Empresa'. Aguarde o contato diretamente pelo chat ou pelos meios de comunicação cadastrados.</Text>
+
+                <View style={{ marginVertical: 15 }}>
+                  <Text style={[styles.DMSansBold]}>Feedback da empresa:</Text>
+
+                  <Text style={[styles.DMSansRegular]}>{feedback}</Text>
+                </View>
+              </View>
+            ) : (
+              <View>
+                <Text style={[styles.DMSansRegular]}>Infelizmente, sua candidatura não foi aprovada neste processo seletivo. Entendemos que esse não é o resultado esperado, mas não desista! Veja abaixo mais detalhes sobre o resultado e continue explorando outras oportunidades que correspondam ao seu perfil.</Text>
+
+                <View style={{ marginVertical: 15, gap: 5 }}>
+                  <Text style={[styles.DMSansBold]}>Feedback da empresa:</Text>
+
+                  <Text style={[styles.DMSansRegular]}>{feedback}</Text>
+                </View>
+              </View>
+            )}
+          </View>
+          <TouchableOpacity style={[{ backgroundColor: "#20dd77", padding: 10, borderRadius: 20, alignItems: "center", justifyContent: "center", width: 100, alignSelf: "flex-end", marginTop: 20 }]} onPress={() => toggleModal()}>
+            <Text style={[styles.DMSansRegular, { color: "#fff" }]}>OK</Text>
+          </TouchableOpacity>
+        </View>
+      </Modal>
     </SafeAreaView>
   );
 }

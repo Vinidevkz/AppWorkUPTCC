@@ -93,8 +93,9 @@ export default function Conversas({ navigation }) {
         renderItem={renderItem}
         key={(item) => item.idChat}
         ListEmptyComponent={
-          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", height: 700 }}>
-            <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma conversa iniciada.</Text>
+          <View style={{ flex: 1, alignItems: "center", justifyContent: "center", height: 700, gap: 20 }}>
+            <Image source={require('../../assets/img/img3.png')} style={{width: 250, height: 150}}/>
+            <Text style={[styles.DMSansRegular, {color: theme.textColor, textAlign: 'center', width: 250}]}>Nenhuma conversa iniciada. Apenas empresas podem iniciar uma conversa com você.</Text>
           </View>
         }
       />

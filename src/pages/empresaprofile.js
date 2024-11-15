@@ -1,5 +1,5 @@
 import React, { useState, useContext } from "react";
-import { View, Text, Image, ScrollView, SafeAreaView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, Image, ScrollView, SafeAreaView, TouchableOpacity, Alert, ActivityIndicator } from "react-native";
 import { Context } from "../pages/initialPages/context/provider";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import styles from "../styles/profile";
@@ -155,16 +155,16 @@ const toggleModal = () => {
             <View style={[styles.profileCont, { backgroundColor: theme.backgroundColor }]}>
               <View style={[styles.profileHeader]}>
                 <View>
-                  <Text style={[styles.DMSansBold, styles.profileName, { color: theme.textColor }]}>{dadosEmpresa.nomeEmpresa || "Loading..."}</Text>
-                  <Text style={[styles.DMSansRegular, styles.profileUserName, { color: theme.textColor }]}>@{dadosEmpresa.usernameEmpresa || "Loading..."}</Text>
+                  <Text style={[styles.DMSansBold, styles.profileName, { color: theme.textColor }]}>{dadosEmpresa.nomeEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}</Text>
+                  <Text style={[styles.DMSansRegular, styles.profileUserName, { color: theme.textColor }]}>@{dadosEmpresa.usernameEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}</Text>
                   <Text style={[styles.DMSansRegular, styles.profileUserLocation, { color: theme.textColor }]}>
-                    {dadosEmpresa.cidadeEmpresa || "Loading..."} - {dadosEmpresa.estadoEmpresa || "Loading..."}
+                    {dadosEmpresa.cidadeEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>} - {dadosEmpresa.estadoEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
                   </Text>
                 </View>
               </View>
 
               <View style={styles.profileBioCont}>
-                <Text style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>{dadosEmpresa.sobreEmpresa || "Loading..."}</Text>
+                <Text style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>{dadosEmpresa.sobreEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}</Text>
               </View>
 
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }} /* Avaliações */>
