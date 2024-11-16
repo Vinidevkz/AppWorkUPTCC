@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     maxHeight: 70,
     alignItems: 'center',
     paddingHorizontal: 20,
-    gap: 20,
+    gap: 10,
     flexDirection: 'row',   
     zIndex: 1,
     borderBottomWidth: 1,
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
   },
 
   titleHeader: {
-    fontSize: 25,
+    fontSize: 17,
     color: '#1b1b1b'
   },
 
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 25,
+    fontSize: 17,
     alignSelf: 'flex-start'
   },    
 

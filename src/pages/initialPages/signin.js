@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { StatusBar, View, Text, TextInput, SafeAreaView, Image, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import * as Font from "expo-font";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "../initialPages/styles/signin.js";
@@ -109,18 +109,18 @@ export default function SignIN({ navigation }) {
       )}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
+         <MaterialIcons name="arrow-back-ios" size={20} color={'#1b1b1b'} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.titleHeader]}>Fazer Login</Text>
       </View>
       <View style={styles.loginCont}>
         <View style={styles.inputCont}>
-          <Entypo name="mail" size={25} color="black" style={{ borderRightWidth: 2, paddingRight: 8 }} />
+          <Entypo name="mail" size={20} color="black" style={{ borderRightWidth: 2, paddingRight: 8 }} />
           <TextInput placeholder="Digite seu email ou usuario" style={[styles.DMSansRegular, styles.input]} onChangeText={(text) => setEmail(text)} value={email} />
         </View>
 
         <View style={styles.inputCont}>
-          <FontAwesome6 name={"unlock"} size={25} color={"#1b1b1b"} style={{ borderRightWidth: 2, paddingRight: 10 }} />
+          <FontAwesome6 name={"unlock"} size={20} color={"#1b1b1b"} style={{ borderRightWidth: 2, paddingRight: 10 }} />
           <TextInput placeholder="Digite sua senha" style={[styles.DMSansRegular, styles.input]} secureTextEntry={!passwordVisible} onChangeText={(text) => setSenha(text)} value={senha} />
           <TouchableOpacity onPress={() => setPasswordVisible(!passwordVisible)}>
             <FontAwesome6 name={passwordVisible ? "eye-slash" : "eye"} size={25} color={"#1b1b1b"} style={{ paddingHorizontal: 10 }} />

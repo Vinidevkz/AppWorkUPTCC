@@ -4,7 +4,7 @@ import { SafeAreaView, Text, View, StatusBar, TouchableOpacity, FlatList, Image 
 import { useTheme } from "../pages/initialPages/context/themecontext";
 import { Context } from "../pages/initialPages/context/provider";
 import ApisUrls from "../ApisUrls/apisurls.js";
-const { apiNgrokChats } = ApisUrls;
+const { apiNgrokChats, apiNgrokMensagemMaisRecente } = ApisUrls;
 
 import * as Font from "expo-font";
 import styles from "../styles/conversas.js";
@@ -31,6 +31,7 @@ export default function Conversas({ navigation }) {
   const buscaChat = useCallback(async () => {
     try {
       const request = await fetch(`${apiNgrokChats}/${userId}`);
+      console.log(chat)
       const response = await request.json();
       setChat(response);
       console.log(response);
@@ -63,8 +64,8 @@ export default function Conversas({ navigation }) {
           </View>
 
           <View>
-            <Text style={[styles.DMSansBold, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
-            <Text style={[styles.DMSansBold, { color: theme.textColor }]}>{item.lastmsg}</Text>
+            <Text style={[styles.DMSansBold, { color: theme.textColor, fontSize: 17 }]}>{item.empresa?.nomeEmpresa}</Text>
+            <Text numberOfLines={1} ellipsizeMode="tail" style={[styles.DMSansBold, { color: '#909090', width: 250, fontSize: 13 }]}>{item.ultima_mensagem?.tipoEmissor === 'Usuario' ? "Você: " : [item.empresa?.nomeEmpresa, ": "]}{item.ultima_mensagem?.mensagem}</Text>
           </View>
         </View>
       </View>

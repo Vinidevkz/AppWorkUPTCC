@@ -95,9 +95,10 @@ const styles = StyleSheet.create({
 
   inputCont: {
     borderRadius: 10,
-    elevation: 2,
+
     paddingHorizontal: 15,
     paddingVertical: 8,
+    height: 50,
     backgroundColor: '#fff',
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -117,7 +118,6 @@ const styles = StyleSheet.create({
   bioCont: {
     backgroundColor: '#fff',
     borderRadius: 20,
-    elevation: 5,
     height: 150,
     width: '100%',
     padding: 20,
@@ -127,7 +127,6 @@ const styles = StyleSheet.create({
   expCont: {
     backgroundColor: '#fff',
     borderRadius: 20,
-    elevation: 5,
     height: 150,
     width: '100%',
     padding: 20,

@@ -30,10 +30,6 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 25,
     zIndex: 1,
-    borderBottomWidth: 3,
-    borderBottomLeftRadius: 10,
-    borderBottomRightRadius: 10,
-    borderColor: '#20dd77'
   },
 
   WUPstyle: {

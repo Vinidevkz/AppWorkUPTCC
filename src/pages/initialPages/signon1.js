@@ -13,7 +13,7 @@ import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import useFonts from "../../styles/fontloader/fontloader.js";
 import { useContext, useState } from "react";
@@ -77,7 +77,7 @@ export default function SignON1({navigation}) {
     <SafeAreaView>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
+        <MaterialIcons name="arrow-back-ios" size={20} color={'#1b1b1b'} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>

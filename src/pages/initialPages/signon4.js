@@ -14,6 +14,7 @@ import styles from "./styles/signon.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 import useFonts from "../../styles/fontloader/fontloader.js";
 import { Context } from "./context/provider.js";
@@ -100,7 +101,7 @@ export default function SignON4({ navigation }) {
     <SafeAreaView>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
+        <MaterialIcons name="arrow-back-ios" size={20} color={'#1b1b1b'} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>
@@ -111,7 +112,7 @@ export default function SignON4({ navigation }) {
             Possui alguma língua estrangeira?:
           </Text>
 
-          <View style={{ overflow: "hidden", borderRadius: 20, elevation: 3 }}>
+          <View style={{ overflow: "hidden", borderRadius: 20}}>
             <Picker
               style={[styles.inputCont, styles.text, styles.DMSansRegular]}
               selectedValue={linguaEstrangeira}

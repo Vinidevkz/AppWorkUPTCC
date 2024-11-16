@@ -9,7 +9,7 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from "../ApisUrls/apisurls.js";
-const { apiNgrokVaga, apiNgrokSalvarVaga, apiNgrokCancelSalvarVaga, apiNgrokVerificarSalvarVaga, apiNgrokVagaPorArea, apiNgrokOutrasVagas } = ApisUrls;
+const { apiNgrokVaga, apiNgrokSalvarVaga, apiNgrokCancelSalvarVaga, apiNgrokVerificarSalvarVaga, apiNgrokVagaPorArea, apiNgrokOutrasVagas, apiNgrokPosts } = ApisUrls;
 import styles from "../styles/home";
 import { Context } from "../pages/initialPages/context/provider";
 
@@ -23,6 +23,8 @@ export default function Home({ navigation }) {
   const [error, setError] = useState(null);
   const [savedIcons, setSavedIcons] = useState({});
   const { theme } = useTheme({ Home });
+
+  const [posts, setPosts] = useState([]);
 
   const [isProcessing, setIsProcessing] = useState(false);
 
@@ -49,6 +51,7 @@ export default function Home({ navigation }) {
 
   useEffect(() => {
     buscaVaga();
+    pegarPosts();
   }, []);
 
   const buscaOutrasVaga = async () => {
@@ -69,6 +72,17 @@ export default function Home({ navigation }) {
   useEffect(() => {
     buscaOutrasVaga();
   }, []);
+
+  const pegarPosts = async () => {
+    try {
+      const request = await fetch(apiNgrokPosts);
+      const response = await request.json();
+      console.log("Posts do banco", posts);
+      setPosts(response);
+    } catch (error) {
+      console.log("Erro ao buscar posts:", error);
+    }
+  };
 
   const salvarVaga = async (vagaID) => {
     const idUsuario = userId;
@@ -170,7 +184,6 @@ export default function Home({ navigation }) {
     };
     verificarTodasVagas();
   }, [data]);
-  
 
   const [fontsLoaded, setFontsLoaded] = useState(false);
   useEffect(() => {
@@ -194,10 +207,10 @@ export default function Home({ navigation }) {
   }
 
   const toggleSaveIcon = async (id) => {
-    if (isProcessing) return;  // Se já está em processamento, não faz nada
-    
-    setIsProcessing(true);  // Marca o início do processamento
-  
+    if (isProcessing) return; // Se já está em processamento, não faz nada
+
+    setIsProcessing(true); // Marca o início do processamento
+
     try {
       if (savedIcons[id]) {
         // Se a vaga já foi salva, remove
@@ -209,42 +222,90 @@ export default function Home({ navigation }) {
         setSavedIcons((prev) => ({ ...prev, [id]: true }));
       }
     } catch (error) {
-      console.error('Erro ao salvar/remover vaga:', error);
+      console.error("Erro ao salvar/remover vaga:", error);
     } finally {
-      setIsProcessing(false);  // Libera o bloqueio para permitir próximos cliques
+      setIsProcessing(false); // Libera o bloqueio para permitir próximos cliques
     }
   };
-  
-  
-  
+
+  const post = ({ item }) => (
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+      }}
+    >
+      <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
+        <View style={styles.postHeader}>
+          <View style={[styles.postIconBox]}>
+            <Image source={item.empresa?.fotoEmpresa ? {uri:item.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+          </View>
+          <View>
+            <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
+            <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
+            {new Date(item.created_at).toLocaleString("pt-BR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric", 
+              hour: "2-digit",
+              minute: "2-digit",
+            })}
+            </Text>
+          </View>
+        </View>
+
+        <View style={styles.postBody}>
+          <Text style={[styles.DMSansBold, {fontSize: 18}]}>{item.tituloPublicacao}</Text>
+          <Text style={[styles.DMSansRegular, styles.postDesc, { color: theme.textColor }]}>{item.detalhePublicacao}</Text>
+          {item.fotoPublicacao ?
+          <View style={styles.postImgCont}>
+            
+  <Image
+    source={{ uri: item.fotoPublicacao }}
+    style={styles.postImg}
+    onError={() => {
+      // Opcional: Você pode definir um estado aqui se necessário
+    }}
+  />
+
+
+          </View>
+: <View></View>}
+          <View style={styles.optionsCont}>
+            <View style={styles.threeIconsCont}>
+              <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
+                <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color={theme.iconColorGreen} />
+              </TouchableOpacity>
+            </View>
+
+            <TouchableOpacity>
+              <SimpleLineIcons name="options-vertical" size={30} color={theme.iconColorWhite} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
 
   return (
     <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
       <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
+        <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+          <View style={[styles.profileIconBox, { borderColor: theme.borderColor }]}>
+            <Image source={fotoUsuario ? { uri: fotoUsuario } : require("../../assets/icons/manicon.jpg")} style={styles.icon} />
+          </View>
 
-      <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
-      <View
-              style={[
-                styles.profileIconBox,
-                { borderColor: theme.borderColor },
-              ]}
-            >
-              <Image
-                source={fotoUsuario ? { uri: fotoUsuario } : require("../../assets/icons/manicon.jpg")}
-                style={styles.icon}
-              />
-            </View>
-
-            <View>
-            <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>@{userName}</Text>
-            <Text style={[styles.DMSansBold, {fontSize: 18, color: theme.textColor}]}>Olá, {nome}</Text>
-            </View>
-      </View>
+          <View>
+            <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>@{userName}</Text>
+            <Text style={[styles.DMSansBold, { fontSize: 18, color: theme.textColor }]}>Olá, {nome}</Text>
+          </View>
+        </View>
 
         <View style={styles.iconBox}>
           <TouchableOpacity onPress={() => navigation.navigate("Conversas")}>
-            <Ionicons name="chatbubbles-outline" size={35} color={theme.iconColorWhite}  />
+            <Ionicons name="chatbubbles-outline" size={35} color={theme.iconColorWhite} />
           </TouchableOpacity>
         </View>
       </View>
@@ -252,10 +313,15 @@ export default function Home({ navigation }) {
       <ScrollView style={styles.ScrollView} showsVerticalScrollIndicator={false}>
         <View style={styles.titleCont2}>
           <View>
-           <Text style={[styles.title, styles.row, styles.DMSansBold, { color: theme.textColor }]}>Vagas para você:</Text>
-           <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>Filtrando de sua preferência: {areaInt}</Text>
+            <Text style={[styles.title, styles.row, styles.DMSansBold, { color: theme.textColor }]}>Vagas para você:</Text>
+            <Text style={[styles.text, styles.DMSansRegular, { color: theme.textColor }]}>Filtrando de sua preferência: {areaInt}</Text>
           </View>
-          <TouchableOpacity onPress={() => {buscaVaga(); buscaOutrasVaga()}}>
+          <TouchableOpacity
+            onPress={() => {
+              buscaVaga();
+              buscaOutrasVaga();
+            }}
+          >
             <FontAwesome name="refresh" size={30} color="#20dd77" />
           </TouchableOpacity>
         </View>
@@ -273,58 +339,56 @@ export default function Home({ navigation }) {
           </View>
         ) : (
           <View>
-          <FlatList
-            horizontal={true}
-            data={data}
-            style={styles.flatlist}
-            keyExtractor={(item) => item.idVaga.toString()}
-            
-            renderItem={({ item }) => (
-              <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
-                <View style={styles.vagaHead}>
-                  <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>
-                    {item.nomeVaga}
-                  </Text>
-                  <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>oferecido por: {item.empresa?.nomeEmpresa}</Text>
-                  <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>publicada em: {item.prazoVaga}</Text>
+            <FlatList
+              horizontal={true}
+              data={data}
+              style={styles.flatlist}
+              keyExtractor={(item) => item.idVaga.toString()}
+              scrollBarStyle="dark"
+              renderItem={({ item }) => (
+                <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
+                  <View style={styles.vagaHead}>
+                    <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>
+                      {item.nomeVaga}
+                    </Text>
+                    <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>oferecido por: {item.empresa?.nomeEmpresa}</Text>
+                    <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>publicada em: {item.prazoVaga}</Text>
+                  </View>
+                  <View style={[styles.vagaBody, { gap: 5 }]}>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Modalidade: {item.modalidade?.descModalidadeVaga}</Text>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Salário: R${item.salarioVaga}</Text>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Cidade: {item.cidadeVaga}</Text>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Área: {item.area?.nomeArea || "Não disponível"}</Text>
+                  </View>
+                  <View style={styles.vagaFooterCont}>
+                    <TouchableOpacity
+                      style={[styles.button, styles.buttonVaga]}
+                      onPress={() => {
+                        setVagaID(item.idVaga);
+                        navigation.navigate("Vagas");
+                      }}
+                    >
+                      <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.addFavButton}
+                      onPress={() => toggleSaveIcon(item.idVaga)} // Chama a função que alterna o ícone
+                    >
+                      <Ionicons
+                        name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
+                        size={35}
+                        color="#20dd77"
+                      />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <View style={[styles.vagaBody, { gap: 5 }]}>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Modalidade: {item.modalidade?.descModalidadeVaga}</Text>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Salário: R${item.salarioVaga}</Text>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Cidade: {item.cidadeVaga}</Text>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Área: {item.area?.nomeArea || "Não disponível"}</Text>
+              )}
+              ListEmptyComponent={
+                <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
+                  <Text style={[styles.DMSansRegular]}>Nenhuma vaga encontrada.</Text>
                 </View>
-                <View style={styles.vagaFooterCont}>
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonVaga]}
-                    onPress={() => {
-                      setVagaID(item.idVaga);
-                      navigation.navigate("Vagas");
-                    }}
-                  >
-                    <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-  style={styles.addFavButton}
-  onPress={() => toggleSaveIcon(item.idVaga)}  // Chama a função que alterna o ícone
->
-  <Ionicons
-    name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
-    size={35}
-    color="#20dd77"
-  />
-</TouchableOpacity>
-
-
-                </View>
-              </View>
-            )}
-            ListEmptyComponent={(
-              <View style={{flex: 1, width: 390, height: 300, alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={[styles.DMSansRegular]}>Nenhuma vaga encontrada.</Text>
-              </View>
-            )}
-          />
+              }
+            />
           </View>
         )}
 
@@ -376,31 +440,30 @@ export default function Home({ navigation }) {
                     <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
-  style={styles.addFavButton}
-  onPress={() => {
-    toggleSaveIcon(item.idVaga);  // Chama a função que alterna o ícone
-  }}
->
-  <Ionicons
-    name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
-    size={35}
-    color="#20dd77"
-  />
-</TouchableOpacity>
-
+                    style={styles.addFavButton}
+                    onPress={() => {
+                      toggleSaveIcon(item.idVaga); // Chama a função que alterna o ícone
+                    }}
+                  >
+                    <Ionicons
+                      name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
+                      size={35}
+                      color="#20dd77"
+                    />
+                  </TouchableOpacity>
                 </View>
               </View>
             )}
-            ListEmptyComponent={(
-              <View style={{flex: 1, width: 390, height: 300, alignItems: 'center', justifyContent: 'center'}}>
+            ListEmptyComponent={
+              <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
                 <Text style={[styles.DMSansRegular]}>Nenhuma vaga encontrada.</Text>
               </View>
-            )}
+            }
           />
         )}
 
         <View style={styles.titleCont}>
-          <Text style={[styles.title, styles.DMSansBold, { color: theme.textColor }]}>Seu Feed:</Text>
+          <Text style={[styles.title, styles.DMSansBold, { color: theme.textColor }]}>Publicações:</Text>
         </View>
 
         <View
@@ -410,61 +473,16 @@ export default function Home({ navigation }) {
             width: "100%",
           }}
         >
-          <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
-            <View style={styles.postHeader}>
-              <View style={[styles.postIconBox]}>
-                <Image source={require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+          <FlatList
+            data={posts}
+            keyExtractor={(item) => item.idPublicacao.toString()}
+            renderItem={post}
+            ListEmptyComponent={
+              <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
+                <Text style={[styles.DMSansRegular]}>Nenhuma publicação encontrado.</Text>
               </View>
-              <View>
-                <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>Dynamo Inc</Text>
-                <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>publicado em 14/09/2024</Text>
-              </View>
-            </View>
-
-            <View style={styles.postBody}>
-              <Text style={[styles.DMSansRegular, styles.postDesc, { color: theme.textColor }]}>Comunicado urgente! Abriremos vagas para desenvolvedores iniciantes na carreira e que estejam estudando nas seguintes áreas: Desenvolvimento de Sistemas Análise em Desenvolvimento de Sistemas</Text>
-              <View style={styles.postImgCont}>
-                <Image source={require("../../assets/icons/postbg.jpg")} style={styles.postImg} />
-              </View>
-
-              <View style={styles.optionsCont}>
-                <View style={styles.threeIconsCont}>
-                  <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
-                    <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color={theme.iconColorGreen} />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Ionicons name="chatbubble-ellipses-outline" size={35} color={theme.iconColorWhite} />
-                  </TouchableOpacity>
-                  <TouchableOpacity>
-                    <Ionicons name="paper-plane-outline" size={35} color={theme.iconColorWhite} />
-                  </TouchableOpacity>
-                </View>
-
-                <TouchableOpacity>
-                  <SimpleLineIcons name="options-vertical" size={30} color={theme.iconColorWhite} />
-                </TouchableOpacity>
-              </View>
-              <View style={styles.postComentCont}>
-                <View style={styles.comentHeader}>
-                  <View style={styles.comentHeaderP1}>
-                    <View style={styles.comentIconBox}>
-                      <FontAwesome name="user" size={30} color="black" />
-                    </View>
-                    <View>
-                      <Text style={[styles.DMSansBold, styles.comentTitle, { color: theme.textColor }]}>Marcos Antônio</Text>
-                      <Text style={[styles.DMSansRegular, styles.comentDate, { color: theme.textColor }]}>09/04/2024</Text>
-                    </View>
-                  </View>
-                  <TouchableOpacity>
-                    <SimpleLineIcons name="options-vertical" size={20} color={theme.iconColorWhite} />
-                  </TouchableOpacity>
-                </View>
-                <View style={styles.comentDescCont}>
-                  <Text style={[styles.DMSansRegular, styles.comentDesc, { color: theme.textColor }]}>Boa vaga!</Text>
-                </View>
-              </View>
-            </View>
-          </View>
+            }
+          />
         </View>
       </ScrollView>
 

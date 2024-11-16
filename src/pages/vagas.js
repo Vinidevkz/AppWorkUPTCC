@@ -225,7 +225,7 @@ export default function Vaga({ navigation }) {
             </Text>
           </View>
         ))}
-        <View style={[styles.infosCont, styles.row, {marginTop: '100%', alignItems: 'center', justifyContent: 'space-between'}]}>
+        <View style={[styles.infosCont, styles.row, { alignItems: 'center', justifyContent: 'space-between'}]}>
           {candidatureStatus[vagaID] ? (
             <TouchableOpacity
               style={[styles.button, { backgroundColor: "", borderWidth: 2, borderColor: "#20dd77" }]}

@@ -20,6 +20,7 @@ import * as ImagePicker from "expo-image-picker";
 import ApisUrls from "../../ApisUrls/apisurls.js";
 import { storage } from './firebase.js';
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 
 export default function SignON3({ navigation }) {
   const {
@@ -241,7 +242,7 @@ export default function SignON3({ navigation }) {
 
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.navigate("Welcome")}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color="#1b1b1b" />
+        <MaterialIcons name="arrow-back-ios" size={20} color={'#1b1b1b'} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title]}>Cadastro</Text>
       </View>
