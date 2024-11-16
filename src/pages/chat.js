@@ -11,6 +11,7 @@ import * as Font from "expo-font";
 import styles from "../styles/conversas.js";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from "@expo/vector-icons/Feather";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function Chat({ navigation }) {
   const flatListRef = useRef(null);
@@ -121,7 +122,7 @@ export default function Chat({ navigation }) {
       <StatusBar barStyle={theme.textColor} />
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
+        <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>{nomeEmpresa}</Text>
       </View>

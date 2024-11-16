@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 15,
+    gap: 10,
     elevation: 10,
     paddingHorizontal: 20,
     zIndex: 1
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 20,
+    fontSize: 17,
   },
 
   text: {

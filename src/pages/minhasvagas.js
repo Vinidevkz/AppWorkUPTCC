@@ -5,6 +5,9 @@ import ApisUrls from "../ApisUrls/apisurls.js";
 import styles from "../styles/vagas.js";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
+
 import Modal from "react-native-modal";
 
 export default function MinhasVagas({ navigation }) {
@@ -20,6 +23,7 @@ export default function MinhasVagas({ navigation }) {
 
   const [statusVaga, setStatusVaga] = useState("");
   const [feedback, setFeedback] = useState("")
+  const [nomeEmpresa, setNomeEmpresa] = useState("")
 
   // Função para buscar as vagas do usuário
   const fetchUserData = async () => {
@@ -88,24 +92,27 @@ export default function MinhasVagas({ navigation }) {
         <Text
           style={{
             color: theme.textColor,
-            fontFamily: "DMSans-Bold",
+            fontFamily: "DMSans-Regular",
             fontSize: 15, paddingVertical: 5
           }}
           numberOfLines={1}
           ellipsizeMode="tail"
         >
-          {item.vaga?.empresa?.nomeEmpresa} • {item.vaga.cidadeVaga} • {item.vaga.estadoVaga} 
+          {item.vaga?.empresa?.nomeEmpresa} 
         </Text>
+
+        <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>{item.vaga.cidadeVaga} • {item.vaga.estadoVaga} </Text>
 
 
         <TouchableOpacity
-          style={{ borderWidth: 2, borderColor: "#20dd77", borderRadius: 10, padding: 10, minWidth: 50, maxWidth: 100 }}
+          style={{alignItems: 'center', justifyContent: 'center', alignSelf: 'flex-start', borderRadius: 10, paddingVertical: 10, flexDirection: 'row', gap: 5 }}
           onPress={() => {
-            toggleModal(), setStatusVaga(item.status?.tipoStatusVaga); setFeedback(item.motivoFeedback)
+            toggleModal(), setStatusVaga(item.status?.tipoStatusVaga); setFeedback(item.motivoFeedback); setNomeEmpresa(item.vaga?.empresa?.nomeEmpresa)
           }}
         >
-          <Text style={[styles.DMSansRegular]}>Status:</Text>
+          <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Status:</Text>
           <Text style={[styles.DMSansRegular, { color: item.status?.tipoStatusVaga === "Chamado" ? "#20dd77" : item.status?.tipoStatusVaga === "Pendente" ? "#898989" : "#ff5447" }]}>{item.status?.tipoStatusVaga}</Text>
+          <MaterialIcons name="arrow-drop-down" size={24} color={theme.textColor} />
         </TouchableOpacity>
       </View>
 
@@ -124,7 +131,10 @@ export default function MinhasVagas({ navigation }) {
   return (
     <SafeAreaView style={[styles.SafeAreaView, { backgroundColor: theme.backgroundColor }]}>
       <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
-      <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
+      <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar, flexDirection: 'row' }]}>
+        <TouchableOpacity style={{padding: 10,  alignItems: 'center', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+        <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
+        </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Minhas Vagas:</Text>
       </View>
       <FlatList
@@ -150,31 +160,31 @@ export default function MinhasVagas({ navigation }) {
       <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
         <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
           <View style={{ gap: 10 }}>
-            <Text style={[styles.DMSansBold, { fontSize: 18 }]}>Status de sua candidatura:</Text>
+            <Text style={[styles.DMSansBold, { fontSize: 18, color: theme.textColor }]}>Status de sua candidatura:</Text>
             <Text style={[styles.DMSansRegular, { color: statusVaga === "Chamado" ? "#20dd77" : statusVaga === "Pendente" ? "#898989" : "#ff5447", fontSize: 17 }]}>{statusVaga}</Text>
 
             {statusVaga === "Pendente" ? (
               <View>
-                <Text style={[styles.DMSansRegular]}>A vaga ainda está em análise. Por favor, aguarde até o término do processo seletivo para receber um retorno da empresa.</Text>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>A vaga ainda está em análise. Por favor, aguarde até o término do processo seletivo para receber um retorno da empresa.</Text>
               </View>
             ) : statusVaga == "Chamado" ? (
               <View>
-                <Text style={[styles.DMSansRegular]}>Parabéns! Sua candidatura foi aprovada pela empresa 'Nome da Empresa'. Aguarde o contato diretamente pelo chat ou pelos meios de comunicação cadastrados.</Text>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Parabéns! Sua candidatura foi aprovada pela empresa {nomeEmpresa}. Aguarde o contato diretamente pelo chat ou pelos meios de comunicação cadastrados.</Text>
 
                 <View style={{ marginVertical: 15 }}>
-                  <Text style={[styles.DMSansBold]}>Feedback da empresa:</Text>
+                  <Text style={[styles.DMSansBold, {color: theme.textColor}]}>Feedback da empresa:</Text>
 
-                  <Text style={[styles.DMSansRegular]}>{feedback}</Text>
+                  <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>{feedback}</Text>
                 </View>
               </View>
             ) : (
               <View>
-                <Text style={[styles.DMSansRegular]}>Infelizmente, sua candidatura não foi aprovada neste processo seletivo. Entendemos que esse não é o resultado esperado, mas não desista! Veja abaixo mais detalhes sobre o resultado e continue explorando outras oportunidades que correspondam ao seu perfil.</Text>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Infelizmente, sua candidatura não foi aprovada neste processo seletivo. Entendemos que esse não é o resultado esperado, mas não desista! Veja abaixo mais detalhes sobre o resultado e continue explorando outras oportunidades que correspondam ao seu perfil.</Text>
 
                 <View style={{ marginVertical: 15, gap: 5 }}>
-                  <Text style={[styles.DMSansBold]}>Feedback da empresa:</Text>
+                  <Text style={[styles.DMSansBold, {color: theme.textColor}]}>Feedback da empresa:</Text>
 
-                  <Text style={[styles.DMSansRegular]}>{feedback}</Text>
+                  <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>{feedback}</Text>
                 </View>
               </View>
             )}

@@ -13,7 +13,7 @@ import Modal from "react-native-modal";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
-import Feather from "@expo/vector-icons/Feather";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 
 export default function EmpresaProfile({ navigation }) {
@@ -138,7 +138,12 @@ const toggleModal = () => {
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.backgroundColor }}>
       <SafeAreaView>
         <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
+          <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
+            </TouchableOpacity>
           <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Perfil da Empresa</Text>
+          </View>
           <TouchableOpacity onPress={toggleModal}>
           <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
           </TouchableOpacity>
@@ -171,7 +176,7 @@ const toggleModal = () => {
                 <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Avaliações da Empresa:</Text>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 5 }}>
                   <Text style={[styles.DMSansRegular, { color: getColorBasedOnAvalicao(dadosEmpresa.avaliacaoEmpresa) }]}>{dadosEmpresa.avaliacaoEmpresa}</Text>
-                  {dadosEmpresa.avaliacaoEmpresa === "Muito Positivas" ? <AntDesign name="checkcircle" size={20} color="#20dd77" /> : <Text>Sem Avaliações</Text>}
+                  {dadosEmpresa.avaliacaoEmpresa === "Muito Positivas" ? <AntDesign name="checkcircle" size={20} color="#20dd77" /> : <Text style={{color: theme.textColor}}>Sem Avaliações</Text>}
                 </View>
               </View>
 

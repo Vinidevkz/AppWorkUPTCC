@@ -8,7 +8,7 @@ const { apiNgrokChats } = ApisUrls;
 
 import * as Font from "expo-font";
 import styles from "../styles/conversas.js";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 
 export default function Conversas({ navigation }) {
   const { theme } = useTheme({ Conversas });
@@ -44,11 +44,6 @@ export default function Conversas({ navigation }) {
     return unsubscribe;
   }, [navigation, buscaChat]);
 
-  /////////////
-  const data = [
-    { id: "1", fotoempresa: "foto empresa", nomeempresa: "Dynamo", lastmsg: "Ultima Mensagem: 2 horas" },
-    { id: "2", fotoempresa: "foto empresa", nomeempresa: "Green Solutions", lastmsg: "Ultima Mensagem: 2 horas" },
-  ];
 
   const renderItem = ({ item }) => (
     <TouchableOpacity
@@ -83,7 +78,7 @@ export default function Conversas({ navigation }) {
 
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
+          <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>Suas Conversas</Text>
       </View>

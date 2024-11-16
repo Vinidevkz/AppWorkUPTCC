@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     paddingBottom: 10,
     paddingHorizontal: 25,
     backgroundColor: '#fff',
-    elevation: 10,
+    elevation: 3,
     zIndex: 1
   },
 
@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
   },
 
   title: {
-    fontSize: 18
+    fontSize: 17
   },
 
   text: {
@@ -106,13 +106,11 @@ const styles = StyleSheet.create({
   },
 
   containerTop: {
-    width: '100%',
     height: 80,
-    maxHeight: 80,
     backgroundColor: '#fff',
-    justifyContent: 'center',
+    alignItems: 'center',
     padding: 20,
-    elevation: 10,
+    elevation: 3,
   },
 });
 

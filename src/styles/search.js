@@ -34,6 +34,7 @@ const styles = StyleSheet.create({
   searchInput: {
     borderRadius: 20,
     paddingVertical: 5,
+    height: 50,
     paddingHorizontal: 10,
     backgroundColor: '#f4f4f4',
     flexDirection: 'row',

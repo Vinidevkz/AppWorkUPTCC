@@ -29,7 +29,11 @@ const styles = StyleSheet.create({
     paddingTop: 15,
     paddingBottom: 10,
     paddingHorizontal: 25,
-    zIndex: 1
+    zIndex: 1,
+    borderBottomWidth: 3,
+    borderBottomLeftRadius: 10,
+    borderBottomRightRadius: 10,
+    borderColor: '#20dd77'
   },
 
   WUPstyle: {
@@ -96,7 +100,7 @@ const styles = StyleSheet.create({
   },
 
   flatlist: {
-    marginHorizontal: 15,
+    paddingHorizontal: 15,
   },
 
   vagaCont: {
@@ -110,6 +114,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     elevation: 5,
     margin: 10,
+    marginRight: 5,
     borderBottomWidth: 3,
     borderColor: '#20dd77'
   },
@@ -179,8 +184,6 @@ const styles = StyleSheet.create({
   },
 
   postIconBox: {
-    borderWidth: 2,
-    borderColor: '#808080',
     borderRadius: 50,
     width: 50,
     height: 50,
@@ -306,6 +309,21 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 50,
     resizeMode: 'cover',
+  },
+
+  //scroll indicator
+  progressBarContainer: {
+    height: 4,
+    backgroundColor: "#e0e0e0", // Cor do fundo do indicador
+    width: "80%",
+    alignSelf: 'center',
+    borderRadius: 2,
+    marginTop: 10, // Espaçamento da FlatList
+  },
+  progressBar: {
+    height: "100%",
+    backgroundColor: "#20dd77", // Cor do progresso
+    borderRadius: 2,
   },
 });
 

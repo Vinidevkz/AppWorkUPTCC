@@ -238,7 +238,7 @@ export default function Home({ navigation }) {
 
             <View>
             <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>@{userName}</Text>
-            <Text style={[styles.DMSansBold, {fontSize: 18, color: theme.textColor}]}>{nome}</Text>
+            <Text style={[styles.DMSansBold, {fontSize: 18, color: theme.textColor}]}>Olá, {nome}</Text>
             </View>
       </View>
 
@@ -272,11 +272,13 @@ export default function Home({ navigation }) {
             <ActivityIndicator size={"large"} />
           </View>
         ) : (
+          <View>
           <FlatList
             horizontal={true}
             data={data}
             style={styles.flatlist}
             keyExtractor={(item) => item.idVaga.toString()}
+            
             renderItem={({ item }) => (
               <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
                 <View style={styles.vagaHead}>
@@ -317,7 +319,13 @@ export default function Home({ navigation }) {
                 </View>
               </View>
             )}
+            ListEmptyComponent={(
+              <View style={{flex: 1, width: 390, height: 300, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={[styles.DMSansRegular]}>Nenhuma vaga encontrada.</Text>
+              </View>
+            )}
           />
+          </View>
         )}
 
         <View style={styles.titleCont}>
@@ -381,6 +389,11 @@ export default function Home({ navigation }) {
 </TouchableOpacity>
 
                 </View>
+              </View>
+            )}
+            ListEmptyComponent={(
+              <View style={{flex: 1, width: 390, height: 300, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={[styles.DMSansRegular]}>Nenhuma vaga encontrada.</Text>
               </View>
             )}
           />

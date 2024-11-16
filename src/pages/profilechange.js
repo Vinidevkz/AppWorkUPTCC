@@ -12,6 +12,8 @@ import { storage } from "../pages/initialPages/firebase.js";
 import * as ImagePicker from "expo-image-picker";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+
 export default function ProfileChange({ navigation }) {
   const { theme } = useTheme();
   const { userId, setNome, setUserName, setBio, setAreaInt, areaInt, setNasc, nasc, setFormacaoUsuario, setTel } = useContext(Context);
@@ -243,7 +245,7 @@ export default function ProfileChange({ navigation }) {
       <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
         <View style={{ alignItems: "center", flexDirection: "row", gap: 20 }}>
           <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
+          <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
           </TouchableOpacity>
           <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Alterar Perfil</Text>
         </View>

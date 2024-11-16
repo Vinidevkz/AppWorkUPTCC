@@ -5,6 +5,8 @@ import ApisUrls from "../ApisUrls/apisurls.js";
 import styles from "../styles/vagas.js";
 import { useTheme } from "../pages/initialPages/context/themecontext";
 
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+
 export default function VagasSalvas({ navigation }) {
   const { theme } = useTheme({ VagasSalvas });
   const { userId, setVagaID } = useContext(Context);
@@ -54,7 +56,10 @@ export default function VagasSalvas({ navigation }) {
     <SafeAreaView style={[styles.SafeAreaView, {backgroundColor: theme.backgroundColor}]}>
       <StatusBar backgroundColor={theme.statusBarBackground} barStyle={theme.statusBarColor} />
 
-        <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
+        <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar, flexDirection: 'row' }]}>
+        <TouchableOpacity style={{padding: 10,  alignItems: 'center', justifyContent: 'center'}} onPress={() => navigation.goBack()}>
+        <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
+        </TouchableOpacity>
           <Text style={[styles.DMSansBold, styles.title, [{ color: theme.textColor }]]}>Vagas Salvas:</Text>
         </View>
 

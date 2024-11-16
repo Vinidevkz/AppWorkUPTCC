@@ -5,7 +5,6 @@ import { useTheme } from "../pages/initialPages/context/themecontext";
 import styles from "../styles/configuracoes";
 
 import Feather from "@expo/vector-icons/Feather";
-import Ionicons from "@expo/vector-icons/Ionicons";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
@@ -18,7 +17,7 @@ export default function Configurações({ navigation }) {
 
       <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
+        <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Configurações e Opções</Text>
       </View>
