@@ -256,7 +256,7 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.postBody}>
-          <Text style={[styles.DMSansBold, {fontSize: 18}]}>{item.tituloPublicacao}</Text>
+          <Text style={[styles.DMSansBold, {fontSize: 18, color: theme.textColor}]}>{item.tituloPublicacao}</Text>
           <Text style={[styles.DMSansRegular, styles.postDesc, { color: theme.textColor }]}>{item.detalhePublicacao}</Text>
           {item.fotoPublicacao ?
           <View style={styles.postImgCont}>
@@ -335,7 +335,7 @@ export default function Home({ navigation }) {
               justifyContent: "center",
             }}
           >
-            <ActivityIndicator size={"large"} />
+            <ActivityIndicator size={"large"} color={'#20dd77'} />
           </View>
         ) : (
           <View>
@@ -385,7 +385,7 @@ export default function Home({ navigation }) {
               )}
               ListEmptyComponent={
                 <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
-                  <Text style={[styles.DMSansRegular]}>Nenhuma vaga encontrada.</Text>
+                  <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma vaga encontrada.</Text>
                 </View>
               }
             />
@@ -406,7 +406,7 @@ export default function Home({ navigation }) {
               justifyContent: "center",
             }}
           >
-            <ActivityIndicator size={"large"} />
+            <ActivityIndicator size={"large"} color={'#20dd77'} />
           </View>
         ) : (
           <FlatList
@@ -482,6 +482,7 @@ export default function Home({ navigation }) {
                 <Text style={[styles.DMSansRegular]}>Nenhuma publicação encontrado.</Text>
               </View>
             }
+            initialNumToRender={10}
           />
         </View>
       </ScrollView>

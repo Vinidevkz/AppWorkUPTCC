@@ -183,7 +183,7 @@ export default function Search({ navigation }) {
       { color: theme.textColor },
     ]}
   >
-    Vagas:
+    Resultado:
   </Text>
 )}
 
@@ -262,15 +262,10 @@ export default function Search({ navigation }) {
                 
               </>
             )}
-            <Text
-              style={[
-                styles.DMSansBold,
-                styles.title,
-                { color: theme.textColor },
-              ]}
-            >
-              Empresas:
-            </Text>
+
+              
+
+
             {data.lenght === 0 ? (
               <ActivityIndicator size={'large'}/>
             ) : (
@@ -303,12 +298,9 @@ export default function Search({ navigation }) {
                 >
                   <View
                     style={{
-                      
                       gap: 5,
                     }}
                   >
-
-
 
                     <View style={styles.profileBackgroundImageCont}>
                       <Image

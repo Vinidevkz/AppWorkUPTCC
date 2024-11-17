@@ -1,113 +1,113 @@
 // ApisUrls.js
 const ApisUrls = {
   //login
-  apiNgrok: "http://44c9-200-53-198-206.ngrok-free.app/api/usuario/login",
+  apiNgrok: "http://b544-200-53-199-197.ngrok-free.app/api/usuario/login",
   apiEmulador: "http://10.0.2.2:8000/api/usuario/login",
-  apiNgrokUsuario: "http://44c9-200-53-198-206.ngrok-free.app/api/usuario/",
+  apiNgrokUsuario: "http://b544-200-53-199-197.ngrok-free.app/api/usuario/",
   apiEmuladorUsuario: "http://10.0.2.2:8000/api/usuario/",
   apiNgrokAlterar: "",
   //cadastro
-  apiNgrokCad: "http://44c9-200-53-198-206.ngrok-free.app/api/usuario",
+  apiNgrokCad: "http://b544-200-53-199-197.ngrok-free.app/api/usuario",
   apiEmuladorCad: "http://10.0.2.2:8000/api/usuario",
   //pegar vagas
-  apiNgrokVaga: "http://44c9-200-53-198-206.ngrok-free.app/api/vagaApp/",
+  apiNgrokVaga: "http://b544-200-53-199-197.ngrok-free.app/api/vagaApp/",
   apiEmuladorVaga: "http://10.0.2.2:8000/api/vagaApp/",
   //pegar area de interesse
-  apiNgrokArea: "http://44c9-200-53-198-206.ngrok-free.app/api/areavaga",
+  apiNgrokArea: "http://b544-200-53-199-197.ngrok-free.app/api/areavaga",
   apiEmuladorArea: "http://10.0.2.2:8000/api/areavaga",
   //pegar id
-  apiNgrokId: "http://44c9-200-53-198-206.ngrok-free.app/api/usuario/",
+  apiNgrokId: "http://b544-200-53-199-197.ngrok-free.app/api/usuario/",
   apiEmuladorId: "http://10.0.2.2:8000/api/usuario/",
 
   //pesquisa
   apiEmuladorVagaPesquisa: "http://10.0.2.2:8000/api/vaga/busca/",
   apiNgrokVagaPesquisa:
-    "http://44c9-200-53-198-206.ngrok-free.app/api/vaga/busca/",
+    "http://b544-200-53-199-197.ngrok-free.app/api/vaga/busca/",
 
   //usuario se candidatar
   apiEmuladorUsuarioVaga: "http://10.0.2.2:8000/api/vagaUsuario",
   apiNgrokUsuarioVaga:
-    "http://44c9-200-53-198-206.ngrok-free.app/api/vagaUsuario",
-  apiNgrokVerificarCandidatura: "http://44c9-200-53-198-206.ngrok-free.app/api/verificarCandidatura/",
+    "http://b544-200-53-199-197.ngrok-free.app/api/vagaUsuario",
+  apiNgrokVerificarCandidatura: "http://b544-200-53-199-197.ngrok-free.app/api/verificarCandidatura/",
   apiEmuladorVerificarCandidatura: "http://10.0.2.2:8000/api/verificarCandidatura/",
   
   apiEmuladorUsuarioVagaCancelar: "http://10.0.2.2:8000/api/vagaUsuario",
   apiNgrokUsuarioVagaCancelar:
-    "http://44c9-200-53-198-206.ngrok-free.app/api/vagaUsuario",
+    "http://b544-200-53-199-197.ngrok-free.app/api/vagaUsuario",
 
     
   //Salvar, cancelar e pegar salvamento da vaga
 
   apiEmuladorSalvarVaga: "http://10.0.2.2:8000/api/salvarVaga/",
   apiNgrokSalvarVaga:
-    "http://44c9-200-53-198-206.ngrok-free.app/api/salvarVaga/",
+    "http://b544-200-53-199-197.ngrok-free.app/api/salvarVaga/",
 
     apiEmuladorCancelSalvarVaga: "http://10.0.2.2:8000/api/salvarVaga/",
     apiNgrokCancelSalvarVaga:
-      "http://44c9-200-53-198-206.ngrok-free.app/api/salvarVaga/",
+      "http://b544-200-53-199-197.ngrok-free.app/api/salvarVaga/",
 
     apiEmuladorPegarVagasSalvas: "http://10.0.2.2:8000/api/salvarVaga",
     apiNgrokPegarVagasSalvas:
-        "http://44c9-200-53-198-206.ngrok-free.app/api/salvarVaga",
+        "http://b544-200-53-199-197.ngrok-free.app/api/salvarVaga",
 
-    apiNgrokVerificarSalvarVaga: "http://44c9-200-53-198-206.ngrok-free.app/api/verificarSalvarVaga",
+    apiNgrokVerificarSalvarVaga: "http://b544-200-53-199-197.ngrok-free.app/api/verificarSalvarVaga",
 
 
     //Urls Empresa
-    apiNgrokEmpresa: "http://44c9-200-53-198-206.ngrok-free.app/api/showempresa/",
+    apiNgrokEmpresa: "http://b544-200-53-199-197.ngrok-free.app/api/showempresa/",
     apiEmuladorEmpresa: "http://10.0.2.2:8000/api/showempresa/",
 
     //Urls Linguas
     apiEmuladorLinguas: "http://10.0.2.2:8000/api/linguas",
-    apiNgrokLinguas: "http://44c9-200-53-198-206.ngrok-free.app/api/linguas",
+    apiNgrokLinguas: "http://b544-200-53-199-197.ngrok-free.app/api/linguas",
 
     //Urls Escolas
     apiEmuladorEscolas: "http://10.0.2.2:8000/api/escolas",
-    apiNgrokEscolas: "http://44c9-200-53-198-206.ngrok-free.app/api/escolas",
+    apiNgrokEscolas: "http://b544-200-53-199-197.ngrok-free.app/api/escolas",
 
     //Urls Denuncias
-    apiNgrokDenunciarVaga: "http://44c9-200-53-198-206.ngrok-free.app/api/denunciarVaga",
+    apiNgrokDenunciarVaga: "http://b544-200-53-199-197.ngrok-free.app/api/denunciarVaga",
     apiEmuladorDenunciarVaga: "http://10.0.2.2:8000/api/denunciarVaga",
-    apiNgrokDenunciarEmpresa: "http://44c9-200-53-198-206.ngrok-free.app/api/denunciaempresa",
+    apiNgrokDenunciarEmpresa: "http://b544-200-53-199-197.ngrok-free.app/api/denunciaempresa",
     apiEmuladorDenunciarEmpresa: "http://10.0.2.2:8000/api/denunciaempresa",
 
     //Urls ver candidaturas do usuario
-    apiNgrokMinhasVagas: "http://44c9-200-53-198-206.ngrok-free.app/api/minhasvagas",
+    apiNgrokMinhasVagas: "http://b544-200-53-199-197.ngrok-free.app/api/minhasvagas",
     apiEmuladorMinhasVagas: "http://10.0.2.2:8000/api/minhasvagas",
 
     //Urls ver vaga pro id da empresa
-    apiNgrokVagaEmpresa: 'http://44c9-200-53-198-206.ngrok-free.app/api/showvagaempresa/',
+    apiNgrokVagaEmpresa: 'http://b544-200-53-199-197.ngrok-free.app/api/showvagaempresa/',
     apiEmuladorVagaEmpresa: 'http://10.0.2.2:8000/api/showvagaempresa/',
 
     //Urls ver vaga baseado na área de interesse
     apiEmuladorVagaPorArea: 'http://10.0.2.2:8000/api/vagaporarea',
-    apiNgrokVagaPorArea: 'http://44c9-200-53-198-206.ngrok-free.app/api/vagaporarea',
+    apiNgrokVagaPorArea: 'http://b544-200-53-199-197.ngrok-free.app/api/vagaporarea',
     
 
     //Urls ver vaga baseado na área de interesse
     apiEmuladorOutrasVagas: 'http://10.0.2.2:8000/api/outrasvagas',
-    apiNgrokOutrasVagas: 'http://44c9-200-53-198-206.ngrok-free.app/api/outrasvagas',
+    apiNgrokOutrasVagas: 'http://b544-200-53-199-197.ngrok-free.app/api/outrasvagas',
 
     //Urls Notificacoes
-    apiNgrokNotificacoes: 'http://44c9-200-53-198-206.ngrok-free.app/api/notificacoes',
+    apiNgrokNotificacoes: 'http://b544-200-53-199-197.ngrok-free.app/api/notificacoes',
     apiEmuladorNotificacoes: 'http://10.0.2.2:8000/api/notificacoes',
 
     //Urls chats
-    apiNgrokChats: 'http://44c9-200-53-198-206.ngrok-free.app/api/chatsusuario',
+    apiNgrokChats: 'http://b544-200-53-199-197.ngrok-free.app/api/chatsusuario',
     apiEmuladorChats: 'http://10.0.2.2:8000:/api/chatsusuario ',
 
     //Urls Mensagens
-    apiNgrokMensagens: 'http://44c9-200-53-198-206.ngrok-free.app/api/mensagens',
+    apiNgrokMensagens: 'http://b544-200-53-199-197.ngrok-free.app/api/mensagens',
     apiEmuladorMensagens: 'http://10.0.2.2:8000/api/mensagens',
 
-    apiNgrokMandarMensagem: 'http://44c9-200-53-198-206.ngrok-free.app/api/mandarMensagem',
+    apiNgrokMandarMensagem: 'http://b544-200-53-199-197.ngrok-free.app/api/mandarMensagem',
     apiEmuladorMandarMensagem: 'http://10.0.2.2:8000/api/mandarMensagem',
 
-    apiNgrokMensagemMaisRecente: 'http://44c9-200-53-198-206.ngrok-free.app/api/mensagemMaisRecente',
+    apiNgrokMensagemMaisRecente: 'http://b544-200-53-199-197.ngrok-free.app/api/mensagemMaisRecente',
     apiEmuladorMensagemMaisRecente: 'http://10.0.2.2:8000/api/mensagemMaisRecente',
 
     //Urls Posts
-    apiNgrokPosts: 'http://44c9-200-53-198-206.ngrok-free.app/api/todosPosts',
+    apiNgrokPosts: 'http://b544-200-53-199-197.ngrok-free.app/api/todosPosts',
     apiEmuladorPosts: 'http://10.0.2.2:8000/api/todosPosts'
     //Ctrl F2 seleciona tudo de uma vez :D
 };

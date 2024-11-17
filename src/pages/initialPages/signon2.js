@@ -26,7 +26,7 @@ import { Context } from "./context/provider.js";
 import ApisUrls from '../../ApisUrls/apisurls.js'
 
 export default function SignON2({ navigation }) {
-  const { areaInt, setAreaInt, setTel, emailContato, setEmailContato, setNasc, setCep, cep } = useContext(Context);
+  const { areaInt, setAreaInt, setTel, tel, emailContato, setEmailContato, setNasc, nasc, setCep, cep } = useContext(Context);
   const [areaVagas, setAreaVagas] = useState([]);
   const [emailError, setEmailError] = useState('');
   const [areaInteresseUsuario, setAreaInteresseUsuario] = useState('');
@@ -153,16 +153,19 @@ export default function SignON2({ navigation }) {
             Telefone:
           </Text>
           <TextInputMask
-            type={"cel-phone"}
-            options={{
-              maskType: "BRL",
-              withDDD: true,
-              dddMask: "(99) ",
-            }}
-            placeholder="(99) 99999-9999"
-            style={[styles.DMSansRegular, styles.inputCont]}
-            onChangeText={(text) => setTel(text)}
-          />
+  type={"cel-phone"}
+  options={{
+    maskType: "BRL",
+    withDDD: true,
+    dddMask: "(99) ",
+  }}
+  placeholder="(99) 99999-9999"
+  style={[styles.DMSansRegular, styles.inputCont]}
+  value={tel} // Adicione o valor do estado correspondente
+  onChangeText={(text) => setTel(text)} // Atualize o estado
+/>
+
+
         </View>
 
         <View style={styles.formCont}>
@@ -176,14 +179,16 @@ export default function SignON2({ navigation }) {
             Data de Nascimento:
           </Text>
           <TextInputMask
-            type={"datetime"}
-            options={{
-              format: "DD/MM/YYYY",
-            }}
-            placeholder="DD/MM/AAAA"
-            style={[styles.DMSansRegular, styles.inputCont]}
-            onChangeText={(text) => setNasc(text)}
-          />
+  type={"datetime"}
+  options={{
+    format: "DD/MM/YYYY",
+  }}
+  placeholder="DD/MM/AAAA"
+  style={[styles.DMSansRegular, styles.inputCont]}
+  value={nasc} // Adicione o valor do estado correspondente
+  onChangeText={(text) => setNasc(text)} // Atualize o estado
+/>
+
         </View>
 
         <View style={styles.formCont}>
@@ -191,11 +196,13 @@ export default function SignON2({ navigation }) {
           <Text style={[styles.DMSansRegular, {color: '#909090', fontSize: 13}]}>Os dados de localização serão preenchidos automaticamente.</Text>
           <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
           <TextInputMask
-            type={"zip-code"}
-            placeholder="Digite seu CEP"
-            style={[styles.DMSansRegular, styles.inputCont, {width: 280}]}
-            onChangeText={(text) => setCep(text)}
-          />
+  type={"zip-code"}
+  placeholder="Digite seu CEP"
+  style={[styles.DMSansRegular, styles.inputCont, { width: 280 }]}
+  value={cep} // Adicione o valor do estado correspondente
+  onChangeText={(text) => setCep(text)} // Atualize o estado
+/>
+
 
           <TouchableOpacity onPress={toggleModal}>
            <Octicons name="checklist" size={30} color="#20dd77" style={{paddingTop: 10}}/>
