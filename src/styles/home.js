@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
 
   flatlist: {
-    paddingHorizontal: 15,
+    paddingHorizontal: 15
   },
 
   vagaCont: {

@@ -54,6 +54,7 @@ export default function Conversas({ navigation }) {
         setEmpresaId(item.empresa?.idEmpresa);
         setIdChat(item.idChat)
       }}
+      style={{borderRadius: 10, backgroundColor: theme.backgroundColorNavBar, marginHorizontal: 20, marginVertical: 5}}
     >
       <View style={styles.item}>
         <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>

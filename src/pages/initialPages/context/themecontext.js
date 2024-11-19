@@ -33,7 +33,9 @@ export function ThemeProvider({ children }) {
     tabBarIconColor: darkMode ? '#fff' : '#1b1b1b',
 
     msgUser: darkMode ? '#1b1b1b' : '#0db862',
-    msgEmpresa: darkMode ? '#808080' : '#fff'
+    msgEmpresa: darkMode ? '#808080' : '#fff',
+
+    arrowColor: darkMode ? '#20dd77' : '#1b1b1b'
   };
 
   return (

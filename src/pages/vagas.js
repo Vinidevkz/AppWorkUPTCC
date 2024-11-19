@@ -228,19 +228,19 @@ export default function Vaga({ navigation }) {
         <View style={[styles.infosCont, styles.row, { alignItems: 'center', justifyContent: 'space-between'}]}>
           {candidatureStatus[vagaID] ? (
             <TouchableOpacity
-              style={[styles.button, { backgroundColor: "", borderWidth: 2, borderColor: "#20dd77" }]}
+              style={[styles.button, { backgroundColor: theme.backgroundColor, borderWidth: 2, borderColor: "#20dd77" }]}
               onPress={() => cancelarCandidatura()}
             >
-              <Text style={[styles.DMSansBold, styles.buttonText, { color: '#fff' }]}>Cancelar Candidatura</Text>
+              <Text style={[styles.DMSansBold, styles.buttonText, { color: theme.textColor }]}>Cancelar Candidatura</Text>
             </TouchableOpacity>
           ) : (
             <TouchableOpacity style={styles.button} onPress={() => seCandidatar()}>
-              <Text style={[styles.DMSansBold, styles.buttonText, { color: "#fff" }]}>Candidatar-se</Text>
+              <Text style={[styles.DMSansBold, styles.buttonText, { color: '#fff' }]}>Candidatar-se</Text>
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity style={{marginRight: 20}} onPress={toggleModal}>
-           <Feather name="alert-triangle" size={30} color="red" />
+          <TouchableOpacity style={{marginRight: 20, backgroundColor: '#ff5447', padding: 10, borderRadius: 50}} onPress={toggleModal}>
+            <Text style={[styles.DMSansRegular,{color: '#fff'}]}>Denunciar vaga</Text>
           </TouchableOpacity>
 
           <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>

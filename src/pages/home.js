@@ -7,6 +7,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from "../ApisUrls/apisurls.js";
 const { apiNgrokVaga, apiNgrokSalvarVaga, apiNgrokCancelSalvarVaga, apiNgrokVerificarSalvarVaga, apiNgrokVagaPorArea, apiNgrokOutrasVagas, apiNgrokPosts } = ApisUrls;
@@ -339,6 +340,9 @@ export default function Home({ navigation }) {
           </View>
         ) : (
           <View>
+            <TouchableOpacity style={{zIndex: 1, position: 'absolute', left: '88%', top: '42%', padding: 10, justifyContent: 'center', borderRadius: 50, backgroundColor: 'rgba(128, 128, 128, 0.5)'}}>
+            <MaterialIcons name="arrow-forward-ios" size={24} color={theme.arrowColor}  />
+            </TouchableOpacity>
             <FlatList
               horizontal={true}
               data={data}
@@ -389,6 +393,7 @@ export default function Home({ navigation }) {
                 </View>
               }
             />
+
           </View>
         )}
 
@@ -409,6 +414,10 @@ export default function Home({ navigation }) {
             <ActivityIndicator size={"large"} color={'#20dd77'} />
           </View>
         ) : (
+<View>
+          <TouchableOpacity style={{zIndex: 1, position: 'absolute', left: '88%', top: '42%', padding: 10, justifyContent: 'center', borderRadius: 50, backgroundColor: 'rgba(128, 128, 128, 0.5)'}}>
+          <MaterialIcons name="arrow-forward-ios" size={24} color={theme.arrowColor} />
+          </TouchableOpacity>
           <FlatList
             horizontal={true}
             data={outrasVagas}
@@ -460,6 +469,7 @@ export default function Home({ navigation }) {
               </View>
             }
           />
+</View>
         )}
 
         <View style={styles.titleCont}>
