@@ -43,13 +43,20 @@ const styles = StyleSheet.create({
   },
 
   textInput: {
-    width: 300,
-
     borderRadius: 20,
     borderWidth: 1,
     borderColor: '#909090',
     padding: 10,
-    paddingHorizontal: 15
+    paddingHorizontal: 15,
+    height: 60,
+  },
+
+  areaInput: {
+    borderRadius: 20,
+    borderWidth: 1,
+    borderColor: '#909090',
+    paddingHorizontal: 15,
+
   },
 
   contactCont: {
@@ -72,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     flexDirection: 'row',
     gap: 5,
-
+    width: 100,
     borderWidth: 2,
     borderColor: '#20dd77',
     padding: 8,

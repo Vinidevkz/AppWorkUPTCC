@@ -24,7 +24,7 @@ export default function ProfileChange({ navigation }) {
   const [userNameAlterado, setUsernameAlterado] = useState("");
   const [sobreUsuarioAlterado, setSobreUsuarioAlterado] = useState("");
   const [nascUsuarioAlterado, setNascUsuarioAlterado] = useState("");
-  const [areaIntUsuarioAlterado, setAreaIntUsuarioAlterado] = useState("");
+  const [areaIntUsuarioAlterado, setAreaIntUsuarioAlterado] = useState(areaInt);
   const [selectedImage, setSelectedImage] = useState(null);
   const [selectedBannerImage, setSelectedBannerImage] = useState(null);
   const [loading, setLoading] = useState(false);
@@ -153,6 +153,7 @@ export default function ProfileChange({ navigation }) {
     setLoading(true);
     if (!nomeUsuarioAlterado.trim() || !userNameAlterado.trim() || !sobreUsuarioAlterado.trim() || !areaIntUsuarioAlterado.trim() || !nascUsuarioAlterado.trim() || !formacaoCompetenciaUsuarioAlterado.trim() || !telAlterado.trim()) {
       Alert.alert("Erro", "Por favor, preencha todos os campos obrigatórios.");
+      setLoading(false);
       return;
     }
 
@@ -160,6 +161,7 @@ export default function ProfileChange({ navigation }) {
 
     if (!formattedDate) {
       Alert.alert("Erro", "Data de nascimento é obrigatória.");
+      setLoading(false);
       return;
     }
 
@@ -251,8 +253,7 @@ export default function ProfileChange({ navigation }) {
         </View>
 
         <TouchableOpacity style={styles.button} onPress={alterarUsuario}>
-          <Text style={[styles.DMSansBold, styles.saveText]}>Salvar</Text>
-          <AntDesign name="plus" size={15} color="#20dd77" />
+          <Text style={[styles.DMSansBold, styles.saveText]}>Salvar</Text>  
         </TouchableOpacity>
       </View>
 
@@ -307,6 +308,8 @@ export default function ProfileChange({ navigation }) {
           </Text>
           <TextInput style={[styles.textInput, styles.DMSansRegular, { color: theme.textColor }]} value={nomeUsuarioAlterado} onChangeText={(text) => setNomeUsuarioAlterado(text)} />
         </View>
+
+
         <View style={styles.changeCont}>
           <Text
             style={{
@@ -317,31 +320,11 @@ export default function ProfileChange({ navigation }) {
           >
             Nome de usuário:
           </Text>
-          <View
-            style={[
-              styles.textInput,
-              styles.DMSansRegular,
-              {
-                flexDirection: "row",
-                alignItems: "center",
-                gap: 5,
-                color: theme.textColor,
-              },
-            ]}
-          >
-            <Text
-              style={{
-                borderRightWidth: 1,
-                borderColor: theme.textColor,
-                paddingRight: 5,
-                color: theme.textColor,
-              }}
-            >
-              @
-            </Text>
-            <TextInput style={{ flex: 1, color: theme.textColor }} value={userNameAlterado} onChangeText={(text) => setUsernameAlterado(text)} />
-          </View>
+          <TextInput style={[styles.textInput, styles.DMSansRegular, { color: theme.textColor }]} value={userNameAlterado} onChangeText={(text) => setUsernameAlterado(text)} />
+
         </View>
+
+
         <View style={styles.changeCont}>
           <Text
             style={{
@@ -389,10 +372,26 @@ export default function ProfileChange({ navigation }) {
           >
             Área de Interesse:
           </Text>
-          <Picker selectedValue={areaIntUsuarioAlterado} style={[styles.inputCont, styles.text, styles.DMSansRegular, { color: theme.textColor }]} onValueChange={(itemValue) => setAreaIntUsuarioAlterado(itemValue)} mode="dropdown">
-            <Picker.Item label="Selecione uma área" value="" />
-            {Array.isArray(areaVagas) && areaVagas.map((area, index) => <Picker.Item key={index} label={area.nomeArea} value={area.nomeArea} />)}
-          </Picker>
+          <View style={styles.areaInput}>
+          <Picker
+  selectedValue={areaIntUsuarioAlterado} // Valor selecionado
+  style={[
+    styles.DMSansRegular,
+    { color: theme.textColor },
+  ]}
+  onValueChange={(itemValue) => setAreaIntUsuarioAlterado(itemValue)} // Atualiza estado
+  mode="dropdown"
+>
+  {/* Item inicial com o valor de areaInt */}
+  <Picker.Item label={areaInt} value={areaInt} />
+  {Array.isArray(areaVagas) &&
+    areaVagas.map((area, index) => (
+      <Picker.Item key={index} label={area.nomeArea} value={area.nomeArea} />
+    ))}
+</Picker>
+          </View>
+
+
         </View>
         <View style={styles.changeCont}>
           <Text

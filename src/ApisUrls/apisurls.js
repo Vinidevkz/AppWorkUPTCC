@@ -1,113 +1,113 @@
 // ApisUrls.js
 const ApisUrls = {
   //login
-  apiNgrok: "http://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/usuario/login",
+  apiNgrok: "http://9d51-200-53-199-197.ngrok-free.app/api/usuario/login",
   apiEmulador: "http://10.0.2.2:8000/api/usuario/login",
-  apiNgrokUsuario: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/usuario/",
+  apiNgrokUsuario: "https://9d51-200-53-199-197.ngrok-free.app/api/usuario/",
   apiEmuladorUsuario: "http://10.0.2.2:8000/api/usuario/",
   apiNgrokAlterar: "",
   //cadastro
-  apiNgrokCad: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/usuario",
+  apiNgrokCad: "https://9d51-200-53-199-197.ngrok-free.app/api/usuario",
   apiEmuladorCad: "http://10.0.2.2:8000/api/usuario",
   //pegar vagas
-  apiNgrokVaga: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/vagaApp/",
+  apiNgrokVaga: "https://9d51-200-53-199-197.ngrok-free.app/api/vagaApp/",
   apiEmuladorVaga: "http://10.0.2.2:8000/api/vagaApp/",
   //pegar area de interesse
-  apiNgrokArea: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/areavaga",
+  apiNgrokArea: "https://9d51-200-53-199-197.ngrok-free.app/api/areavaga",
   apiEmuladorArea: "http://10.0.2.2:8000/api/areavaga",
   //pegar id
-  apiNgrokId: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/usuario/",
+  apiNgrokId: "https://9d51-200-53-199-197.ngrok-free.app/api/usuario/",
   apiEmuladorId: "http://10.0.2.2:8000/api/usuario/",
 
   //pesquisa
   apiEmuladorVagaPesquisa: "http://10.0.2.2:8000/api/vaga/busca/",
   apiNgrokVagaPesquisa:
-    "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/vaga/busca/",
+    "https://9d51-200-53-199-197.ngrok-free.app/api/vaga/busca/",
 
   //usuario se candidatar
   apiEmuladorUsuarioVaga: "http://10.0.2.2:8000/api/vagaUsuario",
   apiNgrokUsuarioVaga:
-    "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/vagaUsuario",
-  apiNgrokVerificarCandidatura: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/verificarCandidatura/",
+    "https://9d51-200-53-199-197.ngrok-free.app/api/vagaUsuario",
+  apiNgrokVerificarCandidatura: "https://9d51-200-53-199-197.ngrok-free.app/api/verificarCandidatura/",
   apiEmuladorVerificarCandidatura: "http://10.0.2.2:8000/api/verificarCandidatura/",
   
   apiEmuladorUsuarioVagaCancelar: "http://10.0.2.2:8000/api/vagaUsuario",
   apiNgrokUsuarioVagaCancelar:
-    "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/vagaUsuario",
+    "https://9d51-200-53-199-197.ngrok-free.app/api/vagaUsuario",
 
     
   //Salvar, cancelar e pegar salvamento da vaga
 
   apiEmuladorSalvarVaga: "http://10.0.2.2:8000/api/salvarVaga/",
   apiNgrokSalvarVaga:
-    "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/salvarVaga/",
+    "https://9d51-200-53-199-197.ngrok-free.app/api/salvarVaga/",
 
     apiEmuladorCancelSalvarVaga: "http://10.0.2.2:8000/api/salvarVaga/",
     apiNgrokCancelSalvarVaga:
-      "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/salvarVaga/",
+      "https://9d51-200-53-199-197.ngrok-free.app/api/salvarVaga/",
 
     apiEmuladorPegarVagasSalvas: "http://10.0.2.2:8000/api/salvarVaga",
     apiNgrokPegarVagasSalvas:
-        "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/salvarVaga",
+        "https://9d51-200-53-199-197.ngrok-free.app/api/salvarVaga",
 
-    apiNgrokVerificarSalvarVaga: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/verificarSalvarVaga",
+    apiNgrokVerificarSalvarVaga: "https://9d51-200-53-199-197.ngrok-free.app/api/verificarSalvarVaga",
 
 
     //Urls Empresa
-    apiNgrokEmpresa: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/showempresa/",
+    apiNgrokEmpresa: "https://9d51-200-53-199-197.ngrok-free.app/api/showempresa/",
     apiEmuladorEmpresa: "http://10.0.2.2:8000/api/showempresa/",
 
     //Urls Linguas
     apiEmuladorLinguas: "http://10.0.2.2:8000/api/linguas",
-    apiNgrokLinguas: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/linguas",
+    apiNgrokLinguas: "https://9d51-200-53-199-197.ngrok-free.app/api/linguas",
 
     //Urls Escolas
     apiEmuladorEscolas: "http://10.0.2.2:8000/api/escolas",
-    apiNgrokEscolas: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/escolas",
+    apiNgrokEscolas: "https://9d51-200-53-199-197.ngrok-free.app/api/escolas",
 
     //Urls Denuncias
-    apiNgrokDenunciarVaga: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/denunciarVaga",
+    apiNgrokDenunciarVaga: "https://9d51-200-53-199-197.ngrok-free.app/api/denunciarVaga",
     apiEmuladorDenunciarVaga: "http://10.0.2.2:8000/api/denunciarVaga",
-    apiNgrokDenunciarEmpresa: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/denunciaempresa",
+    apiNgrokDenunciarEmpresa: "https://9d51-200-53-199-197.ngrok-free.app/api/denunciaempresa",
     apiEmuladorDenunciarEmpresa: "http://10.0.2.2:8000/api/denunciaempresa",
 
     //Urls ver candidaturas do usuario
-    apiNgrokMinhasVagas: "https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/minhasvagas",
+    apiNgrokMinhasVagas: "https://9d51-200-53-199-197.ngrok-free.app/api/minhasvagas",
     apiEmuladorMinhasVagas: "http://10.0.2.2:8000/api/minhasvagas",
 
     //Urls ver vaga pro id da empresa
-    apiNgrokVagaEmpresa: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/showvagaempresa/',
+    apiNgrokVagaEmpresa: 'https://9d51-200-53-199-197.ngrok-free.app/api/showvagaempresa/',
     apiEmuladorVagaEmpresa: 'http://10.0.2.2:8000/api/showvagaempresa/',
 
     //Urls ver vaga baseado na área de interesse
     apiEmuladorVagaPorArea: 'http://10.0.2.2:8000/api/vagaporarea',
-    apiNgrokVagaPorArea: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/vagaporarea',
+    apiNgrokVagaPorArea: 'https://9d51-200-53-199-197.ngrok-free.app/api/vagaporarea',
     
 
     //Urls ver vaga baseado na área de interesse
     apiEmuladorOutrasVagas: 'http://10.0.2.2:8000/api/outrasvagas',
-    apiNgrokOutrasVagas: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/outrasvagas',
+    apiNgrokOutrasVagas: 'https://9d51-200-53-199-197.ngrok-free.app/api/outrasvagas',
 
     //Urls Notificacoes
-    apiNgrokNotificacoes: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/notificacoes',
+    apiNgrokNotificacoes: 'https://9d51-200-53-199-197.ngrok-free.app/api/notificacoes',
     apiEmuladorNotificacoes: 'http://10.0.2.2:8000/api/notificacoes',
 
     //Urls chats
-    apiNgrokChats: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/chatsusuario',
+    apiNgrokChats: 'https://9d51-200-53-199-197.ngrok-free.app/api/chatsusuario',
     apiEmuladorChats: 'http://10.0.2.2:8000:/api/chatsusuario ',
 
     //Urls Mensagens
-    apiNgrokMensagens: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/mensagens',
+    apiNgrokMensagens: 'https://9d51-200-53-199-197.ngrok-free.app/api/mensagens',
     apiEmuladorMensagens: 'http://10.0.2.2:8000/api/mensagens',
 
-    apiNgrokMandarMensagem: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/mandarMensagem',
+    apiNgrokMandarMensagem: 'https://9d51-200-53-199-197.ngrok-free.app/api/mandarMensagem',
     apiEmuladorMandarMensagem: 'http://10.0.2.2:8000/api/mandarMensagem',
 
-    apiNgrokMensagemMaisRecente: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/mensagemMaisRecente',
+    apiNgrokMensagemMaisRecente: 'https://9d51-200-53-199-197.ngrok-free.app/api/mensagemMaisRecente',
     apiEmuladorMensagemMaisRecente: 'http://10.0.2.2:8000/api/mensagemMaisRecente',
 
     //Urls Posts
-    apiNgrokPosts: 'https://2233-2804-388-c321-d7ea-5466-e8a1-b6dd-10b2.ngrok-free.app/api/todosPosts',
+    apiNgrokPosts: 'https://9d51-200-53-199-197.ngrok-free.app/api/todosPosts',
     apiEmuladorPosts: 'http://10.0.2.2:8000/api/todosPosts'
     //Ctrl F2 seleciona tudo de uma vez :D
 };

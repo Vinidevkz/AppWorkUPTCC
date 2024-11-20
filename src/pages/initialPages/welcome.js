@@ -127,96 +127,96 @@ export default function App() {
   return (
     <ThemeProvider>
       <Provider>
-        <NavigationContainer independent={true}>
-          <Stack.Navigator initialRouteName="Welcome">
-            <Stack.Screen
-              name="Welcome"
-              component={Welcome}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignIN"
-              component={SignIN}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Home"
-              component={Home}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="TabBar"
-              component={TabBar}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignON1"
-              component={SignON1}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignON2"
-              component={SignON2}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignON3"
-              component={SignON3}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="SignON4"
-              component={SignON4}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Vagas"
-              component={Vaga}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Configurações"
-              component={Configurações}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="ProfileChange"
-              component={ProfileChange}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Search"
-              component={Search}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Conversas"
-              component={Conversas}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Chat"
-              component={Chat}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="VagasSalvas"
-              component={VagasSalvas}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="EmpresasProfile"
-              component={EmpresasProfile}
-              options={{ headerShown: false }}
-            />
+ 
+  <Stack.Navigator initialRouteName="Welcome">
+    <Stack.Screen
+      name="Welcome"
+      component={Welcome}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="SignIN"
+      component={SignIN}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Home"
+      component={Home}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="TabBar"
+      component={TabBar}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="SignON1"
+      component={SignON1}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="SignON2"
+      component={SignON2}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="SignON3"
+      component={SignON3}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="SignON4"
+      component={SignON4}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Vagas"
+      component={Vaga}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Configurações"
+      component={Configurações}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="ProfileChange"
+      component={ProfileChange}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Search"
+      component={Search}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Conversas"
+      component={Conversas}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="Chat"
+      component={Chat}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="VagasSalvas"
+      component={VagasSalvas}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="EmpresasProfile"
+      component={EmpresasProfile}
+      options={{ headerShown: false }}
+    />
+    <Stack.Screen
+      name="MinhasVagas"
+      component={MinhasVagas}
+      options={{ headerShown: false }}
+    />
+  </Stack.Navigator>
 
-            <Stack.Screen
-            name="MinhasVagas"
-            component={MinhasVagas}
-            options={{headerShown: false}}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
+
       </Provider>
     </ThemeProvider>
   );

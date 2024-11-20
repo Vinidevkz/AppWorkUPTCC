@@ -239,21 +239,28 @@ export default function Home({ navigation }) {
     >
       <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
         <View style={styles.postHeader}>
-          <View style={[styles.postIconBox]}>
-            <Image source={item.empresa?.fotoEmpresa ? {uri:item.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+
+          <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+            <View style={[styles.postIconBox]}>
+              <Image source={item.empresa?.fotoEmpresa ? {uri:item.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+            </View>
+            <View>
+              <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
+              <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
+              {new Date(item.created_at).toLocaleString("pt-BR", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric", 
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+              </Text>
+            </View>
           </View>
-          <View>
-            <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
-            <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
-            {new Date(item.created_at).toLocaleString("pt-BR", {
-              day: "2-digit",
-              month: "2-digit",
-              year: "numeric", 
-              hour: "2-digit",
-              minute: "2-digit",
-            })}
-            </Text>
-          </View>
+
+          <TouchableOpacity>
+              <SimpleLineIcons name="options-vertical" size={25} color={theme.iconColorWhite} />
+            </TouchableOpacity>
         </View>
 
         <View style={styles.postBody}>
@@ -273,17 +280,7 @@ export default function Home({ navigation }) {
 
           </View>
 : <View></View>}
-          <View style={styles.optionsCont}>
-            <View style={styles.threeIconsCont}>
-              <TouchableOpacity onPress={() => setHeartIcon(!heartIcon)}>
-                <AntDesign name={heartIcon ? "hearto" : "heart"} size={35} color={theme.iconColorGreen} />
-              </TouchableOpacity>
-            </View>
 
-            <TouchableOpacity>
-              <SimpleLineIcons name="options-vertical" size={30} color={theme.iconColorWhite} />
-            </TouchableOpacity>
-          </View>
         </View>
       </View>
     </View>
@@ -305,8 +302,12 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.iconBox}>
+        <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 10 }} onPress={() => navigation.navigate("MinhasVagas")}>
+              <MaterialIcons name="work-outline" size={30} color="#20dd77" />
+            </TouchableOpacity>
+
           <TouchableOpacity onPress={() => navigation.navigate("Conversas")}>
-            <Ionicons name="chatbubbles-outline" size={35} color={theme.iconColorWhite} />
+            <Ionicons name="chatbubbles-outline" size={30} color={theme.iconColorWhite} />
           </TouchableOpacity>
         </View>
       </View>

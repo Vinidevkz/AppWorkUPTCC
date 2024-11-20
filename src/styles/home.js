@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
 
   vagaCont: {
     backgroundColor: '#fff',
-    borderRadius: 25,
+    borderRadius: 15,
     alignItems: 'center',
     justifyContent: 'space-around',
     width: 300,
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
 
   // Estilo Posts
   postCont: {
-    borderRadius: 20,
+    borderRadius: 10,
     backgroundColor: '#fff',
     padding: 15,
     marginBottom: 20,
@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
   postHeader: {
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
     gap: 10,
   },
 
@@ -208,13 +209,13 @@ const styles = StyleSheet.create({
   postImgCont: {
     width: '100%',
     height: 200,
-    borderRadius: 20,
+    borderRadius: 10,
   },
 
   postImg: {
     width: '100%',
     height: '100%',
-    borderRadius: 20,
+    borderRadius: 10,
   },
 
   optionsCont: {
