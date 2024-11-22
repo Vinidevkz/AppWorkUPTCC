@@ -8,13 +8,11 @@ import { useFocusEffect } from "@react-navigation/native";
 import { FlatList, GestureHandlerRootView } from "react-native-gesture-handler";
 import axios from "axios";
 
-
 import Modal from "react-native-modal";
 
 import AntDesign from "@expo/vector-icons/AntDesign";
 import Entypo from "@expo/vector-icons/Entypo";
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-
 
 export default function EmpresaProfile({ navigation }) {
   const { theme } = useTheme({ EmpresaProfile });
@@ -24,7 +22,9 @@ export default function EmpresaProfile({ navigation }) {
 
   const [avalicao, setAvalicacao] = useState(null);
   const [motivoDenuncia, setMotivoDenuncia] = useState(null);
-  const [isModalVisible, setModalVisible] = useState(false);
+  const [toggleModal, setToggleModal] = useState(false);
+  const [isModalAvaliarVisible, setModalAvaliarVisible] = useState(false);
+  const [isModalDenunciaVisible, setIsModalDenunciaVisible] = useState(false);
 
   const { apiNgrokEmpresa, apiNgrokVagaEmpresa, apiNgrokDenunciarEmpresa } = ApisUrls;
 
@@ -73,7 +73,7 @@ export default function EmpresaProfile({ navigation }) {
     }, [empresaId])
   );
 
-  /*const denunciarEmpresa = async () => {
+  const denunciarEmpresa = async () => {
     if (motivoDenuncia) {
       try {
         const response = await axios.post(apiNgrokDenunciarEmpresa, {
@@ -85,7 +85,7 @@ export default function EmpresaProfile({ navigation }) {
 
         if (response.status === 200) {
           Alert.alert("Denúncia enviada com sucesso!", `Opção selecionada: ${motivoDenuncia}`);
-          toggleModal(); // Fechar o modal após a denúncia
+          toggleModalDenuncia(); // Fechar o modal após a denúncia
         } else {
           Alert.alert("Erro", "Erro ao enviar denúncia. Tente novamente.");
         }
@@ -109,10 +109,17 @@ export default function EmpresaProfile({ navigation }) {
       Alert.alert("Por favor, selecione uma opção de denúncia.");
     }
   };
-*/
- 
-const toggleModal = () => {
-    setModalVisible(!isModalVisible);
+
+  const toggleAvaliarModal = () => {
+    setModalAvaliarVisible(!isModalAvaliarVisible);
+  };
+
+  const toggleModalButton = () => {
+    setToggleModal(!toggleModal);
+  };
+
+  const toggleModalDenuncia = () => {
+    setIsModalDenunciaVisible(!isModalDenunciaVisible);
   };
 
   const getColorBasedOnAvalicao = (avaliacao) => {
@@ -138,15 +145,17 @@ const toggleModal = () => {
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.backgroundColor }}>
       <SafeAreaView>
         <View style={[styles.containerTop, { backgroundColor: theme.backgroundColorNavBar }]}>
-          <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
             <TouchableOpacity onPress={() => navigation.goBack()}>
-            <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
+              <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
             </TouchableOpacity>
-          <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Perfil da Empresa</Text>
+            <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Perfil da Empresa</Text>
           </View>
-          <TouchableOpacity onPress={toggleModal}>
-          <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity onPress={toggleModalButton}>
+              <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
+            </TouchableOpacity>
+          </View>
         </View>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={{ width: "100%" }}>
@@ -160,23 +169,23 @@ const toggleModal = () => {
             <View style={[styles.profileCont, { backgroundColor: theme.backgroundColor }]}>
               <View style={[styles.profileHeader]}>
                 <View>
-                  <Text style={[styles.DMSansBold, styles.profileName, { color: theme.textColor }]}>{dadosEmpresa.nomeEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}</Text>
-                  <Text style={[styles.DMSansRegular, styles.profileUserName, { color: theme.textColor }]}>@{dadosEmpresa.usernameEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}</Text>
+                  <Text style={[styles.DMSansBold, styles.profileName, { color: theme.textColor }]}>{dadosEmpresa.nomeEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />}</Text>
+                  <Text style={[styles.DMSansRegular, styles.profileUserName, { color: theme.textColor }]}>@{dadosEmpresa.usernameEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />}</Text>
                   <Text style={[styles.DMSansRegular, styles.profileUserLocation, { color: theme.textColor }]}>
-                    {dadosEmpresa.cidadeEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>} - {dadosEmpresa.estadoEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}
+                    {dadosEmpresa.cidadeEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />} - {dadosEmpresa.estadoEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />}
                   </Text>
                 </View>
               </View>
 
               <View style={styles.profileBioCont}>
-                <Text style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>{dadosEmpresa.sobreEmpresa || <ActivityIndicator size={'small'} color={"#20dd77"}/>}</Text>
+                <Text style={[styles.DMSansRegular, styles.text, { color: theme.textColor }]}>{dadosEmpresa.sobreEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />}</Text>
               </View>
 
               <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }} /* Avaliações */>
                 <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Avaliações da Empresa:</Text>
                 <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 5 }}>
                   <Text style={[styles.DMSansRegular, { color: getColorBasedOnAvalicao(dadosEmpresa.avaliacaoEmpresa) }]}>{dadosEmpresa.avaliacaoEmpresa}</Text>
-                  {dadosEmpresa.avaliacaoEmpresa === "Muito Positivas" ? <AntDesign name="checkcircle" size={20} color="#20dd77" /> : <Text style={{color: theme.textColor}}>Sem Avaliações</Text>}
+                  {dadosEmpresa.avaliacaoEmpresa === "Muito Positivas" ? <AntDesign name="checkcircle" size={20} color="#20dd77" /> : <Text style={{ color: theme.textColor }}>Sem Avaliações</Text>}
                 </View>
               </View>
 
@@ -197,7 +206,6 @@ const toggleModal = () => {
                   <FlatList
                     horizontal={true}
                     data={dadosVaga}
-                    style={{ margiRight: 10 }}
                     keyExtractor={(item) => item.idVaga.toString()}
                     renderItem={({ item }) => (
                       <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
@@ -205,7 +213,14 @@ const toggleModal = () => {
                           <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>
                             {item.nomeVaga}
                           </Text>
-                          <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>publicada em: {item.prazoVaga}</Text>
+                          <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>
+                            Publicado em:<Text> </Text>
+                            {new Date(item.created_at).toLocaleString("pt-BR", {
+                              day: "2-digit",
+                              month: "2-digit",
+                              year: "numeric",
+                            })}
+                          </Text>
                         </View>
                         <View style={[styles.vagaBody, { gap: 5 }]}>
                           <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Salário: R${item.salarioVaga}</Text>
@@ -235,76 +250,121 @@ const toggleModal = () => {
               <View style={[styles.line, { borderColor: theme.lineColor }]}></View>
             </View>
 
-            
-            {/* <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
-              <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
-                <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Avaliar Empresa:</Text>
-
-                <View style={{backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
-                {["Muito Bom", "Bom", "Mediana", "Ruim", "Péssima"].map((opcao) => (
-                  
+            <Modal
+              isVisible={toggleModal}
+              onBackdropPress={toggleModalButton}
+              useNativeDriver={true} // Reduz carga de animação
+              hideModalContentWhileAnimating={true} // Evita renderizar enquanto anima
+            >
+              <View style={{ backgroundColor: theme.backgroundColor, paddingVertical: 20, paddingHorizontal: 15, borderRadius: 10 }}>
+                <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Opções:</Text>
+                <View style={{ paddingTop: 10, gap: 15 }}>
                   <TouchableOpacity
-                    key={opcao}
-                    onPress={() => setAvalicacao(opcao)}
-                    style={{
-                      borderWidth: 2,
-                      borderColor: avalicao === opcao ? "#20dd77" : "transparent",
-                      paddingHorizontal: 10,
-                      paddingVertical: 5,
-                      borderRadius: 5,
-                      marginVertical: 5,
-                      flexDirection: "row",
-                      alignItems: "center",
-                      justifyContent: "space-between",
+                    style={{ backgroundColor: theme.backgroundColorNavBar, padding: 15, borderRadius: 10 }}
+                    onPress={() => {
+                      toggleModalButton(), toggleAvaliarModal();
                     }}
                   >
-                    <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
-
-                    {avalicao === opcao && <Feather name="check" size={24} color={theme.textColor} />}
+                    <Text>Avaliar Empresa</Text>
                   </TouchableOpacity>
-                  
-                ))}
-                </View>
-                
-
-                <Text style={[styles.DMSansBold, { marginVertical: 10, color: theme.textColor }]}>Denunciar Empresa:</Text>
-
-                <View style={{backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
-                {["Conteúdo impróprio", "Spam ou fraude", "Discriminação ou Preconceito", "Exploração de Trabalho", "Empresa falsa"].map((opcao) => (
-  <TouchableOpacity
-    key={opcao}
-    onPress={() => setMotivoDenuncia(opcao)}
-    style={{
-      borderWidth: 2,
-      borderColor: motivoDenuncia === opcao ? "#d4552f" : "transparent",
-      paddingHorizontal: 10,
-      paddingVertical: 5,
-      borderRadius: 5,
-      marginVertical: 5,
-      flexDirection: "row",
-      alignItems: "center",
-      justifyContent: "space-between",
-    }}
-  >
-    <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
-    {motivoDenuncia === opcao && <Feather name="check" size={24} color={theme.textColor} />}
-  </TouchableOpacity>
-))}
-
-
-        </View>
-                <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', gap: 10}}>
-                <TouchableOpacity style={[styles.button, { width: 200, marginTop: 20, backgroundColor: "#20dd77", alignItems: "center", justifyContent: "center", padding: 10, borderRadius: 20 }]} onPress={(toggleModal(), Alert.alert(''))}>
-                  <Text style={styles.buttonText}>Confirmar</Text>
-                </TouchableOpacity>
-
-                <TouchableOpacity style={[styles.button, { width: 100, marginTop: 20, backgroundColor: theme.backgroundColorNavBar, alignItems: "center", justifyContent: "center", padding: 10, borderRadius: 20 }]} onPress={toggleModal}>
-                  <Text style={[styles.buttonText, {color: theme.textColor}]}>Cancelar</Text>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{ backgroundColor: theme.backgroundColorNavBar, padding: 15, borderRadius: 10 }}
+                    onPress={() => {
+                      toggleModalButton(), toggleModalDenuncia();
+                    }}
+                  >
+                    <Text>Denunciar Empresa</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
-            </Modal> */}
+            </Modal>
 
+            <Modal
+              isVisible={isModalAvaliarVisible}
+              onBackdropPress={toggleAvaliarModal}
+              useNativeDriver={true} // Reduz carga de animação
+              hideModalContentWhileAnimating={true} // Evita renderizar enquanto anima
+            >
+              <View style={{ backgroundColor: theme.backgroundColor, paddingVertical: 20, borderRadius: 10 }}>
+                <Text style={[styles.DMSansBold, { marginBottom: 10, marginHorizontal: 10, color: theme.textColor }]}>Avaliar Empresa:</Text>
+                <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, marginHorizontal: 10, borderRadius: 10 }}>
+                  {["Muito Bom", "Bom", "Mediana", "Ruim", "Péssima"].map((opcao) => (
+                    <TouchableOpacity
+                      key={opcao}
+                      onPress={() => setAvalicacao(opcao)}
+                      style={{
+                        borderWidth: 2,
+                        borderColor: avalicao === opcao ? "#20dd77" : "transparent",
+                        paddingHorizontal: 10,
+                        paddingVertical: 5,
+                        borderRadius: 5,
+                        marginVertical: 5,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
+                      {avalicao === opcao && <AntDesign name="check" size={24} color="#20dd77" />}
+                    </TouchableOpacity>
+                  ))}
+                </View>
+
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
+                  <TouchableOpacity style={{ marginTop: 20 }} onPress={() => toggleAvaliarModal()}>
+                    <Text style={[styles.buttonText, { color: theme.textColor }]}>Fechar</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{ marginTop: 20, borderWidth: 1, borderColor: "#20dd77", borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={toggleModal}>
+                    <Text style={[styles.buttonText, { color: theme.textColor }]}>Enviar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
+
+            <Modal
+              isVisible={isModalDenunciaVisible}
+              onBackdropPress={toggleModalDenuncia}
+              useNativeDriver={true} // Reduz carga de animação
+              hideModalContentWhileAnimating={true} // Evita renderizar enquanto anima
+            >
+              <View style={{ backgroundColor: theme.backgroundColor, paddingVertical: 20, borderRadius: 10 }}>
+                <Text style={[styles.DMSansBold, { marginBottom: 10, marginHorizontal: 10, color: theme.textColor }]}>Denunciar Empresa:</Text>
+
+                <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, marginHorizontal: 10, borderRadius: 10 }}>
+                  {["Conteúdo Ofensivo", "Spam", "Preconceito", "Fraude", "Empresa Falsa"].map((opcao) => (
+                    <TouchableOpacity
+                      key={opcao}
+                      onPress={() => setAvalicacao(opcao)}
+                      style={{
+                        borderWidth: 2,
+                        borderColor: avalicao === opcao ? "#20dd77" : "transparent",
+                        paddingHorizontal: 10,
+                        paddingVertical: 5,
+                        borderRadius: 5,
+                        marginVertical: 5,
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "space-between",
+                      }}
+                    >
+                      <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
+                      {avalicao === opcao && <AntDesign name="check" size={24} color="#20dd77" />}
+                    </TouchableOpacity>
+                  ))}
+                </View>
+
+                <View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between", paddingHorizontal: 15 }}>
+                  <TouchableOpacity style={{ marginTop: 20 }} onPress={() => toggleModalDenuncia()}>
+                    <Text style={[styles.buttonText, styles.DMSansRegular, { color: theme.textColor }]}>Fechar</Text>
+                  </TouchableOpacity>
+
+                  <TouchableOpacity style={{ marginTop: 20, borderWidth: 1, borderColor: "#20dd77", borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={toggleModal}>
+                    <Text style={[styles.buttonText, styles.DMSansRegular, { color: theme.textColor }]}>Enviar</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </Modal>
           </View>
         </ScrollView>
       </SafeAreaView>

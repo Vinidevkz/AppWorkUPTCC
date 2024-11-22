@@ -341,9 +341,6 @@ export default function Home({ navigation }) {
           </View>
         ) : (
           <View>
-            <TouchableOpacity style={{zIndex: 1, position: 'absolute', left: '88%', top: '42%', padding: 10, justifyContent: 'center', borderRadius: 50, backgroundColor: 'rgba(128, 128, 128, 0.5)'}}>
-            <MaterialIcons name="arrow-forward-ios" size={24} color={theme.arrowColor}  />
-            </TouchableOpacity>
             <FlatList
               horizontal={true}
               data={data}
@@ -416,9 +413,6 @@ export default function Home({ navigation }) {
           </View>
         ) : (
 <View>
-          <TouchableOpacity style={{zIndex: 1, position: 'absolute', left: '88%', top: '42%', padding: 10, justifyContent: 'center', borderRadius: 50, backgroundColor: 'rgba(128, 128, 128, 0.5)'}}>
-          <MaterialIcons name="arrow-forward-ios" size={24} color={theme.arrowColor} />
-          </TouchableOpacity>
           <FlatList
             horizontal={true}
             data={outrasVagas}

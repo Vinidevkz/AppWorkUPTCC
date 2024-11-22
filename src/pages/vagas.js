@@ -206,7 +206,12 @@ export default function Vaga({ navigation }) {
                 </Text>
                 <View style={{ paddingVertical: 3 }}>
                   <Text style={[styles.DMSansRegular, styles.vagaDateText, { color: theme.textColor }]}>
-                    publicada em: {vaga.dataPublicacaoVaga}
+                    publicada em: <Text></Text>
+                    {new Date(vaga.created_at).toLocaleString("pt-BR", {
+              day: "2-digit",
+              month: "2-digit",
+              year: "numeric",
+            })}
                   </Text>
                   <Text style={[styles.DMSansRegular, styles.vagaDateText, { color: theme.textColor }]}>
                     se candidatar até: {vaga.prazoVaga}
