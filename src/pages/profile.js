@@ -188,7 +188,7 @@ export default function Profile({ navigation }) {
                   style={[
                     styles.DMSansBold,
                     styles.title,
-                    { color: theme.textColor },
+                    { color: theme.textColor, fontSize: 19, borderBottomWidth: 1, borderColor: '#c4c4c4' },
                   ]}
                 >
                   Formação Acadêmica:
@@ -227,7 +227,7 @@ export default function Profile({ navigation }) {
                   style={[
                     styles.DMSansBold,
                     styles.title,
-                    { color: theme.textColor },
+                    { color: theme.textColor, fontSize: 19, borderBottomWidth: 1, borderColor: '#c4c4c4' },
                   ]}
                 >
                   Contatos:

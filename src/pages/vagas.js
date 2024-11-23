@@ -195,8 +195,8 @@ export default function Vaga({ navigation }) {
       </View>
       <ScrollView style={{ flex: 1, padding: 20, gap: 50, backgroundColor:  theme.backgroundColor }}>
         {infosVaga.map((vaga, index) => (
-          <View key={index} style={styles.infosCont}>
-            <View style={{ flexDirection: "row", justifyContent: "space-between" }}>
+          <View key={index} style={[styles.infosCont, {gap: 20}]}>
+            <View style={{ flexDirection: "row", justifyContent: "space-between", marginBottom: 15 }}>
               <View>
                 <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>
                   {vaga.nomeVaga}

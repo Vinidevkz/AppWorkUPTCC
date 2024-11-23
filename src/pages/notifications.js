@@ -26,23 +26,6 @@ export default function NotificationsScreen() {
   const responseListener = useRef();
   const { apiNgrokNotificacoes } = ApisUrls;
 
-  // useEffect(() => {
-  //   registerForPushNotificationsAsync().then(token => setExpoPushToken(token));
-
-  //   notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-  //     setNotifications(prev => [notification, ...prev]);
-  //   });
-
-  //   responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-  //     console.log(response);
-  //   });
-
-  //   return () => {
-  //     notificationListener.current && Notifications.removeNotificationSubscription(notificationListener.current);
-  //     responseListener.current && Notifications.removeNotificationSubscription(responseListener.current);
-  //   };
-  // }, []);
-
   useEffect(() => {
     const fetchNotifications = async () => {
       try {
@@ -60,9 +43,6 @@ export default function NotificationsScreen() {
       }
     };
 
-    fetchNotifications();
-    const intervaloId = setInterval(fetchNotifications, 2000);
-
     return () => clearInterval(intervaloId);
   }, [userId, apiNgrokNotificacoes]);
 
@@ -73,7 +53,7 @@ export default function NotificationsScreen() {
         <MaterialCommunityIcons name={"bell"} size={25} color={"#20dd77"} />
       </View>
       <View style={{ borderLeftWidth: 2, borderRightWidth: 2, borderBottomWidth: 2, borderBottomLeftRadius: 10, borderBottomRightRadius: 10, padding: 10 }}>
-        <Text style={[styles.DMSansRegular, { color: theme.textColor, fontSize: 13 }]}>
+        <Text style={[styles.DMSansRegular, { color: theme.textColor, fontSize: 15 }]}>
           A empresa {item.vaga?.empresa?.nomeEmpresa} aprovou sua candidatura na vaga: {item.vaga?.nomeVaga}
         </Text>
       </View>

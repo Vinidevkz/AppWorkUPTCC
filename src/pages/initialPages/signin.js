@@ -60,6 +60,7 @@ export default function SignIN({ navigation }) {
     } catch (error) {
       console.error("Erro na tentativa de login:", error);
       Alert.alert("Erro", "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente.");
+      setLoading(false)
     }
     
   }
@@ -129,7 +130,6 @@ export default function SignIN({ navigation }) {
 
         <TouchableOpacity style={styles.button} onPress={verificarUsuario}>
           <Text style={[styles.DMSansBold, styles.buttonText]}>Fazer Login</Text>
-          <MaterialIcons name="arrow-forward-ios" size={24} color="black" />
         </TouchableOpacity>
 
         <View style={styles.footer}>

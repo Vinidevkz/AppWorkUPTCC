@@ -33,7 +33,7 @@ export default function Home({ navigation }) {
 
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const { userId, vagaID, setVagaID, areaInt, nome, userName, fotoUsuario } = useContext(Context);
+  const { userId, vagaID, setVagaID, areaInt, nome, userName, fotoUsuario, setEmpresaId } = useContext(Context);
 
   const buscaVaga = async () => {
     setLoading(true);
@@ -239,27 +239,29 @@ export default function Home({ navigation }) {
     >
       <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
         <View style={styles.postHeader}>
+        <TouchableOpacity onPress={() => {setEmpresaId(item.idEmpresa), navigation.navigate('EmpresasProfile')}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
 
-          <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
-            <View style={[styles.postIconBox]}>
-              <Image source={item.empresa?.fotoEmpresa ? {uri:item.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+                <View style={[styles.postIconBox]}>
+                  <Image source={item.empresa?.fotoEmpresa ? {uri:item.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+                </View>
+                <View>
+                  <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
+                  <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
+                  {new Date(item.created_at).toLocaleString("pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric", 
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                  </Text>
+                </View>
+          
             </View>
-            <View>
-              <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
-              <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
-              {new Date(item.created_at).toLocaleString("pt-BR", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric", 
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-              </Text>
-            </View>
-          </View>
-
+          </TouchableOpacity>
           <TouchableOpacity>
-              <SimpleLineIcons name="options-vertical" size={25} color={theme.iconColorWhite} />
+          <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
             </TouchableOpacity>
         </View>
 
@@ -482,9 +484,10 @@ export default function Home({ navigation }) {
             data={posts}
             keyExtractor={(item) => item.idPublicacao.toString()}
             renderItem={post}
+            scrollEnabled={false}
             ListEmptyComponent={
               <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
-                <Text style={[styles.DMSansRegular]}>Nenhuma publicação encontrado.</Text>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma publicação encontrado.</Text>
               </View>
             }
             initialNumToRender={10}

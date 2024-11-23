@@ -65,10 +65,12 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-end',
     justifyContent: 'center',
-    borderBottomWidth: 2,
+    borderWidth: 2,
     borderColor: '#20dd77',
+    borderRadius: 50,
     flexDirection: 'row',
-    padding: 5
+    paddingHorizontal: 15,
+    paddingVertical: 10,
   },
 
   buttonText: {

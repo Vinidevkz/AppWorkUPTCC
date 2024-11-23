@@ -232,7 +232,7 @@ export default function Search({ navigation }) {
                               { color: theme.textColor },
                             ]}
                           >
-                            {item.empresa?.nomeEmpresa || "Não disponível"}
+                            {item.nomeEmpresa || "Não disponível"}
                           </Text>
                           <Text style={{ color: theme.textColor }}>
                             R${item.salarioVaga} - {item.cidadeVaga}

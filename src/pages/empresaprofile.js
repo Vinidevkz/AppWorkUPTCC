@@ -20,13 +20,15 @@ export default function EmpresaProfile({ navigation }) {
   const [dadosEmpresa, setDadosEmpresa] = useState([]);
   const [dadosVaga, setDadosVaga] = useState([]);
 
+  const [posts, setPosts] = useState([])
+
   const [avalicao, setAvalicacao] = useState(null);
   const [motivoDenuncia, setMotivoDenuncia] = useState(null);
   const [toggleModal, setToggleModal] = useState(false);
   const [isModalAvaliarVisible, setModalAvaliarVisible] = useState(false);
   const [isModalDenunciaVisible, setIsModalDenunciaVisible] = useState(false);
 
-  const { apiNgrokEmpresa, apiNgrokVagaEmpresa, apiNgrokDenunciarEmpresa } = ApisUrls;
+  const { apiNgrokEmpresa, apiNgrokVagaEmpresa, apiNgrokDenunciarEmpresa, apiNgrokPostsEmpresa } = ApisUrls;
 
   useFocusEffect(
     React.useCallback(() => {
@@ -69,6 +71,31 @@ export default function EmpresaProfile({ navigation }) {
 
       if (empresaId) {
         fetchVagaEmpresa();
+      }
+    }, [empresaId])
+  );
+
+  useFocusEffect(
+    React.useCallback(() => {
+      async function fetchPostsEmpresa() {
+        const apiUrl = `${apiNgrokPostsEmpresa}/${empresaId}`;
+        try {
+          const response = await fetch(apiUrl);
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          const data = await response.json();
+
+          // Verifique se a data é um objeto e transforme em array
+          const postsArray = Array.isArray(data) ? data : [data];
+          console.log("Vagas data:", postsArray); // Verifique os dados aqui
+          setPosts(postsArray);
+          console.log(posts)
+        } catch (error) {
+          console.error("Error fetching posts data:", error);
+        }
+      }
+
+      if (empresaId) {
+        fetchPostsEmpresa();
       }
     }, [empresaId])
   );
@@ -141,6 +168,65 @@ export default function EmpresaProfile({ navigation }) {
     }
   };
 
+  const post = ({ item }) => (
+    <View
+      style={{
+        alignItems: "center",
+        justifyContent: "center",
+        width: "100%",
+      }}
+    >
+      <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
+        <View style={styles.postHeader}>
+        <TouchableOpacity onPress={() => {setEmpresaId(item.idEmpresa), navigation.navigate('EmpresasProfile')}}>
+            <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+
+                <View style={[styles.postIconBox]}>
+                  <Image source={item.empresa?.fotoEmpresa ? {uri:item.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+                </View>
+                <View>
+                  <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
+                  <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
+                  {new Date(item.created_at).toLocaleString("pt-BR", {
+                    day: "2-digit",
+                    month: "2-digit",
+                    year: "numeric", 
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                  </Text>
+                </View>
+          
+            </View>
+          </TouchableOpacity>
+          <TouchableOpacity>
+          <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
+            </TouchableOpacity>
+        </View>
+
+        <View style={styles.postBody}>
+          <Text style={[styles.DMSansBold, {fontSize: 18, color: theme.textColor}]}>{item.tituloPublicacao}</Text>
+          <Text style={[styles.DMSansRegular, styles.postDesc, { color: theme.textColor }]}>{item.detalhePublicacao}</Text>
+          {item.fotoPublicacao ?
+          <View style={styles.postImgCont}>
+            
+  <Image
+    source={{ uri: item.fotoPublicacao }}
+    style={styles.postImg}
+    onError={() => {
+      // Opcional: Você pode definir um estado aqui se necessário
+    }}
+  />
+
+
+          </View>
+: <View></View>}
+
+        </View>
+      </View>
+    </View>
+  );
+
   return (
     <GestureHandlerRootView style={{ flex: 1, backgroundColor: theme.backgroundColor }}>
       <SafeAreaView>
@@ -170,7 +256,6 @@ export default function EmpresaProfile({ navigation }) {
               <View style={[styles.profileHeader]}>
                 <View>
                   <Text style={[styles.DMSansBold, styles.profileName, { color: theme.textColor }]}>{dadosEmpresa.nomeEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />}</Text>
-                  <Text style={[styles.DMSansRegular, styles.profileUserName, { color: theme.textColor }]}>@{dadosEmpresa.usernameEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />}</Text>
                   <Text style={[styles.DMSansRegular, styles.profileUserLocation, { color: theme.textColor }]}>
                     {dadosEmpresa.cidadeEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />} - {dadosEmpresa.estadoEmpresa || <ActivityIndicator size={"small"} color={"#20dd77"} />}
                   </Text>
@@ -228,7 +313,7 @@ export default function EmpresaProfile({ navigation }) {
                         </View>
                         <View style={styles.vagaFooterCont}>
                           <TouchableOpacity
-                            style={[styles.button, styles.buttonVaga]}
+                            style={[styles.button, styles.buttonVaga, {width: '100%'}]}
                             onPress={() => {
                               setVagaID(item.idVaga);
                               navigation.navigate("Vagas");
@@ -239,7 +324,7 @@ export default function EmpresaProfile({ navigation }) {
                         </View>
                       </View>
                     )}
-                    ListEmptyComponent={<Text style={[styles.DMSansRegular]}>Nenhuma vaga publicada.</Text>}
+                    ListEmptyComponent={<Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma vaga publicada.</Text>}
                   />
                 </View>
               </View>
@@ -248,6 +333,8 @@ export default function EmpresaProfile({ navigation }) {
                 <Text style={[styles.DMSansBold, styles.title, { color: theme.textColor }]}>Publicações:</Text>
               </View>
               <View style={[styles.line, { borderColor: theme.lineColor }]}></View>
+
+
             </View>
 
             <Modal
@@ -256,7 +343,7 @@ export default function EmpresaProfile({ navigation }) {
               useNativeDriver={true} // Reduz carga de animação
               hideModalContentWhileAnimating={true} // Evita renderizar enquanto anima
             >
-              <View style={{ backgroundColor: theme.backgroundColor, paddingVertical: 20, paddingHorizontal: 15, borderRadius: 10 }}>
+              <View style={{ backgroundColor: theme.backgroundColor, padding: 20, paddingHorizontal: 15, borderRadius: 10 }}>
                 <Text style={[styles.DMSansBold, { color: theme.textColor }]}>Opções:</Text>
                 <View style={{ paddingTop: 10, gap: 15 }}>
                   <TouchableOpacity
@@ -265,7 +352,7 @@ export default function EmpresaProfile({ navigation }) {
                       toggleModalButton(), toggleAvaliarModal();
                     }}
                   >
-                    <Text>Avaliar Empresa</Text>
+                    <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Avaliar Empresa</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{ backgroundColor: theme.backgroundColorNavBar, padding: 15, borderRadius: 10 }}
@@ -273,7 +360,7 @@ export default function EmpresaProfile({ navigation }) {
                       toggleModalButton(), toggleModalDenuncia();
                     }}
                   >
-                    <Text>Denunciar Empresa</Text>
+                    <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Denunciar Empresa</Text>
                   </TouchableOpacity>
                 </View>
               </View>
@@ -285,9 +372,9 @@ export default function EmpresaProfile({ navigation }) {
               useNativeDriver={true} // Reduz carga de animação
               hideModalContentWhileAnimating={true} // Evita renderizar enquanto anima
             >
-              <View style={{ backgroundColor: theme.backgroundColor, paddingVertical: 20, borderRadius: 10 }}>
-                <Text style={[styles.DMSansBold, { marginBottom: 10, marginHorizontal: 10, color: theme.textColor }]}>Avaliar Empresa:</Text>
-                <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, marginHorizontal: 10, borderRadius: 10 }}>
+              <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
+                <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Avaliar Empresa:</Text>
+                <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
                   {["Muito Bom", "Bom", "Mediana", "Ruim", "Péssima"].map((opcao) => (
                     <TouchableOpacity
                       key={opcao}
@@ -328,10 +415,10 @@ export default function EmpresaProfile({ navigation }) {
               useNativeDriver={true} // Reduz carga de animação
               hideModalContentWhileAnimating={true} // Evita renderizar enquanto anima
             >
-              <View style={{ backgroundColor: theme.backgroundColor, paddingVertical: 20, borderRadius: 10 }}>
-                <Text style={[styles.DMSansBold, { marginBottom: 10, marginHorizontal: 10, color: theme.textColor }]}>Denunciar Empresa:</Text>
+              <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
+                <Text style={[styles.DMSansBold, { marginBottom: 10, color: theme.textColor }]}>Denunciar Empresa:</Text>
 
-                <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, marginHorizontal: 10, borderRadius: 10 }}>
+                <View style={{ backgroundColor: theme.backgroundColorNavBar, padding: 5, borderRadius: 10 }}>
                   {["Conteúdo Ofensivo", "Spam", "Preconceito", "Fraude", "Empresa Falsa"].map((opcao) => (
                     <TouchableOpacity
                       key={opcao}
@@ -366,6 +453,26 @@ export default function EmpresaProfile({ navigation }) {
               </View>
             </Modal>
           </View>
+          <View
+          style={{
+            alignItems: "center",
+            justifyContent: "center",
+
+          }}
+        >
+          <FlatList
+            data={posts}
+            keyExtractor={(item) => item.idPublicacao.toString()}
+            renderItem={post}
+            scrollEnabled={false}
+            ListEmptyComponent={
+              <View style={{ flex: 1,  height: 300, alignItems: "center", justifyContent: "center" }}>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma publicação encontrado.</Text>
+              </View>
+            }
+            initialNumToRender={10}
+          />
+        </View>
         </ScrollView>
       </SafeAreaView>
     </GestureHandlerRootView>

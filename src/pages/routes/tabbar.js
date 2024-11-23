@@ -109,7 +109,7 @@ export default function TabBar() {
         );
       }
     },
-    tabBarActiveTintColor: "#fff",
+    tabBarActiveTintColor: "#f4f4f4",
     tabBarInactiveTintColor: "#808080",
     tabBarShowLabel: false,
     tabBarStyle: {

@@ -232,6 +232,65 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 15,
   },
+
+  //posts empresa
+  postCont: {
+    borderRadius: 10,
+    backgroundColor: '#fff',
+    padding: 15,
+    marginBottom: 20,
+    marginHorizontal: 10,
+    minWidth: 400,
+    maxWidth: 400,
+    minHeight: 350,
+    maxHeight: 800,
+    elevation: 5,
+  },
+
+  postHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: 10,
+  },
+
+  postIconBox: {
+    borderRadius: 50,
+    width: 50,
+    height: 50,
+  },
+
+  postIconImg: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 50,
+  },
+
+  postTile: {
+    fontSize: 17,
+  },
+
+  postBody: {
+    paddingVertical: 20,
+    paddingHorizontal: 10,
+    gap: 10,
+  },
+
+  postDesc: {
+    fontSize: 15,
+  },
+
+  postImgCont: {
+    width: '100%',
+    height: 200,
+    borderRadius: 10,
+  },
+
+  postImg: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 10,
+  },
 });
 
 export default styles;
