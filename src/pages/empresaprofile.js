@@ -422,10 +422,10 @@ export default function EmpresaProfile({ navigation }) {
                   {["Conteúdo Ofensivo", "Spam", "Preconceito", "Fraude", "Empresa Falsa"].map((opcao) => (
                     <TouchableOpacity
                       key={opcao}
-                      onPress={() => setAvalicacao(opcao)}
+                      onPress={() => setMotivoDenuncia(opcao)}
                       style={{
                         borderWidth: 2,
-                        borderColor: avalicao === opcao ? "#20dd77" : "transparent",
+                        borderColor: motivoDenuncia === opcao ? "#20dd77" : "transparent",
                         paddingHorizontal: 10,
                         paddingVertical: 5,
                         borderRadius: 5,
@@ -436,7 +436,7 @@ export default function EmpresaProfile({ navigation }) {
                       }}
                     >
                       <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
-                      {avalicao === opcao && <AntDesign name="check" size={24} color="#20dd77" />}
+                      {motivoDenuncia === opcao && <AntDesign name="check" size={24} color="#20dd77" />}
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -446,7 +446,7 @@ export default function EmpresaProfile({ navigation }) {
                     <Text style={[styles.buttonText, styles.DMSansRegular, { color: theme.textColor }]}>Fechar</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity style={{ marginTop: 20, borderWidth: 1, borderColor: "#20dd77", borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={toggleModal}>
+                  <TouchableOpacity style={{ marginTop: 20, borderWidth: 1, borderColor: "#20dd77", borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={() => {toggleModal, denunciarEmpresa()}}>
                     <Text style={[styles.buttonText, styles.DMSansRegular, { color: theme.textColor }]}>Enviar</Text>
                   </TouchableOpacity>
                 </View>

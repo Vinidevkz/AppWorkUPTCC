@@ -145,7 +145,7 @@ export default function TabBar() {
               name={focused ? "user-alt" : "user"}
               size={size + 2}
               color={color}
-              style={{borderTopWidth: focused ? 3 : null, borderColor: focused ? '#20dd77' : null, width: 50, paddingHorizontal: 10, paddingVertical: 4}}
+              style={{borderTopWidth: focused ? 3 : null, borderColor: focused ? '#20dd77' : null, width: 50, paddingHorizontal: 11, paddingVertical: 4}}
             />
               {focused && (
     <Text

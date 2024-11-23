@@ -61,7 +61,7 @@ export default function Conversas({ navigation }) {
           <View style={[styles.profileIconBox]}>
             <Image 
             source={item.empresa?.fotoEmpresa ? {uri: item.empresa?.fotoEmpresa} : require('../../assets/icons/manicon.jpg')}
-            style={[styles.icon, {width: 80, height: 80}]}/>
+            style={[styles.icon, {width: 50, height: 50}]}/>
           </View>
 
           <View>

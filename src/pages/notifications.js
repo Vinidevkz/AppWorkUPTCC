@@ -42,8 +42,6 @@ export default function NotificationsScreen() {
         console.log(error);
       }
     };
-
-    return () => clearInterval(intervaloId);
   }, [userId, apiNgrokNotificacoes]);
 
   const renderItem = ({ item }) => (
