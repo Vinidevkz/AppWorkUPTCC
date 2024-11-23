@@ -37,7 +37,7 @@ const TabButton = ({ children, onPress }) => {
       onPressOut={animateOut}
       onPress={onPress}
     >
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center', paddingHorizontal: 20 }}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Animated.View style={{ transform: [{ scale: scaleValue }] }}>
           {children}
         </Animated.View>
@@ -57,25 +57,39 @@ export default function TabBar() {
     tabBarLabel: ({ focused }) => (focused ? route.name : null),
     tabBarIcon: ({ color, size, focused }) => {
       const buttonStyle = {
-        backgroundColor: focused ? 'rgba(60, 230, 139, 0.5)' : 'transparent',
-        borderRadius: 20,
-        height: 40,
-        width: 55,
-        marginBottom: 10,
-        alignItems: "center",
-        justifyContent: "center",
+        alignItems: "center", // Centraliza horizontalmente
+        justifyContent: "center", // Centraliza verticalmente
+        width: 60, // Ajuste uniforme da largura
+        height: 70, // Altura para acomodar o texto e o ícone
       };
       
 
       if (route.name === "Home") {
         return (
-          <View style={buttonStyle}>
-            <MaterialCommunityIcons
-              name={focused ? "home-variant" : "home-variant-outline"}
-              size={size + 4}
-              color={color}
-            />
-          </View>
+<View style={buttonStyle}>
+
+    <MaterialCommunityIcons
+      name={focused ? "home-variant" : "home-variant-outline"}
+      size={size + 4}
+      color={color}
+      style={{borderTopWidth: focused ? 3 : null, borderColor: focused ? '#20dd77' : null, width: 50, paddingHorizontal: 10,  paddingVertical: 4}}
+    />
+
+
+  {focused && (
+    <Text
+      style={{
+        color: theme.textColor,
+        fontSize: 12,
+        fontFamily: 'DMSans-Regular',
+        textAlign: 'center', // Garante que o texto fique alinhado ao centro
+      }}
+    >
+      Início
+    </Text>
+  )}
+</View>
+
         );
       } else if (route.name === "Search") {
         return (
@@ -84,7 +98,20 @@ export default function TabBar() {
               name={focused ? "search" : "search-outline"}
               size={size + 4}
               color={color}
+              style={{borderTopWidth: focused ? 3 : null, borderColor: focused ? '#20dd77' : null, width: 50, paddingHorizontal: 10, paddingVertical: 4}}
             />
+              {focused && (
+    <Text
+      style={{
+        color: theme.textColor,
+        fontSize: 12,
+        fontFamily: 'DMSans-Regular',
+        textAlign: 'center', // Garante que o texto fique alinhado ao centro
+      }}
+    >
+      Pesquisa
+    </Text>
+  )}
           </View>
         );
       } else if (route.name === "Notifications") {
@@ -94,7 +121,21 @@ export default function TabBar() {
               name={focused ? "bell" : "bell-outline"}
               size={size + 4}
               color={color}
+              style={{borderTopWidth: focused ? 3 : null, borderColor: focused ? '#20dd77' : null, width: 50, paddingHorizontal: 10, paddingVertical: 4}}
             />
+              {focused && (
+    <Text
+      style={{
+        width: 200,
+        color: theme.textColor,
+        fontSize: 12,
+        fontFamily: 'DMSans-Regular',
+        textAlign: 'center', // Garante que o texto fique alinhado ao centro
+      }}
+    >
+      Notificações
+    </Text>
+  )}
           </View>
         );
       } else if (route.name === "Profile") {
@@ -102,22 +143,37 @@ export default function TabBar() {
           <View style={buttonStyle}>
             <FontAwesome5
               name={focused ? "user-alt" : "user"}
-              size={size}
+              size={size + 2}
               color={color}
+              style={{borderTopWidth: focused ? 3 : null, borderColor: focused ? '#20dd77' : null, width: 50, paddingHorizontal: 10, paddingVertical: 4}}
             />
+              {focused && (
+    <Text
+      style={{
+        color: theme.textColor,
+
+        fontSize: 12,
+        fontFamily: 'DMSans-Regular',
+        textAlign: 'center', // Garante que o texto fique alinhado ao centro
+      }}
+    >
+      Currículo
+    </Text>
+  )}
           </View>
         );
       }
     },
-    tabBarActiveTintColor: "#f4f4f4",
+    tabBarActiveTintColor: "#20dd77",
     tabBarInactiveTintColor: "#808080",
     tabBarShowLabel: false,
     tabBarStyle: {
       backgroundColor: theme.backgroundColorNavBar,
       zIndex: 1,
-      height: 70,
+      height: 65,
       elevation: 20,
       borderTopWidth: 0,
+      paddingBottom: 10
     },
     headerShown: false,
   })}
