@@ -216,7 +216,7 @@ export default function ProfileChange({ navigation }) {
         setTel(telAlterado);
       } else {
         Alert.alert("Erro", jsonResponse.message || "Erro ao atualizar dados");
-        console.log(jsonResponse.message);
+        console.log('mensagem foda: ', jsonResponse.message);
       }
     } catch (error) {
       Alert.alert("Erro", "Erro ao se comunicar com o servidor");

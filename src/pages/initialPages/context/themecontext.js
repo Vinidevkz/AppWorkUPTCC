@@ -23,7 +23,7 @@ export function ThemeProvider({ children }) {
     backgroundCont: darkMode ? '#1b1b1b' : '#f4f4f4',
     backgroundColorNavBar: darkMode ? '#303030' : '#fff',
     backgroundColorSearchInput: darkMode ? '#707070' : '#dbdbdb',
-    backgroundColorItens: darkMode ? "#1b1b1b" : "fff",
+    backgroundColorItens: darkMode ? "#1b1b1b" : "#fff",
     iconColorGreen: darkMode ? "#20dd77" : "#20dd77",
     iconColorWhite: darkMode ? "#fff" : "#1b1b1b",
     textColor: darkMode ? '#fff' : '#1b1b1b',

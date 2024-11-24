@@ -117,7 +117,7 @@ export default function MinhasVagas({ navigation }) {
       </View>
 
       <TouchableOpacity
-        style={[styles.button, styles.buttonVaga]}
+        style={[styles.button, styles.buttonVaga, {width: 130}]}
         onPress={() => {
           setVagaID(item.idVaga);
           navigation.navigate("Vagas");

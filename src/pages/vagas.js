@@ -290,7 +290,7 @@ export default function Vaga({ navigation }) {
       </Modal>
         </View>
         <TouchableOpacity style={{marginRight: 20, borderWidth: 2, borderColor: '#ff5447', padding: 10, borderRadius: 50, alignItems: 'center', justifyContent: 'center', width: '100%'}} onPress={toggleModal}>
-            <Text style={[styles.DMSansRegular,{color: '#fff'}]}>Denunciar vaga</Text>
+            <Text style={[styles.DMSansRegular,{color: theme.textColor}]}>Denunciar vaga</Text>
           </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
