@@ -31,6 +31,8 @@ export default function Profile({ navigation }) {
   const { userId } = useContext(Context);
   const [dadosUser, setDadosUser] = useState([]);
 
+  const [loading, setLoading] = useState(true)
+
   const [skill1Usuario, setSkill1Usuario] = useState("");
   const [skill2Usuario, setSkill2Usuario] = useState("");
   const [skill3Usuario, setSkill3Usuario] = useState("");
@@ -68,6 +70,8 @@ export default function Profile({ navigation }) {
           console.error("Error fetching user data:", error);
         }
       }
+
+      setLoading(false)
 
       if (userId) {
         fetchUserData();
@@ -112,9 +116,9 @@ export default function Profile({ navigation }) {
   
       if (response.ok) { // Verificar se a resposta foi bem-sucedida
         const updatedData = await response.json();
-        Alert.alert('Habilidades atualizadas com sucesso!');
         setDadosUser(updatedData);
         toggleModal();
+        Alert.alert('Habilidades atualizadas com sucesso!');
       } else {
         console.error('Erro inesperado:', await response.text());
       }
@@ -242,35 +246,42 @@ export default function Profile({ navigation }) {
 
               </View>
 
-              {dadosUser.skillUsuario || dadosUser.skill2Usuario || dadosUser.skill3Usuario || dadosUser.skill5Usuario || dadosUser.skill5Usuario ? (
-              <View style={{alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row'}}>
-    <FlatList
-    data={skillsUser} // Passa o array de habilidades para a FlatList
-    keyExtractor={(item, index) => index.toString()} // Define a chave para cada item
-    horizontal={true} // Renderiza horizontalmente
-    showsHorizontalScrollIndicator={false} // Oculta a barra de rolagem
-    renderItem={({ item }) => (
-      <View style={{backgroundColor: theme.textColor, borderRadius: 20, paddingHorizontal: 10, paddingVertical: 5, alignItems: 'center', justifyContent: 'center', marginHorizontal: 5}}>
-        <Text style={[styles.text, {color: theme.backgroundColorItens}]}>#{item}</Text>
+              {loading ? (
+  <ActivityIndicator size="small" color="#20dd77" />
+) : (
+  <>
+    {dadosUser.skillUsuario || dadosUser.skill2Usuario || dadosUser.skill3Usuario || dadosUser.skill5Usuario || dadosUser.skill5Usuario ? (
+      <View style={{alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row'}}>
+        <FlatList
+          data={skillsUser} // Passa o array de habilidades para a FlatList
+          keyExtractor={(item, index) => index.toString()} // Define a chave para cada item
+          horizontal={true} // Renderiza horizontalmente
+          showsHorizontalScrollIndicator={false} // Oculta a barra de rolagem
+          renderItem={({ item }) => (
+            <View style={{backgroundColor: theme.textColor, borderRadius: 20, paddingHorizontal: 10, paddingVertical: 5, alignItems: 'center', justifyContent: 'center', marginHorizontal: 5}}>
+              <Text style={[styles.text, {color: theme.backgroundColorItens}]}>#{item}</Text>
+            </View>
+          )}
+          contentContainerStyle={styles.listContainer}
+        />
+        <TouchableOpacity style={{marginHorizontal: 15}} onPress={() => toggleModal()}>
+          <AntDesign name="pluscircleo" size={30} color="#20dd77" />
+        </TouchableOpacity>
+      </View>
+    ) : (
+      <View style={{gap: 10, alignItems: 'center', justifyContent: 'center'}}>
+        <Text style={[styles.DMSansRegular, {color: theme.textColor, alignSelf: 'center', width: '100%', textAlign: 'center'}]}>
+          Parece que você ainda não adicionou nenhuma habilidade.
+        </Text>
+        <TouchableOpacity style={{borderWidth: 2, borderColor: '#20dd77', padding: 10, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}} onPress={() => toggleModal()}>
+          <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>
+            Adicionar Habilidades <Entypo name="plus" size={15} color={theme.textColor} />
+          </Text>
+        </TouchableOpacity>
       </View>
     )}
-    contentContainerStyle={styles.listContainer}
-
-  />
-        <TouchableOpacity style={{marginHorizontal: 15}} onPress={() => toggleModal()}>
-        <AntDesign name="pluscircleo" size={30} color="#20dd77" />
-      </TouchableOpacity>
-  </View>
-
-              ) : (
-                <View style={{gap: 10,alignItems: 'center', justifyContent: 'center'}}>
-                <Text style={[styles.DMSansRegular, {color : theme.textColor, alignSelf: 'center', width: '100%', textAlign: 'center'}]}>Parece que você ainda não adicionou nenhuma habilidade.</Text>
-  
-                <TouchableOpacity style={{borderWidth: 2, borderColor: '#20dd77', padding: 10, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}} onPress={() => toggleModal()}>
-                  <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Adicionar Habilidades <Entypo name="plus" size={15} color={theme.textColor}/></Text>
-                </TouchableOpacity>
-                </View>
-              )}
+  </>
+)}
 
 
 
@@ -391,7 +402,9 @@ export default function Profile({ navigation }) {
 
                       <TextInput
                       placeholder="escreva aqui sua habilidade"
-                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10}]}
+                      placeholderTextColor={theme.placeholderColor}
+                      maxLength={50}
+                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10, color: theme.textColor}]}
                       value={skill1Usuario}
                       onChangeText={(text) => setSkill1Usuario(text)}
                       />
@@ -402,7 +415,9 @@ export default function Profile({ navigation }) {
 
                       <TextInput
                       placeholder="escreva aqui sua habilidade"
-                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10}]}
+                      placeholderTextColor={theme.placeholderColor}
+                      maxLength={50}
+                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10, color: theme.textColor}]}
                       value={skill2Usuario}
                       onChangeText={(text) => setSkill2Usuario(text)}
                       />
@@ -413,7 +428,9 @@ export default function Profile({ navigation }) {
 
                       <TextInput
                       placeholder="escreva aqui sua habilidade"
-                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10}]}
+                      placeholderTextColor={theme.placeholderColor}
+                      maxLength={50}
+                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10, color: theme.textColor}]}
                       value={skill3Usuario}
                       onChangeText={(text) => setSkill3Usuario(text)}
                       />
@@ -424,7 +441,9 @@ export default function Profile({ navigation }) {
 
                       <TextInput
                       placeholder="escreva aqui sua habilidade"
-                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10}]}
+                      placeholderTextColor={theme.placeholderColor}
+                      maxLength={50}
+                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10, color: theme.textColor}]}
                       value={skill4Usuario}
                       onChangeText={(text) => setSkill4Usuario(text)}
                       />
@@ -435,7 +454,9 @@ export default function Profile({ navigation }) {
 
                       <TextInput
                       placeholder="escreva aqui sua habilidade"
-                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10}]}
+                      placeholderTextColor={theme.placeholderColor}
+                      maxLength={50}
+                      style={[{backgroundColor: theme.backgroundColor, borderRadius: 20, width: '100%', paddingHorizontal: 10, color: theme.textColor}]}
                       value={skill5Usuario}
                       onChangeText={(text) => setSkill5Usuario(text)}
                       />

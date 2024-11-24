@@ -228,7 +228,7 @@ export default function Home({ navigation }) {
       setIsProcessing(false); // Libera o bloqueio para permitir próximos cliques
     }
   };
-  console.log('Foto usuário:' , fotoUsuario)
+
 
   const post = ({ item }) => (
     <View
@@ -464,7 +464,7 @@ export default function Home({ navigation }) {
             )}
             ListEmptyComponent={
               <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
-                <Text style={[styles.DMSansRegular]}>Nenhuma vaga encontrada.</Text>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma vaga encontrada.</Text>
               </View>
             }
           />
@@ -482,7 +482,7 @@ export default function Home({ navigation }) {
             width: "100%",
           }}
         >
-          <FlatList
+          <FlatList         
             data={posts}
             keyExtractor={(item) => item.idPublicacao.toString()}
             renderItem={post}
