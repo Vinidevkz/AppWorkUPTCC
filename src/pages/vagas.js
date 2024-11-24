@@ -3,6 +3,7 @@ import { View, Text, ActivityIndicator, TouchableOpacity, SafeAreaView, ScrollVi
 import Ionicons from "@expo/vector-icons/Ionicons";
 import Feather from '@expo/vector-icons/Feather';
 import { Context } from "../pages/initialPages/context/provider";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import ApisUrls from "../ApisUrls/apisurls.js";
 import { useFocusEffect } from "@react-navigation/native";
 import axios from "axios";
@@ -189,9 +190,9 @@ export default function Vaga({ navigation }) {
     <SafeAreaView style={styles.SafeAreaView}>
       <View style={[styles.navbar, { backgroundColor: theme.backgroundColorNavBar }]}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Ionicons name="caret-back-circle-sharp" size={35} color={theme.iconColorWhite} />
+         <MaterialIcons name="arrow-back-ios" size={20} color={theme.textColor} />
         </TouchableOpacity>
-        <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor }]}>Sobre esta vaga</Text>
+        <Text style={[styles.DMSansBold, styles.titleVaga, { color: theme.textColor, fontSize: 17 }]}>Sobre esta vaga</Text>
       </View>
       <ScrollView style={{ flex: 1, padding: 20, gap: 50, backgroundColor:  theme.backgroundColor }}>
         {infosVaga.map((vaga, index) => (
@@ -223,11 +224,15 @@ export default function Vaga({ navigation }) {
               </View>
             </View>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Descrição:{'\n'}<Text style={styles.DMSansRegular}>{vaga.descricaoVaga}</Text></Text>
+            <View style={{borderWidth: 2, borderColor: '#c4c4c4', borderRadius: 10, paddingVertical: 10, paddingHorizontal: 10, gap: 10}}>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Diferencial: <Text style={styles.DMSansRegular}>{vaga.diferencialVaga}</Text></Text>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Modalidade: <Text style={styles.DMSansRegular}>{vaga.modalidade?.descModalidadeVaga}</Text></Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Benefícios: <Text style={styles.DMSansRegular}>{vaga.beneficiosVaga}</Text></Text>
             <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Salário: <Text style={styles.DMSansRegular}>R${vaga.salarioVaga}</Text></Text>
-            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>
-              Cidade: <Text style={styles.DMSansRegular}>{vaga.cidadeVaga}, {vaga.estadoVaga}</Text>
-            </Text>
+            <Text style={[styles.DMSansBold, styles.text, { color: theme.textColor }]}>Cidade: <Text style={styles.DMSansRegular}>{vaga.cidadeVaga}, {vaga.estadoVaga}</Text></Text>
+            </View>
+
+
           </View>
         ))}
         <View style={[styles.infosCont, styles.row, { alignItems: 'center', justifyContent: 'space-between'}]}>
@@ -244,9 +249,7 @@ export default function Vaga({ navigation }) {
             </TouchableOpacity>
           )}
 
-          <TouchableOpacity style={{marginRight: 20, backgroundColor: '#ff5447', padding: 10, borderRadius: 50}} onPress={toggleModal}>
-            <Text style={[styles.DMSansRegular,{color: '#fff'}]}>Denunciar vaga</Text>
-          </TouchableOpacity>
+
 
           <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
         <View style={{ backgroundColor: theme.backgroundColor, padding: 20, borderRadius: 10 }}>
@@ -286,6 +289,9 @@ export default function Vaga({ navigation }) {
         </View>
       </Modal>
         </View>
+        <TouchableOpacity style={{marginRight: 20, borderWidth: 2, borderColor: '#ff5447', padding: 10, borderRadius: 50, alignItems: 'center', justifyContent: 'center', width: '100%'}} onPress={toggleModal}>
+            <Text style={[styles.DMSansRegular,{color: '#fff'}]}>Denunciar vaga</Text>
+          </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
   );

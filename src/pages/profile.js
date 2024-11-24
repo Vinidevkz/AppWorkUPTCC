@@ -15,6 +15,7 @@ import Entypo from '@expo/vector-icons/Entypo';
 import styles from "../styles/profile";
 import ApisUrls from "../ApisUrls/apisurls.js";
 import { useFocusEffect } from "@react-navigation/native";
+import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
 
 export default function Profile({ navigation }) {
   const { theme } = useTheme({ Profile });
@@ -172,14 +173,29 @@ export default function Profile({ navigation }) {
               </View>
             </View>
 
-            <View
-              style={[styles.line, { borderColor: theme.lineColor }]}
-            ></View>
+            <View style={{ width: '100%', gap: 20}}>
+              <View style={{flexDirection: 'row', alignItems: 'center', gap: 5 }}>
+                <MaterialCommunityIcons name="star-four-points-outline" size={20} color="#f4f4f4" />
+                <Text style={[styles.title, styles.DMSansRegular, {color: theme.textColor, alignItems: 'center'}]}>Habilidades :</Text>
+
+
+              </View>
+              <View style={{gap: 10,alignItems: 'center', justifyContent: 'center'}}>
+              <Text style={[styles.DMSansRegular, {color : theme.textColor, alignSelf: 'center', width: '100%', textAlign: 'center'}]}>Parece que você ainda não adicionou nenhuma habilidade.</Text>
+
+              <TouchableOpacity style={{borderWidth: 2, borderColor: '#20dd77', padding: 10, borderRadius: 50, alignItems: 'center', justifyContent: 'center'}}>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Adicionar Habilidades <Entypo name="plus" size={15} color={theme.textColor}/></Text>
+              </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={[styles.line, { borderColor: theme.lineColor }]}>
+            </View>
 
             <View
               style={{
                 paddingVertical: 10,
-                gap: 20,
+                gap: 30,
                 borderRadius: 20,
               }}
             >

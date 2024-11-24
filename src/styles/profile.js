@@ -116,7 +116,7 @@ const styles = StyleSheet.create({
   profileSkillsCont: {
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: 10,
+    gap: 15,
 
   },
 
@@ -240,9 +240,8 @@ const styles = StyleSheet.create({
     padding: 15,
     marginBottom: 20,
     marginHorizontal: 10,
-    minWidth: 400,
+    width: 400,
     maxWidth: 400,
-    minHeight: 350,
     maxHeight: 800,
     elevation: 5,
   },

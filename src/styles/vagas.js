@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
   },
 
   titleVaga: {
-    fontSize: 20,
+    fontSize: 19,
   },
 
   corpText: {
@@ -94,11 +94,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     padding: 10,
     borderRadius: 20,
+    width: '100%'
   },
 
   buttonText: {
     color: '#fff',
-    fontSize: 18,
+    fontSize: 16,
   },
 
   row: {

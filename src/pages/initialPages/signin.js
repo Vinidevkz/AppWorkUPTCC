@@ -112,7 +112,7 @@ export default function SignIN({ navigation }) {
         <TouchableOpacity onPress={() => navigation.goBack()}>
          <MaterialIcons name="arrow-back-ios" size={20} color={'#1b1b1b'} />
         </TouchableOpacity>
-        <Text style={[styles.DMSansBold, styles.titleHeader]}>Fazer Login</Text>
+        <Text style={[styles.DMSansBold, styles.titleHeader]}>Login</Text>
       </View>
       <View style={styles.loginCont}>
         <View style={styles.inputCont}>

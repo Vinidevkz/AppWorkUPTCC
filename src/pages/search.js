@@ -118,7 +118,7 @@ export default function Search({ navigation }) {
       <View
         style={[
           styles.containerTop,
-          { backgroundColor: theme.backgroundColorNavBar },
+          { backgroundColor: theme.backgroundColorNavBar, flexDirection: 'row' },
         ]}
       >
         <View
@@ -127,10 +127,10 @@ export default function Search({ navigation }) {
             { backgroundColor: theme.backgroundColorSearchInput },
           ]}
         >
-          <FontAwesome name="search" size={23} color={theme.iconColorWhite} />
+          
           <TextInput
             placeholder="Pesquise por vagas e empresas..."
-            placeholderTextColor={'#242424'}
+            placeholderTextColor={theme.placeholderColor}
             style={[
               styles.DMSansRegular,
               styles.searchFontSize,
@@ -139,7 +139,13 @@ export default function Search({ navigation }) {
             onChangeText={handleSearch}
             value={searchText}
           />
+  
+        <View style={{ backgroundColor: '#20dd77',height: 45, width: 45, alignItems: 'center', justifyContent: 'center'}}>
+          <FontAwesome name="search" size={23} color='#f4f4f4' />
         </View>
+
+        </View>
+
       </View>
       <View style={{ height: "100%", backgroundColor: theme.backgroundColor }}>
 

@@ -228,6 +228,7 @@ export default function Home({ navigation }) {
       setIsProcessing(false); // Libera o bloqueio para permitir próximos cliques
     }
   };
+  console.log('Foto usuário:' , fotoUsuario)
 
   const post = ({ item }) => (
     <View
@@ -237,6 +238,7 @@ export default function Home({ navigation }) {
         width: "100%",
       }}
     >
+      
       <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
         <View style={styles.postHeader}>
         <TouchableOpacity onPress={() => {setEmpresaId(item.idEmpresa), navigation.navigate('EmpresasProfile')}}>
@@ -487,7 +489,7 @@ export default function Home({ navigation }) {
             scrollEnabled={false}
             ListEmptyComponent={
               <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
-                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma publicação encontrado.</Text>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma publicação encontrada.</Text>
               </View>
             }
             initialNumToRender={10}

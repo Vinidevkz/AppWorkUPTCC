@@ -35,7 +35,9 @@ export function ThemeProvider({ children }) {
     msgUser: darkMode ? '#1b1b1b' : '#0db862',
     msgEmpresa: darkMode ? '#808080' : '#fff',
 
-    arrowColor: darkMode ? '#20dd77' : '#1b1b1b'
+    arrowColor: darkMode ? '#20dd77' : '#1b1b1b',
+
+    placeholderColor: darkMode ? '#c4c4c4' : '#858383'
   };
 
   return (

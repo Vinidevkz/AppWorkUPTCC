@@ -178,7 +178,6 @@ export default function EmpresaProfile({ navigation }) {
     >
       <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
         <View style={styles.postHeader}>
-        <TouchableOpacity onPress={() => {setEmpresaId(item.idEmpresa), navigation.navigate('EmpresasProfile')}}>
             <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
 
                 <View style={[styles.postIconBox]}>
@@ -198,7 +197,7 @@ export default function EmpresaProfile({ navigation }) {
                 </View>
           
             </View>
-          </TouchableOpacity>
+
           <TouchableOpacity>
           <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
             </TouchableOpacity>
@@ -392,7 +391,7 @@ export default function EmpresaProfile({ navigation }) {
                       }}
                     >
                       <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
-                      {avalicao === opcao && <AntDesign name="check" size={24} color="#20dd77" />}
+                      {avalicao === opcao && <AntDesign name="check" size={24} color={theme.textColor} />}
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -402,7 +401,7 @@ export default function EmpresaProfile({ navigation }) {
                     <Text style={[styles.buttonText, { color: theme.textColor }]}>Fechar</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity style={{ marginTop: 20, borderWidth: 1, borderColor: "#20dd77", borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={toggleModal}>
+                  <TouchableOpacity style={{ marginTop: 20, backgroundColor: '#20dd77', borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={toggleModal}>
                     <Text style={[styles.buttonText, { color: theme.textColor }]}>Enviar</Text>
                   </TouchableOpacity>
                 </View>
@@ -436,7 +435,7 @@ export default function EmpresaProfile({ navigation }) {
                       }}
                     >
                       <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>{opcao}</Text>
-                      {motivoDenuncia === opcao && <AntDesign name="check" size={24} color="#20dd77" />}
+                      {motivoDenuncia === opcao && <AntDesign name="check" size={24} color={theme.textColor} />}
                     </TouchableOpacity>
                   ))}
                 </View>
@@ -446,7 +445,7 @@ export default function EmpresaProfile({ navigation }) {
                     <Text style={[styles.buttonText, styles.DMSansRegular, { color: theme.textColor }]}>Fechar</Text>
                   </TouchableOpacity>
 
-                  <TouchableOpacity style={{ marginTop: 20, borderWidth: 1, borderColor: "#20dd77", borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={() => {toggleModal, denunciarEmpresa()}}>
+                  <TouchableOpacity style={{ marginTop: 20, backgroundColor: '#20dd77', borderRadius: 30, width: 100, alignItems: "center", justifyContent: "center", padding: 10 }} onPress={() => {toggleModal, denunciarEmpresa()}}>
                     <Text style={[styles.buttonText, styles.DMSansRegular, { color: theme.textColor }]}>Enviar</Text>
                   </TouchableOpacity>
                 </View>
@@ -467,7 +466,7 @@ export default function EmpresaProfile({ navigation }) {
             scrollEnabled={false}
             ListEmptyComponent={
               <View style={{ flex: 1,  height: 300, alignItems: "center", justifyContent: "center" }}>
-                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma publicação encontrado.</Text>
+                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma publicação encontrada.</Text>
               </View>
             }
             initialNumToRender={10}

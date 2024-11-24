@@ -27,25 +27,26 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 20,
     elevation: 10,
+    paddingHorizontal: 40
   },
 
   searchInput: {
     borderRadius: 20,
     paddingVertical: 5,
-    height: 50,
-    paddingHorizontal: 10,
+    width: '100%',
+    height: 45,
+    paddingLeft: 20,
+    overflow: 'hidden',
     backgroundColor: '#f4f4f4',
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     gap: 10,
-    fontSize: 17,
   },
 
   searchFontSize: {
-    fontSize: 15,
+    fontSize: 14,
     flex: 1,
   },
 
