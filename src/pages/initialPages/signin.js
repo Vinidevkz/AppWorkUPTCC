@@ -3,7 +3,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { StatusBar, View, Text, TextInput, SafeAreaView, Image, TouchableOpacity, ActivityIndicator, Alert } from "react-native";
 import * as Font from "expo-font";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import styles from "../initialPages/styles/signin.js";
@@ -39,16 +39,15 @@ export default function SignIN({ navigation }) {
       });
 
       const resp = await response.json();
-      console.log("Resposta da API:", resp); // Verificar a resposta recebida
+      console.log("Resposta da API:", resp);
 
       if (response.ok) {
-        // Atualize o contexto com os dados do usuário
         setUserId(resp.idUsuario);
         setNome(resp.nomeUsuario);
         setUserName(resp.usernameUsuario);
-        setEmail(resp.emailUsuario); // Atualize o email no contexto
+        setEmail(resp.emailUsuario);
         setAreaInt(resp.areaInteresseUsuario);
-        setFotoUsuario(resp.fotoUsuario)
+        setFotoUsuario(resp.fotoUsuario);
         navigation.navigate("TabBar");
         setLoading(false);
       } else {
@@ -60,9 +59,8 @@ export default function SignIN({ navigation }) {
     } catch (error) {
       console.error("Erro na tentativa de login:", error);
       Alert.alert("Erro", "Ocorreu um erro ao tentar fazer login. Verifique sua conexão ou tente novamente.");
-      setLoading(false)
+      setLoading(false);
     }
-    
   }
 
   // Carregador de fontes
@@ -110,7 +108,7 @@ export default function SignIN({ navigation }) {
       )}
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()}>
-         <MaterialIcons name="arrow-back-ios" size={20} color={'#1b1b1b'} />
+          <MaterialIcons name="arrow-back-ios" size={20} color={"#1b1b1b"} />
         </TouchableOpacity>
         <Text style={[styles.DMSansBold, styles.titleHeader]}>Login</Text>
       </View>

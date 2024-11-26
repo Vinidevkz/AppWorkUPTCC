@@ -7,7 +7,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import AntDesign from "@expo/vector-icons/AntDesign";
 import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import Entypo from "@expo/vector-icons/Entypo";
 import ApisUrls from "../ApisUrls/apisurls.js";
 const { apiNgrokVaga, apiNgrokSalvarVaga, apiNgrokCancelSalvarVaga, apiNgrokVerificarSalvarVaga, apiNgrokVagaPorArea, apiNgrokOutrasVagas, apiNgrokPosts } = ApisUrls;
@@ -229,7 +229,6 @@ export default function Home({ navigation }) {
     }
   };
 
-
   const post = ({ item }) => (
     <View
       style={{
@@ -238,53 +237,46 @@ export default function Home({ navigation }) {
         width: "100%",
       }}
     >
-      
       <View style={[styles.postCont, { backgroundColor: theme.backgroundColorNavBar }]}>
         <View style={styles.postHeader}>
-        <TouchableOpacity onPress={() => {setEmpresaId(item.idEmpresa), navigation.navigate('EmpresasProfile')}}>
-            <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
-
-                <View style={[styles.postIconBox]}>
-                  <Image source={item.empresa?.fotoEmpresa ? {uri:item.empresa?.fotoEmpresa} : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
-                </View>
-                <View>
-                  <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
-                  <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
+          <TouchableOpacity
+            onPress={() => {
+              setEmpresaId(item.idEmpresa), navigation.navigate("EmpresasProfile");
+            }}
+          >
+            <View style={{ flexDirection: "row", alignItems: "center", gap: 10 }}>
+              <View style={[styles.postIconBox]}>
+                <Image source={item.empresa?.fotoEmpresa ? { uri: item.empresa?.fotoEmpresa } : require("../../assets/icons/dynamo.png")} style={styles.postIconImg} />
+              </View>
+              <View>
+                <Text style={[styles.DMSansBold, styles.postTile, { color: theme.textColor }]}>{item.empresa?.nomeEmpresa}</Text>
+                <Text style={[styles.DMSansRegular, styles.dateText, { color: theme.textColor }]}>
                   {new Date(item.created_at).toLocaleString("pt-BR", {
                     day: "2-digit",
                     month: "2-digit",
-                    year: "numeric", 
+                    year: "numeric",
                     hour: "2-digit",
                     minute: "2-digit",
                   })}
-                  </Text>
-                </View>
-          
+                </Text>
+              </View>
             </View>
           </TouchableOpacity>
           <TouchableOpacity>
-          <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
-            </TouchableOpacity>
+            <Entypo name="dots-three-horizontal" size={30} color={theme.textColor} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.postBody}>
-          <Text style={[styles.DMSansBold, {fontSize: 18, color: theme.textColor}]}>{item.tituloPublicacao}</Text>
+          <Text style={[styles.DMSansBold, { fontSize: 18, color: theme.textColor }]}>{item.tituloPublicacao}</Text>
           <Text style={[styles.DMSansRegular, styles.postDesc, { color: theme.textColor }]}>{item.detalhePublicacao}</Text>
-          {item.fotoPublicacao ?
-          <View style={styles.postImgCont}>
-            
-  <Image
-    source={{ uri: item.fotoPublicacao }}
-    style={styles.postImg}
-    onError={() => {
-      // Opcional: Você pode definir um estado aqui se necessário
-    }}
-  />
-
-
-          </View>
-: <View></View>}
-
+          {item.fotoPublicacao ? (
+            <View style={styles.postImgCont}>
+              <Image source={{ uri: item.fotoPublicacao }} style={styles.postImg} />
+            </View>
+          ) : (
+            <View></View>
+          )}
         </View>
       </View>
     </View>
@@ -306,9 +298,9 @@ export default function Home({ navigation }) {
         </View>
 
         <View style={styles.iconBox}>
-        <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 10 }} onPress={() => navigation.navigate("MinhasVagas")}>
-              <MaterialIcons name="work-outline" size={30} color="#20dd77" />
-            </TouchableOpacity>
+          <TouchableOpacity style={{ flexDirection: "row", alignItems: "center", gap: 10 }} onPress={() => navigation.navigate("MinhasVagas")}>
+            <MaterialIcons name="work-outline" size={30} color="#20dd77" />
+          </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate("Conversas")}>
             <Ionicons name="chatbubbles-outline" size={30} color={theme.iconColorWhite} />
@@ -341,7 +333,7 @@ export default function Home({ navigation }) {
               justifyContent: "center",
             }}
           >
-            <ActivityIndicator size={"large"} color={'#20dd77'} />
+            <ActivityIndicator size={"large"} color={"#20dd77"} />
           </View>
         ) : (
           <View>
@@ -376,26 +368,18 @@ export default function Home({ navigation }) {
                     >
                       <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity
-                      style={styles.addFavButton}
-                      onPress={() => toggleSaveIcon(item.idVaga)} // Chama a função que alterna o ícone
-                    >
-                      <Ionicons
-                        name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
-                        size={35}
-                        color="#20dd77"
-                      />
+                    <TouchableOpacity style={styles.addFavButton} onPress={() => toggleSaveIcon(item.idVaga)}>
+                      <Ionicons name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} size={35} color="#20dd77" />
                     </TouchableOpacity>
                   </View>
                 </View>
               )}
               ListEmptyComponent={
                 <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
-                  <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma vaga encontrada.</Text>
+                  <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Nenhuma vaga encontrada.</Text>
                 </View>
               }
             />
-
           </View>
         )}
 
@@ -413,62 +397,58 @@ export default function Home({ navigation }) {
               justifyContent: "center",
             }}
           >
-            <ActivityIndicator size={"large"} color={'#20dd77'} />
+            <ActivityIndicator size={"large"} color={"#20dd77"} />
           </View>
         ) : (
-<View>
-          <FlatList
-            horizontal={true}
-            data={outrasVagas}
-            style={styles.flatlist}
-            keyExtractor={(item) => item.idVaga.toString()}
-            renderItem={({ item }) => (
-              <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
-                <View style={styles.vagaHead}>
-                  <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>
-                    {item.nomeVaga}
-                  </Text>
-                  <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>oferecido por: {item.empresa?.nomeEmpresa}</Text>
-                  <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>publicada em: {item.prazoVaga}</Text>
+          <View>
+            <FlatList
+              horizontal={true}
+              data={outrasVagas}
+              style={styles.flatlist}
+              keyExtractor={(item) => item.idVaga.toString()}
+              renderItem={({ item }) => (
+                <View style={[styles.vagaCont, { backgroundColor: theme.backgroundColorNavBar }]}>
+                  <View style={styles.vagaHead}>
+                    <Text style={[styles.titleVaga, styles.DMSansBold, { color: theme.textColor }]} numberOfLines={1}>
+                      {item.nomeVaga}
+                    </Text>
+                    <Text style={[styles.corpText, styles.DMSansBold, { color: theme.textColor }]}>oferecido por: {item.empresa?.nomeEmpresa}</Text>
+                    <Text style={[styles.dateText, styles.DMSansRegular, { color: theme.textColor }]}>publicada em: {item.prazoVaga}</Text>
+                  </View>
+                  <View style={[styles.vagaBody, { gap: 5 }]}>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Modalidade: {item.modalidade?.descModalidadeVaga}</Text>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Salário: R${item.salarioVaga}</Text>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Cidade: {item.cidadeVaga}</Text>
+                    <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Área: {item.area?.nomeArea || "Não disponível"}</Text>
+                  </View>
+                  <View style={styles.vagaFooterCont}>
+                    <TouchableOpacity
+                      style={[styles.button, styles.buttonVaga]}
+                      onPress={() => {
+                        setVagaID(item.idVaga);
+                        navigation.navigate("Vagas");
+                      }}
+                    >
+                      <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={styles.addFavButton}
+                      onPress={() => {
+                        toggleSaveIcon(item.idVaga);
+                      }}
+                    >
+                      <Ionicons name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} size={35} color="#20dd77" />
+                    </TouchableOpacity>
+                  </View>
                 </View>
-                <View style={[styles.vagaBody, { gap: 5 }]}>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Modalidade: {item.modalidade?.descModalidadeVaga}</Text>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Salário: R${item.salarioVaga}</Text>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Cidade: {item.cidadeVaga}</Text>
-                  <Text style={[styles.descVaga, styles.DMSansRegular, { color: theme.textColor }]}>Área: {item.area?.nomeArea || "Não disponível"}</Text>
+              )}
+              ListEmptyComponent={
+                <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
+                  <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Nenhuma vaga encontrada.</Text>
                 </View>
-                <View style={styles.vagaFooterCont}>
-                  <TouchableOpacity
-                    style={[styles.button, styles.buttonVaga]}
-                    onPress={() => {
-                      setVagaID(item.idVaga);
-                      navigation.navigate("Vagas");
-                    }}
-                  >
-                    <Text style={[styles.buttonText, styles.DMSansBold]}>Ver Vaga</Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={styles.addFavButton}
-                    onPress={() => {
-                      toggleSaveIcon(item.idVaga); // Chama a função que alterna o ícone
-                    }}
-                  >
-                    <Ionicons
-                      name={savedIcons[item.idVaga] ? "bookmark" : "bookmark-outline"} // Alterna o ícone
-                      size={35}
-                      color="#20dd77"
-                    />
-                  </TouchableOpacity>
-                </View>
-              </View>
-            )}
-            ListEmptyComponent={
-              <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
-                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma vaga encontrada.</Text>
-              </View>
-            }
-          />
-</View>
+              }
+            />
+          </View>
         )}
 
         <View style={styles.titleCont}>
@@ -482,14 +462,14 @@ export default function Home({ navigation }) {
             width: "100%",
           }}
         >
-          <FlatList         
+          <FlatList
             data={posts}
             keyExtractor={(item) => item.idPublicacao.toString()}
             renderItem={post}
             scrollEnabled={false}
             ListEmptyComponent={
               <View style={{ flex: 1, width: 390, height: 300, alignItems: "center", justifyContent: "center" }}>
-                <Text style={[styles.DMSansRegular, {color: theme.textColor}]}>Nenhuma publicação encontrada.</Text>
+                <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Nenhuma publicação encontrada.</Text>
               </View>
             }
             initialNumToRender={10}
