@@ -74,7 +74,7 @@ export default function VagasSalvas({ navigation }) {
                 <Text style={[styles.DMSansRegular, { color: theme.textColor }]}>Salário: R$ {item.salarioVaga}</Text>
               </View>
               <TouchableOpacity
-                style={[styles.button, styles.buttonVaga]}
+                style={[styles.button, styles.buttonVaga, {width: 130}]}
                 onPress={() => {
                 setVagaID(item.idVaga);
                 navigation.navigate("Vagas");
@@ -82,10 +82,6 @@ export default function VagasSalvas({ navigation }) {
               >
                 <Text
                   style={[styles.buttonText, styles.DMSansBold, { color: "#fff" }]}
-                  onPress={() => {
-                    setVagaID(item.idVaga);
-                    navigation.navigate("Vagas");
-                  }}
                 >
                   Ver Vaga
                 </Text>
